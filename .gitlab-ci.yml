@@ -6,7 +6,7 @@ junit:
 generate_artifacts:
   stage: deploy
   script:
-    - mvn -B clean sit package
+    - mvn -B clean site package
   artifacts:
     paths:
     - target/s202*.jar
