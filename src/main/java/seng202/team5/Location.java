@@ -20,7 +20,7 @@ public class Location {
 
     //Should this be an array rather than a List?
     public List<double> getCoords() {
-
+        return new List<double>;
     }
 
     public String getName() {
