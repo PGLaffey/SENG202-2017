@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="816b1443-017d-4972-bb79-6da06e828995" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/seng202/team5/Retailer.java" afterPath="$PROJECT_DIR$/src/main/java/seng202/team5/Retailer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/seng202/team5/Wifi.java" afterPath="$PROJECT_DIR$/src/main/java/seng202/team5/Wifi.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -109,7 +109,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Retailer.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Retailer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/seng202/team5/Retailer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="305">
@@ -124,12 +124,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Wifi.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Wifi.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/seng202/team5/Wifi.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="238">
+              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding>
+                <element signature="e#299#300#0" expanded="true" />
+                <element signature="e#335#336#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -176,6 +179,7 @@
         <option value="$PROJECT_DIR$/src/main/java/seng202/team5/Toilet.java" />
         <option value="$PROJECT_DIR$/src/main/java/seng202/team5/Poi.java" />
         <option value="$PROJECT_DIR$/src/main/java/seng202/team5/Retailer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/seng202/team5/Wifi.java" />
       </list>
     </option>
   </component>
@@ -409,7 +413,14 @@
       <option name="project" value="LOCAL" />
       <updated>1503281866063</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added the content of the Retailer class as specified in the UML Class Diagram">
+      <created>1503281948230</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1503281948230</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -428,7 +439,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3422713" sideWeight="0.5087848" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3422713" sideWeight="0.49121523" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3422713" sideWeight="0.49121523" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -463,7 +474,8 @@
     <MESSAGE value="Added the content of the Route class as specified in the UML Class Diagram" />
     <MESSAGE value="Added the content of the Toilet class as specified in the UML Class Diagram" />
     <MESSAGE value="Added the content of the Poi class as specified in the UML Class Diagram" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the content of the Poi class as specified in the UML Class Diagram" />
+    <MESSAGE value="Added the content of the Retailer class as specified in the UML Class Diagram" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added the content of the Retailer class as specified in the UML Class Diagram" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -537,14 +549,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seng202/team5/Wifi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/seng202/team5/MyObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -557,14 +561,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seng202/team5/Location.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -648,6 +644,25 @@
             <element signature="e#526#527#0" expanded="true" />
             <element signature="e#564#565#0" expanded="true" />
             <element signature="e#603#604#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seng202/team5/Location.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seng202/team5/Wifi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="e#299#300#0" expanded="true" />
+            <element signature="e#335#336#0" expanded="true" />
           </folding>
         </state>
       </provider>
