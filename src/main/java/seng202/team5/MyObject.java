@@ -8,6 +8,7 @@ public class MyObject {
     private int quantity = 11;
 
     MyObject() {
+        String name = "bob";
         //Dummy constructor
     }
 }
