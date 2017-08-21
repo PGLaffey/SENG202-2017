@@ -13,6 +13,6 @@ public class Map {
     }
 
     public void applyFilter(String filter) {
-        
+
     }
 }
