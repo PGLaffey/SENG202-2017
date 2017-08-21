@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="816b1443-017d-4972-bb79-6da06e828995" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/seng202/team5/Wifi.java" afterPath="$PROJECT_DIR$/src/main/java/seng202/team5/Wifi.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/seng202/team5/Location.java" afterPath="$PROJECT_DIR$/src/main/java/seng202/team5/Location.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,12 +44,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Location.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Location.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/seng202/team5/Location.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="255">
+              <caret line="25" column="29" lean-forward="true" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+              <folding>
+                <element signature="e#678#679#0" expanded="true" />
+                <element signature="e#743#744#0" expanded="true" />
+                <element signature="e#773#774#0" expanded="true" />
+                <element signature="e#813#814#0" expanded="true" />
+                <element signature="e#845#846#0" expanded="true" />
+                <element signature="e#921#922#0" expanded="true" />
+                <element signature="e#955#956#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -124,7 +132,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Wifi.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Wifi.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/seng202/team5/Wifi.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
@@ -180,6 +188,7 @@
         <option value="$PROJECT_DIR$/src/main/java/seng202/team5/Poi.java" />
         <option value="$PROJECT_DIR$/src/main/java/seng202/team5/Retailer.java" />
         <option value="$PROJECT_DIR$/src/main/java/seng202/team5/Wifi.java" />
+        <option value="$PROJECT_DIR$/src/main/java/seng202/team5/Location.java" />
       </list>
     </option>
   </component>
@@ -420,7 +429,14 @@
       <option name="project" value="LOCAL" />
       <updated>1503281948230</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added the content of the Wifi class as specified in the UML Class Diagram">
+      <created>1503282026958</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1503282026958</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -475,7 +491,8 @@
     <MESSAGE value="Added the content of the Toilet class as specified in the UML Class Diagram" />
     <MESSAGE value="Added the content of the Poi class as specified in the UML Class Diagram" />
     <MESSAGE value="Added the content of the Retailer class as specified in the UML Class Diagram" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the content of the Retailer class as specified in the UML Class Diagram" />
+    <MESSAGE value="Added the content of the Wifi class as specified in the UML Class Diagram" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added the content of the Wifi class as specified in the UML Class Diagram" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -648,14 +665,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seng202/team5/Location.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/seng202/team5/Wifi.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -663,6 +672,22 @@
           <folding>
             <element signature="e#299#300#0" expanded="true" />
             <element signature="e#335#336#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seng202/team5/Location.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="25" column="29" lean-forward="true" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+          <folding>
+            <element signature="e#678#679#0" expanded="true" />
+            <element signature="e#743#744#0" expanded="true" />
+            <element signature="e#773#774#0" expanded="true" />
+            <element signature="e#813#814#0" expanded="true" />
+            <element signature="e#845#846#0" expanded="true" />
+            <element signature="e#921#922#0" expanded="true" />
+            <element signature="e#955#956#0" expanded="true" />
           </folding>
         </state>
       </provider>
