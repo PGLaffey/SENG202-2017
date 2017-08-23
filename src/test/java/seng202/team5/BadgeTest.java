@@ -4,20 +4,21 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-public class LocationTest extends TestCase{
+public class BadgeTest extends TestCase {
+
     /**
-     * @param testName Name of the test
+     * @param testName The name of the test
      */
-    public LocationTest(String testName)
+    public BadgeTest(String testName)
     {
         super(testName);
     }
 
     /**
-     * @return The suite that the test belongs to.
+     * @return the test suite that the test belongs to.
      */
     public Test suite()
     {
-        return new TestSuite(LocationTest.class);
+        return new TestSuite(BadgeTest.class);
     }
 }

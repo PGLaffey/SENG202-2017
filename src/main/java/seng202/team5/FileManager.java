@@ -2,7 +2,7 @@ package seng202.team5;
 
 import java.io.FileReader;
 
-public class FileHandler {
+public class FileManager {
     private FileReader reader;
 
     public void loadRoute(Route route) {

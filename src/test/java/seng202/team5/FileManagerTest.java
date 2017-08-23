@@ -4,11 +4,11 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-public class LocationTest extends TestCase{
+public class FileManagerTest extends TestCase {
     /**
-     * @param testName Name of the test
+     * @param testName The name of the test.
      */
-    public LocationTest(String testName)
+    public FileManagerTest(String testName)
     {
         super(testName);
     }
@@ -18,6 +18,7 @@ public class LocationTest extends TestCase{
      */
     public Test suite()
     {
-        return new TestSuite(LocationTest.class);
+        return new TestSuite(FileManagerTest.class);
     }
+
 }

@@ -4,7 +4,7 @@ package seng202.team5;
 public class Gui {
     private User currentUser;
     private DataFetcher database;
-    private FileHandler localFiles;
+    private FileManager localFiles;
     private Map map;
 
     public void loginUser(User user) {
