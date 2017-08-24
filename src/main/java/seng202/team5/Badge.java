@@ -6,7 +6,6 @@ import java.awt.*;
 
 public class Badge {
     private int id;
-    private String name;
     private String requirement;
     private String badgeType;
     private String description;
@@ -16,10 +15,6 @@ public class Badge {
 
     public int getId() {
         return this.id;
-    }
-
-    public String getName() {
-        return this.name;
     }
 
     public String getRequirement() {
