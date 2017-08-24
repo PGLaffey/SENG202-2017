@@ -1,6 +1,8 @@
 package seng202.team5;
 
 
+import java.util.List;
+
 public class Location {
     private double lattitude;
     private double longitude;
@@ -19,8 +21,9 @@ public class Location {
     }
 
     //Should this be an array rather than a List?
-    public List<double> getCoords() {
-        return new List<double>;
+    public double[] getCoords() {
+        double[] coords = {this.lattitude, this.longitude};
+        return coords;
     }
 
     public String getName() {

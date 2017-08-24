@@ -32,7 +32,7 @@ public class User {
 
     public Route getRoute(int id) {
         //TODO how are we using the route ID?
-        return this.routes[id];
+        return this.routes.get(id);
     }
 
     public double getHours() {

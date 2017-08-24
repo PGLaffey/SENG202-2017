@@ -3,6 +3,7 @@ package seng202.team5;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.junit.Ignore;
 
 public class BadgeTest extends TestCase {
 
@@ -17,8 +18,18 @@ public class BadgeTest extends TestCase {
     /**
      * @return the test suite that the test belongs to.
      */
-    public Test suite()
+    public static Test suite()
     {
         return new TestSuite(BadgeTest.class);
+    }
+
+    /**
+     * Skeleton test
+     */
+    //TODO: Add real tests
+    @Ignore
+    public void testBadge()
+    {
+        assertTrue(true);
     }
 }
