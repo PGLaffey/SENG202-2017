@@ -2,12 +2,18 @@ package seng202.team5;
 
 public class Route {
     private String name;
-    private int id;
+    private int id; // If we make this a static variable, can we then ensure that the route id is unique?
     private double distance;
     private boolean local;
     private Location start;
     private Location end;
 
+    /**
+     * Constructor for a Route.
+     * @param start
+     * @param end
+     * @param name
+     */
     public Route(Location start, Location end, String name) {
         this.start = start;
         this.end = end;

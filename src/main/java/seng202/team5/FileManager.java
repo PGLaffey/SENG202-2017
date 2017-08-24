@@ -9,10 +9,19 @@ public class FileManager {
 
     }
 
+    /**
+     * Method to load a location and turn it into a route object.
+     * @param route
+     */
     public void loadLocation(Route route) {
 
     }
 
+    /**
+     * Method to read a .csv file.
+     * @param direct
+     * @return
+     */
     public String readFile(String direct) {
         return direct;
     }
