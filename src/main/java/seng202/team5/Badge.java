@@ -13,6 +13,16 @@ public class Badge {
     private int level;
     private Image icon;
 
+    public Badge(String badgeType, int level) {
+        this.badgeType = badgeType;
+        this.level = level;
+    }
+
+    public Badge(String badgeType) {
+        this.badgeType = badgeType;
+        this.level = 0;
+    }
+    
     public int getId() {
         return id;
     }
