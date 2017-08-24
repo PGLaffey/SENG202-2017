@@ -14,31 +14,34 @@ public class Badge {
     private Image icon;
 
     public int getId() {
-        return this.id;
+        return id;
+    }
+
+    public String getName() {
+        return badgeType + level;
     }
 
     public String getRequirement() {
-        return this.requirement;
+        return requirement;
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public boolean getObtained() {
-        return this.obtained;
+        return obtained;
     }
 
-    //TODO What is this meant to do that getObtained() doesn't do?
-    public void checkStatus() {
+    public void getBadgeLevel() {
 
     }
 
     public Image getIcon() {
-        return this.icon;
+        return icon;
     }
 
     public void obtain() {
-        this.obtained = true;
+        obtained = true;
     }
 }
