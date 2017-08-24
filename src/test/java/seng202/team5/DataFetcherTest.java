@@ -27,7 +27,7 @@ public class DataFetcherTest extends TestCase {
      */
     //TODO: Add real tests
     @Ignore
-    public void testData()
+    public void testBlueSky()
     {
         assertTrue(true);
     }
