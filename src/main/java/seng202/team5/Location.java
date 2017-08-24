@@ -1,8 +1,5 @@
 package seng202.team5;
 
-
-import java.util.List;
-
 public class Location {
     private double lattitude;
     private double longitude;
