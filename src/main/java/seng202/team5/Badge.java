@@ -4,6 +4,10 @@ package seng202.team5;
 
 import java.awt.*;
 
+/**
+ * Badge class that serves as a superclass to all the different types of badges.
+ *
+ */
 public class Badge {
     private int id;
     private String requirement;
@@ -13,11 +17,20 @@ public class Badge {
     private int level;
     private Image icon;
 
+    /**
+     * Class constructor specifying what type of badge it is.
+     * @param badgeType The type of badge.
+     */
     public Badge(String badgeType) {
         this.badgeType = badgeType;
         this.level = 0;
     }
 
+    /**
+     * Overloaded class constructor specifying what type of badge and what level it is.
+     * @param badgeType The type of badge.
+     * @param level The level of the badge.
+     */
     public Badge(String badgeType, int level) {
         this.badgeType = badgeType;
         this.level = level;

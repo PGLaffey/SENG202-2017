@@ -11,10 +11,6 @@ public class Gui {
 
     }
 
-    public void connectDb() {
-
-    }
-
     public void loadLocal() {
 
     }

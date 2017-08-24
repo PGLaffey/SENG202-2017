@@ -41,26 +41,69 @@ public class FileManagerTest extends TestCase {
     }
 
     /**
-     * Test to test a blue sky scenario, i.e. File with actual data in correct format.
+     * Test to test FileManager's readFile functions as expected for a .csv with 1 route.
+     * TODO: Create the test files
+     * TODO: Write expected output.
      */
     @Ignore
     @Test
-    public void testOneEntry()
+    public void testRouteOneEntry()
     {
-        reader.readFile("real_data1.csv");
+        reader.readFile("route_data1.csv");
     }
 
     /**
-     * Test to test FileManager's readFile functions as expected for a .csv with 10 entries.
+     * Test to test FileManager's readFile functions as expected for a .csv with 10 routes.
+     * TODO: Create the test files
+     * TODO: Write expected output.
      */
     @Ignore
     @Test
-    public void testTenEntries() {
-        reader.readFile("real_data10.csv");
+    public void testRouteTenEntries() {
+        reader.readFile("route_data10.csv");
+    }
+
+
+    /**
+     * Test to test the FileManager's readFile functions as expected for a .csv with a WiFi location
+     * TODO: Create the test file.
+     * TODO: Write expected output.
+     */
+    public void testWifiOneEntry() {
+        reader.readFile("wifi_data1.csv");
+    }
+
+    /**
+     * Test to test the FileManager's readFile functions as expected for a .csv with 10 WiFi locations.
+     * TODO: Create the test file.
+     * TODO: Write expected output.
+     */
+    public void testWifiTenEntries() {
+        reader.readFile("wifi_data10.csv");
+    }
+
+    /**
+     * Test to test the FileManager's readFile functions as expected for a .csv with a Retailer
+     * TODO: Create the test file.
+     * TODO: Write expected output.
+     */
+    public void testRetailerOneEntry() {
+        reader.readFile("retailer_data1.csv");
+    }
+
+    /**
+     * Test to test the FileManager's readFile functions as expected for a .csv with 10 Retailers
+     * TODO: Create the test file.
+     * TODO: Write expected output.
+     */
+    public void testRetailerTenEntries() {
+        reader.readFile("retailer_data10.csv");
     }
 
     /**
      * Test to test FileManager's readfile with an empty .csv file
+     * TODO: Create the test files
+     * TODO: Write expected output.
      */
     @Ignore
     @Test(expected = NoDataException.class)
@@ -70,6 +113,8 @@ public class FileManagerTest extends TestCase {
 
     /**
      * Test to test FileManager's ability to throw a FileNotFound exception
+     * TODO: Create the test files
+     * TODO: Write expected output.
      */
     @Ignore
     @Test(expected = FileNotFoundException.class)
@@ -80,6 +125,8 @@ public class FileManagerTest extends TestCase {
 
     /**
      * Test to test FileManager's ability to handle files of the wrong format.
+     * TODO: Create the test files
+     * TODO: Write expected output.
      */
     @Ignore
     @Test(expected = WrongFormatException.class)
