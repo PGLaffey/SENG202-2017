@@ -7,12 +7,13 @@ public class FileManager {
 
     /**
      * Loads a route to into the program.
-     * @param route
+     * @param route The route to be loaded.
      */
     public void loadRoute(Route route) {
 
     }
 
+    //TODO Two locations make a route, one cannot make a route on its own.
     /**
      * Method to load a location and turn it into a route object.
      * @param location
