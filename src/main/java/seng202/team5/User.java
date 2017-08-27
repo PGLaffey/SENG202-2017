@@ -1,6 +1,9 @@
 package seng202.team5;
 import java.util.ArrayList;
 
+/**
+User class stores the users information to be used in the app and stored.
+ */
 public class User {
     private String name;
     private int id;
@@ -10,7 +13,13 @@ public class User {
     private ArrayList<Route> routes;
     private ArrayList<Badge> badges;
 
-    //TODO Should this be on the UML?
+    //TODO Add to the UML
+    //TODO Did we agree that the id was to be randomly generated or chosen by the user?
+    /**
+    Constructor for the User class, creates a new user instance
+    @param name The name of the new user
+    @param id The unique id code for the user
+     */
     public User(String name, int id) {
         this.name = name;
         this.id = id;
@@ -22,32 +31,32 @@ public class User {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     //TODO Add getId(void) to the UML diagram
     public int getId() {
-        return this.id;
+        return id;
     }
 
     public Route getRoute(int id) {
         //TODO how are we using the route ID?
-        return this.routes.get(id);
+        return routes.get(id);
     }
 
     public double getHours() {
-        return this.hoursCycled;
+        return hoursCycled;
     }
 
     public double getDistance() {
-        return this.distanceCycled;
+        return distanceCycled;
     }
 
     public int getRoutesCycled() {
-        return this.routesCycled;
+        return routesCycled;
     }
 
     public ArrayList<Badge> getBadges() {
-        return this.badges;
+        return badges;
     }
 }
