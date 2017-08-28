@@ -44,28 +44,28 @@
                               <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="52.0" GridPane.columnIndex="4" />
                               <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                                  <image>
-                                    <Image url="@seng_images/pie_chart.png" />
+                                    <Image url="@images/pie_chart.png" />
                                  </image>
                               </ImageView>
                               <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                                  <image>
-                                    <Image url="@seng_images/map.png" />
+                                    <Image url="@images/map.png" />
                                  </image>
                               </ImageView>
                               <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" GridPane.columnIndex="4">
                                  <image>
-                                    <Image url="@seng_images/logout.png" />
+                                    <Image url="@images/logout.png" />
                                  </image>
                               </ImageView>
                               <ImageView fitHeight="51.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                                  <image>
-                                    <Image url="@seng_images/account.png" />
+                                    <Image url="@images/account.png" />
                                  </image>
                               </ImageView>
                               <Label alignment="CENTER" prefHeight="16.0" prefWidth="132.0" text="           CYCLRR" />
                               <ImageView fitHeight="53.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@seng_images/bike.png" />
+                                    <Image url="@images/bike.png" />
                                  </image>
                               </ImageView>
                            </children>
