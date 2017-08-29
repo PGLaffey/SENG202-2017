@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 public class FileManagerTest extends TestCase {
 
     private FileManager reader;
+    private static final String TARGET = "/testdata/";
     /**
      * Constructor for FileManagerTest
      * @param testName The name of the test.
@@ -49,7 +50,7 @@ public class FileManagerTest extends TestCase {
     @Test
     public void testRouteOneEntry()
     {
-        reader.readFile("route_data1.csv");
+        reader.readFile(TARGET+"route_data1.csv");
     }
 
     /**
@@ -60,7 +61,7 @@ public class FileManagerTest extends TestCase {
     @Ignore
     @Test
     public void testRouteTenEntries() {
-        reader.readFile("route_data10.csv");
+        reader.readFile(TARGET+"route_data10.csv");
     }
 
 
@@ -70,7 +71,7 @@ public class FileManagerTest extends TestCase {
      * TODO: Write expected output.
      */
     public void testWifiOneEntry() {
-        reader.readFile("wifi_data1.csv");
+        reader.readFile(TARGET+"wifi_data1.csv");
     }
 
     /**
@@ -79,7 +80,7 @@ public class FileManagerTest extends TestCase {
      * TODO: Write expected output.
      */
     public void testWifiTenEntries() {
-        reader.readFile("wifi_data10.csv");
+        reader.readFile(TARGET+"wifi_data10.csv");
     }
 
     /**
@@ -88,7 +89,7 @@ public class FileManagerTest extends TestCase {
      * TODO: Write expected output.
      */
     public void testRetailerOneEntry() {
-        reader.readFile("retailer_data1.csv");
+        reader.readFile(TARGET+"retailer_data1.csv");
     }
 
     /**
@@ -97,7 +98,7 @@ public class FileManagerTest extends TestCase {
      * TODO: Write expected output.
      */
     public void testRetailerTenEntries() {
-        reader.readFile("retailer_data10.csv");
+        reader.readFile(TARGET+"retailer_data10.csv");
     }
 
     /**
@@ -108,7 +109,7 @@ public class FileManagerTest extends TestCase {
     @Ignore
     @Test(expected = NoDataException.class)
     public void testEmpty() {
-        reader.readFile("empty_file.csv");
+        reader.readFile(TARGET+"empty_file.csv");
     }
 
     /**
@@ -120,7 +121,7 @@ public class FileManagerTest extends TestCase {
     @Test(expected = FileNotFoundException.class)
     public void testNonExistant()
     {
-        reader.readFile("gibbletyfook.csv");
+        reader.readFile(TARGET+"gibbletyfook.csv");
     }
 
     /**
@@ -132,7 +133,7 @@ public class FileManagerTest extends TestCase {
     @Test(expected = WrongFormatException.class)
     public void testWrongFormat()
     {
-        reader.readFile("terribleFormat.csv");
+        reader.readFile(TARGET+"terribleFormat.csv");
     }
 
 }
