@@ -6,19 +6,27 @@ public class FileManager {
     private FileReader reader;
 
     /**
-     * Loads a route to into the program.
-     * @param route The route to be loaded.
+     * Serializes an instance of the User class (exporting out of the program).
+     * @param user The User object to be stored in a file.
+     * @param fileName Name of the file the user will be stored in.
      */
-    public void loadRoute(Route route) {
+    public void userSerialize(User user, String fileName){
 
     }
 
-    //TODO Two locations make a route, one cannot make a route on its own.
     /**
-     * Method to load a location and turn it into a route object.
-     * @param location
+     * Deserializes an instance of the User class (importing into the program).
+     * @param fileName The file where the instance of the User class exists.
+     * @return The User object stored in the named file.
      */
-    public void loadLocation(Location location) {}
+    public User userDeserialize(String fileName) {
+
+
+        // TODO Get rid of the below code once the function is implemented, only here as a placeholder.
+        User user = new User("Not a real user", 107);
+        return user;
+    }
+
 
     /**
      * Method to read a .csv file.
