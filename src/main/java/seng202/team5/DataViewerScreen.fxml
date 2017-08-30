@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
@@ -17,7 +18,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<GridPane alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.DataViewerScreenController">
   <children>
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="827.0">
       <children>
@@ -27,7 +28,7 @@
               <children>
                 <GridPane layoutY="-1.0" prefHeight="49.0" prefWidth="825.0">
                   <children>
-                    <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="203.0" style="-: ;" text="Map" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Button fx:id="mapButton" mnemonicParsing="false" onAction="#mapPressed" prefHeight="49.0" prefWidth="203.0" style="-: ;" text="Map" GridPane.columnIndex="1" GridPane.rowIndex="0">
                       <graphic>
                         <ImageView fitHeight="45.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                           <image>
@@ -36,7 +37,7 @@
                         </ImageView>
                       </graphic>
                     </Button>
-                    <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="203.0" text="Statistics" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                    <Button fx:id="statButton" mnemonicParsing="false" prefHeight="49.0" prefWidth="203.0" text="Statistics" GridPane.columnIndex="2" GridPane.rowIndex="0">
                       <graphic>
                         <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                           <image>
@@ -45,7 +46,7 @@
                         </ImageView>
                       </graphic>
                     </Button>
-                    <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="202.0" text="Account" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                    <Button fx:id="accountButton" mnemonicParsing="false" prefHeight="49.0" prefWidth="202.0" text="Account" GridPane.columnIndex="3" GridPane.rowIndex="0">
                       <graphic>
                         <ImageView fitHeight="51.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                           <image>
@@ -64,7 +65,7 @@
                       </graphic>
                     </Label>
                     <Button alignment="CENTER_LEFT" contentDisplay="CENTER" graphicTextGap="-100.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="57.0" GridPane.columnIndex="4" GridPane.rowIndex="0" />
-                    <ImageView fitHeight="43.0" fitWidth="51.0" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="0">
+                    <ImageView fx:id="logoutButton" fitHeight="43.0" fitWidth="51.0" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="0">
                       <image>
                         <Image url="@images/logout.png" />
                       </image>
@@ -89,14 +90,20 @@
                   <items>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                       <children>
-                        <MenuButton layoutX="3.0" layoutY="88.0" mnemonicParsing="false" text="Filter Graph">
+                        <ChoiceBox fx:id="filterGraphBox" layoutX="36.0" layoutY="70.0">
                           <items>
-                            <CheckMenuItem disable="false" mnemonicParsing="false" text="Locations" />
-                            <CheckMenuItem mnemonicParsing="false" text="CO2 emissions saved" />
-                            <CheckMenuItem mnemonicParsing="false" text="Distance travelled" />
-                            <CheckMenuItem mnemonicParsing="false" text="Time spent cycling" />
+                            <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="Item 1" />
+                              <String fx:value="Item 2" />
+                              <String fx:value="Item 3" />
+                            </FXCollections>
                           </items>
-                        </MenuButton>
+                        </ChoiceBox>
+                        <Label layoutX="45.0" layoutY="38.0" text="Filter Graph" />
+                        <RadioButton fx:id="graphRadio" layoutX="6.0" layoutY="288.0" mnemonicParsing="false" text="Graph" />
+                        <RadioButton fx:id="rawDataRadio" layoutX="6.0" layoutY="320.0" mnemonicParsing="false" text="Raw Data Viewer" />
+                        <Button layoutX="50.0" layoutY="379.0" mnemonicParsing="false" text="Export" />
+                        <Label fx:id="mapPressedLabel" layoutX="-2.0" layoutY="160.0" text="MAP BUTTON PRESSED" visible="false" />
                       </children>
                     </AnchorPane>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
