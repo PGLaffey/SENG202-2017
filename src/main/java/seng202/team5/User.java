@@ -1,10 +1,11 @@
 package seng202.team5;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
 User class stores the users information to be used in the app and stored.
  */
-public class User {
+public class User implements Serializable {
     private String name;
     private int id;
     private int routesCycled;
@@ -13,7 +14,7 @@ public class User {
     private ArrayList<Route> routes;
     private ArrayList<Badge> badges;
 
-    //TODO Add to the UML
+    //TODO There is a suggestion that this should be packet-private, should this be something to consider?
     //TODO Did we agree that the id was to be randomly generated or chosen by the user?
     /**
     Constructor for the User class, creates a new user instance
@@ -34,7 +35,6 @@ public class User {
         return name;
     }
 
-    //TODO Add getId(void) to the UML diagram
     public int getId() {
         return id;
     }

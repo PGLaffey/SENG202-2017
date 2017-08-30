@@ -10,20 +10,20 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="400.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.Controller">
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="400.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LoginScreen.LoginScreenController">
   <children>
     <Label alignment="CENTER_LEFT" text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
     <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-    <PasswordField prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+    <TextField fx:id="usernameText" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+    <PasswordField fx:id="passwordText" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cyclrr!" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
       <font>
         <Font name="Broadway" size="30.0" />
       </font>
     </Text>
-    <Button mnemonicParsing="false" text="Sign In" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
-    <Button mnemonicParsing="false" mouseTransparent="false" text="Sign Up" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
-    <CheckBox mnemonicParsing="false" text="Stay signed in" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <Button fx:id="signInButton" mnemonicParsing="false" text="Sign In" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
+    <Button fx:id="signUpButton" mnemonicParsing="false" mouseTransparent="false" text="Sign Up" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
+    <CheckBox fx:id="staySignedInCheck" mnemonicParsing="false" text="Stay signed in" GridPane.columnIndex="0" GridPane.rowIndex="3" />
   </children>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="196.0" />
