@@ -37,7 +37,7 @@
                         </ImageView>
                       </graphic>
                     </Button>
-                    <Button fx:id="statButton" mnemonicParsing="false" prefHeight="49.0" prefWidth="203.0" text="Statistics" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                    <Button fx:id="statButton" mnemonicParsing="false" onAction="#statPressed" prefHeight="49.0" prefWidth="203.0" text="Statistics" GridPane.columnIndex="2" GridPane.rowIndex="0">
                       <graphic>
                         <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                           <image>
@@ -46,7 +46,7 @@
                         </ImageView>
                       </graphic>
                     </Button>
-                    <Button fx:id="accountButton" mnemonicParsing="false" prefHeight="49.0" prefWidth="202.0" text="Account" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                    <Button fx:id="accountButton" mnemonicParsing="false" onAction="#accountPressed" prefHeight="49.0" prefWidth="202.0" text="Account" GridPane.columnIndex="3" GridPane.rowIndex="0">
                       <graphic>
                         <ImageView fitHeight="51.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                           <image>
