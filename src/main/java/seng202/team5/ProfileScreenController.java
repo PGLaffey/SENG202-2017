@@ -1,4 +1,8 @@
-package seng202.team5
+package seng202.team5;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 public class ProfileScreenController {
 	
@@ -12,7 +16,7 @@ public class ProfileScreenController {
 	private Button accountButton;
 	
 	@FXML
-	private Button lougoutButton;
+	private Button logoutButton;
 	
 	@FXML
 	private Button editButton;
@@ -22,7 +26,7 @@ public class ProfileScreenController {
 	
 	@FXML
 	private Button deleteButton;
-	
+
 	@FXML
 	private Label usersNameLabel;
 	
