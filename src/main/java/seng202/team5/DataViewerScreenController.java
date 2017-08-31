@@ -1,5 +1,11 @@
 package seng202.team5;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+
 public class DataViewerScreenController {
 	
 	
@@ -33,7 +39,7 @@ public class DataViewerScreenController {
 	 * button is pressed
 	 */
 	public void mapPressed() {
-		mapPressedLabel.setVisable(true); //testing that the function works, but cant run it
+		mapPressedLabel.setVisible(true); //testing that the function works, but cant run it
 	}
 	
 	
