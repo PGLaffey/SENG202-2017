@@ -1,6 +1,8 @@
 package seng202.team5;
 //TODO fill in methods of the class
 
+import java.sql.*;
+
 public class DataFetcher {
     private User user;
     private String hostname;
@@ -52,6 +54,16 @@ public class DataFetcher {
      * Provides a request to connect to the external database.
      */
     public void connectDb() {
-
+    	Connection connect = DriverManager.getConnection("jdbc:mysql://222.152.179.135:3306/cyclrr","monitor","Team5Pass");
+    	testConnection(connect);
+    	connect.close();
+    }
+    
+    private void testConnection(Connection connect) {
+    	Statement qrytest = connect.createStatement();
+    	ResultSet result = qrytest.executeQuery("show tables");
+    	while (result.next()) {
+    	system.out.println(result.getString());
+    	}
     }
 }
