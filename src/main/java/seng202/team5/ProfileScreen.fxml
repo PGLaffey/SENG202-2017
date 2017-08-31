@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<GridPane alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.team5.ProfileScreenController">
   <children>
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="827.0">
       <children>
@@ -26,33 +26,6 @@
               <children>
                 <GridPane layoutY="-1.0" prefHeight="49.0" prefWidth="825.0">
                   <children>
-                    <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="203.0" style="-: ;" text="Map" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                      <graphic>
-                        <ImageView fitHeight="45.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                            <Image url="@images/map.png" />
-                          </image>
-                        </ImageView>
-                      </graphic>
-                    </Button>
-                    <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="203.0" text="Statistics" GridPane.columnIndex="2" GridPane.rowIndex="0">
-                      <graphic>
-                        <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                            <Image url="@images/pie_chart.png" />
-                          </image>
-                        </ImageView>
-                      </graphic>
-                    </Button>
-                    <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="202.0" text="Account" GridPane.columnIndex="3" GridPane.rowIndex="0">
-                      <graphic>
-                        <ImageView fitHeight="51.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                            <Image url="@images/account.png" />
-                          </image>
-                        </ImageView>
-                      </graphic>
-                    </Button>
                     <Label alignment="CENTER" contentDisplay="LEFT" disable="false" focusTraversable="false" graphicTextGap="-50.0" prefHeight="47.0" prefWidth="183.0" text="           CYCLRR" textOverrun="ELLIPSIS" visible="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
                       <graphic>
                         <ImageView fitHeight="53.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
@@ -62,7 +35,34 @@
                         </ImageView>
                       </graphic>
                     </Label>
-                    <Button alignment="CENTER_LEFT" contentDisplay="CENTER" graphicTextGap="-100.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="57.0" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                    <Button fx:id="mapButton" mnemonicParsing="false" onAction="#mapPressed" prefHeight="49.0" prefWidth="203.0" style="-: ;" text="Map" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                      <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                            <Image url="@images/map.png" />
+                          </image>
+                        </ImageView>
+                      </graphic>
+                    </Button>
+                    <Button id="statButtonq" fx:id="statButton" mnemonicParsing="false" onAction="#statPressed" prefHeight="49.0" prefWidth="203.0" text="Statistics" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                      <graphic>
+                        <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                            <Image url="@images/pie_chart.png" />
+                          </image>
+                        </ImageView>
+                      </graphic>
+                    </Button>
+                    <Button fx:id="accountButton" mnemonicParsing="false" onAction="#accountPressed" prefHeight="49.0" prefWidth="202.0" text="Account" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                      <graphic>
+                        <ImageView fitHeight="51.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                            <Image url="@images/account.png" />
+                          </image>
+                        </ImageView>
+                      </graphic>
+                    </Button>
+                    <Button fx:id="logoutButton" alignment="CENTER_LEFT" contentDisplay="CENTER" graphicTextGap="-100.0" mnemonicParsing="false" onAction="#logoutPressed" prefHeight="51.0" prefWidth="57.0" GridPane.columnIndex="4" GridPane.rowIndex="0" />
                     <ImageView fitHeight="43.0" fitWidth="51.0" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="0">
                       <image>
                         <Image url="@images/logout.png" />
@@ -86,19 +86,19 @@
               <children>
                 <GridPane prefHeight="433.0" prefWidth="825.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <children>
-                    <Button mnemonicParsing="false" prefWidth="171.0" text="Delete Account" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                    <Button fx:id="editButton" mnemonicParsing="false" onAction="#editPressed" prefWidth="171.0" text="Edit" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                       <GridPane.margin>
-                        <Insets bottom="8.0" right="5.0" />
+                        <Insets bottom="88.0" right="5.0" />
                       </GridPane.margin>
                     </Button>
-                    <Button mnemonicParsing="false" prefWidth="171.0" text="Change Password" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                    <Button fx:id="passwordButton" mnemonicParsing="false" onAction="#passwordPressed" prefWidth="171.0" text="Change Password" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                       <GridPane.margin>
                         <Insets bottom="48.0" right="5.0" />
                       </GridPane.margin>
                     </Button>
-                    <Button mnemonicParsing="false" prefWidth="171.0" text="Edit" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                    <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deletePressed" prefWidth="171.0" text="Delete Account" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                       <GridPane.margin>
-                        <Insets bottom="88.0" right="5.0" />
+                        <Insets bottom="8.0" right="5.0" />
                       </GridPane.margin>
                     </Button>
                     <Label text="Name:" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER">
@@ -112,6 +112,16 @@
                       </GridPane.margin>
                     </Label>
                     <Label text="Badges" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                    <Label fx:id="usersNameLabel" text="John Smith" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+                      <GridPane.margin>
+                        <Insets left="70.0" top="-40.0" />
+                      </GridPane.margin>
+                    </Label>
+                    <Label fx:id="usersAgeLabel" text="32" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+                      <GridPane.margin>
+                        <Insets left="55.0" top="40.0" />
+                      </GridPane.margin>
+                    </Label>
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
