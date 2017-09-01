@@ -58,12 +58,17 @@ public class DataFetcher {
     	testConnection(connect);
     	connect.close();
     }
-    
+
+    /**
+     * Method to test the connection to the database.
+     * TODO: Should this be in the DataFetcher test?
+     * @param connect
+     */
     private void testConnection(Connection connect) {
     	Statement qrytest = connect.createStatement();
     	ResultSet result = qrytest.executeQuery("show tables");
     	while (result.next()) {
-    	system.out.println(result.getString());
+    	System.out.println(result.getString());
     	}
     }
 }

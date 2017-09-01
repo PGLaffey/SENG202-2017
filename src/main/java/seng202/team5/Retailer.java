@@ -11,7 +11,7 @@ public class Retailer extends Location {
     /**
      * Constructor for the retailer subclass, uses the location superclass constructor.
      * @param lattitude The lattitude of the retailer location.
-     * @param longitude The logitude of the retailer location.
+     * @param longitude The longitude of the retailer location.
      * @param name The name of the retailer.
      * @param product The product the retailer sells.
      * @param description A description of the retailer at the location.

@@ -2,3 +2,4 @@
 .idea/workspace.xml
 target/*
 dependency_reduced_pom.xml
+*.iml

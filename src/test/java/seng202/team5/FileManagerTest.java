@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 public class FileManagerTest extends TestCase {
 
     private FileManager reader;
+    private CurrentStorage storage;
     private static final String TARGET = "/testdata/";
     /**
      * Constructor for FileManagerTest
@@ -34,53 +35,77 @@ public class FileManagerTest extends TestCase {
     }
 
     /**
-     * Set up a new FileManager object.
+     * Set up a new FileManager object and create a new instance of the storage of the app.
      */
     @Before
     public void setUp(){
         reader = new FileManager();
+        storage = new CurrentStorage();
     }
 
     /**
      * Test to test FileManager's readFile functions as expected for a .csv with 1 route.
-     * TODO: Create the test files
-     * TODO: Write expected output.
      */
     @Ignore
     @Test
     public void testRouteOneEntry()
     {
         reader.readFile(TARGET+"route_data1.csv");
+        Route expected_route = new Route(new Location(40.75323098, -73.97032517, "Expected start", "4"),
+                                        new Location(40.73221853, -73.98165557, "Expected end", "4"),
+                                        "Expected Route");
+        assertEquals(expected_route, storage.getRouteArray().get(0));
+
+    }
+
+    /**
+     * Test to ensure that duplicates are handled properly.
+     */
+    @Ignore
+    @Test
+    public void testRouteDuplicates()
+    {
+        //Read the same data twice, should only save it once.
+        reader.readFile(TARGET+"route_data1.csv");
+        reader.readFile(TARGET+"route_data1.csv");
+        assertEquals(1, storage.getRouteArray().size());
     }
 
     /**
      * Test to test FileManager's readFile functions as expected for a .csv with 10 routes.
-     * TODO: Create the test files
-     * TODO: Write expected output.
      */
     @Ignore
     @Test
     public void testRouteTenEntries() {
         reader.readFile(TARGET+"route_data10.csv");
+        //Only need to test whether there are 10 objects as it was previously tested whether routes are saved properly, and tested that duplicates are not saved.
+        assertEquals(10, storage.getRouteArray().size());
     }
-
 
     /**
      * Test to test the FileManager's readFile functions as expected for a .csv with a WiFi location
-     * TODO: Create the test file.
-     * TODO: Write expected output.
      */
     public void testWifiOneEntry() {
         reader.readFile(TARGET+"wifi_data1.csv");
+        Wifi expected_wifi = new Wifi(40.745968, -73.994039, "LinkNYC Free Wi-Fi", "LinkNYC - Citybridge");
+        assertEquals(expected_wifi, storage.getWifiArray().get(0));
+    }
+
+    /**
+     * Test to ensure duplicate WiFi data is handled correctly.
+     */
+    public void testWifiDuplicate() {
+        reader.readFile(TARGET+"wifi_data1.csv");
+        reader.readFile(TARGET+"wifi_data1.csv");
+        assertEquals(1, storage.getWIfiArray().size());
     }
 
     /**
      * Test to test the FileManager's readFile functions as expected for a .csv with 10 WiFi locations.
-     * TODO: Create the test file.
-     * TODO: Write expected output.
      */
     public void testWifiTenEntries() {
         reader.readFile(TARGET+"wifi_data10.csv");
+        assertEquals(10, storage.getWifiArray().size());
     }
 
     /**
@@ -90,6 +115,7 @@ public class FileManagerTest extends TestCase {
      */
     public void testRetailerOneEntry() {
         reader.readFile(TARGET+"retailer_data1.csv");
+        Retailer expected_retailer = new Retailer()
     }
 
     /**
@@ -103,8 +129,6 @@ public class FileManagerTest extends TestCase {
 
     /**
      * Test to test FileManager's readfile with an empty .csv file
-     * TODO: Create the test files
-     * TODO: Write expected output.
      */
     @Ignore
     @Test(expected = NoDataException.class)
@@ -114,8 +138,6 @@ public class FileManagerTest extends TestCase {
 
     /**
      * Test to test FileManager's ability to throw a FileNotFound exception
-     * TODO: Create the test files
-     * TODO: Write expected output.
      */
     @Ignore
     @Test(expected = FileNotFoundException.class)
@@ -126,8 +148,6 @@ public class FileManagerTest extends TestCase {
 
     /**
      * Test to test FileManager's ability to handle files of the wrong format.
-     * TODO: Create the test files
-     * TODO: Write expected output.
      */
     @Ignore
     @Test(expected = WrongFormatException.class)
