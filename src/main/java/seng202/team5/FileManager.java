@@ -35,8 +35,7 @@ public class FileManager {
      * @return
      */
     // Do we want to add a type param that just tells what type of data is in the file?
-    public String readFile(String direct) {
-        return direct;
+    public void readFile(String direct) {
     }
 
     /**
