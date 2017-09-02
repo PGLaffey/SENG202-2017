@@ -97,7 +97,7 @@ public class FileManagerTest extends TestCase {
     public void testWifiDuplicate() {
         reader.readFile(TARGET+"wifi_data1.csv");
         reader.readFile(TARGET+"wifi_data1.csv");
-        assertEquals(1, storage.getWIfiArray().size());
+        assertEquals(1, storage.getWifiArray().size());
     }
 
     /**
@@ -110,21 +110,27 @@ public class FileManagerTest extends TestCase {
 
     /**
      * Test to test the FileManager's readFile functions as expected for a .csv with a Retailer
-     * TODO: Create the test file.
-     * TODO: Write expected output.
      */
     public void testRetailerOneEntry() {
         reader.readFile(TARGET+"retailer_data1.csv");
-        Retailer expected_retailer = new Retailer()
+        Retailer expected_retailer = new Retailer("3 New York Plaza", "Starbucks Coffee", "Casual Eating & Takeout", "F-Coffeehouse");
+        assertEquals(expected_retailer, storage.getRetailerArray().get(0));
     }
 
     /**
+     * Test to check if duplicate retailer entries are handled properly.
+     */
+    public void testRetailerDuplicate() {
+        reader.readFile(TARGET+"retailer_data1.csv");
+        reader.readFile(TARGET+"retailer_data1.csv");
+        assertEquals(1, storage.getRetailerArray().size());
+    }
+    /**
      * Test to test the FileManager's readFile functions as expected for a .csv with 10 Retailers
-     * TODO: Create the test file.
-     * TODO: Write expected output.
      */
     public void testRetailerTenEntries() {
         reader.readFile(TARGET+"retailer_data10.csv");
+        assertEquals(10, storage.getRetailerArray().size());
     }
 
     /**

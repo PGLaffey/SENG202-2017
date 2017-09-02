@@ -27,6 +27,19 @@ public class Location {
     }
 
     /**
+     * Overloaded constructor to take an address and obtain a longitude and lattitude for the address.
+     * @param address The address of the location.
+     * @param name The name of the new location.
+     * @param locationType The type of location the new location is (i.e. point of interest, wifi spot, retailer or toilet).
+     */
+    public Location(String address, String name, String locationType) {
+        this.lattitude = Map.getLattitude(address);
+        this.longitude = Map.getLongitude(address);
+        this.name = name;
+        this.locationType = locationType;
+    }
+
+    /**
      * Function that returns the logitude and latitude of the location in an Array.
      * @return The latitude and logitude of the location in an Array.
      */
