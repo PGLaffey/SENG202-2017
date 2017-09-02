@@ -1,5 +1,6 @@
 package seng202.team5;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class LoginScreenController {
@@ -42,9 +44,11 @@ public class LoginScreenController {
 	 * button is pressed
 	 */
 
-    public void signUpButtonPressed() throws Exception {
-        System.out.println("SignUp Pressed");
-        Parent signUp = FXMLLoader.load(getClass().getResource("/SignUpScreen.fxml"));
+    public void signUpButtonPressed(ActionEvent event) throws Exception {
+        FXMLLoader signUp = FXMLLoader.load(Main.class.getResource("/SignUpScreen.fxml"));
+        AnchorPane login = (AnchorPane) signUp.load();
+        Scene scene = new Scene(login);
+        
 
     }
 
