@@ -22,7 +22,6 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
@@ -34,41 +33,35 @@
       </Label>
       <Label text="Name:" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
       <Label text="Username:" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-      <Label text="Email Address:" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
       <Label text="Repeat Password:" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
       <Label text="Password:" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-      <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="90.0" promptText="First" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="90.0" promptText="Last" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+      <TextField fx:id="firstNameLbl" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="90.0" promptText="First" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <TextField fx:id="lastNameLbl" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="90.0" promptText="Last" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets right="8.0" />
          </GridPane.margin></TextField>
-      <TextField promptText="Username" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <TextField fx:id="usernameLbl" promptText="Username" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets right="8.0" />
          </GridPane.margin>
       </TextField>
-      <PasswordField promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <PasswordField fx:id="passwordLbl" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets right="8.0" />
          </GridPane.margin>
       </PasswordField>
-      <PasswordField promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <PasswordField fx:id="repeatPasswordLbl" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets right="8.0" />
          </GridPane.margin>
       </PasswordField>
-      <TextField promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="5">
-         <GridPane.margin>
-            <Insets right="8.0" />
-         </GridPane.margin>
-      </TextField>
-      <Label text="Birth date:" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-      <DatePicker promptText="dd/mm/yyyy" GridPane.columnIndex="1" GridPane.rowIndex="6">
+      <Label text="Birth date:" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+      <DatePicker fx:id="birthDatePicker" promptText="dd/mm/yyyy" GridPane.columnIndex="1" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets right="8.0" />
          </GridPane.margin>
       </DatePicker>
-      <Button mnemonicParsing="false" text="Back" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
-      <Button mnemonicParsing="false" text="Create" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+      <Button fx:id="backButton" mnemonicParsing="false" text="Back" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+      <Button fx:id="createButton" mnemonicParsing="false" text="Create" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
    </children>
 </GridPane>
