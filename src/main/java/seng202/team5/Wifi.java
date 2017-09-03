@@ -8,13 +8,13 @@ public class Wifi extends Location {
 
     /**
      * Creates a new instance of the wifi class, uses the constructor of the Location superclass.
-     * @param lattitude The lattitude of the wifi hotspot.
-     * @param longitude The logitude of the wifi hotspot.
+     * @param latitude The latitude of the wifi hotspot.
+     * @param longitude The longitude of the wifi hotspot.
      * @param name The name of the wifi hotspot location.
      * @param provider The name of the provider of the wifi hotspot.
      */
-    public Wifi(double lattitude, double longitude, String name, String provider) {
-        super(lattitude, longitude, name, "Wifi");
+    public Wifi(double latitude, double longitude, String name, String provider) {
+        super(latitude, longitude, name, "Wifi");
         this.provider = provider;
     }
 
