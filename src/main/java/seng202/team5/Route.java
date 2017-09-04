@@ -5,7 +5,6 @@ package seng202.team5;
  */
 public class Route {
     private String name;
-    private int id; // If we make this a static variable, can we then ensure that the route id is unique?
     private double distance;
     private boolean local;
     private Location start;
@@ -33,10 +32,6 @@ public class Route {
         return name;
     }
 
-    //TODO Add getId(void) to the UML diagram
-    public int getId() {
-        return id;
-    }
 
     public double getDistance() {
         return distance;
