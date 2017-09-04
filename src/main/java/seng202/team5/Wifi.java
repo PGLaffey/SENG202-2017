@@ -14,7 +14,7 @@ public class Wifi extends Location {
      * @param provider The name of the provider of the wifi hotspot.
      */
     public Wifi(double latitude, double longitude, String name, String provider) {
-        super(latitude, longitude, name, "Wifi");
+        super(latitude, longitude, name, 3);
         this.provider = provider;
     }
 

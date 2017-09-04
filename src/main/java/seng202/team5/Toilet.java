@@ -16,7 +16,7 @@ public class Toilet extends Location {
      * @param uniSex Whether the toilet is unisex or has seperate facilities for men and women.
      */
     public Toilet(double latitude, double longitude, String name, boolean forDisabled, boolean uniSex) {
-        super(latitude, longitude, name, "Toilet");
+        super(latitude, longitude, name, 0);
         this.forDisabled = forDisabled;
         this.uniSex = uniSex;
     }

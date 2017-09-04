@@ -16,7 +16,7 @@ public class Poi extends Location {
      * @param cost The cost of visiting the point of interest.
      */
     public Poi(double latitude, double longitude, String name, String description, double cost) {
-        super(latitude, longitude, name, "Poi");
+        super(latitude, longitude, name, 1);
         this.description = description;
         this.cost = cost;
     }
