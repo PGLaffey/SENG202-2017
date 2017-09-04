@@ -159,7 +159,7 @@ import java.io.FileNotFoundException;
     @Ignore @Test(expected = WrongFormatException.class)
     public void testWrongFormat()
     {
-        reader.readFile(TARGET+"terribleFormat.csv");
+        reader.readFile(TARGET+"terrible_format.csv");
     }
 
 }
