@@ -8,7 +8,6 @@ public class Location {
     private double longitude;
     //TODO added type to location
     private int locationType; //toilet = 0, poi = 1, retailer = 2, wifi = 3, general = 4
-    private int id;
     private String name;
     private boolean local;
 
@@ -52,10 +51,6 @@ public class Location {
         return name;
     }
 
-    //TODO Add this to the UML diagram
-    public int getId() {
-        return id;
-    }
 
     public int getLocationType() {
         return locationType;
