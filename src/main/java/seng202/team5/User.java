@@ -9,6 +9,7 @@ public class User implements Serializable {
     private String name;
     private int id;
     private String username;
+    private String password;
     private String dateOfBirth;
     private int routesCycled;
     private double distanceCycled;
