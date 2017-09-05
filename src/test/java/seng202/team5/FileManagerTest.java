@@ -11,7 +11,7 @@ import seng202.exceptions.WrongFormatException;
 import java.io.FileNotFoundException;
 
 
-public class FileManagerTest extends TestCase {
+@Ignore public class FileManagerTest extends TestCase {
 
     private FileManager reader;
     private CurrentStorage storage;
@@ -46,13 +46,12 @@ public class FileManagerTest extends TestCase {
     /**
      * Test to test FileManager's readFile functions as expected for a .csv with 1 route.
      */
-    @Ignore
-    @Test
+    @Ignore @Test
     public void testRouteOneEntry()
     {
         reader.readFile(TARGET+"route_data1.csv");
-        Route expected_route = new Route(new Location(40.75323098, -73.97032517, "Expected start", "4"),
-                                        new Location(40.73221853, -73.98165557, "Expected end", "4"),
+        Route expected_route = new Route(new Location(40.75323098, -73.97032517, "Expected start", 4),
+                                        new Location(40.73221853, -73.98165557, "Expected end", 4),
                                         "Expected Route");
         assertEquals(expected_route, storage.getRouteArray().get(0));
 
@@ -61,8 +60,7 @@ public class FileManagerTest extends TestCase {
     /**
      * Test to ensure that duplicates are handled properly.
      */
-    @Ignore
-    @Test
+    @Ignore @Test
     public void testRouteDuplicates()
     {
         //Read the same data twice, should only save it once.
@@ -74,8 +72,7 @@ public class FileManagerTest extends TestCase {
     /**
      * Test to test FileManager's readFile functions as expected for a .csv with 10 routes.
      */
-    @Ignore
-    @Test
+    @Ignore @Test
     public void testRouteTenEntries() {
         reader.readFile(TARGET+"route_data10.csv");
         //Only need to test whether there are 10 objects as it was previously tested whether routes are saved properly, and tested that duplicates are not saved.
@@ -85,6 +82,7 @@ public class FileManagerTest extends TestCase {
     /**
      * Test to test the FileManager's readFile functions as expected for a .csv with a WiFi location
      */
+    @Ignore @Test
     public void testWifiOneEntry() {
         reader.readFile(TARGET+"wifi_data1.csv");
         Wifi expected_wifi = new Wifi(40.745968, -73.994039, "LinkNYC Free Wi-Fi", "LinkNYC - Citybridge");
@@ -94,6 +92,7 @@ public class FileManagerTest extends TestCase {
     /**
      * Test to ensure duplicate WiFi data is handled correctly.
      */
+    @Ignore @Test
     public void testWifiDuplicate() {
         reader.readFile(TARGET+"wifi_data1.csv");
         reader.readFile(TARGET+"wifi_data1.csv");
@@ -103,6 +102,7 @@ public class FileManagerTest extends TestCase {
     /**
      * Test to test the FileManager's readFile functions as expected for a .csv with 10 WiFi locations.
      */
+    @Ignore @Test
     public void testWifiTenEntries() {
         reader.readFile(TARGET+"wifi_data10.csv");
         assertEquals(10, storage.getWifiArray().size());
@@ -111,6 +111,7 @@ public class FileManagerTest extends TestCase {
     /**
      * Test to test the FileManager's readFile functions as expected for a .csv with a Retailer
      */
+    @Ignore @Test
     public void testRetailerOneEntry() {
         reader.readFile(TARGET+"retailer_data1.csv");
         Retailer expected_retailer = new Retailer("3 New York Plaza", "Starbucks Coffee", "Casual Eating & Takeout", "F-Coffeehouse");
@@ -120,6 +121,7 @@ public class FileManagerTest extends TestCase {
     /**
      * Test to check if duplicate retailer entries are handled properly.
      */
+    @Ignore @Test
     public void testRetailerDuplicate() {
         reader.readFile(TARGET+"retailer_data1.csv");
         reader.readFile(TARGET+"retailer_data1.csv");
@@ -128,6 +130,7 @@ public class FileManagerTest extends TestCase {
     /**
      * Test to test the FileManager's readFile functions as expected for a .csv with 10 Retailers
      */
+    @Ignore @Test
     public void testRetailerTenEntries() {
         reader.readFile(TARGET+"retailer_data10.csv");
         assertEquals(10, storage.getRetailerArray().size());
@@ -136,8 +139,7 @@ public class FileManagerTest extends TestCase {
     /**
      * Test to test FileManager's readfile with an empty .csv file
      */
-    @Ignore
-    @Test(expected = NoDataException.class)
+    @Ignore @Test(expected = NoDataException.class)
     public void testEmpty() {
         reader.readFile(TARGET+"empty_file.csv");
     }
@@ -145,8 +147,7 @@ public class FileManagerTest extends TestCase {
     /**
      * Test to test FileManager's ability to throw a FileNotFound exception
      */
-    @Ignore
-    @Test(expected = FileNotFoundException.class)
+    @Ignore @Test(expected = FileNotFoundException.class)
     public void testNonExistant()
     {
         reader.readFile(TARGET+"gibbletyfook.csv");
@@ -155,11 +156,23 @@ public class FileManagerTest extends TestCase {
     /**
      * Test to test FileManager's ability to handle files of the wrong format.
      */
-    @Ignore
-    @Test(expected = WrongFormatException.class)
+    @Ignore @Test(expected = WrongFormatException.class)
     public void testWrongFormat()
     {
-        reader.readFile(TARGET+"terribleFormat.csv");
+        reader.readFile(TARGET+"terrible_format.csv");
     }
 
+    /**
+     * Test to test the FileManager's ability to write a file.
+     */
+    public void testWriteRouteFile() {
+        reader.readFile(TARGET+"route_data1.csv");
+        //TODO: confirm this and potentially require a user as well.
+        reader.writeFile("test_file.csv", storage.getRouteArray());
+        reader.readFile("test_file.csv");
+        Route expected_route = new Route(new Location(40.75323098, -73.97032517, "Expected start", 4),
+                new Location(40.73221853, -73.98165557, "Expected end", 4),
+                "Expected Route");
+        assertEquals(expected_route, storage.getRouteArray().get(0));
+    }
 }

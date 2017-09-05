@@ -4,11 +4,10 @@ package seng202.team5;
  * Location object stores the information about a specific location (i.e. wifi hotspot, retailer, toilet or point of interest).
  */
 public class Location {
-    private double lattitude;
+    private double latitude;
     private double longitude;
     //TODO added type to location
-    private String locationType;
-    private int id;
+    private int locationType; //toilet = 0, poi = 1, retailer = 2, wifi = 3, general = 4
     private String name;
     private boolean local;
 
@@ -19,8 +18,8 @@ public class Location {
      * @param name The name of the new location.
      * @param locationType The type of location the new location is (i.e. point of interest, wifi spot, retailer or toilet).
      */
-    public Location(double latitude, double longitude, String name, String locationType) {
-        this.lattitude = latitude;
+    public Location(double latitude, double longitude, String name, int locationType) {
+        this.latitude = latitude;
         this.longitude = longitude;
         this.name = name;
         this.locationType = locationType;
@@ -32,8 +31,8 @@ public class Location {
      * @param name The name of the new location.
      * @param locationType The type of location the new location is (i.e. point of interest, wifi spot, retailer or toilet).
      */
-    public Location(String address, String name, String locationType) {
-        this.lattitude = Map.getLattitude(address);
+    public Location(String address, String name, int locationType) {
+        this.latitude = Map.getLattitude(address);
         this.longitude = Map.getLongitude(address);
         this.name = name;
         this.locationType = locationType;
@@ -44,7 +43,7 @@ public class Location {
      * @return The latitude and logitude of the location in an Array.
      */
     public double[] getCoords() {
-        double[] coords = {lattitude, longitude};
+        double[] coords = {latitude, longitude};
         return coords;
     }
 
@@ -52,12 +51,8 @@ public class Location {
         return name;
     }
 
-    //TODO Add this to the UML diagram
-    public int getId() {
-        return id;
-    }
 
-    public String getLocationType() {
+    public int getLocationType() {
         return locationType;
     }
 

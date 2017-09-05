@@ -17,7 +17,7 @@ public class Retailer extends Location {
      * @param description A description of the retailer at the location.
      */
     public Retailer(String address, String name, String product, String description) {
-        super(address, name, "Retailer");
+        super(address, name, 2);
         this.address = address;
         this.product = product;
         this.description = description;

@@ -5,11 +5,13 @@ package seng202.team5;
  */
 public class Route {
     private String name;
-    private int id; // If we make this a static variable, can we then ensure that the route id is unique?
     private double distance;
     private boolean local;
     private Location start;
     private Location end;
+    private Location via1;
+    private Location via2;
+    private Location via3;
 
     /**
      * Constructor for a Route.
@@ -21,16 +23,15 @@ public class Route {
         this.start = start;
         this.end = end;
         this.name = name;
+        via1 = null;
+        via2 = null;
+        via3 = null;
     }
 
     public String getName() {
         return name;
     }
 
-    //TODO Add getId(void) to the UML diagram
-    public int getId() {
-        return id;
-    }
 
     public double getDistance() {
         return distance;
@@ -45,6 +46,11 @@ public class Route {
         return start;
     }
 
+    public Location[] getVia() {
+    	Location[] vias = {via1, via2, via3};
+    	return vias;
+    }
+    
     //TODO Add getEnd(void) to the UML diagram, getStart added twice
     public Location getEnd() {
         return end;

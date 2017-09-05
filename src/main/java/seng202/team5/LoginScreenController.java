@@ -1,5 +1,7 @@
 package seng202.team5;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,8 +35,17 @@ public class LoginScreenController {
 	/** 
 	 * Method for when the Sign In 
 	 * button is pressed
+	 * @throws IOException 
 	 */
-    public void signInButtonPressed() {
+    public void signInButtonPressed() throws IOException {
+    	
+    	Stage primaryStage = (Stage)signInButton.getScene().getWindow();
+    	
+    	Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
+    	
+    	primaryStage.setTitle("Profile");
+    	primaryStage.setScene(new Scene(root));
+    	
 
     }
 	
@@ -45,9 +56,16 @@ public class LoginScreenController {
 	 */
 
     public void signUpButtonPressed(ActionEvent event) throws Exception {
-        FXMLLoader signUp = FXMLLoader.load(Main.class.getResource("/SignUpScreen.fxml"));
-        AnchorPane login = (AnchorPane) signUp.load();
-        Scene scene = new Scene(login);
+//        FXMLLoader signUp = FXMLLoader.load(Main.class.getResource("/SignUpScreen.fxml"));
+//        AnchorPane login = (AnchorPane) signUp.load();
+//        Scene scene = new Scene(login);
+    	
+    	Stage primaryStage = (Stage) signUpButton.getScene().getWindow();
+    	
+    	Parent root = FXMLLoader.load(getClass().getResource("/SignupScreen.fxml"));
+    	
+    	primaryStage.setTitle("Sign Up");
+    	primaryStage.setScene(new Scene(root));
         
 
     }
