@@ -43,8 +43,7 @@ public class ProfileScreenController {
 	
 	
 	/**
-	 * Method for when the Map
-	 * button is pressed
+	 * Method for when the Map button is pressed
 	 * @throws IOException 
 	 */
 	public void mapPressed() throws IOException {
@@ -61,8 +60,7 @@ public class ProfileScreenController {
 	
 	
 	/**
-	 * Method for when the Statistics
-	 * button is pressed
+	 * Method for when the Statistics button is pressed
 	 * @throws IOException 
 	 */
 	public void statPressed() throws IOException {
@@ -78,8 +76,7 @@ public class ProfileScreenController {
 	
 	
 	/**
-	 * Method for when the Account
-	 * button is pressed
+	 * Method for when the Account button is pressed
 	 * @throws IOException 
 	 */
 	public void accountPressed() throws IOException {
@@ -94,8 +91,7 @@ public class ProfileScreenController {
 	
 	
 	/**
-	 * Method for when the Logout
-	 * button is pressed
+	 * Method for when the Logout button is pressed
 	 * @throws IOException 
 	 */
 	public void logoutPressed() throws IOException {
@@ -110,26 +106,39 @@ public class ProfileScreenController {
 	
 	
 	/**
-	 * Method for when the Edit Account
-	 * button is pressed
+	 * Method for when the Edit Account button is pressed
 	 */
 	public void editPressed() {
 	}
 	
 	
 	/**
-	 * Method for when the Change Password
-	 * button is pressed
+	 * Method for when the Change Password button is pressed
+	 * @throws IOException 
 	 */
-	public void passwordPressed() {
+	public void passwordPressed() throws IOException {
+		Stage stage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/ChangePasswordScreen.fxml"));
+		
+		Scene scene = new Scene(root); 
+		stage.setTitle("Change Password");
+		stage.setScene(scene);
+		stage.show();
 	}
 	
 	
 	/**
-	 * Method for when the Delete Account
-	 * button is pressed
+	 * Method for when the Delete Account button is pressed
+	 * @throws IOException 
 	 */
-	public void deletePressed() {
+	public void deletePressed() throws IOException {
+		Stage stage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/DeleteAccountScreen.fxml"));
+		
+		Scene scene = new Scene(root); 
+		stage.setTitle("Delete Account");
+		stage.setScene(scene);
+		stage.show();
 	}
 	
 

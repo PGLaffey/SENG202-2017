@@ -53,7 +53,7 @@
                         </ImageView>
                       </graphic>
                     </Button>
-                    <Button fx:id="accountButton" mnemonicParsing="false" onAction="#accountPressed" prefHeight="49.0" prefWidth="202.0" text="Account" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                    <Button fx:id="accountButton" mnemonicParsing="false" onAction="#accountPressed" prefHeight="49.0" prefWidth="202.0" style="-fx-background-color: #599ff9;" text="Account" GridPane.columnIndex="3" GridPane.rowIndex="0">
                       <graphic>
                         <ImageView fitHeight="51.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                           <image>

@@ -46,7 +46,7 @@
                         </ImageView>
                       </graphic>
                     </Button>
-                    <Button fx:id="statButton" mnemonicParsing="false" onAction="#statPressed" prefHeight="49.0" prefWidth="203.0" text="Statistics" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                    <Button fx:id="statButton" mnemonicParsing="false" onAction="#statPressed" prefHeight="49.0" prefWidth="203.0" style="-fx-background-color: #599ff9;" text="Statistics" GridPane.columnIndex="2" GridPane.rowIndex="0">
                       <graphic>
                         <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                           <image>
@@ -64,12 +64,15 @@
                         </ImageView>
                       </graphic>
                     </Button>
-                    <Button fx:id="logoutButton" alignment="CENTER_LEFT" contentDisplay="CENTER" graphicTextGap="-100.0" mnemonicParsing="false" onAction="#logoutPressed" prefHeight="51.0" prefWidth="57.0" GridPane.columnIndex="4" GridPane.rowIndex="0" />
-                    <ImageView id="logoutButton" fitHeight="43.0" fitWidth="51.0" pickOnBounds="true" GridPane.columnIndex="4" GridPane.rowIndex="0">
-                      <image>
-                        <Image url="@images/logout.png" />
-                      </image>
-                    </ImageView>
+                    <Button fx:id="logoutButton" alignment="CENTER_LEFT" contentDisplay="CENTER" graphicTextGap="-100.0" mnemonicParsing="false" onAction="#logoutPressed" prefHeight="51.0" prefWidth="57.0" GridPane.columnIndex="4" GridPane.rowIndex="0">
+                      <graphic>
+                        <ImageView id="logoutButton" fitHeight="43.0" fitWidth="51.0" pickOnBounds="true">
+                          <image>
+                            <Image url="@images/logout.png" />
+                          </image>
+                        </ImageView>
+                      </graphic>
+                    </Button>
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="216.0" minWidth="10.0" prefWidth="186.0" />

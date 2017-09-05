@@ -41,7 +41,7 @@ public class LoginScreenController {
     	
     	Stage primaryStage = (Stage)signInButton.getScene().getWindow();
     	
-    	Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
+    	Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
     	
     	primaryStage.setTitle("Profile");
     	primaryStage.setScene(new Scene(root));
@@ -56,9 +56,16 @@ public class LoginScreenController {
 	 */
 
     public void signUpButtonPressed(ActionEvent event) throws Exception {
-        FXMLLoader signUp = FXMLLoader.load(Main.class.getResource("/SignUpScreen.fxml"));
-        AnchorPane login = (AnchorPane) signUp.load();
-        Scene scene = new Scene(login);
+//        FXMLLoader signUp = FXMLLoader.load(Main.class.getResource("/SignUpScreen.fxml"));
+//        AnchorPane login = (AnchorPane) signUp.load();
+//        Scene scene = new Scene(login);
+    	
+    	Stage primaryStage = (Stage) signUpButton.getScene().getWindow();
+    	
+    	Parent root = FXMLLoader.load(getClass().getResource("/SignupScreen.fxml"));
+    	
+    	primaryStage.setTitle("Sign Up");
+    	primaryStage.setScene(new Scene(root));
         
 
     }

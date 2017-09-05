@@ -17,7 +17,7 @@
 <?import javafx.scene.web.*?>
 <?import javafx.scene.web.WebView?>
 
-<GridPane alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<GridPane alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.team5.MainScreenController">
   <children>
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="827.0">
       <children>
@@ -36,7 +36,7 @@
                         </ImageView>
                       </graphic>
                     </Label>
-                    <Button fx:id="mapButton" mnemonicParsing="false" onAction="#mapPressed" prefHeight="49.0" prefWidth="203.0" style="-: ;" text="Map" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Button fx:id="mapButton" mnemonicParsing="false" onAction="#mapPressed" prefHeight="49.0" prefWidth="203.0" style="-fx-background-color: #599ff9;" text="Map" GridPane.columnIndex="1" GridPane.rowIndex="0">
                       <graphic>
                         <ImageView fitHeight="45.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                           <image>
