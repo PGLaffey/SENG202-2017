@@ -202,7 +202,7 @@ public class DataFetcher {
     	try {
     		System.out.println("Connecting...");
     		//Following line the 192.168.1.70 needs to be 222.152.179.135 if outside of Patrick's network
-    		Connection connectTest = DriverManager.getConnection("jdbc:mysql://192.168.1.70:3306/cyclrr","monitor","Team5Pass");
+    		Connection connectTest = DriverManager.getConnection("jdbc:mysql://222.152.179.135:3306/cyclrr","monitor","Team5Pass");
     		testConnection(connectTest);
     		connectTest.close();
     	}

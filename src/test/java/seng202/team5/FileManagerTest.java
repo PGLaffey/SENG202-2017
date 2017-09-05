@@ -9,6 +9,7 @@ import seng202.exceptions.NoDataException;
 import seng202.exceptions.WrongFormatException;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 
 @Ignore public class FileManagerTest extends TestCase {
@@ -165,10 +166,17 @@ import java.io.FileNotFoundException;
     /**
      * Test to test the FileManager's ability to write a file.
      */
+    @Ignore @Test
     public void testWriteRouteFile() {
         reader.readFile(TARGET+"route_data1.csv");
         //TODO: confirm this and potentially require a user as well.
-        reader.writeFile("test_file.csv", storage.getRouteArray());
+        ArrayList<String> content = new ArrayList<String>();
+        content.add("This");
+        content.add("Is");
+        content.add("A");
+        content.add("String");
+        //TODO: Make real test data to use with the writeFile function.
+        reader.writeFile("test_file.csv", content/* storage.getRouteArray() */);
         reader.readFile("test_file.csv");
         Route expected_route = new Route(new Location(40.75323098, -73.97032517, "Expected start", 4),
                 new Location(40.73221853, -73.98165557, "Expected end", 4),

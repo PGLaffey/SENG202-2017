@@ -2,7 +2,6 @@ package seng202.team5;
 
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.junit.Before;
@@ -28,10 +27,11 @@ public class DataFetcherTest extends TestCase {
         return new TestSuite(DataFetcherTest.class);
     }
 
-    @Before
+    @Before @Override
     public void setUp() {
-        DataFetcher fetcher = new DataFetcher();
+        fetcher = new DataFetcher();
     }
+
     /**
      * Test the code that allows us to connect to the database.
      */
@@ -49,11 +49,12 @@ public class DataFetcherTest extends TestCase {
         }
 
         try {
-            assertTrue(fetcher.getConnect().isValid(60));
+            // Ensures that the connection is not closed. If it is closed, then there is no connection to the database, and hence the test fails.
+            assertTrue(!fetcher.getConnect().isClosed());
         } catch(SQLException e) {
             fail("Encountered an sql exception.");
         }
     }
 
-    }
+
 }
