@@ -78,9 +78,31 @@ public class FileManager {
     /**
      * Function to write a .csv file to import to other instances of the app.
      * @param fileName The name of the file for the .csv to
-     * @param contents The content for the .csv file.
+     * @param content The content for the .csv file.
      */
-    public void writeFile(String fileName, ArrayList<String> contents) {
+    public void writeFile(String fileName, ArrayList<String> content) {
+        try {
+            PrintWriter printWriter = new PrintWriter(new File(fileName));
+            StringBuilder stringBuilder = new StringBuilder();
+            for (String line : content) {
+                for (String item : line.split(",")) {
+                    stringBuilder.append(item);
+                }
+                stringBuilder.append('\n');
+            }
+            printWriter.write(stringBuilder.toString());
+            printWriter.close();
+        } catch (FileNotFoundException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    /**
+     * Retrieves the list of the given retailers and converts it into a list of Retailer objects.
+     * Then adds this file to the currentStorage of the app.
+     * @param currentStorage The instance of the current storage object that the list of retailers will be added to.
+     */
+    public void retailerRetriever(CurrentStorage currentStorage) {
 
     }
 }
