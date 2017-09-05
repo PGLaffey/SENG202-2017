@@ -162,4 +162,17 @@ import java.io.FileNotFoundException;
         reader.readFile(TARGET+"terrible_format.csv");
     }
 
+    /**
+     * Test to test the FileManager's ability to write a file.
+     */
+    public void testWriteRouteFile() {
+        reader.readFile(TARGET+"route_data1.csv");
+        //TODO: confirm this and potentially require a user as well.
+        reader.writeFile("test_file.csv", storage.getRouteArray());
+        reader.readFile("test_file.csv");
+        Route expected_route = new Route(new Location(40.75323098, -73.97032517, "Expected start", 4),
+                new Location(40.73221853, -73.98165557, "Expected end", 4),
+                "Expected Route");
+        assertEquals(expected_route, storage.getRouteArray().get(0));
+    }
 }

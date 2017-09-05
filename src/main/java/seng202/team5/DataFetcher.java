@@ -6,7 +6,14 @@ import java.util.ArrayList;
 public class DataFetcher {
     private Connection connect = null;
 
-    /**
+	/**
+	 * Getter for the Connection connect
+	 */
+	public Connection getConnect() {
+		return connect;
+	}
+
+	/**
      * Loads a user into the application
      * @param user User to add into the application
      */
