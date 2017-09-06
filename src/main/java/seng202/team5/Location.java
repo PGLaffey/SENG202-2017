@@ -10,6 +10,7 @@ public class Location {
     private int locationType; //toilet = 0, poi = 1, retailer = 2, wifi = 3, general = 4
     private String name;
     private boolean local;
+    private User belongsTo;
 
     /**
      * Constructor for the location class, creates a new Location.
@@ -51,7 +52,14 @@ public class Location {
         return name;
     }
 
-
+    public boolean getLocal() {
+    	return local;
+    }
+    
+    public User getOwner() {
+    	return belongsTo;
+    }
+    
     public int getLocationType() {
         return locationType;
     }

@@ -39,17 +39,15 @@ public class User implements Serializable {
         return name;
     }
 
-    public void setId(int id1) {this.id = id;}
-
-    public int getId() {
-        return id;
-    }
-
     public Route getRoute(int id) {
         //TODO how are we using the route ID?
         return routes.get(id);
     }
 
+    public String getDob() {
+    	return dateOfBirth;
+    }
+    
     public double getHours() {
         return hoursCycled;
     }
@@ -60,6 +58,10 @@ public class User implements Serializable {
 
     public int getRoutesCycled() {
         return routesCycled;
+    }
+    
+    public String getPassword() {
+    	return password;
     }
 
     public ArrayList<Badge> getBadges() {
