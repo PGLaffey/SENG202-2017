@@ -37,7 +37,7 @@ public class SignupScreenController {
     private Button backBtn;
 
     @FXML
-    private Button createBtn;
+    private Button createButton;
 
     @FXML
     private Label missingField;
@@ -46,31 +46,27 @@ public class SignupScreenController {
      * Creates an account if all fields are met
      * @throws IOException
      */
-    public void createBtnPressed(ActionEvent event) throws IOException {
-//        if (usernameLbl.getText().trim().isEmpty() || firstNameLbl.getText().trim().isEmpty() || lastNameLbl.getText().trim().isEmpty()
-//                || birthDatePicker.getValue() == null){ //not sure why it's red
-//            missingField.setVisible(true);
-//        }
-//        else {
-//        String username = usernameLbl.getText().trim();
-//        String name = firstNameLbl.getText().trim() + " " + lastNameLbl.getText().trim();
-//        String birthDate = birthDatePicker.getValue().toString();
-//
-//        User newUser = new User(name, 1, birthDate); //create new user - need to change id
-//        newUser.setUsername(username);
-//
-//
-//
-//
-//
-//        Stage primaryStage = (Stage) createBtn.getScene().getWindow();
-//        Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
-//
-//        Scene scene = new Scene(root);
-//        primaryStage.setTitle("Log in");
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
-//        }
+    public void createBtnPressed(ActionEvent event) throws IOException, IllegalAccessException, ClassNotFoundException, InstantiationException {
+        if (usernameLbl.getText().trim().isEmpty() || firstNameLbl.getText().trim().isEmpty() || lastNameLbl.getText().trim().isEmpty()){ //not sure why it's red
+            missingField.setVisible(true);
+        }
+        else {
+        String username = usernameLbl.getText().trim();
+        String name = firstNameLbl.getText().trim();
+        String birthDate = birthDatePicker.getValue().toString();
+
+        User newUser = new User(name, username, birthDate); //create new user - need to change id
+
+        DataFetcher data = new DataFetcher();
+        data.connectDb();
+        data.addUser(newUser);
+            Stage primaryStage = (Stage)createButton.getScene().getWindow();
+
+            Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
+
+            primaryStage.setTitle("Login");
+            primaryStage.setScene(new Scene(root));
+        }
     }
     
     public void backBtnPressed(ActionEvent event) throws IOException {

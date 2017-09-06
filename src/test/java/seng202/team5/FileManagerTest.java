@@ -168,7 +168,7 @@ import java.io.FileNotFoundException;
     public void testWriteRouteFile() {
         reader.readFile(TARGET+"route_data1.csv");
         //TODO: confirm this and potentially require a user as well.
-        reader.writeFile("test_file.csv", storage.getRouteArray());
+        //reader.writeFile("test_file.csv", storage.getRouteArray());
         reader.readFile("test_file.csv");
         Route expected_route = new Route(new Location(40.75323098, -73.97032517, "Expected start", 4),
                 new Location(40.73221853, -73.98165557, "Expected end", 4),

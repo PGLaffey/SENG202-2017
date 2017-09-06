@@ -21,4 +21,16 @@ public class CurrentStorage {
     public ArrayList<Wifi> getWifiArray() {
         return wifiArray;
     }
+
+    public void addRoute(Route route) {
+        routeArray.add(route);
+    }
+
+    public void addRetailer(Retailer retailer) {
+        retailerArray.add(retailer);
+    }
+
+    public void addWifi(Wifi wifi) {
+        wifiArray.add(wifi);
+    }
 }

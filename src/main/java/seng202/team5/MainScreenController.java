@@ -1,16 +1,26 @@
 package seng202.team5;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+
+import javafx.geometry.Side;
 
 
 public class MainScreenController {
@@ -20,6 +30,15 @@ public class MainScreenController {
 
     @FXML
     private URL location;
+    
+    @FXML
+    private AnchorPane addLocationsPane;
+
+    @FXML
+    private AnchorPane mainMapPane;
+
+    @FXML
+    private AnchorPane randomRoutePane;
 
     @FXML
     private Button accountButton;
@@ -31,7 +50,7 @@ public class MainScreenController {
     private Button bikeIconButton;
 
     @FXML
-    private Button createRouteButton;
+    private Button showRouteButton;
 
     @FXML
     private Button favouriteIconButton;
@@ -52,7 +71,7 @@ public class MainScreenController {
     private Button retailerIconButton;
 
     @FXML
-    private Button saveButton;
+    private Button saveRouteButton;
 
     @FXML
     private TextField searchText;
@@ -73,6 +92,24 @@ public class MainScreenController {
     private Button wifiIconButton;
     
     @FXML
+    private Button saveLocationButton;
+    
+    @FXML
+    private MenuButton loadRouteMenu;
+    
+    @FXML
+    private Menu favouriteRoutesMenu;
+    
+    @FXML
+    private Menu savedRoutesMenu;
+    
+    @FXML
+    private TextField locationNameText;
+
+    @FXML
+    private ChoiceBox<String> locationTypeBox;
+    
+    @FXML
     void mapPressed(ActionEvent event) throws IOException {
     	Stage primaryStage = (Stage) mapButton.getScene().getWindow(); // Here the window is the stage
 		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
@@ -85,41 +122,65 @@ public class MainScreenController {
     
     @FXML
     void statPressed(ActionEvent event) throws IOException {
-    	Stage primaryStage = (Stage) statButton.getScene().getWindow(); // Here the window is the stage
+    	Stage primaryStage = (Stage) statButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/DataViewerScreen.fxml"));
 		
-		Scene scene = new Scene(root); // I think we can add in window size here?
 		primaryStage.setTitle("Statistics");
-		primaryStage.setScene(scene);
+		primaryStage.setScene(new Scene(root));
 		primaryStage.show();
     }
 
 
     @FXML
     void accountPressed(ActionEvent event) throws IOException {
-    	Stage primaryStage = (Stage) accountButton.getScene().getWindow(); // Here the window is the stage
+    	Stage primaryStage = (Stage) accountButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
 		
-		Scene scene = new Scene(root); // I think we can add in window size here?
 		primaryStage.setTitle("Profile");
-		primaryStage.setScene(scene);
+		primaryStage.setScene(new Scene(root));
 		primaryStage.show();
     }
     
     @FXML
     void logoutPressed(ActionEvent event) throws IOException {
-    	Stage primaryStage = (Stage) logoutButton.getScene().getWindow(); // Here the window is the stage
+    	Stage primaryStage = (Stage) logoutButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 		
-		Scene scene = new Scene(root); // I think we can add in window size here?
 		primaryStage.setTitle("Login");
-		primaryStage.setScene(scene);
+		primaryStage.setScene(new Scene(root));
 		primaryStage.show();
+    }
+    
+    @FXML
+    void showRoutePressed(ActionEvent event) {
+    }
+    
+    @FXML
+    void loadRoutePressed(ActionEvent event) {
+    }
+
+    @FXML
+    void randomRoutePressed(ActionEvent event) {
+    	randomRoutePane.setVisible(true);
+    	mainMapPane.setVisible(false);
+    	addLocationsPane.setVisible(false);
     }
 
     @FXML
     void addLocationsPressed(ActionEvent event) {
+    	addLocationsPane.setVisible(true);
+    	mainMapPane.setVisible(false);
+    	randomRoutePane.setVisible(false);
+    }
+    
+    @FXML
+    void sharePressed(ActionEvent event) throws IOException {
+    	Stage stage = new Stage();
+    	Parent root = FXMLLoader.load(getClass().getResource("/ShareRouteScreen.fxml"));
     	
+    	stage.setTitle("Share route");
+    	stage.setScene(new Scene(root));
+    	stage.show();
     }
 
     @FXML
@@ -127,19 +188,7 @@ public class MainScreenController {
     }
 
     @FXML
-    void createRoutePressed(ActionEvent event) {
-    }
-
-    @FXML
     void favouriteIconPressed(ActionEvent event) {
-    }
-
-    @FXML
-    void loadRoutePressed(ActionEvent event) {
-    }
-
-    @FXML
-    void randomRoutePressed(ActionEvent event) {
     }
 
     @FXML
@@ -147,15 +196,19 @@ public class MainScreenController {
     }
 
     @FXML
-    void saveButtonPressed(ActionEvent event) {
+    void saveRouteButtonPressed(ActionEvent event) throws IOException {
+    	Stage stage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/SaveRouteScreen.fxml"));
+		
+		Scene scene = new Scene(root); 
+		stage.setTitle("Save Route");
+		stage.setScene(scene);
+		stage.show();
     }
-
+    
     @FXML
-    void shareIconPressed(ActionEvent event) {
-    }
-
-    @FXML
-    void sharePressed(ActionEvent event) {
+    void saveLocationButtonPressed(ActionEvent event) throws IOException {
+    	saveLocationButton.setText("Saved");
     }
 
     @FXML
@@ -168,20 +221,31 @@ public class MainScreenController {
 
     @FXML
     void initialize() {
-        assert accountButton != null : "fx:id=\"accountButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
+    	ObservableList<String> locationTypes = FXCollections.observableArrayList("Wifi hotspot","Retailer","Toilets", "Point of interest", "Other");
+    	loadRouteMenu.setPopupSide(Side.RIGHT);
+    	locationTypeBox.setItems(locationTypes);
+    	assert accountButton != null : "fx:id=\"accountButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert addLocationsButton != null : "fx:id=\"addLocationsButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
+        assert addLocationsPane != null : "fx:id=\"addLocationsPane\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert bikeIconButton != null : "fx:id=\"bikeIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert createRouteButton != null : "fx:id=\"createRouteButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert favouriteIconButton != null : "fx:id=\"favouriteIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert loadRouteButton != null : "fx:id=\"loadRouteButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
+        assert favouriteRoutesMenu != null : "fx:id=\"favouriteRoutesMenu\" was not injected: check your FXML file 'MainScreen.fxml'.";
+        assert loadRouteMenu != null : "fx:id=\"loadRouteMenu\" was not injected: check your FXML file 'MainScreen.fxml'.";
+        assert locationNameText != null : "fx:id=\"locationNameText\" was not injected: check your FXML file 'MainScreen.fxml'.";
+        assert locationTypeBox != null : "fx:id=\"locationTypeBox\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert logoutButton != null : "fx:id=\"logoutButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
+        assert mainMapPane != null : "fx:id=\"mainMapPane\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert mapButton != null : "fx:id=\"mapButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert randomRouteButton != null : "fx:id=\"randomRouteButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
+        assert randomRoutePane != null : "fx:id=\"randomRoutePane\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert retailerIconButton != null : "fx:id=\"retailerIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert saveButton != null : "fx:id=\"saveButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
+        assert saveLocationButton != null : "fx:id=\"saveLocationButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
+        assert saveRouteButton != null : "fx:id=\"saveRouteButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
+        assert savedRoutesMenu != null : "fx:id=\"savedRoutesMenu\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert searchText != null : "fx:id=\"searchText\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert shareButton != null : "fx:id=\"shareButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert shareIconButton != null : "fx:id=\"shareIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
+        assert showRouteButton != null : "fx:id=\"showRouteButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert statButton != null : "fx:id=\"statButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert toiletIconButton != null : "fx:id=\"toiletIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert wifiIconButton != null : "fx:id=\"wifiIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";

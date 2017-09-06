@@ -59,6 +59,17 @@ public class DataFetcher {
     					+ "Type = '" + type + "'").toString());
     }
 
+    private void runUpdate(String update) {
+    	Statement qryUpdate;
+
+    	try {
+        	qryUpdate = connect.createStatement();
+			qryUpdate.executeUpdate(update);
+		} catch (SQLException ex) {
+			printSqlError(ex);
+		}
+    }
+    
     /**
      * Runs any MySQL query given to it on the currently connected database.
      * Array List return format is result[Row[Column]] or: 
@@ -110,7 +121,7 @@ public class DataFetcher {
     	int routesCycled = user.getRoutesCycled();
     	double hoursCycled = user.getHours();
     	double distanceCycled = user.getDistance();
-    	runQuery("INSERT INTO tblUser "
+    	runUpdate("INSERT INTO tblUser "
     			+ "(FName, Username, NumRoutesCycled, HoursCycled, DistanceCycled) VALUES "
     			+ "('" + firstName + "', '" + username + "', '" + routesCycled + "', '" + hoursCycled + "', '" + distanceCycled + "')");
     }
@@ -136,7 +147,7 @@ public class DataFetcher {
     		endID = findLocation(end);
     	}
     	
-    	runQuery("INSERT INTO tblRoutes "
+    	runUpdate("INSERT INTO tblRoutes "
     			+ "(StartID, EndID, Name) VALUES "
     			+ "('" + startID + "', '" + endID + "', '" + name + "')");
     }
@@ -172,7 +183,7 @@ public class DataFetcher {
     	double[] coords = location.getCoords();
     	double longitude = coords[1];
     	double latitude = coords[0];
-    	runQuery("INSERT INTO tblLocations "
+    	runUpdate("INSERT INTO tblLocations "
     			+ "(Latitude, Longitude, Name, Type) VALUES "
     			+ "('" + latitude + "', '" + longitude + "', '" + name + "', '" + type + "')");
     }
@@ -187,7 +198,7 @@ public class DataFetcher {
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
     	try {
     		//Following line the 192.168.1.70 needs to be 222.152.179.135 if outside of Patrick's network
-    		connect = DriverManager.getConnection("jdbc:mysql://192.168.1.70:3306/cyclrr","monitor","Team5Pass");
+    		connect = DriverManager.getConnection("jdbc:mysql://222.152.179.135:3306/cyclrr","monitor","Team5Pass");
     	}
     	catch (SQLException ex) {
     		System.out.println("Exception: " + ex.getMessage());
