@@ -59,6 +59,17 @@ public class DataFetcher {
     					+ "Type = '" + type + "'").toString());
     }
 
+    private void runUpdate(String update) {
+    	Statement qryUpdate;
+
+    	try {
+        	qryUpdate = connect.createStatement();
+			qryUpdate.executeUpdate(update);
+		} catch (SQLException ex) {
+			printSqlError(ex);
+		}
+    }
+    
     /**
      * Runs any MySQL query given to it on the currently connected database.
      * Array List return format is result[Row[Column]] or: 
@@ -110,7 +121,7 @@ public class DataFetcher {
     	int routesCycled = user.getRoutesCycled();
     	double hoursCycled = user.getHours();
     	double distanceCycled = user.getDistance();
-    	runQuery("INSERT INTO tblUser "
+    	runUpdate("INSERT INTO tblUser "
     			+ "(FName, Username, NumRoutesCycled, HoursCycled, DistanceCycled) VALUES "
     			+ "('" + firstName + "', '" + username + "', '" + routesCycled + "', '" + hoursCycled + "', '" + distanceCycled + "')");
     }
@@ -136,7 +147,7 @@ public class DataFetcher {
     		endID = findLocation(end);
     	}
     	
-    	runQuery("INSERT INTO tblRoutes "
+    	runUpdate("INSERT INTO tblRoutes "
     			+ "(StartID, EndID, Name) VALUES "
     			+ "('" + startID + "', '" + endID + "', '" + name + "')");
     }
@@ -172,7 +183,7 @@ public class DataFetcher {
     	double[] coords = location.getCoords();
     	double longitude = coords[1];
     	double latitude = coords[0];
-    	runQuery("INSERT INTO tblLocations "
+    	runUpdate("INSERT INTO tblLocations "
     			+ "(Latitude, Longitude, Name, Type) VALUES "
     			+ "('" + latitude + "', '" + longitude + "', '" + name + "', '" + type + "')");
     }
