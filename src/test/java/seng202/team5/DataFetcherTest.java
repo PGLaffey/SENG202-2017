@@ -74,7 +74,6 @@ public class DataFetcherTest extends TestCase {
     {
         FileManager reader = new FileManager();
         reader.readFile(TARGET+"route_data1.csv");
-
     }
 
     /**
