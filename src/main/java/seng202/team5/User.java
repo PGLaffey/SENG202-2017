@@ -9,6 +9,7 @@ public class User implements Serializable {
     private String name;
     private int id;
     private String username;
+    private String password;
     private String dateOfBirth;
     private int routesCycled;
     private double distanceCycled;
@@ -21,12 +22,11 @@ public class User implements Serializable {
     /**
     Constructor for the User class, creates a new user instance
     @param name The name of the new user
-    @param id The unique id code for the user
      @param doB The date of birth for the new user
      */
-    public User(String name, int id, String doB) {
+    public User(String name, String username, String doB) {
         this.name = name;
-        this.id = id;
+        this.username = username;
         this.dateOfBirth = doB;
         this.routesCycled = 0;
         this.distanceCycled = 0;
@@ -39,15 +39,15 @@ public class User implements Serializable {
         return name;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public Route getRoute(int id) {
         //TODO how are we using the route ID?
         return routes.get(id);
     }
 
+    public String getDob() {
+    	return dateOfBirth;
+    }
+    
     public double getHours() {
         return hoursCycled;
     }
@@ -59,6 +59,10 @@ public class User implements Serializable {
     public int getRoutesCycled() {
         return routesCycled;
     }
+    
+    public String getPassword() {
+    	return password;
+    }
 
     public ArrayList<Badge> getBadges() {
         return badges;
@@ -66,9 +70,5 @@ public class User implements Serializable {
 
 	public String getUsername() {
 		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 }

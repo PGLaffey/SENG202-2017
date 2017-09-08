@@ -57,13 +57,13 @@
          </GridPane.margin>
       </PasswordField>
       <Label text="Birth date:" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-      <DatePicker fx:id="DatePicker" promptText="dd/mm/yyyy" GridPane.columnIndex="1" GridPane.rowIndex="5">
+      <DatePicker fx:id="birthDatePicker" promptText="dd/mm/yyyy" GridPane.columnIndex="1" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets right="8.0" />
          </GridPane.margin>
       </DatePicker>
       <Button fx:id="backButton" mnemonicParsing="false" text="Back" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
-      <Button fx:id="createButton" mnemonicParsing="false" onAction="#createBtnPressed"  text="Create" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+      <Button fx:id="createButton" mnemonicParsing="false" onAction="#createBtnPressed" text="Create" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
       <Label fx:id="missingField" prefHeight="16.0" prefWidth="240.0" text="One or more fields were left blank" textAlignment="CENTER" textFill="RED" visible="false" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
    </children>
 </GridPane>

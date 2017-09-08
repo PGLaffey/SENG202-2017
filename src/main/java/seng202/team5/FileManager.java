@@ -97,12 +97,41 @@ public class FileManager {
         }
     }
 
+
     /**
-     * Retrieves the list of the given retailers and converts it into a list of Retailer objects.
-     * Then adds this file to the currentStorage of the app.
+     * Retrieves the list of the given retailers and converts each of these to being a new instance of Retailer stored in currentStorage.
      * @param currentStorage The instance of the current storage object that the list of retailers will be added to.
      */
     public void retailerRetriever(CurrentStorage currentStorage) {
+        ArrayList<String> retailers = readFile("SENG202-Team5-Cyclr/src/main/resources/data_files/Lower_Manhattan_Retailers.csv");
+        int i = 2;
+        while (i < retailers.size()) {
+            for (String retailer : retailers) {
+                String[] information = retailer.split(",");
+                String retailerAddress = information[1] + information[2] + information[3] + information[4] + information[5] + information[6];
+                Retailer newRetailer = new Retailer(retailerAddress, information[0], information[7], information[8]);
+                currentStorage.addRetailer(newRetailer);
+            }
+        }
+    }
 
+
+    /**
+     * Retrieves the list of the given wifiHotspots and converts each item into a wifi object list in the currentStorage class.
+     * @param currentStorage The current storage of the application which the Wifi hotspots will be added to.
+     */
+    public void wifiRetriever(CurrentStorage currentStorage) {
+        ArrayList<String> wifiHotspots = readFile("SENG202-Team5-Cyclr/src/main/resources/data_files/NYC_Free_Public_WiFi_03292017.csv");
+        int i = 1;
+        while (i < wifiHotspots.size()) {
+            for (String wifiHotspot: wifiHotspots) {
+                String[] information = wifiHotspot.split(",");
+                Double wifiLatitude = new Double(information[7]);
+                Double wifiLongitude = new Double(information[8]);
+                String wifiName = information[0];
+                String wifiProvider = information[4];
+                Wifi newHotspot = new Wifi(wifiLatitude, wifiLongitude, wifiName, wifiProvider);
+            }
+        }
     }
 }
