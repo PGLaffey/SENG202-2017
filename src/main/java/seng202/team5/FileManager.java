@@ -57,18 +57,16 @@ public class FileManager {
      * @param fileName The name of the .csv file to be read.
      * @return An arrayList of the data from the .csv file.
      */
-    // Do we want to add a type param that just tells what type of data is in the file?
     public ArrayList<String> readFile(String fileName) {
-        File file = new File(fileName);
         ArrayList<String> dataList = new ArrayList<String>();
         try {
-            Scanner inputStream = new Scanner(file);
-            while (inputStream.hasNext()) {
-                String data = inputStream.next();
+            FileReader file = new FileReader(fileName);
+            BufferedReader buffReader = new BufferedReader(file);
+            String data;
+            while ((data = buffReader.readLine()) != null) {
                 dataList.add(data);
             }
-            inputStream.close();
-        } catch (FileNotFoundException exception) {
+        } catch (IOException exception) {
             exception.printStackTrace();
         }
         return dataList;
