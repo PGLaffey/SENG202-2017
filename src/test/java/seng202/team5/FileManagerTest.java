@@ -170,7 +170,6 @@ import java.util.ArrayList;
     public void testWriteRouteFile() {
         reader.readFile(TARGET+"route_data1.csv");
         //TODO: confirm this and potentially require a user as well.
-<<<<<<< HEAD
         ArrayList<String> content = new ArrayList<String>();
         content.add("This");
         content.add("Is");
@@ -178,9 +177,7 @@ import java.util.ArrayList;
         content.add("String");
         //TODO: Make real test data to use with the writeFile function.
         reader.writeFile("test_file.csv", content/* storage.getRouteArray() */);
-=======
         //reader.writeFile("test_file.csv", storage.getRouteArray());
->>>>>>> 27e06ee0d248745398f34c7f042e16ab4b5214d6
         reader.readFile("test_file.csv");
         Route expected_route = new Route(new Location(40.75323098, -73.97032517, "Expected start", 4),
                 new Location(40.73221853, -73.98165557, "Expected end", 4),

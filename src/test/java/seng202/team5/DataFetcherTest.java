@@ -7,18 +7,12 @@ import java.sql.SQLException;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-<<<<<<< HEAD
-
-public class DataFetcherTest extends TestCase {
-    private DataFetcher fetcher;
-=======
 
 import java.sql.SQLException;
 
 public class DataFetcherTest extends TestCase {
     private DataFetcher fetcher;
     private static final String TARGET = "/testdata/";
->>>>>>> 27e06ee0d248745398f34c7f042e16ab4b5214d6
 
     /**
      * @param testName The name of the test
@@ -63,36 +57,6 @@ public class DataFetcherTest extends TestCase {
             assertTrue(!fetcher.getConnect().isClosed());
         } catch(SQLException e) {
             fail("Encountered an sql exception.");
-        }
-    }
-
-=======
-     * Sets up a new dataFetcher before every test
-     */
-    public void setUp()
-    {
-        fetcher = new DataFetcher();
-    }
-    /**
-     * Test to ensure that the connectDB function results in a functional connection.
-     */
-    @Test
-    public void testConnectDB()
-    {
-        try {
-            fetcher.connectDb();
-        } catch (IllegalAccessException exception) {
-            fail("Call to access illegal area.");
-        } catch (ClassNotFoundException exception) {
-            fail("Class not found");
-        } catch (InstantiationException exception) {
-            fail("Failed to instantiate a connection");
-        }
-        try {
-            // Checks if the connection obtained by the fetcher in connectDB is valid
-            assertTrue(fetcher.getConnect().isValid(60));
-        } catch (SQLException exception) {
-            fail("SQLException");
         }
     }
 
@@ -145,6 +109,5 @@ public class DataFetcherTest extends TestCase {
     /**
      * Test to ensure that the DataFetcher class can add new users to the database correctly.
      */
->>>>>>> 27e06ee0d248745398f34c7f042e16ab4b5214d6
 
 }
