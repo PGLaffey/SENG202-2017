@@ -114,8 +114,8 @@ public class FileManager {
             double startLongitude = Double.parseDouble(information[6]);
             double endLatitude = Double.parseDouble(information[9]);
             double endLongitude = Double.parseDouble(information[10]);
-            Location startLocation = new Location(startLatitude, startLongitude, startName);
-            Location endLocation = new Location(endLatitude, endLongitude, endName);
+            Location startLocation = new Location(startLatitude, startLongitude, startName, 4);
+            Location endLocation = new Location(endLatitude, endLongitude, endName, 4);
             Route newRoute = new Route(startLocation, endLocation);
             currentStorage.addRoute(newRoute);
         }
