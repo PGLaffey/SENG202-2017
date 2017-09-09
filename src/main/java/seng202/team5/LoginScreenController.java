@@ -7,10 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -31,20 +28,32 @@ public class LoginScreenController {
 	@FXML
 	private CheckBox staySignedInCheck;
 	
+	@FXML
+	private Label incorrectPasswordLbl;
 
+	@FXML
+	private Label incorrectUserLbl;
 	/** 
 	 * Method for when the Sign In 
 	 * button is pressed
 	 * @throws IOException 
 	 */
-    public void signInButtonPressed() throws IOException {
-    	
-    	Stage primaryStage = (Stage)signInButton.getScene().getWindow();
-    	
-    	Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
-    	
-    	primaryStage.setTitle("Profile");
-    	primaryStage.setScene(new Scene(root));
+    public void signInButtonPressed() throws IOException, IllegalAccessException, ClassNotFoundException, InstantiationException {
+
+    	DataFetcher data = new DataFetcher();
+		data.connectDb();
+		if ((data.fetchPassword(usernameText.getText()).isEmpty())) {
+			incorrectPasswordLbl.setVisible(false);
+			incorrectUserLbl.setVisible(true);
+		} else if ((data.fetchPassword(usernameText.getText()).get(0).get(0).toString().equals(passwordText.getText().toString()))) {
+			Stage primaryStage = (Stage)signInButton.getScene().getWindow();
+			Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
+			primaryStage.setTitle("Profile");
+			primaryStage.setScene(new Scene(root));
+		} else {
+			incorrectUserLbl.setVisible(false);
+			incorrectPasswordLbl.setVisible(true);
+		}
     	
 
     }

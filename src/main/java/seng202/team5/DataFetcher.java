@@ -22,7 +22,21 @@ public class DataFetcher {
     	System.out.print(runQuery("SELECT * FROM tblUser WHERE "
     			+ "Username = '" + username +"'"));
     }
+//
+//	public boolean checkSignIn(String username, String password) {
+//		if (runQuery("SELECT * FROM tblUser WHERE "
+//				+ "Username = '" + username + "'" + "AND " + "Password = '" + password + "'").isEmpty()) {
+//			System.out.println("First");
+//			return false;
+//		} else {
+//			System.out.println("First");
+//			return true;
+//		}
+//	}
 
+	public ArrayList<ArrayList<String>> fetchPassword(String username) {
+		return (runQuery("SELECT Password FROM tblUser WHERE Username = '" + username + "'"));
+	}
     /**
      * Loads a route into the application
      * @param route Route to add into the application
@@ -219,12 +233,12 @@ public class DataFetcher {
     
     /**
      * Finds if a user exists in the database based off their unique username
-     * @param user The user to check 
+     * @param user The user to check
      * @return true if the user exists, false otherwise
      */
     public boolean userExists(User user) {
     	String username = user.getUsername();
-    	if (runQuery("SELECT Username FROM tblUser WHERE Username = '" + username + "'").get(0).isEmpty()) {
+    	if (runQuery("SELECT Username FROM tblUser WHERE Username = '" + username + "'").isEmpty()) {
     		return false;
     	}
     	else {
@@ -237,26 +251,19 @@ public class DataFetcher {
      * @param user User to add into the external database
      */
     public void addUser(User user) {
-    	String name = user.getName();
-    	String firstName = "";
-    	String lastName = "";
+    	String firstName = user.getFirstName();
+    	String lastName = user.getLastName();
     	String password = user.getPassword();
+    	System.out.println(password);
     	String dob = user.getDob();
-    	if (name.contains(" ")) {
-    		firstName = name.substring(0, name.indexOf(" "));
-    		lastName = name.substring(name.indexOf(" ") + 1);
-    	}
-    	else {
-    		firstName = name;
-    	}
     	String username = user.getUsername();
     	int routesCycled = user.getRoutesCycled();
     	double hoursCycled = user.getHours();
     	double distanceCycled = user.getDistance();
     	if (!userExists(user)) {
     		runUpdate("INSERT INTO tblUser "
-    				+ "(FName, LName, Username, YearOfBirth, NumRoutesCycled, HoursCycled, DistanceCycled) VALUES "
-    				+ "('" + firstName + "', '" + lastName + "', '" + username + "', '" + dob + "', '" + routesCycled + "', '" + hoursCycled + "', '" + distanceCycled + "')");
+    				+ "(FName, LName, Username, YearOfBirth, Password, NumRoutesCycled, HoursCycled, DistanceCycled) VALUES "
+    				+ "('" + firstName + "', '" + lastName + "', '" + username + "', '" + dob + "', '" + password + "', '" + routesCycled + "', '" + hoursCycled + "', '" + distanceCycled + "')");
     	}
     	else {
     		System.out.println("Error: User already exists, cannot create new user with same username");
@@ -472,7 +479,7 @@ public class DataFetcher {
     	try {
     		System.out.println("Connecting...");
     		//Following line the 192.168.1.70 needs to be 222.152.179.135 if outside of Patrick's network
-    		Connection connectTest = DriverManager.getConnection("jdbc:mysql://192.168.1.70:3306/cyclrr","monitor","Team5Pass");
+    		Connection connectTest = DriverManager.getConnection("jdbc:mysql://125.239.188.8:3306/cyclrr","monitor","Team5Pass");
     		testConnection(connectTest);
     		connectTest.close();
     	}

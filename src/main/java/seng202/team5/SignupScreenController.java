@@ -25,16 +25,16 @@ public class SignupScreenController {
     private TextField usernameLbl;
 
     @FXML
-    private TextField passwordLbl;
+    private PasswordField passwordLbl;
 
     @FXML
-    private TextField repeatPasswordLbl;
+    private PasswordField repeatPasswordLbl;
 
     @FXML
     private DatePicker birthDatePicker;
 
     @FXML
-    private Button backBtn;
+    private Button backButton;
 
     @FXML
     private Button createButton;
@@ -42,6 +42,7 @@ public class SignupScreenController {
     @FXML
     private Label missingField;
 
+    @FXML Label wrongPasswordLbl;
     /**
      * Creates an account if all fields are met
      * @throws IOException
@@ -50,12 +51,16 @@ public class SignupScreenController {
         if (usernameLbl.getText().trim().isEmpty() || firstNameLbl.getText().trim().isEmpty() || lastNameLbl.getText().trim().isEmpty()){ //not sure why it's red
             missingField.setVisible(true);
         }
-        else {
+        else if (!passwordLbl.getText().equals(repeatPasswordLbl.getText())) {
+            wrongPasswordLbl.setVisible(true);
+        } else {
         String username = usernameLbl.getText().trim();
-        String name = firstNameLbl.getText().trim();
+        String first = firstNameLbl.getText().trim();
+        String last = lastNameLbl.getText().trim();
         String birthDate = birthDatePicker.getValue().toString();
+        String password = passwordLbl.getText();
 
-        User newUser = new User(name, username, birthDate); //create new user - need to change id
+        User newUser = new User(first, last, username, birthDate, password); //create new user - need to change id
 
         DataFetcher data = new DataFetcher();
         data.connectDb();
@@ -69,9 +74,9 @@ public class SignupScreenController {
         }
     }
     
-    public void backBtnPressed(ActionEvent event) throws IOException {
+    public void backButtonPressed(ActionEvent event) throws IOException {
 		
-		Stage primaryStage = (Stage) backBtn.getScene().getWindow(); // Here the window is the stage
+		Stage primaryStage = (Stage) backButton.getScene().getWindow(); // Here the window is the stage
 		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 		
 		Scene scene = new Scene(root); // I think we can add in window size here?

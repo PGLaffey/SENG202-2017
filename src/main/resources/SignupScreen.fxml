@@ -62,8 +62,9 @@
             <Insets right="8.0" />
          </GridPane.margin>
       </DatePicker>
-      <Button fx:id="backButton" mnemonicParsing="false" text="Back" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+      <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
       <Button fx:id="createButton" mnemonicParsing="false" onAction="#createBtnPressed" text="Create" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
       <Label fx:id="missingField" prefHeight="16.0" prefWidth="240.0" text="One or more fields were left blank" textAlignment="CENTER" textFill="RED" visible="false" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+      <Label fx:id="wrongPasswordLbl" text="Passwords do not match" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
    </children>
 </GridPane>

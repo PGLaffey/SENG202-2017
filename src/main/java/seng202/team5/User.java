@@ -7,7 +7,8 @@ User class stores the users information to be used in the app and stored.
  */
 public class User implements Serializable {
     private String name;
-    private int id;
+    private String firstName;
+    private String lastName;
     private String username;
     private String password;
     private String dateOfBirth;
@@ -21,11 +22,13 @@ public class User implements Serializable {
     //TODO Did we agree that the id was to be randomly generated or chosen by the user?
     /**
     Constructor for the User class, creates a new user instance
-    @param name The name of the new user
-     @param doB The date of birth for the new user
+
      */
-    public User(String name, String username, String doB) {
-        this.name = name;
+    public User(String first, String last, String username, String doB, String password) {
+        this.name = first + " " + last;
+        this.firstName = first;
+        this.lastName = last;
+        this.password = password;
         this.username = username;
         this.dateOfBirth = doB;
         this.routesCycled = 0;
@@ -35,8 +38,13 @@ public class User implements Serializable {
         this.badges = new ArrayList<Badge>();
     }
 
-    public String getName() {
-        return name;
+    public String getName() { return name; }
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public Route getRoute(int id) {
