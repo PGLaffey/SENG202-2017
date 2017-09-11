@@ -141,5 +141,11 @@ public class ProfileScreenController {
 		stage.show();
 	}
 	
+	@FXML
+	void initialize() {
+		usersNameLabel.setText("Users name"); // Not sure how to get user object to call getname() on
+		usersAgeLabel.setText("Users age"); // Need to calculate age using getbirth()
+	}
+	
 
 }
