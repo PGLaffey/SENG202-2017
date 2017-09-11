@@ -22,7 +22,11 @@ public class User implements Serializable {
     //TODO Did we agree that the id was to be randomly generated or chosen by the user?
     /**
     Constructor for the User class, creates a new user instance
-
+     @param first The first name of the user.
+     @param last The last name of the user.
+     @param username The username of the user.
+     @param doB The date of the user's birth.
+     @param password The password the user has chosen.
      */
     public User(String first, String last, String username, String doB, String password) {
         this.name = first + " " + last;
