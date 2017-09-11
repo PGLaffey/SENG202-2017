@@ -224,6 +224,9 @@ public class MainScreenController {
     	ObservableList<String> locationTypes = FXCollections.observableArrayList("Wifi hotspot","Retailer","Toilets", "Point of interest", "Other");
     	loadRouteMenu.setPopupSide(Side.RIGHT);
     	locationTypeBox.setItems(locationTypes);
+    	addLocationsPane.setVisible(false);
+    	mainMapPane.setVisible(true);
+    	randomRoutePane.setVisible(false);
     	assert accountButton != null : "fx:id=\"accountButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert addLocationsButton != null : "fx:id=\"addLocationsButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert addLocationsPane != null : "fx:id=\"addLocationsPane\" was not injected: check your FXML file 'MainScreen.fxml'.";
