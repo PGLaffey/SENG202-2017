@@ -2,8 +2,11 @@ package seng202.team5;
 
 import java.io.IOException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -31,7 +34,7 @@ public class DataViewerScreenController {
 	private Button logoutButton;	
 	
 	@FXML
-	private ChoiceBox filterGraphBox;
+	private ChoiceBox<String> filterGraphBox;
 	
 	@FXML
 	private RadioButton graphRadio;
@@ -105,5 +108,9 @@ public class DataViewerScreenController {
 		primaryStage.show();	
 	}
 	
-	
+	@FXML
+	void initialize() {
+		ObservableList<String> filterTypes = FXCollections.observableArrayList("Distance travelled","Time spent cycling");
+		filterGraphBox.setItems(filterTypes);
+	}
 }
