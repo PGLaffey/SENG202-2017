@@ -37,6 +37,7 @@ public class DataFetcher {
 	public ArrayList<ArrayList<String>> fetchPassword(String username) {
 		return (runQuery("SELECT Password FROM tblUser WHERE Username = '" + username + "'"));
 	}
+
     /**
      * Loads a route into the application
      * @param route Route to add into the application
