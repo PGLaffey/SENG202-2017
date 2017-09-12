@@ -94,10 +94,14 @@ public class DataFetcher {
 	    	boolean local;
 	    	int type;
 	    	User owner;
+
 	    	String ssid;
 	    	String provider;
 	    	String description;
 	    	String product;
+	    	String borough;
+	    	String wifi_type;
+
 	    	double cost;
 	    	boolean isDisabled;
 	    	boolean unisex;
@@ -137,7 +141,7 @@ public class DataFetcher {
 					typeOutput.next();
 					product = typeOutput.getString(2);
 					description = typeOutput.getString(3);
-					locations.add(new Retailer(latitude, longitude, name, product, description));
+					locations.add(new Retailer(latitude, longitude, name, product, description, 0));
 					break;
 				case 3:
 					typeID = output.getInt(11);
@@ -145,7 +149,10 @@ public class DataFetcher {
 					typeOutput.next();
 					ssid = typeOutput.getString(2);
 					provider = typeOutput.getString(3);
-					locations.add(new Wifi(latitude, longitude, name, provider));					
+					//Temporary fillers. TODO: Change this with the real value.
+					borough = "";
+					wifi_type = "";
+					locations.add(new Wifi(latitude, longitude, name, borough, wifi_type,  provider));
 					break;
 				case 4:
 					locations.add(new Location(latitude, longitude, name, 4));
@@ -507,7 +514,7 @@ public class DataFetcher {
     	Location testLoc1 = new Location(47.2134400, 172.1232100, "Telecom Hotspot", 3);
     	//test.loadLocation(testLoc1);		//Tests loading a valid location
     	Location testLoc2 = new Location(159.1547895, 0.3256984, "NULL", 4);
-    	Route testRoute = new Route(testLoc1, testLoc2, "Test");
+    	Route testRoute = new Route("fakeBike", testLoc1, testLoc2, "Test", "M");
     	//test.loadRoute(testRoute);		//Tests loading a valid route
     	Location invalidLoc = new Location(25.1258469, 56.1658468, "NULL", 4);
     	//test.loadLocation(invalidLoc);	//Tests loading a invalid location
