@@ -8,6 +8,7 @@ public class Retailer extends Location {
     private String product;
     private String description;
     private String address;
+    private int zip;
 
 	/**
 	 * Constructor for the retailer subclass, uses the location superclass constructor.
@@ -17,7 +18,7 @@ public class Retailer extends Location {
      * @param product The product the retailer sells.
      * @param description A description of the retailer at the location.
 	 */
-    public Retailer(double latitude, double longitude, String name, String product, String description) {
+    public Retailer(double latitude, double longitude, String name, String product, String description, int zip) {
     	super(latitude, longitude, name, 2);
     	this.product = product;
     	this.description = description;
@@ -30,7 +31,7 @@ public class Retailer extends Location {
      * @param product The product the retailer sells.
      * @param description A description of the retailer at the location.
      */
-    public Retailer(String address, String name, String product, String description) {
+    public Retailer(String address, String name, String product, String description, int zip) {
         super(address, name, 2);
         this.address = address;
         this.product = product;

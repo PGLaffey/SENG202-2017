@@ -106,17 +106,25 @@ public class FileManager {
     public void routeRetriever(CurrentStorage currentStorage) {
         ArrayList<String> routes = readFile("SENG202-Team5-Cyclr/src/main/resources/data_files/2014-01 - Citi Bike trip data.csv");
         routes.remove(0);
+
         for (String route : routes) {
             String[] information = route.split(",");
+
+            //Obtain the relevant information from the csv.
+            String bikeID = information[11];
             String startName = information[4];
             String endName = information[8];
             double startLatitude = Double.parseDouble(information[5]);
             double startLongitude = Double.parseDouble(information[6]);
             double endLatitude = Double.parseDouble(information[9]);
             double endLongitude = Double.parseDouble(information[10]);
+
+            //Convert the relevant data into the associated classes
             Location startLocation = new Location(startLatitude, startLongitude, startName, 4);
             Location endLocation = new Location(endLatitude, endLongitude, endName, 4);
-            Route newRoute = new Route(startLocation, endLocation);
+            Route newRoute = new Route(bikeID, startLocation, endLocation);
+
+            //Log the new object into the storage class.
             currentStorage.addRoute(newRoute);
         }
     }
@@ -151,10 +159,18 @@ public class FileManager {
         ArrayList<String> retailers = readFile("SENG202-Team5-Cyclr/src/main/resources/data_files/Lower_Manhattan_Retailers.csv");
         retailers.remove(0);
         retailers.remove(0);
+
         for (String retailer : retailers) {
             String[] information = retailer.split(",");
-            String retailerAddress = information[1] + information[2] + information[3] + information[4] + information[5] + information[6];
-            Retailer newRetailer = new Retailer(retailerAddress, information[0], information[7], information[8]);
+
+            //Obtain relevant fields
+            String retailerAddress = information[1] + information[2] + information[3] + information[4];
+            int zip = Integer.parseInt(information[5]);
+
+            //Creates a new instance of retailer.
+            Retailer newRetailer = new Retailer(retailerAddress, information[0], information[7], information[8], zip);
+
+            //Add the retailer to the storage class.
             currentStorage.addRetailer(newRetailer);
         }
     }
@@ -169,11 +185,19 @@ public class FileManager {
         wifiHotspots.remove(0);
         for (String wifiHotspot: wifiHotspots) {
             String[] information = wifiHotspot.split(",");
+
+            //Obtains the relevant information
             Double wifiLatitude = new Double(information[7]);
             Double wifiLongitude = new Double(information[8]);
-            String wifiName = information[0];
+            String wifiName = information[14];
             String wifiProvider = information[4];
-            Wifi newHotspot = new Wifi(wifiLatitude, wifiLongitude, wifiName, wifiProvider);
+            String borough = information[18];
+            String type = information[3];
+
+            //Creates a new Wifi object.
+            Wifi newHotspot = new Wifi(wifiLatitude, wifiLongitude, wifiName, borough, type, wifiProvider);
+
+            currentStorage.addWifi(newHotspot);
         }
     }
 }

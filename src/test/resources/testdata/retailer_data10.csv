@@ -1,11 +1,11 @@
-CnBio_Org_Name,CnAdrPrf_Addrline1,CnAdrPrf_Addrline2,CnAdrPrf_City,CnAdrPrf_State,Block-Lot,Primary,Secondary
-Starbucks Coffee,3 New York Plaza,New York,NY,10004,Aug-32,Casual Eating & Takeout,F-Coffeehouse
-New York Health & Racquet Club,39 Whitehall Street,New York,NY,10004,Aug-32,Personal and Professional Services,P-Athletic Clubs/Fitness
-A.J. Kelly's,6 Stone Street,New York,NY,10004,Oct-32,Full Service Dining,F-Irish Pub
-Fraunces Tavern® Restaurant,54 Pearl Street,New York,NY,10004,Jul-35,Full Service Dining,F-American
-Bombay's,60 Pearl Street,New York,NY,10004,Jul-37,Casual Eating & Takeout,F-Indian
-Pearl Bodywork,60 Pearl Street,Floor 2,New York,NY,10004,Jul-38,Personal and Professional Services,P-Spa
-McDonald's,6 Water Street,New York,NY,10004,Aug-51,Casual Eating & Takeout,F-Fast Food
-Water Street Gourmet Deli & Pizza,12 Water Street,New York,NY,10004,Aug-51,Casual Eating & Takeout,F-Deli
-Alice's Fashion,1 New York Plaza,New York,NY,10004,1-Apr,Shopping,S-Apparel: Women's
-Mr. Soup,1 New York Plaza,New York,NY,10004,1-Apr,Casual Eating & Takeout,F-Soup
+CnBio_Org_Name,CnAdrPrf_Addrline1,CnAdrPrf_Addrline2,CnAdrPrf_City,CnAdrPrf_State,CnAdrPrf_ZIP,Block-Lot,Primary,Secondary
+Starbucks Coffee,3 New York Plaza,,New York,NY,10004,8-32,Casual Eating & Takeout,F-Coffeehouse
+New York Health & Racquet Club,39 Whitehall Street,,New York,NY,10004,8-32,Personal and Professional Services,P-Athletic Clubs/Fitness
+A.J. Kelly's,6 Stone Street,,New York,NY,10004,10-32,Full Service Dining,F-Irish Pub
+Fraunces TavernÂ® Restaurant,54 Pearl Street,,New York,NY,10004,7-35,Full Service Dining,F-American
+Bombay's,60 Pearl Street,,New York,NY,10004,7-37,Casual Eating & Takeout,F-Indian
+Pearl Bodywork,60 Pearl Street,Floor 2,New York,NY,10004,7-38,Personal and Professional Services,P-Spa
+McDonald's,6 Water Street,,New York,NY,10004,8-51,Casual Eating & Takeout,F-Fast Food
+Water Street Gourmet Deli & Pizza,12 Water Street,,New York,NY,10004,8-51,Casual Eating & Takeout,F-Deli
+Alice's Fashion,1 New York Plaza,,New York,NY,10004,4-1,Shopping,S-Apparel: Women's
+Mr. Soup,1 New York Plaza,,New York,NY,10004,4-1,Casual Eating & Takeout,F-Soup

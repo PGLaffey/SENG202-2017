@@ -57,9 +57,9 @@ import java.io.FileNotFoundException;
     public void testRouteOneEntry()
     {
         reader.readFile(getClass().getResource(TARGET+"/route_data1.csv").getFile());
-        Route expected_route = new Route(new Location(40.75323098, -73.97032517, "Expected start", 4),
+        Route expected_route = new Route("16950", new Location(40.75323098, -73.97032517, "Expected start", 4),
                                         new Location(40.73221853, -73.98165557, "Expected end", 4),
-                                        "Expected Route");
+                                        "Expected Route", "0");
         assertEquals(expected_route, storage.getRouteArray().get(0));
 
     }
@@ -93,7 +93,7 @@ import java.io.FileNotFoundException;
     public void testWifiOneEntry() {
 
         reader.readFile(TARGET+"/wifi_data1.csv");
-        Wifi expected_wifi = new Wifi(40.745968, -73.994039, "LinkNYC Free Wi-Fi", "LinkNYC - Citybridge");
+        Wifi expected_wifi = new Wifi(40.745968, -73.994039, "LinkNYC Free Wi-Fi", "Manhattan","Free","LinkNYC - Citybridge");
         assertEquals(expected_wifi, storage.getWifiArray().get(0));
     }
 
@@ -125,7 +125,7 @@ import java.io.FileNotFoundException;
     public void testRetailerOneEntry() {
 
         reader.readFile(TARGET+"/retailer_data1.csv");
-        Retailer expected_retailer = new Retailer("3 New York Plaza", "Starbucks Coffee", "Casual Eating & Takeout", "F-Coffeehouse");
+        Retailer expected_retailer = new Retailer("3 New York Plaza", "Starbucks Coffee", "Casual Eating & Takeout", "F-Coffeehouse", 10004);
         assertEquals(expected_retailer, storage.getRetailerArray().get(0));
     }
 
@@ -185,11 +185,11 @@ import java.io.FileNotFoundException;
     {
         reader.readFile(TARGET+"/route_data1.csv");
         //TODO: confirm this and potentially require a user as well.
-        //reader.writeFile("test_file.csv", storage.getRouteArray());
-        reader.readFile("/test_file.csv");
-        Route expected_route = new Route(new Location(40.75323098, -73.97032517, "Expected start", 4),
+        //.writeFile("test_file.csv", storage.getRouteArray());
+        assertTrue(new File(TARGET+"/test_file.csv").exists());
+        Route expected_route = new Route("16950", new Location(40.75323098, -73.97032517, "Expected start", 4),
                 new Location(40.73221853, -73.98165557, "Expected end", 4),
-                "Expected Route");
+                "Expected Route", "0");
         assertEquals(expected_route, storage.getRouteArray().get(0));
     }
 }

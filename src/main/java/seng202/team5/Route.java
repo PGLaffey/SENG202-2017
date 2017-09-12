@@ -5,6 +5,8 @@ package seng202.team5;
  */
 public class Route {
     private String name;
+    private String bikeID;
+    private String gender;
     private double distance;
     private boolean local;
     private Location start;
@@ -15,10 +17,12 @@ public class Route {
 
     /**
      * Constructs a route based on the start and end locations.
+     * @param bikeID The ID of the bike used to make this route.
      * @param start The start location of the route.
      * @param end The end location of the route
      */
-    public Route(Location start, Location end) {
+    public Route(String bikeID, Location start, Location end) {
+        this.bikeID = bikeID;
         this.start = start;
         this.end = end;
         via1 = null;
@@ -28,14 +32,18 @@ public class Route {
 
     /**
      * Overloaded constructor for the route class, gives the route a name.
+     * @param bikeID The id of the bike used to make the route.
      * @param start The start location of the route.
      * @param end The end location of the route.
      * @param name The name of the route.
+     * @param gender The gender of the cyclist that cycled this route.
      */
-    public Route(Location start, Location end, String name) {
+    public Route(String bikeID, Location start, Location end, String name, String gender) {
+        this.bikeID = bikeID;
         this.start = start;
         this.end = end;
         this.name = name;
+        this.gender = gender;
         via1 = null;
         via2 = null;
         via3 = null;
@@ -44,6 +52,10 @@ public class Route {
     public String getName() {
         return name;
     }
+
+    public String getBikeID() { return bikeID; }
+
+    public String getGender() { return gender; }
 
     public double getDistance() {
         return distance;
