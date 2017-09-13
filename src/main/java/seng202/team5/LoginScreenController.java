@@ -46,6 +46,8 @@ public class LoginScreenController {
 			incorrectPasswordLbl.setVisible(false);
 			incorrectUserLbl.setVisible(true);
 		} else if ((data.fetchPassword(usernameText.getText()).get(0).get(0).toString().equals(passwordText.getText().toString()))) {
+			//User user = new User(String first, String last, usernameText.getText().toString(), String doB, passwordText.getText().toString());
+			//CurrentStorage.setUser(user); // TODO: Not sure how to access the users name and dob from the database
 			Stage primaryStage = (Stage)signInButton.getScene().getWindow();
 			Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 			primaryStage.setTitle("Profile");
@@ -54,7 +56,7 @@ public class LoginScreenController {
 			incorrectUserLbl.setVisible(false);
 			incorrectPasswordLbl.setVisible(true);
 		}
-    	//CurrentStorage.setUser(user);
+    	
 
     }
 	

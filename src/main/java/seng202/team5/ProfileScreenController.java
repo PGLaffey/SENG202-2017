@@ -39,7 +39,9 @@ public class ProfileScreenController {
 	private Label usersNameLabel;
 	
 	@FXML 
-	private Label usersAgeLabel;
+	private Label usersBirthDateLabel;
+	
+	private User user;
 	
 	
 	/**
@@ -141,10 +143,14 @@ public class ProfileScreenController {
 		stage.show();
 	}
 	
+	private
+	
 	@FXML
 	void initialize() {
-		usersNameLabel.setText("Users name"); // Not sure how to get user object to call getname() on
-		usersAgeLabel.setText("Users age"); // Need to calculate age using getbirth()
+		// TODO: uncomment the below once the user object is created properly in the login fxml
+		/*user = CurrentStorage.getUser();
+		usersNameLabel.setText(CurrentStorage.getUser().getName()); 
+		usersBirthDateLabel.setText(CurrentStorage.getUser().getDob()); */
 	}
 	
 

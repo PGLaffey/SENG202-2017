@@ -104,7 +104,7 @@
                         <Insets left="10.0" top="-40.0" />
                       </GridPane.margin>
                     </Label>
-                    <Label text="Age:" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+                    <Label text="Date of Birth:" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER">
                       <GridPane.margin>
                         <Insets left="10.0" top="40.0" />
                       </GridPane.margin>
@@ -115,9 +115,9 @@
                         <Insets left="70.0" top="-40.0" />
                       </GridPane.margin>
                     </Label>
-                    <Label fx:id="usersAgeLabel" text="32" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+                    <Label id="usersAgeLabel" fx:id="usersBirthDateLabel" text="32" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER">
                       <GridPane.margin>
-                        <Insets left="55.0" top="40.0" />
+                        <Insets left="125.0" top="40.0" />
                       </GridPane.margin>
                     </Label>
                   </children>
