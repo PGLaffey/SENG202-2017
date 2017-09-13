@@ -1,9 +1,22 @@
 package seng202.team5;
 
 import java.io.IOException;
+
+import com.lynden.gmapsfx.GoogleMapView;
+import com.lynden.gmapsfx.MapComponentInitializedListener;
+import com.lynden.gmapsfx.javascript.object.GoogleMap;
+import com.lynden.gmapsfx.javascript.object.LatLong;
+import com.lynden.gmapsfx.javascript.object.MapOptions;
+import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
+import com.lynden.gmapsfx.service.geocoding.GeocoderStatus;
+import com.lynden.gmapsfx.service.geocoding.GeocodingResult;
+import com.lynden.gmapsfx.service.geocoding.GeocodingService;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,17 +26,15 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.geometry.Side;
 
 
-public class MainScreenController {
+public class MainScreenController implements MapComponentInitializedListener{
+
+    @FXML
+    private GoogleMapView mapView;
 
     @FXML
     private ResourceBundle resources;
@@ -108,6 +119,12 @@ public class MainScreenController {
 
     @FXML
     private ChoiceBox<String> locationTypeBox;
+
+    private GoogleMap map;
+
+    private GeocodingService geocodingService;
+
+    private StringProperty address = new SimpleStringProperty();
     
     @FXML
     void mapPressed(ActionEvent event) throws IOException {
@@ -220,14 +237,35 @@ public class MainScreenController {
     }
 
     @FXML
+    public void searchTextAction(ActionEvent event) {
+        geocodingService.geocode(address.get(), (GeocodingResult[] results, GeocoderStatus status) -> {
+            LatLong latLong = null;
+
+            if (status == GeocoderStatus.ZERO_RESULTS) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "No matching address found");
+                alert.show();
+                latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
+                        results[0].getGeometry().getLocation().getLongitude());
+            } else {
+                latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
+                        results[0].getGeometry().getLocation().getLongitude());
+            }
+
+            map.setCenter(latLong);
+        });
+    }
+    @FXML
     void initialize() {
     	ObservableList<String> locationTypes = FXCollections.observableArrayList("Wifi hotspot","Retailer","Toilets", "Point of interest", "Other");
+        mapView.addMapInializedListener(this);
+        address.bind(searchText.textProperty());
     	loadRouteMenu.setPopupSide(Side.RIGHT);
     	locationTypeBox.setItems(locationTypes);
     	addLocationsPane.setVisible(false);
     	mainMapPane.setVisible(true);
     	randomRoutePane.setVisible(false);
-    	assert accountButton != null : "fx:id=\"accountButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
+
+        assert accountButton != null : "fx:id=\"accountButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert addLocationsButton != null : "fx:id=\"addLocationsButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert addLocationsPane != null : "fx:id=\"addLocationsPane\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert bikeIconButton != null : "fx:id=\"bikeIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
@@ -254,6 +292,24 @@ public class MainScreenController {
         assert wifiIconButton != null : "fx:id=\"wifiIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
 
 
+    }
+
+    @Override
+    public void mapInitialized() {
+        geocodingService = new GeocodingService();
+        MapOptions mapOptions = new MapOptions();
+
+        mapOptions.center(new LatLong(40.6971494, -74.2598728))
+                .mapType(MapTypeIdEnum.ROADMAP)
+                .overviewMapControl(false)
+                .panControl(true)
+                .rotateControl(true)
+                .scaleControl(true)
+                .streetViewControl(false)
+                .zoomControl(true)
+                .zoom(12);
+
+        map = mapView.createMap(mapOptions);
     }
 
 }

@@ -19,12 +19,13 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 <?import javafx.scene.web.WebView?>
+<?import com.lynden.gmapsfx.GoogleMapView?>
 
 <GridPane alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.team5.MainScreenController">
   <children>
-    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="827.0">
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"  GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS"> <!--prefHeight="489.0" prefWidth="827.0"-->
       <children>
-        <SplitPane dividerPositions="0.10472279260780287" orientation="VERTICAL" prefHeight="489.0" prefWidth="827.0">
+        <SplitPane dividerPositions="0.10472279260780287" orientation="VERTICAL" prefHeight="489.0" prefWidth="827.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="56.0" prefWidth="696.0">
               <children>
@@ -153,8 +154,8 @@
                       <children>
                         <AnchorPane fx:id="mainMapPane" prefHeight="430.0" prefWidth="637.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <children>
-                            <WebView prefHeight="430.0" prefWidth="637.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                            <TextField fx:id="searchText" prefHeight="32.0" prefWidth="199.0" promptText="Search" AnchorPane.bottomAnchor="384.0" AnchorPane.leftAnchor="417.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="14.0" />
+                            <GoogleMapView fx:id="mapView" prefHeight="430.0" prefWidth="637.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            <TextField fx:id="searchText" onAction="#searchTextAction" prefHeight="32.0" prefWidth="199.0" promptText="Search" AnchorPane.bottomAnchor="384.0" AnchorPane.leftAnchor="417.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="14.0" />
                             <Button fx:id="wifiIconButton" layoutX="575.0" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#wifiIconPressed" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: 144;">
                               <graphic>
                                 <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
@@ -267,6 +268,7 @@
         </SplitPane>
       </children>
     </AnchorPane>
+
   </children>
   <columnConstraints>
     <ColumnConstraints />

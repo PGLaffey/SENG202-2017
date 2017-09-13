@@ -6,11 +6,11 @@ import com.lynden.gmapsfx.service.directions.*;
 public class Map {
     private Route currentRoute;
     private Location currentLocation;
-    private DirectionsService directionsServiceHandler = new DirectionsService();
+    private static DirectionsService directionsServiceHandler = new DirectionsService();
 
     public static double getLattitude(String address) {
         DirectionsRequest request = new DirectionsRequest(address, address, TravelModes.BICYCLING);
-        directionsServiceHandler.getRoute(request, this, new DirectionsRenderer());
+        //directionsServiceHandler.getRoute(request, this, new DirectionsRenderer());
         double lattitude = 0;
         return lattitude;
     }
