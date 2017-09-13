@@ -14,7 +14,7 @@ public class FileManager {
      * Serializes an instance of the User class (exporting out of the program).
      * @param user The User object to be stored in a file
      */
-    public void userSerialize(User user){
+    public static void userSerialize(User user){
         try {
             String filePath = "SENG202-Team5-Cyclr/src/main/resources/data_files" + user.getName() + ".ser";
             FileOutputStream userOutFile = new FileOutputStream(filePath);
@@ -34,7 +34,7 @@ public class FileManager {
      * @param nameOfUser The name of the user to be deserialized.
      * @return The User object stored in the named file.
      */
-    public User userDeserialize(String nameOfUser) {
+    public static User userDeserialize(String nameOfUser) {
         User user = null;
         try {
             String filePath = "SENG202-Team5-Cyclr/src/main/resources/data_files" + nameOfUser + ".ser";
@@ -61,7 +61,7 @@ public class FileManager {
      * @param fileName The name of the .csv file to be read.
      * @return An arrayList of the data from the .csv file.
      */
-    public ArrayList<String> readFile(String fileName) {
+    public static ArrayList<String> readFile(String fileName) {
         ArrayList<String> dataList = new ArrayList<String>();
         try {
             FileReader file = new FileReader(fileName);
@@ -82,7 +82,7 @@ public class FileManager {
      * @param fileName The name of the file for the .csv to
      * @param content The content for the .csv file.
      */
-    public void writeFile(String fileName, ArrayList<String> content) {
+    public static void writeFile(String fileName, ArrayList<String> content) {
         try {
             PrintWriter printWriter = new PrintWriter(new File(fileName));
             StringBuilder stringBuilder = new StringBuilder();
@@ -103,7 +103,7 @@ public class FileManager {
      * in the current storage class for that instance of the app.
      * @param currentStorage The instance of the CurrentStorage class for the open instance of the app.
      */
-    public void routeRetriever(CurrentStorage currentStorage) {
+    public static void routeRetriever(CurrentStorage currentStorage) {
         ArrayList<String> routes = readFile("SENG202-Team5-Cyclr/src/main/resources/data_files/2014-01 - Citi Bike trip data.csv");
         routes.remove(0);
 
@@ -133,7 +133,7 @@ public class FileManager {
      * Stores the route data stored in the current storage class.
      * @param currentStorage The current instance of the CurrentStorage class of the application.
      */
-    public void routeWriter(CurrentStorage currentStorage) {
+    public static void routeWriter(CurrentStorage currentStorage) {
         ArrayList<Route> routes = currentStorage.getRouteArray();
         ArrayList<String> strRoutes = new ArrayList<String>();
         for (Route route : routes) {
@@ -155,7 +155,7 @@ public class FileManager {
      * Retrieves the list of the given retailers and converts each of these to being a new instance of Retailer stored in currentStorage.
      * @param currentStorage The instance of the current storage object that the list of retailers will be added to.
      */
-    public void retailerRetriever(CurrentStorage currentStorage) {
+    public static void retailerRetriever(CurrentStorage currentStorage) {
         ArrayList<String> retailers = readFile("SENG202-Team5-Cyclr/src/main/resources/data_files/Lower_Manhattan_Retailers.csv");
         retailers.remove(0);
         retailers.remove(0);
@@ -180,7 +180,7 @@ public class FileManager {
      * Retrieves the list of the given wifiHotspots and converts each item into a wifi object list in the currentStorage class.
      * @param currentStorage The current storage of the application which the Wifi hotspots will be added to.
      */
-    public void wifiRetriever(CurrentStorage currentStorage) {
+    public static void wifiRetriever(CurrentStorage currentStorage) {
         ArrayList<String> wifiHotspots = readFile("SENG202-Team5-Cyclr/src/main/resources/data_files/NYC_Free_Public_WiFi_03292017.csv");
         wifiHotspots.remove(0);
         for (String wifiHotspot: wifiHotspots) {

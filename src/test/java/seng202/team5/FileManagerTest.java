@@ -15,8 +15,6 @@ import java.io.FileNotFoundException;
 
 
 @Ignore public class FileManagerTest extends TestCase {
-    private FileManager reader;
-    private CurrentStorage storage;
     private String TARGET = new File(this.getClass().getResource("/testdata/").getFile()).getAbsolutePath();
 
     @Rule
@@ -45,8 +43,6 @@ import java.io.FileNotFoundException;
      */
     @Before
     public void setUp(){
-        reader = new FileManager();
-        storage = new CurrentStorage();
         //TARGET = new File("./testdata/route_data1.csv");
     }
 
@@ -56,11 +52,11 @@ import java.io.FileNotFoundException;
     @Test
     public void testRouteOneEntry()
     {
-        reader.readFile(getClass().getResource(TARGET+"/route_data1.csv").getFile());
+        FileManager.readFile(getClass().getResource(TARGET+"/route_data1.csv").getFile());
         Route expected_route = new Route("16950", new Location(40.75323098, -73.97032517, "Expected start", 4),
                                         new Location(40.73221853, -73.98165557, "Expected end", 4),
                                         "Expected Route", "0");
-        assertEquals(expected_route, storage.getRouteArray().get(0));
+        assertEquals(expected_route, CurrentStorage.getRouteArray().get(0));
 
     }
 
@@ -71,9 +67,9 @@ import java.io.FileNotFoundException;
     public void testRouteDuplicates()
     {
         //Read the same data twice, should only save it once.
-        reader.readFile(TARGET+"/route_data1.csv");
-        reader.readFile(TARGET+"/route_data1.csv");
-        assertEquals(1, storage.getRouteArray().size());
+        FileManager.readFile(TARGET+"/route_data1.csv");
+        FileManager.readFile(TARGET+"/route_data1.csv");
+        assertEquals(1, CurrentStorage.getRouteArray().size());
     }
 
     /**
@@ -81,9 +77,9 @@ import java.io.FileNotFoundException;
      */
     @Ignore @Test
     public void testRouteTenEntries() {
-        reader.readFile(TARGET+"/route_data10.csv");
+        FileManager.readFile(TARGET+"/route_data10.csv");
         //Only need to test whether there are 10 objects as it was previously tested whether routes are saved properly, and tested that duplicates are not saved.
-        assertEquals(10, storage.getRouteArray().size());
+        assertEquals(10, CurrentStorage.getRouteArray().size());
     }
 
     /**
@@ -92,9 +88,9 @@ import java.io.FileNotFoundException;
     @Ignore @Test
     public void testWifiOneEntry() {
 
-        reader.readFile(TARGET+"/wifi_data1.csv");
+        FileManager.readFile(TARGET+"/wifi_data1.csv");
         Wifi expected_wifi = new Wifi(40.745968, -73.994039, "LinkNYC Free Wi-Fi", "Manhattan","Free","LinkNYC - Citybridge");
-        assertEquals(expected_wifi, storage.getWifiArray().get(0));
+        assertEquals(expected_wifi, CurrentStorage.getWifiArray().get(0));
     }
 
     /**
@@ -103,9 +99,9 @@ import java.io.FileNotFoundException;
     @Ignore @Test
     public void testWifiDuplicate() {
 
-        reader.readFile(TARGET+"/wifi_data1.csv");
-        reader.readFile(TARGET+"/wifi_data1.csv");
-        assertEquals(1, storage.getWifiArray().size());
+        FileManager.readFile(TARGET+"/wifi_data1.csv");
+        FileManager.readFile(TARGET+"/wifi_data1.csv");
+        assertEquals(1, CurrentStorage.getWifiArray().size());
     }
 
     /**
@@ -114,8 +110,8 @@ import java.io.FileNotFoundException;
     @Ignore @Test
     public void testWifiTenEntries() {
 
-        reader.readFile(TARGET+"/wifi_data10.csv");
-        assertEquals(10, storage.getWifiArray().size());
+        FileManager.readFile(TARGET+"/wifi_data10.csv");
+        assertEquals(10, CurrentStorage.getWifiArray().size());
     }
 
     /**
@@ -124,9 +120,9 @@ import java.io.FileNotFoundException;
     @Ignore @Test
     public void testRetailerOneEntry() {
 
-        reader.readFile(TARGET+"/retailer_data1.csv");
+        FileManager.readFile(TARGET+"/retailer_data1.csv");
         Retailer expected_retailer = new Retailer("3 New York Plaza", "Starbucks Coffee", "Casual Eating & Takeout", "F-Coffeehouse", 10004);
-        assertEquals(expected_retailer, storage.getRetailerArray().get(0));
+        assertEquals(expected_retailer, CurrentStorage.getRetailerArray().get(0));
     }
 
     /**
@@ -135,9 +131,9 @@ import java.io.FileNotFoundException;
     @Ignore @Test
     public void testRetailerDuplicate() {
 
-        reader.readFile(TARGET+"/retailer_data1.csv");
-        reader.readFile(TARGET+"/retailer_data1.csv");
-        assertEquals(1, storage.getRetailerArray().size());
+        FileManager.readFile(TARGET+"/retailer_data1.csv");
+        FileManager.readFile(TARGET+"/retailer_data1.csv");
+        assertEquals(1, CurrentStorage.getRetailerArray().size());
     }
     /**
      * Test to test the FileManager's readFile functions as expected for a .csv with 10 Retailers
@@ -145,8 +141,8 @@ import java.io.FileNotFoundException;
     @Ignore @Test
     public void testRetailerTenEntries() {
 
-        reader.readFile(TARGET+"/retailer_data10.csv");
-        assertEquals(10, storage.getRetailerArray().size());
+        FileManager.readFile(TARGET+"/retailer_data10.csv");
+        assertEquals(10, CurrentStorage.getRetailerArray().size());
     }
 
     /**
@@ -155,7 +151,7 @@ import java.io.FileNotFoundException;
     @Ignore @Test(expected = NoDataException.class)
     public void testEmpty() {
         thrown.expect(NoDataException.class);
-        reader.readFile(TARGET+"/empty_file.csv");
+        FileManager.readFile(TARGET+"/empty_file.csv");
     }
 
     /**
@@ -165,7 +161,7 @@ import java.io.FileNotFoundException;
     public void testNonExistant()
     {
         thrown.expect(FileNotFoundException.class);
-        reader.readFile(TARGET+"/gibbletyfook.csv");
+        FileManager.readFile(TARGET+"/gibbletyfook.csv");
     }
 
     /**
@@ -175,7 +171,7 @@ import java.io.FileNotFoundException;
     public void testWrongFormat()
     {
         thrown.expect(WrongFormatException.class);
-        reader.readFile(TARGET+"/terrible_format.csv");
+        FileManager.readFile(TARGET+"/terrible_format.csv");
     }
 
     /**
@@ -183,13 +179,13 @@ import java.io.FileNotFoundException;
      */
     public void testWriteRouteFile()
     {
-        reader.readFile(TARGET+"/route_data1.csv");
+        FileManager.readFile(TARGET+"/route_data1.csv");
         //TODO: confirm this and potentially require a user as well.
-        //.writeFile("test_file.csv", storage.getRouteArray());
+        //.writeFile("test_file.csv", CurrentStorage.getRouteArray());
         assertTrue(new File(TARGET+"/test_file.csv").exists());
         Route expected_route = new Route("16950", new Location(40.75323098, -73.97032517, "Expected start", 4),
                 new Location(40.73221853, -73.98165557, "Expected end", 4),
                 "Expected Route", "0");
-        assertEquals(expected_route, storage.getRouteArray().get(0));
+        assertEquals(expected_route, CurrentStorage.getRouteArray().get(0));
     }
 }
