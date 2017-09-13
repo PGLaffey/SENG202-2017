@@ -54,7 +54,7 @@ public class LoginScreenController {
 			incorrectUserLbl.setVisible(false);
 			incorrectPasswordLbl.setVisible(true);
 		}
-    	
+    	//CurrentStorage.setUser(user);
 
     }
 	

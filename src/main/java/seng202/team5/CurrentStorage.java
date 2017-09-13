@@ -9,6 +9,16 @@ public class CurrentStorage {
     private static ArrayList<Route> routeArray = new ArrayList<Route>();
     private static ArrayList<Retailer> retailerArray = new ArrayList<Retailer>();
     private static ArrayList<Wifi> wifiArray = new ArrayList<Wifi>();
+    private static User currentUser;
+    
+    
+    public static User getUser() {
+    	return currentUser;
+    }
+    
+    public static void setUser(User user) {
+    	currentUser = user;
+    }
 
     public static ArrayList<Route> getRouteArray() {
         return routeArray;
