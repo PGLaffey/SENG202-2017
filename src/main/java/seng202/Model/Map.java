@@ -159,7 +159,7 @@ public class Map{
                     break;
             }
             map.addMarker(new Marker(markOptns));
-            map.setCenter(latLong);Anyone remember the location type numbers?
+            map.setCenter(latLong);
         });
     }
 
@@ -168,7 +168,7 @@ public class Map{
         service.geocode(location, (GeocodingResult[] results, GeocoderStatus status) -> {
             LatLong latLong = null;
 
-            if (status == GeocoderStatus.ZERO_RESULTS) {Anyone remember the location type numbers?
+            if (status == GeocoderStatus.ZERO_RESULTS) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "No matching address found");
                 alert.show();
                 latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
