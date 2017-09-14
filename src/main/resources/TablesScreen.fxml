@@ -110,54 +110,54 @@
                 </ChoiceBox>
                 <TableView fx:id="allLocationsTable" layoutX="13.0" layoutY="119.0" prefHeight="300.0" prefWidth="800.0" visible="false">
                   <columns>
-                    <TableColumn prefWidth="200.0" text="Name" />
-                    <TableColumn prefWidth="200.0" text="Type" />
-                    <TableColumn prefWidth="200.0" text="Latitude" />
-                    <TableColumn prefWidth="200.0" text="Longitude" />
+                    <TableColumn prefWidth="200.0" text="Name" fx:id="allLocNameCol" />
+                    <TableColumn prefWidth="200.0" text="Type" fx:id="allLocTypeCol" />
+                    <TableColumn prefWidth="200.0" text="Latitude" fx:id="allLocLatCol" />
+                    <TableColumn prefWidth="200.0" text="Longitude" fx:id="allLocLongCol" />
                   </columns>
                 </TableView>
                 <TableView id="allLocationsTable" fx:id="wifiTable" layoutX="13.0" layoutY="119.0" prefHeight="300.0" prefWidth="800.0" visible="false">
                   <columns>
-                    <TableColumn prefWidth="160.0" text="Name" />
-                    <TableColumn prefWidth="160.0" text="Latitude" />
-                    <TableColumn prefWidth="160.0" text="Longitude" />
-                    <TableColumn prefWidth="160.0" text="Type" />
-                    <TableColumn prefWidth="160.0" text="Provider" />
+                    <TableColumn prefWidth="160.0" text="Name" fx:id="wifiNameCol" />
+                    <TableColumn prefWidth="160.0" text="Latitude" fx:id="wifiLatCol" />
+                    <TableColumn prefWidth="160.0" text="Longitude" fx:id="wifiLongCol" />
+                    <TableColumn prefWidth="160.0" text="Type" fx:id="wifiTypeCol" />
+                    <TableColumn prefWidth="160.0" text="Provider" fx:id="wifiProvCol" />
                   </columns>
                 </TableView>
                 <TableView id="allLocationsTable" fx:id="retailersTable" layoutX="13.0" layoutY="119.0" prefHeight="300.0" prefWidth="800.0" visible="false">
                   <columns>
-                    <TableColumn prefWidth="160.0" text="Name" />
-                    <TableColumn prefWidth="160.0" text="Latitude" />
-                    <TableColumn prefWidth="160.0" text="Longitude" />
-                    <TableColumn prefWidth="160.0" text="Product" />
-                    <TableColumn prefWidth="160.0" text="Description" />
+                    <TableColumn prefWidth="160.0" text="Name" fx:id="retNameCol" />
+                    <TableColumn prefWidth="160.0" text="Latitude" fx:id="retLatCol" />
+                    <TableColumn prefWidth="160.0" text="Longitude" fx:id="retLongCol" />
+                    <TableColumn prefWidth="160.0" text="Product" fx:id="retProductCol" />
+                    <TableColumn prefWidth="160.0" text="Description" fx:id="retDescCol" />
                   </columns>
                 </TableView>
                 <TableView id="allLocationsTable" fx:id="poiTable" layoutX="13.0" layoutY="119.0" prefHeight="300.0" prefWidth="800.0" visible="false">
                   <columns>
-                    <TableColumn prefWidth="160.0" text="Name" />
-                    <TableColumn prefWidth="160.0" text="Latitude" />
-                    <TableColumn prefWidth="160.0" text="Longitude" />
-                    <TableColumn prefWidth="160.0" text="Cost" />
-                    <TableColumn prefWidth="160.0" text="Description" />
+                    <TableColumn prefWidth="160.0" text="Name" fx:id="poiNameCol" />
+                    <TableColumn prefWidth="160.0" text="Latitude" fx:id="poiLatCol" />
+                    <TableColumn prefWidth="160.0" text="Longitude" fx:id="poiLongCol" />
+                    <TableColumn prefWidth="160.0" text="Cost" fx:id="poiCostCol" />
+                    <TableColumn prefWidth="160.0" text="Description" fx:id="poiDescCol" />
                   </columns>
                 </TableView>
                 <TableView id="allLocationsTable" fx:id="toiletsTable" layoutX="13.0" layoutY="119.0" prefHeight="300.0" prefWidth="800.0" visible="false">
                   <columns>
-                    <TableColumn prefWidth="160.0" text="Name" />
-                    <TableColumn prefWidth="160.0" text="Latitude" />
-                    <TableColumn prefWidth="160.0" text="Longitude" />
-                    <TableColumn prefWidth="160.0" text="Uni Sex" />
-                    <TableColumn prefWidth="160.0" text="Disabled" />
+                    <TableColumn prefWidth="160.0" text="Name" fx:id="toiletNameCol" />
+                    <TableColumn prefWidth="160.0" text="Latitude" fx:id="toiletLatCol" />
+                    <TableColumn prefWidth="160.0" text="Longitude" fx:id="toiletLongCol" />
+                    <TableColumn prefWidth="160.0" text="Uni Sex" fx:id="toiletUniCol" />
+                    <TableColumn prefWidth="160.0" text="Disabled" fx:id="toiletDisCol" />
                   </columns>
                 </TableView>
-                <TableView id="allLocationsTable" fx:id="routesTable" layoutX="13.0" layoutY="119.0" prefHeight="300.0" prefWidth="800.0" visible="false">
+                <TableView id="allLocationsTable" fx:id="routesTable" layoutX="13.0" layoutY="119.0" prefHeight="300.0" prefWidth="800.0" visible="true">
                   <columns>
-                    <TableColumn prefWidth="200.0" text="Name" />
-                    <TableColumn prefWidth="200.0" text="Start" />
-                    <TableColumn prefWidth="200.0" text="End" />
-                    <TableColumn prefWidth="200.0" text="Distance" />
+                    <TableColumn prefWidth="200.0" text="Name" fx:id="routeNameCol" />
+                    <TableColumn prefWidth="200.0" text="Start" fx:id="routeStartCol" />
+                    <TableColumn prefWidth="200.0" text="End" fx:id="routeEndCol" />
+                    <TableColumn prefWidth="200.0" text="Distance" fx:id="routeDIstCol" />
                   </columns>
                 </TableView>
                 <Button fx:id="searchButton" layoutX="727.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchPressed" text="Search" />

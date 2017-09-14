@@ -47,6 +47,14 @@ public class Location {
         double[] coords = {latitude, longitude};
         return coords;
     }
+    
+    public double getLatitude() {
+    	return latitude;
+    }
+    
+    public double getLongitude() {
+    	return longitude;
+    }
 
     public String getName() {
         return name;
