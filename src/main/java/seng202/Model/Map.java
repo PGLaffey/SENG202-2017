@@ -1,12 +1,11 @@
 package seng202.Model;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.javascript.object.LatLong;
-import com.lynden.gmapsfx.service.directions.*;
+import com.lynden.gmapsfx.service.directions.DirectionsRequest;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
 
 import java.io.InputStream;
@@ -90,7 +89,6 @@ public class Map{
         double a = (Math.sin(phi/2) * Math.sin(phi/2)) + Math.cos(lat1) * Math.cos(lat2) * (Math.sin(delta/2) * Math.sin(delta/2));
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         double distance = earthRadius * c;
-
         return distance;
     }
 
@@ -119,17 +117,18 @@ public class Map{
         return distance;
     }
 
-    public void findRoute(DirectionsRequest request, GoogleMapView mapView) {
+    public static void findRoute(DirectionsRequest request, GoogleMapView mapView) {
 
     }
 
-    public void loadLocation(Location location) {
+    public static void findLocation(Location location, GoogleMapView mapView) {
 
     }
 
-    public void applyFilter(String filter) {
+    public static void findLocation(String location) {
 
     }
+
 
     public static void main(String[] argv){
         System.out.println(Map.getDistance(-43.512390, 172.546751,-43.523538, 172.583923));

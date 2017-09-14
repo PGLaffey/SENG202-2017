@@ -1,34 +1,28 @@
 package seng202.Controller;
 
-import java.io.IOException;
-
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
-import com.lynden.gmapsfx.javascript.object.GoogleMap;
-import com.lynden.gmapsfx.javascript.object.LatLong;
-import com.lynden.gmapsfx.javascript.object.MapOptions;
-import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
+import com.lynden.gmapsfx.javascript.object.*;
 import com.lynden.gmapsfx.service.geocoding.GeocoderStatus;
 import com.lynden.gmapsfx.service.geocoding.GeocodingResult;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
-
-import javafx.geometry.Side;
-import netscape.javascript.JSObject;
 
 
 public class MainScreenController implements MapComponentInitializedListener{
@@ -251,7 +245,9 @@ public class MainScreenController implements MapComponentInitializedListener{
                 latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
                         results[0].getGeometry().getLocation().getLongitude());
             }
-
+            map.addMarker(new Marker(new MarkerOptions()
+                    .animation(Animation.DROP)
+                    .position(latLong)));
             map.setCenter(latLong);
         });
     }
