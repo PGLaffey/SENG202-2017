@@ -14,7 +14,7 @@ public class Map{
     private static GeocodingService geoService;
 
 
-    public static double getLattitude(String address) {
+    public static double getLatitude(String address) {
         double latitude = 0;
         GeoPoint locationPoint = null;
         //Converting spaces into '%20' for URLs
@@ -94,6 +94,6 @@ public class Map{
 
     public static void main(String[] argv){
         System.out.println(Map.getDistance(-43.512390, 172.546751,-43.523538, 172.583923));
-        System.out.println(Map.getLattitude("2 Brockhall Lane"));
+        System.out.println(Map.getLatitude("2 Brockhall Lane"));
     }
 }

@@ -33,15 +33,15 @@ public class Location {
      * @param locationType The type of location the new location is (i.e. point of interest, wifi spot, retailer or toilet).
      */
     public Location(String address, String name, int locationType) {
-        this.latitude = Map.getLattitude(address);
+        this.latitude = Map.getLatitude(address);
         this.longitude = Map.getLongitude(address);
         this.name = name;
         this.locationType = locationType;
     }
 
     /**
-     * Function that returns the logitude and latitude of the location in an Array.
-     * @return The latitude and logitude of the location in an Array.
+     * Function that returns the longitude and latitude of the location in an Array.
+     * @return The latitude and longitude of the location in an Array.
      */
     public double[] getCoords() {
         double[] coords = {latitude, longitude};

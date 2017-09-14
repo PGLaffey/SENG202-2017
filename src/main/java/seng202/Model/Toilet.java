@@ -15,7 +15,7 @@ public class Toilet extends Location {
      * @param longitude The longitude of the toilet location.
      * @param name The name of the toilet location.
      * @param forDisabled Whether the toilet has facilities for wheelchair users.
-     * @param uniSex Whether the toilet is unisex or has seperate facilities for men and women.
+     * @param uniSex Whether the toilet is unisex or has separate facilities for men and women.
      */
     public Toilet(double latitude, double longitude, String name, boolean forDisabled, boolean uniSex) {
         super(latitude, longitude, name, 0);

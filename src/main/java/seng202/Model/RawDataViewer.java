@@ -12,4 +12,112 @@ public class RawDataViewer {
         this.routeArrayList = currentStorage.getRouteArray();
     }
 
+    /*public ArrayList<Location> searchLocations(ArrayList<Location> locationsArrayList, String condition) {
+        ArrayList<Location> foundLocations = new ArrayList<Location>();
+        for (int i = 0; i < locationsArrayList.size(); i++) {
+            if (locationsArrayList.get(i).getCoords().toString().toLowerCase().contains(condition.toLowerCase())) {
+                foundLocations.add(locationsArrayList.get(i));
+            } else if (locationsArrayList.get(i).getName().toLowerCase().contains(condition.toLowerCase())) {
+                foundLocations.add(locationsArrayList.get(i));
+            } else if (locationsArrayList.get(i).getCoords().toString().toLowerCase().contains(condition.toLowerCase())) {
+                foundLocations.add(locationsArrayList.get(i));
+            }
+        }
+        return foundLocations;
+    }*/
+
+    /**
+     * Filters through an array list of points of interest and returns an array list of Poi's that match the search condition
+     * @param poiArrayList array list of points of interests to be searched through
+     * @param condition the condition which is looked for in each Poi object
+     * @return an array list of matched Poi objects
+     */
+    public ArrayList<Poi> searchPoi(ArrayList<Poi> poiArrayList, String condition) {
+        ArrayList<Poi> foundPoi = new ArrayList<Poi>();
+        for (int i = 0; i < poiArrayList.size(); i++) {
+            if (Double.toString(poiArrayList.get(i).getCost()).toLowerCase().contains(condition.toLowerCase())) {
+                foundPoi.add(poiArrayList.get(i));
+            } else if (poiArrayList.get(i).getDescription().toLowerCase().contains(condition.toLowerCase())) {
+                foundPoi.add(poiArrayList.get(i));
+            } else if (poiArrayList.get(i).getName().toLowerCase().contains(condition.toLowerCase())) {
+                foundPoi.add(poiArrayList.get(i));
+            }
+        }
+        return foundPoi;
+    }
+
+    /**
+     * Filters through an array list of retailers and returns an array list of retailers that match the search condition
+     * @param retailerArrayList array list of retailers to be searched through
+     * @param condition the condition which is looked for in each retailer object
+     * @return an array list of matched retailer objects
+     */
+    public ArrayList<Retailer> searchRetailer(ArrayList<Retailer> retailerArrayList, String condition) {
+        ArrayList<Retailer> foundRetailer = new ArrayList<Retailer>();
+        for (int i = 0; i < retailerArrayList.size(); i++) {
+            if (retailerArrayList.get(i).getDescription().toLowerCase().contains(condition.toLowerCase())) {
+                foundRetailer.add(retailerArrayList.get(i));
+            } else if (retailerArrayList.get(i).getProduct().toLowerCase().contains(condition.toLowerCase())) {
+                foundRetailer.add(retailerArrayList.get(i));
+            } else if (retailerArrayList.get(i).getAddress().toLowerCase().contains(condition.toLowerCase())) {
+                foundRetailer.add(retailerArrayList.get(i));
+            } else if (retailerArrayList.get(i).getName().toLowerCase().contains(condition.toLowerCase())) {
+                foundRetailer.add(retailerArrayList.get(i));
+            }
+        }
+        return foundRetailer;
+    }
+
+    /**
+     * Filters through an array list of routes and returns an array list of routes that match the search condition
+     * @param routeArrayList array list of routes to be searched through
+     * @param condition the condition which is looked for in each route object
+     * @return an array list of matched route objects
+     */
+    public ArrayList<Route> searchRoutes(ArrayList<Route> routeArrayList, String condition) { //how will we check for start and end location?
+        ArrayList<Route> foundRoutes = new ArrayList<Route>();
+        for (int i = 0; i < routeArrayList.size(); i++) {
+            if (routeArrayList.get(i).getName().toLowerCase().contains(condition.toLowerCase())) {
+                foundRoutes.add(routeArrayList.get(i));
+            } else if (Double.toString(routeArrayList.get(i).getDistance()).contains(condition)) {
+                foundRoutes.add(routeArrayList.get(i));
+            } else if (routeArrayList.get(i).getGender().toLowerCase().contains(condition.toLowerCase())) {
+                foundRoutes.add(routeArrayList.get(i));
+            } else if (routeArrayList.get(i).getBikeID().contains(condition)) {
+                foundRoutes.add(routeArrayList.get(i));
+            } else if (routeArrayList.get(i).getName().toLowerCase().contains(condition.toLowerCase())) {
+                foundRoutes.add(routeArrayList.get(i));
+            }
+        }
+        return foundRoutes;
+    }
+
+    /**
+     * Filters through an array list of wifi objects and returns an array list of wifi objects that match the search condition
+     * @param wifiArrayList array list of wifi objects to be searched through
+     * @param condition the condition which is looked for in each wifi object
+     * @return an array list of matched wifi objects
+     */
+    public ArrayList<Wifi> searchWifi (ArrayList<Wifi> wifiArrayList, String condition) {
+        ArrayList<Wifi> foundWifi = new ArrayList<Wifi>();
+        for (int i = 0; i < wifiArrayList.size(); i++) {
+            if (wifiArrayList.get(i).getProvider().toLowerCase().contains(condition.toLowerCase())) {
+                foundWifi.add(wifiArrayList.get(i));
+            } else if (wifiArrayList.get(i).getBorough().toLowerCase().contains(condition.toLowerCase())) {
+                foundWifi.add(wifiArrayList.get(i));
+            } else if(wifiArrayList.get(i).getType().toLowerCase().contains(condition.toLowerCase())) {
+                foundWifi.add(wifiArrayList.get(i));
+            } else if (wifiArrayList.get(i).getName().toLowerCase().contains(condition.toLowerCase())) {
+                foundWifi.add(wifiArrayList.get(i));
+            }
+        }
+        return foundWifi;
+    }
+
+/*    public ArrayList<Toilet> searchToilets (ArrayList<Toilet> toiletArrayList, String condition) {
+        ArrayList<Toilet> foundToilets = new ArrayList<Toilet>();
+
+        return foundToilets;
+}*/
+
 }
