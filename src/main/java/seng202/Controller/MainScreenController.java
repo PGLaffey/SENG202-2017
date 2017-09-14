@@ -28,6 +28,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.geometry.Side;
+import netscape.javascript.JSObject;
 
 
 public class MainScreenController implements MapComponentInitializedListener{
@@ -237,6 +238,7 @@ public class MainScreenController implements MapComponentInitializedListener{
 
     @FXML
     public void searchTextAction(ActionEvent event) {
+        //Obtains a geocode location around latLong
         geocodingService.geocode(address.get(), (GeocodingResult[] results, GeocoderStatus status) -> {
             LatLong latLong = null;
 
