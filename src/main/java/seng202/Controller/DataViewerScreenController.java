@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,6 +20,9 @@ public class DataViewerScreenController {
 	
 	@FXML
 	private Button mapButton;
+	
+    @FXML
+    private Button tableButton;
 	
 	@FXML 
 	private Label mapPressedLabel;
@@ -57,6 +61,17 @@ public class DataViewerScreenController {
 		primaryStage.setScene(scene);
 		primaryStage.show();	
 	}
+	
+	@FXML
+    void tablePressed(ActionEvent event) throws IOException {
+		Stage primaryStage = (Stage) tableButton.getScene().getWindow(); // Here the window is the stage
+		Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
+		
+		Scene scene = new Scene(root); // I think we can add in window size here?
+		primaryStage.setTitle("Table");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+    }
 	
 	
 	/**

@@ -2,6 +2,7 @@ package seng202.Controller;
 
 import java.io.IOException;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,6 +16,9 @@ public class ProfileScreenController {
 	
 	@FXML
 	private Button mapButton;
+	
+    @FXML
+    private Button tableButton;
 	
 	@FXML
 	private Button statButton;
@@ -58,6 +62,17 @@ public class ProfileScreenController {
 		primaryStage.show();	
 		
 	}
+	
+	@FXML
+    void tablePressed(ActionEvent event) throws IOException {
+		Stage primaryStage = (Stage) tableButton.getScene().getWindow(); // Here the window is the stage
+		Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
+		
+		Scene scene = new Scene(root); // I think we can add in window size here?
+		primaryStage.setTitle("Table");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+    }
 	
 	
 	/**
