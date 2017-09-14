@@ -1,10 +1,18 @@
 package seng202.Model;
 
-import com.google.appengine.api.search.GeoPoint;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.javascript.object.LatLong;
 import com.lynden.gmapsfx.service.directions.*;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import static java.lang.Math.toRadians;
 
@@ -16,19 +24,50 @@ public class Map{
 
     public static double getLattitude(String address) {
         double latitude = 0;
-        GeoPoint locationPoint = null;
-        //Converting spaces into '%20' for URLs
-        String locationAddress = address.replaceAll(" ", "%20");
-        String url = "http://maps.googleapis.com/maps/api/geocode/json?address="+locationAddress+"&sensor=true";
+        address = address.replaceAll(" ", "%20");
+        try {
+            URL mapsUrl = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=true");
+            HttpURLConnection request = (HttpURLConnection) mapsUrl.openConnection();
+            request.setRequestMethod("GET");
+            request.connect();
 
-        //String ss = readWebService(url);
+            JsonParser jp = new JsonParser();
+            JsonElement thing = jp.parse(new InputStreamReader((InputStream) request.getContent()));
+            JsonObject thingObj = thing.getAsJsonObject();
 
+            JsonObject resultsObj = thingObj.get("results").getAsJsonArray().get(0).getAsJsonObject();
+            JsonObject geometry = resultsObj.getAsJsonObject("geometry");
+            JsonObject location = geometry.getAsJsonObject("location");
+            latitude = location.get("lat").getAsDouble();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         return latitude;
     }
 
     public static double getLongitude(String address) {
 
         double longitude = 0;
+        address = address.replaceAll(" ", "%20");
+        try {
+            URL mapsUrl = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=true");
+            HttpURLConnection request = (HttpURLConnection) mapsUrl.openConnection();
+            request.setRequestMethod("GET");
+            request.connect();
+
+            JsonParser jp = new JsonParser();
+            JsonElement thing = jp.parse(new InputStreamReader((InputStream) request.getContent()));
+            JsonObject thingObj = thing.getAsJsonObject();
+
+            JsonObject resultsObj = thingObj.get("results").getAsJsonArray().get(0).getAsJsonObject();
+            JsonObject geometry = resultsObj.getAsJsonObject("geometry");
+            JsonObject location = geometry.getAsJsonObject("location");
+            longitude = location.get("lng").getAsDouble();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         return longitude;
     }
 
@@ -94,6 +133,7 @@ public class Map{
 
     public static void main(String[] argv){
         System.out.println(Map.getDistance(-43.512390, 172.546751,-43.523538, 172.583923));
-        System.out.println(Map.getLattitude("2 Brockhall Lane"));
+        System.out.println(Map.getLattitude("University of Canterbury"));
+        System.out.println(Map.getLongitude("University of Canterbury"));
     }
 }
