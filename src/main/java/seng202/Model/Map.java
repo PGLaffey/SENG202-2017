@@ -4,9 +4,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.lynden.gmapsfx.GoogleMapView;
-import com.lynden.gmapsfx.javascript.object.LatLong;
+import com.lynden.gmapsfx.javascript.object.*;
 import com.lynden.gmapsfx.service.directions.DirectionsRequest;
+import com.lynden.gmapsfx.service.geocoding.GeocoderStatus;
+import com.lynden.gmapsfx.service.geocoding.GeocodingResult;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
+import javafx.scene.control.Alert;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -121,12 +124,64 @@ public class Map{
 
     }
 
-    public static void findLocation(Location location, GoogleMapView mapView) {
+    public static void findLocation(Location location, GoogleMap map, GeocodingService service) {
+        String locationName = location.getName();
+        int locationType = location.getLocationType();
 
+        service.geocode(locationName, (GeocodingResult[] results, GeocoderStatus status) -> {
+            LatLong latLong = null;
+
+            if (status == GeocoderStatus.ZERO_RESULTS) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "No matching address found");
+                alert.show();
+                latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
+                        results[0].getGeometry().getLocation().getLongitude());
+            } else {
+                latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
+                        results[0].getGeometry().getLocation().getLongitude());
+            }
+
+            MarkerOptions markOptns = new MarkerOptions()
+                    .animation(Animation.DROP)
+                    .position(latLong);
+
+            switch(locationType) {
+                case 0:
+                    markOptns.icon(seng202.Model.Map.class.getResource("/images/toiletIcon.png").getPath());
+                    break;
+                case 2:
+                    markOptns.icon(seng202.Model.Map.class.getResource("/images/retailIcon.png").getPath());
+                    break;
+                case 3:
+                    markOptns.icon(seng202.Model.Map.class.getResource("/images/wifiIcon.png").getPath());
+                    break;
+                default:
+                    break;
+            }
+            map.addMarker(new Marker(markOptns));
+            map.setCenter(latLong);Anyone remember the location type numbers?
+        });
     }
 
-    public static void findLocation(String location) {
+    public static void findLocation(String location, GoogleMap map, GeocodingService service) {
+        //Obtains a geocode location around latLong
+        service.geocode(location, (GeocodingResult[] results, GeocoderStatus status) -> {
+            LatLong latLong = null;
 
+            if (status == GeocoderStatus.ZERO_RESULTS) {Anyone remember the location type numbers?
+                Alert alert = new Alert(Alert.AlertType.ERROR, "No matching address found");
+                alert.show();
+                latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
+                        results[0].getGeometry().getLocation().getLongitude());
+            } else {
+                latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
+                        results[0].getGeometry().getLocation().getLongitude());
+            }
+            map.addMarker(new Marker(new MarkerOptions()
+                    .animation(Animation.DROP)
+                    .position(latLong)));
+            map.setCenter(latLong);
+        });
     }
 
 

@@ -2,9 +2,10 @@ package seng202.Controller;
 
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
-import com.lynden.gmapsfx.javascript.object.*;
-import com.lynden.gmapsfx.service.geocoding.GeocoderStatus;
-import com.lynden.gmapsfx.service.geocoding.GeocodingResult;
+import com.lynden.gmapsfx.javascript.object.GoogleMap;
+import com.lynden.gmapsfx.javascript.object.LatLong;
+import com.lynden.gmapsfx.javascript.object.MapOptions;
+import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -19,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import seng202.Model.Map;
 
 import java.io.IOException;
 import java.net.URL;
@@ -188,7 +190,7 @@ public class MainScreenController implements MapComponentInitializedListener{
     void sharePressed(ActionEvent event) throws IOException {
     	Stage stage = new Stage();
     	Parent root = FXMLLoader.load(getClass().getResource("/ShareRouteScreen.fxml"));
-    	
+
     	stage.setTitle("Share route");
     	stage.setScene(new Scene(root));
     	stage.show();
@@ -233,23 +235,24 @@ public class MainScreenController implements MapComponentInitializedListener{
     @FXML
     public void searchTextAction(ActionEvent event) {
         //Obtains a geocode location around latLong
-        geocodingService.geocode(address.get(), (GeocodingResult[] results, GeocoderStatus status) -> {
-            LatLong latLong = null;
-
-            if (status == GeocoderStatus.ZERO_RESULTS) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "No matching address found");
-                alert.show();
-                latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
-                        results[0].getGeometry().getLocation().getLongitude());
-            } else {
-                latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
-                        results[0].getGeometry().getLocation().getLongitude());
-            }
-            map.addMarker(new Marker(new MarkerOptions()
-                    .animation(Animation.DROP)
-                    .position(latLong)));
-            map.setCenter(latLong);
-        });
+//        geocodingService.geocode(address.get(), (GeocodingResult[] results, GeocoderStatus status) -> {
+//            LatLong latLong = null;
+//
+//            if (status == GeocoderStatus.ZERO_RESULTS) {
+//                Alert alert = new Alert(Alert.AlertType.ERROR, "No matching address found");
+//                alert.show();
+//                latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
+//                        results[0].getGeometry().getLocation().getLongitude());
+//            } else {
+//                latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
+//                        results[0].getGeometry().getLocation().getLongitude());
+//            }
+//            map.addMarker(new Marker(new MarkerOptions()
+//                    .animation(Animation.DROP)
+//                    .position(latLong)));
+//            map.setCenter(latLong);
+//        });
+        Map.findLocation(address.get(), map, geocodingService);
     }
     @FXML
     void initialize() {
