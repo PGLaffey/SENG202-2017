@@ -49,7 +49,7 @@ public class LoginScreenController {
 			//User user = new User(String first, String last, usernameText.getText().toString(), String doB, passwordText.getText().toString());
 			//CurrentStorage.setUser(user); // TODO: Not sure how to access the users name and dob from the database
 			Stage primaryStage = (Stage)signInButton.getScene().getWindow();
-			Parent root = FXMLLoader.load(getClass().getResource("/seng202/View/MainScreen.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 			primaryStage.setTitle("Profile");
 			primaryStage.setScene(new Scene(root));
 		} else {
@@ -73,7 +73,7 @@ public class LoginScreenController {
     	
     	Stage primaryStage = (Stage) signUpButton.getScene().getWindow();
     	
-    	Parent root = FXMLLoader.load(getClass().getResource("/seng202/View/SignupScreen.fxml"));
+    	Parent root = FXMLLoader.load(getClass().getResource("/SignupScreen.fxml"));
     	
     	primaryStage.setTitle("Sign Up");
     	primaryStage.setScene(new Scene(root));

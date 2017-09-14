@@ -7,16 +7,27 @@ import com.lynden.gmapsfx.javascript.object.LatLong;
 import com.lynden.gmapsfx.service.directions.*;
 
 public class Map implements DirectionsServiceCallback {
-    private Route currentRoute;
-    private Location currentLocation;
-    private static DirectionsService directionsServiceHandler = new DirectionsService();
-    private DirectionsResult result;
-    private DirectionStatus status;
+    protected Route currentRoute;
+    protected Location currentLocation;
+    protected DirectionsService directionsServiceHandler;
+    protected DirectionsResult result;
+    protected DirectionStatus status;
+    protected LatLong start = new LatLong(-43.512390, 172.546751);
+    protected LatLong end = new LatLong( -43.523538, 172.583923);
+
+    public LatLong getStart() {
+        return start;
+    }
+
+    public LatLong getEnd() {
+        return end;
+    }
 
     @Override
     public void directionsReceived(DirectionsResult results, DirectionStatus status) {
-        result = results;
-        this.status = status;
+        /*result = results;
+        System.out.println(result);
+        this.status = status;*/
     }
 
     public static double getLattitude(String address) {
@@ -32,26 +43,43 @@ public class Map implements DirectionsServiceCallback {
         return longitude;
     }
 
-    public static double getDistance(double srcLat, double srcLong,
+    public double getDistance(double srcLat, double srcLong,
                                      double destLat, double destLong) {
-        DirectionsRequest request = new DirectionsRequest(new LatLong(srcLat, srcLong),
-                            new LatLong(destLat, destLong),
+        double distance = 0;
+        LatLong start = new LatLong(srcLat, srcLong);
+        LatLong end = new LatLong(destLat, destLong);
+        DirectionsRequest request = new DirectionsRequest(start, end,
                 TravelModes.BICYCLING);
-        Map.findRoute(request);
-        for (DirectionsRoute route : result.getRoutes()) {
-
+        System.out.println("Request"+request);
+        GoogleMapView mapView = new GoogleMapView();
+        findRoute(request, mapView);
+        for (DirectionsLeg dirLeg : result.getRoutes().get(0).getLegs()) {
+            distance += dirLeg.getDistance().getValue();
         }
-        DirectionsLeg dirLeg = new DirectionsLeg();
 
-        return dirLeg.getDistance().getValue();
+        return distance;
     }
 
-    public void findRoute(DirectionsRequest request) {
+    public double getDistance(LatLong start, LatLong end) {
+        double distance = 0;
+        DirectionsRequest request = new DirectionsRequest(start, end,
+                TravelModes.BICYCLING);
+        System.out.println("Request"+request);
         GoogleMapView mapView = new GoogleMapView();
+        findRoute(request, mapView);
+        for (DirectionsLeg dirLeg : result.getRoutes().get(0).getLegs()) {
+            distance += dirLeg.getDistance().getValue();
+        }
+
+        return distance;
+    }
+
+    public void findRoute(DirectionsRequest request, GoogleMapView mapView) {
         GoogleMap map = mapView.createMap();
 
         DirectionsPane dirPane = mapView.getDirec();
         directionsServiceHandler.getRoute(request, this, new DirectionsRenderer(true, map, dirPane));
+        directionsServiceHandler.processResponse(result, status);
 
     }
 
@@ -61,5 +89,11 @@ public class Map implements DirectionsServiceCallback {
 
     public void applyFilter(String filter) {
 
+    }
+
+    public static void main(String[] argv){
+        Map map = new Map();
+
+        System.out.println(map.getDistance(map.getStart(), map.getEnd()));
     }
 }

@@ -35,7 +35,7 @@
                       <graphic>
                         <ImageView fitHeight="53.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                           <image>
-                            <Image url="@../../../resources/images/bike.png" />
+                            <Image url="@images/bike.png" />
                           </image>
                         </ImageView>
                       </graphic>
@@ -44,7 +44,7 @@
                       <graphic>
                         <ImageView fitHeight="45.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                           <image>
-                            <Image url="@../../../resources/images/map.png" />
+                            <Image url="@images/map.png" />
                           </image>
                         </ImageView>
                       </graphic>
@@ -53,7 +53,7 @@
                       <graphic>
                         <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                           <image>
-                            <Image url="@../../../resources/images/pie_chart.png" />
+                            <Image url="@images/pie_chart.png" />
                           </image>
                         </ImageView>
                       </graphic>
@@ -62,7 +62,7 @@
                       <graphic>
                         <ImageView fitHeight="51.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                           <image>
-                            <Image url="@../../../resources/images/account.png" />
+                            <Image url="@images/account.png" />
                           </image>
                         </ImageView>
                       </graphic>
@@ -71,7 +71,7 @@
                       <graphic>
                         <ImageView fitHeight="43.0" fitWidth="51.0" pickOnBounds="true">
                           <image>
-                            <Image url="@../../../resources/images/logout.png" />
+                            <Image url="@images/logout.png" />
                           </image>
                         </ImageView>
                       </graphic>
@@ -160,7 +160,7 @@
                               <graphic>
                                 <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                                   <image>
-                                    <Image url="@../../../resources/images/wifiIcon.png" />
+                                    <Image url="@images/wifiIcon.png" />
                                   </image>
                                 </ImageView>
                               </graphic>
@@ -169,7 +169,7 @@
                               <graphic>
                                 <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                                   <image>
-                                    <Image url="@../../../resources/images/retailIcon.png" />
+                                    <Image url="@images/retailIcon.png" />
                                   </image>
                                 </ImageView>
                               </graphic>
@@ -178,7 +178,7 @@
                               <graphic>
                                 <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                                   <image>
-                                    <Image url="@../../../resources/images/toiletIcon.png" />
+                                    <Image url="@images/toiletIcon.png" />
                                   </image>
                                 </ImageView>
                               </graphic>
@@ -187,7 +187,7 @@
                               <graphic>
                                 <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                                   <image>
-                                    <Image url="@../../../resources/images/routeIcon.png" />
+                                    <Image url="@images/routeIcon.png" />
                                   </image>
                                 </ImageView>
                               </graphic>
@@ -196,7 +196,7 @@
                               <graphic>
                                 <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                                   <image>
-                                    <Image url="@../../../resources/images/favouriteIcon.png" />
+                                    <Image url="@images/favouriteIcon.png" />
                                   </image>
                                 </ImageView>
                               </graphic>
@@ -205,7 +205,7 @@
                               <graphic>
                                 <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                                   <image>
-                                    <Image url="@../../../resources/images/shareIcon.png" />
+                                    <Image url="@images/shareIcon.png" />
                                   </image>
                                 </ImageView>
                               </graphic>

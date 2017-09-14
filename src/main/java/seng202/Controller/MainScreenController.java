@@ -128,7 +128,7 @@ public class MainScreenController implements MapComponentInitializedListener{
     @FXML
     void mapPressed(ActionEvent event) throws IOException {
     	Stage primaryStage = (Stage) mapButton.getScene().getWindow(); // Here the window is the stage
-		Parent root = FXMLLoader.load(getClass().getResource("/seng202/View/MainScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 		
 		Scene scene = new Scene(root); // I think we can add in window size here?
 		primaryStage.setTitle("Map");
@@ -139,7 +139,7 @@ public class MainScreenController implements MapComponentInitializedListener{
     @FXML
     void statPressed(ActionEvent event) throws IOException {
     	Stage primaryStage = (Stage) statButton.getScene().getWindow(); 
-		Parent root = FXMLLoader.load(getClass().getResource("/seng202/View/DataViewerScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/DataViewerScreen.fxml"));
 		
 		primaryStage.setTitle("Statistics");
 		primaryStage.setScene(new Scene(root));
@@ -150,7 +150,7 @@ public class MainScreenController implements MapComponentInitializedListener{
     @FXML
     void accountPressed(ActionEvent event) throws IOException {
     	Stage primaryStage = (Stage) accountButton.getScene().getWindow(); 
-		Parent root = FXMLLoader.load(getClass().getResource("/seng202/View/ProfileScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
 		
 		primaryStage.setTitle("Profile");
 		primaryStage.setScene(new Scene(root));
@@ -160,7 +160,7 @@ public class MainScreenController implements MapComponentInitializedListener{
     @FXML
     void logoutPressed(ActionEvent event) throws IOException {
     	Stage primaryStage = (Stage) logoutButton.getScene().getWindow(); 
-		Parent root = FXMLLoader.load(getClass().getResource("/seng202/View/LoginScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 		
 		primaryStage.setTitle("Login");
 		primaryStage.setScene(new Scene(root));
@@ -192,7 +192,7 @@ public class MainScreenController implements MapComponentInitializedListener{
     @FXML
     void sharePressed(ActionEvent event) throws IOException {
     	Stage stage = new Stage();
-    	Parent root = FXMLLoader.load(getClass().getResource("/seng202/View/ShareRouteScreen.fxml"));
+    	Parent root = FXMLLoader.load(getClass().getResource("/ShareRouteScreen.fxml"));
     	
     	stage.setTitle("Share route");
     	stage.setScene(new Scene(root));
@@ -214,7 +214,7 @@ public class MainScreenController implements MapComponentInitializedListener{
     @FXML
     void saveRouteButtonPressed(ActionEvent event) throws IOException {
     	Stage stage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/seng202/View/SaveRouteScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/SaveRouteScreen.fxml"));
 		
 		Scene scene = new Scene(root); 
 		stage.setTitle("Save Route");

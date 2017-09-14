@@ -50,7 +50,7 @@ public class ProfileScreenController {
 	public void mapPressed() throws IOException {
 		
 		Stage primaryStage = (Stage) mapButton.getScene().getWindow(); // Here the window is the stage
-		Parent root = FXMLLoader.load(getClass().getResource("/seng202/View/MainScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 		
 		Scene scene = new Scene(root); // I think we can add in window size here?
 		primaryStage.setTitle("Map");
@@ -67,7 +67,7 @@ public class ProfileScreenController {
 	public void statPressed() throws IOException {
 		
 		Stage primaryStage = (Stage) statButton.getScene().getWindow(); // Here the window is the stage
-		Parent root = FXMLLoader.load(getClass().getResource("/seng202/View/DataViewerScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/DataViewerScreen.fxml"));
 		
 		Scene scene = new Scene(root); // I think we can add in window size here?
 		primaryStage.setTitle("Statistics");
@@ -82,7 +82,7 @@ public class ProfileScreenController {
 	 */
 	public void accountPressed() throws IOException {
 		Stage primaryStage = (Stage) accountButton.getScene().getWindow(); // Here the window is the stage
-		Parent root = FXMLLoader.load(getClass().getResource("/seng202/View/ProfileScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
 		
 		Scene scene = new Scene(root); // I think we can add in window size here?
 		primaryStage.setTitle("Profile");
@@ -97,7 +97,7 @@ public class ProfileScreenController {
 	 */
 	public void logoutPressed() throws IOException {
 		Stage primaryStage = (Stage) logoutButton.getScene().getWindow(); // Here the window is the stage
-		Parent root = FXMLLoader.load(getClass().getResource("/seng202/View/LoginScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 		
 		Scene scene = new Scene(root); // I think we can add in window size here?
 		primaryStage.setTitle("Login");
@@ -119,7 +119,7 @@ public class ProfileScreenController {
 	 */
 	public void passwordPressed() throws IOException {
 		Stage stage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/seng202/View/ChangePasswordScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/ChangePasswordScreen.fxml"));
 		
 		Scene scene = new Scene(root); 
 		stage.setTitle("Change Password");
@@ -134,7 +134,7 @@ public class ProfileScreenController {
 	 */
 	public void deletePressed() throws IOException {
 		Stage stage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/seng202/View/DeleteAccountScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/DeleteAccountScreen.fxml"));
 		
 		Scene scene = new Scene(root); 
 		stage.setTitle("Delete Account");

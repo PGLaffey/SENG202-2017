@@ -67,7 +67,7 @@ public class SignupScreenController {
         data.addUser(newUser);
             Stage primaryStage = (Stage)createButton.getScene().getWindow();
 
-            Parent root = FXMLLoader.load(getClass().getResource("/seng202/View/LoginScreen.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 
             primaryStage.setTitle("Login");
             primaryStage.setScene(new Scene(root));
@@ -77,7 +77,7 @@ public class SignupScreenController {
     public void backButtonPressed(ActionEvent event) throws IOException {
 		
 		Stage primaryStage = (Stage) backButton.getScene().getWindow(); // Here the window is the stage
-		Parent root = FXMLLoader.load(getClass().getResource("/seng202/View/LoginScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 		
 		Scene scene = new Scene(root); // I think we can add in window size here?
 		primaryStage.setTitle("Log in");
