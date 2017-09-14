@@ -1,19 +1,29 @@
 package seng202.Model;
 
+import com.google.appengine.api.search.GeoPoint;
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.javascript.object.LatLong;
 import com.lynden.gmapsfx.service.directions.*;
+import com.lynden.gmapsfx.service.geocoding.GeocodingService;
 
 import static java.lang.Math.toRadians;
 
 public class Map{
     private Route currentRoute;
     private Location currentLocation;
+    private static GeocodingService geoService;
+
 
     public static double getLattitude(String address) {
-        DirectionsRequest request = new DirectionsRequest(address, address, TravelModes.BICYCLING);
-        double lattitude = 0;
-        return lattitude;
+        double latitude = 0;
+        GeoPoint locationPoint = null;
+        //Converting spaces into '%20' for URLs
+        String locationAddress = address.replaceAll(" ", "%20");
+        String url = "http://maps.googleapis.com/maps/api/geocode/json?address="+locationAddress+"&sensor=true";
+
+        //String ss = readWebService(url);
+
+        return latitude;
     }
 
     public static double getLongitude(String address) {
@@ -84,5 +94,6 @@ public class Map{
 
     public static void main(String[] argv){
         System.out.println(Map.getDistance(-43.512390, 172.546751,-43.523538, 172.583923));
+        System.out.println(Map.getLattitude("2 Brockhall Lane"));
     }
 }
