@@ -22,7 +22,7 @@ public class Map{
     private static GeocodingService geoService;
 
 
-    public static double getLattitude(String address) {
+    public static double getLatitude(String address) {
         double latitude = 0;
         address = address.replaceAll(" ", "%20");
         try {
@@ -133,7 +133,7 @@ public class Map{
 
     public static void main(String[] argv){
         System.out.println(Map.getDistance(-43.512390, 172.546751,-43.523538, 172.583923));
-        System.out.println(Map.getLattitude("University of Canterbury"));
+        System.out.println(Map.getLatitude("University of Canterbury"));
         System.out.println(Map.getLongitude("University of Canterbury"));
     }
 }
