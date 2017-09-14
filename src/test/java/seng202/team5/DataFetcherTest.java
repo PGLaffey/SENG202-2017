@@ -3,8 +3,9 @@ package seng202.team5;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.junit.Test;
+import seng202.Model.DataFetcher;
+import seng202.Model.FileManager;
 
-import java.io.File;
 import java.sql.SQLException;
 
 public class DataFetcherTest extends TestCase {

@@ -7,6 +7,7 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import seng202.Model.*;
 import seng202.exceptions.NoDataException;
 import seng202.exceptions.WrongFormatException;
 
