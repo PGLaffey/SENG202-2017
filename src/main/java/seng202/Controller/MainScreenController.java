@@ -51,6 +51,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     private Button accountButton;
+    
+    @FXML
+    private Button tableButton;
 
     @FXML
     private Button addLocationsButton;
@@ -131,6 +134,17 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 		
 		Scene scene = new Scene(root); // I think we can add in window size here?
 		primaryStage.setTitle("Map");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+    }
+    
+	@FXML
+    void tablePressed(ActionEvent event) throws IOException {
+		Stage primaryStage = (Stage) tableButton.getScene().getWindow(); // Here the window is the stage
+		Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
+		
+		Scene scene = new Scene(root); // I think we can add in window size here?
+		primaryStage.setTitle("Table");
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
