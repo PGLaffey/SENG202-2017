@@ -99,7 +99,7 @@ public class Map{
      * Overloaded distance method to calculate the displacement between two points via the Haversine formula
      * @param start - Starting point of type LatLong
      * @param end - Ending point of type LatLong
-     * @return - The distance between the two points in metres.
+     * @return - The displacement between the two points in metres.
      */
     public static double getDistance(LatLong start, LatLong end) {
         double srcLat = start.getLatitude();
@@ -124,6 +124,12 @@ public class Map{
 
     }
 
+    /**
+     * Locates an address on the maps in the application given a Location object.
+     * @param location - A initialized Location object
+     * @param map - The map to place the marker on
+     * @param service - A GeocodingService from the GMapsFX API
+     */
     public static void findLocation(Location location, GoogleMap map, GeocodingService service) {
         String locationName = location.getName();
         int locationType = location.getLocationType();
@@ -163,6 +169,12 @@ public class Map{
         });
     }
 
+    /**
+     * An overloaded method to handle a lone address and display it as a marker on a GoogleMap object
+     * @param location - An address passed as a string
+     * @param map - The map object to place the marker on.
+     * @param service - A GeocodingService from the GMapsFX API
+     */
     public static void findLocation(String location, GoogleMap map, GeocodingService service) {
         //Obtains a geocode location around latLong
         service.geocode(location, (GeocodingResult[] results, GeocoderStatus status) -> {
@@ -179,15 +191,16 @@ public class Map{
             }
             map.addMarker(new Marker(new MarkerOptions()
                     .animation(Animation.DROP)
-                    .position(latLong)));
+                    .position(latLong)
+                    .icon(seng202.Model.Map.class.getResource("/images/wifiIcon.png").getFile())));
             map.setCenter(latLong);
         });
     }
-
 
     public static void main(String[] argv){
         System.out.println(Map.getDistance(-43.512390, 172.546751,-43.523538, 172.583923));
         System.out.println(Map.getLatitude("University of Canterbury"));
         System.out.println(Map.getLongitude("University of Canterbury"));
+        System.out.println(seng202.Model.Map.class.getResource("/images/wifiIcon.png").getFile());
     }
 }

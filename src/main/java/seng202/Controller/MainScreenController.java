@@ -2,10 +2,8 @@ package seng202.Controller;
 
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
-import com.lynden.gmapsfx.javascript.object.GoogleMap;
-import com.lynden.gmapsfx.javascript.object.LatLong;
-import com.lynden.gmapsfx.javascript.object.MapOptions;
-import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
+import com.lynden.gmapsfx.javascript.object.*;
+import com.lynden.gmapsfx.service.directions.*;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -27,7 +25,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class MainScreenController implements MapComponentInitializedListener{
+public class MainScreenController implements MapComponentInitializedListener, DirectionsServiceCallback{
+
+    protected DirectionsService directionsService;
+    protected DirectionsPane directionsPane;
+    protected InfoWindow infoWindow;
 
     @FXML
     private GoogleMapView mapView;
@@ -253,12 +255,15 @@ public class MainScreenController implements MapComponentInitializedListener{
 //            map.setCenter(latLong);
 //        });
         Map.findLocation(address.get(), map, geocodingService);
+        DirectionsRequest request = new DirectionsRequest("2 brockhall lane", "University of Canterbury", TravelModes.DRIVING);
+        directionsService.getRoute(request, this, new DirectionsRenderer(true, mapView.getMap(), directionsPane));
     }
     @FXML
     void initialize() {
     	ObservableList<String> locationTypes = FXCollections.observableArrayList("Wifi hotspot","Retailer","Toilets", "Point of interest", "Other");
         mapView.addMapInializedListener(this);
         address.bind(searchText.textProperty());
+
     	loadRouteMenu.setPopupSide(Side.RIGHT);
     	locationTypeBox.setItems(locationTypes);
     	addLocationsPane.setVisible(false);
@@ -310,6 +315,22 @@ public class MainScreenController implements MapComponentInitializedListener{
                 .zoom(12);
 
         map = mapView.createMap(mapOptions);
+        directionsService = new DirectionsService();
+        directionsPane = mapView.getDirec();
     }
 
+    @Override
+    public void directionsReceived(DirectionsResult results, DirectionStatus status){
+        infoWindow = new InfoWindow();
+        Double totalDistance = 0.0;
+        int step = results.getRoutes().get(0).getLegs().get(0).getSteps().size() / 2;
+        for (DirectionsLeg leg : results.getRoutes().get(0).getLegs()) {
+            totalDistance += leg.getDistance().getValue();
+        }
+        infoWindow.setContent(totalDistance.toString() + "km\n" + results.getRoutes().get(0).getLegs().get(0).getDuration().getText()+" minutes");
+
+
+        infoWindow.setPosition(results.getRoutes().get(0).getLegs().get(0).getSteps().get(step).getEndLocation());
+        infoWindow.open(map);
+    }
 }
