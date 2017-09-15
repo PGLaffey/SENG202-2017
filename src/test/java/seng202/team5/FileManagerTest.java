@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 @Ignore public class FileManagerTest extends TestCase {
     private String TARGET = new File(this.getClass().getResource("/testdata/").getFile()).getAbsolutePath();
-    private String WRITE_TARGET = new File(seng202.Model.FileManager.class.getResource("/data_files/").getFile()).getAbsolutePath();
+    private String WRITE_TARGET = new File(seng202.Model.FileManager.class.getResource("/data_files/").getFile()).toString();
     private ArrayList<String> result;
 
     @Rule
@@ -47,6 +47,8 @@ import java.util.ArrayList;
     @Before
     public void setUp(){
         result = new ArrayList<String>();
+        // Flushes the current storage to ensure empty lists each time.
+        CurrentStorage.flush();
     }
 
     /**
@@ -54,8 +56,8 @@ import java.util.ArrayList;
      */
     @Test
     public void testReadFile() {
-        result = FileManager.readFile(getClass().getResource(TARGET+"someText.txt").getFile());
-        assertEquals("This is a string", result.get(0));
+        result = FileManager.readFile(TARGET+"/someText.txt");
+        assertEquals("this is a string", result.get(0));
     }
 
     /**
@@ -63,8 +65,8 @@ import java.util.ArrayList;
      */
     @Test
     public void testReadMultiLine() {
-        result = FileManager.readFile(getClass().getResource(TARGET+"moreText.txt").getFile());
-        assertEquals(10, result.size());
+        result = FileManager.readFile(TARGET+"/moreText.txt");
+        assertEquals(11, result.size());
     }
 
     /**
@@ -117,7 +119,7 @@ import java.util.ArrayList;
         result = FileManager.readFile(TARGET+"/wifi_data1.csv");
         FileManager.wifiRetriever(result);
         Wifi expected_wifi = new Wifi(40.745968, -73.994039, "LinkNYC Free Wi-Fi", "Manhattan","Free","LinkNYC - Citybridge");
-        assertEquals(expected_wifi, CurrentStorage.getWifiArray().get(0));
+        assertTrue(CurrentStorage.getWifiArray().get(0).equals(expected_wifi));
     }
 
     /**
@@ -151,7 +153,7 @@ import java.util.ArrayList;
         result = FileManager.readFile(TARGET+"/retailer_data1.csv");
         FileManager.retailerRetriever(result);
         Retailer expected_retailer = new Retailer("3 New York Plaza", "Starbucks Coffee", "Casual Eating & Takeout", "F-Coffeehouse", 10004);
-        assertEquals(expected_retailer, CurrentStorage.getRetailerArray().get(0));
+        assertTrue(CurrentStorage.getRetailerArray().get(0).equals(expected_retailer));
     }
 
     /**
@@ -226,6 +228,6 @@ import java.util.ArrayList;
                 new Location(40.73221853, -73.98165557, "Expected end", 4),
                 "Expected Route", "0");
 
-        assertEquals(expected_route, CurrentStorage.getRouteArray().get(0));
+        assertTrue(CurrentStorage.getRouteArray().get(0).equals(expected_route));
     }
 }

@@ -49,4 +49,26 @@ public class Retailer extends Location {
     public String getDescription() {
         return description;
     }
+
+    /**
+     * A .equals method for retailer.
+     * @param other - The object to compare to.
+     * @return a boolean value based on whether the contents are similar.
+     */
+    public boolean equals(Retailer other) {
+        if (this.getName() != other.getName()) {
+            return false;
+        }
+        if (getLatitude() != other.getLatitude() &&
+                getLongitude() != other.getLongitude()) {
+            return false;
+        }
+        if (getProduct() != other.getProduct()) {
+            return false;
+        }
+        if (getDescription() != other.getDescription()) {
+            return false;
+        }
+        return true;
+    }
 }

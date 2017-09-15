@@ -27,6 +27,7 @@ public class Route {
         this.bikeID = bikeID;
         this.start = start;
         this.end = end;
+        this.distance = Map.getDistance(start.getLatitude(), start.getLongitude(), end.getLatitude(), end.getLongitude());
         via1 = null;
         via2 = null;
         via3 = null;
@@ -46,6 +47,7 @@ public class Route {
         this.end = end;
         this.name = name;
         this.gender = gender;
+        this.distance = Map.getDistance(start.getLatitude(), start.getLongitude(), end.getLatitude(), end.getLongitude());
         via1 = null;
         via2 = null;
         via3 = null;
@@ -80,7 +82,30 @@ public class Route {
         return end;
     }
 
+    /**
+     * Determines whether the Route should be saved locally or just on a server.
+     * @param local
+     */
     public void storeLocation(boolean local) {
         this.local = local;
+    }
+
+    /**
+     * A .equals method for route.
+     * @param other - The object to compare to.
+     * @return a boolean value based on whether the contents are similar.
+     */
+    public boolean equals(Route other) {
+        if (getStart().getLatitude() != other.getStart().getLatitude() &&
+                getStart().getLongitude() != other.getStart().getLongitude() &&
+                getEnd().getLatitude() != other.getEnd().getLatitude() &&
+                getEnd().getLongitude() != other.getEnd().getLongitude()) {
+            return false;
+        }
+
+        if (getVia().equals(other.getVia())) {
+            return false;
+        }
+        return true;
     }
 }

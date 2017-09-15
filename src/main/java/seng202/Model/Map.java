@@ -201,6 +201,9 @@ public class Map{
         System.out.println(Map.getDistance(-43.512390, 172.546751,-43.523538, 172.583923));
         System.out.println(Map.getLatitude("University of Canterbury"));
         System.out.println(Map.getLongitude("University of Canterbury"));
+        Location loc = new Retailer("3 New York Plaza", "Test", "Thing", "BEGONE THOT", 4);
+        System.out.println(loc.getLatitude());
+        System.out.println(loc.getLongitude());
         System.out.println(seng202.Model.Map.class.getResource("/images/wifiIcon.png").getFile());
     }
 }
