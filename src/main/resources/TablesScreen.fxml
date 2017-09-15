@@ -157,7 +157,7 @@
                     <TableColumn prefWidth="200.0" text="Name" fx:id="routeNameCol" />
                     <TableColumn prefWidth="200.0" text="Start" fx:id="routeStartCol" />
                     <TableColumn prefWidth="200.0" text="End" fx:id="routeEndCol" />
-                    <TableColumn prefWidth="200.0" text="Distance" fx:id="routeDIstCol" />
+                    <TableColumn prefWidth="200.0" text="Distance" fx:id="routeDistCol" />
                   </columns>
                 </TableView>
                 <Button fx:id="searchButton" layoutX="727.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchPressed" text="Search" />

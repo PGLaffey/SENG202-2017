@@ -98,16 +98,16 @@ public class TablesScreenController {
     private TableView<Retailer> retailersTable;
 
     @FXML
-    private TableColumn<?, ?> routeDIstCol;
+    private TableColumn<Route, Double> routeDistCol;
 
     @FXML
-    private TableColumn<?, ?> routeEndCol;
+    private TableColumn<Route, Location> routeEndCol;
 
     @FXML
-    private TableColumn<?, ?> routeNameCol;
+    private TableColumn<Route, String> routeNameCol;
 
     @FXML
-    private TableColumn<?, ?> routeStartCol;
+    private TableColumn<Route, Location> routeStartCol;
 
     @FXML
     private TableView<Route> routesTable;
@@ -125,40 +125,40 @@ public class TablesScreenController {
     private ChoiceBox<String> tableOptions;
 
     @FXML
-    private TableColumn<?, ?> toiletDisCol;
+    private TableColumn<Toilet, Boolean> toiletDisCol;
 
     @FXML
-    private TableColumn<?, ?> toiletLatCol;
+    private TableColumn<Toilet, Double> toiletLatCol;
 
     @FXML
-    private TableColumn<?, ?> toiletLongCol;
+    private TableColumn<Toilet, Double> toiletLongCol;
 
     @FXML
-    private TableColumn<?, ?> toiletNameCol;
+    private TableColumn<Toilet, String> toiletNameCol;
 
     @FXML
-    private TableColumn<?, ?> toiletUniCol;
+    private TableColumn<Toilet, Boolean> toiletUniCol;
 
     @FXML
     private TableView<Toilet> toiletsTable;
 
     @FXML
-    private TableColumn<?, ?> wifiLatCol;
+    private TableColumn<Wifi, Double> wifiLatCol;
 
     @FXML
-    private TableColumn<?, ?> wifiLongCol;
+    private TableColumn<Wifi, Double> wifiLongCol;
 
     @FXML
-    private TableColumn<?, ?> wifiNameCol;
+    private TableColumn<Wifi, String> wifiNameCol;
 
     @FXML
-    private TableColumn<?, ?> wifiProvCol;
+    private TableColumn<Wifi, String> wifiProvCol;
 
     @FXML
     private TableView<Wifi> wifiTable;
 
     @FXML
-    private TableColumn<?, ?> wifiTypeCol;
+    private TableColumn<Wifi, String> wifiTypeCol;
 
 
     @FXML
@@ -260,7 +260,7 @@ public class TablesScreenController {
     @FXML
     void initialize() {
     	
-    	ObservableList<String> filterOptions = FXCollections.observableArrayList("All locations","Routes");
+    	ObservableList<String> filterOptions = FXCollections.observableArrayList("All locations","Routes", "Retailer", "WiFi", "Toilets", "Points of interest");
     	tableOptions.setItems(filterOptions);
     	
     	
@@ -270,10 +270,31 @@ public class TablesScreenController {
     	allLocLongCol.setCellValueFactory(new PropertyValueFactory<Location,Double>("longitude"));
     	allLocTypeCol.setCellValueFactory(new PropertyValueFactory<Location,Integer>("locationType"));
     	
-    	ObservableList<Location> data = FXCollections.observableArrayList(new Location(123.56, 456.789, "A location", 0), new Location(234.45,234.67, "B location", 2)); // create the data
-    	allLocationsTable.setItems(data);
+    	ObservableList<Location> locData = FXCollections.observableArrayList(new Location(123.56, 456.789, "A location", 0), new Location(234.45,234.67, "B location", 2)); // create the data
+    	allLocationsTable.setItems(locData);
     	
+    	toiletDisCol.setCellValueFactory(new PropertyValueFactory<Toilet, Boolean>("forDisabled"));
+    	toiletLatCol.setCellValueFactory(new PropertyValueFactory<Toilet, Double>("latitude"));
+    	toiletLongCol.setCellValueFactory(new PropertyValueFactory<Toilet, Double>("longitude"));
+    	toiletUniCol.setCellValueFactory(new PropertyValueFactory<Toilet, Boolean>("uniSex"));
+    	toiletNameCol.setCellValueFactory(new PropertyValueFactory<Toilet, String>("name"));
     	
+    	ObservableList<Toilet> toiletData = FXCollections.observableArrayList(new Toilet(123.56, 456.789, "A toilet", true, false), new Toilet(234.45, 234.67, "B toilet", false, true)); // create the data
+    	toiletsTable.setItems(toiletData);
+    	
+    	wifiLatCol.setCellValueFactory(new PropertyValueFactory<Wifi, Double>("latitude"));
+    	wifiProvCol.setCellValueFactory(new PropertyValueFactory<Wifi, String>("provider"));
+    	wifiLongCol.setCellValueFactory(new PropertyValueFactory<Wifi, Double>("longitude"));
+    	wifiTypeCol.setCellValueFactory(new PropertyValueFactory<Wifi, String>("type"));
+    	wifiNameCol.setCellValueFactory(new PropertyValueFactory<Wifi, String>("name"));
+    	
+    	ObservableList<Wifi> wifiData = FXCollections.observableArrayList(new Wifi(123.56, 456.789, "A wifi", "A borough", "Free", "Provider A"), new Wifi(234.45, 234.67, "B wifi", "B borough", "Expensive", "Provider B")); // create the data
+    	wifiTable.setItems(wifiData);
+    	
+    	routeEndCol.setCellValueFactory(new PropertyValueFactory<Route, Location>("end"));
+    	routeStartCol.setCellValueFactory(new PropertyValueFactory<Route, Location>("start"));
+    	//routeDistCol.setCellValueFactory(new PropertyValueFactory<Route, Double>("distance"));
+    	routeNameCol.setCellValueFactory(new PropertyValueFactory<Route, String>("name"));
     	
         assert accountButton != null : "fx:id=\"accountButton\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert allLocLatCol != null : "fx:id=\"allLocLatCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
@@ -295,7 +316,7 @@ public class TablesScreenController {
         assert retNameCol != null : "fx:id=\"retNameCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert retProductCol != null : "fx:id=\"retProductCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert retailersTable != null : "fx:id=\"retailersTable\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert routeDIstCol != null : "fx:id=\"routeDIstCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
+        assert routeDistCol != null : "fx:id=\"routeDIstCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert routeEndCol != null : "fx:id=\"routeEndCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert routeNameCol != null : "fx:id=\"routeNameCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert routeStartCol != null : "fx:id=\"routeStartCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
