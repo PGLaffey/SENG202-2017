@@ -102,8 +102,10 @@ public class FileManager {
      * Retrieves a list of routes from the readFile function and then converts them indevidually to Route objects stored
      * in the current storage class for that instance of the app.
      */
-    public static void routeRetriever() {
-        ArrayList<String> routes = readFile("SENG202-Team5-Cyclr/src/main/resources/data_files/2014-01 - Citi Bike trip data.csv");
+    public static void routeRetriever(ArrayList<String> routes) {
+        //ArrayList<String> routes = readFile("SENG202-Team5-Cyclr/src/main/resources/data_files/2014-01 - Citi Bike trip data.csv");
+
+        //TODO: Replace this line with one that reads the csv files more dynamically.
         routes.remove(0);
 
         for (String route : routes) {
@@ -131,7 +133,7 @@ public class FileManager {
     /**
      * Stores the route data stored in the current storage class.
      */
-    public static void routeWriter() {
+    public static void routeWriter(String filename) {
         ArrayList<Route> routes = CurrentStorage.getRouteArray();
         ArrayList<String> strRoutes = new ArrayList<String>();
         for (Route route : routes) {
@@ -152,8 +154,8 @@ public class FileManager {
     /**
      * Retrieves the list of the given retailers and converts each of these to being a new instance of Retailer stored in currentStorage.
      */
-    public static void retailerRetriever() {
-        ArrayList<String> retailers = readFile("SENG202-Team5-Cyclr/src/main/resources/data_files/Lower_Manhattan_Retailers.csv");
+    public static void retailerRetriever(ArrayList<String> retailers) {
+        //ArrayList<String> retailers = readFile("SENG202-Team5-Cyclr/src/main/resources/data_files/Lower_Manhattan_Retailers.csv");
         retailers.remove(0);
         retailers.remove(0);
 
@@ -176,8 +178,8 @@ public class FileManager {
     /**
      * Retrieves the list of the given wifiHotspots and converts each item into a wifi object list in the currentStorage class.
      */
-    public static void wifiRetriever() {
-        ArrayList<String> wifiHotspots = readFile("SENG202-Team5-Cyclr/src/main/resources/data_files/NYC_Free_Public_WiFi_03292017.csv");
+    public static void wifiRetriever(ArrayList<String> wifiHotspots) {
+        //ArrayList<String> wifiHotspots = readFile("SENG202-Team5-Cyclr/src/main/resources/data_files/NYC_Free_Public_WiFi_03292017.csv");
         wifiHotspots.remove(0);
         for (String wifiHotspot: wifiHotspots) {
             String[] information = wifiHotspot.split(",");
@@ -197,7 +199,7 @@ public class FileManager {
         }
     }
 
-    public static void wifiWriter() {
+    public static void wifiWriter(String filename) {
         ArrayList<Wifi> wifis = CurrentStorage.getWifiArray();
         ArrayList<String> strWifis = new ArrayList<String>();
         for (Wifi  wifi : wifis) {
@@ -212,6 +214,6 @@ public class FileManager {
             strWifi = wifiLatitude + "," + wifiLongitude + "," + SSID + "," + wifiBorough + "," + wifiType + "," + wifiProvider;
             strWifis.add(strWifi);
         }
-        writeFile("SENG202-Team5-Cyclr/src/main/resources/data_files/route_data.csv", strWifis);
+        writeFile("SENG202-Team5-Cyclr/src/main/resources/data_files/"+filename+".csv", strWifis);
     }
 }

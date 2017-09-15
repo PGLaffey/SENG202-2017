@@ -43,4 +43,13 @@ public class CurrentStorage {
     public static void addWifi(Wifi wifi) {
         wifiArray.add(wifi);
     }
+
+    /**
+     * Flushes all data out of arrayLists.
+     */
+    public static void flush() {
+        routeArray.clear();
+        retailerArray.clear();
+        wifiArray.clear();
+    }
 }
