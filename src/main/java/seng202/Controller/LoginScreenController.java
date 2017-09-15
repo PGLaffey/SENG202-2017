@@ -1,5 +1,6 @@
 package seng202.Controller;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -66,7 +67,7 @@ public class LoginScreenController {
 	 * button is pressed
 	 */
 
-    public void signUpButtonPressed(ActionEvent event) throws Exception {
+    public void signUpButtonPressed() throws Exception {
 //        FXMLLoader signUp = FXMLLoader.load(Main.class.getResource("/SignUpScreen.fxml"));
 //        AnchorPane login = (AnchorPane) signUp.load();
 //        Scene scene = new Scene(login);
@@ -80,6 +81,13 @@ public class LoginScreenController {
         
 
     }
+    
+/*    @FXML
+    void handleEnterPressed(KeyEvent event) throws Exception {
+    	if (event.getKeyCode() == KeyEvent.VK_ENTER) {
+            signUpButtonPressed();
+        }
+    }*/
 
 
 }
