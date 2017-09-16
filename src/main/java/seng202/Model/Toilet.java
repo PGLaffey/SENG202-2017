@@ -32,15 +32,15 @@ public class Toilet extends Location {
     }
 
     public boolean equals(Toilet other) {
-        if (this.getName() != other.getName()) {
+        if (!getName().equals(other.getName())) {
             return false;
         }
-        if (getLatitude() != other.getLatitude()) {
+
+        if (getLatitude() != other.getLatitude() &&
+                getLongitude() != other.getLongitude()) {
             return false;
         }
-        if (getLongitude() != other.getLongitude()) {
-            return false;
-        }
+
         if (getForDisabled() != other.forDisabled || getUniSex() != other.getUniSex()) {
             return false;
         }

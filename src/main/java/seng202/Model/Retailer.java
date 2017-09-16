@@ -56,17 +56,17 @@ public class Retailer extends Location {
      * @return a boolean value based on whether the contents are similar.
      */
     public boolean equals(Retailer other) {
-        if (this.getName() != other.getName()) {
+        if (!getName().equals(other.getName())) {
             return false;
         }
         if (getLatitude() != other.getLatitude() &&
                 getLongitude() != other.getLongitude()) {
             return false;
         }
-        if (getProduct() != other.getProduct()) {
+        if (!getProduct().equals(other.getProduct())) {
             return false;
         }
-        if (getDescription() != other.getDescription()) {
+        if (!getDescription().equals(other.getDescription())) {
             return false;
         }
         return true;

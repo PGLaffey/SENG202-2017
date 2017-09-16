@@ -43,18 +43,28 @@ public class Wifi extends Location {
 
     public boolean equals(Wifi other) {
 
-        if (this.getName() != other.getName()) {
+        if (!getName().equals(other.getName())) {
             return false;
         }
-        if (getLatitude() != other.getLatitude()) {
+
+        if (getLatitude() != other.getLatitude() && getLongitude() != other.getLongitude()) {
             return false;
         }
-        if (getLongitude() != other.getLongitude()) {
+
+        if (!getProvider().equals(other.getProvider())) {
             return false;
         }
-        if (getProvider() != other.getProvider()) {
+
+        if (!getType().equals(other.getType())) {
             return false;
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "SSID: " + getName() + "\nLocation: (" + getLatitude() + ", " + getLongitude() + ")\nProvider: "
+                + getProvider() + "\nType: " + getType() + "\nBorough: " + getBorough();
+    }
+
 }

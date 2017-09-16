@@ -2,6 +2,8 @@ package seng202.Model;
 
 import seng202.Model.Location;
 
+import java.util.Arrays;
+
 /**
  * The Route class, stores information about the route.
  */
@@ -111,7 +113,7 @@ public class Route {
             return false;
         }
 
-        if (getVia().equals(other.getVia())) {
+        if (!Arrays.equals(getVia(), other.getVia())) {
             return false;
         }
         return true;

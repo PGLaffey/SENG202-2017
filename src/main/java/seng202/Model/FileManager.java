@@ -187,9 +187,9 @@ public class FileManager {
             //Obtains the relevant information
             Double wifiLatitude = new Double(information[7]);
             Double wifiLongitude = new Double(information[8]);
-            String wifiName = information[14];
+            String wifiName = information[15];
             String wifiProvider = information[4];
-            String borough = information[18];
+            String borough = information[19];
             String type = information[3];
 
             //Creates a new Wifi object.
