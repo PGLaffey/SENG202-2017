@@ -71,6 +71,20 @@ public class Location {
     public int getLocationType() {
         return locationType;
     }
+    
+    public String getTypeString() {
+    	if (locationType == 0) {
+    		return("Toilet");
+    	} else if (locationType == 1) {
+    		return("Point of interest");
+    	} else if(locationType == 2) {
+    		return("Retailer");
+    	} else if(locationType == 3) {
+    		return("Wifi");
+    	} else {
+    		return("Other");
+    	}
+    }
 
     public void setName(String name) {
         this.name = name;
