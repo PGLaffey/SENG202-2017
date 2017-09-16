@@ -4,6 +4,7 @@ import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
 import seng202.Model.Location;
 import seng202.Model.Poi;
+import seng202.Model.RawDataViewer;
 import seng202.Model.Retailer;
 import seng202.Model.Route;
 import seng202.Model.Toilet;
@@ -24,10 +25,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+/*import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.TableView;*/
+
+import javafx.scene.control.*;
 
 
 public class TablesScreenController {
@@ -125,6 +128,12 @@ public class TablesScreenController {
 
     @FXML
     private ChoiceBox<String> tableOptions;
+    
+    @FXML
+    private TextField keywordText;
+    
+    //@FXML
+    //private TextField keywordText;
 
     @FXML
     private TableColumn<Toilet, Boolean> toiletDisCol;
@@ -198,6 +207,7 @@ public class TablesScreenController {
 
     @FXML
     void searchPressed(ActionEvent event) {
+
     	String option = tableOptions.getValue().toString();
     	if (option == "All locations") {
     		allLocationsTable.setVisible(true);
@@ -207,6 +217,9 @@ public class TablesScreenController {
     		toiletsTable.setVisible(false);
     		routesTable.setVisible(false);
     	} else if (option == "Retailers") {
+    		ArrayList<Retailer> retFiltered = RawDataViewer.searchRetailer(CurrentStorage.getRetailerArray(), keywordText.getText().toString());
+    		ObservableList<Retailer> retData = FXCollections.observableArrayList(retFiltered);
+        	retailersTable.setItems(retData);
     		allLocationsTable.setVisible(false);
     		poiTable.setVisible(false);
     		retailersTable.setVisible(true);
@@ -214,6 +227,9 @@ public class TablesScreenController {
     		toiletsTable.setVisible(false);
     		routesTable.setVisible(false);
     	} else if (option == "WiFi") {
+    		ArrayList<Wifi> wifiFiltered = RawDataViewer.searchWifi(CurrentStorage.getWifiArray(), keywordText.getText().toString());
+    		ObservableList<Wifi> wifiData = FXCollections.observableArrayList(wifiFiltered);
+    		wifiTable.setItems(wifiData);
     		allLocationsTable.setVisible(false);
     		poiTable.setVisible(false);
     		retailersTable.setVisible(false);
@@ -228,6 +244,9 @@ public class TablesScreenController {
     		toiletsTable.setVisible(true);
     		routesTable.setVisible(false);
     	} else if (option == "Points of interest")  {
+    		ArrayList<Poi> poiFiltered = RawDataViewer.searchPoi(CurrentStorage.getPoiArray(), keywordText.getText().toString());
+    		ObservableList<Poi> poiData = FXCollections.observableArrayList(poiFiltered);
+    		poiTable.setItems(poiData);
     		allLocationsTable.setVisible(false);
     		poiTable.setVisible(true);
     		retailersTable.setVisible(false);
@@ -235,6 +254,9 @@ public class TablesScreenController {
     		toiletsTable.setVisible(false);
     		routesTable.setVisible(false);
     	} else if (option == "Routes") {
+    		ArrayList<Route> routeFiltered = RawDataViewer.searchRoutes(CurrentStorage.getRouteArray(), keywordText.getText().toString());
+    		ObservableList<Route> routeData = FXCollections.observableArrayList(routeFiltered);
+    		routesTable.setItems(routeData);
     		allLocationsTable.setVisible(false);
     		poiTable.setVisible(false);
     		retailersTable.setVisible(false);
@@ -262,6 +284,13 @@ public class TablesScreenController {
     @FXML
     void initialize() {
     	
+
+    	CurrentStorage.addRetailer(new Retailer(23.45, 127.3, "Retailer new", "Bikes", "We sell bikes", 1));
+    	CurrentStorage.addRetailer(new Retailer(5345.2, 765.3, "Retailer old", "Biks", "what do we", 1));
+    	CurrentStorage.addRetailer(new Retailer(123.45, 127.3, "Retailer new", "Bikes", "rand", 1));
+    	CurrentStorage.addRetailer(new Retailer(400.45, 127.3, "Retailer new", "Bikes", "We sell bikes", 1));
+    	CurrentStorage.addRetailer(new Retailer(1235, 123, "Retaew", "CLothes", "We sell bikes", 1));
+    	
     	allLocationsTable.setVisible(false);
 		poiTable.setVisible(false);
 		retailersTable.setVisible(false);
@@ -269,7 +298,7 @@ public class TablesScreenController {
 		toiletsTable.setVisible(false);
 		routesTable.setVisible(false);
     	
-    	ObservableList<String> filterOptions = FXCollections.observableArrayList("All locations","Routes", "Retailer", "WiFi", "Toilets", "Points of interest");
+    	ObservableList<String> filterOptions = FXCollections.observableArrayList("All locations","Routes", "Retailers", "WiFi", "Toilets", "Points of interest");
     	tableOptions.setItems(filterOptions);
     	
     	// Set up the all locations table
@@ -312,7 +341,7 @@ public class TablesScreenController {
     	
     	// Set up the retailers table
     	retLatCol.setCellValueFactory(new PropertyValueFactory<Retailer, Double>("latitude"));
-    	retDescCol.setCellValueFactory(new PropertyValueFactory<Retailer, String>("desrciption"));
+    	retDescCol.setCellValueFactory(new PropertyValueFactory<Retailer, String>("description"));
     	retLongCol.setCellValueFactory(new PropertyValueFactory<Retailer, Double>("longitude"));
     	retProductCol.setCellValueFactory(new PropertyValueFactory<Retailer, String>("product"));
     	retNameCol.setCellValueFactory(new PropertyValueFactory<Retailer, String>("name"));
@@ -329,13 +358,17 @@ public class TablesScreenController {
     	
     	ObservableList<Poi> poiData = FXCollections.observableArrayList(CurrentStorage.getPoiArray());
     	poiTable.setItems(poiData);
+    	
+    	// Scribble
+    	
     	    	
-        assert accountButton != null : "fx:id=\"accountButton\" was not injected: check your FXML file 'TablesScreen.fxml'.";
+    	assert accountButton != null : "fx:id=\"accountButton\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert allLocLatCol != null : "fx:id=\"allLocLatCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert allLocLongCol != null : "fx:id=\"allLocLongCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert allLocNameCol != null : "fx:id=\"allLocNameCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert allLocTypeCol != null : "fx:id=\"allLocTypeCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert allLocationsTable != null : "fx:id=\"allLocationsTable\" was not injected: check your FXML file 'TablesScreen.fxml'.";
+        assert keywordText != null : "fx:id=\"conditionText\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert logoutButton != null : "fx:id=\"logoutButton\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert mapButton != null : "fx:id=\"mapButton\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert poiCostCol != null : "fx:id=\"poiCostCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
@@ -350,7 +383,7 @@ public class TablesScreenController {
         assert retNameCol != null : "fx:id=\"retNameCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert retProductCol != null : "fx:id=\"retProductCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert retailersTable != null : "fx:id=\"retailersTable\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert routeDistCol != null : "fx:id=\"routeDIstCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
+        assert routeDistCol != null : "fx:id=\"routeDistCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert routeEndCol != null : "fx:id=\"routeEndCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert routeNameCol != null : "fx:id=\"routeNameCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert routeStartCol != null : "fx:id=\"routeStartCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
