@@ -47,6 +47,7 @@ import java.util.ArrayList;
     @Before
     public void setUp(){
         result = new ArrayList<String>();
+        System.out.println(WRITE_TARGET);
         // Flushes the current storage to ensure empty lists each time.
         CurrentStorage.flush();
     }
@@ -75,7 +76,7 @@ import java.util.ArrayList;
     @Test
     public void testRouteOneEntry()
     {
-        result = FileManager.readFile(getClass().getResource(TARGET+"/route_data1.csv").getFile());
+        result = FileManager.readFile(TARGET+"/route_data1.csv");
         FileManager.routeRetriever(result);
 
         Route expected_route = new Route("16950", new Location(40.75323098, -73.97032517, "Expected start", 4),
@@ -88,7 +89,7 @@ import java.util.ArrayList;
     /**
      * Test to ensure that duplicates are handled properly.
      */
-    @Ignore @Test
+    @Test
     public void testRouteDuplicates()
     {
         //Read the same data twice, should only save it once.
@@ -102,7 +103,7 @@ import java.util.ArrayList;
     /**
      * Test to test FileManager's readFile functions as expected for a .csv with 10 routes.
      */
-    @Ignore @Test
+    @Test
     public void testRouteTenEntries() {
         result = FileManager.readFile(TARGET+"/route_data10.csv");
         //Only need to test whether there are 10 objects as it was previously tested whether routes are saved properly, and tested that duplicates are not saved.
@@ -113,7 +114,7 @@ import java.util.ArrayList;
     /**
      * Test to test the FileManager's readFile functions as expected for a .csv with a WiFi location
      */
-    @Ignore @Test
+    @Test
     public void testWifiOneEntry() {
 
         result = FileManager.readFile(TARGET+"/wifi_data1.csv");
@@ -125,7 +126,7 @@ import java.util.ArrayList;
     /**
      * Test to ensure duplicate WiFi data is handled correctly.
      */
-    @Ignore @Test
+    @Test
     public void testWifiDuplicate() {
         result = FileManager.readFile(TARGET+"/wifi_data1.csv");
         FileManager.wifiRetriever(result);
@@ -137,7 +138,7 @@ import java.util.ArrayList;
     /**
      * Test to test the FileManager's readFile functions as expected for a .csv with 10 WiFi locations.
      */
-    @Ignore @Test
+    @Test
     public void testWifiTenEntries() {
         result = FileManager.readFile(TARGET+"/wifi_data10.csv");
         FileManager.wifiRetriever(result);
@@ -147,7 +148,7 @@ import java.util.ArrayList;
     /**
      * Test to test the FileManager's readFile functions as expected for a .csv with a Retailer
      */
-    @Ignore @Test
+    @Test
     public void testRetailerOneEntry() {
 
         result = FileManager.readFile(TARGET+"/retailer_data1.csv");
@@ -159,7 +160,7 @@ import java.util.ArrayList;
     /**
      * Test to check if duplicate retailer entries are handled properly.
      */
-    @Ignore @Test
+    @Test
     public void testRetailerDuplicate() {
 
         result = FileManager.readFile(TARGET+"/retailer_data1.csv");
@@ -172,7 +173,7 @@ import java.util.ArrayList;
     /**
      * Test to test the FileManager's readFile functions as expected for a .csv with 10 Retailers
      */
-    @Ignore @Test
+    @Test
     public void testRetailerTenEntries() {
         result = FileManager.readFile(TARGET+"/retailer_data10.csv");
         FileManager.retailerRetriever(result);
@@ -182,7 +183,7 @@ import java.util.ArrayList;
     /**
      * Test to test FileManager's readfile with an empty .csv file
      */
-    @Ignore @Test
+    @Test
     public void testEmpty() {
         result = FileManager.readFile(TARGET+"/empty_file.csv");
         FileManager.retailerRetriever(result);
@@ -196,7 +197,7 @@ import java.util.ArrayList;
     /**
      * Test to test FileManager's ability to throw a FileNotFound exception
      */
-    @Ignore @Test(expected = FileNotFoundException.class)
+    @Test(expected = FileNotFoundException.class)
     public void testNonExistant()
     {
         thrown.expect(FileNotFoundException.class);
@@ -206,7 +207,7 @@ import java.util.ArrayList;
     /**
      * Test to test FileManager's ability to handle files of the wrong format.
      */
-    @Ignore @Test(expected = WrongFormatException.class)
+    @Test(expected = WrongFormatException.class)
     public void testWrongFormat()
     {
         thrown.expect(WrongFormatException.class);
@@ -216,6 +217,7 @@ import java.util.ArrayList;
     /**
      * Test to test the FileManager's ability to write a file.
      */
+    @Test
     public void testWriteRouteFile()
     {
         result = FileManager.readFile(TARGET+"/route_data1.csv");
@@ -230,4 +232,56 @@ import java.util.ArrayList;
 
         assertTrue(CurrentStorage.getRouteArray().get(0).equals(expected_route));
     }
+
+    /**
+     * Test to test the FileManager's ability to write a file with a filename that contains spaces.
+     */
+    @Test
+    public void testWriteRouteFileSpaces()
+    {
+        result = FileManager.readFile(TARGET+"/route_data1.csv");
+        FileManager.routeRetriever(result);
+        //TODO: confirm this and potentially require a user as well.
+        FileManager.routeWriter("test file.csv");
+        assertTrue(new File(WRITE_TARGET+"/test file.csv").exists());
+        result = FileManager.readFile(WRITE_TARGET+"/test file.csv");
+        Route expected_route = new Route("16950", new Location(40.75323098, -73.97032517, "Expected start", 4),
+                new Location(40.73221853, -73.98165557, "Expected end", 4),
+                "Expected Route", "0");
+
+        assertTrue(CurrentStorage.getRouteArray().get(0).equals(expected_route));
+    }
+
+    /**
+     * Test to test the FileManager's ability to write a file.
+     */
+    @Test
+    public void testWriteWifiFile()
+    {
+        result = FileManager.readFile(TARGET+"/wifi_data1.csv");
+        FileManager.wifiRetriever(result);
+        //TODO: confirm this and potentially require a user as well.
+        FileManager.wifiWriter("test_file");
+        assertTrue(new File(WRITE_TARGET+"/test_file.csv").exists());
+        result = FileManager.readFile(WRITE_TARGET+"/test_file.csv");
+        Wifi expected_wifi = new Wifi(40.745968, -73.994039, "LinkNYC Free Wi-Fi", "Manhattan","Free","LinkNYC - Citybridge");
+        assertTrue(CurrentStorage.getWifiArray().get(0).equals(expected_wifi));
+    }
+
+    /**
+     * Test to test the FileManager's ability to write a file.
+     */
+    @Test
+    public void testWriteRetailerFile()
+    {
+        result = FileManager.readFile(TARGET+"/retailer_data1.csv");
+        FileManager.retailerRetriever(result);
+        //TODO: confirm this and potentially require a user as well.
+        FileManager.retailerWriter("test_file");
+        assertTrue(new File(WRITE_TARGET+"/test_file.csv").exists());
+        result = FileManager.readFile(WRITE_TARGET+"/test_file.csv");
+        Retailer expected_retailer = new Retailer("3 New York Plaza", "Starbucks Coffee", "Casual Eating & Takeout", "F-Coffeehouse", 10004);
+        assertTrue(CurrentStorage.getRetailerArray().get(0).equals(expected_retailer));
+    }
+
 }
