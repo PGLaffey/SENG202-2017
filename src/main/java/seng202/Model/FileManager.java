@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * @author Rebecka Cox
  */
 public class FileManager {
+    private static final String DEST_TARGET = new File(seng202.Model.FileManager.class.getResource("/data_files/").getFile()).toString();
 
     /**
      * Serializes an instance of the User class (exporting out of the program).
@@ -82,9 +83,9 @@ public class FileManager {
      * @param fileName The name of the file for the .csv to
      * @param content The content for the .csv file.
      */
-    public static void writeFile(String fileName, ArrayList<String> content) {
+    public static void writeFile(String destination, String fileName, ArrayList<String> content) {
         try {
-            PrintWriter printWriter = new PrintWriter(new File(fileName));
+            PrintWriter printWriter = new PrintWriter(new File(destination+"/"+fileName));
             StringBuilder stringBuilder = new StringBuilder();
             for (String line : content) {
                 stringBuilder.append(line);
@@ -147,7 +148,7 @@ public class FileManager {
             strRoute = startName + "," + startLatitude + "," + startLongitude + "," + endName + "," + endLatitude + "," + endLongitude;
             strRoutes.add(strRoute);
         }
-        writeFile("SENG202-Team5-Cyclr/src/main/resources/data_files/route_data.csv", strRoutes);
+        writeFile(DEST_TARGET,filename+".csv", strRoutes);
     }
 
 
@@ -172,6 +173,25 @@ public class FileManager {
             //Add the retailer to the storage class.
             CurrentStorage.addRetailer(newRetailer);
         }
+    }
+
+    public static void retailerWriter(String filename) {
+        ArrayList<Retailer> retailers = CurrentStorage.getRetailerArray();
+        ArrayList<String> strRetailers = new ArrayList<String>();
+        for (Retailer retailer : retailers) {
+
+            //Obtain relevant information to write.
+            String address = retailer.getAddress();
+            String product = retailer.getProduct();
+            String description = retailer.getDescription();
+            int zip = retailer.getZip();
+            double latitude = retailer.getLatitude();
+            double longitude = retailer.getLongitude();
+
+            String strRetailer = address + "," + zip + "," + product + "," + description + "," + latitude + "," + longitude;
+            strRetailers.add(strRetailer);
+        }
+        writeFile(DEST_TARGET, filename+".csv", strRetailers);
     }
 
 
@@ -214,6 +234,6 @@ public class FileManager {
             strWifi = wifiLatitude + "," + wifiLongitude + "," + SSID + "," + wifiBorough + "," + wifiType + "," + wifiProvider;
             strWifis.add(strWifi);
         }
-        writeFile("SENG202-Team5-Cyclr/src/main/resources/data_files/"+filename+".csv", strWifis);
+        writeFile(DEST_TARGET,filename+".csv", strWifis);
     }
 }
