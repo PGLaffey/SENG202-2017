@@ -75,7 +75,7 @@
                       <graphic>
                         <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                           <image>
-                            <Image url="@images/pie_chart.png" />
+                            <Image url="@images/table.png" />
                           </image>
                         </ImageView>
                       </graphic>

@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import seng202.Model.CurrentStorage;
 import seng202.Model.User;
 
 public class ProfileScreenController {
@@ -162,9 +163,9 @@ public class ProfileScreenController {
 	@FXML
 	void initialize() {
 		// TODO: uncomment the below once the user object is created properly in the login fxml
-		/*user = CurrentStorage.getUser();
-		usersNameLabel.setText(CurrentStorage.getUser().getName()); 
-		usersBirthDateLabel.setText(CurrentStorage.getUser().getDob()); */
+		user = CurrentStorage.getUser();
+		usersNameLabel.setText(user.getName()); 
+		usersBirthDateLabel.setText(user.getDob());
 	}
 	
 
