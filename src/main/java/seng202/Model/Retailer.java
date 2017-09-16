@@ -51,7 +51,7 @@ public class Retailer extends Location {
         return product;
     }
 
-    public String getDescription() {
+    public String getDescription() { 
         return description;
     }
 

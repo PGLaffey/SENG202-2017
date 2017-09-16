@@ -32,7 +32,7 @@ public class RawDataViewer {
      * @param condition the condition which is looked for in each Poi object
      * @return an array list of matched Poi objects
      */
-    public ArrayList<Poi> searchPoi(ArrayList<Poi> poiArrayList, String condition) {
+    public static ArrayList<Poi> searchPoi(ArrayList<Poi> poiArrayList, String condition) {
         ArrayList<Poi> foundPoi = new ArrayList<Poi>();
         for (int i = 0; i < poiArrayList.size(); i++) {
             if (Double.toString(poiArrayList.get(i).getCost()).toLowerCase().contains(condition.toLowerCase())) {
@@ -52,15 +52,16 @@ public class RawDataViewer {
      * @param condition the condition which is looked for in each retailer object
      * @return an array list of matched retailer objects
      */
-    public ArrayList<Retailer> searchRetailer(ArrayList<Retailer> retailerArrayList, String condition) {
+    public static ArrayList<Retailer> searchRetailer(ArrayList<Retailer> retailerArrayList, String condition) {
         ArrayList<Retailer> foundRetailer = new ArrayList<Retailer>();
         for (int i = 0; i < retailerArrayList.size(); i++) {
             if (retailerArrayList.get(i).getDescription().toLowerCase().contains(condition.toLowerCase())) {
                 foundRetailer.add(retailerArrayList.get(i));
             } else if (retailerArrayList.get(i).getProduct().toLowerCase().contains(condition.toLowerCase())) {
                 foundRetailer.add(retailerArrayList.get(i));
-            } else if (retailerArrayList.get(i).getAddress().toLowerCase().contains(condition.toLowerCase())) {
-                foundRetailer.add(retailerArrayList.get(i));
+            //} else if (retailerArrayList.get(i).getAddress().toLowerCase().contains(condition.toLowerCase())) {
+              //  foundRetailer.add(retailerArrayList.get(i));
+                // TODO Have commented this out because not all retailer objects have an address
             } else if (retailerArrayList.get(i).getName().toLowerCase().contains(condition.toLowerCase())) {
                 foundRetailer.add(retailerArrayList.get(i));
             }
@@ -74,7 +75,7 @@ public class RawDataViewer {
      * @param condition the condition which is looked for in each route object
      * @return an array list of matched route objects
      */
-    public ArrayList<Route> searchRoutes(ArrayList<Route> routeArrayList, String condition) { //how will we check for start and end location?
+    public static ArrayList<Route> searchRoutes(ArrayList<Route> routeArrayList, String condition) { //how will we check for start and end location?
         ArrayList<Route> foundRoutes = new ArrayList<Route>();
         for (int i = 0; i < routeArrayList.size(); i++) {
             if (routeArrayList.get(i).getName().toLowerCase().contains(condition.toLowerCase())) {
@@ -98,7 +99,7 @@ public class RawDataViewer {
      * @param condition the condition which is looked for in each wifi object
      * @return an array list of matched wifi objects
      */
-    public ArrayList<Wifi> searchWifi (ArrayList<Wifi> wifiArrayList, String condition) {
+    public static ArrayList<Wifi> searchWifi (ArrayList<Wifi> wifiArrayList, String condition) {
         ArrayList<Wifi> foundWifi = new ArrayList<Wifi>();
         for (int i = 0; i < wifiArrayList.size(); i++) {
             if (wifiArrayList.get(i).getProvider().toLowerCase().contains(condition.toLowerCase())) {
