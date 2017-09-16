@@ -10,7 +10,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import seng202.Model.CurrentStorage;
 import seng202.Model.DataFetcher;
+import seng202.Model.User;
 
 public class LoginScreenController {
 	
@@ -49,6 +51,8 @@ public class LoginScreenController {
 		} else if ((data.fetchPassword(usernameText.getText()).get(0).get(0).toString().equals(passwordText.getText().toString()))) {
 			//User user = new User(String first, String last, usernameText.getText().toString(), String doB, passwordText.getText().toString());
 			//CurrentStorage.setUser(user); // TODO: Not sure how to access the users name and dob from the database
+			User user = new User("Courtney", "Hoskin", "cgh31", "6 apr","password");
+			CurrentStorage.setUser(user);
 			Stage primaryStage = (Stage)signInButton.getScene().getWindow();
 			Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 			primaryStage.setTitle("Profile");

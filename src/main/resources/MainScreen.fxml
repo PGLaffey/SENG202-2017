@@ -50,6 +50,15 @@
                         </ImageView>
                       </graphic>
                     </Button>
+                    <Button id="statButton" fx:id="tableButton" mnemonicParsing="false" onAction="#tablePressed" prefHeight="49.0" prefWidth="203.0" text="Table" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                      <graphic>
+                        <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                            <Image url="@images/table.png" />
+                          </image>
+                        </ImageView>
+                      </graphic>
+                    </Button>
                     <Button fx:id="statButton" mnemonicParsing="false" onAction="#statPressed" prefHeight="49.0" prefWidth="203.0" text="Statistics" GridPane.columnIndex="3" GridPane.rowIndex="0">
                       <graphic>
                         <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
@@ -73,15 +82,6 @@
                         <ImageView fitHeight="43.0" fitWidth="51.0" pickOnBounds="true">
                           <image>
                             <Image url="@images/logout.png" />
-                          </image>
-                        </ImageView>
-                      </graphic>
-                    </Button>
-                    <Button id="statButton" fx:id="tableButton" mnemonicParsing="false" onAction="#tablePressed" prefHeight="49.0" prefWidth="203.0" text="Table" GridPane.columnIndex="2" GridPane.rowIndex="0">
-                      <graphic>
-                        <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                            <Image url="@images/pie_chart.png" />
                           </image>
                         </ImageView>
                       </graphic>
