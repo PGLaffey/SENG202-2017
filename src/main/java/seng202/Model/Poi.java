@@ -23,6 +23,12 @@ public class Poi extends Location {
         this.cost = cost;
     }
 
+    public Poi(String address, String name, String description, double cost) {
+        super(address, name, 1);
+        this.description = description;
+        this.cost = cost;
+    }
+
     public String getDescription() {
         return description;
     }

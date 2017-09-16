@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class RawDataViewer {
     ArrayList<Route> routeArrayList = new ArrayList<Route>();
 
-    public RawDataViewer(CurrentStorage currentStorage) {
-        this.routeArrayList = currentStorage.getRouteArray();
+    public RawDataViewer() {
+        this.routeArrayList = CurrentStorage.getRouteArray();
     }
 
     /*public ArrayList<Location> searchLocations(ArrayList<Location> locationsArrayList, String condition) {
