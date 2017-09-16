@@ -62,37 +62,37 @@ public class TablesScreenController {
     private Button mapButton;
 
     @FXML
-    private TableColumn<?, ?> poiCostCol;
+    private TableColumn<Poi, Double> poiCostCol;
 
     @FXML
-    private TableColumn<?, ?> poiDescCol;
+    private TableColumn<Poi, String> poiDescCol;
 
     @FXML
-    private TableColumn<?, ?> poiLatCol;
+    private TableColumn<Poi, Double> poiLatCol;
 
     @FXML
-    private TableColumn<?, ?> poiLongCol;
+    private TableColumn<Poi, Double> poiLongCol;
 
     @FXML
-    private TableColumn<?, ?> poiNameCol;
+    private TableColumn<Poi, String> poiNameCol;
 
     @FXML
     private TableView<Poi> poiTable;
 
     @FXML
-    private TableColumn<?, ?> retDescCol;
+    private TableColumn<Retailer, String> retDescCol;
 
     @FXML
-    private TableColumn<?, ?> retLatCol;
+    private TableColumn<Retailer, Double> retLatCol;
 
     @FXML
-    private TableColumn<?, ?> retLongCol;
+    private TableColumn<Retailer, Double> retLongCol;
 
     @FXML
-    private TableColumn<?, ?> retNameCol;
+    private TableColumn<Retailer, String> retNameCol;
 
     @FXML
-    private TableColumn<?, ?> retProductCol;
+    private TableColumn<Retailer, String> retProductCol;
 
     @FXML
     private TableView<Retailer> retailersTable;
@@ -101,13 +101,13 @@ public class TablesScreenController {
     private TableColumn<Route, Double> routeDistCol;
 
     @FXML
-    private TableColumn<Route, Location> routeEndCol;
+    private TableColumn<Route, String> routeEndCol;
 
     @FXML
     private TableColumn<Route, String> routeNameCol;
 
     @FXML
-    private TableColumn<Route, Location> routeStartCol;
+    private TableColumn<Route, String> routeStartCol;
 
     @FXML
     private TableView<Route> routesTable;
@@ -260,6 +260,13 @@ public class TablesScreenController {
     @FXML
     void initialize() {
     	
+    	allLocationsTable.setVisible(false);
+		poiTable.setVisible(false);
+		retailersTable.setVisible(false);
+		wifiTable.setVisible(false);
+		toiletsTable.setVisible(false);
+		routesTable.setVisible(false);
+    	
     	ObservableList<String> filterOptions = FXCollections.observableArrayList("All locations","Routes", "Retailer", "WiFi", "Toilets", "Points of interest");
     	tableOptions.setItems(filterOptions);
     	
@@ -291,11 +298,35 @@ public class TablesScreenController {
     	ObservableList<Wifi> wifiData = FXCollections.observableArrayList(new Wifi(123.56, 456.789, "A wifi", "A borough", "Free", "Provider A"), new Wifi(234.45, 234.67, "B wifi", "B borough", "Expensive", "Provider B")); // create the data
     	wifiTable.setItems(wifiData);
     	
-    	routeEndCol.setCellValueFactory(new PropertyValueFactory<Route, Location>("end"));
-    	routeStartCol.setCellValueFactory(new PropertyValueFactory<Route, Location>("start"));
-    	//routeDistCol.setCellValueFactory(new PropertyValueFactory<Route, Double>("distance"));
+    	routeEndCol.setCellValueFactory(new PropertyValueFactory<Route, String>("endString"));
+    	routeStartCol.setCellValueFactory(new PropertyValueFactory<Route, String>("startString"));
+    	routeDistCol.setCellValueFactory(new PropertyValueFactory<Route, Double>("distance"));
     	routeNameCol.setCellValueFactory(new PropertyValueFactory<Route, String>("name"));
     	
+    	Location start = new Location(123.56, 456.789, "A location", 0);
+    	Location end = new Location(234.45,234.67, "B location", 2);
+    	
+    	ObservableList<Route> routeData = FXCollections.observableArrayList(new Route("id 1", start, end, "A route", "female"), new Route("id 2", start, end, "B route", "male")); // create the data
+    	routesTable.setItems(routeData);
+    	
+    	retLatCol.setCellValueFactory(new PropertyValueFactory<Retailer, Double>("latitude"));
+    	retDescCol.setCellValueFactory(new PropertyValueFactory<Retailer, String>("desrciption"));
+    	retLongCol.setCellValueFactory(new PropertyValueFactory<Retailer, Double>("longitude"));
+    	retProductCol.setCellValueFactory(new PropertyValueFactory<Retailer, String>("product"));
+    	retNameCol.setCellValueFactory(new PropertyValueFactory<Retailer, String>("name"));
+    	
+    	ObservableList<Retailer> retData = FXCollections.observableArrayList(new Retailer(123.56, 456.789, "A retailer", "A product", "A description", 1), new Retailer(234.45, 234.67, "B retailer", "B product", "B desription", 2)); // create the data
+    	retailersTable.setItems(retData);
+    	
+    	poiLatCol.setCellValueFactory(new PropertyValueFactory<Poi, Double>("latitude"));
+    	poiDescCol.setCellValueFactory(new PropertyValueFactory<Poi, String>("description"));
+    	poiLongCol.setCellValueFactory(new PropertyValueFactory<Poi, Double>("longitude"));
+    	poiNameCol.setCellValueFactory(new PropertyValueFactory<Poi, String>("name"));
+    	poiCostCol.setCellValueFactory(new PropertyValueFactory<Poi, Double>("cost"));
+    	
+    	ObservableList<Poi> poiData = FXCollections.observableArrayList(new Poi(123.56, 456.789, "A poi", "A description", 1.00), new Poi(234.45, 234.67, "B poi", "B desription", 2.00)); // create the data
+    	poiTable.setItems(poiData);
+    	    	
         assert accountButton != null : "fx:id=\"accountButton\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert allLocLatCol != null : "fx:id=\"allLocLatCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert allLocLongCol != null : "fx:id=\"allLocLongCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";

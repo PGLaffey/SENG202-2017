@@ -81,6 +81,14 @@ public class Route {
     public Location getEnd() {
         return end;
     }
+    
+    public String getStartString() {
+    	return start.getName();
+    }
+    
+    public String getEndString() {
+    	return end.getName();
+    }
 
     /**
      * Determines whether the Route should be saved locally or just on a server.
