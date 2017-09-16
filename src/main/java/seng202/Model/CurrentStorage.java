@@ -9,6 +9,8 @@ public class CurrentStorage {
     private static ArrayList<Route> routeArray = new ArrayList<Route>();
     private static ArrayList<Retailer> retailerArray = new ArrayList<Retailer>();
     private static ArrayList<Wifi> wifiArray = new ArrayList<Wifi>();
+    private static ArrayList<Toilet> toiletArray = new ArrayList<Toilet>();
+    private static ArrayList<Poi> poiArray = new ArrayList<Poi>();
     private static User currentUser;
     
     
@@ -31,6 +33,14 @@ public class CurrentStorage {
     public static ArrayList<Wifi> getWifiArray() {
         return wifiArray;
     }
+    
+    public static ArrayList<Toilet> getToiletArray() {
+    	return toiletArray;
+    }
+    
+    public static ArrayList<Poi> getPoiArray() {
+    	return poiArray;
+    }
 
     public static void addRoute(Route route) {
         routeArray.add(route);
@@ -43,6 +53,14 @@ public class CurrentStorage {
     public static void addWifi(Wifi wifi) {
         wifiArray.add(wifi);
     }
+    
+    public static void addToilet(Toilet toilet) {
+    	toiletArray.add(toilet);
+    }
+    
+    public static void addPoi(Poi poi) {
+    	poiArray.add(poi);
+    }
 
     /**
      * Flushes all data out of arrayLists.
@@ -51,5 +69,7 @@ public class CurrentStorage {
         routeArray.clear();
         retailerArray.clear();
         wifiArray.clear();
+        toiletArray.clear();
+        poiArray.clear();
     }
 }
