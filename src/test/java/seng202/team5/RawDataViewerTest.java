@@ -148,8 +148,8 @@ public class RawDataViewerTest extends TestCase {
         pois.add(MoMA);
 
         //Make a condition such that no entries should be found.
-        ArrayList<Poi> found = RawDataViewer.searchPoi(pois, "z");
-        assertEquals(3, found.size());
+        ArrayList<Poi> found = RawDataViewer.searchPoi(pois, "#");
+        assertEquals(0, found.size());
     }
 
     /**
@@ -221,8 +221,103 @@ public class RawDataViewerTest extends TestCase {
     public void testSearchRetailerNoneFound() {
         ArrayList<Retailer> retailers = new ArrayList<Retailer>();
 
+        //Create new retailers to test on.
+        Retailer SBC = new Retailer("3 New York Plaza, New York, NY", "Starbucks Coffee",
+                "Casual Eating and Takeout", "F-Coffeehouse", 10004);
+
+        Retailer HRC = new Retailer("39 Whitehall Street, New York, NY", "New York Health & Racquet Club",
+                "Personal and Professional Services", "P-Athletic Clubs/Fitness", 10004);
+
+        Retailer AJK = new Retailer("6 Stone Street, New York, NY", "A.J. Kelly's",
+                "Full Service Dining", "F-American", 10004);
+
+        //Add the retailers to the retailers ArrayList
+        retailers.add(SBC);
+        retailers.add(HRC);
+        retailers.add(AJK);
+
         ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "#");
         assertEquals(0, found.size());
+    }
+
+    /**
+     * Test to ensure that the method returns an arrayList of size 0 if no retailers are provided.
+     */
+    public void testSearchRetailerNoEntries() {
+        ArrayList<Retailer> retailers = new ArrayList<Retailer>();
+
+        ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "NY");
+        assertEquals(0, found.size());
+    }
+
+    /**
+     * Test to ensure that searchRetailers can search via an address
+     */
+    public void testSearchRetailerAddr() {
+        ArrayList<Retailer> retailers = new ArrayList<Retailer>();
+
+        //Create new retailers to test on.
+        Retailer SBC = new Retailer("3 New York Plaza, New York, NY", "Starbucks Coffee",
+                "Casual Eating and Takeout", "F-Coffeehouse", 10004);
+
+        ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "3 New York Plaza, New York, NY");
+        assertTrue(found.get(0).equals(SBC));
+    }
+
+    /**
+     * Test to ensure that searchRetailers can search via product
+     */
+    public void testSearchRetailerProduct() {
+        ArrayList<Retailer> retailers = new ArrayList<Retailer>();
+
+        // Create new retailers to test on.
+        Retailer HRC = new Retailer("39 Whitehall Street, New York, NY", "New York Health & Racquet Club",
+                "Personal and Professional Services", "P-Athletic Clubs/Fitness", 10004);
+
+        ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "Personal and Professional Services");
+        assertTrue(found.get(0).equals(HRC));
+    }
+
+    /**
+     * Test to ensure that searchRetailers can search via zip code
+     */
+    public void testSearchRetailerZip() {
+        ArrayList<Retailer> retailers = new ArrayList<Retailer>();
+
+        // Create new retailers to test on.
+        Retailer HRC = new Retailer("39 Whitehall Street, New York, NY", "New York Health & Racquet Club",
+                "Personal and Professional Services", "P-Athletic Clubs/Fitness", 10004);
+
+        ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "Personal and Professional Services");
+        assertTrue(found.get(0).equals(HRC));
+    }
+
+    /**
+     * Test to ensure that searchRetailers can search via a name
+     */
+    public void testSearchRetailerName() {
+        ArrayList<Retailer> retailers = new ArrayList<Retailer>();
+
+        //Create new retailers to test on.
+        Retailer AJK = new Retailer("6 Stone Street, New York, NY", "A.J. Kelly's",
+                "Full Service Dining", "F-American", 10004);
+
+        ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "A.J. Kelly's");
+        assertTrue(found.get(0).equals(AJK));
+    }
+
+    /**
+     * Test to ensure that searchRetailers can search via a description
+     */
+    public void testSearchRetailerDescription() {
+        ArrayList<Retailer> retailers = new ArrayList<Retailer>();
+
+        // Create new retailers to test on.
+        Retailer HRC = new Retailer("39 Whitehall Street, New York, NY", "New York Health & Racquet Club",
+                "Personal and Professional Services", "P-Athletic Clubs/Fitness", 10004);
+
+        ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "P-Athletic Clubs/Fitness");
+        assertTrue(found.get(0).equals(HRC));
     }
 
     /**
