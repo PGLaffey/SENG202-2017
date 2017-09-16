@@ -1,6 +1,7 @@
 package seng202.Controller;
 
 import javafx.stage.Stage;
+import seng202.Model.CurrentStorage;
 import seng202.Model.Location;
 import seng202.Model.Poi;
 import seng202.Model.Retailer;
@@ -16,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -49,7 +51,7 @@ public class TablesScreenController {
     private TableColumn<Location, String> allLocNameCol;
 
     @FXML
-    private TableColumn<Location, Integer> allLocTypeCol;
+    private TableColumn<Location, String> allLocTypeCol;
 
     @FXML
     private TableView<Location> allLocationsTable;
@@ -270,61 +272,62 @@ public class TablesScreenController {
     	ObservableList<String> filterOptions = FXCollections.observableArrayList("All locations","Routes", "Retailer", "WiFi", "Toilets", "Points of interest");
     	tableOptions.setItems(filterOptions);
     	
-    	
-    	// Set up the invoice table
+    	// Set up the all locations table
     	allLocNameCol.setCellValueFactory(new PropertyValueFactory<Location,String>("name"));
     	allLocLatCol.setCellValueFactory(new PropertyValueFactory<Location,Double>("latitude"));
     	allLocLongCol.setCellValueFactory(new PropertyValueFactory<Location,Double>("longitude"));
-    	allLocTypeCol.setCellValueFactory(new PropertyValueFactory<Location,Integer>("locationType"));
+    	allLocTypeCol.setCellValueFactory(new PropertyValueFactory<Location,String>("typeString"));
     	
-    	ObservableList<Location> locData = FXCollections.observableArrayList(new Location(123.56, 456.789, "A location", 0), new Location(234.45,234.67, "B location", 2)); // create the data
+    	ObservableList<Location> locData = FXCollections.observableArrayList(CurrentStorage.getToiletArray()); // TODO: Make a list in Current Storage that has all the locations
     	allLocationsTable.setItems(locData);
     	
+    	// Set up the toilets table
     	toiletDisCol.setCellValueFactory(new PropertyValueFactory<Toilet, Boolean>("forDisabled"));
     	toiletLatCol.setCellValueFactory(new PropertyValueFactory<Toilet, Double>("latitude"));
     	toiletLongCol.setCellValueFactory(new PropertyValueFactory<Toilet, Double>("longitude"));
     	toiletUniCol.setCellValueFactory(new PropertyValueFactory<Toilet, Boolean>("uniSex"));
     	toiletNameCol.setCellValueFactory(new PropertyValueFactory<Toilet, String>("name"));
     	
-    	ObservableList<Toilet> toiletData = FXCollections.observableArrayList(new Toilet(123.56, 456.789, "A toilet", true, false), new Toilet(234.45, 234.67, "B toilet", false, true)); // create the data
+    	ObservableList<Toilet> toiletData = FXCollections.observableArrayList(CurrentStorage.getToiletArray());
     	toiletsTable.setItems(toiletData);
     	
+    	// Set up the wifi table
     	wifiLatCol.setCellValueFactory(new PropertyValueFactory<Wifi, Double>("latitude"));
     	wifiProvCol.setCellValueFactory(new PropertyValueFactory<Wifi, String>("provider"));
     	wifiLongCol.setCellValueFactory(new PropertyValueFactory<Wifi, Double>("longitude"));
     	wifiTypeCol.setCellValueFactory(new PropertyValueFactory<Wifi, String>("type"));
     	wifiNameCol.setCellValueFactory(new PropertyValueFactory<Wifi, String>("name"));
     	
-    	ObservableList<Wifi> wifiData = FXCollections.observableArrayList(new Wifi(123.56, 456.789, "A wifi", "A borough", "Free", "Provider A"), new Wifi(234.45, 234.67, "B wifi", "B borough", "Expensive", "Provider B")); // create the data
+    	ObservableList<Wifi> wifiData = FXCollections.observableArrayList(CurrentStorage.getWifiArray());
     	wifiTable.setItems(wifiData);
     	
+    	// Set up the routes table
     	routeEndCol.setCellValueFactory(new PropertyValueFactory<Route, String>("endString"));
     	routeStartCol.setCellValueFactory(new PropertyValueFactory<Route, String>("startString"));
     	routeDistCol.setCellValueFactory(new PropertyValueFactory<Route, Double>("distance"));
     	routeNameCol.setCellValueFactory(new PropertyValueFactory<Route, String>("name"));
     	
-    	Location start = new Location(123.56, 456.789, "A location", 0);
-    	Location end = new Location(234.45,234.67, "B location", 2);
-    	
-    	ObservableList<Route> routeData = FXCollections.observableArrayList(new Route("id 1", start, end, "A route", "female"), new Route("id 2", start, end, "B route", "male")); // create the data
+    	ObservableList<Route> routeData = FXCollections.observableArrayList(CurrentStorage.getRouteArray());
     	routesTable.setItems(routeData);
     	
+    	// Set up the retailers table
     	retLatCol.setCellValueFactory(new PropertyValueFactory<Retailer, Double>("latitude"));
     	retDescCol.setCellValueFactory(new PropertyValueFactory<Retailer, String>("desrciption"));
     	retLongCol.setCellValueFactory(new PropertyValueFactory<Retailer, Double>("longitude"));
     	retProductCol.setCellValueFactory(new PropertyValueFactory<Retailer, String>("product"));
     	retNameCol.setCellValueFactory(new PropertyValueFactory<Retailer, String>("name"));
     	
-    	ObservableList<Retailer> retData = FXCollections.observableArrayList(new Retailer(123.56, 456.789, "A retailer", "A product", "A description", 1), new Retailer(234.45, 234.67, "B retailer", "B product", "B desription", 2)); // create the data
+    	ObservableList<Retailer> retData = FXCollections.observableArrayList(CurrentStorage.getRetailerArray());
     	retailersTable.setItems(retData);
     	
+    	// Set up the poi table
     	poiLatCol.setCellValueFactory(new PropertyValueFactory<Poi, Double>("latitude"));
     	poiDescCol.setCellValueFactory(new PropertyValueFactory<Poi, String>("description"));
     	poiLongCol.setCellValueFactory(new PropertyValueFactory<Poi, Double>("longitude"));
     	poiNameCol.setCellValueFactory(new PropertyValueFactory<Poi, String>("name"));
     	poiCostCol.setCellValueFactory(new PropertyValueFactory<Poi, Double>("cost"));
     	
-    	ObservableList<Poi> poiData = FXCollections.observableArrayList(new Poi(123.56, 456.789, "A poi", "A description", 1.00), new Poi(234.45, 234.67, "B poi", "B desription", 2.00)); // create the data
+    	ObservableList<Poi> poiData = FXCollections.observableArrayList(CurrentStorage.getPoiArray());
     	poiTable.setItems(poiData);
     	    	
         assert accountButton != null : "fx:id=\"accountButton\" was not injected: check your FXML file 'TablesScreen.fxml'.";
