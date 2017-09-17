@@ -2,6 +2,8 @@ package seng202.Model;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * File Manager class reads and writes files to and from .csv files, and stores the information in the apps current storage.
@@ -63,7 +65,7 @@ public class FileManager {
      * @return An arrayList of the data from the .csv file.
      */
     public static ArrayList<String> readFile(String fileName) {
-        ArrayList<String> dataList = new ArrayList<String>();
+        ArrayList<String> dataList = new ArrayList<>();
         try {
             FileReader file = new FileReader(fileName);
             BufferedReader buffReader = new BufferedReader(file);
@@ -103,23 +105,33 @@ public class FileManager {
      * Retrieves a list of routes from the readFile function and then converts them indevidually to Route objects stored
      * in the current storage class for that instance of the app.
      */
-    public static void routeRetriever(ArrayList<String> routes) {
-        //ArrayList<String> routes = readFile("SENG202-Team5-Cyclr/src/main/resources/data_files/2014-01 - Citi Bike trip data.csv");
+    public static void routeRetriever(String filename) {
+        ArrayList<String> routes = readFile(filename);
 
-        //TODO: Replace this line with one that reads the csv files more dynamically.
+        List header = Arrays.asList(routes.get(0).split(","));
+
+        //Get the index of each of the key fields for the route class from the header of the csv.
+        int startNameIndex = header.indexOf("start station name");
+        int startLatIndex = header.indexOf("start station latitude");
+        int startLongIndex = header.indexOf("start station longitude");
+        int endNameIndex = header.indexOf("end station name");
+        int endLatIndex = header.indexOf("end station latitude");
+        int endLongIndex = header.indexOf("end station longitude");
+        int bikeId = header.indexOf("bikeid");
+
         routes.remove(0);
 
         for (String route : routes) {
             String[] information = route.split(",");
 
             //Obtain the relevant information from the csv.
-            String bikeID = information[11];
-            String startName = information[4];
-            String endName = information[8];
-            double startLatitude = Double.parseDouble(information[5]);
-            double startLongitude = Double.parseDouble(information[6]);
-            double endLatitude = Double.parseDouble(information[9]);
-            double endLongitude = Double.parseDouble(information[10]);
+            String bikeID = information[bikeId];
+            String startName = information[startNameIndex];
+            String endName = information[endNameIndex];
+            double startLatitude = Double.parseDouble(information[startLatIndex]);
+            double startLongitude = Double.parseDouble(information[startLongIndex]);
+            double endLatitude = Double.parseDouble(information[endLatIndex]);
+            double endLongitude = Double.parseDouble(information[endLongIndex]);
 
             //Convert the relevant data into the associated classes
             Location startLocation = new Location(startLatitude, startLongitude, startName, 4);
@@ -136,16 +148,15 @@ public class FileManager {
      */
     public static void routeWriter(String filename) {
         ArrayList<Route> routes = CurrentStorage.getRouteArray();
-        ArrayList<String> strRoutes = new ArrayList<String>();
+        ArrayList<String> strRoutes = new ArrayList<>();
         for (Route route : routes) {
-            String strRoute = "";
             String startName = route.getStart().getName();
             String endName = route.getEnd().getName();
             String startLatitude = Double.toString(route.getStart().getCoords()[0]);
             String startLongitude = Double.toString(route.getStart().getCoords()[1]);
             String endLatitude = Double.toString(route.getEnd().getCoords()[0]);
             String endLongitude = Double.toString(route.getEnd().getCoords()[1]);
-            strRoute = startName + "," + startLatitude + "," + startLongitude + "," + endName + "," + endLatitude + "," + endLongitude;
+            String strRoute = startName + "," + startLatitude + "," + startLongitude + "," + endName + "," + endLatitude + "," + endLongitude;
             strRoutes.add(strRoute);
         }
         writeFile(DEST_TARGET,filename+".csv", strRoutes);
@@ -155,8 +166,20 @@ public class FileManager {
     /**
      * Retrieves the list of the given retailers and converts each of these to being a new instance of Retailer stored in currentStorage.
      */
-    public static void retailerRetriever(ArrayList<String> retailers) {
-        //ArrayList<String> retailers = readFile("SENG202-Team5-Cyclr/src/main/resources/data_files/Lower_Manhattan_Retailers.csv");
+    public static void retailerRetriever(String filename) {
+        ArrayList<String> retailers = readFile(filename);
+
+        List header = Arrays.asList(retailers.get(0).split(","));
+
+        int retailerName = header.indexOf("CnBio_Org_Name");
+        int addrLine1Index = header.indexOf("CnAdrPrf_Addrline1");
+        int addrLine2Index = header.indexOf("CnAdrPrf_Addrline2");
+        int retailerCity = header.indexOf("CnAdrPrf_City");
+        int retailerState = header.indexOf("CnAdrPrf_State");
+        int retailerZip = header.indexOf("CnAdrPrf_ZIP");
+        int retailerPrimary = header.indexOf("Primary");
+        int retailerSecondary = header.indexOf("Secondary");
+
         retailers.remove(0);
         retailers.remove(0);
 
@@ -164,11 +187,11 @@ public class FileManager {
             String[] information = retailer.split(",");
 
             //Obtain relevant fields
-            String retailerAddress = information[1] + information[2] + information[3] + information[4];
-            int zip = Integer.parseInt(information[5]);
+            String retailerAddress = information[addrLine1Index] + information[addrLine2Index] + information[retailerCity] + information[retailerState];
+            int zip = Integer.parseInt(information[retailerZip]);
 
             //Creates a new instance of retailer.
-            Retailer newRetailer = new Retailer(retailerAddress, information[0], information[7], information[8], zip);
+            Retailer newRetailer = new Retailer(retailerAddress, information[retailerName], information[retailerPrimary], information[retailerSecondary], zip);
 
             //Add the retailer to the storage class.
             CurrentStorage.addRetailer(newRetailer);
@@ -177,7 +200,7 @@ public class FileManager {
 
     public static void retailerWriter(String filename) {
         ArrayList<Retailer> retailers = CurrentStorage.getRetailerArray();
-        ArrayList<String> strRetailers = new ArrayList<String>();
+        ArrayList<String> strRetailers = new ArrayList<>();
         for (Retailer retailer : retailers) {
 
             //Obtain relevant information to write.
@@ -198,19 +221,28 @@ public class FileManager {
     /**
      * Retrieves the list of the given wifiHotspots and converts each item into a wifi object list in the currentStorage class.
      */
-    public static void wifiRetriever(ArrayList<String> wifiHotspots) {
-        //ArrayList<String> wifiHotspots = readFile("SENG202-Team5-Cyclr/src/main/resources/data_files/NYC_Free_Public_WiFi_03292017.csv");
+    public static void wifiRetriever(String filename) {
+        ArrayList<String> wifiHotspots = readFile(filename);
+        List header = Arrays.asList(wifiHotspots.get(0).split(","));
+
+        int wifiLatIndex = header.indexOf("LAT");
+        int wifiLongIndex = header.indexOf("LON");
+        int wifiNameIndex = header.indexOf("NAME");
+        int wifiProviderIndex = header.indexOf("PROVIDER");
+        int wifiBoroughIndex = header.indexOf("BORONAME");
+        int wifiTypeIndex = header.indexOf("TYPE");
+
         wifiHotspots.remove(0);
         for (String wifiHotspot: wifiHotspots) {
             String[] information = wifiHotspot.split(",");
 
             //Obtains the relevant information
-            Double wifiLatitude = new Double(information[7]);
-            Double wifiLongitude = new Double(information[8]);
-            String wifiName = information[15];
-            String wifiProvider = information[4];
-            String borough = information[19];
-            String type = information[3];
+            Double wifiLatitude = new Double(information[wifiLatIndex]);
+            Double wifiLongitude = new Double(information[wifiLongIndex]);
+            String wifiName = information[wifiNameIndex];
+            String wifiProvider = information[wifiProviderIndex];
+            String borough = information[wifiBoroughIndex];
+            String type = information[wifiTypeIndex];
 
             //Creates a new Wifi object.
             Wifi newHotspot = new Wifi(wifiLatitude, wifiLongitude, wifiName, borough, type, wifiProvider);
@@ -219,11 +251,14 @@ public class FileManager {
         }
     }
 
-    public static void wifiWriter(String filename) {
-        ArrayList<Wifi> wifis = CurrentStorage.getWifiArray();
-        ArrayList<String> strWifis = new ArrayList<String>();
+    /**
+     * Writes a csv file of wifi hotspots to a specified file.
+     * @param filename The filename for the list of wifi objects to be written to.
+     * @param wifis The list of wifi objects to be converted to a csv file.
+     */
+    public static void wifiWriter(String filename, ArrayList<Wifi> wifis) {
+        ArrayList<String> strWifis = new ArrayList<>();
         for (Wifi  wifi : wifis) {
-            String strWifi = "";
             String SSID = wifi.getName();
             String wifiLatitude = Double.toString(wifi.getCoords()[0]);
             String wifiLongitude = Double.toString(wifi.getCoords()[1]);
@@ -231,9 +266,56 @@ public class FileManager {
             String wifiBorough = wifi.getBorough();
             String wifiProvider = wifi.getProvider();
             //TODO: Change the order to suit the csv.
-            strWifi = wifiLatitude + "," + wifiLongitude + "," + SSID + "," + wifiBorough + "," + wifiType + "," + wifiProvider;
+            String strWifi = wifiLatitude + "," + wifiLongitude + "," + SSID + "," + wifiBorough + "," + wifiType + "," + wifiProvider;
             strWifis.add(strWifi);
         }
         writeFile(DEST_TARGET,filename+".csv", strWifis);
+    }
+
+
+    public static void toiletRetriever(String filename) {
+        ArrayList<String> toilets = readFile(filename);
+        List header = Arrays.asList(toilets.get(0).split(","));
+
+        int nameIndex = header.indexOf("name");
+        int disabledAccessIndex = header.indexOf("disabled access");
+        int toiletLatIndex = header.indexOf("latitude");
+        int toiletLonIndex = header.indexOf("longitude");
+        int unisexIndex = header.indexOf("unisex");
+
+        toilets.remove(0);
+        for (String toilet: toilets) {
+            String[] information = toilet.split(",");
+
+            //Obtains the relevant information
+            String toiletName = information[nameIndex];
+            boolean disabledAccess = Boolean.parseBoolean(information[disabledAccessIndex]);
+            Double toiletLatitude = new Double(information[toiletLatIndex]);
+            Double toiletLongitude = new Double(information[toiletLonIndex]);
+            boolean unisex = Boolean.parseBoolean(information[unisexIndex]);
+
+            //Creates a new toilet object.
+            Toilet newToilet = new Toilet(toiletLatitude, toiletLongitude, toiletName, disabledAccess, unisex);
+
+            CurrentStorage.addToilet(newToilet);
+        }
+
+    }
+
+
+    public static void toiletWriter(String fileName, ArrayList<Toilet> toilets) {
+        // TODO write the function here
+    }
+
+
+    public static void poiReader(String filename) {
+        // TODO Finish writing this function
+        ArrayList<String> pois = readFile(filename);
+        List header = Arrays.asList(pois.get(0).split(","));
+
+        int PoiLatIndex = header.indexOf("latitude");
+        int PoiLonIndex = header.indexOf("longitude");
+        int PoiDescriptionIndex = header.indexOf("description");
+        int PoiCostIndex = header.indexOf("cost");
     }
 }
