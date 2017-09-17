@@ -66,6 +66,7 @@ public class CurrentStorage {
      * Flushes all data out of arrayLists.
      */
     public static void flush() {
+    	currentUser = null;
         routeArray.clear();
         retailerArray.clear();
         wifiArray.clear();
