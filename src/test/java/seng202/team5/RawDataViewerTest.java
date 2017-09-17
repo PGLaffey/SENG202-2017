@@ -3,9 +3,7 @@ package seng202.team5;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import seng202.Model.Poi;
-import seng202.Model.RawDataViewer;
-import seng202.Model.Retailer;
+import seng202.Model.*;
 
 import java.util.ArrayList;
 
@@ -321,20 +319,314 @@ public class RawDataViewerTest extends TestCase {
     }
 
     /**
-     * Test to check if the searchWifi is working.
+     * Test to check if the searchWifi is working when the condition is a name.
      */
-    public void testSearchWifi() {
+    public void testSearchWifiName() {
+        ArrayList<Wifi> wifis = new ArrayList<Wifi>();
 
+        // Create new Wifi hotspots.
+        Wifi LnK = new Wifi(40.745968, -73.9940399, "LinkNYC Free Wi-Fi", "Manhattan", "FREE", "LinkNYC - Citybridge");
+        Wifi WF = new Wifi(23.15644, -71.51563, "WhyFly", "Brooklyn", "FREE", "Spark");
+        Wifi HYW = new Wifi(35.61213, -72.15961, "Hide yo kids, hide yo wifi", "Queens", "PAID", "Yeezy");
+
+        // Add the wifis to an ArrayList
+        wifis.add(LnK);
+        wifis.add(WF);
+        wifis.add(HYW);
+
+        ArrayList<Wifi> found = RawDataViewer.searchWifi(wifis, "WhyFly");
+        assertTrue(found.get(0).equals(WF));
     }
 
     /**
-     * Test to check if the searchRetailer
+     * Test to check if the searchWifiFunction works for searching by Borough.
+     */
+    public void testSearchWifiBorough() {
+        ArrayList<Wifi> wifis = new ArrayList<Wifi>();
+
+        // Create new Wifi hotspots.
+        Wifi LnK = new Wifi(40.745968, -73.9940399, "LinkNYC Free Wi-Fi", "Manhattan", "FREE", "LinkNYC - Citybridge");
+        Wifi WF = new Wifi(23.15644, -71.51563, "WhyFly", "Brooklyn", "FREE", "Spark");
+        Wifi HYW = new Wifi(35.61213, -72.15961, "Hide yo kids, hide yo wifi", "Queens", "PAID", "Yeezy");
+
+        // Add the wifis to an ArrayList
+        wifis.add(LnK);
+        wifis.add(WF);
+        wifis.add(HYW);
+
+        ArrayList<Wifi> found = RawDataViewer.searchWifi(wifis, "Brooklyn");
+        assertTrue(found.get(0).equals(WF));
+    }
+
+    /**
+     * Test is searchWifi can search by type.
+     */
+    public void testSearchWifiType() {
+        ArrayList<Wifi> wifis = new ArrayList<Wifi>();
+
+        // Create new Wifi hotspots.
+        Wifi LnK = new Wifi(40.745968, -73.9940399, "LinkNYC Free Wi-Fi", "Manhattan", "FREE", "LinkNYC - Citybridge");
+        Wifi WF = new Wifi(23.15644, -71.51563, "WhyFly", "Brooklyn", "FREE", "Spark");
+        Wifi HYW = new Wifi(35.61213, -72.15961, "Hide yo kids, hide yo wifi", "Queens", "PAID", "Yeezy");
+
+        // Add the wifis to an ArrayList
+        wifis.add(LnK);
+        wifis.add(WF);
+        wifis.add(HYW);
+
+        ArrayList<Wifi> found = RawDataViewer.searchWifi(wifis, "PAID");
+        assertTrue(found.get(0).equals(HYW));
+    }
+
+    /**
+     * Test if searchWifi can search by provider.
+     */
+    public void testSearchWifiProvider() {
+        ArrayList<Wifi> wifis = new ArrayList<Wifi>();
+
+        // Create new Wifi hotspots.
+        Wifi LnK = new Wifi(40.745968, -73.9940399, "LinkNYC Free Wi-Fi", "Manhattan", "FREE", "LinkNYC - Citybridge");
+        Wifi WF = new Wifi(23.15644, -71.51563, "WhyFly", "Brooklyn", "FREE", "Spark");
+        Wifi HYW = new Wifi(35.61213, -72.15961, "Hide yo kids, hide yo wifi", "Queens", "PAID", "Yeezy");
+
+        // Add the wifis to an ArrayList
+        wifis.add(LnK);
+        wifis.add(WF);
+        wifis.add(HYW);
+
+        ArrayList<Wifi> found = RawDataViewer.searchWifi(wifis, "Yeezy");
+        assertTrue(found.get(0).equals(HYW));
+    }
+
+    /**
+     * Test if searchWifi can search by latitude
+     */
+    public void testSearchWifiLat() {
+        ArrayList<Wifi> wifis = new ArrayList<Wifi>();
+
+        // Create new Wifi hotspots.
+        Wifi LnK = new Wifi(40.745968, -73.9940399, "LinkNYC Free Wi-Fi", "Manhattan", "FREE", "LinkNYC - Citybridge");
+        Wifi WF = new Wifi(23.15644, -71.51563, "WhyFly", "Brooklyn", "FREE", "Spark");
+        Wifi HYW = new Wifi(35.61213, -72.15961, "Hide yo kids, hide yo wifi", "Queens", "PAID", "Yeezy");
+
+        // Add the wifis to an ArrayList
+        wifis.add(LnK);
+        wifis.add(WF);
+        wifis.add(HYW);
+
+        ArrayList<Wifi> found = RawDataViewer.searchWifi(wifis, "40.745968");
+        assertTrue(found.get(0).equals(LnK));
+    }
+
+    /**
+     * Test if searchWifi can search by longitude
+     */
+    public void testSearchWifiLong() {
+        ArrayList<Wifi> wifis = new ArrayList<Wifi>();
+
+        // Create new Wifi hotspots.
+        Wifi LnK = new Wifi(40.745968, -73.9940399, "LinkNYC Free Wi-Fi", "Manhattan", "FREE", "LinkNYC - Citybridge");
+        Wifi WF = new Wifi(23.15644, -71.51563, "WhyFly", "Brooklyn", "FREE", "Spark");
+        Wifi HYW = new Wifi(35.61213, -72.15961, "Hide yo kids, hide yo wifi", "Queens", "PAID", "Yeezy");
+
+        // Add the wifis to an ArrayList
+        wifis.add(LnK);
+        wifis.add(WF);
+        wifis.add(HYW);
+
+        ArrayList<Wifi> found = RawDataViewer.searchWifi(wifis, "-71.51563");
+        assertTrue(found.get(0).equals(WF));
+    }
+
+    /**
+     * Test if searchWifi returns the correct amount of data.
+     */
+    public void testSearchWifiMany() {
+        ArrayList<Wifi> wifis = new ArrayList<Wifi>();
+
+        // Create new Wifi hotspots.
+        Wifi LnK = new Wifi(40.745968, -73.9940399, "LinkNYC Free Wi-Fi", "Manhattan", "FREE", "LinkNYC - Citybridge");
+        Wifi WF = new Wifi(23.15644, -71.51563, "WhyFly", "Brooklyn", "FREE", "Spark");
+        Wifi HYW = new Wifi(35.61213, -72.15961, "Hide yo kids, hide yo wifi", "Queens", "PAID", "Yeezy");
+
+        // Add the wifis to an ArrayList
+        wifis.add(LnK);
+        wifis.add(WF);
+        wifis.add(HYW);
+
+        ArrayList<Wifi> found = RawDataViewer.searchWifi(wifis, "W");
+        assertEquals(3, found.size());
+    }
+
+    /**
+     * Test if searchWifi returns the nothing if no results were found.
+     */
+    public void testSearchWifiNone() {
+        ArrayList<Wifi> wifis = new ArrayList<Wifi>();
+
+        // Create new Wifi hotspots.
+        Wifi LnK = new Wifi(40.745968, -73.9940399, "LinkNYC Free Wi-Fi", "Manhattan", "FREE", "LinkNYC - Citybridge");
+        Wifi WF = new Wifi(23.15644, -71.51563, "WhyFly", "Brooklyn", "FREE", "Spark");
+        Wifi HYW = new Wifi(35.61213, -72.15961, "Hide yo kids, hide yo wifi", "Queens", "PAID", "Yeezy");
+
+        // Add the wifis to an ArrayList
+        wifis.add(LnK);
+        wifis.add(WF);
+        wifis.add(HYW);
+
+        ArrayList<Wifi> found = RawDataViewer.searchWifi(wifis, "#");
+        assertEquals(0, found.size());
+    }
+
+    /**
+     * Test to check if the searchRetailer can search by Name
      */
     public void testSearchRoute() {
+        ArrayList<Route> routes = new ArrayList<Route>();
 
+        // Create new Wifi hotspots.
+        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4), new Location(25.156342, -43.123645, "TestPlace1End", 4), "Home-Work", "M");
+        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4), new Location(26.187342, -41.123625, "TestPlace2End", 4), "Test-Place", "F");
+        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4), new Location(-16.158742, 33.654645, "TestPlace3End", 4), "Work-Party", "0");
+
+        // Add the wifis to an ArrayList
+        routes.add(HW);
+        routes.add(TP);
+        routes.add(WP);
+
+        ArrayList<Route> found = RawDataViewer.searchRoutes(routes, "Home-Work");
+        assertTrue(found.get(0).equals(HW));
     }
 
     /**
-     * Test to check if the search
+     * Test to check if searchRetailer can search for routes by starting location name
      */
+    public void testSearchRouteLocStartName() {
+        ArrayList<Route> routes = new ArrayList<Route>();
+
+        // Create new Wifi hotspots.
+        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4), new Location(25.156342, -43.123645, "TestPlace1End", 4), "Home-Work", "M");
+        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4), new Location(26.187342, -41.123625, "TestPlace2End", 4), "Test-Place", "F");
+        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4), new Location(-16.158742, 33.654645, "TestPlace3End", 4), "Work-Party", "0");
+
+        // Add the wifis to an ArrayList
+        routes.add(HW);
+        routes.add(TP);
+        routes.add(WP);
+
+        ArrayList<Route> found = RawDataViewer.searchRoutes(routes, "TestPlace2Start");
+        assertTrue(found.get(0).equals(TP));
+    }
+
+    /**
+     * Test to check if searchRetailer can search for routes by ending location name.
+     */
+    public void testSearchRouteLocEndName() {
+        ArrayList<Route> routes = new ArrayList<Route>();
+
+        // Create new Wifi hotspots.
+        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4), new Location(25.156342, -43.123645, "TestPlace1End", 4), "Home-Work", "M");
+        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4), new Location(26.187342, -41.123625, "TestPlace2End", 4), "Test-Place", "F");
+        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4), new Location(-16.158742, 33.654645, "TestPlace3End", 4), "Work-Party", "0");
+
+        // Add the wifis to an ArrayList
+        routes.add(HW);
+        routes.add(TP);
+        routes.add(WP);
+
+        ArrayList<Route> found = RawDataViewer.searchRoutes(routes, "TestPlace3End");
+        assertTrue(found.get(0).equals(WP));
+    }
+
+    /**
+     * Test if the searchRoute can search by bikeID
+     */
+    public void testSearchRouteBikeID() {
+        ArrayList<Route> routes = new ArrayList<Route>();
+
+        // Create new Wifi hotspots.
+        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4), new Location(25.156342, -43.123645, "TestPlace1End", 4), "Home-Work", "M");
+        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4), new Location(26.187342, -41.123625, "TestPlace2End", 4), "Test-Place", "F");
+        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4), new Location(-16.158742, 33.654645, "TestPlace3End", 4), "Work-Party", "0");
+
+        // Add the wifis to an ArrayList
+        routes.add(HW);
+        routes.add(TP);
+        routes.add(WP);
+
+        ArrayList<Route> found = RawDataViewer.searchRoutes(routes, "12");
+        assertEquals(2, found.size());
+        assertTrue(found.get(0).equals(HW));
+        assertTrue(found.get(1).equals(TP));
+    }
+
+    /**
+     * Test to check if the searchRoute method can search by gender.
+     */
+    public void testSearchRouteGender() {
+        ArrayList<Route> routes = new ArrayList<Route>();
+
+        // Create new Wifi hotspots.
+        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4), new Location(25.156342, -43.123645, "TestPlace1End", 4), "Home-Work", "M");
+        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4), new Location(26.187342, -41.123625, "TestPlace2End", 4), "Test-Place", "F");
+        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4), new Location(-16.158742, 33.654645, "TestPlace3End", 4), "Work-Party", "0");
+
+        // Add the wifis to an ArrayList
+        routes.add(HW);
+        routes.add(TP);
+        routes.add(WP);
+
+        ArrayList<Route> found = RawDataViewer.searchRoutes(routes, "F");
+        assertTrue(found.get(0).equals(TP));
+    }
+
+    /**
+     * Test to check if the searchRoute method can return many routes.
+     */
+    public void testSearchRouteMany() {
+        ArrayList<Route> routes = new ArrayList<Route>();
+
+        // Create new Wifi hotspots.
+        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4), new Location(25.156342, -43.123645, "TestPlace1End", 4), "Home-Work", "M");
+        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4), new Location(26.187342, -41.123625, "TestPlace2End", 4), "Test-Place", "F");
+        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4), new Location(-16.158742, 33.654645, "TestPlace3End", 4), "Work-Party", "0");
+
+        // Add the wifis to an ArrayList
+        routes.add(HW);
+        routes.add(TP);
+        routes.add(WP);
+
+        ArrayList<Route> found = RawDataViewer.searchRoutes(routes, "-");
+        assertEquals(3, found.size());
+    }
+
+    /**
+     * Test to check if the searchRoute method will return no routes if it cannot find a match.
+     */
+    public void testSearchRouteNone() {
+        ArrayList<Route> routes = new ArrayList<Route>();
+
+        // Create new Wifi hotspots.
+        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4), new Location(25.156342, -43.123645, "TestPlace1End", 4), "Home-Work", "M");
+        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4), new Location(26.187342, -41.123625, "TestPlace2End", 4), "Test-Place", "F");
+        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4), new Location(-16.158742, 33.654645, "TestPlace3End", 4), "Work-Party", "0");
+
+        // Add the wifis to an ArrayList
+        routes.add(HW);
+        routes.add(TP);
+        routes.add(WP);
+
+        ArrayList<Route> found = RawDataViewer.searchRoutes(routes, "#");
+        assertEquals(0, found.size());
+    }
+
+    /**
+     * Test to check if the searchRoute method will return no routes if there are no entries.
+     */
+    public void testSearchRouteNoEntry() {
+        ArrayList<Route> routes = new ArrayList<Route>();
+
+        ArrayList<Route> found = RawDataViewer.searchRoutes(routes, "Home-Work");
+        assertEquals(0, found.size());
+    }
 }
