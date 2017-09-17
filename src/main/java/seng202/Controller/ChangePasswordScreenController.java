@@ -38,12 +38,22 @@ public class ChangePasswordScreenController {
     private TextField oldPasswordText;
 
 
+    /** 
+     * Method for when the cancel button is pressed, closes the window.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void cancelButtonPressed(ActionEvent event) throws IOException {  	
     	Stage stage = (Stage) cancelButton.getScene().getWindow();
     	stage.hide();
     }
 
+    /**
+     * Method for when the change password button is pressed.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void changePasswordButtonPressed(ActionEvent event) throws IOException {
     	Stage stage = (Stage) changePasswordButton.getScene().getWindow();

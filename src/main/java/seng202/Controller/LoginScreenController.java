@@ -1,7 +1,10 @@
 package seng202.Controller;
 
+import seng202.Model.FileManager;
+
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,9 +39,9 @@ public class LoginScreenController {
 
 	@FXML
 	private Label incorrectUserLbl;
+	
 	/** 
-	 * Method for when the Sign In 
-	 * button is pressed
+	 * Method for when the Sign In button is pressed. Checks the login, informing if information is wrong otherwise shows login screen.
 	 * @throws IOException 
 	 */
     public void signInButtonPressed() throws IOException, IllegalAccessException, ClassNotFoundException, InstantiationException {
@@ -51,6 +54,11 @@ public class LoginScreenController {
 		} else if ((data.fetchPassword(usernameText.getText()).get(0).get(0).toString().equals(passwordText.getText().toString()))) {
 			//User user = new User(String first, String last, usernameText.getText().toString(), String doB, passwordText.getText().toString());
 			//CurrentStorage.setUser(user); // TODO: Not sure how to access the users name and dob from the database
+			// TODO: put the correct filenames in
+			// TODO: or somehow load the objects into current storage
+			//FileManager.retailerRetriever("/SENG202-Team5-Cyclr/src/main/resources/data_files/Lower_Manhattan_Retailers2.csv");
+			//FileManager.wifiRetriever(filename);
+			//FileManager.routeRetriever(filename);
 			User user = new User("Courtney", "Hoskin", "cgh31", "6 apr","password");
 			CurrentStorage.setUser(user);
 			Stage primaryStage = (Stage)signInButton.getScene().getWindow();
@@ -67,15 +75,10 @@ public class LoginScreenController {
 	
 
 	/** 
-	 * Method for when the Sign Up 
-	 * button is pressed
+	 * Method for when the Sign Up button is pressed, shows the sign up screen.
 	 */
 
-    public void signUpButtonPressed() throws Exception {
-//        FXMLLoader signUp = FXMLLoader.load(Main.class.getResource("/SignUpScreen.fxml"));
-//        AnchorPane login = (AnchorPane) signUp.load();
-//        Scene scene = new Scene(login);
-    	
+    public void signUpButtonPressed() throws Exception {  	
     	Stage primaryStage = (Stage) signUpButton.getScene().getWindow();
     	
     	Parent root = FXMLLoader.load(getClass().getResource("/SignupScreen.fxml"));
@@ -85,13 +88,6 @@ public class LoginScreenController {
         
 
     }
-    
-/*    @FXML
-    void handleEnterPressed(KeyEvent event) throws Exception {
-    	if (event.getKeyCode() == KeyEvent.VK_ENTER) {
-            signUpButtonPressed();
-        }
-    }*/
 
 
 }

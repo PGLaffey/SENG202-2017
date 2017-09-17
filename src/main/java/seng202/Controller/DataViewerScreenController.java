@@ -14,6 +14,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
+import seng202.Model.CurrentStorage;
 
 public class DataViewerScreenController {
 	
@@ -47,8 +48,7 @@ public class DataViewerScreenController {
 
 	
 	/**
-	 * Method for when the Map
-	 * button is pressed
+	 * Method for when the map menu button is pressed, shows the main map screen.
 	 * @throws IOException 
 	 */
 	public void mapPressed() throws IOException {
@@ -62,6 +62,12 @@ public class DataViewerScreenController {
 		primaryStage.show();	
 	}
 	
+	
+	/** 
+	 * Method for when the table menu button is pressed, shows the raw tables screen.
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
     void tablePressed(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) tableButton.getScene().getWindow(); // Here the window is the stage
@@ -75,8 +81,7 @@ public class DataViewerScreenController {
 	
 	
 	/**
-	 * Method for when the Statistics
-	 * button is pressed
+	 * Method for when the statistics menu button is pressed, shows the statistics screen.
 	 * @throws IOException 
 	 */
 	public void statPressed() throws IOException {
@@ -92,15 +97,14 @@ public class DataViewerScreenController {
 	
 	
 	/**
-	 * Method for when the Account
-	 * button is pressed
+	 * Method for when the account menu button is pressed, shows the profile screen.
 	 * @throws IOException 
 	 */
 	public void accountPressed() throws IOException {
-		Stage primaryStage = (Stage) accountButton.getScene().getWindow(); // Here the window is the stage
+		Stage primaryStage = (Stage) accountButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
 		
-		Scene scene = new Scene(root); // I think we can add in window size here?
+		Scene scene = new Scene(root); 
 		primaryStage.setTitle("Profile");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -108,15 +112,16 @@ public class DataViewerScreenController {
 	
 	
 	/**
-	 * Method for when the Logout
-	 * button is pressed
+	 * Method for when the Logout button is pressed, shows the login screen and flushes the current storage.
 	 * @throws IOException 
 	 */
 	public void logoutPressed() throws IOException {
-		Stage primaryStage = (Stage) logoutButton.getScene().getWindow(); // Here the window is the stage
+		CurrentStorage.flush();
+		
+		Stage primaryStage = (Stage) logoutButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 		
-		Scene scene = new Scene(root); // I think we can add in window size here?
+		Scene scene = new Scene(root); 
 		primaryStage.setTitle("Login");
 		primaryStage.setScene(scene);
 		primaryStage.show();	

@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import seng202.Model.CurrentStorage;
 import seng202.Model.Map;
 
 import java.io.IOException;
@@ -127,28 +128,44 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     private StringProperty address = new SimpleStringProperty();
     
+    
+    /** 
+     * Method for when the map menu button is pressed, shows the main map screen.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void mapPressed(ActionEvent event) throws IOException {
-    	Stage primaryStage = (Stage) mapButton.getScene().getWindow(); // Here the window is the stage
+    	Stage primaryStage = (Stage) mapButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 		
-		Scene scene = new Scene(root); // I think we can add in window size here?
+		Scene scene = new Scene(root);
 		primaryStage.setTitle("Map");
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
     
+    /**
+     * Method for when the table menu button is pressed, shows the raw tables screen.
+     * @param event
+     * @throws IOException
+     */
 	@FXML
     void tablePressed(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) tableButton.getScene().getWindow(); // Here the window is the stage
+		Stage primaryStage = (Stage) tableButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
 		
-		Scene scene = new Scene(root); // I think we can add in window size here?
+		Scene scene = new Scene(root);
 		primaryStage.setTitle("Table");
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
     
+	/**
+	 * Method for when the statistics menu button is pressed, shows the statistics screen.
+	 * @param event
+	 * @throws IOException
+	 */
     @FXML
     void statPressed(ActionEvent event) throws IOException {
     	Stage primaryStage = (Stage) statButton.getScene().getWindow(); 
@@ -160,6 +177,11 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     }
 
 
+    /** 
+     * Method for when the account menu button is pressed, shows the account screen.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void accountPressed(ActionEvent event) throws IOException {
     	Stage primaryStage = (Stage) accountButton.getScene().getWindow(); 
@@ -170,8 +192,15 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 		primaryStage.show();
     }
     
+    /**
+     * Method for when logout button is pressed, shows the login screen and flushes current storage.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void logoutPressed(ActionEvent event) throws IOException {
+    	CurrentStorage.flush();
+    	
     	Stage primaryStage = (Stage) logoutButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 		
@@ -202,6 +231,11 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	randomRoutePane.setVisible(false);
     }
     
+    /**
+     * Method for when the share button pressed. Shows the pop up.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void sharePressed(ActionEvent event) throws IOException {
     	Stage stage = new Stage();
@@ -224,6 +258,11 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     void retailerIconPressed(ActionEvent event) {
     }
 
+    /** 
+     * Method for when the save route button is pressed, open the pop up.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void saveRouteButtonPressed(ActionEvent event) throws IOException {
     	Stage stage = new Stage();
