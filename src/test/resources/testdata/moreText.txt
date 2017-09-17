@@ -1,0 +1,11 @@
+This is more strings.
+There are at least two strings in this file.
+Some of the lines are really really really really really long. This is purely to test the capabilities of something this file doesn't understand because it cannot see outside of it's own little world. But that's okay.
+Here's another line.
+There
+is
+also
+short
+lines.
+Actually, there's only
+1

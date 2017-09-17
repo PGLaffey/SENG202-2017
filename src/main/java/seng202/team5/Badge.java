@@ -6,7 +6,6 @@ import java.awt.Image;
 
 /**
  * Badge class that serves as a superclass to all the different types of badges.
- *
  */
 public class Badge {
     private int id;

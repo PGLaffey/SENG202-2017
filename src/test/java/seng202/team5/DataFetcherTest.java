@@ -2,17 +2,14 @@ package seng202.team5;
 
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import java.sql.SQLException;
-
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import seng202.Model.DataFetcher;
+import seng202.Model.FileManager;
 
 import java.sql.SQLException;
 
 public class DataFetcherTest extends TestCase {
     private DataFetcher fetcher;
-    private static final String TARGET = "/testdata/";
 
     /**
      * @param testName The name of the test
@@ -30,43 +27,35 @@ public class DataFetcherTest extends TestCase {
         return new TestSuite(DataFetcherTest.class);
     }
 
-    @Before @Override
-    public void setUp() {
+    /**
+     * Sets up a new dataFetcher before every test
+     */
+    public void setUp()
+    {
         fetcher = new DataFetcher();
     }
 
     /**
-<<<<<<< HEAD
-     * Test the code that allows us to connect to the database.
+     * Test to ensure that the connectDB function results in a functional connection.
      */
-    @Ignore @Test
+    @Test
     public void testConnectDB()
     {
         try {
             fetcher.connectDb();
-        } catch(InstantiationException e) {
-            fail("Instantiation Error");
-        } catch(IllegalAccessException e) {
-            fail("Illegal Access");
-        } catch(ClassNotFoundException e) {
+        } catch (IllegalAccessException exception) {
+            fail("Call to access illegal area.");
+        } catch (ClassNotFoundException exception) {
             fail("Class not found");
+        } catch (InstantiationException exception) {
+            fail("Failed to instantiate a connection");
         }
-
         try {
-            // Ensures that the connection is not closed. If it is closed, then there is no connection to the database, and hence the test fails.
-            assertTrue(!fetcher.getConnect().isClosed());
-        } catch(SQLException e) {
-            fail("Encountered an sql exception.");
+            // Checks if the connection obtained by the fetcher in connectDB is valid
+            assertTrue(fetcher.getConnect().isValid(60));
+        } catch (SQLException exception) {
+            fail("SQLException");
         }
-    }
-
-    /**
-     * Test to ensure the DataFetcher class can be sent SQL statements and return correct data.
-     */
-    @Test
-    public void testSQL()
-    {
-
     }
 
     /**
@@ -75,8 +64,9 @@ public class DataFetcherTest extends TestCase {
     @Test
     public void testWriteRoute()
     {
+        String TARGET = getClass().getResource("/testdata/route_data1.csv").getFile();
         FileManager reader = new FileManager();
-        reader.readFile(TARGET+"route_data1.csv");
+        reader.readFile(TARGET);
     }
 
     /**

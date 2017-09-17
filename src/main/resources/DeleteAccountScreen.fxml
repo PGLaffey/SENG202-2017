@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="452.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.team5.DeleteAccountScreenController">
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="452.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.Controller.DeleteAccountScreenController">
   <children>
     <Label prefHeight="114.0" prefWidth="400.0" text="Are you sure you want to delete your &#10;Cyclrr account?&#10;&#10;This cannot be undone" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
     <Button id="signInButton" fx:id="noButton" mnemonicParsing="false" onAction="#noButtonPressed" text="No" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">

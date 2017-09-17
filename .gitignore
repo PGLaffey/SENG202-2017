@@ -3,3 +3,5 @@
 target/*
 dependency_reduced_pom.xml
 *.iml
+/bin/
+/target/
