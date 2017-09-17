@@ -76,8 +76,7 @@ import java.util.ArrayList;
     @Test
     public void testRouteOneEntry()
     {
-        result = FileManager.readFile(TARGET+"/route_data1.csv");
-        FileManager.routeRetriever(result);
+        FileManager.routeRetriever(TARGET+"/route_data1.csv");
 
         Route expected_route = new Route("16950", new Location(40.75323098, -73.97032517, "Expected start", 4),
                                         new Location(40.73221853, -73.98165557, "Expected end", 4),
@@ -93,10 +92,8 @@ import java.util.ArrayList;
     public void testRouteDuplicates()
     {
         //Read the same data twice, should only save it once.
-        result = FileManager.readFile(TARGET+"/route_data1.csv");
-        FileManager.routeRetriever(result);
-        result = FileManager.readFile(TARGET+"/route_data1.csv");
-        FileManager.routeRetriever(result);
+        FileManager.routeRetriever(TARGET+"/route_data1.csv");
+        FileManager.routeRetriever(TARGET+"/route_data1.csv");
         assertEquals(1, CurrentStorage.getRouteArray().size());
     }
 
@@ -105,9 +102,8 @@ import java.util.ArrayList;
      */
     @Test
     public void testRouteTenEntries() {
-        result = FileManager.readFile(TARGET+"/route_data10.csv");
         //Only need to test whether there are 10 objects as it was previously tested whether routes are saved properly, and tested that duplicates are not saved.
-        FileManager.routeRetriever(result);
+        FileManager.routeRetriever(TARGET+"/route_data10.csv");
         assertEquals(10, CurrentStorage.getRouteArray().size());
     }
 
@@ -116,9 +112,7 @@ import java.util.ArrayList;
      */
     @Test
     public void testWifiOneEntry() {
-
-        result = FileManager.readFile(TARGET+"/wifi_data1.csv");
-        FileManager.wifiRetriever(result);
+        FileManager.wifiRetriever(TARGET+"/wifi_data1.csv");
         Wifi expected_wifi = new Wifi(40.745968, -73.994039, "LinkNYC Free Wi-Fi", "Manhattan","Free","LinkNYC - Citybridge");
         assertTrue(CurrentStorage.getWifiArray().get(0).equals(expected_wifi));
     }
@@ -128,10 +122,8 @@ import java.util.ArrayList;
      */
     @Test
     public void testWifiDuplicate() {
-        result = FileManager.readFile(TARGET+"/wifi_data1.csv");
-        FileManager.wifiRetriever(result);
-        result = FileManager.readFile(TARGET+"/wifi_data1.csv");
-        FileManager.wifiRetriever(result);
+        FileManager.wifiRetriever(TARGET+"/wifi_data1.csv");
+        FileManager.wifiRetriever(TARGET+"/wifi_data1.csv");
         assertEquals(1, CurrentStorage.getWifiArray().size());
     }
 
@@ -140,8 +132,7 @@ import java.util.ArrayList;
      */
     @Test
     public void testWifiTenEntries() {
-        result = FileManager.readFile(TARGET+"/wifi_data10.csv");
-        FileManager.wifiRetriever(result);
+        FileManager.wifiRetriever(TARGET+"/wifi_data10.csv");
         assertEquals(10, CurrentStorage.getWifiArray().size());
     }
 
@@ -150,9 +141,7 @@ import java.util.ArrayList;
      */
     @Test
     public void testRetailerOneEntry() {
-
-        result = FileManager.readFile(TARGET+"/retailer_data1.csv");
-        FileManager.retailerRetriever(result);
+        FileManager.retailerRetriever(TARGET+"/retailer_data1.csv");
         Retailer expected_retailer = new Retailer("3 New York Plaza", "Starbucks Coffee", "Casual Eating & Takeout", "F-Coffeehouse", 10004);
         assertTrue(CurrentStorage.getRetailerArray().get(0).equals(expected_retailer));
     }
@@ -162,11 +151,8 @@ import java.util.ArrayList;
      */
     @Test
     public void testRetailerDuplicate() {
-
-        result = FileManager.readFile(TARGET+"/retailer_data1.csv");
-        FileManager.retailerRetriever(result);
-        result = FileManager.readFile(TARGET+"/retailer_data1.csv");
-        FileManager.retailerRetriever(result);
+        FileManager.retailerRetriever(TARGET+"/retailer_data1.csv");
+        FileManager.retailerRetriever(TARGET+"/retailer_data1.csv");
         assertEquals(1, CurrentStorage.getRetailerArray().size());
     }
 
@@ -175,8 +161,7 @@ import java.util.ArrayList;
      */
     @Test
     public void testRetailerTenEntries() {
-        result = FileManager.readFile(TARGET+"/retailer_data10.csv");
-        FileManager.retailerRetriever(result);
+        FileManager.retailerRetriever(TARGET+"/retailer_data10.csv");
         assertEquals(10, CurrentStorage.getRetailerArray().size());
     }
 
@@ -185,10 +170,9 @@ import java.util.ArrayList;
      */
     @Test
     public void testEmpty() {
-        result = FileManager.readFile(TARGET+"/empty_file.csv");
-        FileManager.retailerRetriever(result);
-        FileManager.wifiRetriever(result);
-        FileManager.routeRetriever(result);
+        FileManager.retailerRetriever(TARGET+"/empty_file.csv");
+        FileManager.wifiRetriever(TARGET+"/empty_file.csv");
+        FileManager.routeRetriever(TARGET+"/empty_file.csv");
         assertEquals(0, CurrentStorage.getRetailerArray().size());
         assertEquals(0, CurrentStorage.getRouteArray().size());
         assertEquals(0, CurrentStorage.getWifiArray().size());
@@ -220,8 +204,7 @@ import java.util.ArrayList;
     @Test
     public void testWriteRouteFile()
     {
-        result = FileManager.readFile(TARGET+"/route_data1.csv");
-        FileManager.routeRetriever(result);
+        FileManager.routeRetriever(TARGET+"/route_data1.csv");
         //TODO: confirm this and potentially require a user as well.
         FileManager.routeWriter("test_file.csv");
         assertTrue(new File(WRITE_TARGET+"/test_file.csv").exists());
@@ -239,8 +222,7 @@ import java.util.ArrayList;
     @Test
     public void testWriteRouteFileSpaces()
     {
-        result = FileManager.readFile(TARGET+"/route_data1.csv");
-        FileManager.routeRetriever(result);
+        FileManager.routeRetriever(TARGET+"/route_data1.csv");
         //TODO: confirm this and potentially require a user as well.
         FileManager.routeWriter("test file.csv");
         assertTrue(new File(WRITE_TARGET+"/test file.csv").exists());
@@ -258,10 +240,9 @@ import java.util.ArrayList;
     @Test
     public void testWriteWifiFile()
     {
-        result = FileManager.readFile(TARGET+"/wifi_data1.csv");
-        FileManager.wifiRetriever(result);
+        FileManager.wifiRetriever(TARGET+"/wifi_data1.csv");
         //TODO: confirm this and potentially require a user as well.
-        FileManager.wifiWriter("test_file");
+        FileManager.wifiWriter("test_file", CurrentStorage.getWifiArray());
         assertTrue(new File(WRITE_TARGET+"/test_file.csv").exists());
         result = FileManager.readFile(WRITE_TARGET+"/test_file.csv");
         Wifi expected_wifi = new Wifi(40.745968, -73.994039, "LinkNYC Free Wi-Fi", "Manhattan","Free","LinkNYC - Citybridge");
@@ -274,8 +255,7 @@ import java.util.ArrayList;
     @Test
     public void testWriteRetailerFile()
     {
-        result = FileManager.readFile(TARGET+"/retailer_data1.csv");
-        FileManager.retailerRetriever(result);
+        FileManager.retailerRetriever(TARGET+"/retailer_data1.csv");
         //TODO: confirm this and potentially require a user as well.
         FileManager.retailerWriter("test_file");
         assertTrue(new File(WRITE_TARGET+"/test_file.csv").exists());
