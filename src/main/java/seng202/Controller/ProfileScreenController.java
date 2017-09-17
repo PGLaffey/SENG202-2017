@@ -49,27 +49,32 @@ public class ProfileScreenController {
 	
 	
 	/**
-	 * Method for when the Map button is pressed
+	 * Method for when the map menu button is pressed, shows the main map screen. 
 	 * @throws IOException 
 	 */
 	public void mapPressed() throws IOException {
 		
-		Stage primaryStage = (Stage) mapButton.getScene().getWindow(); // Here the window is the stage
+		Stage primaryStage = (Stage) mapButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 		
-		Scene scene = new Scene(root); // I think we can add in window size here?
+		Scene scene = new Scene(root);
 		primaryStage.setTitle("Map");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
 		
 	}
 	
+	/**
+	 * Method for when the table menu buttonis pressed, shows the raw tables screen.
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
     void tablePressed(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) tableButton.getScene().getWindow(); // Here the window is the stage
+		Stage primaryStage = (Stage) tableButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
 		
-		Scene scene = new Scene(root); // I think we can add in window size here?
+		Scene scene = new Scene(root);
 		primaryStage.setTitle("Table");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -77,15 +82,15 @@ public class ProfileScreenController {
 	
 	
 	/**
-	 * Method for when the Statistics button is pressed
+	 * Method for when the statistics menu button is pressed, shows the statistics screen.
 	 * @throws IOException 
 	 */
 	public void statPressed() throws IOException {
 		
-		Stage primaryStage = (Stage) statButton.getScene().getWindow(); // Here the window is the stage
+		Stage primaryStage = (Stage) statButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/DataViewerScreen.fxml"));
 		
-		Scene scene = new Scene(root); // I think we can add in window size here?
+		Scene scene = new Scene(root); 
 		primaryStage.setTitle("Statistics");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -93,14 +98,14 @@ public class ProfileScreenController {
 	
 	
 	/**
-	 * Method for when the Account button is pressed
+	 * Method for when the account menu button is pressed, shows the profile screen.
 	 * @throws IOException 
 	 */
 	public void accountPressed() throws IOException {
-		Stage primaryStage = (Stage) accountButton.getScene().getWindow(); // Here the window is the stage
+		Stage primaryStage = (Stage) accountButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
 		
-		Scene scene = new Scene(root); // I think we can add in window size here?
+		Scene scene = new Scene(root); 
 		primaryStage.setTitle("Profile");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -108,14 +113,16 @@ public class ProfileScreenController {
 	
 	
 	/**
-	 * Method for when the Logout button is pressed
+	 * Method for when the Logout button is pressed, shows the login screen and flushes the current storage.
 	 * @throws IOException 
 	 */
 	public void logoutPressed() throws IOException {
-		Stage primaryStage = (Stage) logoutButton.getScene().getWindow(); // Here the window is the stage
+		CurrentStorage.flush();
+		
+		Stage primaryStage = (Stage) logoutButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 		
-		Scene scene = new Scene(root); // I think we can add in window size here?
+		Scene scene = new Scene(root); 
 		primaryStage.setTitle("Login");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -130,7 +137,7 @@ public class ProfileScreenController {
 	
 	
 	/**
-	 * Method for when the Change Password button is pressed
+	 * Method for when the Change Password button is pressed, shows the change password pop up screen.
 	 * @throws IOException 
 	 */
 	public void passwordPressed() throws IOException {
@@ -145,7 +152,7 @@ public class ProfileScreenController {
 	
 	
 	/**
-	 * Method for when the Delete Account button is pressed
+	 * Method for when the Delete Account button is pressed, shows the delete account pop up screen.
 	 * @throws IOException 
 	 */
 	public void deletePressed() throws IOException {
@@ -158,11 +165,8 @@ public class ProfileScreenController {
 		stage.show();
 	}
 	
-	private
-	
 	@FXML
 	void initialize() {
-		// TODO: uncomment the below once the user object is created properly in the login fxml
 		user = CurrentStorage.getUser();
 		usersNameLabel.setText(user.getName()); 
 		usersBirthDateLabel.setText(user.getDob());

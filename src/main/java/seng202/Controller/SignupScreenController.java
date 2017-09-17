@@ -43,8 +43,9 @@ public class SignupScreenController {
     private Label missingField;
 
     @FXML Label wrongPasswordLbl;
+    
     /**
-     * Creates an account if all fields are met
+     * Creates an account if all fields are met and shows the login screen.
      * @throws IOException
      */
     public void createBtnPressed(ActionEvent event) throws IOException, IllegalAccessException, ClassNotFoundException, InstantiationException {
@@ -60,7 +61,7 @@ public class SignupScreenController {
         String birthDate = birthDatePicker.getValue().toString();
         String password = passwordLbl.getText();
 
-        User newUser = new User(first, last, username, birthDate, password); //create new user - need to change id
+        User newUser = new User(first, last, username, birthDate, password); //create new user - need to change id - TODO
 
         DataFetcher data = new DataFetcher();
         data.connectDb();
@@ -74,12 +75,17 @@ public class SignupScreenController {
         }
     }
     
+    /**
+     * Method for when the back button is pressed, shows the login screen.
+     * @param event
+     * @throws IOException
+     */
     public void backButtonPressed(ActionEvent event) throws IOException {
 		
-		Stage primaryStage = (Stage) backButton.getScene().getWindow(); // Here the window is the stage
+		Stage primaryStage = (Stage) backButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 		
-		Scene scene = new Scene(root); // I think we can add in window size here?
+		Scene scene = new Scene(root);
 		primaryStage.setTitle("Log in");
 		primaryStage.setScene(scene);
 		primaryStage.show();	

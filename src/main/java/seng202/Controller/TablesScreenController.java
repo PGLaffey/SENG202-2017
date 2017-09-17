@@ -25,10 +25,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-/*import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;*/
+
 
 import javafx.scene.control.*;
 
@@ -172,6 +169,11 @@ public class TablesScreenController {
     private TableColumn<Wifi, String> wifiTypeCol;
 
 
+    /**
+     * Method for when account menu button pressed, shows the profile screen.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void accountPressed(ActionEvent event) throws IOException {
     	Stage primaryStage = (Stage) accountButton.getScene().getWindow();
@@ -183,8 +185,15 @@ public class TablesScreenController {
 		primaryStage.show();
     }
 
+    /**
+     * Method for when logout button pressed, shows the login screen and flushes current storage.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void logoutPressed(ActionEvent event) throws IOException {
+    	CurrentStorage.flush();
+    	
     	Stage primaryStage = (Stage) logoutButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 		
@@ -194,6 +203,11 @@ public class TablesScreenController {
 		primaryStage.show();
     }
 
+    /**
+     * Method for when the map menu button pressed, shows main map screen.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void mapPressed(ActionEvent event) throws IOException {
     	Stage primaryStage = (Stage) mapButton.getScene().getWindow();
@@ -205,6 +219,10 @@ public class TablesScreenController {
 		primaryStage.show();
     }
 
+    /** 
+     * Method when the search button is pressed. Displays the correct table and filtering.
+     * @param event
+     */
     @FXML
     void searchPressed(ActionEvent event) {
 
@@ -273,6 +291,12 @@ public class TablesScreenController {
     	}
     }
 
+    
+    /**
+     * Method when the statistics menu button pressed, shows the statistics screen. 
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void statPressed(ActionEvent event) throws IOException {
     	Stage primaryStage = (Stage) statButton.getScene().getWindow();
@@ -288,6 +312,10 @@ public class TablesScreenController {
     void tablePressed(ActionEvent event) {
     }
 
+    
+    /**
+     * Initialises all the nodes. Also fills all columns in each tables with the correct objects from current storage.
+     */
     @FXML
     void initialize() {
     	
