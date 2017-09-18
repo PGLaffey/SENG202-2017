@@ -43,7 +43,9 @@ public class CurrentStorage {
     }
 
     public static void addRoute(Route route) {
-        routeArray.add(route);
+        if (!(routeArray.contains(route))) {
+            routeArray.add(route);
+        }
     }
 
     public static void addRetailer(Retailer retailer) {
