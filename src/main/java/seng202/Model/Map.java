@@ -4,12 +4,16 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.lynden.gmapsfx.GoogleMapView;
+import com.lynden.gmapsfx.javascript.event.UIEventType;
 import com.lynden.gmapsfx.javascript.object.*;
 import com.lynden.gmapsfx.service.directions.*;
 import com.lynden.gmapsfx.service.geocoding.GeocoderStatus;
 import com.lynden.gmapsfx.service.geocoding.GeocodingResult;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
+import com.lynden.gmapsfx.shapes.Circle;
+import com.lynden.gmapsfx.shapes.CircleOptions;
 import javafx.scene.control.Alert;
+import netscape.javascript.JSObject;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -245,6 +249,32 @@ public class Map{
                 new LatLong(route.getEnd().getLatitude(), route.getEnd().getLongitude()), TravelModes.BICYCLING);
 
         service.getRoute(request, callback, new DirectionsRenderer(true, mapView.getMap(), pane));
+    }
+
+    public static void findWifi(Wifi wifi, GoogleMap map) {
+        CircleOptions circleOptns = new CircleOptions()
+                .center(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
+                .radius(30)
+                .draggable(false)
+                .clickable(true)
+                .fillOpacity(0.1)
+                .fillColor("Blue")
+                .strokeColor("Blue")
+                .strokeWeight(0.2);
+        Circle circle = new Circle(circleOptns);
+
+        InfoWindowOptions cWindowOptns = new InfoWindowOptions().content("HelloWorld");
+        InfoWindow cWindow = new InfoWindow(cWindowOptns);
+
+        MarkerOptions cOptns = new MarkerOptions().position(circle.getCenter()).visible(false);
+        Marker cCentre = new Marker(cOptns);
+        cWindow.open(map, cCentre);
+
+        map.addUIEventHandler(circle, UIEventType.click, (JSObject obj) -> {
+            cCentre.setVisible(!cCentre.getVisible());
+        });
+
+        map.addMapShape(circle);
     }
 
     public static void main(String[] argv){

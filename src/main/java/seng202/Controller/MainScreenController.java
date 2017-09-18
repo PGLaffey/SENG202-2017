@@ -294,7 +294,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     void wifiIconPressed(ActionEvent event) {
         for (Wifi wifi : CurrentStorage.getWifiArray()) {
-            placeMarkerOnMap(wifi);
+            placeCircleOnMap(wifi);
         }
     }
 
@@ -343,6 +343,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         assert wifiIconButton != null : "fx:id=\"wifiIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
 
 
+    }
+
+    public void placeCircleOnMap(Wifi wifi) {
+        Map.findWifi(wifi, map);
     }
 
     public void placeMarkerOnMap(Location loc) {
