@@ -117,7 +117,7 @@ public class FileManager {
         int endNameIndex = header.indexOf("end station name");
         int endLatIndex = header.indexOf("end station latitude");
         int endLongIndex = header.indexOf("end station longitude");
-        int bikeId = header.indexOf("bikeid");
+        int bikeIdIndex = header.indexOf("bikeid");
 
         routes.remove(0);
 
@@ -125,7 +125,7 @@ public class FileManager {
             String[] information = route.split(",");
 
             //Obtain the relevant information from the csv.
-            String bikeID = information[bikeId];
+            String bikeID = information[bikeIdIndex];
             String startName = information[startNameIndex];
             String endName = information[endNameIndex];
             double startLatitude = Double.parseDouble(information[startLatIndex]);
@@ -173,25 +173,24 @@ public class FileManager {
 
         int retailerName = header.indexOf("CnBio_Org_Name");
         int addrLine1Index = header.indexOf("CnAdrPrf_Addrline1");
-        int addrLine2Index = header.indexOf("CnAdrPrf_Addrline2");
-        int retailerCity = header.indexOf("CnAdrPrf_City");
-        int retailerState = header.indexOf("CnAdrPrf_State");
         int retailerZip = header.indexOf("CnAdrPrf_ZIP");
         int retailerPrimary = header.indexOf("Primary");
         int retailerSecondary = header.indexOf("Secondary");
 
         retailers.remove(0);
-        retailers.remove(0);
+
+        if (retailers.get(0).split(",")[0] == "CnBio_Org_Name") {
+            retailers.remove(0);
+        }
 
         for (String retailer : retailers) {
             String[] information = retailer.split(",");
 
             //Obtain relevant fields
-            String retailerAddress = information[addrLine1Index] + information[addrLine2Index] + information[retailerCity] + information[retailerState];
             int zip = Integer.parseInt(information[retailerZip]);
 
             //Creates a new instance of retailer.
-            Retailer newRetailer = new Retailer(retailerAddress, information[retailerName], information[retailerPrimary], information[retailerSecondary], zip);
+            Retailer newRetailer = new Retailer(information[addrLine1Index], information[retailerName], information[retailerPrimary], information[retailerSecondary], zip);
 
             //Add the retailer to the storage class.
             CurrentStorage.addRetailer(newRetailer);
@@ -313,9 +312,19 @@ public class FileManager {
         ArrayList<String> pois = readFile(filename);
         List header = Arrays.asList(pois.get(0).split(","));
 
+        int PoiNameIndex = header.indexOf("name");
         int PoiLatIndex = header.indexOf("latitude");
         int PoiLonIndex = header.indexOf("longitude");
         int PoiDescriptionIndex = header.indexOf("description");
         int PoiCostIndex = header.indexOf("cost");
+
+        for (String poi : pois) {
+            String[] information = poi.split(",");
+            String PoiName = information[PoiNameIndex];
+            Double PoiLatitude = Double.parseDouble(information[PoiLatIndex]);
+            Double PoiLongitude = Double.parseDouble(information[PoiLonIndex]);
+            String PoiDescription = information[PoiDescriptionIndex];
+
+        }
     }
 }
