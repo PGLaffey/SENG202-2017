@@ -32,6 +32,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     protected DirectionsService directionsService;
     protected DirectionsPane directionsPane;
     protected InfoWindow infoWindow;
+    protected Marker currentMarker;
 
     @FXML
     private GoogleMapView mapView;
@@ -177,7 +178,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 		primaryStage.show();
     }
 
-
     /** 
      * Method for when the account menu button is pressed, shows the account screen.
      * @param event
@@ -249,6 +249,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     void bikeIconPressed(ActionEvent event) {
+        for (Route route: CurrentStorage.getRouteArray()) {
+            placeMarkerOnMap(route.getStart());
+        }
     }
 
     @FXML
@@ -257,6 +260,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     void retailerIconPressed(ActionEvent event) {
+        for (Retailer retailer : CurrentStorage.getRetailerArray()) {
+            placeMarkerOnMap(retailer);
+        }
     }
 
     /** 
@@ -287,9 +293,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     void wifiIconPressed(ActionEvent event) {
-        ArrayList<Wifi> wifis = new ArrayList<Wifi>();
-        wifis = RawDataViewer.searchWifi(CurrentStorage.getWifiArray(), "Wifi");
-        for (Wifi wifi : wifis) {
+        for (Wifi wifi : CurrentStorage.getWifiArray()) {
             placeMarkerOnMap(wifi);
         }
     }
@@ -297,6 +301,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     public void searchTextAction(ActionEvent event) {
         //Obtains a geocode location around latLong
+        map.clearMarkers();
         Map.findLocation(address.get(), map, geocodingService);
     }
     @FXML

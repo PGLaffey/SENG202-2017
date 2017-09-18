@@ -150,7 +150,7 @@ public class Map{
             MarkerOptions markOptns = new MarkerOptions()
                     .animation(Animation.DROP)
                     .position(latLong);
-
+/*
             switch(givenLocation.getLocationType()) {
                 case 0:
                     markOptns.icon(seng202.Model.Map.class.getResource("/images/toiletIcon.png").getPath());
@@ -163,7 +163,7 @@ public class Map{
                     break;
                 default:
                     break;
-            }
+            }*/
             map.addMarker(new Marker(markOptns));
             map.setCenter(latLong);
         });
@@ -191,8 +191,8 @@ public class Map{
             }
             map.addMarker(new Marker(new MarkerOptions()
                     .animation(Animation.DROP)
-                    .position(latLong)
-                    .icon(seng202.Model.Map.class.getResource("/images/wifiIcon.png").getFile())));
+                    .position(latLong)));
+                    //.icon(seng202.Model.Map.class.getResource("/images/wifiIcon.png").getFile())));
             map.setCenter(latLong);
         });
     }
