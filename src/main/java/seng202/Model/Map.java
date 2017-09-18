@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.javascript.object.*;
-import com.lynden.gmapsfx.service.directions.DirectionsRequest;
+import com.lynden.gmapsfx.service.directions.*;
 import com.lynden.gmapsfx.service.geocoding.GeocoderStatus;
 import com.lynden.gmapsfx.service.geocoding.GeocodingResult;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.DirectoryNotEmptyException;
 
 import static java.lang.Math.toRadians;
 
@@ -126,13 +127,12 @@ public class Map{
 
     /**
      * Locates an address on the maps in the application given a Location object.
-     * @param location - A initialized Location object
+     * @param givenLocation - A initialized Location object
      * @param map - The map to place the marker on
      * @param service - A GeocodingService from the GMapsFX API
      */
-    public static void findLocation(Location location, GoogleMap map, GeocodingService service) {
-        String locationName = location.getName();
-        int locationType = location.getLocationType();
+    public static void findLocation(Location givenLocation, GoogleMap map, GeocodingService service) {
+        String locationName = givenLocation.getName();
 
         service.geocode(locationName, (GeocodingResult[] results, GeocoderStatus status) -> {
             LatLong latLong = null;
@@ -151,7 +151,7 @@ public class Map{
                     .animation(Animation.DROP)
                     .position(latLong);
 
-            switch(locationType) {
+            switch(givenLocation.getLocationType()) {
                 case 0:
                     markOptns.icon(seng202.Model.Map.class.getResource("/images/toiletIcon.png").getPath());
                     break;
@@ -195,6 +195,56 @@ public class Map{
                     .icon(seng202.Model.Map.class.getResource("/images/wifiIcon.png").getFile())));
             map.setCenter(latLong);
         });
+    }
+
+    /**
+     * Method to find a route given two addresses
+     * @param startAddress - Starting address of the route
+     * @param endAddress - Destination address of the route.
+     * @param mapView - The mapView for the renderer to draw on.
+     * @param service - The DirectionsService object used to obtain the route
+     * @param callback - The callback to return the object to.
+     * @param pane - The DirectionsPane object used in the DirectionsRenderer for the service.
+     */
+    public void findRoute(String startAddress, String endAddress, GoogleMapView mapView,
+                          DirectionsService service, DirectionsServiceCallback callback, DirectionsPane pane) {
+        DirectionsRequest request = new DirectionsRequest(startAddress, endAddress, TravelModes.BICYCLING);
+        service.getRoute(request, callback, new DirectionsRenderer(true, mapView.getMap(), pane));
+    }
+
+    /**
+     * Overloaded method to find a route given two locations
+     * @param startLoc - starting location
+     * @param endLoc - Destination
+     * @param mapView - MapView to render the route on.
+     * @param service - DirectionsService Object to use/
+     * @param callback - callback to return the results to
+     * @param pane - Directions pane used for the directionsRenderer.
+     */
+    public void findRoute(Location startLoc, Location endLoc, GoogleMapView mapView,
+                          DirectionsService service, DirectionsServiceCallback callback, DirectionsPane pane) {
+
+        DirectionsRequest request = new DirectionsRequest(new LatLong(startLoc.getLatitude(), startLoc.getLongitude()),
+                new LatLong(endLoc.getLatitude(), endLoc.getLongitude()), TravelModes.BICYCLING);
+
+        service.getRoute(request, callback, new DirectionsRenderer(true, mapView.getMap(), pane));
+    }
+
+    /**
+     * Finds a given route on the map
+     * @param route - The route to find
+     * @param mapView - the mapView to render the route on.
+     * @param service - The DirectionsService to use.
+     * @param callback - The DirectionsServiceCallback to return the results to.
+     * @param pane - The directionsPane to use in the DirectionsRenderer.
+     */
+    public void findRoute(Route route, GoogleMapView mapView,
+                          DirectionsService service, DirectionsServiceCallback callback, DirectionsPane pane) {
+
+        DirectionsRequest request = new DirectionsRequest(new LatLong(route.getStart().getLatitude(), route.getStart().getLongitude()),
+                new LatLong(route.getEnd().getLatitude(), route.getEnd().getLongitude()), TravelModes.BICYCLING);
+
+        service.getRoute(request, callback, new DirectionsRenderer(true, mapView.getMap(), pane));
     }
 
     public static void main(String[] argv){

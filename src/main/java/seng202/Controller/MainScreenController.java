@@ -18,11 +18,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import seng202.Model.CurrentStorage;
-import seng202.Model.Map;
+import org.omg.CORBA.Current;
+import seng202.Model.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -281,35 +282,22 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     void toiletIconPressed(ActionEvent event) {
+        ArrayList<Toilet> toilets = new ArrayList<Toilet>();
     }
 
     @FXML
     void wifiIconPressed(ActionEvent event) {
+        ArrayList<Wifi> wifis = new ArrayList<Wifi>();
+        wifis = RawDataViewer.searchWifi(CurrentStorage.getWifiArray(), "Wifi");
+        for (Wifi wifi : wifis) {
+            placeMarkerOnMap(wifi);
+        }
     }
 
     @FXML
     public void searchTextAction(ActionEvent event) {
         //Obtains a geocode location around latLong
-//        geocodingService.geocode(address.get(), (GeocodingResult[] results, GeocoderStatus status) -> {
-//            LatLong latLong = null;
-//
-//            if (status == GeocoderStatus.ZERO_RESULTS) {
-//                Alert alert = new Alert(Alert.AlertType.ERROR, "No matching address found");
-//                alert.show();
-//                latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
-//                        results[0].getGeometry().getLocation().getLongitude());
-//            } else {
-//                latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
-//                        results[0].getGeometry().getLocation().getLongitude());
-//            }
-//            map.addMarker(new Marker(new MarkerOptions()
-//                    .animation(Animation.DROP)
-//                    .position(latLong)));
-//            map.setCenter(latLong);
-//        });
         Map.findLocation(address.get(), map, geocodingService);
-        DirectionsRequest request = new DirectionsRequest("2 brockhall lane", "University of Canterbury", TravelModes.DRIVING);
-        directionsService.getRoute(request, this, new DirectionsRenderer(true, mapView.getMap(), directionsPane));
     }
     @FXML
     void initialize() {
@@ -350,6 +338,15 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         assert wifiIconButton != null : "fx:id=\"wifiIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
 
 
+    }
+
+    public void placeMarkerOnMap(Location loc) {
+        Map.findLocation(loc, map, geocodingService);
+    }
+
+    public void placeMarkerOnMap(Route route) {
+        Map.findLocation(route.getStart(), map, geocodingService);
+        Map.findLocation(route.getEnd(), map, geocodingService);
     }
 
     @Override

@@ -230,6 +230,7 @@ public class FileManager {
         int wifiProviderIndex = header.indexOf("PROVIDER");
         int wifiBoroughIndex = header.indexOf("BORONAME");
         int wifiTypeIndex = header.indexOf("TYPE");
+        System.out.println(wifiLatIndex+" "+ wifiLongIndex + " " + wifiNameIndex + " " + wifiProviderIndex);
 
         wifiHotspots.remove(0);
         for (String wifiHotspot: wifiHotspots) {

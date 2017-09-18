@@ -223,7 +223,6 @@ import java.util.ArrayList;
     public void testWriteRouteFileSpaces()
     {
         FileManager.routeRetriever(TARGET+"/route_data1.csv");
-        //TODO: confirm this and potentially require a user as well.
         FileManager.routeWriter("test file.csv");
         assertTrue(new File(WRITE_TARGET+"/test file.csv").exists());
         result = FileManager.readFile(WRITE_TARGET+"/test file.csv");
