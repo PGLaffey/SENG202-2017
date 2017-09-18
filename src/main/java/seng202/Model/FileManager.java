@@ -145,6 +145,7 @@ public class FileManager {
         }
     }
 
+
     /**
      * Stores the route data stored in the current storage class.
      */
@@ -201,6 +202,7 @@ public class FileManager {
         }
     }
 
+
     public static void retailerWriter(String filename) {
         ArrayList<Retailer> retailers = CurrentStorage.getRetailerArray();
         ArrayList<String> strRetailers = new ArrayList<>();
@@ -223,6 +225,7 @@ public class FileManager {
 
     /**
      * Retrieves the list of the given wifiHotspots and converts each item into a wifi object list in the currentStorage class.
+     * @param filename The file that the csv to be read is in.
      */
     public static void wifiRetriever(String filename) {
         ArrayList<String> wifiHotspots = readFile(filename);
@@ -236,7 +239,6 @@ public class FileManager {
             int wifiProviderIndex = header.indexOf("PROVIDER");
             int wifiBoroughIndex = header.indexOf("BORONAME");
             int wifiTypeIndex = header.indexOf("TYPE");
-            System.out.println(wifiLatIndex+" "+ wifiLongIndex + " " + wifiNameIndex + " " + wifiProviderIndex);
 
             wifiHotspots.remove(0);
             for (String wifiHotspot: wifiHotspots) {
@@ -265,21 +267,27 @@ public class FileManager {
      */
     public static void wifiWriter(String filename, ArrayList<Wifi> wifis) {
         ArrayList<String> strWifis = new ArrayList<>();
-        for (Wifi  wifi : wifis) {
-            String SSID = wifi.getName();
-            String wifiLatitude = Double.toString(wifi.getCoords()[0]);
-            String wifiLongitude = Double.toString(wifi.getCoords()[1]);
-            String wifiType = wifi.getType();
-            String wifiBorough = wifi.getBorough();
-            String wifiProvider = wifi.getProvider();
-            //TODO: Change the order to suit the csv.
-            String strWifi = wifiLatitude + "," + wifiLongitude + "," + SSID + "," + wifiBorough + "," + wifiType + "," + wifiProvider;
-            strWifis.add(strWifi);
+        if (!(wifis.isEmpty())) {
+            String header = "LAT,LON,NAME,PROVIDER,BORONAME,TYPE";
+            strWifis.add(header);
+            for (Wifi  wifi : wifis) {
+                String SSID = wifi.getName();
+                String wifiLatitude = Double.toString(wifi.getCoords()[0]);
+                String wifiLongitude = Double.toString(wifi.getCoords()[1]);
+                String wifiType = wifi.getType();
+                String wifiBorough = wifi.getBorough();
+                String wifiProvider = wifi.getProvider();
+                String strWifi = wifiLatitude + "," + wifiLongitude + "," + SSID + "," + wifiProvider + "," + wifiBorough + "," + wifiType;
+                strWifis.add(strWifi);
+            }
+            writeFile(DEST_TARGET,filename+".csv", strWifis);
         }
-        writeFile(DEST_TARGET,filename+".csv", strWifis);
     }
 
-
+    /**
+     *
+     * @param filename
+     */
     public static void toiletRetriever(String filename) {
         ArrayList<String> toilets = readFile(filename);
 
