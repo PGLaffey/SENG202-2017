@@ -1,13 +1,5 @@
 package seng202.Controller;
 
-import seng202.Model.FileManager;
-
-import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +8,11 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
 import seng202.Model.DataFetcher;
+import seng202.Model.FileManager;
 import seng202.Model.User;
+
+import java.io.File;
+import java.io.IOException;
 
 public class LoginScreenController {
 	
@@ -57,8 +53,8 @@ public class LoginScreenController {
 			//CurrentStorage.setUser(user); // TODO: Not sure how to access the users name and dob from the database
 			// TODO: put the correct filenames in
 			// TODO: or somehow load the objects into current storage
-			FileManager.retailerRetriever( new File(getClass().getResource("/data_files/").getFile()).toString() + "/retailer_data1.csv");
-			FileManager.wifiRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/wifi_data1.csv");
+			//FileManager.retailerRetriever( new File(getClass().getResource("/data_files/").getFile()).toString() + "/Lower_Manhattan_Retailers.csv");
+			FileManager.wifiRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/NYC_Free_Public_WiFi_03292017.csv");
 			//FileManager.routeRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-01 - Citi Bike trip data.csv");
 			//FileManager.routeRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-02 - Citi Bike trip data.csv");
 			User user = new User("Courtney", "Hoskin", "cgh31", "6 apr","password");

@@ -19,7 +19,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.file.DirectoryNotEmptyException;
 
 import static java.lang.Math.toRadians;
 
@@ -154,20 +153,20 @@ public class Map{
             MarkerOptions markOptns = new MarkerOptions()
                     .animation(Animation.DROP)
                     .position(latLong);
-/*
+
             switch(givenLocation.getLocationType()) {
                 case 0:
-                    markOptns.icon(seng202.Model.Map.class.getResource("/images/toiletIcon.png").getPath());
+                    markOptns.icon("http://google.com/mapfiles/ms/micons/green-dot"/*seng202.Model.Map.class.getResource("/images/toiletIcon.png").getPath()*/);
                     break;
                 case 2:
-                    markOptns.icon(seng202.Model.Map.class.getResource("/images/retailIcon.png").getPath());
+                    markOptns.icon("http://google.com/mapfiles/ms/micons/green-dot");
                     break;
                 case 3:
-                    markOptns.icon(seng202.Model.Map.class.getResource("/images/wifiIcon.png").getPath());
+                    markOptns.icon("http://google.com/mapfiles/ms/micons/green-dot");
                     break;
                 default:
                     break;
-            }*/
+            }
             map.addMarker(new Marker(markOptns));
             map.setCenter(latLong);
         });
@@ -254,24 +253,16 @@ public class Map{
     public static void findWifi(Wifi wifi, GoogleMap map) {
         CircleOptions circleOptns = new CircleOptions()
                 .center(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
-                .radius(30)
+                .radius(70)
                 .draggable(false)
                 .clickable(true)
-                .fillOpacity(0.1)
-                .fillColor("Blue")
+                .fillOpacity(0.075)
+                .fillColor("LightBlue")
                 .strokeColor("Blue")
                 .strokeWeight(0.2);
         Circle circle = new Circle(circleOptns);
-
-        InfoWindowOptions cWindowOptns = new InfoWindowOptions().content("HelloWorld");
-        InfoWindow cWindow = new InfoWindow(cWindowOptns);
-
-        MarkerOptions cOptns = new MarkerOptions().position(circle.getCenter()).visible(false);
-        Marker cCentre = new Marker(cOptns);
-        cWindow.open(map, cCentre);
-
         map.addUIEventHandler(circle, UIEventType.click, (JSObject obj) -> {
-            cCentre.setVisible(!cCentre.getVisible());
+
         });
 
         map.addMapShape(circle);
