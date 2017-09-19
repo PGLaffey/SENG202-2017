@@ -247,7 +247,6 @@ public class TablesScreenController {
     		allLocationsTable.setVisible(false);
     		poiTable.setVisible(false);
     		retailersTable.setVisible(true);
-    		//retailersTable.toFront();
     		wifiTable.setVisible(false);
     		toiletsTable.setVisible(false);
     		routesTable.setVisible(false);
@@ -291,7 +290,6 @@ public class TablesScreenController {
     		wifiTable.setVisible(false);
     		toiletsTable.setVisible(false);
     		routesTable.setVisible(true);
-    		//routesTable.toFront();
     	}
     }
 
@@ -344,7 +342,7 @@ public class TablesScreenController {
     	
     }
     
-/*    @FXML
+    @FXML
     void toiletTableClicked(MouseEvent event) throws IOException {
     	Toilet row = toiletsTable.getSelectionModel().getSelectedItem();
     	CurrentStorage.setToilet(row);
@@ -355,7 +353,7 @@ public class TablesScreenController {
 		stage.setTitle("About toilet point");
 		stage.setScene(scene);
 		stage.show();
-    }*/
+    }
     
 /*    @FXML
     void allLocationTableClicked(MouseEvent event) throws IOException {
@@ -383,7 +381,7 @@ public class TablesScreenController {
 		stage.show();
     }
     
-/*    @FXML
+    @FXML
     void poiTableClicked(MouseEvent event) throws IOException {
     	Poi row = poiTable.getSelectionModel().getSelectedItem();
     	CurrentStorage.setPoi(row);
@@ -394,7 +392,7 @@ public class TablesScreenController {
 		stage.setTitle("About point of interest");
 		stage.setScene(scene);
 		stage.show();
-    }*/
+    }
 
 
     
@@ -406,11 +404,15 @@ public class TablesScreenController {
     	
     	// Random objects for testing
 
-    	CurrentStorage.addRetailer(new Retailer(23.45, 127.3, "Retailer new", "Bikes", "We sell bikes", 1));
+    	/*CurrentStorage.addRetailer(new Retailer(23.45, 127.3, "Retailer new", "Bikes", "We sell bikes", 1));
     	CurrentStorage.addRetailer(new Retailer(5345.2, 765.3, "Retailer old", "Biks", "what do we", 1));
     	CurrentStorage.addRetailer(new Retailer(123.45, 127.3, "Retailer new", "Bikes", "rand", 1));
     	CurrentStorage.addRetailer(new Retailer(400.45, 127.3, "Retailer new", "Bikes", "We sell bikes", 1));
-    	CurrentStorage.addRetailer(new Retailer(1235, 123, "Retaew", "CLothes", "We sell bikes", 1));
+    	CurrentStorage.addRetailer(new Retailer(1235, 123, "Retaew", "CLothes", "We sell bikes", 1));*/
+    	
+    	//CurrentStorage.addToilet(new Toilet(324.3, 235.456, "A toilet", false, true));
+    	
+    	CurrentStorage.addPoi(new Poi(2343.2, 467.42, "POI", "cool place", 23.50));
     	
     	// Originally     	
     	allLocationsTable.setVisible(false);
