@@ -109,7 +109,7 @@ public class FileManager {
         ArrayList<String> routes = readFile(filename);
 
         if (!(routes.isEmpty())) {
-            List header = Arrays.asList(routes.get(0).split(","));
+            List header = Arrays.asList(routes.get(0).split("\",\""));
 
             //Get the index of each of the key fields for the route class from the header of the csv.
             int startNameIndex = header.indexOf("start station name");
@@ -123,7 +123,7 @@ public class FileManager {
             routes.remove(0);
 
             for (String route : routes) {
-                String[] information = route.split(",");
+                String[] information = route.split("\",\"", -1);
 
                 //Obtain the relevant information from the csv.
                 String bikeID = information[bikeIdIndex];

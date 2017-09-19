@@ -239,11 +239,10 @@ public class FileManagerTest extends TestCase {
     public void testWriteWifiFile()
     {
         FileManager.wifiRetriever(TARGET+"/wifi_data1.csv");
-        //TODO: confirm this and potentially require a user as well.
         FileManager.wifiWriter("test_file", CurrentStorage.getWifiArray());
         assertTrue(new File(WRITE_TARGET+"/test_file.csv").exists());
         result = FileManager.readFile(WRITE_TARGET+"/test_file.csv");
-        Wifi expected_wifi = new Wifi(40.745968, -73.994039, "LinkNYC Free Wi-Fi", "Manhattan","Free","LinkNYC - Citybridge");
+        Wifi expected_wifi = new Wifi(40.745968, -73.994039, "mn-05-123662", "Manhattan","Free","LinkNYC - Citybridge");
         assertTrue(CurrentStorage.getWifiArray().get(0).equals(expected_wifi));
     }
 
@@ -254,7 +253,6 @@ public class FileManagerTest extends TestCase {
     public void testWriteRetailerFile()
     {
         FileManager.retailerRetriever(TARGET+"/retailer_data1.csv");
-        //TODO: confirm this and potentially require a user as well.
         FileManager.retailerWriter("test_file");
         assertTrue(new File(WRITE_TARGET+"/test_file.csv").exists());
         result = FileManager.readFile(WRITE_TARGET+"/test_file.csv");
