@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static jdk.nashorn.internal.objects.NativeString.substring;
+
 /**
  * File Manager class reads and writes files to and from .csv files, and stores the information in the apps current storage.
  * The File Manager class also serializes and deserializes user objects.
@@ -119,25 +121,27 @@ public class FileManager {
             int endLatIndex = header.indexOf("end station latitude");
             int endLongIndex = header.indexOf("end station longitude");
             int bikeIdIndex = header.indexOf("bikeid");
+            int genderIndex = header.indexOf("birth year");
 
             routes.remove(0);
 
             for (String route : routes) {
-                String[] information = route.split("\",\"", -1);
+                String[] information = route.split(",\"", -1);
 
                 //Obtain the relevant information from the csv.
-                String bikeID = information[bikeIdIndex];
-                String startName = information[startNameIndex];
-                String endName = information[endNameIndex];
-                double startLatitude = Double.parseDouble(information[startLatIndex]);
-                double startLongitude = Double.parseDouble(information[startLongIndex]);
-                double endLatitude = Double.parseDouble(information[endLatIndex]);
-                double endLongitude = Double.parseDouble(information[endLongIndex]);
+                String bikeID = information[bikeIdIndex].substring(0, information[bikeIdIndex].indexOf("\""));
+                String startName = information[startNameIndex].substring(0, information[startNameIndex].indexOf("\""));
+                String endName = information[endNameIndex].substring(0, information[endNameIndex].indexOf("\""));
+                double startLatitude = Double.parseDouble(information[startLatIndex].substring(0, information[startLatIndex].indexOf("\"")));
+                double startLongitude = Double.parseDouble(information[startLongIndex].substring(0, information[startLongIndex].indexOf("\"")));
+                double endLatitude = Double.parseDouble(information[endLatIndex].substring(0, information[endLatIndex].indexOf("\"")));
+                double endLongitude = Double.parseDouble(information[endLongIndex].substring(0, information[endLongIndex].indexOf("\"")));
+                String gender = information[genderIndex].split(",")[1]; // This line is causing problems as there are cases where the birth year line is left free (without quotes)
 
                 //Convert the relevant data into the associated classes
                 Location startLocation = new Location(startLatitude, startLongitude, startName, 4);
                 Location endLocation = new Location(endLatitude, endLongitude, endName, 4);
-                Route newRoute = new Route(bikeID, startLocation, endLocation);
+                Route newRoute = new Route(bikeID, startLocation, endLocation, "NA", gender);
 
                 //Log the new object into the storage class.
                 CurrentStorage.addRoute(newRoute);
@@ -192,7 +196,7 @@ public class FileManager {
 
                 //Obtain relevant fields
                 int zip = 0;
-                if (information[retailerZip] != "") {
+                if (!information[retailerZip].equals("")) {
                     zip = Integer.parseInt(information[retailerZip]);
                 }
 
@@ -287,14 +291,14 @@ public class FileManager {
     }
 
     /**
-     *
-     * @param filename
+     * Retrieves a list of toilet location from a csv file and stores them in the current storage.
+     * @param filename The file where the list of toilets is found.
      */
     public static void toiletRetriever(String filename) {
         ArrayList<String> toilets = readFile(filename);
 
         if (!(toilets.isEmpty())) {
-            List header = Arrays.asList(toilets.get(0).split(","));
+            List header = Arrays.asList(toilets.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
 
             int nameIndex = header.indexOf("name");
             int disabledAccessIndex = header.indexOf("disabled access");
@@ -321,34 +325,63 @@ public class FileManager {
         }
     }
 
-
+    /**
+     * Writes an arrayList of toilet objects to a string.
+     * @param fileName The file where the csv will be placed.
+     * @param toilets The arrayList of toilet objects to be stored in the csv.
+     */
     public static void toiletWriter(String fileName, ArrayList<Toilet> toilets) {
-        // TODO write the function here
+        ArrayList<String> strToilets = new ArrayList<>();
+        if (!(toilets.isEmpty())) {
+            String header = "name,disabled access,latitude,longitude,unisex";
+            strToilets.add(header);
+            for (Toilet toilet : toilets) {
+                String toiletName = toilet.getName();
+                Double toiletLat = toilet.getLatitude();
+                Double toiletLon = toilet.getLongitude();
+                boolean accessable = toilet.getForDisabled();
+                boolean unisex = toilet.getUniSex();
+
+                String strToilet = toiletName + "," + toiletLat + "," + toiletLon + "," + accessable + "," + unisex;
+                strToilets.add(strToilet);
+            }
+            writeFile(DEST_TARGET, fileName + ".csv", strToilets);
+        }
     }
 
-
+    /**
+     * Reads Points Of Interest from a csv file and stores them in the current storage class.
+     * @param filename The file where the new points of interest csv is.
+     */
     public static void poiReader(String filename) {
-        // TODO Finish writing this function
         ArrayList<String> pois = readFile(filename);
 
         if (!(pois.isEmpty())) {
+            List header = Arrays.asList(pois.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
 
-        }
-        List header = Arrays.asList(pois.get(0).split(","));
+            //Finds locations of information in header.
+            int poiNameIndex = header.indexOf("name");
+            int poiLatIndex = header.indexOf("latitude");
+            int poiLonIndex = header.indexOf("longitude");
+            int poiDescriptionIndex = header.indexOf("description");
+            int poiCostIndex = header.indexOf("cost");
 
-        int PoiNameIndex = header.indexOf("name");
-        int PoiLatIndex = header.indexOf("latitude");
-        int PoiLonIndex = header.indexOf("longitude");
-        int PoiDescriptionIndex = header.indexOf("description");
-        int PoiCostIndex = header.indexOf("cost");
+            for (String poi : pois) {
+                String[] information = poi.split(",");
 
-        for (String poi : pois) {
-            String[] information = poi.split(",");
-            String PoiName = information[PoiNameIndex];
-            Double PoiLatitude = Double.parseDouble(information[PoiLatIndex]);
-            Double PoiLongitude = Double.parseDouble(information[PoiLonIndex]);
-            String PoiDescription = information[PoiDescriptionIndex];
+                // Obtains relevant information
+                String poiName = information[poiNameIndex];
+                Double poiLatitude = Double.parseDouble(information[poiLatIndex]);
+                Double poiLongitude = Double.parseDouble(information[poiLonIndex]);
+                String poiDescription = information[poiDescriptionIndex];
+                int poiCost = Integer.parseInt(information[poiCostIndex]);
 
+                // Creates new Poi object
+                Poi newPoi = new Poi(poiLatitude, poiLongitude, poiName, poiDescription, poiCost);
+
+                // Stores new object in the current storage class
+                CurrentStorage.addPoi(newPoi);
+            }
         }
     }
 }
