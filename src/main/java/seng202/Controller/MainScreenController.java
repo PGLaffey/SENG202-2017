@@ -263,7 +263,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         for (Retailer retailer : CurrentStorage.getRetailerArray()) {
             placeRetailerOnMap(retailer);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(451);
             } catch (InterruptedException e) {
                 continue;
             }

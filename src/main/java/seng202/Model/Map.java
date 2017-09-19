@@ -262,7 +262,7 @@ public class Map{
 
     public static void findRetailers(Retailer retailer, GoogleMap map, GeocodingService service) {
         System.out.println(retailer.getAddress());
-        service.geocode(retailer.getAddress(), (GeocodingResult[] results, GeocoderStatus status) -> {
+        service.geocode(retailer.getAddress()+", NYC", (GeocodingResult[] results, GeocoderStatus status) -> {
             LatLong latLong = null;
 
             if (status == GeocoderStatus.ZERO_RESULTS) {
@@ -277,7 +277,7 @@ public class Map{
             map.addMarker(new Marker(new MarkerOptions()
                     .animation(Animation.DROP)
                     .position(latLong)
-                    .icon("https://google.com/mapfiles/ms/micons/green-dot.png")));
+                    .icon("http://maps.google.com/mapfiles/ms/micons/green-dot.png")));
         });
     }
 
