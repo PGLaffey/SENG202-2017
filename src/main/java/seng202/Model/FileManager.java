@@ -196,7 +196,6 @@ public class FileManager {
                     zip = Integer.parseInt(information[retailerZip]);
                 }
 
-
                 //Creates a new instance of retailer.
                 Retailer newRetailer = new Retailer(information[addrLine1Index], information[retailerName], information[retailerPrimary], information[retailerSecondary], zip);
 
@@ -205,7 +204,6 @@ public class FileManager {
             }
         }
     }
-
 
     public static void retailerWriter(String filename) {
         ArrayList<Retailer> retailers = CurrentStorage.getRetailerArray();
