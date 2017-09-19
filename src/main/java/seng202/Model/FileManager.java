@@ -192,7 +192,7 @@ public class FileManager {
 
                 //Obtain relevant fields
                 int zip = 0;
-                if (!information[retailerZip].equals("")) {
+                if (information[retailerZip] != "") {
                     zip = Integer.parseInt(information[retailerZip]);
                 }
 

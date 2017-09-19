@@ -38,7 +38,7 @@ public class Retailer extends Location {
      *
      */
     public Retailer(String address, String name, String product, String description, int zip) {
-        super(address, name, 2);
+        super(name, 2);
         this.address = address;
         this.product = product;
         this.description = description;

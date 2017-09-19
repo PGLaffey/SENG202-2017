@@ -124,10 +124,6 @@ public class Map{
         return distance;
     }
 
-    public static void findRoute(DirectionsRequest request, GoogleMapView mapView) {
-
-    }
-
     /**
      * Locates an address on the maps in the application given a Location object.
      * @param givenLocation - A initialized Location object
@@ -156,11 +152,11 @@ public class Map{
 
             switch(givenLocation.getLocationType()) {
                 case 0:
-                    markOptns.icon("http://google.com/mapfiles/ms/micons/green-dot"/*seng202.Model.Map.class.getResource("/images/toiletIcon.png").getPath()*/);
-                    break;
-                case 2:
                     markOptns.icon("http://google.com/mapfiles/ms/micons/green-dot");
                     break;
+                //case 2:
+                    //markOptns.icon("http://google.com/mapfiles/ms/micons/green-dot");
+                    //break;
                 case 3:
                     markOptns.icon("http://google.com/mapfiles/ms/micons/green-dot");
                     break;
@@ -261,11 +257,28 @@ public class Map{
                 .strokeColor("Blue")
                 .strokeWeight(0.2);
         Circle circle = new Circle(circleOptns);
-        map.addUIEventHandler(circle, UIEventType.click, (JSObject obj) -> {
-
-        });
-
         map.addMapShape(circle);
+    }
+
+    public static void findRetailers(Retailer retailer, GoogleMap map, GeocodingService service) {
+        System.out.println(retailer.getAddress());
+        service.geocode(retailer.getAddress()+", NYC", (GeocodingResult[] results, GeocoderStatus status) -> {
+            LatLong latLong = null;
+
+            if (status == GeocoderStatus.ZERO_RESULTS) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "No matching address found");
+                alert.show();
+                latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
+                        results[0].getGeometry().getLocation().getLongitude());
+            } else {
+                latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
+                        results[0].getGeometry().getLocation().getLongitude());
+            }
+            map.addMarker(new Marker(new MarkerOptions()
+                    .animation(Animation.DROP)
+                    .position(latLong)
+                    .icon("http://maps.google.com/mapfiles/ms/micons/green-dot.png")));
+        });
     }
 
     public static void main(String[] argv){

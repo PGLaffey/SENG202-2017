@@ -25,7 +25,7 @@ public class Poi extends Location {
     }
 
     public Poi(String address, String name, String description, double cost) {
-        super(address, name, 1);
+        super(name, 1);
         this.address = address;
         this.description = description;
         this.cost = cost;
