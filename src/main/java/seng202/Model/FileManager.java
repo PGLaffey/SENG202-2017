@@ -108,40 +108,43 @@ public class FileManager {
     public static void routeRetriever(String filename) {
         ArrayList<String> routes = readFile(filename);
 
-        List header = Arrays.asList(routes.get(0).split(","));
+        if (!(routes.isEmpty())) {
+            List header = Arrays.asList(routes.get(0).split(","));
 
-        //Get the index of each of the key fields for the route class from the header of the csv.
-        int startNameIndex = header.indexOf("start station name");
-        int startLatIndex = header.indexOf("start station latitude");
-        int startLongIndex = header.indexOf("start station longitude");
-        int endNameIndex = header.indexOf("end station name");
-        int endLatIndex = header.indexOf("end station latitude");
-        int endLongIndex = header.indexOf("end station longitude");
-        int bikeIdIndex = header.indexOf("bikeid");
+            //Get the index of each of the key fields for the route class from the header of the csv.
+            int startNameIndex = header.indexOf("start station name");
+            int startLatIndex = header.indexOf("start station latitude");
+            int startLongIndex = header.indexOf("start station longitude");
+            int endNameIndex = header.indexOf("end station name");
+            int endLatIndex = header.indexOf("end station latitude");
+            int endLongIndex = header.indexOf("end station longitude");
+            int bikeIdIndex = header.indexOf("bikeid");
 
-        routes.remove(0);
+            routes.remove(0);
 
-        for (String route : routes) {
-            String[] information = route.split(",");
+            for (String route : routes) {
+                String[] information = route.split(",");
 
-            //Obtain the relevant information from the csv.
-            String bikeID = information[bikeIdIndex];
-            String startName = information[startNameIndex];
-            String endName = information[endNameIndex];
-            double startLatitude = Double.parseDouble(information[startLatIndex]);
-            double startLongitude = Double.parseDouble(information[startLongIndex]);
-            double endLatitude = Double.parseDouble(information[endLatIndex]);
-            double endLongitude = Double.parseDouble(information[endLongIndex]);
+                //Obtain the relevant information from the csv.
+                String bikeID = information[bikeIdIndex];
+                String startName = information[startNameIndex];
+                String endName = information[endNameIndex];
+                double startLatitude = Double.parseDouble(information[startLatIndex]);
+                double startLongitude = Double.parseDouble(information[startLongIndex]);
+                double endLatitude = Double.parseDouble(information[endLatIndex]);
+                double endLongitude = Double.parseDouble(information[endLongIndex]);
 
-            //Convert the relevant data into the associated classes
-            Location startLocation = new Location(startLatitude, startLongitude, startName, 4);
-            Location endLocation = new Location(endLatitude, endLongitude, endName, 4);
-            Route newRoute = new Route(bikeID, startLocation, endLocation);
+                //Convert the relevant data into the associated classes
+                Location startLocation = new Location(startLatitude, startLongitude, startName, 4);
+                Location endLocation = new Location(endLatitude, endLongitude, endName, 4);
+                Route newRoute = new Route(bikeID, startLocation, endLocation);
 
-            //Log the new object into the storage class.
-            CurrentStorage.addRoute(newRoute);
+                //Log the new object into the storage class.
+                CurrentStorage.addRoute(newRoute);
+            }
         }
     }
+
 
     /**
      * Stores the route data stored in the current storage class.
@@ -169,33 +172,36 @@ public class FileManager {
     public static void retailerRetriever(String filename) {
         ArrayList<String> retailers = readFile(filename);
 
-        List header = Arrays.asList(retailers.get(0).split(","));
+        if (!(retailers.isEmpty())) {
+            List header = Arrays.asList(retailers.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
 
-        int retailerName = header.indexOf("CnBio_Org_Name");
-        int addrLine1Index = header.indexOf("CnAdrPrf_Addrline1");
-        int retailerZip = header.indexOf("CnAdrPrf_ZIP");
-        int retailerPrimary = header.indexOf("Primary");
-        int retailerSecondary = header.indexOf("Secondary");
+            int retailerName = header.indexOf("CnBio_Org_Name");
+            int addrLine1Index = header.indexOf("CnAdrPrf_Addrline1");
+            int retailerZip = header.indexOf("CnAdrPrf_ZIP");
+            int retailerPrimary = header.indexOf("Primary");
+            int retailerSecondary = header.indexOf("Secondary");
 
-        retailers.remove(0);
-
-        if (retailers.get(0).split(",")[0] == "CnBio_Org_Name") {
             retailers.remove(0);
-        }
 
-        for (String retailer : retailers) {
-            String[] information = retailer.split(",");
+            if (retailers.get(0).split(",")[0].equals("CnBio_Org_Name")) {
+                retailers.remove(0);
+            }
 
-            //Obtain relevant fields
-            int zip = Integer.parseInt(information[retailerZip]);
+            for (String retailer : retailers) {
+                String[] information = retailer.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 
-            //Creates a new instance of retailer.
-            Retailer newRetailer = new Retailer(information[addrLine1Index], information[retailerName], information[retailerPrimary], information[retailerSecondary], zip);
+                //Obtain relevant fields
+                int zip = Integer.parseInt(information[retailerZip]);
 
-            //Add the retailer to the storage class.
-            CurrentStorage.addRetailer(newRetailer);
+                //Creates a new instance of retailer.
+                Retailer newRetailer = new Retailer(information[addrLine1Index], information[retailerName], information[retailerPrimary], information[retailerSecondary], zip);
+
+                //Add the retailer to the storage class.
+                CurrentStorage.addRetailer(newRetailer);
+            }
         }
     }
+
 
     public static void retailerWriter(String filename) {
         ArrayList<Retailer> retailers = CurrentStorage.getRetailerArray();
@@ -219,37 +225,40 @@ public class FileManager {
 
     /**
      * Retrieves the list of the given wifiHotspots and converts each item into a wifi object list in the currentStorage class.
+     * @param filename The file that the csv to be read is in.
      */
     public static void wifiRetriever(String filename) {
         ArrayList<String> wifiHotspots = readFile(filename);
-        List header = Arrays.asList(wifiHotspots.get(0).split(","));
 
-        int wifiLatIndex = header.indexOf("LAT");
-        int wifiLongIndex = header.indexOf("LON");
-        int wifiNameIndex = header.indexOf("NAME");
-        int wifiProviderIndex = header.indexOf("PROVIDER");
-        int wifiBoroughIndex = header.indexOf("BORONAME");
-        int wifiTypeIndex = header.indexOf("TYPE");
-        System.out.println(wifiLatIndex+" "+ wifiLongIndex + " " + wifiNameIndex + " " + wifiProviderIndex);
+        if (!(wifiHotspots.isEmpty())) {
+            List header = Arrays.asList(wifiHotspots.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
 
-        wifiHotspots.remove(0);
-        for (String wifiHotspot: wifiHotspots) {
-            String[] information = wifiHotspot.split(",");
+            int wifiLatIndex = header.indexOf("LAT");
+            int wifiLongIndex = header.indexOf("LON");
+            int wifiNameIndex = header.indexOf("NAME");
+            int wifiProviderIndex = header.indexOf("PROVIDER");
+            int wifiBoroughIndex = header.indexOf("BORONAME");
+            int wifiTypeIndex = header.indexOf("TYPE");
 
-            //Obtains the relevant information
-            Double wifiLatitude = new Double(information[wifiLatIndex]);
-            Double wifiLongitude = new Double(information[wifiLongIndex]);
-            String wifiName = information[wifiNameIndex];
-            String wifiProvider = information[wifiProviderIndex];
-            String borough = information[wifiBoroughIndex];
-            String type = information[wifiTypeIndex];
+            wifiHotspots.remove(0);
+            for (String wifiHotspot: wifiHotspots) {
+                String[] information = wifiHotspot.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 
-            //Creates a new Wifi object.
-            Wifi newHotspot = new Wifi(wifiLatitude, wifiLongitude, wifiName, borough, type, wifiProvider);
+                //Obtains the relevant information
+                Double wifiLatitude = new Double(information[wifiLatIndex]);
+                Double wifiLongitude = new Double(information[wifiLongIndex]);
+                String wifiName = information[wifiNameIndex];
+                String wifiProvider = information[wifiProviderIndex];
+                String borough = information[wifiBoroughIndex];
+                String type = information[wifiTypeIndex];
 
-            CurrentStorage.addWifi(newHotspot);
+                //Creates a new Wifi object.
+                Wifi newHotspot = new Wifi(wifiLatitude, wifiLongitude, wifiName, borough, type, wifiProvider);
+                CurrentStorage.addWifi(newHotspot);
+            }
         }
     }
+
 
     /**
      * Writes a csv file of wifi hotspots to a specified file.
@@ -258,48 +267,56 @@ public class FileManager {
      */
     public static void wifiWriter(String filename, ArrayList<Wifi> wifis) {
         ArrayList<String> strWifis = new ArrayList<>();
-        for (Wifi  wifi : wifis) {
-            String SSID = wifi.getName();
-            String wifiLatitude = Double.toString(wifi.getCoords()[0]);
-            String wifiLongitude = Double.toString(wifi.getCoords()[1]);
-            String wifiType = wifi.getType();
-            String wifiBorough = wifi.getBorough();
-            String wifiProvider = wifi.getProvider();
-            //TODO: Change the order to suit the csv.
-            String strWifi = wifiLatitude + "," + wifiLongitude + "," + SSID + "," + wifiBorough + "," + wifiType + "," + wifiProvider;
-            strWifis.add(strWifi);
+        if (!(wifis.isEmpty())) {
+            String header = "LAT,LON,NAME,PROVIDER,BORONAME,TYPE";
+            strWifis.add(header);
+            for (Wifi  wifi : wifis) {
+                String SSID = wifi.getName();
+                String wifiLatitude = Double.toString(wifi.getCoords()[0]);
+                String wifiLongitude = Double.toString(wifi.getCoords()[1]);
+                String wifiType = wifi.getType();
+                String wifiBorough = wifi.getBorough();
+                String wifiProvider = wifi.getProvider();
+                String strWifi = wifiLatitude + "," + wifiLongitude + "," + SSID + "," + wifiProvider + "," + wifiBorough + "," + wifiType;
+                strWifis.add(strWifi);
+            }
+            writeFile(DEST_TARGET,filename+".csv", strWifis);
         }
-        writeFile(DEST_TARGET,filename+".csv", strWifis);
     }
 
-
+    /**
+     *
+     * @param filename
+     */
     public static void toiletRetriever(String filename) {
         ArrayList<String> toilets = readFile(filename);
-        List header = Arrays.asList(toilets.get(0).split(","));
 
-        int nameIndex = header.indexOf("name");
-        int disabledAccessIndex = header.indexOf("disabled access");
-        int toiletLatIndex = header.indexOf("latitude");
-        int toiletLonIndex = header.indexOf("longitude");
-        int unisexIndex = header.indexOf("unisex");
+        if (!(toilets.isEmpty())) {
+            List header = Arrays.asList(toilets.get(0).split(","));
 
-        toilets.remove(0);
-        for (String toilet: toilets) {
-            String[] information = toilet.split(",");
+            int nameIndex = header.indexOf("name");
+            int disabledAccessIndex = header.indexOf("disabled access");
+            int toiletLatIndex = header.indexOf("latitude");
+            int toiletLonIndex = header.indexOf("longitude");
+            int unisexIndex = header.indexOf("unisex");
 
-            //Obtains the relevant information
-            String toiletName = information[nameIndex];
-            boolean disabledAccess = Boolean.parseBoolean(information[disabledAccessIndex]);
-            Double toiletLatitude = new Double(information[toiletLatIndex]);
-            Double toiletLongitude = new Double(information[toiletLonIndex]);
-            boolean unisex = Boolean.parseBoolean(information[unisexIndex]);
+            toilets.remove(0);
+            for (String toilet: toilets) {
+                String[] information = toilet.split(",");
 
-            //Creates a new toilet object.
-            Toilet newToilet = new Toilet(toiletLatitude, toiletLongitude, toiletName, disabledAccess, unisex);
+                //Obtains the relevant information
+                String toiletName = information[nameIndex];
+                boolean disabledAccess = Boolean.parseBoolean(information[disabledAccessIndex]);
+                Double toiletLatitude = new Double(information[toiletLatIndex]);
+                Double toiletLongitude = new Double(information[toiletLonIndex]);
+                boolean unisex = Boolean.parseBoolean(information[unisexIndex]);
 
-            CurrentStorage.addToilet(newToilet);
+                //Creates a new toilet object.
+                Toilet newToilet = new Toilet(toiletLatitude, toiletLongitude, toiletName, disabledAccess, unisex);
+
+                CurrentStorage.addToilet(newToilet);
+            }
         }
-
     }
 
 
@@ -311,6 +328,10 @@ public class FileManager {
     public static void poiReader(String filename) {
         // TODO Finish writing this function
         ArrayList<String> pois = readFile(filename);
+
+        if (!(pois.isEmpty())) {
+
+        }
         List header = Arrays.asList(pois.get(0).split(","));
 
         int PoiNameIndex = header.indexOf("name");
