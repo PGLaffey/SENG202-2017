@@ -3,7 +3,6 @@ package seng202.team5;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -15,7 +14,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 
-@Ignore public class FileManagerTest extends TestCase {
+public class FileManagerTest extends TestCase {
     private String TARGET = new File(this.getClass().getResource("/testdata/").getFile()).getAbsolutePath();
     private String WRITE_TARGET = new File(seng202.Model.FileManager.class.getResource("/data_files/").getFile()).toString();
     private ArrayList<String> result;
