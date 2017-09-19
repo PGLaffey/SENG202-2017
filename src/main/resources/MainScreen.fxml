@@ -167,7 +167,7 @@
                     <children>
                       <GoogleMapView fx:id="mapView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" SplitPane.resizableWithParent="true"/>
                       <TextField fx:id="searchText" onAction="#searchTextAction" maxHeight="32.0" maxWidth="199.0" prefHeight="32.0" prefWidth="199.0" promptText="Search" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="14.0" />
-                      <Button fx:id="wifiIconButton" layoutX="575.0" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#wifiIconPressed" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: 144;" AnchorPane.rightAnchor="21.0">
+                      <Button fx:id="wifiIconButton" layoutX="575.0" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#wifiIconPressed" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="21.0">
                         <graphic>
                           <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -176,7 +176,7 @@
                           </ImageView>
                         </graphic>
                       </Button>
-                      <Button fx:id="retailerIconButton" layoutX="575.0" layoutY="100.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#retailerIconPressed" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: 144;" AnchorPane.rightAnchor="21.0">
+                      <Button fx:id="retailerIconButton" layoutX="575.0" layoutY="100.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#retailerIconPressed" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="21.0">
                         <graphic>
                           <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -185,7 +185,7 @@
                           </ImageView>
                         </graphic>
                       </Button>
-                      <Button fx:id="toiletIconButton" layoutX="575.0" layoutY="140.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#toiletIconPressed" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: 144;" AnchorPane.rightAnchor="21.0">
+                      <Button fx:id="toiletIconButton" layoutX="575.0" layoutY="140.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#toiletIconPressed" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="21.0">
                         <graphic>
                           <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -194,7 +194,7 @@
                           </ImageView>
                         </graphic>
                       </Button>
-                      <Button fx:id="bikeIconButton" layoutX="575.0" layoutY="180.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bikeIconPressed" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: 144;" AnchorPane.rightAnchor="21.0">
+                      <Button fx:id="bikeIconButton" layoutX="575.0" layoutY="180.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bikeIconPressed" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="21.0">
                         <graphic>
                           <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -203,7 +203,7 @@
                           </ImageView>
                         </graphic>
                       </Button>
-                      <Button fx:id="favouriteIconButton" layoutX="575.0" layoutY="220.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#favouriteIconPressed" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: 144;" AnchorPane.rightAnchor="21.0">
+                      <Button fx:id="favouriteIconButton" layoutX="575.0" layoutY="220.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#favouriteIconPressed" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="21.0">
                         <graphic>
                           <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -212,7 +212,7 @@
                           </ImageView>
                         </graphic>
                       </Button>
-                      <Button fx:id="shareIconButton" layoutX="575.0" layoutY="260.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#sharePressed" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: 144;" AnchorPane.rightAnchor="21.0">
+                      <Button fx:id="shareIconButton" layoutX="575.0" layoutY="260.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#sharePressed" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="21.0">
                         <graphic>
                           <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                             <image>
