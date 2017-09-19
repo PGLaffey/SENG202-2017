@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * The raw data viewer class of the program.
  */
 public class RawDataViewer {
-    ArrayList<Route> routeArrayList = new ArrayList<Route>();
+    private ArrayList<Route> routeArrayList = new ArrayList<Route>();
 
     public RawDataViewer() {
         this.routeArrayList = CurrentStorage.getRouteArray();
@@ -46,7 +46,11 @@ public class RawDataViewer {
             } else if (String.valueOf(poiArrayList.get(i).getLatitude()).toLowerCase().contains(condition.toLowerCase())) {
             	foundPoi.add(poiArrayList.get(i));
             } else if (String.valueOf(poiArrayList.get(i).getLongitude()).toLowerCase().contains(condition.toLowerCase())) {
-            	foundPoi.add(poiArrayList.get(i));
+                foundPoi.add(poiArrayList.get(i));
+            } else if (!poiArrayList.get(i).getAddress().isEmpty()) {
+                if (poiArrayList.get(i).getAddress().toLowerCase().contains(condition.toLowerCase())) {
+                    foundPoi.add(poiArrayList.get(i));
+                }
             }
         }
         return foundPoi;
@@ -65,15 +69,19 @@ public class RawDataViewer {
                 foundRetailer.add(retailerArrayList.get(i));
             } else if (retailerArrayList.get(i).getProduct().toLowerCase().contains(condition.toLowerCase())) {
                 foundRetailer.add(retailerArrayList.get(i));
-            //} else if (retailerArrayList.get(i).getAddress().toLowerCase().contains(condition.toLowerCase())) {
-              //  foundRetailer.add(retailerArrayList.get(i));
-                // TODO Have commented this out because not all retailer objects have an address
+            } else if (Integer.toString(retailerArrayList.get(i).getZip()).contains(condition)) {
+                foundRetailer.add(retailerArrayList.get(i));
             } else if (retailerArrayList.get(i).getName().toLowerCase().contains(condition.toLowerCase())) {
                 foundRetailer.add(retailerArrayList.get(i));
             } else if (String.valueOf(retailerArrayList.get(i).getLatitude()).toLowerCase().contains(condition.toLowerCase())) {
             	foundRetailer.add(retailerArrayList.get(i));
             } else if (String.valueOf(retailerArrayList.get(i).getLongitude()).toLowerCase().contains(condition.toLowerCase())) {
             	foundRetailer.add(retailerArrayList.get(i));
+            	System.out.println(retailerArrayList.get(i).getAddress());
+            } else if (!retailerArrayList.get(i).getAddress().isEmpty()) {
+                if (retailerArrayList.get(i).getAddress().toLowerCase().contains(condition.toLowerCase())) {
+                    foundRetailer.add(retailerArrayList.get(i));
+                }
             }
             
         }
@@ -96,6 +104,10 @@ public class RawDataViewer {
             } else if (routeArrayList.get(i).getGender().toLowerCase().contains(condition.toLowerCase())) {
                 foundRoutes.add(routeArrayList.get(i));
             } else if (routeArrayList.get(i).getBikeID().contains(condition)) {
+                foundRoutes.add(routeArrayList.get(i));
+            } else if (routeArrayList.get(i).getStart().getName().toLowerCase().contains(condition.toLowerCase())) {
+                foundRoutes.add(routeArrayList.get(i));
+            } else if (routeArrayList.get(i).getEnd().getName().toLowerCase().contains(condition.toLowerCase())) {
                 foundRoutes.add(routeArrayList.get(i));
             }
         }

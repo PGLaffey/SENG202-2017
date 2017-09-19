@@ -8,6 +8,7 @@ import seng202.Model.Location;
 public class Poi extends Location {
     private String description;
     private double cost;
+    private String address;
 
     /**
      * The POI constructor, creates a new instance of the point of interest object using the location superclass constructor.
@@ -25,9 +26,12 @@ public class Poi extends Location {
 
     public Poi(String address, String name, String description, double cost) {
         super(address, name, 1);
+        this.address = address;
         this.description = description;
         this.cost = cost;
     }
+
+    public String getAddress() { return address; }
 
     public String getDescription() {
         return description;
