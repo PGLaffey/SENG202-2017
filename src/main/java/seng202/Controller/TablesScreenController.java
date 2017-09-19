@@ -247,6 +247,7 @@ public class TablesScreenController {
     		allLocationsTable.setVisible(false);
     		poiTable.setVisible(false);
     		retailersTable.setVisible(true);
+    		//retailersTable.toFront();
     		wifiTable.setVisible(false);
     		toiletsTable.setVisible(false);
     		routesTable.setVisible(false);
@@ -290,6 +291,7 @@ public class TablesScreenController {
     		wifiTable.setVisible(false);
     		toiletsTable.setVisible(false);
     		routesTable.setVisible(true);
+    		//routesTable.toFront();
     	}
     }
 
@@ -315,18 +317,84 @@ public class TablesScreenController {
     }
     
     @FXML
-    void tableMouseClicked(MouseEvent event) throws IOException {
-    	Retailer row = retailersTable.getSelectionModel().getSelectedItem();
-    	
+    void wifiTableClicked(MouseEvent event) throws IOException {
+    	Wifi row = wifiTable.getSelectionModel().getSelectedItem();
+    	CurrentStorage.setWifi(row);
     	Stage stage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/ObjectInfoScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/WifiInfoScreen.fxml"));
 
 		Scene scene = new Scene(root); 
-		stage.setTitle("Information");
+		stage.setTitle("About wifi point");
 		stage.setScene(scene);
 		stage.show();
 
     }
+    
+    @FXML
+    void retailerTableClicked(MouseEvent event) throws IOException {
+    	Retailer row = retailersTable.getSelectionModel().getSelectedItem();
+    	CurrentStorage.setRetailer(row);
+    	Stage stage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/RetailerInfoScreen.fxml"));
+
+		Scene scene = new Scene(root); 
+		stage.setTitle("About retailer point");
+		stage.setScene(scene);
+		stage.show();
+    	
+    }
+    
+/*    @FXML
+    void toiletTableClicked(MouseEvent event) throws IOException {
+    	Toilet row = toiletsTable.getSelectionModel().getSelectedItem();
+    	CurrentStorage.setToilet(row);
+    	Stage stage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/ToiletInfoScreen.fxml"));
+
+		Scene scene = new Scene(root); 
+		stage.setTitle("About toilet point");
+		stage.setScene(scene);
+		stage.show();
+    }*/
+    
+/*    @FXML
+    void allLocationTableClicked(MouseEvent event) throws IOException {
+    	Location row = allLocationsTable.getSelectionModel().getSelectedItem();
+    	CurrentStorage.setLocation(row);;
+    	Stage stage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/LocationInfoScreen.fxml"));
+
+		Scene scene = new Scene(root); 
+		stage.setTitle("About location point");
+		stage.setScene(scene);
+		stage.show();
+    }*/
+    
+    @FXML
+    void routeTableClicked(MouseEvent event) throws IOException {
+    	Route row = routesTable.getSelectionModel().getSelectedItem();
+    	CurrentStorage.setRoute(row);
+    	Stage stage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/RouteInfoScreen.fxml"));
+
+		Scene scene = new Scene(root); 
+		stage.setTitle("About route");
+		stage.setScene(scene);
+		stage.show();
+    }
+    
+/*    @FXML
+    void poiTableClicked(MouseEvent event) throws IOException {
+    	Poi row = poiTable.getSelectionModel().getSelectedItem();
+    	CurrentStorage.setPoi(row);
+    	Stage stage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/PoiInfoScreen.fxml"));
+
+		Scene scene = new Scene(root); 
+		stage.setTitle("About point of interest");
+		stage.setScene(scene);
+		stage.show();
+    }*/
 
 
     
@@ -338,11 +406,11 @@ public class TablesScreenController {
     	
     	// Random objects for testing
 
-    /*	CurrentStorage.addRetailer(new Retailer(23.45, 127.3, "Retailer new", "Bikes", "We sell bikes", 1));
+    	CurrentStorage.addRetailer(new Retailer(23.45, 127.3, "Retailer new", "Bikes", "We sell bikes", 1));
     	CurrentStorage.addRetailer(new Retailer(5345.2, 765.3, "Retailer old", "Biks", "what do we", 1));
     	CurrentStorage.addRetailer(new Retailer(123.45, 127.3, "Retailer new", "Bikes", "rand", 1));
     	CurrentStorage.addRetailer(new Retailer(400.45, 127.3, "Retailer new", "Bikes", "We sell bikes", 1));
-    	CurrentStorage.addRetailer(new Retailer(1235, 123, "Retaew", "CLothes", "We sell bikes", 1));*/
+    	CurrentStorage.addRetailer(new Retailer(1235, 123, "Retaew", "CLothes", "We sell bikes", 1));
     	
     	// Originally     	
     	allLocationsTable.setVisible(false);

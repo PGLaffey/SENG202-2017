@@ -117,7 +117,7 @@
                     <TableColumn prefWidth="200.0" text="Longitude" fx:id="allLocLongCol" />
                   </columns>
                 </TableView>
-                <TableView id="allLocationsTable" fx:id="wifiTable" layoutX="13.0" layoutY="119.0" prefHeight="300.0" prefWidth="800.0" visible="false">
+                <TableView id="allLocationsTable" fx:id="wifiTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#wifiTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false">
                   <columns>
                     <TableColumn prefWidth="160.0" text="Name" fx:id="wifiNameCol" />
                     <TableColumn prefWidth="130.0" text="Latitude" fx:id="wifiLatCol" />
@@ -127,7 +127,7 @@
                     <TableColumn prefWidth="130.0" text="Provider" fx:id="wifiProvCol" />
                   </columns>
                 </TableView>
-                <TableView id="allLocationsTable" fx:id="retailersTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#tableMouseClicked" prefHeight="300.0" prefWidth="800.0" visible="true">
+                <TableView id="allLocationsTable" fx:id="retailersTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#retailerTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false">
                   <columns>
                     <TableColumn prefWidth="160.0" text="Name" fx:id="retNameCol" />
                     <TableColumn prefWidth="160.0" text="Latitude" fx:id="retLatCol" />
@@ -154,7 +154,7 @@
                     <TableColumn prefWidth="160.0" text="Disabled" fx:id="toiletDisCol" />
                   </columns>
                 </TableView>
-                <TableView id="allLocationsTable" fx:id="routesTable" layoutX="13.0" layoutY="119.0" prefHeight="300.0" prefWidth="800.0" visible="false">
+                <TableView id="allLocationsTable" fx:id="routesTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#routeTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false">
                   <columns>
                     <TableColumn prefWidth="200.0" text="Name" fx:id="routeNameCol" />
                     <TableColumn prefWidth="200.0" text="Start" fx:id="routeStartCol" />
