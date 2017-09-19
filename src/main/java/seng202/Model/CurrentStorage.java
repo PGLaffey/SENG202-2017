@@ -13,12 +13,19 @@ public class CurrentStorage {
     private static ArrayList<Poi> poiArray = new ArrayList<Poi>();
     private static User currentUser;
     
+    private static Wifi wifiViewed;
+    private static Retailer retailerViewed;
+    private static Toilet toiletViewed;
+    private static Poi poiViewed;
+    private static Location locationViewed;
+    private static Route routeViewed;
+    
     
     public static User getUser() {
     	return currentUser;
     }
-    
-    public static void setUser(User user) {
+
+	public static void setUser(User user) {
     	currentUser = user;
     }
 
@@ -63,6 +70,54 @@ public class CurrentStorage {
     public static void addPoi(Poi poi) {
     	poiArray.add(poi);
     }
+    
+    public static void setWifi(Wifi wifi) {
+    	wifiViewed = wifi;
+    }
+    
+    public static Wifi getWifi() {
+    	return wifiViewed;
+    }
+    
+    public static void setRetailer(Retailer retailer) {
+    	retailerViewed = retailer;
+    }
+    
+    public static Retailer getRetailer() {
+    	return retailerViewed;
+    }
+    
+    public static Toilet getToilet() {
+		return toiletViewed;
+	}
+
+	public static void setToilet(Toilet toilet) {
+		toiletViewed = toilet;
+	}
+
+	public static Poi getPoi() {
+		return poiViewed;
+	}
+
+	public static void setPoi(Poi poi) {
+		poiViewed = poi;
+	}
+
+	public static Location getLocation() {
+		return locationViewed;
+	}
+
+	public static void setLocation(Location location) {
+		locationViewed = location;
+	}
+
+	public static Route getRoute() {
+		return routeViewed;
+	}
+
+	public static void setRoute(Route route) {
+		routeViewed = route;
+	}
 
     /**
      * Flushes all data out of arrayLists.
