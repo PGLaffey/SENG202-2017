@@ -1,5 +1,7 @@
 package seng202.Controller;
 
+
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
 import seng202.Model.Location;
@@ -311,6 +313,21 @@ public class TablesScreenController {
     @FXML
     void tablePressed(ActionEvent event) {
     }
+    
+    @FXML
+    void tableMouseClicked(MouseEvent event) throws IOException {
+    	Retailer row = retailersTable.getSelectionModel().getSelectedItem();
+    	
+    	Stage stage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/ObjectInfoScreen.fxml"));
+
+		Scene scene = new Scene(root); 
+		stage.setTitle("Information");
+		stage.setScene(scene);
+		stage.show();
+
+    }
+
 
     
     /**
@@ -321,7 +338,7 @@ public class TablesScreenController {
     	
     	// Random objects for testing
 
-/*    	CurrentStorage.addRetailer(new Retailer(23.45, 127.3, "Retailer new", "Bikes", "We sell bikes", 1));
+    /*	CurrentStorage.addRetailer(new Retailer(23.45, 127.3, "Retailer new", "Bikes", "We sell bikes", 1));
     	CurrentStorage.addRetailer(new Retailer(5345.2, 765.3, "Retailer old", "Biks", "what do we", 1));
     	CurrentStorage.addRetailer(new Retailer(123.45, 127.3, "Retailer new", "Bikes", "rand", 1));
     	CurrentStorage.addRetailer(new Retailer(400.45, 127.3, "Retailer new", "Bikes", "We sell bikes", 1));
