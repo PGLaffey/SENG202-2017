@@ -31,7 +31,7 @@ public class ObjectInfoScreenController {
     }
     
     public static void setInfoLabel(String retailer ) {
-    	//objectInfoLabel.setText(retailer);
+    	objectInfoLabel.setText(retailer);
     }
 
     @FXML
