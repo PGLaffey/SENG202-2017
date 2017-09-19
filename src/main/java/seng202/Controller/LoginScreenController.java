@@ -57,8 +57,8 @@ public class LoginScreenController {
 			//CurrentStorage.setUser(user); // TODO: Not sure how to access the users name and dob from the database
 			// TODO: put the correct filenames in
 			// TODO: or somehow load the objects into current storage
-			FileManager.retailerRetriever( new File(getClass().getResource("/data_files/").getFile()).toString() + "/retailer_data1.csv");
-			FileManager.wifiRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/wifi_data1.csv");
+			//FileManager.retailerRetriever( new File(getClass().getResource("/data_files/").getFile()).toString() + "/Lower_Manhattan_Retailers.csv");
+			//FileManager.wifiRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/NYC_Free_Public_WiFi_03292017.csv");
 			//FileManager.routeRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-01 - Citi Bike trip data.csv");
 			//FileManager.routeRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-02 - Citi Bike trip data.csv");
 			User user = new User("Courtney", "Hoskin", "cgh31", "6 apr","password");
