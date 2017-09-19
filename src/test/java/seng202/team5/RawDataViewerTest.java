@@ -56,7 +56,7 @@ public class RawDataViewerTest extends TestCase {
         // Add the place of interest to an ArrayList
         pois.add(ESB);
 
-        ArrayList<Poi> found = RawDataViewer.searchPoi(pois, "350 5th Ave, New York, NY");
+        ArrayList<Poi> found = RawDataViewer.searchPoi(pois, "350 5th Ave, New Tork, NY");
         assertTrue(found.get(0).equals(ESB));
     }
 
@@ -207,7 +207,6 @@ public class RawDataViewerTest extends TestCase {
         retailers.add(SBC);
         retailers.add(HRC);
         retailers.add(AJK);
-
         RawDataViewer filterer = new RawDataViewer();
         ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "NY");
         assertEquals(3, found.size());
@@ -257,7 +256,7 @@ public class RawDataViewerTest extends TestCase {
         //Create new retailers to test on.
         Retailer SBC = new Retailer("3 New York Plaza, New York, NY", "Starbucks Coffee",
                 "Casual Eating and Takeout", "F-Coffeehouse", 10004);
-
+        retailers.add(SBC);
         ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "3 New York Plaza, New York, NY");
         assertTrue(found.get(0).equals(SBC));
     }
@@ -271,7 +270,7 @@ public class RawDataViewerTest extends TestCase {
         // Create new retailers to test on.
         Retailer HRC = new Retailer("39 Whitehall Street, New York, NY", "New York Health & Racquet Club",
                 "Personal and Professional Services", "P-Athletic Clubs/Fitness", 10004);
-
+        retailers.add(HRC);
         ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "Personal and Professional Services");
         assertTrue(found.get(0).equals(HRC));
     }
@@ -285,8 +284,8 @@ public class RawDataViewerTest extends TestCase {
         // Create new retailers to test on.
         Retailer HRC = new Retailer("39 Whitehall Street, New York, NY", "New York Health & Racquet Club",
                 "Personal and Professional Services", "P-Athletic Clubs/Fitness", 10004);
-
-        ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "Personal and Professional Services");
+        retailers.add(HRC);
+        ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "10004");
         assertTrue(found.get(0).equals(HRC));
     }
 
@@ -299,7 +298,7 @@ public class RawDataViewerTest extends TestCase {
         //Create new retailers to test on.
         Retailer AJK = new Retailer("6 Stone Street, New York, NY", "A.J. Kelly's",
                 "Full Service Dining", "F-American", 10004);
-
+        retailers.add(AJK);
         ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "A.J. Kelly's");
         assertTrue(found.get(0).equals(AJK));
     }
@@ -313,7 +312,7 @@ public class RawDataViewerTest extends TestCase {
         // Create new retailers to test on.
         Retailer HRC = new Retailer("39 Whitehall Street, New York, NY", "New York Health & Racquet Club",
                 "Personal and Professional Services", "P-Athletic Clubs/Fitness", 10004);
-
+        retailers.add(HRC);
         ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "P-Athletic Clubs/Fitness");
         assertTrue(found.get(0).equals(HRC));
     }
