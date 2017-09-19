@@ -28,13 +28,13 @@ public class Location {
 
     /**
      * Overloaded constructor to take an address and obtain a longitude and lattitude for the address.
-     * @param address The address of the location.
+     * address The address of the location.
      * @param name The name of the new location.
      * @param locationType The type of location the new location is (i.e. point of interest, wifi spot, retailer or toilet).
      */
-    public Location(String address, String name, int locationType) {
-        this.latitude = Map.getLatitude(address);
-        this.longitude = Map.getLongitude(address);
+    public Location(/*String address,*/ String name, int locationType) {
+        //this.latitude = Map.getLatitude(address);
+        //this.longitude = Map.getLongitude(address);
         this.name = name;
         this.locationType = locationType;
     }

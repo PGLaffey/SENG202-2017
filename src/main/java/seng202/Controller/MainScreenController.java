@@ -261,7 +261,12 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     void retailerIconPressed(ActionEvent event) {
         for (Retailer retailer : CurrentStorage.getRetailerArray()) {
-            placeMarkerOnMap(retailer);
+            placeRetailerOnMap(retailer);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                continue;
+            }
         }
     }
 
@@ -352,6 +357,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     public void placeMarkerOnMap(Location loc) {
         Map.findLocation(loc, map, geocodingService);
     }
+
+    public void placeRetailerOnMap(Retailer retailer) {Map.findRetailers(retailer, map, geocodingService);}
 
     public void placeMarkerOnMap(Route route) {
         Map.findLocation(route.getStart(), map, geocodingService);
