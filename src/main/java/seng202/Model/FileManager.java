@@ -191,7 +191,11 @@ public class FileManager {
                 String[] information = retailer.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 
                 //Obtain relevant fields
-                int zip = Integer.parseInt(information[retailerZip]);
+                int zip = 0;
+                if (information[retailerZip].matches("^-?\\d+$")) {
+                    zip = Integer.parseInt(information[retailerZip]);
+                }
+
 
                 //Creates a new instance of retailer.
                 Retailer newRetailer = new Retailer(information[addrLine1Index], information[retailerName], information[retailerPrimary], information[retailerSecondary], zip);
