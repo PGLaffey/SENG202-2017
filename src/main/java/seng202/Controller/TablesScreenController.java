@@ -57,7 +57,6 @@ public class TablesScreenController {
 
     @FXML
     private TableView<Location> allLocationsTable;
-    
 
     @FXML
     private Button logoutButton;
@@ -230,10 +229,16 @@ public class TablesScreenController {
 
     	String option = tableOptions.getValue().toString();
     	if (option == "All locations") {
-    		// TODO: have a getLocationArray() in current storage, then uncomment the below
-    		//ArrayList<Location> = locFiltered = RawDataViewer.searchLocations(CurrentStorage.getLocationArray(), keywordText.getText().toString());
-    		//ObservableList<Location> locData = FXCollections.observableArrayList(locFiltered);
-        	//allLocationsTable.setItems(locData);
+    		ArrayList<Location> locations = new ArrayList<Location>();
+    		locations.addAll(CurrentStorage.getPoiArray());
+    		locations.addAll(CurrentStorage.getRetailerArray());
+    		locations.addAll(CurrentStorage.getToiletArray());
+    		locations.addAll(CurrentStorage.getWifiArray());
+    		 
+    		ArrayList<Location> locFiltered = RawDataViewer.searchLocations(locations, keywordText.getText().toString());   		
+    		ObservableList<Location> locData = FXCollections.observableArrayList(locFiltered);
+    		allLocationsTable.setItems(locData);
+    		
     		allLocationsTable.setVisible(true);
     		poiTable.setVisible(false);
     		retailersTable.setVisible(false);
