@@ -35,10 +35,18 @@ public class DataFetcher {
 	public ArrayList<ArrayList<String>> fetchUserInfo(String username) {
 		return (runQuery("SELECT FName, LNAME, YearOfBirth FROM tblUser WHERE Username = '" + username + "'"));
 	}
-    /**
+
+
+	public void deleteUser(String username) {
+		runQuery( "DELETE FROM TABLE tblUser WHERE Username = '" + username + "'");
+	}
+
+
+	/**
      * Loads a route into the application
      * @param route Route to add into the application
      */
+
     public void loadRoute(Route route) {
     	double[] startCoords = route.getStart().getCoords();
     	double[] endCoords = route.getEnd().getCoords();
