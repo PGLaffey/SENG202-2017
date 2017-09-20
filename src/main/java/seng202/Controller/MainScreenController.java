@@ -44,7 +44,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     private URL location;
     
     @FXML
-    private AnchorPane addLocationsPane;
+    private AnchorPane addWifiPane;
 
     @FXML
     private AnchorPane mainMapPane;
@@ -57,9 +57,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     
     @FXML
     private Button tableButton;
-
-    @FXML
-    private Button addLocationsButton;
 
     @FXML
     private Button bikeIconButton;
@@ -123,6 +120,24 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     private ChoiceBox<String> locationTypeBox;
+    
+    @FXML
+    private MenuButton addLocationsMenu;
+
+    @FXML
+    private MenuItem addOtherMenuButton;
+
+    @FXML
+    private MenuItem addPoiMenuButton;
+
+    @FXML
+    private MenuItem addRetailerMenuButton;
+
+    @FXML 
+    private MenuItem addToiletMenuButton;
+
+    @FXML
+    private MenuItem addWifiMenuButton;
 
     private GoogleMap map;
 
@@ -222,12 +237,12 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     void randomRoutePressed(ActionEvent event) {
     	randomRoutePane.setVisible(true);
     	mainMapPane.setVisible(false);
-    	addLocationsPane.setVisible(false);
+    	addWifiPane.setVisible(false);
     }
 
     @FXML
     void addLocationsPressed(ActionEvent event) {
-    	addLocationsPane.setVisible(true);
+    	addWifiPane.setVisible(true);
     	mainMapPane.setVisible(false);
     	randomRoutePane.setVisible(false);
     }
@@ -309,6 +324,30 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         map.clearMarkers();
         Map.findLocation(address.get(), map, geocodingService);
     }
+    
+    @FXML
+    void addOtherMenuPressed(ActionEvent event) {
+    }
+
+    @FXML
+    void addPoiMenuPressed(ActionEvent event) {
+    }
+
+    @FXML
+    void addRetailerMenuPressed(ActionEvent event) {
+    }
+
+    @FXML
+    void addToiletMenuPressed(ActionEvent event) {
+    }
+
+    @FXML
+    void addWifiMenuPressed(ActionEvent event) {
+    	addWifiPane.setVisible(true);
+    	mainMapPane.setVisible(false);
+    }
+
+    
     @FXML
     void initialize() {
     	ObservableList<String> locationTypes = FXCollections.observableArrayList("Wifi hotspot","Retailer","Toilets", "Point of interest", "Other");
@@ -317,13 +356,14 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     	loadRouteMenu.setPopupSide(Side.RIGHT);
     	locationTypeBox.setItems(locationTypes);
-    	addLocationsPane.setVisible(false);
+    	addWifiPane.setVisible(false);
     	mainMapPane.setVisible(true);
     	randomRoutePane.setVisible(false);
+    	
+    	addLocationsMenu.setPopupSide(Side.RIGHT);
 
         assert accountButton != null : "fx:id=\"accountButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert addLocationsButton != null : "fx:id=\"addLocationsButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert addLocationsPane != null : "fx:id=\"addLocationsPane\" was not injected: check your FXML file 'MainScreen.fxml'.";
+        assert addWifiPane != null : "fx:id=\"addWifiPane\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert bikeIconButton != null : "fx:id=\"bikeIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert favouriteIconButton != null : "fx:id=\"favouriteIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert favouriteRoutesMenu != null : "fx:id=\"favouriteRoutesMenu\" was not injected: check your FXML file 'MainScreen.fxml'.";
