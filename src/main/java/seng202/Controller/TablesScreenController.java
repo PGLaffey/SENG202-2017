@@ -430,9 +430,9 @@ public class TablesScreenController {
     	allLocLatCol.setCellValueFactory(new PropertyValueFactory<Location,Double>("latitude"));
     	allLocLongCol.setCellValueFactory(new PropertyValueFactory<Location,Double>("longitude"));
     	allLocTypeCol.setCellValueFactory(new PropertyValueFactory<Location,String>("typeString"));
-    	
-    	ObservableList<Location> locData = FXCollections.observableArrayList(CurrentStorage.getToiletArray()); // TODO: Make a list in Current Storage that has all the locations, getLocationArray()
-    	allLocationsTable.setItems(locData);
+
+		ObservableList<Location> locData = FXCollections.observableArrayList(CurrentStorage.getToiletArray()); // TODO: Make a list in Current Storage that has all the locations, getLocationArray()
+		allLocationsTable.setItems(locData);
     	
     	// Set up the toilets table
     	toiletDisCol.setCellValueFactory(new PropertyValueFactory<Toilet, Boolean>("forDisabled"));

@@ -32,7 +32,7 @@ public class Map{
         double latitude = 0;
         address = address.replaceAll(" ", "%20");
         try {
-            URL mapsUrl = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=true");
+            URL mapsUrl = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=\"" + address + ",%20NY&sensor=true");
             HttpURLConnection request = (HttpURLConnection) mapsUrl.openConnection();
             request.setRequestMethod("GET");
             request.connect();
@@ -57,7 +57,7 @@ public class Map{
         double longitude = 0;
         address = address.replaceAll(" ", "%20");
         try {
-            URL mapsUrl = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=true");
+            URL mapsUrl = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=\"" + address + ",%20NY\"&sensor=true");
             HttpURLConnection request = (HttpURLConnection) mapsUrl.openConnection();
             request.setRequestMethod("GET");
             request.connect();

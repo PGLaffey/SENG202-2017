@@ -372,10 +372,11 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
         mapOptions.center(new LatLong(40.6971494, -74.2598728))
                 .mapType(MapTypeIdEnum.ROADMAP)
+                .mapTypeControl(false)
                 .overviewMapControl(false)
-                .panControl(true)
-                .rotateControl(true)
-                .scaleControl(true)
+                .panControl(false)
+                .rotateControl(false)
+                .scaleControl(false)
                 .streetViewControl(false)
                 .zoomControl(true)
                 .zoom(12);
