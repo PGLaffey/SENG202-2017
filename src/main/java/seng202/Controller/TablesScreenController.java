@@ -180,7 +180,7 @@ public class TablesScreenController {
     	Stage primaryStage = (Stage) accountButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
 		
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
 		primaryStage.setTitle("Profile");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -198,7 +198,7 @@ public class TablesScreenController {
     	Stage primaryStage = (Stage) logoutButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 		
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
 		primaryStage.setTitle("Login");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -214,7 +214,7 @@ public class TablesScreenController {
     	Stage primaryStage = (Stage) mapButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 		
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
 		primaryStage.setTitle("Map");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -309,7 +309,7 @@ public class TablesScreenController {
     	Stage primaryStage = (Stage) statButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/DataViewerScreen.fxml"));
 		
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
 		primaryStage.setTitle("Statistics");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -326,7 +326,7 @@ public class TablesScreenController {
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/WifiInfoScreen.fxml"));
 
-		Scene scene = new Scene(root); 
+		Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
 		stage.setTitle("About wifi point");
 		stage.setScene(scene);
 		stage.show();
@@ -340,7 +340,7 @@ public class TablesScreenController {
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/RetailerInfoScreen.fxml"));
 
-		Scene scene = new Scene(root); 
+		Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
 		stage.setTitle("About retailer point");
 		stage.setScene(scene);
 		stage.show();
@@ -354,7 +354,7 @@ public class TablesScreenController {
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/ToiletInfoScreen.fxml"));
 
-		Scene scene = new Scene(root); 
+		Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
 		stage.setTitle("About toilet point");
 		stage.setScene(scene);
 		stage.show();
@@ -367,7 +367,7 @@ public class TablesScreenController {
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/LocationInfoScreen.fxml"));
 
-		Scene scene = new Scene(root); 
+		Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
 		stage.setTitle("About location point");
 		stage.setScene(scene);
 		stage.show();
@@ -380,7 +380,7 @@ public class TablesScreenController {
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/RouteInfoScreen.fxml"));
 
-		Scene scene = new Scene(root); 
+		Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
 		stage.setTitle("About route");
 		stage.setScene(scene);
 		stage.show();
@@ -393,7 +393,7 @@ public class TablesScreenController {
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/PoiInfoScreen.fxml"));
 
-		Scene scene = new Scene(root); 
+		Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
 		stage.setTitle("About point of interest");
 		stage.setScene(scene);
 		stage.show();

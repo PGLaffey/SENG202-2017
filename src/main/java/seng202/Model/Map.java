@@ -11,8 +11,10 @@ import com.lynden.gmapsfx.service.geocoding.GeocodingResult;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
 import com.lynden.gmapsfx.shapes.Circle;
 import com.lynden.gmapsfx.shapes.CircleOptions;
+import com.lynden.gmapsfx.util.MarkerImageFactory;
 import javafx.scene.control.Alert;
 
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -20,7 +22,7 @@ import java.net.URL;
 
 import static java.lang.Math.toRadians;
 
-public class Map{
+public class Map extends Thread{
     private Route currentRoute;
     private Location currentLocation;
     private static GeocodingService geoService;
@@ -245,26 +247,29 @@ public class Map{
 
     public static void findWifi(Wifi wifi, GoogleMap map) {
         if (wifi.getCircle() == null) {
+            System.out.println("Making new circles");
             CircleOptions circleOptns = new CircleOptions()
                     .center(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
                     .radius(70)
                     .draggable(false)
                     .clickable(true)
                     .fillOpacity(0.075)
-                    .fillColor("LightBlue")
+                    .fillColor("Blue")
                     .strokeColor("Blue")
                     .strokeWeight(0.2);
             wifi.setCircle(new Circle(circleOptns));
-            map.addMapShape(wifi.getCircle());
             wifi.getCircle().setVisible(!wifi.getCircle().getVisible());
+            map.addMapShape(wifi.getCircle());
+
         } else {
+            System.out.println("hiding/showing existing");
             wifi.getCircle().setVisible(!wifi.getCircle().getVisible());
         }
     }
 
     public static void findRetailers(Retailer retailer, GoogleMap map, GeocodingService service) {
         if (retailer.getMarker() == null) {
-            System.out.println(retailer.getAddress());
+            System.out.println("Making new marker.");
             service.geocode(retailer.getAddress() + ", NYC", (GeocodingResult[] results, GeocoderStatus status) -> {
                 LatLong latLong = null;
 
@@ -278,15 +283,17 @@ public class Map{
                             results[0].getGeometry().getLocation().getLongitude());
                 }
 
-                Marker marker = new Marker(new MarkerOptions()
+                MarkerOptions markerOptns = new MarkerOptions()
                         .animation(Animation.DROP)
                         .position(latLong)
-                        .icon("http://maps.google.com/mapfiles/ms/micons/green-dot.png"));
-                retailer.setMarker(marker);
+                        .visible(false)
+                        .icon("http://maps.google.com/mapfiles/kml/pal3/icon26.png");
+                retailer.setMarker(new Marker(markerOptns));
                 map.addMarker(retailer.getMarker());
                 retailer.getMarker().setVisible(!retailer.getMarker().getVisible());
             });
         } else {
+            System.out.println("Showing/Hiding");
             retailer.getMarker().setVisible(!retailer.getMarker().getVisible());
         }
     }
@@ -326,13 +333,7 @@ public class Map{
         }
     }
 
-    public static void main(String[] argv){
-        System.out.println(Map.getDistance(-43.512390, 172.546751,-43.523538, 172.583923));
-        System.out.println(Map.getLatitude("University of Canterbury"));
-        System.out.println(Map.getLongitude("University of Canterbury"));
-        Location loc = new Retailer("3 New York Plaza", "Test", "Thing", "BEGONE THOT", 4);
-        System.out.println(loc.getLatitude());
-        System.out.println(loc.getLongitude());
-        System.out.println(seng202.Model.Map.class.getResource("/images/wifiIcon.png").getFile());
+    public void run(){
+        System.out.println("Starting thread");
     }
 }

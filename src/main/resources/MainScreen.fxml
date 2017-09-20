@@ -26,9 +26,9 @@
   <children>
     <SplitPane dividerPositions="0.10472279260780287" orientation="VERTICAL" prefHeight="489.0" prefWidth="827.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <items>
-        <AnchorPane maxHeight="49.0" minHeight="0.0" minWidth="49.0">
+        <AnchorPane maxHeight="49.0" minHeight="49.0" minWidth="0.0">
           <children>
-            <GridPane prefHeight="49.0" prefWidth="825.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane minHeight="49.0" prefWidth="825.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
                 <Label alignment="CENTER" prefHeight="16.0" prefWidth="132.0" text="CYCLRR" GridPane.columnIndex="0" GridPane.rowIndex="0">
                   <graphic>
@@ -103,7 +103,7 @@
           <children>
             <SplitPane dividerPositions="0.22235722964763063" prefHeight="432.0" prefWidth="825.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" SplitPane.resizableWithParent="false">
               <items>
-                <AnchorPane maxWidth="500.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <AnchorPane maxWidth="200.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                   <children>
                     <GridPane prefHeight="430.0" prefWidth="182.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>

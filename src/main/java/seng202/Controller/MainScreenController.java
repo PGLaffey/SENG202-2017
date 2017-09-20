@@ -5,10 +5,13 @@ import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.object.*;
 import com.lynden.gmapsfx.service.directions.*;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
+import com.lynden.gmapsfx.shapes.Circle;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Service;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.concurrent.Task;
 import org.omg.CORBA.Current;
 import seng202.Model.*;
 
@@ -25,6 +29,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static seng202.Model.Map.findRetailers;
+import static seng202.Model.Map.findWifi;
 
 
 public class MainScreenController implements MapComponentInitializedListener, DirectionsServiceCallback{
@@ -283,8 +290,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     private TextField otherZipText;
 
-
-    
+    Service<Void> backgroundThread;
     
     /** 
      * Method for when the map menu button is pressed, shows the main map screen.
@@ -296,7 +302,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	Stage primaryStage = (Stage) mapButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 		
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
 		primaryStage.setTitle("Map");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -312,7 +318,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 		Stage primaryStage = (Stage) tableButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
 		
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
 		primaryStage.setTitle("Table");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -329,7 +335,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 		Parent root = FXMLLoader.load(getClass().getResource("/DataViewerScreen.fxml"));
 		
 		primaryStage.setTitle("Statistics");
-		primaryStage.setScene(new Scene(root));
+		primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
 		primaryStage.show();
     }
 
@@ -344,7 +350,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
 		
 		primaryStage.setTitle("Profile");
-		primaryStage.setScene(new Scene(root));
+		primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
 		primaryStage.show();
     }
     
@@ -361,7 +367,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 		
 		primaryStage.setTitle("Login");
-		primaryStage.setScene(new Scene(root));
+		primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
 		primaryStage.show();
     }
     
@@ -398,7 +404,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	Parent root = FXMLLoader.load(getClass().getResource("/ShareRouteScreen.fxml"));
 
     	stage.setTitle("Share route");
-    	stage.setScene(new Scene(root));
+    	stage.setScene(new Scene(root, stage.getWidth(), stage.getHeight()));
     	stage.show();
     }
 
@@ -418,11 +424,25 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         for (Retailer retailer : CurrentStorage.getRetailerArray()) {
             placeRetailerOnMap(retailer);
             try {
-                Thread.sleep(451);
+                Thread.sleep(475);
             } catch (InterruptedException e) {
-                continue;
+                e.printStackTrace();
             }
         }
+        /*
+        backgroundThread = new Service<Void>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+
+                        return null;
+                    }
+                };
+            }
+        };
+        backgroundThread.restart();*/
     }
 
     /** 
@@ -435,7 +455,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/SaveRouteScreen.fxml"));
 		
-		Scene scene = new Scene(root); 
+		Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
 		stage.setTitle("Save Route");
 		stage.setScene(scene);
 		stage.show();
@@ -606,6 +626,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     public void placeCircleOnMap(Wifi wifi) {
         Map.findWifi(wifi, map);
+
     }
 
     public void placeMarkerOnMap(Location loc) {

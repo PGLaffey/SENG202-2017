@@ -56,7 +56,7 @@ public class DataViewerScreenController {
 		Stage primaryStage = (Stage) mapButton.getScene().getWindow(); // Here the window is the stage
 		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 		
-		Scene scene = new Scene(root); // I think we can add in window size here?
+		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Map");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -73,7 +73,7 @@ public class DataViewerScreenController {
 		Stage primaryStage = (Stage) tableButton.getScene().getWindow(); // Here the window is the stage
 		Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
 		
-		Scene scene = new Scene(root); // I think we can add in window size here?
+		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Table");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -89,7 +89,7 @@ public class DataViewerScreenController {
 		Stage primaryStage = (Stage) statButton.getScene().getWindow(); // Here the window is the stage
 		Parent root = FXMLLoader.load(getClass().getResource("/DataViewerScreen.fxml"));
 		
-		Scene scene = new Scene(root); // I think we can add in window size here?
+		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Statistics");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -104,7 +104,7 @@ public class DataViewerScreenController {
 		Stage primaryStage = (Stage) accountButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
 		
-		Scene scene = new Scene(root); 
+		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
 		primaryStage.setTitle("Profile");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -121,7 +121,7 @@ public class DataViewerScreenController {
 		Stage primaryStage = (Stage) logoutButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 		
-		Scene scene = new Scene(root); 
+		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
 		primaryStage.setTitle("Login");
 		primaryStage.setScene(scene);
 		primaryStage.show();	

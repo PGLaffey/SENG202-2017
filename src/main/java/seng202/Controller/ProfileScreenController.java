@@ -57,7 +57,7 @@ public class ProfileScreenController {
 		Stage primaryStage = (Stage) mapButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 		
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
 		primaryStage.setTitle("Map");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -74,7 +74,7 @@ public class ProfileScreenController {
 		Stage primaryStage = (Stage) tableButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
 		
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
 		primaryStage.setTitle("Table");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -90,7 +90,7 @@ public class ProfileScreenController {
 		Stage primaryStage = (Stage) statButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/DataViewerScreen.fxml"));
 		
-		Scene scene = new Scene(root); 
+		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
 		primaryStage.setTitle("Statistics");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -105,7 +105,7 @@ public class ProfileScreenController {
 		Stage primaryStage = (Stage) accountButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
 		
-		Scene scene = new Scene(root); 
+		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
 		primaryStage.setTitle("Profile");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -122,7 +122,7 @@ public class ProfileScreenController {
 		Stage primaryStage = (Stage) logoutButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 		
-		Scene scene = new Scene(root); 
+		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
 		primaryStage.setTitle("Login");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -144,7 +144,7 @@ public class ProfileScreenController {
 		Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/ChangePasswordScreen.fxml"));
 		
-		Scene scene = new Scene(root); 
+		Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
 		stage.setTitle("Change Password");
 		stage.setScene(scene);
 		stage.show();
@@ -159,7 +159,7 @@ public class ProfileScreenController {
 		Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/DeleteAccountScreen.fxml"));
 		
-		Scene scene = new Scene(root); 
+		Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
 		stage.setTitle("Delete Account");
 		stage.setScene(scene);
 		stage.show();

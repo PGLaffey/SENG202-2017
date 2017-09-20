@@ -71,7 +71,7 @@ public class SignupScreenController {
             Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 
             primaryStage.setTitle("Login");
-            primaryStage.setScene(new Scene(root));
+            primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
         }
     }
     
@@ -85,7 +85,7 @@ public class SignupScreenController {
 		Stage primaryStage = (Stage) backButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 		
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
 		primaryStage.setTitle("Log in");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
