@@ -10,7 +10,6 @@ import java.util.Arrays;
 
 /**
  * Badge class that serves as a superclass to all the different types of badges.
- *
  */
 
 public class Badge {

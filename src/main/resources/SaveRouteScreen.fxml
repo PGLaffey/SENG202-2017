@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="452.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.team5.SaveRouteScreenController">
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="452.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.Controller.SaveRouteScreenController">
   <children>
     <Button id="signInButton" fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelButtonPressed" text="Cancel" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
       <GridPane.margin>

@@ -2,14 +2,14 @@ package seng202.team5;
 
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import org.junit.Ignore;
 import org.junit.Test;
+import seng202.Model.DataFetcher;
+import seng202.Model.FileManager;
 
 import java.sql.SQLException;
 
 public class DataFetcherTest extends TestCase {
     private DataFetcher fetcher;
-    private static final String TARGET = "/testdata/";
 
     /**
      * @param testName The name of the test
@@ -34,6 +34,7 @@ public class DataFetcherTest extends TestCase {
     {
         fetcher = new DataFetcher();
     }
+
     /**
      * Test to ensure that the connectDB function results in a functional connection.
      */
@@ -58,23 +59,14 @@ public class DataFetcherTest extends TestCase {
     }
 
     /**
-     * Test to ensure the DataFetcher class can be sent SQL statements and return correct data.
-     */
-    @Test
-    public void testSQL()
-    {
-
-    }
-
-    /**
      * Test to ensure that the DataFetcher class can write routes to the database.
      */
     @Test
     public void testWriteRoute()
     {
+        String TARGET = getClass().getResource("/testdata/route_data1.csv").getFile();
         FileManager reader = new FileManager();
-        reader.readFile(TARGET+"route_data1.csv");
-
+        reader.readFile(TARGET);
     }
 
     /**
