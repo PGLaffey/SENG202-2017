@@ -19,8 +19,7 @@ public class CurrentStorage {
     private static Poi poiViewed;
     private static Location locationViewed;
     private static Route routeViewed;
-    
-    
+
     public static User getUser() {
     	return currentUser;
     }
@@ -60,7 +59,9 @@ public class CurrentStorage {
     }
 
     public static void addWifi(Wifi wifi) {
-        wifiArray.add(wifi);
+        if (!retailerArray.contains(wifi)) {
+            wifiArray.add(wifi);
+        }
     }
     
     public static void addToilet(Toilet toilet) {
