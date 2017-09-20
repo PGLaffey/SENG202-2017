@@ -152,6 +152,26 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     private TextField wifiNameText;
     
+    //Adding poi pane
+    
+    @FXML
+    private AnchorPane addPoiPane;
+    
+    //Adding toilet pane
+    
+    @FXML
+    private AnchorPane addToiletPane;
+    
+    //Adding retailer pane
+    
+    @FXML
+    private AnchorPane addRetailerPane;
+    
+    //Adding other pane
+    
+    @FXML
+    private AnchorPane addOtherPane;
+    
 
 
 
@@ -338,24 +358,77 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     
     @FXML
     void addOtherMenuPressed(ActionEvent event) {
+    	addWifiPane.setVisible(false);
+    	mainMapPane.setVisible(false);
+    	addPoiPane.setVisible(false);
+    	addToiletPane.setVisible(false);
+    	addRetailerPane.setVisible(false);
+    	addOtherPane.setVisible(true);
+    	randomRoutePane.setVisible(false);
     }
 
     @FXML
     void addPoiMenuPressed(ActionEvent event) {
+    	addWifiPane.setVisible(false);
+    	mainMapPane.setVisible(false);
+    	addPoiPane.setVisible(true);
+    	addToiletPane.setVisible(false);
+    	addRetailerPane.setVisible(false);
+    	addOtherPane.setVisible(false);
+    	randomRoutePane.setVisible(false);
     }
 
     @FXML
     void addRetailerMenuPressed(ActionEvent event) {
+    	addWifiPane.setVisible(false);
+    	mainMapPane.setVisible(false);
+    	addPoiPane.setVisible(false);
+    	addToiletPane.setVisible(false);
+    	addRetailerPane.setVisible(true);
+    	addOtherPane.setVisible(false);
+    	randomRoutePane.setVisible(false);
     }
 
     @FXML
     void addToiletMenuPressed(ActionEvent event) {
+    	addWifiPane.setVisible(false);
+    	mainMapPane.setVisible(false);
+    	addPoiPane.setVisible(false);
+    	addToiletPane.setVisible(true);
+    	addRetailerPane.setVisible(false);
+    	addOtherPane.setVisible(false);
+    	randomRoutePane.setVisible(false);
     }
 
     @FXML
     void addWifiMenuPressed(ActionEvent event) {
     	addWifiPane.setVisible(true);
     	mainMapPane.setVisible(false);
+    	addPoiPane.setVisible(false);
+    	addToiletPane.setVisible(false);
+    	addRetailerPane.setVisible(false);
+    	addOtherPane.setVisible(false);
+    	randomRoutePane.setVisible(false);
+    }
+    
+    @FXML
+    void saveOtherButtonPressed(ActionEvent event) {
+    }
+
+    @FXML
+    void savePoiButtonPressed(ActionEvent event) {
+    }
+
+    @FXML
+    void saveRetailerButtonPressed(ActionEvent event) {
+    }
+
+    @FXML
+    void saveToiletButtonPressed(ActionEvent event) {
+    }
+
+    @FXML
+    void saveWifiButtonPressed(ActionEvent event) {
     }
 
     
@@ -365,8 +438,13 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         address.bind(searchText.textProperty());
 
     	loadRouteMenu.setPopupSide(Side.RIGHT);
+    	
     	addWifiPane.setVisible(false);
     	mainMapPane.setVisible(true);
+    	addPoiPane.setVisible(false);
+    	addToiletPane.setVisible(false);
+    	addRetailerPane.setVisible(false);
+    	addOtherPane.setVisible(false);
     	randomRoutePane.setVisible(false);
     	
     	addLocationsMenu.setPopupSide(Side.RIGHT);
