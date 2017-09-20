@@ -150,29 +150,138 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     private Button saveWifiButton;
     
     @FXML
+    private TextField wifiAddressText;
+
+    @FXML
+    private TextField wifiBoroughText;
+
+    @FXML
+    private TextField wifiLatText;
+
+    @FXML
+    private TextField wifiLongText;
+
+    @FXML
     private TextField wifiNameText;
+
+    @FXML
+    private TextField wifiProviderText;
+
+    @FXML
+    private TextField wifiTypeText;
+
+    @FXML
+    private TextField wifiZipText;
     
     //Adding poi pane
     
     @FXML
     private AnchorPane addPoiPane;
     
+    @FXML
+    private TextField poiAddressText;
+
+    @FXML
+    private TextField poiBoroughText;
+
+    @FXML
+    private TextField poiCostText;
+
+    @FXML
+    private TextArea poiDescriptionText;
+
+    @FXML
+    private TextField poiLatText;
+
+    @FXML
+    private TextField poiLongText;
+
+    @FXML
+    private TextField poiNameText;
+
+    @FXML
+    private TextField poiZipText;
+    
     //Adding toilet pane
     
     @FXML
     private AnchorPane addToiletPane;
+
+    @FXML
+    private TextField toiletAddressText;
+
+    @FXML
+    private TextField toiletBoroughText;
+
+    @FXML
+    private ChoiceBox<?> toiletDisabledChoice;
+
+    @FXML
+    private TextField toiletLatText;
+
+    @FXML
+    private TextField toiletLongText;
+
+    @FXML
+    private TextField toiletNameText;
+
+    @FXML
+    private ChoiceBox<?> toiletUnisexChoice;
+
+    @FXML
+    private TextField toiletZipText;
     
     //Adding retailer pane
     
     @FXML
     private AnchorPane addRetailerPane;
     
+    @FXML
+    private TextField retailerAddressText;
+
+    @FXML
+    private TextField retailerBoroughText;
+
+    @FXML
+    private TextArea retailerDescriptionText;
+
+    @FXML
+    private TextField retailerLatText;
+
+    @FXML
+    private TextField retailerLongText;
+
+    @FXML
+    private TextField retailerNameText;
+
+    @FXML
+    private TextField retailerProductText;
+
+    @FXML
+    private TextField retailerZipText;
+    
     //Adding other pane
     
     @FXML
     private AnchorPane addOtherPane;
     
+    @FXML
+    private TextField otherAddressText;
 
+    @FXML
+    private TextField otherBoroughText;
+
+    @FXML
+    private TextField otherLatText;
+
+    @FXML
+    private TextField otherLongText;
+
+    @FXML
+    private TextField otherNameText;
+
+    @FXML
+    private TextField otherZipText;
 
 
     
@@ -331,11 +440,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 		stage.setScene(scene);
 		stage.show();
     }
-    
-    @FXML
-    void saveLocationButtonPressed(ActionEvent event) throws IOException {
-    	saveWifiButton.setText("Saved");
-    }
 
     @FXML
     void toiletIconPressed(ActionEvent event) {
@@ -417,10 +521,25 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     void savePoiButtonPressed(ActionEvent event) {
+    	if (!poiAddressText.getText().isEmpty()) {
+    		Poi poi = new Poi(poiAddressText.getText(), poiNameText.getText(), poiDescriptionText.getText(), Double.parseDouble(poiCostText.getText()));
+    		//CurrentStorage.addNewPoi(poi);
+    	} else {
+    		Poi poi = new Poi(Double.parseDouble(poiLatText.getText()), Double.parseDouble(poiLongText.getText()), poiNameText.getText(), poiDescriptionText.getText(), Double.parseDouble(poiCostText.getText()));
+    		//CurrentStorage.addNewPoi(poi);
+    	}
     }
 
     @FXML
     void saveRetailerButtonPressed(ActionEvent event) {
+    	if (!retailerAddressText.getText().isEmpty()) {
+    		Retailer retailer = new Retailer(retailerAddressText.getText(), retailerNameText.getText(), retailerProductText.getText(), retailerDescriptionText.getText(), Integer.parseInt(retailerZipText.getText()));
+        	CurrentStorage.addNewRetailer(retailer);
+        } else {
+        	Retailer retailer = new Retailer(Double.parseDouble(retailerLatText.getText()), Double.parseDouble(retailerLongText.getText()), retailerNameText.getText(), retailerProductText.getText(), retailerDescriptionText.getText(), Integer.parseInt(retailerZipText.getText()));
+        	CurrentStorage.addNewRetailer(retailer);
+
+    	}
     }
 
     @FXML
@@ -429,6 +548,15 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     void saveWifiButtonPressed(ActionEvent event) {
+    	if (!wifiAddressText.getText().isEmpty()) {
+        	//Wifi wifi = new Wifi(wifiAddressText.getText(), wifiNameText.getText(), wifiBoroughText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
+        	//CurrentStorage.addNewWifi(wifi);
+    	}
+    	else {
+        	Wifi wifi = new Wifi(Double.parseDouble(wifiLatText.getText()), Double.parseDouble(wifiLongText.getText()), wifiNameText.getText(), wifiBoroughText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
+        	//CurrentStorage.addNewWifi(wifi);
+    	}
+
     }
 
     
