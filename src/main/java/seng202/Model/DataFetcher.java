@@ -22,22 +22,19 @@ public class DataFetcher {
     	System.out.print(runQuery("SELECT * FROM tblUser WHERE "
     			+ "Username = '" + username +"'"));
     }
-//
-//	public boolean checkSignIn(String username, String password) {
-//		if (runQuery("SELECT * FROM tblUser WHERE "
-//				+ "Username = '" + username + "'" + "AND " + "Password = '" + password + "'").isEmpty()) {
-//			System.out.println("First");
-//			return false;
-//		} else {
-//			System.out.println("First");
-//			return true;
-//		}
-//	}
 
 	public ArrayList<ArrayList<String>> fetchPassword(String username) {
 		return (runQuery("SELECT Password FROM tblUser WHERE Username = '" + username + "'"));
 	}
 
+	/**
+	 *
+	 * @param username the username of the user logging in
+	 * @return the LName, FName and YearOfBirth of the user from the database
+	 */
+	public ArrayList<ArrayList<String>> fetchUserInfo(String username) {
+		return (runQuery("SELECT FName, LNAME, YearOfBirth FROM tblUser WHERE Username = '" + username + "'"));
+	}
     /**
      * Loads a route into the application
      * @param route Route to add into the application

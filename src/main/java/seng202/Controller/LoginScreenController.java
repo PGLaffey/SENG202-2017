@@ -13,6 +13,7 @@ import seng202.Model.User;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class LoginScreenController {
 	
@@ -55,8 +56,12 @@ public class LoginScreenController {
 			FileManager.wifiRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/NYC_Free_Public_WiFi_03292017.csv");
 			//FileManager.routeRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-01 - Citi Bike trip data.csv");
 			//FileManager.routeRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-02 - Citi Bike trip data.csv");
-			User user = new User("Courtney", "Hoskin", "cgh31", "6 apr","password");
+			ArrayList<ArrayList<String>> userInfo;
+			userInfo = data.fetchUserInfo(usernameText.getText());
+
+			User user = new User(userInfo.get(0).get(0), userInfo.get(0).get(1), usernameText.getText().toLowerCase(), userInfo.get(0).get(2), passwordText.getText().toString());
 			CurrentStorage.setUser(user);
+
 			Stage primaryStage = (Stage)signInButton.getScene().getWindow();
 			Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 			primaryStage.setTitle("Profile");
