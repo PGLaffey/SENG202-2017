@@ -15,7 +15,7 @@ public class Location {
     private String borough = null;
     private boolean secret = false;
     
-    private User belongsTo;
+    private User belongsTo = null;
 
     /**
      * Constructor for the location class, creates a new Location.
@@ -24,22 +24,25 @@ public class Location {
      * @param name The name of the new location.
      * @param locationType The type of location the new location is (i.e. point of interest, wifi spot, retailer or toilet).
      */
-    public Location(double latitude, double longitude, String name, int locationType) {
+    public Location(double latitude, double longitude, String name, int locationType, int zip) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.name = name;
         this.locationType = locationType;
+        this.zip = zip;
     }
 
     /**
      * Overloaded constructor to take an address and obtain a longitude and lattitude for the address.
-     * address The address of the location.
+     * @param address The address of the location.
      * @param name The name of the new location.
      * @param locationType The type of location the new location is (i.e. point of interest, wifi spot, retailer or toilet).
      */
-    public Location(/*String address,*/ String name, int locationType) {
+    public Location(String address, String name, int locationType, int zip) {
         //this.latitude = Map.getLatitude(address);
         //this.longitude = Map.getLongitude(address);
+		this.address = address;
+		this.zip = zip;
         this.name = name;
         this.locationType = locationType;
     }
@@ -121,13 +124,13 @@ public class Location {
         this.local = local;
     }
 
-	public String getBorough() {
+	/* public String getBorough() { // TODO as these things when adding borough to the location superclass
 		return borough;
 	}
 
 	public void setBorough(String borough) {
 		this.borough = borough;
-	}
+	} */
 
 	public String getAddress() {
 		return address;
@@ -152,4 +155,12 @@ public class Location {
 	public void setSecret(boolean secret) {
 		this.secret = secret;
 	}
+
+    public String getBorough() {
+        return this.borough;
+    }
+
+    public void setBorough(String borough) {
+        this.borough = borough;
+    }
 }

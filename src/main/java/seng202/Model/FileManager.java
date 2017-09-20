@@ -136,11 +136,17 @@ public class FileManager {
                 double startLongitude = Double.parseDouble(information[startLongIndex].substring(0, information[startLongIndex].indexOf("\"")));
                 double endLatitude = Double.parseDouble(information[endLatIndex].substring(0, information[endLatIndex].indexOf("\"")));
                 double endLongitude = Double.parseDouble(information[endLongIndex].substring(0, information[endLongIndex].indexOf("\"")));
-                String gender = information[genderIndex].split(",")[1]; // This line is causing problems as there are cases where the birth year line is left free (without quotes)
+
+                String gender;
+                if (information.length < header.size()) {
+                    gender = information[header.indexOf("birth year")].substring(0, information[header.indexOf("birth year")].indexOf("\""));
+                } else {
+                    gender = information[genderIndex].split(",")[1];
+                }
 
                 //Convert the relevant data into the associated classes
-                Location startLocation = new Location(startLatitude, startLongitude, startName, 4);
-                Location endLocation = new Location(endLatitude, endLongitude, endName, 4);
+                Location startLocation = new Location(startLatitude, startLongitude, startName,4, 0);
+                Location endLocation = new Location(endLatitude, endLongitude, endName, 4, 0);
                 Route newRoute = new Route(bikeID, startLocation, endLocation, "NA", gender);
 
                 //Log the new object into the storage class.

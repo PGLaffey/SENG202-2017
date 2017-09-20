@@ -10,6 +10,7 @@ public class Wifi extends Location {
     private String type;
     private Circle circle = null;
     private String ssid;
+    private String borough;
 
     /**
      * Creates a new instance of the wifi class, uses the constructor of the Location superclass.
@@ -17,15 +18,16 @@ public class Wifi extends Location {
      * @param latitude  The latitude of the wifi hotspot.
      * @param longitude The longitude of the wifi hotspot.
      * @param name      The name of the wifi hotspot location.
-     * @param borough   The borough in which the wifi is located.
+     * @param borough   The borough in which the wifi is located. // TODO Add borough to the locations class (probs needs to be done in the mornings or very, very late at night)
      * @param type      Distinguishes between free and limited_free wifi
      * @param provider  The name of the provider of the wifi hotspot.
      */
-    public Wifi(double latitude, double longitude, String name, String type, String provider, String ssid) {
-        super(latitude, longitude, name, 3);
+    public Wifi(double latitude, double longitude, String name, String borough, String type, String provider) {
+        super(latitude, longitude, name, 3, 0);
+        this.borough = borough;
         this.provider = provider;
-        this.type = type;
         this.ssid = ssid;
+        this.type = type;
     }
 
     public String getProvider() {
@@ -58,6 +60,14 @@ public class Wifi extends Location {
             return false;
         }
         return true;
+    }
+
+    public String getBorough() {
+        return this.borough;
+    }
+
+    public void setBorough(String borough) {
+        this.borough = borough;
     }
 
     @Override

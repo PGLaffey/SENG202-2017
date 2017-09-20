@@ -10,6 +10,7 @@ public class Retailer extends Location {
     private String product;
     private String description;
     private Marker marker = null;
+    private String borough;
 
 	/**
 	 * Constructor for the retailer subclass, uses the location superclass constructor.
@@ -21,7 +22,7 @@ public class Retailer extends Location {
      * @param zip The zip code in which the retailer resides
 	 */
     public Retailer(double latitude, double longitude, String name, String product, String description, int zip) {
-    	super(latitude, longitude, name, 2);
+    	super(latitude, longitude, name, 2, zip);
     	this.product = product;
     	this.description = description;
     }
@@ -35,8 +36,8 @@ public class Retailer extends Location {
      * @param zip The zip code in which the retailer resides
      *
      */
-    public Retailer(String name, String product, String description, int zip) {
-        super(name, 2);
+    public Retailer(String address, String name, String product, String description, int zip) {
+        super(address, name, 2, zip);
         this.product = product;
         this.description = description;
     }
@@ -75,5 +76,13 @@ public class Retailer extends Location {
             return false;
         }
         return true;
+    }
+
+    public String getBorough() {
+        return this.borough;
+    }
+
+    public void setBorough(String borough) {
+        this.borough = borough;
     }
 }

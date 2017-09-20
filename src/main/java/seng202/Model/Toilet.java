@@ -8,6 +8,7 @@ import seng202.Model.Location;
 public class Toilet extends Location {
     private boolean forDisabled;
     private boolean uniSex;
+    private String borough;
 
     /**
      * Toilet constructor, creates a new instance of the toilet object using the location superclass constructor.
@@ -18,7 +19,7 @@ public class Toilet extends Location {
      * @param uniSex Whether the toilet is unisex or has separate facilities for men and women.
      */
     public Toilet(double latitude, double longitude, String name, boolean forDisabled, boolean uniSex) {
-        super(latitude, longitude, name, 0);
+        super(latitude, longitude, name, 0, 0);
         this.forDisabled = forDisabled;
         this.uniSex = uniSex;
     }
@@ -45,6 +46,14 @@ public class Toilet extends Location {
             return false;
         }
         return true;
+    }
+
+    public String getBorough() {
+        return this.borough;
+    }
+
+    public void setBorough(String borough) {
+        this.borough = borough;
     }
 }
 

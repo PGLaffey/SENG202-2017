@@ -77,9 +77,9 @@ public class FileManagerTest extends TestCase {
     {
         FileManager.routeRetriever(TARGET+"/route_data1.csv");
 
-        Route expected_route = new Route("16950", new Location(40.75323098, -73.97032517, "Expected start", 4),
-                                        new Location(40.73221853, -73.98165557, "Expected end", 4),
-                                        "Expected Route", "0");
+        Route expected_route = new Route("16950", new Location(40.75323098, -73.97032517, "E 47 St & 2 Ave", 4, 4),
+                                        new Location(40.73221853, -73.98165557, "1 Ave & E 15 St", 4, 4),
+                                        "NA", "0");
 
         assertEquals(expected_route, CurrentStorage.getRouteArray().get(0));
     }
@@ -208,12 +208,15 @@ public class FileManagerTest extends TestCase {
         FileManager.routeWriter("test_file.csv");
         assertTrue(new File(WRITE_TARGET+"/test_file.csv").exists());
         result = FileManager.readFile(WRITE_TARGET+"/test_file.csv");
-        Route expected_route = new Route("16950", new Location(40.75323098, -73.97032517, "Expected start", 4),
-                new Location(40.73221853, -73.98165557, "Expected end", 4),
+        Route expected_route = new Route("16950", new Location(40.75323098, -73.97032517, "E 47 St & 2 Ave", 4, 4),
+                new Location(40.73221853, -73.98165557, "1 Ave & E 15 St", 4, 4),
                 "Expected Route", "0");
 
         assertTrue(CurrentStorage.getRouteArray().get(0).equals(expected_route));
     }
+
+
+
 
     /**
      * Test to test the FileManager's ability to write a file with a filename that contains spaces.
@@ -225,8 +228,8 @@ public class FileManagerTest extends TestCase {
         FileManager.routeWriter("test file.csv");
         assertTrue(new File(WRITE_TARGET+"/test file.csv").exists());
         result = FileManager.readFile(WRITE_TARGET+"/test file.csv");
-        Route expected_route = new Route("16950", new Location(40.75323098, -73.97032517, "Expected start", 4),
-                new Location(40.73221853, -73.98165557, "Expected end", 4),
+        Route expected_route = new Route("16950", new Location(40.75323098, -73.97032517, "E 47 St & 2 Ave", 4, 4),
+                new Location(40.73221853, -73.98165557, "1 Ave & E 15 St", 4, 4),
                 "Expected Route", "0");
 
         assertTrue(CurrentStorage.getRouteArray().get(0).equals(expected_route));

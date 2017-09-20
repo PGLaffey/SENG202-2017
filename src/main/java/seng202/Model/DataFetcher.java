@@ -230,7 +230,7 @@ public class DataFetcher {
 					CurrentStorage.addWifi(wifi);
 					break;
 				case 4:
-					location = new Location(latitude, longitude, name, 4);
+					location = new Location(latitude, longitude, name, 4, 0);
 					if (borough != null) {
 						location.setBorough(borough);
 					}
@@ -604,12 +604,12 @@ public class DataFetcher {
     	DataFetcher test = new DataFetcher();
     	//test.connectDbTest();				//Tests the connection to the database
     	test.connectDb();
-    	Location testLoc1 = new Location(47.2134400, 172.1232100, "Telecom Hotspot", 3);
+    	Location testLoc1 = new Location(47.2134400, 172.1232100, "Telecom Hotspot", 3, 0);
     	//test.loadLocation(testLoc1);		//Tests loading a valid location
-    	Location testLoc2 = new Location(159.1547895, 0.3256984, "NULL", 4);
+    	Location testLoc2 = new Location(159.1547895, 0.3256984, "NULL", 4, 0);
     	Route testRoute = new Route("fakeBike", testLoc1, testLoc2, "Test", "M");
     	//test.loadRoute(testRoute);		//Tests loading a valid route
-    	Location invalidLoc = new Location(25.1258469, 56.1658468, "NULL", 4);
+    	Location invalidLoc = new Location(25.1258469, 56.1658468, "NULL", 4, 0);
     	//test.loadLocation(invalidLoc);	//Tests loading a invalid location
     }
 }
