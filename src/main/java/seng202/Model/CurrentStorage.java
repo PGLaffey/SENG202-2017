@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class CurrentStorage {
     private static ArrayList<Route> routeArray = new ArrayList<Route>();
     private static ArrayList<Retailer> retailerArray = new ArrayList<Retailer>();
+    private static ArrayList<Integer> addedRetailers = new ArrayList<Integer>();
     private static ArrayList<Wifi> wifiArray = new ArrayList<Wifi>();
     private static ArrayList<Toilet> toiletArray = new ArrayList<Toilet>();
     private static ArrayList<Poi> poiArray = new ArrayList<Poi>();
@@ -19,8 +20,7 @@ public class CurrentStorage {
     private static Poi poiViewed;
     private static Location locationViewed;
     private static Route routeViewed;
-    
-    
+
     public static User getUser() {
     	return currentUser;
     }
@@ -55,12 +55,19 @@ public class CurrentStorage {
         }
     }
 
-    public static void addRetailer(Retailer retailer) {
+    public static void addRetailer(Retailer retailer) { // Used when bringing data in from database
         retailerArray.add(retailer);
+    }
+    
+    public static void addNewRetailer(Retailer retailer) { // Used when user adding new data (from GUI or CSV)
+    	retailerArray.add(retailer);
+    	addedRetailers.add(retailerArray.indexOf(retailer));
     }
 
     public static void addWifi(Wifi wifi) {
-        wifiArray.add(wifi);
+        if (!retailerArray.contains(wifi)) {
+            wifiArray.add(wifi);
+        }
     }
     
     public static void addToilet(Toilet toilet) {
