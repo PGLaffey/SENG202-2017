@@ -18,6 +18,7 @@ public class Route {
     private Location via1;
     private Location via2;
     private Location via3;
+    private boolean secret;
 
     /**
      * Constructs a route based on the start and end locations.
@@ -118,4 +119,12 @@ public class Route {
         }
         return true;
     }
+
+	public boolean isSecret() {
+		return secret;
+	}
+
+	public void setSecret(boolean secret) {
+		this.secret = secret;
+	}
 }
