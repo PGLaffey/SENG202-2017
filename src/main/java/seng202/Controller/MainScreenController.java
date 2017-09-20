@@ -33,6 +33,12 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     protected DirectionsPane directionsPane;
     protected InfoWindow infoWindow;
     protected Marker currentMarker;
+    
+    private GoogleMap map;
+
+    private GeocodingService geocodingService;
+
+    private StringProperty address = new SimpleStringProperty();
 
     @FXML
     private GoogleMapView mapView;
@@ -43,68 +49,27 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     private URL location;
     
+    //Top menu bar
+        
     @FXML
-    private AnchorPane addWifiPane;
-
+    private Button mapButton;
+    
     @FXML
-    private AnchorPane mainMapPane;
-
+    private Button tableButton;
+    
     @FXML
-    private AnchorPane randomRoutePane;
-
+    private Button statButton;
+    
     @FXML
     private Button accountButton;
     
     @FXML
-    private Button tableButton;
-
-    @FXML
-    private Button bikeIconButton;
-
-    @FXML
-    private Button showRouteButton;
-
-    @FXML
-    private Button favouriteIconButton;
-
-    @FXML
-    private Button loadRouteButton;
-
-    @FXML
     private Button logoutButton;
-
-    @FXML
-    private Button mapButton;
-
-    @FXML
-    private Button randomRouteButton;
-
-    @FXML
-    private Button retailerIconButton;
-
-    @FXML
-    private Button saveRouteButton;
-
-    @FXML
-    private TextField searchText;
-
-    @FXML
-    private Button shareButton;
-
-    @FXML
-    private Button shareIconButton;
-
-    @FXML
-    private Button statButton;
-
-    @FXML
-    private Button toiletIconButton;
-
-    @FXML
-    private Button wifiIconButton;
+    
+    //Side menu bar
     
     @FXML
-    private Button saveLocationButton;
+    private Button showRouteButton;
     
     @FXML
     private MenuButton loadRouteMenu;
@@ -116,10 +81,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     private Menu savedRoutesMenu;
     
     @FXML
-    private TextField locationNameText;
-
-    @FXML
-    private ChoiceBox<String> locationTypeBox;
+    private Button randomRouteButton;  
     
     @FXML
     private MenuButton addLocationsMenu;
@@ -138,12 +100,61 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     private MenuItem addWifiMenuButton;
+    
+    @FXML
+    private Button shareButton;
+    
+    
+    
+    
+    //Main map pane
+    
+    @FXML
+    private AnchorPane mainMapPane;
+    
+    @FXML
+    private Button bikeIconButton;
+    
+    @FXML
+    private Button favouriteIconButton;
+    
+    @FXML
+    private Button retailerIconButton;
+    
+    @FXML
+    private Button shareIconButton;
 
-    private GoogleMap map;
+    @FXML
+    private Button toiletIconButton;
 
-    private GeocodingService geocodingService;
+    @FXML
+    private Button wifiIconButton;
+    
+    @FXML
+    private Button saveRouteButton;
+    
+    @FXML
+    private TextField searchText;
+    
+    //Random route pane
+    
+    @FXML
+    private AnchorPane randomRoutePane;
+    
+    //Adding wifi pane
+    
+    @FXML
+    private AnchorPane addWifiPane;
+    
+    @FXML
+    private Button saveWifiButton;
+    
+    @FXML
+    private TextField wifiNameText;
+    
 
-    private StringProperty address = new SimpleStringProperty();
+
+
     
     
     /** 
@@ -303,7 +314,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     
     @FXML
     void saveLocationButtonPressed(ActionEvent event) throws IOException {
-    	saveLocationButton.setText("Saved");
+    	saveWifiButton.setText("Saved");
     }
 
     @FXML
@@ -350,12 +361,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     
     @FXML
     void initialize() {
-    	ObservableList<String> locationTypes = FXCollections.observableArrayList("Wifi hotspot","Retailer","Toilets", "Point of interest", "Other");
         mapView.addMapInializedListener(this);
         address.bind(searchText.textProperty());
 
     	loadRouteMenu.setPopupSide(Side.RIGHT);
-    	locationTypeBox.setItems(locationTypes);
     	addWifiPane.setVisible(false);
     	mainMapPane.setVisible(true);
     	randomRoutePane.setVisible(false);
@@ -368,15 +377,14 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         assert favouriteIconButton != null : "fx:id=\"favouriteIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert favouriteRoutesMenu != null : "fx:id=\"favouriteRoutesMenu\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert loadRouteMenu != null : "fx:id=\"loadRouteMenu\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert locationNameText != null : "fx:id=\"locationNameText\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert locationTypeBox != null : "fx:id=\"locationTypeBox\" was not injected: check your FXML file 'MainScreen.fxml'.";
+        assert wifiNameText != null : "fx:id=\"locationNameText\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert logoutButton != null : "fx:id=\"logoutButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert mainMapPane != null : "fx:id=\"mainMapPane\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert mapButton != null : "fx:id=\"mapButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert randomRouteButton != null : "fx:id=\"randomRouteButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert randomRoutePane != null : "fx:id=\"randomRoutePane\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert retailerIconButton != null : "fx:id=\"retailerIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert saveLocationButton != null : "fx:id=\"saveLocationButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
+        assert saveWifiButton != null : "fx:id=\"saveLocationButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert saveRouteButton != null : "fx:id=\"saveRouteButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert savedRoutesMenu != null : "fx:id=\"savedRoutesMenu\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert searchText != null : "fx:id=\"searchText\" was not injected: check your FXML file 'MainScreen.fxml'.";

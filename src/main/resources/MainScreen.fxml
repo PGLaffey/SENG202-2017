@@ -234,47 +234,137 @@
                     </AnchorPane>
                     <AnchorPane fx:id="addWifiPane" prefHeight="430.0" prefWidth="637.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <TextField fx:id="wifiLatText" layoutX="119.0" layoutY="231.0" prefWidth="200.0" />
-                        <Label layoutX="350.0" layoutY="234.0" text="Longitude:" />
-                        <Label id="routeNameLabel" layoutX="11.0" layoutY="52.0" text="Location name:" />
-                        <TextField id="locationNameText" fx:id="wifiNameText" layoutX="153.0" layoutY="46.0" prefWidth="200.0" />
-                        <TextField fx:id="wifiAddressText" layoutX="119.0" layoutY="165.0" prefWidth="160.0" />
-                        <Label layoutX="11.0" layoutY="165.0" text="Address:" />
-                        <TextField fx:id="wifiLongText" layoutX="462.0" layoutY="231.0" prefWidth="160.0" />
-                        <Label layoutX="20.0" layoutY="202.0" text="OR" />
-                        <Label layoutX="15.0" layoutY="234.0" text="Latitude:" />
-                        <Button id="saveButton" fx:id="saveLocationButton" layoutX="555.0" layoutY="384.0" mnemonicParsing="false" onAction="#saveLocationButtonPressed" text="Save" />
                         <Label layoutX="282.0" layoutY="14.0" text="Add Wifi:" />
+                        <Label id="routeNameLabel" layoutX="11.0" layoutY="52.0" text="Wifi point name:" />
+                        <TextField id="locationNameText" fx:id="wifiNameText" layoutX="153.0" layoutY="46.0" prefWidth="200.0" />
+                        <Line endX="499.0" endY="-1.0" layoutX="116.0" layoutY="109.0" startX="-100.0" />
+                        <Label layoutX="7.0" layoutY="123.0" text="Address:" />
+                        <TextField fx:id="wifiAddressText" layoutX="115.0" layoutY="123.0" prefWidth="160.0" />
+                        <Label layoutX="16.0" layoutY="160.0" text="OR" />
+                        <Label layoutX="11.0" layoutY="192.0" text="Latitude:" />
+                        <TextField fx:id="wifiLatText" layoutX="115.0" layoutY="189.0" prefWidth="200.0" />
+                        <Label layoutX="346.0" layoutY="192.0" text="Longitude:" />
+                        <TextField fx:id="wifiLongText" layoutX="458.0" layoutY="189.0" prefWidth="160.0" />
+                        <Line endX="494.0" endY="119.0" layoutX="126.0" layoutY="119.0" startX="-110.0" startY="123.0" />
+                        <Label layoutX="14.0" layoutY="258.0" text="Zip:" />
+                        <TextField fx:id="wifiZipText" layoutX="60.0" layoutY="252.0" prefWidth="142.0" />
+                        <Label layoutX="261.0" layoutY="258.0" text="Borough:" />
+                        <TextField fx:id="wifiBoroughText" layoutX="355.0" layoutY="252.0" prefWidth="200.0" />
+                        <Line endX="483.0" endY="170.0" layoutX="136.0" layoutY="129.0" startX="-121.0" startY="173.0" />
+                        <Label layoutX="14.0" layoutY="323.0" text="Type:" />
+                        <TextField fx:id="wifiTypeText" layoutX="75.0" layoutY="317.0" prefWidth="200.0" />
+                        <Label layoutX="11.0" layoutY="376.0" text="Provider:" />
+                        <TextField fx:id="wifiProviderText" layoutX="98.0" layoutY="376.0" prefWidth="200.0" />
+                        <Button id="saveButton" fx:id="saveWifiButton" layoutX="555.0" layoutY="384.0" mnemonicParsing="false" onAction="#saveWifiButtonPressed" text="Save" />
                       </children>
                     </AnchorPane>
-                    <AnchorPane id="addWifiPane" fx:id="addRetailerPane" prefHeight="431.0" prefWidth="637.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <AnchorPane id="addWifiPane" fx:id="addRetailerPane" prefHeight="431.0" prefWidth="637.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <TextField id="wifiLatText" fx:id="retailerLatText" layoutX="119.0" layoutY="231.0" prefWidth="200.0" />
-                        <Label layoutX="350.0" layoutY="234.0" text="Longitude:" />
-                        <Label id="routeNameLabel" layoutX="11.0" layoutY="52.0" text="Location name:" />
+                        <Label layoutX="282.0" layoutY="14.0" text="Add Retailer:" />
+                        <Label id="routeNameLabel" layoutX="11.0" layoutY="52.0" text="Retailer name:" />
                         <TextField id="locationNameText" fx:id="retailerNameText" layoutX="153.0" layoutY="46.0" prefWidth="200.0" />
-                        <TextField id="wifiAddressText" fx:id="retailerAdressText" layoutX="119.0" layoutY="165.0" prefWidth="160.0" />
-                        <Label layoutX="11.0" layoutY="165.0" text="Address:" />
-                        <TextField id="wifiLongText" fx:id="retailerLongText" layoutX="462.0" layoutY="231.0" prefWidth="160.0" />
-                        <Label layoutX="20.0" layoutY="202.0" text="OR" />
-                        <Label layoutX="15.0" layoutY="234.0" text="Latitude:" />
-                        <Button id="saveButton" layoutX="555.0" layoutY="384.0" mnemonicParsing="false" onAction="#saveLocationButtonPressed" text="Save" />
-                        <Label layoutX="282.0" layoutY="14.0" text="Add Wifi:" />
+                        <Line endX="507.0" endY="-11.0" layoutX="115.0" layoutY="99.0" startX="-107.0" startY="-8.0" />
+                        <Label layoutX="7.0" layoutY="111.0" text="Address:" />
+                        <TextField id="wifiAddressText" fx:id="retailerAddressText" layoutX="115.0" layoutY="111.0" prefWidth="160.0" />
+                        <Label layoutX="16.0" layoutY="148.0" text="OR" />
+                        <Label layoutX="11.0" layoutY="180.0" text="Latitude:" />
+                        <TextField id="wifiLatText" fx:id="retailerLatText" layoutX="115.0" layoutY="177.0" prefWidth="200.0" />
+                        <Label layoutX="346.0" layoutY="180.0" text="Longitude:" />
+                        <TextField id="wifiLongText" fx:id="retailerLongText" layoutX="458.0" layoutY="177.0" prefWidth="160.0" />
+                        <Line endX="500.0" endY="112.0" layoutX="125.0" layoutY="109.0" startX="-112.0" startY="113.0" />
+                        <Label layoutX="11.0" layoutY="235.0" text="Zip: " />
+                        <TextField fx:id="retailerZipText" layoutX="53.0" layoutY="232.0" prefWidth="149.0" />
+                        <Label layoutX="242.0" layoutY="238.0" text="Borough:" />
+                        <TextField fx:id="retailerBoroughText" layoutX="346.0" layoutY="235.0" prefWidth="200.0" />
+                        <Line endX="489.0" endY="160.0" layoutX="135.0" layoutY="119.0" startX="-121.0" startY="159.0" />
+                        <Label layoutX="14.0" layoutY="290.0" text="Product:" />
+                        <TextField fx:id="retailerProductText" layoutX="95.0" layoutY="290.0" prefWidth="200.0" />
+                        <Label layoutX="16.0" layoutY="334.0" text="Description:" />
+                        <TextArea fx:id="retailerDescriptionText" layoutX="128.0" layoutY="333.0" prefHeight="85.0" prefWidth="234.0" wrapText="true" />
+                        <Button id="saveButton" fx:id="saveRetailerButton" layoutX="555.0" layoutY="384.0" mnemonicParsing="false" onAction="#saveRetailerButtonPressed" text="Save" />
                       </children>
                     </AnchorPane>
                     <AnchorPane id="addLocationsPane" fx:id="addToiletPane" prefHeight="431.0" prefWidth="637.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <TextField id="wifiLatText" fx:id="toiletLatText" layoutX="119.0" layoutY="231.0" prefWidth="200.0" />
+                        <Label layoutX="282.0" layoutY="14.0" text="Add Toilet:" />
+                        <Label id="routeNameLabel" layoutX="11.0" layoutY="52.0" text="Toilet name:" />
+                        <TextField id="locationNameText" fx:id="toiletNameText" layoutX="153.0" layoutY="46.0" prefWidth="200.0" />
+                        <Line endX="508.0" endY="-2.0" layoutX="112.0" layoutY="85.0" startX="-100.0" />
+                        <Label layoutX="7.0" layoutY="99.0" text="Address:" />
+                        <TextField id="wifiAddressText" fx:id="toiletAddressText" layoutX="115.0" layoutY="99.0" prefWidth="160.0" />
+                        <Label layoutX="16.0" layoutY="136.0" text="OR" />
+                        <Label layoutX="11.0" layoutY="168.0" text="Latitude:" />
+                        <TextField id="wifiLatText" fx:id="toiletLatText" layoutX="115.0" layoutY="165.0" prefWidth="200.0" />
+                        <Label layoutX="346.0" layoutY="168.0" text="Longitude:" />
+                        <TextField id="wifiLongText" fx:id="toiletLongText" layoutX="458.0" layoutY="165.0" prefWidth="160.0" />
+                        <Line endX="503.0" endY="122.0" layoutX="122.0" layoutY="95.0" startX="-107.0" startY="124.0" />
+                        <Label layoutX="16.0" layoutY="235.0" text="Zip:" />
+                        <TextField fx:id="toiletZipText" layoutX="60.0" layoutY="229.0" prefWidth="154.0" />
+                        <Label layoutX="261.0" layoutY="232.0" text="Borough:" />
+                        <TextField fx:id="toiletBoroughText" layoutX="338.0" layoutY="229.0" prefWidth="200.0" />
+                        <Line endX="490.0" endY="166.0" layoutX="132.0" layoutY="105.0" startX="-118.0" startY="172.0" />
+                        <Label layoutX="14.0" layoutY="289.0" text="For Disabled:" />
+                        <ChoiceBox fx:id="toiletDisabledChoice" layoutX="142.0" layoutY="286.0">
+                          <items>
+                            <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="Item 1" />
+                              <String fx:value="Item 2" />
+                              <String fx:value="Item 3" />
+                            </FXCollections>
+                          </items>
+                        </ChoiceBox>
+                        <Label layoutX="14.0" layoutY="335.0" text="For UniSex:" />
+                        <ChoiceBox fx:id="toiletUnisexChoice" layoutX="142.0" layoutY="331.0">
+                          <items>
+                            <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="Item 1" />
+                              <String fx:value="Item 2" />
+                              <String fx:value="Item 3" />
+                            </FXCollections>
+                          </items>
+                        </ChoiceBox>
+                        <Button id="saveButton" fx:id="saveToiletButton" layoutX="555.0" layoutY="384.0" mnemonicParsing="false" onAction="#saveToiletButtonPressed" text="Save" />
+                      </children>
+                    </AnchorPane>
+                    <AnchorPane id="addLocationsPane" fx:id="addPoiPane" prefHeight="431.0" prefWidth="637.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <children>
+                        <Label layoutX="234.0" layoutY="14.0" text="Add Point of Interest:" />
+                        <Label id="routeNameLabel" layoutX="11.0" layoutY="49.0" text="Point of Interest Name:" />
+                        <TextField id="locationNameText" fx:id="poiNameText" layoutX="203.0" layoutY="46.0" prefWidth="200.0" />
+                        <Line endX="507.0" endY="-2.0" layoutX="116.0" layoutY="91.0" startX="-100.0" />
+                        <Label layoutX="10.0" layoutY="108.0" text="Address:" />
+                        <TextField id="wifiAddressText" fx:id="poiAddressText" layoutX="118.0" layoutY="108.0" prefWidth="160.0" />
+                        <Label layoutX="19.0" layoutY="145.0" text="OR" />
+                        <Label layoutX="14.0" layoutY="177.0" text="Latitude:" />
+                        <TextField id="wifiLatText" fx:id="poiLatText" layoutX="118.0" layoutY="174.0" prefWidth="200.0" />
+                        <Label layoutX="349.0" layoutY="177.0" text="Longitude:" />
+                        <TextField id="wifiLongText" fx:id="poiLongText" layoutX="461.0" layoutY="174.0" prefWidth="160.0" />
+                        <Line endX="504.0" endY="118.0" layoutX="126.0" layoutY="101.0" startX="-114.0" startY="120.0" />
+                        <Label layoutX="14.0" layoutY="235.0" text="Zip:" />
+                        <TextField fx:id="poiZipText" layoutX="61.0" layoutY="229.0" prefWidth="154.0" />
+                        <Label layoutX="256.0" layoutY="235.0" text="Borough:" />
+                        <TextField fx:id="poiBoroughText" layoutX="354.0" layoutY="229.0" prefWidth="200.0" />
+                        <Line endX="492.0" endY="161.0" layoutX="136.0" layoutY="111.0" startX="-126.0" startY="162.0" />
+                        <Label layoutX="14.0" layoutY="287.0" text="Cost:" />
+                        <TextField fx:id="poiCostText" layoutX="61.0" layoutY="281.0" prefWidth="155.0" />
+                        <Label layoutX="14.0" layoutY="322.0" text="Description:" />
+                        <TextArea fx:id="poiDescriptionText" layoutX="118.0" layoutY="321.0" prefHeight="97.0" prefWidth="214.0" wrapText="true" />
+                        <Button id="saveButton" fx:id="savePoiButton" layoutX="555.0" layoutY="384.0" mnemonicParsing="false" onAction="#savePoiButtonPressed" text="Save" />
+                      </children>
+                    </AnchorPane>
+                    <AnchorPane id="addLocationsPane" fx:id="addOtherLocation" prefHeight="431.0" prefWidth="637.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <children>
+                        <TextField id="wifiLatText" fx:id="otherLatText" layoutX="119.0" layoutY="231.0" prefWidth="200.0" />
                         <Label layoutX="350.0" layoutY="234.0" text="Longitude:" />
                         <Label id="routeNameLabel" layoutX="11.0" layoutY="52.0" text="Location name:" />
-                        <TextField id="locationNameText" fx:id="toiletNameText" layoutX="153.0" layoutY="46.0" prefWidth="200.0" />
-                        <TextField id="wifiAddressText" fx:id="toiletAddressText" layoutX="119.0" layoutY="165.0" prefWidth="160.0" />
+                        <TextField id="locationNameText" fx:id="otherNameText" layoutX="153.0" layoutY="46.0" prefWidth="200.0" />
+                        <TextField id="wifiAddressText" fx:id="otherAddressText" layoutX="119.0" layoutY="165.0" prefWidth="160.0" />
                         <Label layoutX="11.0" layoutY="165.0" text="Address:" />
-                        <TextField id="wifiLongText" fx:id="toiletLongText" layoutX="462.0" layoutY="231.0" prefWidth="160.0" />
+                        <TextField id="wifiLongText" fx:id="otherLongText" layoutX="462.0" layoutY="231.0" prefWidth="160.0" />
                         <Label layoutX="20.0" layoutY="202.0" text="OR" />
                         <Label layoutX="15.0" layoutY="234.0" text="Latitude:" />
-                        <Button id="saveButton" layoutX="555.0" layoutY="384.0" mnemonicParsing="false" onAction="#saveLocationButtonPressed" text="Save" />
-                        <Label layoutX="282.0" layoutY="14.0" text="Add Toilet:" />
+                        <Button id="saveButton" fx:id="saveOtherButton" layoutX="555.0" layoutY="384.0" mnemonicParsing="false" onAction="#saveOtherButtonPressed" text="Save" />
+                        <Label layoutX="282.0" layoutY="14.0" text="Add Poi:" />
                       </children>
                     </AnchorPane>
                   </children>
