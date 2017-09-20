@@ -136,7 +136,7 @@
                     <TableColumn prefWidth="160.0" text="Description" fx:id="retDescCol" />
                   </columns>
                 </TableView>
-                <TableView id="allLocationsTable" fx:id="poiTable" layoutX="13.0" layoutY="119.0" prefHeight="300.0" prefWidth="800.0" visible="false">
+                <TableView id="allLocationsTable" fx:id="poiTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#poiTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false">
                   <columns>
                     <TableColumn prefWidth="160.0" text="Name" fx:id="poiNameCol" />
                     <TableColumn prefWidth="160.0" text="Latitude" fx:id="poiLatCol" />
@@ -145,7 +145,7 @@
                     <TableColumn prefWidth="160.0" text="Description" fx:id="poiDescCol" />
                   </columns>
                 </TableView>
-                <TableView id="allLocationsTable" fx:id="toiletsTable" layoutX="13.0" layoutY="119.0" prefHeight="300.0" prefWidth="800.0" visible="false">
+                <TableView id="allLocationsTable" fx:id="toiletsTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#toiletTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false">
                   <columns>
                     <TableColumn prefWidth="160.0" text="Name" fx:id="toiletNameCol" />
                     <TableColumn prefWidth="160.0" text="Latitude" fx:id="toiletLatCol" />
