@@ -9,8 +9,6 @@ public class Retailer extends Location {
     //TODO Changed "type" to "product" as this avoids confusion with the "type" of location
     private String product;
     private String description;
-    private String address;
-    private int zip;
     private Marker marker = null;
 
 	/**
@@ -26,7 +24,6 @@ public class Retailer extends Location {
     	super(latitude, longitude, name, 2);
     	this.product = product;
     	this.description = description;
-    	this.zip = zip;
     }
     
     /**
@@ -38,15 +35,11 @@ public class Retailer extends Location {
      * @param zip The zip code in which the retailer resides
      *
      */
-    public Retailer(String address, String name, String product, String description, int zip) {
+    public Retailer(String name, String product, String description, int zip) {
         super(name, 2);
-        this.address = address;
         this.product = product;
         this.description = description;
-        this.zip = zip;
     }
-
-    public String getAddress() { return address; }
 
     public String getProduct() {
         return product;
@@ -55,8 +48,6 @@ public class Retailer extends Location {
     public String getDescription() { 
         return description;
     }
-
-    public int getZip() { return zip; }
 
     public Marker getMarker() { return marker; }
 

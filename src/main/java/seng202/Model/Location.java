@@ -13,7 +13,7 @@ public class Location {
     private int zip = 0;
     private String address = null;
     private String borough = null;
-
+    
     private User belongsTo;
 
     /**
@@ -43,6 +43,27 @@ public class Location {
         this.locationType = locationType;
     }
 
+    @Override
+    public boolean equals(Object other) {
+    	if (other == null) {
+    		return false;
+    	}
+    	if (other == this) {
+    		return true;
+    	}
+    	if (!(other instanceof Location)) {
+    		return false;
+    	}
+    	Location otherLocation = (Location)other;
+    	if (otherLocation.getCoords() != this.getCoords()) {
+    		return false;
+    	}
+    	if (otherLocation.getLocationType() != this.getLocationType()) {
+    		return false;
+    	}
+    	return true;
+    }
+    
     /**
      * Function that returns the longitude and latitude of the location in an Array.
      * @return The latitude and longitude of the location in an Array.
@@ -98,4 +119,28 @@ public class Location {
     public void storeLocal(boolean local) {
         this.local = local;
     }
+
+	public String getBorough() {
+		return borough;
+	}
+
+	public void setBorough(String borough) {
+		this.borough = borough;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public int getZip() {
+		return zip;
+	}
+
+	public void setZip(int zip) {
+		this.zip = zip;
+	}
 }

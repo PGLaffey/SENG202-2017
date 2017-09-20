@@ -12,6 +12,7 @@ public class CurrentStorage {
     private static ArrayList<Wifi> wifiArray = new ArrayList<Wifi>();
     private static ArrayList<Toilet> toiletArray = new ArrayList<Toilet>();
     private static ArrayList<Poi> poiArray = new ArrayList<Poi>();
+    private static ArrayList<Location> generalArray = new ArrayList<Location>();
     private static User currentUser;
     
     private static Wifi wifiViewed;
@@ -21,6 +22,17 @@ public class CurrentStorage {
     private static Location locationViewed;
     private static Route routeViewed;
 
+    public static Location findLocation(Location find) {
+    	int count = 0;
+    	while (count < generalArray.size()) {
+    		if (generalArray.get(count).equals(find)) {
+    			return generalArray.get(count);
+    		}
+    		count += 1;
+    	}
+    	return null;
+    }
+    
     public static User getUser() {
     	return currentUser;
     }
@@ -49,6 +61,14 @@ public class CurrentStorage {
     	return poiArray;
     }
 
+	public static ArrayList<Location> getGeneralArray() {
+		return generalArray;
+	}
+
+	public static void addGeneral(Location location) {
+		generalArray.add(location);
+	}
+	
     public static void addRoute(Route route) {
         if (!(routeArray.contains(route))) {
             routeArray.add(route);

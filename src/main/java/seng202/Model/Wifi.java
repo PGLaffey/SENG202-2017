@@ -7,9 +7,9 @@ import com.lynden.gmapsfx.shapes.Circle;
  */
 public class Wifi extends Location {
     private String provider;
-    private String borough;
     private String type;
     private Circle circle = null;
+    private String ssid;
 
     /**
      * Creates a new instance of the wifi class, uses the constructor of the Location superclass.
@@ -21,19 +21,15 @@ public class Wifi extends Location {
      * @param type      Distinguishes between free and limited_free wifi
      * @param provider  The name of the provider of the wifi hotspot.
      */
-    public Wifi(double latitude, double longitude, String name, String borough, String type, String provider) {
+    public Wifi(double latitude, double longitude, String name, String type, String provider, String ssid) {
         super(latitude, longitude, name, 3);
         this.provider = provider;
-        this.borough = borough;
         this.type = type;
+        this.ssid = ssid;
     }
 
     public String getProvider() {
         return provider;
-    }
-
-    public String getBorough() {
-        return borough;
     }
 
     public Circle getCircle() { return circle; }

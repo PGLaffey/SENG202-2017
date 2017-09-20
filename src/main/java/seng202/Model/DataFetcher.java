@@ -74,20 +74,35 @@ public class DataFetcher {
     					+ "Type = '" + type + "'").toString());
     }
 
-    /**
-     * Loads all locations in the database into the program
-     * @return An ArrayList of all locations
-     */
-    public ArrayList<Location> loadAllLocations() {
-    	ArrayList<Location> locations = new ArrayList<Location>();
+    public void loadAllRoutes() {
+    	Route route = null;
     	try {
-    		//Idk what this does
+    		Statement qryLoadRoutes = connect.createStatement();
+			ResultSet output = qryLoadRoutes.executeQuery("SELECT * FROM tblRoutes");
+
+			
+    	}
+    	catch (SQLException ex) {
+    		printSqlError(ex);
+    	}
+    }
+    
+    /**
+     * Loads all locations in the database into the programs current storage
+     */
+    public void loadAllLocations() {
+    	Toilet toilet = null;
+    	Poi poi = null;
+    	Retailer retailer = null;
+    	Wifi wifi = null;
+    	Location location = null;
+    	try {
+    		//Initialize the query to fetch all locations from the database and its result set
     		Statement qryLoadLocations = connect.createStatement();
 			ResultSet output = qryLoadLocations.executeQuery("SELECT * FROM tblLocations");
 			Statement qryTypeData;
-	    	ArrayList<String> typeData = new ArrayList<String>();
 	    	ResultSet typeOutput;
-	    	//intitilize some things
+	    	//Initialize all the variables for the different location types
 	    	double latitude;
 	    	double longitude;
 	    	String name;
@@ -101,39 +116,66 @@ public class DataFetcher {
 	    	String product;
 	    	String borough;
 	    	String wifi_type;
+	    	int zip;
+	    	String address;
 
 	    	double cost;
 	    	boolean isDisabled;
 	    	boolean unisex;
 	    	int typeID;
-	    	//Do something else. Idk what else
+	    	//Loop while there a another location to be loaded from the database
 			while (output.next()) {
+				//Defines the data all location types share
 	    		latitude = output.getDouble(2);
 	    		longitude = output.getDouble(3);
 	    		name = output.getString(4);
 	    		//user index 5
 	    		local = output.getBoolean(6);
 				type = output.getInt(7);
+				borough = output.getString(12);
+				zip = output.getInt(13);
+				address = output.getString(14);
 				qryTypeData = connect.createStatement();
-				//have a switch cause why not
+				//Switch to determine what type of location is being loaded
 				switch (type) {
 				case 0:
+					//Defines the type specific data
 					typeID = output.getInt(8);
 					typeOutput = qryTypeData.executeQuery("SELECT * FROM tblToilets WHERE ToiletID = '" + typeID + "'");
 					typeOutput.next();
 					isDisabled = typeOutput.getBoolean(2);
 					unisex = typeOutput.getBoolean(3);
-					//add things to another thing
-					locations.add(new Toilet(latitude, longitude, name, isDisabled, unisex));
+					//Add the toilet to the current storage
+					toilet = new Toilet(latitude, longitude, name, isDisabled, unisex);
+					if (borough != null) {
+						toilet.setBorough(borough);
+					}
+					if (zip != 0) {
+						toilet.setZip(zip);
+					}
+					if (address != null) {
+						toilet.setAddress(address);
+					}
+					CurrentStorage.addToilet(toilet);
 					break;
-				// more things like case 0. whatever that is
+				//Same as the case for toilet but with data for the other types
 				case 1:
 					typeID = output.getInt(9);
 					typeOutput = qryTypeData.executeQuery("SELECT * FROM tblPOI WHERE PoiID = '" + typeID + "'");
 					typeOutput.next();
 					cost = typeOutput.getDouble(2);
 					description = typeOutput.getString(3);
-					locations.add(new Poi(latitude, longitude, name, description, cost));
+					poi = new Poi(latitude, longitude, name, description, cost);
+					if (borough != null) {
+						poi.setBorough(borough);
+					}
+					if (zip != 0) {
+						poi.setZip(zip);
+					}
+					if (address != null) {
+						poi.setAddress(address);
+					}
+					CurrentStorage.addPoi(poi);
 					break;
 				case 2:
 					typeID = output.getInt(10);
@@ -141,7 +183,17 @@ public class DataFetcher {
 					typeOutput.next();
 					product = typeOutput.getString(2);
 					description = typeOutput.getString(3);
-					locations.add(new Retailer(latitude, longitude, name, product, description, 0));
+					retailer = new Retailer(latitude, longitude, name, product, description, 0);
+					if (borough != null) {
+						retailer.setBorough(borough);
+					}
+					if (zip != 0) {
+						retailer.setZip(zip);
+					}
+					if (address != null) {
+						retailer.setAddress(address);
+					}
+					CurrentStorage.addRetailer(retailer);
 					break;
 				case 3:
 					typeID = output.getInt(11);
@@ -149,23 +201,54 @@ public class DataFetcher {
 					typeOutput.next();
 					ssid = typeOutput.getString(2);
 					provider = typeOutput.getString(3);
-					//Temporary fillers. TODO: Change this with the real value.
-					borough = "";
-					wifi_type = "";
-					locations.add(new Wifi(latitude, longitude, name, borough, wifi_type,  provider));
+					switch (typeOutput.getInt(4)) {
+					case 0:
+						wifi_type = "Free";
+						break;
+					case 1:
+						wifi_type = "Limited Free";
+						break;
+					case 2:
+						wifi_type = "Provider Site";
+						break;
+					case 4:
+						wifi_type = "Paid";
+						break;
+					default:
+						wifi_type = "Unknown";
+					}
+					wifi = new Wifi(latitude, longitude, name, wifi_type,  provider, ssid);
+					if (borough != null) {
+						wifi.setBorough(borough);
+					}
+					if (zip != 0) {
+						wifi.setZip(zip);
+					}
+					if (address != null) {
+						wifi.setAddress(address);
+					}
+					CurrentStorage.addWifi(wifi);
 					break;
 				case 4:
-					locations.add(new Location(latitude, longitude, name, 4));
+					location = new Location(latitude, longitude, name, 4);
+					if (borough != null) {
+						location.setBorough(borough);
+					}
+					if (zip != 0) {
+						location.setZip(zip);
+					}
+					if (address != null) {
+						location.setAddress(address);
+					}
+					CurrentStorage.addGeneral(location);
 					break;
-				}	
-	    	}
+				}
+    		}
 		} 
-    	//Just encase all else fails
+    	//Prints the correct error statements if an SQLException occurs
     	catch (SQLException ex) {
 			printSqlError(ex);
 		}
-    	//return locations, which is an array list I think
-    	return locations;
     }
     
     /**
@@ -464,9 +547,9 @@ public class DataFetcher {
     
     /**
      * Provides a request to connect to the external database.
-     * @throws ClassNotFoundException 
-     * @throws IllegalAccessException 
-     * @throws InstantiationException 
+     * @throws ClassNotFoundException Occurs when the mysql driver class is not found
+     * @throws IllegalAccessException Occurs when access to the database is refused due to username or password issues
+     * @throws InstantiationException Occurs when there is an error creating an instance of the mysql driver class
      */
     public void connectDb() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		//Creates an instance of the driver to connect to the database
@@ -481,6 +564,16 @@ public class DataFetcher {
     	}
     }
     
+    /**
+     * Closes the connection to the database if it exists
+     */
+    public void closeConnection() {
+    	try {
+			connect.close();
+		} catch (SQLException ex) {
+			printSqlError(ex);
+		}
+    }
 
     public void connectDbTest() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
     	Class.forName("com.mysql.jdbc.Driver").newInstance();
