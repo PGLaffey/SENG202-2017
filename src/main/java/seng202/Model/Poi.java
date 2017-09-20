@@ -1,6 +1,6 @@
 package seng202.Model;
 
-import seng202.Model.Location;
+import com.lynden.gmapsfx.javascript.object.Marker;
 
 /**
  * Point of Interest (POI) subclass of location, stores a description of the location and the cost of visiting.
@@ -9,6 +9,7 @@ public class Poi extends Location {
     private String description;
     private double cost;
     private String address;
+    private Marker marker = null;
 
     /**
      * The POI constructor, creates a new instance of the point of interest object using the location superclass constructor.
@@ -40,4 +41,8 @@ public class Poi extends Location {
     public double getCost() {
         return cost;
     }
+
+    public Marker getMarker() { return marker; }
+
+    public void setMarker(Marker marker) { this.marker = marker;}
 }

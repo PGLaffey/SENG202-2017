@@ -1,6 +1,6 @@
 package seng202.Model;
 
-import seng202.Model.Location;
+import com.lynden.gmapsfx.javascript.object.Marker;
 
 /**
  * Retailer subclass of Location, contains the type of product sold, and a description of the retailer.
@@ -11,6 +11,7 @@ public class Retailer extends Location {
     private String description;
     private String address;
     private int zip;
+    private Marker marker = null;
 
 	/**
 	 * Constructor for the retailer subclass, uses the location superclass constructor.
@@ -56,6 +57,12 @@ public class Retailer extends Location {
     }
 
     public int getZip() { return zip; }
+
+    public Marker getMarker() { return marker; }
+
+    public void setMarker(Marker marker) {
+        this.marker = marker;
+    }
 
     /**
      * A .equals method for retailer.

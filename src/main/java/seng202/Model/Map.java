@@ -4,7 +4,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.lynden.gmapsfx.GoogleMapView;
-import com.lynden.gmapsfx.javascript.event.UIEventType;
 import com.lynden.gmapsfx.javascript.object.*;
 import com.lynden.gmapsfx.service.directions.*;
 import com.lynden.gmapsfx.service.geocoding.GeocoderStatus;
@@ -13,7 +12,6 @@ import com.lynden.gmapsfx.service.geocoding.GeocodingService;
 import com.lynden.gmapsfx.shapes.Circle;
 import com.lynden.gmapsfx.shapes.CircleOptions;
 import javafx.scene.control.Alert;
-import netscape.javascript.JSObject;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -191,7 +189,6 @@ public class Map{
             map.addMarker(new Marker(new MarkerOptions()
                     .animation(Animation.DROP)
                     .position(latLong)));
-                    //.icon(seng202.Model.Map.class.getResource("/images/wifiIcon.png").getFile())));
             map.setCenter(latLong);
         });
     }
@@ -247,38 +244,86 @@ public class Map{
     }
 
     public static void findWifi(Wifi wifi, GoogleMap map) {
-        CircleOptions circleOptns = new CircleOptions()
-                .center(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
-                .radius(70)
-                .draggable(false)
-                .clickable(true)
-                .fillOpacity(0.075)
-                .fillColor("LightBlue")
-                .strokeColor("Blue")
-                .strokeWeight(0.2);
-        Circle circle = new Circle(circleOptns);
-        map.addMapShape(circle);
+        if (wifi.getCircle() == null) {
+            CircleOptions circleOptns = new CircleOptions()
+                    .center(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
+                    .radius(70)
+                    .draggable(false)
+                    .clickable(true)
+                    .fillOpacity(0.075)
+                    .fillColor("LightBlue")
+                    .strokeColor("Blue")
+                    .strokeWeight(0.2);
+            wifi.setCircle(new Circle(circleOptns));
+            map.addMapShape(wifi.getCircle());
+            wifi.getCircle().setVisible(!wifi.getCircle().getVisible());
+        } else {
+            wifi.getCircle().setVisible(!wifi.getCircle().getVisible());
+        }
     }
 
     public static void findRetailers(Retailer retailer, GoogleMap map, GeocodingService service) {
-        System.out.println(retailer.getAddress());
-        service.geocode(retailer.getAddress()+", NYC", (GeocodingResult[] results, GeocoderStatus status) -> {
-            LatLong latLong = null;
+        if (retailer.getMarker() == null) {
+            System.out.println(retailer.getAddress());
+            service.geocode(retailer.getAddress() + ", NYC", (GeocodingResult[] results, GeocoderStatus status) -> {
+                LatLong latLong = null;
 
-            if (status == GeocoderStatus.ZERO_RESULTS) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "No matching address found");
-                alert.show();
-                latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
-                        results[0].getGeometry().getLocation().getLongitude());
-            } else {
-                latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
-                        results[0].getGeometry().getLocation().getLongitude());
-            }
-            map.addMarker(new Marker(new MarkerOptions()
-                    .animation(Animation.DROP)
-                    .position(latLong)
-                    .icon("http://maps.google.com/mapfiles/ms/micons/green-dot.png")));
-        });
+                if (status == GeocoderStatus.ZERO_RESULTS) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "No matching address found");
+                    alert.show();
+                    latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
+                            results[0].getGeometry().getLocation().getLongitude());
+                } else {
+                    latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
+                            results[0].getGeometry().getLocation().getLongitude());
+                }
+
+                Marker marker = new Marker(new MarkerOptions()
+                        .animation(Animation.DROP)
+                        .position(latLong)
+                        .icon("http://maps.google.com/mapfiles/ms/micons/green-dot.png"));
+                retailer.setMarker(marker);
+                map.addMarker(retailer.getMarker());
+                retailer.getMarker().setVisible(!retailer.getMarker().getVisible());
+            });
+        } else {
+            retailer.getMarker().setVisible(!retailer.getMarker().getVisible());
+        }
+    }
+
+    /**
+     * Method to find place of interest using the google maps API
+     * @param poi - Place of interest to find
+     * @param map - Map to render the marker on.
+     * @param service - geocoding service object to use for google map API
+     */
+    public static void findPoi(Poi poi, GoogleMap map, GeocodingService service) {
+        if (poi.getMarker() == null) {
+            service.geocode(poi.getAddress() + ", NYC", (GeocodingResult[] results, GeocoderStatus status) -> {
+                LatLong latLong = null;
+
+                if (status == GeocoderStatus.ZERO_RESULTS) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "No matching address found");
+                    alert.show();
+                    latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
+                            results[0].getGeometry().getLocation().getLongitude());
+                } else {
+                    latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
+                            results[0].getGeometry().getLocation().getLongitude());
+                }
+
+                Marker marker = new Marker(new MarkerOptions()
+                        .animation(Animation.DROP)
+                        .position(latLong)
+                        .icon("http://labs.google.com/ridefinder/images/mm_20_yellow.png"));
+
+                poi.setMarker(marker);
+                map.addMarker(poi.getMarker());
+                poi.getMarker().setVisible(!poi.getMarker().getVisible());
+            });
+        } else {
+            poi.getMarker().setVisible(!poi.getMarker().getVisible());
+        }
     }
 
     public static void main(String[] argv){

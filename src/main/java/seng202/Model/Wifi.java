@@ -1,6 +1,6 @@
 package seng202.Model;
 
-import seng202.Model.Location;
+import com.lynden.gmapsfx.shapes.Circle;
 
 /**
  * Wifi subclass of Location, contains the information of the wifi provider.
@@ -9,6 +9,7 @@ public class Wifi extends Location {
     private String provider;
     private String borough;
     private String type;
+    private Circle circle = null;
 
     /**
      * Creates a new instance of the wifi class, uses the constructor of the Location superclass.
@@ -35,7 +36,9 @@ public class Wifi extends Location {
         return borough;
     }
 
-    ;
+    public Circle getCircle() { return circle; }
+
+    public void setCircle(Circle circle) { this.circle = circle; }
 
     public String getType() {
         return type;
