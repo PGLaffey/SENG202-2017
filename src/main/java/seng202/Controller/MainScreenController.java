@@ -751,7 +751,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     void saveRetailerButtonPressed(ActionEvent event) {
     	if (retailerNameText.getText().isEmpty()) {
     		retailerNameLabel.setTextFill(Color.RED);
-    	} else if (retailerAddressText.getText().isEmpty() && (retailerLatText.getText().isEmpty() || retailerLongText.getText().isEmpty())) {
+    	} else if (retailerAddressText.getText().equals("") && (retailerLatText.getText().equals("") || retailerLongText.getText().equals(""))) {
     		retailerNameLabel.setTextFill(Color.BLACK);
     		retailerAddressLabel.setTextFill(Color.RED);
     		retailerLatLabel.setTextFill(Color.RED);
@@ -774,14 +774,14 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     		retailerAddressLabel.setTextFill(Color.BLACK);
     		retailerLatLabel.setTextFill(Color.BLACK);
     		retailerLongLabel.setTextFill(Color.BLACK);
-    		retailerNameText.setText(null);
-    		retailerAddressText.setText(null);
-    		retailerLatText.setText(null);
-    		retailerLongText.setText(null);
-    		retailerZipText.setText(null);
-    		retailerBoroughText.setText(null);
-    		retailerProductText.setText(null);
-    		retailerDescriptionText.setText(null);
+    		retailerNameText.setText("");
+    		retailerAddressText.setText("");
+    		retailerLatText.setText("");
+    		retailerLongText.setText("");
+    		retailerZipText.setText("");
+    		retailerBoroughText.setText("");
+    		retailerProductText.setText("");
+    		retailerDescriptionText.setText("");
     	}
     	
     }
