@@ -9,8 +9,11 @@ public class Retailer extends Location {
     //TODO Changed "type" to "product" as this avoids confusion with the "type" of location
     private String product;
     private String description;
-    private Marker marker = null;
     private String borough;
+
+    private Marker marker = null;
+    private boolean noMarker = false;
+    Coord coord = null;
 
 	/**
 	 * Constructor for the retailer subclass, uses the location superclass constructor.
@@ -84,5 +87,21 @@ public class Retailer extends Location {
 
     public void setBorough(String borough) {
         this.borough = borough;
+    }
+
+    public boolean hasNoMarker() {
+        return noMarker;
+    }
+
+    public void setNoMarker(boolean bool) {
+        noMarker = bool;
+    }
+
+    public Coord getCoord() {
+        return coord;
+    }
+
+    public void setCoord(Coord coord) {
+        this.coord = coord;
     }
 }
