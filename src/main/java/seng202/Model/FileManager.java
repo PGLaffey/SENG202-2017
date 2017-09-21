@@ -10,7 +10,6 @@ import static jdk.nashorn.internal.objects.NativeString.substring;
 /**
  * File Manager class reads and writes files to and from .csv files, and stores the information in the apps current storage.
  * The File Manager class also serializes and deserializes user objects.
- * @author Rebecka Cox
  */
 public class FileManager {
     private static final String DEST_TARGET = new File(seng202.Model.FileManager.class.getResource("/data_files/").getFile()).toString();
