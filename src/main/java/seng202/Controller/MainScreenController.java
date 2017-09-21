@@ -88,7 +88,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     private Menu savedRoutesMenu;
     
     @FXML
-    private Button randomRouteButton;  
+    private Button fileChooserButton;
     
     @FXML
     private MenuButton addLocationsMenu;
@@ -141,9 +141,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     private TextField searchText;
     
     //Random route pane
-    
-    @FXML
-    private AnchorPane randomRoutePane;
     
     //Adding wifi pane
     
@@ -502,7 +499,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     }
 
     @FXML
-    void randomRoutePressed(ActionEvent event) {
+    void fileChooserPressed(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open File");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Data Files", "*.csv"));
@@ -515,7 +512,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     void addLocationsPressed(ActionEvent event) {
     	addWifiPane.setVisible(true);
     	mainMapPane.setVisible(false);
-    	randomRoutePane.setVisible(false);
     }
     
     /**
@@ -619,7 +615,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addToiletPane.setVisible(false);
     	addRetailerPane.setVisible(false);
     	addOtherPane.setVisible(true);
-    	randomRoutePane.setVisible(false);
     }
 
     @FXML
@@ -630,7 +625,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addToiletPane.setVisible(false);
     	addRetailerPane.setVisible(false);
     	addOtherPane.setVisible(false);
-    	randomRoutePane.setVisible(false);
     }
 
     @FXML
@@ -641,7 +635,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addToiletPane.setVisible(false);
     	addRetailerPane.setVisible(true);
     	addOtherPane.setVisible(false);
-    	randomRoutePane.setVisible(false);
     }
 
     @FXML
@@ -652,7 +645,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addToiletPane.setVisible(true);
     	addRetailerPane.setVisible(false);
     	addOtherPane.setVisible(false);
-    	randomRoutePane.setVisible(false);
     }
 
     @FXML
@@ -663,7 +655,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addToiletPane.setVisible(false);
     	addRetailerPane.setVisible(false);
     	addOtherPane.setVisible(false);
-    	randomRoutePane.setVisible(false);
     }
     
     @FXML
@@ -875,7 +866,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addToiletPane.setVisible(false);
     	addRetailerPane.setVisible(false);
     	addOtherPane.setVisible(false);
-    	randomRoutePane.setVisible(false);
     	
     	addLocationsMenu.setPopupSide(Side.RIGHT);
     	
@@ -895,8 +885,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         assert logoutButton != null : "fx:id=\"logoutButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert mainMapPane != null : "fx:id=\"mainMapPane\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert mapButton != null : "fx:id=\"mapButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert randomRouteButton != null : "fx:id=\"randomRouteButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert randomRoutePane != null : "fx:id=\"randomRoutePane\" was not injected: check your FXML file 'MainScreen.fxml'.";
+        assert fileChooserButton != null : "fx:id=\"fileChooserButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert retailerIconButton != null : "fx:id=\"retailerIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert saveWifiButton != null : "fx:id=\"saveLocationButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert saveRouteButton != null : "fx:id=\"saveRouteButton\" was not injected: check your FXML file 'MainScreen.fxml'.";

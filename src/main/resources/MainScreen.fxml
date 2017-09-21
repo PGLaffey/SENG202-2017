@@ -19,9 +19,10 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 <?import javafx.scene.web.WebView?>
+
 <?import com.lynden.gmapsfx.GoogleMapView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.Controller.MainScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.MainScreenController">
   <!--prefHeight="489.0" prefWidth="827.0"-->
   <children>
     <SplitPane dividerPositions="0.10677618069815195" orientation="VERTICAL" prefHeight="489.0" prefWidth="827.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -114,7 +115,7 @@
                         </Button>
                         <MenuButton fx:id="loadRouteMenu" mnemonicParsing="false" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: #fafafa;&#10;" text="Load Route" GridPane.columnIndex="0" GridPane.rowIndex="2">
                           <items>
-                            <Menu mnemonicParsing="false" style="" text="Favourite Routes" fx:id="favouriteRoutesMenu">
+                            <Menu fx:id="favouriteRoutesMenu" mnemonicParsing="false" style="" text="Favourite Routes">
                               <items>
                                 <MenuItem mnemonicParsing="false" style="" text="Action 1">
                                   <graphic>
@@ -123,7 +124,7 @@
                                 </MenuItem>
                               </items>
                             </Menu>
-                            <Menu mnemonicParsing="false" style="" text="Saved Routes" fx:id="savedRoutesMenu">
+                            <Menu fx:id="savedRoutesMenu" mnemonicParsing="false" style="" text="Saved Routes">
                               <items>
                                 <MenuItem mnemonicParsing="false" style="" text="Action 1">
                                   <graphic>
@@ -134,14 +135,14 @@
                             </Menu>
                           </items>
                         </MenuButton>
-                        <Button fx:id="randomRouteButton" mnemonicParsing="false" onAction="#randomRoutePressed" prefHeight="69.0" prefWidth="215.0" style="-fx-background-color: #fafafa;" text="Random Route" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                        <Button fx:id="fileChooserButton" mnemonicParsing="false" onAction="#fileChooserPressed" prefHeight="69.0" prefWidth="215.0" style="-fx-background-color: #fafafa;" text="Upload File" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                         <MenuButton id="loadRouteMenu" fx:id="addLocationsMenu" mnemonicParsing="false" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: #fafafa;&#10;" text="Add Location" GridPane.columnIndex="0" GridPane.rowIndex="4">
                           <items>
-                            <MenuItem mnemonicParsing="false" onAction="#addWifiMenuPressed" text="Wifi" fx:id="addWifiMenuButton" />
-                            <MenuItem mnemonicParsing="false" onAction="#addRetailerMenuPressed" text="Retailer" fx:id="addRetailerMenuButton" />
-                            <MenuItem mnemonicParsing="false" onAction="#addToiletMenuPressed" text="Toilet" fx:id="addToiletMenuButton" />
-                            <MenuItem mnemonicParsing="false" onAction="#addPoiMenuPressed" text="Point of Interest" fx:id="addPoiMenuButton" />
-                            <MenuItem mnemonicParsing="false" onAction="#addOtherMenuPressed" text="Other" fx:id="addOtherMenuButton" />
+                            <MenuItem fx:id="addWifiMenuButton" mnemonicParsing="false" onAction="#addWifiMenuPressed" text="Wifi" />
+                            <MenuItem fx:id="addRetailerMenuButton" mnemonicParsing="false" onAction="#addRetailerMenuPressed" text="Retailer" />
+                            <MenuItem fx:id="addToiletMenuButton" mnemonicParsing="false" onAction="#addToiletMenuPressed" text="Toilet" />
+                            <MenuItem fx:id="addPoiMenuButton" mnemonicParsing="false" onAction="#addPoiMenuPressed" text="Point of Interest" />
+                            <MenuItem fx:id="addOtherMenuButton" mnemonicParsing="false" onAction="#addOtherMenuPressed" text="Other" />
                           </items>
                         </MenuButton>
                         <Button fx:id="shareButton" mnemonicParsing="false" onAction="#sharePressed" prefHeight="68.0" prefWidth="215.0" style="-fx-background-color: #fafafa;" text="Share" GridPane.columnIndex="0" GridPane.rowIndex="5" />
