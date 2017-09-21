@@ -40,6 +40,9 @@ public class DataFetcher {
 		}
 	}
 
+	public void updateUserPassword (String username, String password) {
+		runQuery("UPDATE tblUser SET Password = '" + password + "' WHERE Username = '" + username + "'");
+	}
 	/**
 	 *
 	 * @param username the username of the user logging in

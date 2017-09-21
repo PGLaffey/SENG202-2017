@@ -12,6 +12,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import seng202.Model.CurrentStorage;
+import seng202.Model.DataFetcher;
+import seng202.Model.User;
 
 
 public class ChangePasswordScreenController {
@@ -56,6 +59,13 @@ public class ChangePasswordScreenController {
      */
     @FXML
     void changePasswordButtonPressed(ActionEvent event) throws IOException {
+        User user = CurrentStorage.getUser();
+        DataFetcher data = new DataFetcher();
+        if (user.getPassword().equals(oldPasswordText.getText().toString())) {
+            if (newPasswordText.equals(newPasswordTextAgain)) {
+                data.updateUserPassword(user.getUsername(), newPasswordText.getText());
+            }
+        }
     	Stage stage = (Stage) changePasswordButton.getScene().getWindow();
     	stage.hide();	
     }
@@ -67,6 +77,8 @@ public class ChangePasswordScreenController {
         assert newPasswordText != null : "fx:id=\"newPasswordText\" was not injected: check your FXML file 'ChangePasswordScreen.fxml'.";
         assert newPasswordTextAgain != null : "fx:id=\"newPasswordTextAgain\" was not injected: check your FXML file 'ChangePasswordScreen.fxml'.";
         assert oldPasswordText != null : "fx:id=\"oldPasswordText\" was not injected: check your FXML file 'ChangePasswordScreen.fxml'.";
+
+        User user = CurrentStorage.getUser();
 
 
     }
