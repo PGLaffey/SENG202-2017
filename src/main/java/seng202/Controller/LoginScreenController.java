@@ -49,17 +49,15 @@ public class LoginScreenController {
 		if ((data.fetchPassword(usernameText.getText()).isEmpty())) {
 			incorrectPasswordLbl.setVisible(false);
 			incorrectUserLbl.setVisible(true);
-		} else if ((data.fetchPassword(usernameText.getText()).get(0).get(0).toString().equals(passwordText.getText().toString()))) {
-			//User user = new User(String first, String last, usernameText.getText().toString(), String doB, passwordText.getText().toString());
-			//CurrentStorage.setUser(user); // TODO: Not sure how to access the users name and dob from the database
+		} else if ((data.fetchPassword(usernameText.getText()).toString().equals(passwordText.getText().toString()))) {
 			FileManager.retailerRetriever( new File(getClass().getResource("/data_files/").getFile()).toString() + "/Retailers_subset.csv");
 			FileManager.wifiRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/NYC_Free_Public_WiFi_03292017.csv");
 			//FileManager.routeRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-01 - Citi Bike trip data.csv");
 			//FileManager.routeRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-02 - Citi Bike trip data.csv");
-			ArrayList<ArrayList<String>> userInfo;
+			ArrayList<String> userInfo;
 			userInfo = data.fetchUserInfo(usernameText.getText());
 
-			User user = new User(userInfo.get(0).get(0), userInfo.get(0).get(1), usernameText.getText().toLowerCase(), userInfo.get(0).get(2), passwordText.getText().toString());
+			User user = new User(userInfo.get(0), userInfo.get(1), usernameText.getText().toLowerCase(), userInfo.get(2), passwordText.getText().toString());
 			CurrentStorage.setUser(user);
 
 			Stage primaryStage = (Stage)signInButton.getScene().getWindow();
