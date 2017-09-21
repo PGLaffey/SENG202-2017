@@ -169,13 +169,13 @@ public class RawDataViewerTest extends TestCase {
 
         //Create new retailers to test on.
         Retailer SBC = new Retailer("3 New York Plaza, New York, NY", "Starbucks Coffee",
-                "Casual Eating and Takeout", "F-Coffeehouse", 10004);
+                "Casual Eating and Takeout", "F-Coffeehouse");
 
         Retailer HRC = new Retailer("39 Whitehall Street, New York, NY", "New York Health & Racquet Club",
-                "Personal and Professional Services", "P-Athletic Clubs/Fitness", 10004);
+                "Personal and Professional Services", "P-Athletic Clubs/Fitness");
 
         Retailer AJK = new Retailer("6 Stone Street, New York, NY", "A.J. Kelly's",
-                "Full Service Dining", "F-American", 10004);
+                "Full Service Dining", "F-American");
 
         //Add the retailers to the retailers ArrayList
         retailers.add(SBC);
@@ -195,13 +195,13 @@ public class RawDataViewerTest extends TestCase {
 
         //Create new retailers to test on.
         Retailer SBC = new Retailer("3 New York Plaza, New York, NY", "Starbucks Coffee",
-                "Casual Eating and Takeout", "F-Coffeehouse", 10004);
+                "Casual Eating and Takeout", "F-Coffeehouse");
 
         Retailer HRC = new Retailer("39 Whitehall Street, New York, NY", "New York Health & Racquet Club",
-                "Personal and Professional Services", "P-Athletic Clubs/Fitness", 10004);
+                "Personal and Professional Services", "P-Athletic Clubs/Fitness");
 
         Retailer AJK = new Retailer("6 Stone Street, New York, NY", "A.J. Kelly's",
-                "Full Service Dining", "F-American", 10004);
+                "Full Service Dining", "F-American");
 
         //Add the retailers to the retailers ArrayList
         retailers.add(SBC);
@@ -220,13 +220,13 @@ public class RawDataViewerTest extends TestCase {
 
         //Create new retailers to test on.
         Retailer SBC = new Retailer("3 New York Plaza, New York, NY", "Starbucks Coffee",
-                "Casual Eating and Takeout", "F-Coffeehouse", 10004);
+                "Casual Eating and Takeout", "F-Coffeehouse");
 
         Retailer HRC = new Retailer("39 Whitehall Street, New York, NY", "New York Health & Racquet Club",
-                "Personal and Professional Services", "P-Athletic Clubs/Fitness", 10004);
+                "Personal and Professional Services", "P-Athletic Clubs/Fitness");
 
         Retailer AJK = new Retailer("6 Stone Street, New York, NY", "A.J. Kelly's",
-                "Full Service Dining", "F-American", 10004);
+                "Full Service Dining", "F-American");
 
         //Add the retailers to the retailers ArrayList
         retailers.add(SBC);
@@ -255,7 +255,8 @@ public class RawDataViewerTest extends TestCase {
 
         //Create new retailers to test on.
         Retailer SBC = new Retailer("3 New York Plaza, New York, NY", "Starbucks Coffee",
-                "Casual Eating and Takeout", "F-Coffeehouse", 10004);
+                "Casual Eating and Takeout", "F-Coffeehouse");
+        SBC.setZip(10004);
         retailers.add(SBC);
         ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "3 New York Plaza, New York, NY");
         assertTrue(found.get(0).equals(SBC));
@@ -269,7 +270,7 @@ public class RawDataViewerTest extends TestCase {
 
         // Create new retailers to test on.
         Retailer HRC = new Retailer("39 Whitehall Street, New York, NY", "New York Health & Racquet Club",
-                "Personal and Professional Services", "P-Athletic Clubs/Fitness", 10004);
+                "Personal and Professional Services", "P-Athletic Clubs/Fitness");
         retailers.add(HRC);
         ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "Personal and Professional Services");
         assertTrue(found.get(0).equals(HRC));
@@ -283,7 +284,8 @@ public class RawDataViewerTest extends TestCase {
 
         // Create new retailers to test on.
         Retailer HRC = new Retailer("39 Whitehall Street, New York, NY", "New York Health & Racquet Club",
-                "Personal and Professional Services", "P-Athletic Clubs/Fitness", 10004);
+                "Personal and Professional Services", "P-Athletic Clubs/Fitness");
+        HRC.setZip(10004);
         retailers.add(HRC);
         ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "10004");
         assertTrue(found.get(0).equals(HRC));
@@ -297,7 +299,7 @@ public class RawDataViewerTest extends TestCase {
 
         //Create new retailers to test on.
         Retailer AJK = new Retailer("6 Stone Street, New York, NY", "A.J. Kelly's",
-                "Full Service Dining", "F-American", 10004);
+                "Full Service Dining", "F-American");
         retailers.add(AJK);
         ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "A.J. Kelly's");
         assertTrue(found.get(0).equals(AJK));
@@ -311,7 +313,7 @@ public class RawDataViewerTest extends TestCase {
 
         // Create new retailers to test on.
         Retailer HRC = new Retailer("39 Whitehall Street, New York, NY", "New York Health & Racquet Club",
-                "Personal and Professional Services", "P-Athletic Clubs/Fitness", 10004);
+                "Personal and Professional Services", "P-Athletic Clubs/Fitness");
         retailers.add(HRC);
         ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "P-Athletic Clubs/Fitness");
         assertTrue(found.get(0).equals(HRC));
@@ -484,9 +486,9 @@ public class RawDataViewerTest extends TestCase {
         ArrayList<Route> routes = new ArrayList<Route>();
 
         // Create new Wifi hotspots.
-        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4, 0), new Location(25.156342, -43.123645, "TestPlace1End", 4, 0), "Home-Work", "M");
-        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4, 0), new Location(26.187342, -41.123625, "TestPlace2End", 4, 0), "Test-Place", "F");
-        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4, 0), new Location(-16.158742, 33.654645, "TestPlace3End", 4, 0), "Work-Party", "0");
+        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4), new Location(25.156342, -43.123645, "TestPlace1End", 4), "Home-Work", "M");
+        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4), new Location(26.187342, -41.123625, "TestPlace2End", 4), "Test-Place", "F");
+        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4), new Location(-16.158742, 33.654645, "TestPlace3End", 4), "Work-Party", "0");
 
         // Add the wifis to an ArrayList
         routes.add(HW);
@@ -504,9 +506,9 @@ public class RawDataViewerTest extends TestCase {
         ArrayList<Route> routes = new ArrayList<Route>();
 
         // Create new Wifi hotspots.
-        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4, 0), new Location(25.156342, -43.123645, "TestPlace1End", 4, 0), "Home-Work", "M");
-        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4, 0), new Location(26.187342, -41.123625, "TestPlace2End", 4, 0), "Test-Place", "F");
-        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4, 0), new Location(-16.158742, 33.654645, "TestPlace3End", 4, 0), "Work-Party", "0");
+        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4), new Location(25.156342, -43.123645, "TestPlace1End", 4), "Home-Work", "M");
+        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4), new Location(26.187342, -41.123625, "TestPlace2End", 4), "Test-Place", "F");
+        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4), new Location(-16.158742, 33.654645, "TestPlace3End", 4), "Work-Party", "0");
 
         // Add the wifis to an ArrayList
         routes.add(HW);
@@ -524,9 +526,9 @@ public class RawDataViewerTest extends TestCase {
         ArrayList<Route> routes = new ArrayList<Route>();
 
         // Create new Wifi hotspots.
-        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4, 0), new Location(25.156342, -43.123645, "TestPlace1End", 4, 0), "Home-Work", "M");
-        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4, 0), new Location(26.187342, -41.123625, "TestPlace2End", 4, 0), "Test-Place", "F");
-        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4, 0), new Location(-16.158742, 33.654645, "TestPlace3End", 4, 0), "Work-Party", "0");
+        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4), new Location(25.156342, -43.123645, "TestPlace1End", 4), "Home-Work", "M");
+        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4), new Location(26.187342, -41.123625, "TestPlace2End", 4), "Test-Place", "F");
+        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4), new Location(-16.158742, 33.654645, "TestPlace3End", 4), "Work-Party", "0");
 
         // Add the wifis to an ArrayList
         routes.add(HW);
@@ -544,9 +546,9 @@ public class RawDataViewerTest extends TestCase {
         ArrayList<Route> routes = new ArrayList<Route>();
 
         // Create new Wifi hotspots.
-        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4, 0), new Location(25.156342, -43.123645, "TestPlace1End", 4, 0), "Home-Work", "M");
-        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4, 0), new Location(26.187342, -41.123625, "TestPlace2End", 4, 0), "Test-Place", "F");
-        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4, 0), new Location(-16.158742, 33.654645, "TestPlace3End", 4, 0), "Work-Party", "0");
+        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4), new Location(25.156342, -43.123645, "TestPlace1End", 4), "Home-Work", "M");
+        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4), new Location(26.187342, -41.123625, "TestPlace2End", 4), "Test-Place", "F");
+        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4), new Location(-16.158742, 33.654645, "TestPlace3End", 4), "Work-Party", "0");
 
         // Add the wifis to an ArrayList
         routes.add(HW);
@@ -566,9 +568,9 @@ public class RawDataViewerTest extends TestCase {
         ArrayList<Route> routes = new ArrayList<Route>();
 
         // Create new Wifi hotspots.
-        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4, 0), new Location(25.156342, -43.123645, "TestPlace1End", 4, 0), "Home-Work", "M");
-        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4, 0), new Location(26.187342, -41.123625, "TestPlace2End", 4, 0), "Test-Place", "F");
-        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4, 0), new Location(-16.158742, 33.654645, "TestPlace3End", 4, 0), "Work-Party", "0");
+        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4), new Location(25.156342, -43.123645, "TestPlace1End", 4), "Home-Work", "M");
+        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4), new Location(26.187342, -41.123625, "TestPlace2End", 4), "Test-Place", "F");
+        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4), new Location(-16.158742, 33.654645, "TestPlace3End", 4), "Work-Party", "0");
 
         // Add the wifis to an ArrayList
         routes.add(HW);
@@ -586,9 +588,9 @@ public class RawDataViewerTest extends TestCase {
         ArrayList<Route> routes = new ArrayList<Route>();
 
         // Create new Wifi hotspots.
-        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4, 0), new Location(25.156342, -43.123645, "TestPlace1End", 4, 0), "Home-Work", "M");
-        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4, 0), new Location(26.187342, -41.123625, "TestPlace2End", 4, 0), "Test-Place", "F");
-        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4, 0), new Location(-16.158742, 33.654645, "TestPlace3End", 4, 0), "Work-Party", "0");
+        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4), new Location(25.156342, -43.123645, "TestPlace1End", 4), "Home-Work", "M");
+        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4), new Location(26.187342, -41.123625, "TestPlace2End", 4), "Test-Place", "F");
+        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4), new Location(-16.158742, 33.654645, "TestPlace3End", 4), "Work-Party", "0");
 
         // Add the wifis to an ArrayList
         routes.add(HW);
@@ -606,9 +608,9 @@ public class RawDataViewerTest extends TestCase {
         ArrayList<Route> routes = new ArrayList<Route>();
 
         // Create new Wifi hotspots.
-        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4, 0), new Location(25.156342, -43.123645, "TestPlace1End", 4, 0), "Home-Work", "M");
-        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4, 0), new Location(26.187342, -41.123625, "TestPlace2End", 4, 0), "Test-Place", "F");
-        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4, 0), new Location(-16.158742, 33.654645, "TestPlace3End", 4, 0), "Work-Party", "0");
+        Route HW = new Route("1238", new Location(24.156342, -42.123645, "TestPlace1Start", 4), new Location(25.156342, -43.123645, "TestPlace1End", 4), "Home-Work", "M");
+        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4), new Location(26.187342, -41.123625, "TestPlace2End", 4), "Test-Place", "F");
+        Route WP = new Route("1414", new Location(-11.159542, 45.112345, "TestPlace3Start", 4), new Location(-16.158742, 33.654645, "TestPlace3End", 4), "Work-Party", "0");
 
         // Add the wifis to an ArrayList
         routes.add(HW);
