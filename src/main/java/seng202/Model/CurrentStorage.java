@@ -13,6 +13,7 @@ public class CurrentStorage {
     private static ArrayList<Toilet> toiletArray = new ArrayList<Toilet>();
     private static ArrayList<Poi> poiArray = new ArrayList<Poi>();
     private static ArrayList<Location> generalArray = new ArrayList<Location>();
+    private static ArrayList<Coord> coordsArray = new ArrayList<Coord>();
     private static User currentUser;
     
     private static Wifi wifiViewed;
@@ -141,6 +142,10 @@ public class CurrentStorage {
     public static void addPoi(Poi poi) {
     	poiArray.add(poi);
     }
+
+    public static void addCoords(Coord coord) { coordsArray.add(coord); }
+
+    public static ArrayList<Coord> getCoords() { return coordsArray; }
     
     public static void setWifi(Wifi wifi) {
     	wifiViewed = wifi;

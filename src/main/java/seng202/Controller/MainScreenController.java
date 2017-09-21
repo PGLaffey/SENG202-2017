@@ -5,12 +5,8 @@ import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.object.*;
 import com.lynden.gmapsfx.service.directions.*;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
-import com.lynden.gmapsfx.shapes.Circle;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,17 +17,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.concurrent.Task;
-import org.omg.CORBA.Current;
 import seng202.Model.*;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import static seng202.Model.Map.findRetailers;
-import static seng202.Model.Map.findWifi;
 
 
 public class MainScreenController implements MapComponentInitializedListener, DirectionsServiceCallback{
@@ -622,14 +613,14 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     }
 
     public void placeMarkerOnMap(Location loc) {
-        Map.findLocation(loc, map, geocodingService);
+        Map.findLocation(loc.getAddress(), map, geocodingService);
     }
 
     public void placeRetailerOnMap(Retailer retailer) {Map.findRetailers(retailer, map);}
 
     public void placeMarkerOnMap(Route route) {
-        Map.findLocation(route.getStart(), map, geocodingService);
-        Map.findLocation(route.getEnd(), map, geocodingService);
+        Map.findLocation(route.getStartString(), map, geocodingService);
+        Map.findLocation(route.getEndString(), map, geocodingService);
     }
 
     @Override
