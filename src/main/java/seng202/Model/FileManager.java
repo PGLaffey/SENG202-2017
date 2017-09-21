@@ -209,7 +209,7 @@ public class FileManager {
                 Retailer newRetailer = new Retailer(information[addrLine1Index], information[retailerName], information[retailerPrimary], information[retailerSecondary], zip);
 
                 //Add the retailer to the storage class.
-                CurrentStorage.addRetailer(newRetailer);
+                CurrentStorage.addNewRetailer(newRetailer);
             }
         }
     }
