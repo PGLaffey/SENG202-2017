@@ -19,7 +19,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 <?import javafx.scene.web.WebView?>
-<!--<?import com.lynden.gmapsfx.GoogleMapView?>-->
+<?import com.lynden.gmapsfx.GoogleMapView?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.Controller.MainScreenController">
   <!--prefHeight="489.0" prefWidth="827.0"-->
@@ -164,7 +164,7 @@
                   <children>
                     <AnchorPane fx:id="mainMapPane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <!--<GoogleMapView fx:id="mapView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" SplitPane.resizableWithParent="true"/>-->
+                        <GoogleMapView fx:id="mapView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" SplitPane.resizableWithParent="true"/>
                         <TextField fx:id="searchText" maxHeight="32.0" maxWidth="199.0" onAction="#searchTextAction" prefHeight="32.0" prefWidth="199.0" promptText="Search" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="14.0" />
                         <Button fx:id="wifiIconButton" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#wifiIconPressed" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="21.0">
                           <graphic>
