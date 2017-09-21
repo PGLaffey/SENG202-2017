@@ -127,10 +127,21 @@ public class CurrentStorage {
         }
     }
     
-    public static void addNewRoute (Route route) {
-    	routeArray.add(route);
-    	addedRoutes.add(routeArray.indexOf(route));
+    public static boolean containsRoute(Route route) {
+    	for (Route currentRoute : CurrentStorage.getRouteArray()) {
+    		if (currentRoute.equals(route)) {
+    			return true;
+			}
+		}
+		return false;
     }
+
+    public static void addNewRoute(Route route) {
+    	if (!(containsRoute(route))) {
+			routeArray.add(route);
+			addedRoutes.add(routeArray.indexOf(route));
+		}
+	}
 
     public static void addRetailer(Retailer retailer) { // Used when bringing data in from database
         retailerArray.add(retailer);

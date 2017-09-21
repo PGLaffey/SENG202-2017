@@ -82,7 +82,7 @@ public class FileManagerTest extends TestCase {
                                         new Location(40.73221853, -73.98165557, "1 Ave & E 15 St", 4),
                                         "NA", "0");
 
-        assertEquals(expected_route, CurrentStorage.getRouteArray().get(0));
+        assertTrue(CurrentStorage.getRouteArray().get(0).equals(expected_route));
     }
 
     /**
@@ -228,7 +228,7 @@ public class FileManagerTest extends TestCase {
     {
         FileManager.routeRetriever(TARGET+"/route_data1.csv");
         FileManager.routeWriter("test file.csv");
-        assertTrue(new File(WRITE_TARGET+"/test file.csv").exists());
+        assertTrue(new File(WRITE_TARGET+"/test_file.csv").exists());
         result = FileManager.readFile(WRITE_TARGET+"/test file.csv");
         Route expected_route = new Route("16950", new Location(40.75323098, -73.97032517, "E 47 St & 2 Ave", 4),
                 new Location(40.73221853, -73.98165557, "1 Ave & E 15 St", 4),

@@ -137,10 +137,10 @@ public class FileManager {
                 double endLongitude = Double.parseDouble(information[endLongIndex].substring(0, information[endLongIndex].indexOf("\"")));
 
                 String gender;
-                if (information.length < header.size()) {
+                if (information.length != header.size()) {
                     gender = information[genderIndex - 1].substring(0, information[genderIndex - 1].indexOf("\""));
                 } else {
-                    gender = information[genderIndex].split(",")[1];
+                    gender = information[genderIndex];
                 }
 
                 //Convert the relevant data into the associated classes
@@ -149,9 +149,24 @@ public class FileManager {
                 Route newRoute = new Route(bikeID, startLocation, endLocation, "NA", gender);
 
                 //Log the new object into the storage class.
-                CurrentStorage.addRoute(newRoute);
+                CurrentStorage.addNewRoute(newRoute);
             }
         }
+    }
+
+
+    public static String filenameConverter(String filename) {
+        String empty = " ";
+        String newString = "";
+        for (int i = 0; i < filename.length(); i++) {
+            char character = filename.charAt(i);
+            if (!(character == empty.charAt(0))) {
+                newString += "_";
+            } else {
+                newString += filename.charAt(i);
+            }
+        }
+        return newString;
     }
 
 
@@ -159,6 +174,7 @@ public class FileManager {
      * Stores the route data stored in the current storage class.
      */
     public static void routeWriter(String filename) {
+        filename = filenameConverter(filename);
         ArrayList<Route> routes = CurrentStorage.getRouteArray();
         ArrayList<String> strRoutes = new ArrayList<String>();
         for (Route route : routes) {
