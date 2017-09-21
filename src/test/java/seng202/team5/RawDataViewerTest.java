@@ -366,9 +366,12 @@ public class RawDataViewerTest extends TestCase {
         ArrayList<Wifi> wifis = new ArrayList<Wifi>();
 
         // Create new Wifi hotspots.
-        Wifi LnK = new Wifi(40.745968, -73.9940399, "LinkNYC Free Wi-Fi", "Manhattan", "FREE", "LinkNYC - Citybridge");
-        Wifi WF = new Wifi(23.15644, -71.51563, "WhyFly", "Brooklyn", "FREE", "Spark");
-        Wifi HYW = new Wifi(35.61213, -72.15961, "Hide yo kids, hide yo wifi", "Queens", "PAID", "Yeezy");
+        Wifi LnK = new Wifi(40.745968, -73.9940399, "Manhattan-has-too-much-wifi", "LinkNYC Free Wi-Fi", "FREE", "LinkNYC - Citybridge");
+        LnK.setBorough("Manhattan");
+        Wifi WF = new Wifi(23.15644, -71.51563, "mn-this-is-wifi", "WhyFly", "FREE", "Spark");
+        WF.setBorough("Brooklyn");
+        Wifi HYW = new Wifi(35.61213, -72.15961,"mn-another-wifi", "Hide yo kids, hide yo wifi",  "PAID", "Yeezy");
+        HYW.setBorough("Queens");
 
         // Add the wifis to an ArrayList
         wifis.add(LnK);

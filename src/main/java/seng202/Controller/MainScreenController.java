@@ -11,6 +11,7 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,19 +20,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seng202.Model.*;
 
-import javafx.scene.paint.Color;
-
-
-//import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+//import java.awt.Color;
 
 
 public class MainScreenController implements MapComponentInitializedListener, DirectionsServiceCallback{
@@ -590,14 +590,28 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     void wifiIconPressed(ActionEvent event) {
-        for (Wifi wifi : CurrentStorage.getWifiArray()) {
-            if (wifi.getCircle() == null) {
-                wifiCircles.add(Map.findWifi(wifi));
-                map.addMapShape(wifi.getCircle());
-            } else {
-                wifi.getCircle().setVisible(!wifi.getCircle().getVisible());
+        Service<Void> wifiLoaderService = new Service<Void>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        for (Wifi wifi : CurrentStorage.getWifiArray()) {
+                            if (wifi.getCircle() == null) {
+                                wifiCircles.add(Map.findWifi(wifi));
+                                map.addMapShape(wifi.getCircle());
+                            } else {
+                                wifi.getCircle().setVisible(!wifi.getCircle().getVisible());
+                            }
+                        }
+                        return null;
+                    }
+                };
             }
-        }
+        };
+
+        wifiLoaderService.start();
+
     }
 
     @FXML
