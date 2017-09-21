@@ -232,7 +232,7 @@
                         </Label>
                       </children>
                     </AnchorPane>
-                    <AnchorPane fx:id="addWifiPane" prefHeight="430.0" prefWidth="637.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <AnchorPane fx:id="addWifiPane" prefHeight="430.0" prefWidth="637.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
                         <Label layoutX="282.0" layoutY="14.0" text="Add Wifi:" />
                         <Label id="routeNameLabel" layoutX="11.0" layoutY="52.0" text="Wifi point name:" />
@@ -352,7 +352,7 @@
                         <Button id="saveButton" fx:id="savePoiButton" layoutX="555.0" layoutY="384.0" mnemonicParsing="false" onAction="#savePoiButtonPressed" text="Save" />
                       </children>
                     </AnchorPane>
-                    <AnchorPane id="addLocationsPane" fx:id="addOtherPane" prefHeight="431.0" prefWidth="637.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <AnchorPane id="addLocationsPane" fx:id="addOtherPane" prefHeight="431.0" prefWidth="637.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
                         <Label layoutX="239.0" layoutY="14.0" text="Add Other Location:" />
                         <Label id="routeNameLabel" fx:id="otherNameLabel" layoutX="11.0" layoutY="49.0" text="Location name:" />
