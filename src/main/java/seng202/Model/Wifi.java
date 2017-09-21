@@ -27,6 +27,13 @@ public class Wifi extends Location {
         this.ssid = ssid;
         this.type = type;
     }
+    
+    public Wifi(String address, String name, String ssid, String type, String provider) {
+    	super(address, name, 3);
+    	this.provider = provider;
+    	this.ssid = ssid;
+    	this.type = type;
+    }
 
     public String getProvider() {
         return provider;

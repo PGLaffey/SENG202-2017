@@ -23,6 +23,12 @@ public class Toilet extends Location {
         this.forDisabled = forDisabled;
         this.uniSex = uniSex;
     }
+    
+    public Toilet(String address, String name, boolean forDisabled, boolean uniSex) {
+    	super(address, name, 0);
+    	this.forDisabled = forDisabled;
+    	this.uniSex = uniSex;
+    }
 
     public boolean getForDisabled() {
         return forDisabled;
