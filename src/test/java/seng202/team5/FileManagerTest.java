@@ -258,9 +258,8 @@ public class FileManagerTest extends TestCase {
     public void testWriteRetailerFile()
     {
         FileManager.retailerRetriever(TARGET+"/retailer_data1.csv");
-        FileManager.retailerWriter("test_file");
+        FileManager.retailerWriter("test_file", CurrentStorage.getRetailerArray());
         assertTrue(new File(WRITE_TARGET+"/test_file.csv").exists());
-        result = FileManager.readFile(WRITE_TARGET+"/test_file.csv");
         Retailer expected_retailer = new Retailer("3 New York Plaza", "Starbucks Coffee", "Casual Eating & Takeout", "F-Coffeehouse");
         assertTrue(CurrentStorage.getRetailerArray().get(0).equals(expected_retailer));
     }

@@ -14,6 +14,27 @@ import static jdk.nashorn.internal.objects.NativeString.substring;
 public class FileManager {
     private static final String DEST_TARGET = new File(seng202.Model.FileManager.class.getResource("/data_files/").getFile()).toString();
 
+
+    /**
+     * Converts a filename to a string with no " ".
+     * @param filename The filename to be checked and converted.
+     * @return The converted filename to be used by the writer functions.
+     */
+    public static String filenameConverter(String filename) {
+        String empty = " ";
+        String newString = "";
+        for (int i = 0; i < filename.length(); i++) {
+            char character = filename.charAt(i);
+            if (!(character == empty.charAt(0))) {
+                newString += "_";
+            } else {
+                newString += filename.charAt(i);
+            }
+        }
+        return newString;
+    }
+
+
     /**
      * Serializes an instance of the User class (exporting out of the program).
      * @param user The User object to be stored in a file
@@ -155,23 +176,9 @@ public class FileManager {
     }
 
 
-    public static String filenameConverter(String filename) {
-        String empty = " ";
-        String newString = "";
-        for (int i = 0; i < filename.length(); i++) {
-            char character = filename.charAt(i);
-            if (!(character == empty.charAt(0))) {
-                newString += "_";
-            } else {
-                newString += filename.charAt(i);
-            }
-        }
-        return newString;
-    }
-
-
     /**
      * Stores the route data stored in the current storage class.
+     * @param filename The filename where the csv file is to be stored.
      */
     public static void routeWriter(String filename) {
         filename = filenameConverter(filename);
@@ -193,6 +200,7 @@ public class FileManager {
 
     /**
      * Retrieves the list of the given retailers and converts each of these to being a new instance of Retailer stored in currentStorage.
+     * @param filename The filename where the csv file is stored.
      */
     public static void retailerRetriever(String filename) {
         ArrayList<String> retailers = readFile(filename);
@@ -230,8 +238,14 @@ public class FileManager {
         }
     }
 
-    public static void retailerWriter(String filename) {
-        ArrayList<Retailer> retailers = CurrentStorage.getRetailerArray();
+
+    /**
+     * Converts an arrayList of Retailers to a csv file.
+     * @param filename The file where the csv of retailers is to be written.
+     * @param retailers The arrayList of retailers to be stored as a csv file.
+     */
+    public static void retailerWriter(String filename, ArrayList<Retailer> retailers) {
+        filename = filenameConverter(filename);
         ArrayList<String> strRetailers = new ArrayList<String>();
         for (Retailer retailer : retailers) {
 
@@ -296,6 +310,7 @@ public class FileManager {
      * @param wifis The list of wifi objects to be converted to a csv file.
      */
     public static void wifiWriter(String filename, ArrayList<Wifi> wifis) {
+        filename = filenameConverter(filename);
         ArrayList<String> strWifis = new ArrayList<String>();
         if (!(wifis.isEmpty())) {
             String header = "LAT,LON,NAME,PROVIDER,BORONAME,TYPE";
@@ -313,6 +328,7 @@ public class FileManager {
             writeFile(DEST_TARGET,filename+".csv", strWifis);
         }
     }
+
 
     /**
      * Retrieves a list of toilet location from a csv file and stores them in the current storage.
@@ -349,12 +365,14 @@ public class FileManager {
         }
     }
 
+
     /**
      * Writes an arrayList of toilet objects to a string.
      * @param fileName The file where the csv will be placed.
      * @param toilets The arrayList of toilet objects to be stored in the csv.
      */
     public static void toiletWriter(String fileName, ArrayList<Toilet> toilets) {
+        fileName = filenameConverter(fileName);
         ArrayList<String> strToilets = new ArrayList<String>();
         if (!(toilets.isEmpty())) {
             String header = "name,disabled access,latitude,longitude,unisex";
@@ -372,6 +390,7 @@ public class FileManager {
             writeFile(DEST_TARGET, fileName + ".csv", strToilets);
         }
     }
+
 
     /**
      * Reads Points Of Interest from a csv file and stores them in the current storage class.
@@ -398,7 +417,7 @@ public class FileManager {
                 Double poiLatitude = Double.parseDouble(information[poiLatIndex]);
                 Double poiLongitude = Double.parseDouble(information[poiLonIndex]);
                 String poiDescription = information[poiDescriptionIndex];
-                int poiCost = Integer.parseInt(information[poiCostIndex]);
+                double poiCost = Integer.parseInt(information[poiCostIndex]);
 
                 // Creates new Poi object
                 Poi newPoi = new Poi(poiLatitude, poiLongitude, poiName, poiDescription, poiCost);
@@ -406,6 +425,32 @@ public class FileManager {
                 // Stores new object in the current storage class
                 CurrentStorage.addPoi(newPoi);
             }
+        }
+    }
+
+
+    /**
+     * Writes a csv file of a supplied arrayList of Poi objects.
+     * @param fileName The filename for the csv to be saved to.
+     * @param pois The list of points of interest to be saved as a csv.
+     */
+    public static void poiWriter(String fileName, ArrayList<Poi> pois) {
+        fileName = filenameConverter(fileName);
+        ArrayList<String> strPois = new ArrayList<String>();
+        if (!(pois.isEmpty())) {
+            String header = "name,latitude,longitude,description,cost";
+            strPois.add(header);
+            for (Poi poi : pois) {
+                String poiName = poi.getName();
+                Double poiLat = poi.getLatitude();
+                Double poiLon = poi.getLongitude();
+                String poiDescription = poi.getDescription();
+                double poiCost = poi.getCost();
+
+                String strPoi = poiName + "," + poiLat + "," + poiLon + "," + poiDescription + "," + poiCost;
+                strPois.add(strPoi);
+            }
+            writeFile(DEST_TARGET, fileName + ".csv", strPois);
         }
     }
 }
