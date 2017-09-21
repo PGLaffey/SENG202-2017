@@ -246,17 +246,6 @@ public class Map {
                 .strokeWeight(0.2);
         wifi.setCircle(new Circle(circleOptns));
         return wifi.getCircle();
-            //map.addMapShape(wifi.getCircle());
-            /*MarkerOptions markOptns = new MarkerOptions()
-                    .position(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
-                    .animation(Animation.DROP)
-                    .title(wifi.getName())
-                    .visible(false)
-                    .icon("http://labs.google.com/ridefinder/images/mm_20_blue.png");
-            wifi.setCircle(new Marker(markOptns));
-            wifi.getCircle().setVisible(!wifi.getCircle().getVisible());
-            map.addMarker(wifi.getCircle());*/
-
     }
 
     public static Marker findRetailers(Retailer retailer) {
@@ -267,6 +256,7 @@ public class Map {
                 if (coord.hasMarker()) {
                     retailer.setNoMarker(true);
                     retailer.setCoord(coord);
+                    break;
                 }
             }
         }

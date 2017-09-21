@@ -51,7 +51,8 @@ public class LoginScreenController {
 				} else if ((data.fetchPassword(usernameText.getText()).equals(passwordText.getText().toString()))) {
 					Thread retailerImporter = new Thread(new RetailerImporterThread(new File(getClass().getResource("/data_files/").getFile()).toString() + "/Lower_Manhattan_Retailers.csv"));
 					retailerImporter.start();
-					FileManager.wifiRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/NYC_Free_Public_WiFi_03292017.csv");
+					Thread wifiImporter = new Thread(new WifiImporterThread(new File(getClass().getResource("/data_files/").getFile()).toString() + "/NYC_Free_Public_WiFi_03292017.csv"));
+					wifiImporter.start();
 					//FileManager.routeRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-01 - Citi Bike trip data.csv");
 					//FileManager.routeRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-02 - Citi Bike trip data.csv");
 					ArrayList<String> userInfo;
