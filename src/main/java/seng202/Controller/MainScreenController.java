@@ -5,6 +5,7 @@ import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.object.*;
 import com.lynden.gmapsfx.service.directions.*;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
+import com.lynden.gmapsfx.shapes.Circle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.concurrent.Service;
@@ -279,6 +280,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     private TextField otherZipText;
 
     Service<Void> backgroundThread;
+    ArrayList<Circle> wifiCircles = new ArrayList<Circle>();
+    ArrayList<Marker> locationMarkers = new ArrayList<Marker>();
     
     /** 
      * Method for when the map menu button is pressed, shows the main map screen.
@@ -410,7 +413,12 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     void retailerIconPressed(ActionEvent event) {
         for (Retailer retailer : CurrentStorage.getRetailerArray()) {
-            placeRetailerOnMap(retailer);
+            if (!retailer.hasNoMarker() && retailer.getMarker() != null) {
+                retailer.getMarker().setVisible(!retailer.getMarker().getVisible());
+                map.addMarker(retailer.getMarker());
+            } else {
+                locationMarkers.add(Map.findRetailers(retailer));
+            }
         }
         /*
         backgroundThread = new Service<Void>() {
@@ -452,7 +460,12 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     void wifiIconPressed(ActionEvent event) {
         for (Wifi wifi : CurrentStorage.getWifiArray()) {
-            placeCircleOnMap(wifi);
+            if (wifi.getCircle() == null) {
+                wifiCircles.add(Map.findWifi(wifi));
+                map.addMapShape(wifi.getCircle());
+            } else {
+                wifi.getCircle().setVisible(!wifi.getCircle().getVisible());
+            }
         }
     }
 
@@ -608,7 +621,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     }
 
     public void placeCircleOnMap(Wifi wifi) {
-        Map.findWifi(wifi, map);
+        Map.findWifi(wifi);
 
     }
 
@@ -616,7 +629,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         Map.findLocation(loc.getAddress(), map, geocodingService);
     }
 
-    public void placeRetailerOnMap(Retailer retailer) {Map.findRetailers(retailer, map);}
+    public void placeRetailerOnMap(Retailer retailer) {Map.findRetailers(retailer);}
 
     public void placeMarkerOnMap(Route route) {
         Map.findLocation(route.getStartString(), map, geocodingService);
