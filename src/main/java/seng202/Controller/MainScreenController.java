@@ -20,6 +20,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import seng202.Model.*;
 
+import javafx.scene.paint.Color;
+
+
+//import java.awt.Color;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -48,8 +52,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     private URL location;
     
-    //Top menu bar
-        
+  //Top menu bar
+    
     @FXML
     private Button mapButton;
     
@@ -146,25 +150,49 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     private Button saveWifiButton;
     
     @FXML
+    private Label wifiAddressLabel;
+
+    @FXML
     private TextField wifiAddressText;
+
+    @FXML
+    private Label wifiBoroughLabel;
 
     @FXML
     private TextField wifiBoroughText;
 
     @FXML
+    private Label wifiLatLabel;
+
+    @FXML
     private TextField wifiLatText;
+
+    @FXML
+    private Label wifiLongLabel;
 
     @FXML
     private TextField wifiLongText;
 
     @FXML
+    private Label wifiNameLabel;
+
+    @FXML
     private TextField wifiNameText;
+
+    @FXML
+    private Label wifiProviderLabel;
 
     @FXML
     private TextField wifiProviderText;
 
     @FXML
+    private Label wifiTypeLabel;
+
+    @FXML
     private TextField wifiTypeText;
+
+    @FXML
+    private Label wifiZipLabel;
 
     @FXML
     private TextField wifiZipText;
@@ -175,28 +203,56 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     private AnchorPane addPoiPane;
     
     @FXML
+    private Button savePoiButton;
+    
+    @FXML
+    private Label poiAddressLabel;
+
+    @FXML
     private TextField poiAddressText;
+
+    @FXML
+    private Label poiBoroughLabel;
 
     @FXML
     private TextField poiBoroughText;
 
     @FXML
+    private Label poiCostLabel;
+
+    @FXML
     private TextField poiCostText;
+
+    @FXML
+    private Label poiDescriptionLabel;
 
     @FXML
     private TextArea poiDescriptionText;
 
     @FXML
+    private Label poiLatLabel;
+
+    @FXML
     private TextField poiLatText;
+
+    @FXML
+    private Label poiLongLabel;
 
     @FXML
     private TextField poiLongText;
 
     @FXML
+    private Label poiNameLabel;
+
+    @FXML
     private TextField poiNameText;
 
     @FXML
+    private Label poiZipLabel;
+
+    @FXML
     private TextField poiZipText;
+
     
     //Adding toilet pane
     
@@ -233,28 +289,53 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     private AnchorPane addRetailerPane;
     
     @FXML
+    private Label retailerAddressLabel;
+
+    @FXML
     private TextField retailerAddressText;
+
+    @FXML
+    private Label retailerBoroughLabel;
 
     @FXML
     private TextField retailerBoroughText;
 
     @FXML
+    private Label retailerDescriptionLabel;
+
+    @FXML
     private TextArea retailerDescriptionText;
+
+    @FXML
+    private Label retailerLatLabel;
 
     @FXML
     private TextField retailerLatText;
 
     @FXML
+    private Label retailerLongLabel;
+
+    @FXML
     private TextField retailerLongText;
+
+    @FXML
+    private Label retailerNameLabel;
 
     @FXML
     private TextField retailerNameText;
 
     @FXML
+    private Label retailerProductLabel;
+
+    @FXML
     private TextField retailerProductText;
 
     @FXML
+    private Label retailerZipLabel;
+
+    @FXML
     private TextField retailerZipText;
+
     
     //Adding other pane
     
@@ -537,25 +618,81 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     void savePoiButtonPressed(ActionEvent event) {
-    	if (!poiAddressText.getText().isEmpty()) {
-    		Poi poi = new Poi(poiAddressText.getText(), poiNameText.getText(), poiDescriptionText.getText(), Double.parseDouble(poiCostText.getText()));
-    		//CurrentStorage.addNewPoi(poi);
+    	if (poiNameText.getText().isEmpty()) {
+    		poiNameLabel.setTextFill(Color.RED);
+    	} else if (poiAddressText.getText().isEmpty() && (poiLatLabel.getText().isEmpty() || poiLongLabel.getText().isEmpty())) {
+    		poiNameLabel.setTextFill(Color.BLACK);
+    		poiAddressLabel.setTextFill(Color.RED);
+    		poiLatLabel.setTextFill(Color.RED);
+    		poiLongLabel.setTextFill(Color.RED);
     	} else {
-    		Poi poi = new Poi(Double.parseDouble(poiLatText.getText()), Double.parseDouble(poiLongText.getText()), poiNameText.getText(), poiDescriptionText.getText(), Double.parseDouble(poiCostText.getText()));
-    		//CurrentStorage.addNewPoi(poi);
+    		if (!poiAddressText.getText().isEmpty()) {
+        		Poi poi = new Poi(poiAddressText.getText(), poiNameText.getText(), poiDescriptionText.getText(), Double.parseDouble(poiCostText.getText()));
+        		if (!poiZipText.getText().isEmpty()) {
+        			poi.setZip(Integer.parseInt(poiZipText.getText()));
+        		}
+        		//CurrentStorage.addNewPoi(poi);
+        	} else {
+        		Poi poi = new Poi(Double.parseDouble(poiLatText.getText()), Double.parseDouble(poiLongText.getText()), poiNameText.getText(), poiDescriptionText.getText(), Double.parseDouble(poiCostText.getText()));
+        		if (!poiZipText.getText().isEmpty()) {
+        			poi.setZip(Integer.parseInt(poiZipText.getText()));
+        		}
+        		//CurrentStorage.addNewPoi(poi);
+        	}
+    		poiNameLabel.setTextFill(Color.BLACK);
+    		poiAddressLabel.setTextFill(Color.BLACK);
+    		poiLatLabel.setTextFill(Color.BLACK);
+    		poiLongLabel.setTextFill(Color.BLACK);
+    		poiNameText.setText(null);
+    		poiAddressText.setText(null);
+    		poiLatText.setText(null);
+    		poiLongText.setText(null);
+    		poiZipText.setText(null);
+    		poiBoroughText.setText(null);
+    		poiCostText.setText(null);
+    		poiDescriptionText.setText(null);
     	}
+    	
     }
+
 
     @FXML
     void saveRetailerButtonPressed(ActionEvent event) {
-    	if (!retailerAddressText.getText().isEmpty()) {
-    		Retailer retailer = new Retailer(retailerAddressText.getText(), retailerNameText.getText(), retailerProductText.getText(), retailerDescriptionText.getText(), Integer.parseInt(retailerZipText.getText()));
-        	CurrentStorage.addNewRetailer(retailer);
-        } else {
-        	Retailer retailer = new Retailer(Double.parseDouble(retailerLatText.getText()), Double.parseDouble(retailerLongText.getText()), retailerNameText.getText(), retailerProductText.getText(), retailerDescriptionText.getText(), Integer.parseInt(retailerZipText.getText()));
-        	CurrentStorage.addNewRetailer(retailer);
-
+    	if (retailerNameText.getText().isEmpty()) {
+    		retailerNameLabel.setTextFill(Color.RED);
+    	} else if (retailerAddressText.getText().isEmpty() && (retailerLatText.getText().isEmpty() || retailerLongText.getText().isEmpty())) {
+    		retailerNameLabel.setTextFill(Color.BLACK);
+    		retailerAddressLabel.setTextFill(Color.RED);
+    		retailerLatLabel.setTextFill(Color.RED);
+    		retailerLongLabel.setTextFill(Color.RED);
+    	} else {
+    		if (!retailerAddressText.getText().isEmpty()) {
+        		Retailer retailer = new Retailer(retailerAddressText.getText(), retailerNameText.getText(), retailerProductText.getText(), retailerDescriptionText.getText());
+        		if (!retailerZipText.getText().isEmpty()) {
+        			retailer.setZip(Integer.parseInt(retailerZipText.getText()));
+        		}
+            	CurrentStorage.addNewRetailer(retailer);
+            } else {
+            	Retailer retailer = new Retailer(Double.parseDouble(retailerLatText.getText()), Double.parseDouble(retailerLongText.getText()), retailerNameText.getText(), retailerProductText.getText(), retailerDescriptionText.getText());
+            	if (!retailerZipText.getText().isEmpty()) {
+        			retailer.setZip(Integer.parseInt(retailerZipText.getText()));
+        		}
+            	CurrentStorage.addNewRetailer(retailer);
+        	}
+    		retailerNameLabel.setTextFill(Color.BLACK);
+    		retailerAddressLabel.setTextFill(Color.BLACK);
+    		retailerLatLabel.setTextFill(Color.BLACK);
+    		retailerLongLabel.setTextFill(Color.BLACK);
+    		retailerNameText.setText(null);
+    		retailerAddressText.setText(null);
+    		retailerLatText.setText(null);
+    		retailerLongText.setText(null);
+    		retailerZipText.setText(null);
+    		retailerBoroughText.setText(null);
+    		retailerProductText.setText(null);
+    		retailerDescriptionText.setText(null);
     	}
+    	
     }
 
     @FXML
@@ -564,14 +701,43 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     void saveWifiButtonPressed(ActionEvent event) {
-    	if (!wifiAddressText.getText().isEmpty()) {
-        	//Wifi wifi = new Wifi(wifiAddressText.getText(), wifiNameText.getText(), wifiBoroughText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
-        	//CurrentStorage.addNewWifi(wifi);
+    	if (wifiNameText.getText().isEmpty()) {
+    		wifiNameLabel.setTextFill(Color.RED);
+    	} else if (wifiAddressText.getText().isEmpty() && (wifiLatText.getText().isEmpty() || wifiLongText.getText().isEmpty())) {
+    		wifiNameLabel.setTextFill(Color.BLACK);
+    		wifiAddressLabel.setTextFill(Color.RED);
+    		wifiLatLabel.setTextFill(Color.RED);
+    		wifiLongLabel.setTextFill(Color.RED);
+    	} else {
+    		if (!wifiAddressText.getText().isEmpty()) {
+    			// TODO: Have a constructor with address
+            	//Wifi wifi = new Wifi(wifiAddressText.getText(), wifiNameText.getText(), wifiBoroughText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
+    			if (!wifiZipText.getText().isEmpty()) {
+    				//wifi.setZip(Integer.parseInt(wifiZipText.getText());
+    			}
+            	//CurrentStorage.addNewWifi(wifi);
+        	}
+        	else {
+            	Wifi wifi = new Wifi(Double.parseDouble(wifiLatText.getText()), Double.parseDouble(wifiLongText.getText()), wifiNameText.getText(), wifiBoroughText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
+            	if (!wifiZipText.getText().isEmpty()) {
+    				//wifi.setZip(Integer.parseInt(wifiZipText.getText());
+    			}
+            	//CurrentStorage.addNewWifi(wifi);
+        	}
+    		wifiNameLabel.setTextFill(Color.BLACK);
+    		wifiAddressLabel.setTextFill(Color.BLACK);
+    		wifiLatLabel.setTextFill(Color.BLACK);
+    		wifiLongLabel.setTextFill(Color.BLACK);
+    		wifiNameText.setText(null);
+    		wifiAddressText.setText(null);
+    		wifiLatText.setText(null);
+    		wifiLongText.setText(null);
+    		wifiZipText.setText(null);
+    		wifiBoroughText.setText(null);
+    		wifiTypeText.setText(null);
+    		wifiProviderText.setText(null);
     	}
-    	else {
-        	Wifi wifi = new Wifi(Double.parseDouble(wifiLatText.getText()), Double.parseDouble(wifiLongText.getText()), wifiNameText.getText(), wifiBoroughText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
-        	//CurrentStorage.addNewWifi(wifi);
-    	}
+    	
 
     }
 
