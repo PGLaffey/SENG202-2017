@@ -787,11 +787,11 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     		toiletLongLabel.setTextFill(Color.RED);
     	} else {
     		if(!toiletAddressText.getText().isEmpty()) {
-    			//Toilet toilet = new Toilet(Double.parseDouble(toiletAddressText.getText(), toiletNameText.getText(), toiletDisabledChoice.getValue(), toiletUnisexChoice.getValue());
+    			Toilet toilet = new Toilet(toiletAddressText.getText(), toiletNameText.getText(), toiletDisabledChoice.getValue(), toiletUnisexChoice.getValue());
     			if (!toiletZipText.getText().isEmpty()) {
-    				//toilet.setZip(Integer.parseInt(toiletZipText.getText()));
+    				toilet.setZip(Integer.parseInt(toiletZipText.getText()));
     			}
-    			//CurrentStorage.addNewToilet(toilet);
+    			CurrentStorage.addNewToilet(toilet);
     		} else {
     			Toilet toilet = new Toilet(Double.parseDouble(toiletLatText.getText()), Double.parseDouble(toiletLongText.getText()), toiletNameText.getText(), toiletDisabledChoice.getValue(), toiletUnisexChoice.getValue());
 
@@ -827,16 +827,15 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     		wifiLongLabel.setTextFill(Color.RED);
     	} else {
     		if (!wifiAddressText.getText().isEmpty()) {
-    			// TODO: Have a constructor with address
-            	//Wifi wifi = new Wifi(wifiAddressText.getText(), wifiNameText.getText(), wifiBoroughText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
+            	Wifi wifi = new Wifi(wifiAddressText.getText(), wifiNameText.getText(), wifiBoroughText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
     			if (!wifiZipText.getText().isEmpty()) {
-    				//wifi.setZip(Integer.parseInt(wifiZipText.getText());
+    				wifi.setZip(Integer.parseInt(wifiZipText.getText()));
     			}
-            	//CurrentStorage.addNewWifi(wifi);
+            	CurrentStorage.addNewWifi(wifi);
         	} else {
             	Wifi wifi = new Wifi(Double.parseDouble(wifiLatText.getText()), Double.parseDouble(wifiLongText.getText()), wifiNameText.getText(), wifiBoroughText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
             	if (!wifiZipText.getText().isEmpty()) {
-    				//wifi.setZip(Integer.parseInt(wifiZipText.getText());
+    				wifi.setZip(Integer.parseInt(wifiZipText.getText()));
     			}
             	CurrentStorage.addNewWifi(wifi);
         	}
