@@ -25,6 +25,7 @@ public class Map {
     private Location currentLocation;
     private static GeocodingService geoService;
     private static boolean retailerVisible = false;
+    private static boolean routeStartVisible = false;
 
     public static void setRetailerVisible(boolean value) {
         retailerVisible = value;
@@ -33,6 +34,10 @@ public class Map {
     public static boolean getRetailerVisible() {
         return retailerVisible;
     }
+
+    public static boolean getRouteVisible() { return routeStartVisible; }
+
+    public static void setRouteStartVisible(boolean value) { routeStartVisible = value; }
 
     /**
      * Sends a GET-request to the google geocoding service and parses the returned JSON to find the latitude and longitude.
@@ -305,6 +310,30 @@ public class Map {
 
         } else {
             poi.getMarker().setVisible(!poi.getMarker().getVisible());
+        }
+    }
+
+    public static void findRouteMarker(Route route, GoogleMap map) {
+        if (route.getStartMarker() == null) {
+            MarkerOptions startMarkOptns  = new MarkerOptions()
+                    .position(new LatLong(route.getStart().getLatitude(), route.getStart().getLongitude()))
+                    .animation(Animation.DROP)
+                    .title(route.getStartString())
+                    .visible(routeStartVisible)
+                    .icon("http://google.com/mapfiles/ms/micons/cycling.png");
+            route.setStartMarker(new Marker(startMarkOptns));
+
+            MarkerOptions endMarkOptns = new MarkerOptions()
+                    .position(new LatLong(route.getEnd().getLatitude(), route.getEnd().getLongitude()))
+                    .animation(Animation.DROP)
+                    .title(route.getEndString())
+                    .visible(false)
+                    .icon("http://maps.google.com/mapsfiles/kml/pal2/icon13.png");
+
+            route.setEndMarker(new Marker(endMarkOptns));
+
+            map.addMarker(route.getStartMarker());
+            map.addMarker(route.getEndMarker());
         }
     }
 
