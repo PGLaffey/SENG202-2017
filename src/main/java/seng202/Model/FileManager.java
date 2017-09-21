@@ -144,8 +144,8 @@ public class FileManager {
                 }
 
                 //Convert the relevant data into the associated classes
-                Location startLocation = new Location(startLatitude, startLongitude, startName,4, 0);
-                Location endLocation = new Location(endLatitude, endLongitude, endName, 4, 0);
+                Location startLocation = new Location(startLatitude, startLongitude, startName, 4);
+                Location endLocation = new Location(endLatitude, endLongitude, endName, 4);
                 Route newRoute = new Route(bikeID, startLocation, endLocation, "NA", gender);
 
                 //Log the new object into the storage class.
@@ -206,8 +206,8 @@ public class FileManager {
                 }
 
                 //Creates a new instance of retailer.
-                Retailer newRetailer = new Retailer(information[addrLine1Index], information[retailerName], information[retailerPrimary], information[retailerSecondary], zip);
-
+                Retailer newRetailer = new Retailer(information[addrLine1Index], information[retailerName], information[retailerPrimary], information[retailerSecondary]);
+                newRetailer.setZip(zip);
                 //Add the retailer to the storage class.
                 CurrentStorage.addNewRetailer(newRetailer);
             }
