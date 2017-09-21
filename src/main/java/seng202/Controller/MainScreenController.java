@@ -19,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seng202.Model.*;
 
@@ -26,6 +27,7 @@ import javafx.scene.paint.Color;
 
 
 //import java.awt.Color;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -501,9 +503,12 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     void randomRoutePressed(ActionEvent event) {
-    	randomRoutePane.setVisible(true);
-    	mainMapPane.setVisible(false);
-    	addWifiPane.setVisible(false);
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open File");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Data Files", "*.csv"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        String path = selectedFile.getPath();
+        FileManager.readFile(path);
     }
 
     @FXML

@@ -66,7 +66,7 @@ public class ChangePasswordScreenController {
                 data.updateUserPassword(user.getUsername(), newPasswordText.getText());
             }
         }
-        data.closeConnection();
+        //data.closeConnection();
     	Stage stage = (Stage) changePasswordButton.getScene().getWindow();
     	stage.hide();	
     }
