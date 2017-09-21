@@ -59,7 +59,7 @@ public class DeleteAccountScreenController {
     	stage.hide();	// TODO: Work out how to then change primaryStage to login screen
         Stage primaryStage = (Stage) yesButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
-
+        data.closeConnection();
         primaryStage.setTitle("Login");
         primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
         primaryStage.show();
