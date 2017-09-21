@@ -113,7 +113,8 @@ public class FileManagerTest extends TestCase {
     @Test
     public void testWifiOneEntry() {
         FileManager.wifiRetriever(TARGET+"/wifi_data1.csv");
-        Wifi expected_wifi = new Wifi(40.745968, -73.994039, "mn-05-123662", "Manhattan","Free","LinkNYC - Citybridge");
+        Wifi expected_wifi = new Wifi(40.745968, -73.994039, "mn-05-123662", "LinkNYC Free Wi-Fi","Free","LinkNYC - Citybridge");
+        expected_wifi.setBorough("Manhatten");
         assertTrue(CurrentStorage.getWifiArray().get(0).equals(expected_wifi));
     }
 

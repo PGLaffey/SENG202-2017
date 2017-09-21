@@ -246,7 +246,8 @@ public class FileManager {
 
             int wifiLatIndex = header.indexOf("LAT");
             int wifiLongIndex = header.indexOf("LON");
-            int wifiNameIndex = header.indexOf("SSID");
+            int wifiNameIndex = header.indexOf("NAME");
+            int wifiSSIDIndex = header.indexOf("SSID");
             int wifiProviderIndex = header.indexOf("PROVIDER");
             int wifiBoroughIndex = header.indexOf("BORONAME");
             int wifiTypeIndex = header.indexOf("TYPE");
@@ -262,9 +263,11 @@ public class FileManager {
                 String wifiProvider = information[wifiProviderIndex];
                 String borough = information[wifiBoroughIndex];
                 String type = information[wifiTypeIndex];
+                String ssid = information[wifiSSIDIndex];
 
                 //Creates a new Wifi object.
-                Wifi newHotspot = new Wifi(wifiLatitude, wifiLongitude, wifiName, borough, type, wifiProvider);
+                Wifi newHotspot = new Wifi(wifiLatitude, wifiLongitude, wifiName, ssid, type, wifiProvider);
+                newHotspot.setBorough(borough);
                 CurrentStorage.addWifi(newHotspot);
             }
         }
