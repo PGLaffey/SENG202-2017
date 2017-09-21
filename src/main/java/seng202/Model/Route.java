@@ -107,9 +107,9 @@ public class Route {
      * @return a boolean value based on whether the contents are similar.
      */
     public boolean equals(Route other) {
-        if (getStart().getLatitude() != other.getStart().getLatitude() &&
-                getStart().getLongitude() != other.getStart().getLongitude() &&
-                getEnd().getLatitude() != other.getEnd().getLatitude() &&
+        if (getStart().getLatitude() != other.getStart().getLatitude() |
+                getStart().getLongitude() != other.getStart().getLongitude() |
+                getEnd().getLatitude() != other.getEnd().getLatitude() |
                 getEnd().getLongitude() != other.getEnd().getLongitude()) {
             return false;
         }
