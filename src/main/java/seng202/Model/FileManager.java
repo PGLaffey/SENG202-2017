@@ -67,7 +67,7 @@ public class FileManager {
      * @return An arrayList of the data from the .csv file.
      */
     public static ArrayList<String> readFile(String fileName) {
-        ArrayList<String> dataList = new ArrayList<>();
+        ArrayList<String> dataList = new ArrayList<String>();
         try {
             FileReader file = new FileReader(fileName);
             BufferedReader buffReader = new BufferedReader(file);
@@ -139,7 +139,7 @@ public class FileManager {
 
                 String gender;
                 if (information.length < header.size()) {
-                    gender = information[header.indexOf("birth year")].substring(0, information[header.indexOf("birth year")].indexOf("\""));
+                    gender = information[genderIndex - 1].substring(0, information[genderIndex - 1].indexOf("\""));
                 } else {
                     gender = information[genderIndex].split(",")[1];
                 }
@@ -161,7 +161,7 @@ public class FileManager {
      */
     public static void routeWriter(String filename) {
         ArrayList<Route> routes = CurrentStorage.getRouteArray();
-        ArrayList<String> strRoutes = new ArrayList<>();
+        ArrayList<String> strRoutes = new ArrayList<String>();
         for (Route route : routes) {
             String startName = route.getStart().getName();
             String endName = route.getEnd().getName();
@@ -217,7 +217,7 @@ public class FileManager {
 
     public static void retailerWriter(String filename) {
         ArrayList<Retailer> retailers = CurrentStorage.getRetailerArray();
-        ArrayList<String> strRetailers = new ArrayList<>();
+        ArrayList<String> strRetailers = new ArrayList<String>();
         for (Retailer retailer : retailers) {
 
             //Obtain relevant information to write.
@@ -278,7 +278,7 @@ public class FileManager {
      * @param wifis The list of wifi objects to be converted to a csv file.
      */
     public static void wifiWriter(String filename, ArrayList<Wifi> wifis) {
-        ArrayList<String> strWifis = new ArrayList<>();
+        ArrayList<String> strWifis = new ArrayList<String>();
         if (!(wifis.isEmpty())) {
             String header = "LAT,LON,NAME,PROVIDER,BORONAME,TYPE";
             strWifis.add(header);
@@ -337,7 +337,7 @@ public class FileManager {
      * @param toilets The arrayList of toilet objects to be stored in the csv.
      */
     public static void toiletWriter(String fileName, ArrayList<Toilet> toilets) {
-        ArrayList<String> strToilets = new ArrayList<>();
+        ArrayList<String> strToilets = new ArrayList<String>();
         if (!(toilets.isEmpty())) {
             String header = "name,disabled access,latitude,longitude,unisex";
             strToilets.add(header);
