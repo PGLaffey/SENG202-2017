@@ -423,11 +423,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     void retailerIconPressed(ActionEvent event) {
         for (Retailer retailer : CurrentStorage.getRetailerArray()) {
             placeRetailerOnMap(retailer);
-            try {
-                Thread.sleep(475);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
         /*
         backgroundThread = new Service<Void>() {
@@ -633,7 +628,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         Map.findLocation(loc, map, geocodingService);
     }
 
-    public void placeRetailerOnMap(Retailer retailer) {Map.findRetailers(retailer, map, geocodingService);}
+    public void placeRetailerOnMap(Retailer retailer) {Map.findRetailers(retailer, map);}
 
     public void placeMarkerOnMap(Route route) {
         Map.findLocation(route.getStart(), map, geocodingService);
@@ -645,7 +640,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         geocodingService = new GeocodingService();
         MapOptions mapOptions = new MapOptions();
 
-        mapOptions.center(new LatLong(40.6971494, -74.2598728))
+        mapOptions.center(new LatLong(40.7128, -74.0059))
                 .mapType(MapTypeIdEnum.ROADMAP)
                 .mapTypeControl(false)
                 .overviewMapControl(false)

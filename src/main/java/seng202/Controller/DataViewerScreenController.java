@@ -52,7 +52,6 @@ public class DataViewerScreenController {
 	 * @throws IOException 
 	 */
 	public void mapPressed() throws IOException {
-		
 		Stage primaryStage = (Stage) mapButton.getScene().getWindow(); // Here the window is the stage
 		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 		

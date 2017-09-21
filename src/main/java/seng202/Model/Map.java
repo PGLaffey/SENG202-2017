@@ -28,32 +28,8 @@ public class Map extends Thread{
     private static GeocodingService geoService;
 
 
-    public static double getLatitude(String address) {
+    public static double[] getLatLong(String address) {
         double latitude = 0;
-        address = address.replaceAll(" ", "%20");
-        try {
-            URL mapsUrl = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=\"" + address + ",%20NY&sensor=true");
-            HttpURLConnection request = (HttpURLConnection) mapsUrl.openConnection();
-            request.setRequestMethod("GET");
-            request.connect();
-
-            JsonParser jp = new JsonParser();
-            JsonElement thing = jp.parse(new InputStreamReader((InputStream) request.getContent()));
-            JsonObject thingObj = thing.getAsJsonObject();
-
-            JsonObject resultsObj = thingObj.get("results").getAsJsonArray().get(0).getAsJsonObject();
-            JsonObject geometry = resultsObj.getAsJsonObject("geometry");
-            JsonObject location = geometry.getAsJsonObject("location");
-            latitude = location.get("lat").getAsDouble();
-
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        return latitude;
-    }
-
-    public static double getLongitude(String address) {
-
         double longitude = 0;
         address = address.replaceAll(" ", "%20");
         try {
@@ -69,13 +45,40 @@ public class Map extends Thread{
             JsonObject resultsObj = thingObj.get("results").getAsJsonArray().get(0).getAsJsonObject();
             JsonObject geometry = resultsObj.getAsJsonObject("geometry");
             JsonObject location = geometry.getAsJsonObject("location");
+            latitude = location.get("lat").getAsDouble();
             longitude = location.get("lng").getAsDouble();
 
         } catch (Exception e){
             e.printStackTrace();
         }
-        return longitude;
+        double[] latLong = {latitude, longitude};
+        return latLong;
     }
+
+//    public static double getLongitude(String address) {
+//
+//        double longitude = 0;
+//        address = address.replaceAll(" ", "%20");
+//        try {
+//            URL mapsUrl = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=\"" + address + ",%20NY\"&sensor=true");
+//            HttpURLConnection request = (HttpURLConnection) mapsUrl.openConnection();
+//            request.setRequestMethod("GET");
+//            request.connect();
+//
+//            JsonParser jp = new JsonParser();
+//            JsonElement thing = jp.parse(new InputStreamReader((InputStream) request.getContent()));
+//            JsonObject thingObj = thing.getAsJsonObject();
+//
+//            JsonObject resultsObj = thingObj.get("results").getAsJsonArray().get(0).getAsJsonObject();
+//            JsonObject geometry = resultsObj.getAsJsonObject("geometry");
+//            JsonObject location = geometry.getAsJsonObject("location");
+//            longitude = location.get("lng").getAsDouble();
+//
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return longitude;
+//    }
 
 
     /** Calculates the displacement of two latitudes and longitudes by using the Haversine formula
@@ -128,23 +131,11 @@ public class Map extends Thread{
      * Locates an address on the maps in the application given a Location object.
      * @param givenLocation - A initialized Location object
      * @param map - The map to place the marker on
-     * @param service - A GeocodingService from the GMapsFX API
      */
-    public static void findLocation(Location givenLocation, GoogleMap map, GeocodingService service) {
+    public static void findLocation(Location givenLocation, GoogleMap map) {
         String locationName = givenLocation.getName();
 
-        service.geocode(locationName, (GeocodingResult[] results, GeocoderStatus status) -> {
-            LatLong latLong = null;
-
-            if (status == GeocoderStatus.ZERO_RESULTS) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "No matching address found");
-                alert.show();
-                latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
-                        results[0].getGeometry().getLocation().getLongitude());
-            } else {
-                latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
-                        results[0].getGeometry().getLocation().getLongitude());
-            }
+        LatLong latLong = new LatLong(givenLocation.getLatitude(), givenLocation.getLongitude());
 
             MarkerOptions markOptns = new MarkerOptions()
                     .animation(Animation.DROP)
@@ -165,7 +156,6 @@ public class Map extends Thread{
             }
             map.addMarker(new Marker(markOptns));
             map.setCenter(latLong);
-        });
     }
 
     /**
@@ -267,31 +257,18 @@ public class Map extends Thread{
         }
     }
 
-    public static void findRetailers(Retailer retailer, GoogleMap map, GeocodingService service) {
+    public static void findRetailers(Retailer retailer, GoogleMap map) {
         if (retailer.getMarker() == null) {
+            LatLong latLong = new LatLong(retailer.getLatitude(), retailer.getLongitude());
             System.out.println("Making new marker.");
-            service.geocode(retailer.getAddress() + ", NYC", (GeocodingResult[] results, GeocoderStatus status) -> {
-                LatLong latLong = null;
-
-                if (status == GeocoderStatus.ZERO_RESULTS) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "No matching address found");
-                    alert.show();
-                    latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
-                            results[0].getGeometry().getLocation().getLongitude());
-                } else {
-                    latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
-                            results[0].getGeometry().getLocation().getLongitude());
-                }
-
-                MarkerOptions markerOptns = new MarkerOptions()
-                        .animation(Animation.DROP)
-                        .position(latLong)
-                        .visible(false)
-                        .icon("http://maps.google.com/mapfiles/kml/pal3/icon26.png");
+            MarkerOptions markerOptns = new MarkerOptions()
+                    .animation(Animation.DROP)
+                    .position(latLong)
+                    .visible(false)
+                    .icon("http://maps.google.com/mapfiles/kml/pal3/icon26.png");
                 retailer.setMarker(new Marker(markerOptns));
                 map.addMarker(retailer.getMarker());
                 retailer.getMarker().setVisible(!retailer.getMarker().getVisible());
-            });
         } else {
             System.out.println("Showing/Hiding");
             retailer.getMarker().setVisible(!retailer.getMarker().getVisible());
@@ -302,23 +279,10 @@ public class Map extends Thread{
      * Method to find place of interest using the google maps API
      * @param poi - Place of interest to find
      * @param map - Map to render the marker on.
-     * @param service - geocoding service object to use for google map API
      */
-    public static void findPoi(Poi poi, GoogleMap map, GeocodingService service) {
+    public static void findPoi(Poi poi, GoogleMap map) {
         if (poi.getMarker() == null) {
-            service.geocode(poi.getAddress() + ", NYC", (GeocodingResult[] results, GeocoderStatus status) -> {
-                LatLong latLong = null;
-
-                if (status == GeocoderStatus.ZERO_RESULTS) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "No matching address found");
-                    alert.show();
-                    latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
-                            results[0].getGeometry().getLocation().getLongitude());
-                } else {
-                    latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
-                            results[0].getGeometry().getLocation().getLongitude());
-                }
-
+                LatLong latLong = new LatLong(poi.getLatitude(), poi.getLongitude());
                 Marker marker = new Marker(new MarkerOptions()
                         .animation(Animation.DROP)
                         .position(latLong)
@@ -327,7 +291,7 @@ public class Map extends Thread{
                 poi.setMarker(marker);
                 map.addMarker(poi.getMarker());
                 poi.getMarker().setVisible(!poi.getMarker().getVisible());
-            });
+
         } else {
             poi.getMarker().setVisible(!poi.getMarker().getVisible());
         }
