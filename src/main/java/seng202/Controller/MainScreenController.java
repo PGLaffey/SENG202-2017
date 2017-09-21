@@ -657,7 +657,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addOtherPane.setVisible(false);
     }
     
-    @FXML
+/*    @FXML
     void saveOtherButtonPressed(ActionEvent event) {
     	if (otherNameText.getText().isEmpty()) {
     		otherNameLabel.setTextFill(Color.RED);
@@ -697,7 +697,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     void savePoiButtonPressed(ActionEvent event) {
     	if (poiNameText.getText().isEmpty()) {
     		poiNameLabel.setTextFill(Color.RED);
-    	} else if (poiAddressText.getText().isEmpty() && (poiLatLabel.getText().isEmpty() || poiLongLabel.getText().isEmpty())) {
+    	} else if (poiAddressText.getText().isEmpty() && (poiLatText.getText().isEmpty() || poiLongText.getText().isEmpty())) {
     		poiNameLabel.setTextFill(Color.BLACK);
     		poiAddressLabel.setTextFill(Color.RED);
     		poiLatLabel.setTextFill(Color.RED);
@@ -821,6 +821,17 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     		wifiAddressLabel.setTextFill(Color.RED);
     		wifiLatLabel.setTextFill(Color.RED);
     		wifiLongLabel.setTextFill(Color.RED);
+    	} else if ((wifiAddressText.getText().isEmpty()) && ((wifiLatText.getText().isEmpty()) || (wifiLongText.getText().isEmpty()))) {
+    		wifiAddressLabel.setTextFill(Color.RED);
+    		
+    	} if (wifiAddressText.getText().isEmpty()) {
+    		wifiAddressLabel.setTextFill(Color.RED);
+    	} if (wifiLatText.getText().isEmpty()) {
+    		wifiLatLabel.setTextFill(Color.RED);
+    	} if (wifiLongText.getText().isEmpty()) {
+    		wifiLongLabel.setTextFill(Color.RED);
+    		
+    		
     	} else {
     		if (!wifiAddressText.getText().isEmpty()) {
             	Wifi wifi = new Wifi(wifiAddressText.getText(), wifiNameText.getText(), wifiBoroughText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
@@ -851,7 +862,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	
 
     }
-
+*/
     
     @FXML
     void initialize() {
