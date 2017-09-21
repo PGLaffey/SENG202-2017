@@ -543,12 +543,13 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     void retailerIconPressed(ActionEvent event) {
         for (Retailer retailer : CurrentStorage.getRetailerArray()) {
             if (!retailer.hasNoMarker() && retailer.getMarker() != null) {
-                retailer.getMarker().setVisible(!retailer.getMarker().getVisible());
+                retailer.getMarker().setVisible(!Map.getRetailerVisible());
                 map.addMarker(retailer.getMarker());
             } else {
                 locationMarkers.add(Map.findRetailers(retailer));
             }
         }
+        Map.setRetailerVisible(!Map.getRetailerVisible());
         /*
         backgroundThread = new Service<Void>() {
             @Override

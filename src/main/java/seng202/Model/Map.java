@@ -20,10 +20,19 @@ import java.net.URL;
 
 import static java.lang.Math.toRadians;
 
-public class Map implements Runnable{
+public class Map {
     private Route currentRoute;
     private Location currentLocation;
     private static GeocodingService geoService;
+    private static boolean retailerVisible = false;
+
+    public static void setRetailerVisible(boolean value) {
+        retailerVisible = value;
+    }
+
+    public static boolean getRetailerVisible() {
+        return retailerVisible;
+    }
 
     /**
      * Sends a GET-request to the google geocoding service and parses the returned JSON to find the latitude and longitude.
@@ -36,7 +45,6 @@ public class Map implements Runnable{
         double longitude = 0;
         for (Coord coord : CurrentStorage.getCoords()) {
             if (new Coord(address, 0, 0).equals(coord)) {
-                System.out.println("Found one!");
                 double[] latLong = {coord.getLat(), coord.getLng()};
                 return latLong;
             }
@@ -232,7 +240,7 @@ public class Map implements Runnable{
                 .radius(70)
                 .draggable(false)
                 .clickable(false)
-                .fillOpacity(0.075)
+                .fillOpacity(0.01)
                 .fillColor("Blue")
                 .strokeColor("Blue")
                 .strokeWeight(0.2);
@@ -271,11 +279,11 @@ public class Map implements Runnable{
                 .animation(Animation.DROP)
                 .position(latLong)
                 .title(retailer.toString())
-                .visible(false) // sets it to false and inverts it.
+                .visible(retailerVisible) // sets it to false and inverts it.
                 .icon("http://maps.google.com/mapfiles/kml/pal3/icon26.png"); //Obtains the correct image for the marker.
         retailer.setMarker(new Marker(markerOptns));
 
-        retailer.getMarker().setVisible(!retailer.getMarker().getVisible());
+        retailer.getMarker().setVisible(!retailerVisible);
 
         // Sets the corresponding coord so that it has a marker.
         for (Coord coord : CurrentStorage.getCoords()) {
@@ -310,6 +318,4 @@ public class Map implements Runnable{
         }
     }
 
-    public void run() {
-    }
 }
