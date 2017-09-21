@@ -163,6 +163,10 @@ public class ProfileScreenController {
 		stage.setTitle("Delete Account");
 		stage.setScene(scene);
 		stage.show();
+		
+		
+		Stage primaryStage = (Stage) accountButton.getScene().getWindow(); 
+		primaryStage.hide();
 	}
 	
 	@FXML
