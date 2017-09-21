@@ -123,20 +123,51 @@ public class CurrentStorage {
     public static void addRetailer(Retailer retailer) { // Used when bringing data in from database
         retailerArray.add(retailer);
     }
+
+    public static boolean checkRetailer(Retailer retailer) {
+    	for (Retailer currentRetailer : CurrentStorage.getRetailerArray()) {
+    		if (currentRetailer.equals(retailer)) {
+    			return true;
+			}
+		}
+		return false;
+	}
     
     public static void addNewRetailer(Retailer retailer) { // Used when user adding new data (from GUI or CSV)
-    	retailerArray.add(retailer);
-    	addedRetailers.add(retailerArray.indexOf(retailer));
+		if (!(checkRetailer(retailer))) {
+			retailerArray.add(retailer);
+			addedRetailers.add(retailerArray.indexOf(retailer));
+		}
+    }
+
+    public static boolean containsWifi(Wifi wifi) {
+        for (Wifi currentWifi : CurrentStorage.getWifiArray()) {
+        	if (currentWifi.equals(wifi)) {
+        		return true;
+			}
+		}
+		return false;
     }
 
     public static void addWifi(Wifi wifi) {
-        if (!retailerArray.contains(wifi)) {
-            wifiArray.add(wifi);
-        }
-    }
+    	if (!containsWifi(wifi)) {
+    		wifiArray.add(wifi);
+		}
+	}
+
+	public static boolean containsToilet(Toilet toilet) {
+    	for (Toilet currentToilet : CurrentStorage.getToiletArray()) {
+    		if (currentToilet.equals(toilet)) {
+    			return true;
+			}
+		}
+		return false;
+	}
     
     public static void addToilet(Toilet toilet) {
-    	toiletArray.add(toilet);
+		if (!(containsToilet(toilet))) {
+			toiletArray.add(toilet);
+		}
     }
     
     public static void addPoi(Poi poi) {
