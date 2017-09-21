@@ -7,12 +7,17 @@ import java.util.ArrayList;
  */
 public class CurrentStorage {
     private static ArrayList<Route> routeArray = new ArrayList<Route>();
+    private static ArrayList<Integer> addedRoutes = new ArrayList<Integer>();
     private static ArrayList<Retailer> retailerArray = new ArrayList<Retailer>();
     private static ArrayList<Integer> addedRetailers = new ArrayList<Integer>();
     private static ArrayList<Wifi> wifiArray = new ArrayList<Wifi>();
+    private static ArrayList<Integer> addedWifi = new ArrayList<Integer>();
     private static ArrayList<Toilet> toiletArray = new ArrayList<Toilet>();
+    private static ArrayList<Integer> addedToilets = new ArrayList<Integer>();
     private static ArrayList<Poi> poiArray = new ArrayList<Poi>();
-    private static ArrayList<Location> generalArray = new ArrayList<Location>();
+    private static ArrayList<Integer> addedPoi = new ArrayList<Integer>();
+    private static ArrayList<Location> generalArray = new ArrayList<Location>(); 
+    private static ArrayList<Integer> addedGeneral = new ArrayList<Integer>();
     private static ArrayList<Coord> coordsArray = new ArrayList<Coord>();
     private static User currentUser;
     
@@ -114,10 +119,20 @@ public class CurrentStorage {
 		generalArray.add(location);
 	}
 	
+	public static void addNewGeneral(Location location) {
+		generalArray.add(location);
+		addedGeneral.add(generalArray.indexOf(location));
+	}
+	
     public static void addRoute(Route route) {
         if (!(routeArray.contains(route))) {
             routeArray.add(route);
         }
+    }
+    
+    public static void addNewRoute (Route route) {
+    	routeArray.add(route);
+    	addedRoutes.add(routeArray.indexOf(route));
     }
 
     public static void addRetailer(Retailer retailer) { // Used when bringing data in from database
@@ -154,6 +169,11 @@ public class CurrentStorage {
     		wifiArray.add(wifi);
 		}
 	}
+    
+    public static void addNewWifi(Wifi wifi) {
+    	wifiArray.add(wifi);
+    	addedWifi.add(wifiArray.indexOf(wifi));
+    }
 
 	public static boolean containsToilet(Toilet toilet) {
     	for (Toilet currentToilet : CurrentStorage.getToiletArray()) {
@@ -170,8 +190,18 @@ public class CurrentStorage {
 		}
     }
     
+    public static void addNewToilet(Toilet toilet) {
+    	toiletArray.add(toilet);
+    	addedToilets.add(toiletArray.indexOf(toilet));
+    }
+    
     public static void addPoi(Poi poi) {
     	poiArray.add(poi);
+    }
+    
+    public static void addNewPoi(Poi poi) {
+    	poiArray.add(poi);
+    	addedPoi.add(poiArray.indexOf(poi));
     }
 
     public static void addCoords(Coord coord) { coordsArray.add(coord); }
