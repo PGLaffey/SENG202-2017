@@ -657,7 +657,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addOtherPane.setVisible(false);
     }
     
-/*    @FXML
+    @FXML
     void saveOtherButtonPressed(ActionEvent event) {
     	if (otherNameText.getText().isEmpty()) {
     		otherNameLabel.setTextFill(Color.RED);
@@ -820,18 +820,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     		wifiNameLabel.setTextFill(Color.BLACK);
     		wifiAddressLabel.setTextFill(Color.RED);
     		wifiLatLabel.setTextFill(Color.RED);
-    		wifiLongLabel.setTextFill(Color.RED);
-    	} else if ((wifiAddressText.getText().isEmpty()) && ((wifiLatText.getText().isEmpty()) || (wifiLongText.getText().isEmpty()))) {
-    		wifiAddressLabel.setTextFill(Color.RED);
-    		
-    	} if (wifiAddressText.getText().isEmpty()) {
-    		wifiAddressLabel.setTextFill(Color.RED);
-    	} if (wifiLatText.getText().isEmpty()) {
-    		wifiLatLabel.setTextFill(Color.RED);
-    	} if (wifiLongText.getText().isEmpty()) {
-    		wifiLongLabel.setTextFill(Color.RED);
-    		
-    		
+    		wifiLongLabel.setTextFill(Color.RED);    		
     	} else {
     		if (!wifiAddressText.getText().isEmpty()) {
             	Wifi wifi = new Wifi(wifiAddressText.getText(), wifiNameText.getText(), wifiBoroughText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
@@ -862,7 +851,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	
 
     }
-*/
+
     
     @FXML
     void initialize() {
