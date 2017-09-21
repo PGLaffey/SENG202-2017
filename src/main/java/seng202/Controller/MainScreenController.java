@@ -181,6 +181,12 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     private TextField wifiNameText;
 
     @FXML
+    private Label wifiSsidLabel;
+
+    @FXML
+    private TextField wifiSsidText;
+
+    @FXML
     private Label wifiProviderLabel;
 
     @FXML
@@ -681,23 +687,23 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     
     @FXML
     void saveOtherButtonPressed(ActionEvent event) {
-    	if (otherNameText.getText().isEmpty()) {
+    	if (otherNameText.getText().equals("")) {
     		otherNameLabel.setTextFill(Color.RED);
-    	} else if (otherAddressText.getText().isEmpty() && (otherLatText.getText().isEmpty() || otherLongText.getText().isEmpty())) {
+    	} else if (otherAddressText.getText().equals("") && (otherLatText.getText().equals("") || otherLongText.getText().equals(""))) {
     		otherNameLabel.setTextFill(Color.BLACK);
     		otherAddressLabel.setTextFill(Color.RED);
     		otherLatLabel.setTextFill(Color.RED);
     		otherLongLabel.setTextFill(Color.RED);
     	} else {
-    		if (!otherAddressText.getText().isEmpty()) {
+    		if (!otherAddressText.getText().equals("")) {
     			Location location = new Location(otherAddressText.getText(), otherNameText.getText(), 4);
-    			if (!otherZipText.getText().isEmpty()) {
+    			if (!otherZipText.getText().equals("")) {
     				location.setZip(Integer.parseInt(otherZipText.getText()));
     			}
     			CurrentStorage.addNewGeneral(location);
     		} else {
     			Location location = new Location(Integer.parseInt(otherLatText.getText()), Integer.parseInt(otherLongLabel.getText()), otherNameText.getText(), 4);
-    			if (!otherZipText.getText().isEmpty()) {
+    			if (!otherZipText.getText().equals("")) {
     				location.setZip(Integer.parseInt(otherZipText.getText()));
     			}
     			CurrentStorage.addNewGeneral(location);
@@ -706,34 +712,34 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     		otherAddressLabel.setTextFill(Color.BLACK);
     		otherLatLabel.setTextFill(Color.BLACK);
     		otherLongLabel.setTextFill(Color.BLACK);
-    		otherNameText.setText(null);
-    		otherAddressText.setText(null);
-    		otherLatText.setText(null);
-    		otherLongText.setText(null);
-    		otherZipText.setText(null);
-    		otherBoroughText.setText(null);
+    		otherNameText.setText("");
+    		otherAddressText.setText("");
+    		otherLatText.setText("");
+    		otherLongText.setText("");
+    		otherZipText.setText("");
+    		otherBoroughText.setText("");
     	}
     }
 
     @FXML
     void savePoiButtonPressed(ActionEvent event) {
-    	if (poiNameText.getText().isEmpty()) {
+    	if (poiNameText.getText().equals("")) {
     		poiNameLabel.setTextFill(Color.RED);
-    	} else if (poiAddressText.getText().isEmpty() && (poiLatText.getText().isEmpty() || poiLongText.getText().isEmpty())) {
+    	} else if (poiAddressText.getText().equals("") && (poiLatText.getText().equals("") || poiLongText.getText().equals(""))) {
     		poiNameLabel.setTextFill(Color.BLACK);
     		poiAddressLabel.setTextFill(Color.RED);
     		poiLatLabel.setTextFill(Color.RED);
     		poiLongLabel.setTextFill(Color.RED);
     	} else {
-    		if (!poiAddressText.getText().isEmpty()) {
+    		if (!poiAddressText.getText().equals("")) {
         		Poi poi = new Poi(poiAddressText.getText(), poiNameText.getText(), poiDescriptionText.getText(), Double.parseDouble(poiCostText.getText()));
-        		if (!poiZipText.getText().isEmpty()) {
+        		if (!poiZipText.getText().equals("")) {
         			poi.setZip(Integer.parseInt(poiZipText.getText()));
         		}
         		CurrentStorage.addNewPoi(poi);
         	} else {
         		Poi poi = new Poi(Double.parseDouble(poiLatText.getText()), Double.parseDouble(poiLongText.getText()), poiNameText.getText(), poiDescriptionText.getText(), Double.parseDouble(poiCostText.getText()));
-        		if (!poiZipText.getText().isEmpty()) {
+        		if (!poiZipText.getText().equals("")) {
         			poi.setZip(Integer.parseInt(poiZipText.getText()));
         		}
         		CurrentStorage.addNewPoi(poi);
@@ -742,14 +748,14 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     		poiAddressLabel.setTextFill(Color.BLACK);
     		poiLatLabel.setTextFill(Color.BLACK);
     		poiLongLabel.setTextFill(Color.BLACK);
-    		poiNameText.setText(null);
-    		poiAddressText.setText(null);
-    		poiLatText.setText(null);
-    		poiLongText.setText(null);
-    		poiZipText.setText(null);
-    		poiBoroughText.setText(null);
-    		poiCostText.setText(null);
-    		poiDescriptionText.setText(null);
+    		poiNameText.setText("");
+    		poiAddressText.setText("");
+    		poiLatText.setText("");
+    		poiLongText.setText("");
+    		poiZipText.setText("");
+    		poiBoroughText.setText("");
+    		poiCostText.setText("");
+    		poiDescriptionText.setText("");
     	}
     	
     }
@@ -757,7 +763,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     void saveRetailerButtonPressed(ActionEvent event) {
-    	if (retailerNameText.getText().isEmpty()) {
+    	if (retailerNameText.getText().equals("")) {
     		retailerNameLabel.setTextFill(Color.RED);
     	} else if (retailerAddressText.getText().equals("") && (retailerLatText.getText().equals("") || retailerLongText.getText().equals(""))) {
     		retailerNameLabel.setTextFill(Color.BLACK);
@@ -765,15 +771,15 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     		retailerLatLabel.setTextFill(Color.RED);
     		retailerLongLabel.setTextFill(Color.RED);
     	} else {
-    		if (!retailerAddressText.getText().isEmpty()) {
+    		if (!retailerAddressText.getText().equals("")) {
         		Retailer retailer = new Retailer(retailerAddressText.getText(), retailerNameText.getText(), retailerProductText.getText(), retailerDescriptionText.getText());
-        		if (!retailerZipText.getText().isEmpty()) {
+        		if (!retailerZipText.getText().equals("")) {
         			retailer.setZip(Integer.parseInt(retailerZipText.getText()));
         		}
             	CurrentStorage.addNewRetailer(retailer);
             } else {
             	Retailer retailer = new Retailer(Double.parseDouble(retailerLatText.getText()), Double.parseDouble(retailerLongText.getText()), retailerNameText.getText(), retailerProductText.getText(), retailerDescriptionText.getText());
-            	if (!retailerZipText.getText().isEmpty()) {
+            	if (!retailerZipText.getText().equals("")) {
         			retailer.setZip(Integer.parseInt(retailerZipText.getText()));
         		}
             	CurrentStorage.addNewRetailer(retailer);
@@ -796,24 +802,24 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     void saveToiletButtonPressed(ActionEvent event) {
-    	if (toiletNameText.getText().isEmpty()) {
+    	if (toiletNameText.getText().equals("")) {
     		toiletNameLabel.setTextFill(Color.RED);
-    	} else if (toiletAddressText.getText().isEmpty() && (toiletLatText.getText().isEmpty() || toiletLongText.getText().isEmpty())) {
+    	} else if (toiletAddressText.getText().equals("") && (toiletLatText.getText().equals("") || toiletLongText.getText().equals(""))) {
     		toiletNameLabel.setTextFill(Color.BLACK);
     		toiletAddressLabel.setTextFill(Color.RED);
     		toiletLatLabel.setTextFill(Color.RED);
     		toiletLongLabel.setTextFill(Color.RED);
     	} else {
-    		if(!toiletAddressText.getText().isEmpty()) {
+    		if(!toiletAddressText.getText().equals("")) {
     			Toilet toilet = new Toilet(toiletAddressText.getText(), toiletNameText.getText(), toiletDisabledChoice.getValue(), toiletUnisexChoice.getValue());
-    			if (!toiletZipText.getText().isEmpty()) {
+    			if (!toiletZipText.getText().equals("")) {
     				toilet.setZip(Integer.parseInt(toiletZipText.getText()));
     			}
     			CurrentStorage.addNewToilet(toilet);
     		} else {
     			Toilet toilet = new Toilet(Double.parseDouble(toiletLatText.getText()), Double.parseDouble(toiletLongText.getText()), toiletNameText.getText(), toiletDisabledChoice.getValue(), toiletUnisexChoice.getValue());
 
-    			if (!toiletZipText.getText().isEmpty()) {
+    			if (!toiletZipText.getText().equals("")) {
     				toilet.setZip(Integer.parseInt(toiletZipText.getText()));
     			}
     			CurrentStorage.addNewToilet(toilet);
@@ -822,12 +828,12 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     		toiletAddressLabel.setTextFill(Color.BLACK);
     		toiletLatLabel.setTextFill(Color.BLACK);
     		toiletLongLabel.setTextFill(Color.BLACK);
-    		toiletNameText.setText(null);
-    		toiletAddressText.setText(null);
-    		toiletLatText.setText(null);
-    		toiletLongText.setText(null);
-    		toiletZipText.setText(null);
-    		toiletBoroughText.setText(null);
+    		toiletNameText.setText("");
+    		toiletAddressText.setText("");
+    		toiletLatText.setText("");
+    		toiletLongText.setText("");
+    		toiletZipText.setText("");
+    		toiletBoroughText.setText("");
     		
     		
     			
@@ -836,23 +842,51 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     void saveWifiButtonPressed(ActionEvent event) {
-    	if (wifiNameText.getText().isEmpty()) {
-    		wifiNameLabel.setTextFill(Color.RED);
-    	} else if (wifiAddressText.getText().isEmpty() && (wifiLatText.getText().isEmpty() || wifiLongText.getText().isEmpty())) {
-    		wifiNameLabel.setTextFill(Color.BLACK);
-    		wifiAddressLabel.setTextFill(Color.RED);
-    		wifiLatLabel.setTextFill(Color.RED);
-    		wifiLongLabel.setTextFill(Color.RED);    		
+    	if (wifiNameText.getText().equals("")) {
+            wifiNameLabel.setTextFill(Color.RED);
+        } else if(wifiSsidText.getText().equals("")) {
+    	    wifiNameLabel.setTextFill(Color.BLACK);
+    	    wifiSsidLabel.setTextFill(Color.RED);
+    	} else if (wifiAddressText.getText().equals("") && (wifiLatText.getText().equals("") || wifiLongText.getText().equals(""))) {
+            wifiNameLabel.setTextFill(Color.BLACK);
+            wifiSsidLabel.setTextFill(Color.BLACK);
+            wifiAddressLabel.setTextFill(Color.RED);
+            wifiLatLabel.setTextFill(Color.RED);
+            wifiLongLabel.setTextFill(Color.RED);
+        } else if(wifiBoroughText.getText().equals("")) {
+            wifiNameLabel.setTextFill(Color.BLACK);
+            wifiSsidLabel.setTextFill(Color.BLACK);
+            wifiAddressLabel.setTextFill(Color.BLACK);
+            wifiLatLabel.setTextFill(Color.BLACK);
+            wifiLongLabel.setTextFill(Color.BLACK);
+            wifiBoroughLabel.setTextFill(Color.RED);
+        } else if(wifiTypeText.getText().equals("")) {
+            wifiNameLabel.setTextFill(Color.BLACK);
+            wifiSsidLabel.setTextFill(Color.BLACK);
+            wifiAddressLabel.setTextFill(Color.BLACK);
+            wifiLatLabel.setTextFill(Color.BLACK);
+            wifiLongLabel.setTextFill(Color.BLACK);
+            wifiBoroughLabel.setTextFill(Color.BLACK);
+            wifiTypeLabel.setTextFill(Color.RED);
+        } else if (wifiProviderText.getText().equals("")) {
+            wifiNameLabel.setTextFill(Color.BLACK);
+            wifiSsidLabel.setTextFill(Color.BLACK);
+            wifiAddressLabel.setTextFill(Color.BLACK);
+            wifiLatLabel.setTextFill(Color.BLACK);
+            wifiLongLabel.setTextFill(Color.BLACK);
+            wifiBoroughLabel.setTextFill(Color.BLACK);
+            wifiTypeLabel.setTextFill(Color.BLACK);
+    	    wifiProviderLabel.setTextFill(Color.RED);
     	} else {
-    		if (!wifiAddressText.getText().isEmpty()) {
+    		if (!wifiAddressText.getText().equals("")) {
             	Wifi wifi = new Wifi(wifiAddressText.getText(), wifiNameText.getText(), wifiBoroughText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
-    			if (!wifiZipText.getText().isEmpty()) {
+    			if (!wifiZipText.getText().equals("")) {
     				wifi.setZip(Integer.parseInt(wifiZipText.getText()));
     			}
             	CurrentStorage.addNewWifi(wifi);
         	} else {
             	Wifi wifi = new Wifi(Double.parseDouble(wifiLatText.getText()), Double.parseDouble(wifiLongText.getText()), wifiNameText.getText(), wifiBoroughText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
-            	if (!wifiZipText.getText().isEmpty()) {
+            	if (!wifiZipText.getText().equals("")) {
     				wifi.setZip(Integer.parseInt(wifiZipText.getText()));
     			}
             	CurrentStorage.addNewWifi(wifi);
@@ -861,14 +895,14 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     		wifiAddressLabel.setTextFill(Color.BLACK);
     		wifiLatLabel.setTextFill(Color.BLACK);
     		wifiLongLabel.setTextFill(Color.BLACK);
-    		wifiNameText.setText(null);
-    		wifiAddressText.setText(null);
-    		wifiLatText.setText(null);
-    		wifiLongText.setText(null);
-    		wifiZipText.setText(null);
-    		wifiBoroughText.setText(null);
-    		wifiTypeText.setText(null);
-    		wifiProviderText.setText(null);
+    		wifiNameText.setText("");
+    		wifiAddressText.setText("");
+    		wifiLatText.setText("");
+    		wifiLongText.setText("");
+    		wifiZipText.setText("");
+    		wifiBoroughText.setText("");
+    		wifiTypeText.setText("");
+    		wifiProviderText.setText("");
     	}
     	
 
