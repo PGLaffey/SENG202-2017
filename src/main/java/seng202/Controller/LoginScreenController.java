@@ -42,35 +42,43 @@ public class LoginScreenController {
 	 * Method for when the Sign In button is pressed. Checks the login, informing if information is wrong otherwise shows login screen.
 	 * @throws IOException 
 	 */
-    public void signInButtonPressed() throws IOException, IllegalAccessException, ClassNotFoundException, InstantiationException {
+	public void signInButtonPressed() throws IOException, IllegalAccessException, ClassNotFoundException, InstantiationException {
 
-    	DataFetcher data = new DataFetcher();
+		DataFetcher data = new DataFetcher();
 		data.connectDb();
-		if ((data.fetchPassword(usernameText.getText()).isEmpty())) {
-			incorrectPasswordLbl.setVisible(false);
-			incorrectUserLbl.setVisible(true);
-		} else if ((data.fetchPassword(usernameText.getText()).toString().equals(passwordText.getText().toString()))) {
-			FileManager.retailerRetriever( new File(getClass().getResource("/data_files/").getFile()).toString() + "/Lower_Manhattan_Retailers.csv");
-			FileManager.wifiRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/NYC_Free_Public_WiFi_03292017.csv");
-			//FileManager.routeRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-01 - Citi Bike trip data.csv");
-			//FileManager.routeRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-02 - Citi Bike trip data.csv");
-			ArrayList<String> userInfo;
-			userInfo = data.fetchUserInfo(usernameText.getText());
+		if (!usernameText.getText().isEmpty() && !passwordText.getText().isEmpty()) {
+			if (data.isUser(usernameText.getText()) == true) {
+				if (data.fetchPassword(usernameText.getText()).isEmpty()) {
+					incorrectPasswordLbl.setVisible(false);
+					incorrectUserLbl.setVisible(true);
+				} else if ((data.fetchPassword(usernameText.getText()).equals(passwordText.getText().toString()))) {
+					FileManager.retailerRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/Retailers_subset.csv");
+					FileManager.wifiRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/NYC_Free_Public_WiFi_03292017.csv");
+					//FileManager.routeRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-01 - Citi Bike trip data.csv");
+					//FileManager.routeRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-02 - Citi Bike trip data.csv");
+					ArrayList<String> userInfo;
+					userInfo = data.fetchUserInfo(usernameText.getText());
 
-			User user = new User(userInfo.get(0), userInfo.get(1), usernameText.getText().toLowerCase(), userInfo.get(2), passwordText.getText().toString());
-			CurrentStorage.setUser(user);
+					User user = new User(userInfo.get(0), userInfo.get(1), usernameText.getText().toLowerCase(), userInfo.get(2), passwordText.getText().toString());
+					CurrentStorage.setUser(user);
 
-			Stage primaryStage = (Stage)signInButton.getScene().getWindow();
-			Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
-			primaryStage.setTitle("Profile");
-			primaryStage.setScene(new Scene(root));
+					Stage primaryStage = (Stage) signInButton.getScene().getWindow();
+					Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
+					primaryStage.setTitle("Profile");
+					primaryStage.setScene(new Scene(root));
+				} else {
+					incorrectUserLbl.setVisible(false);
+					incorrectPasswordLbl.setVisible(true);
+				}
+			} else {
+				incorrectPasswordLbl.setVisible(false);
+				incorrectUserLbl.setVisible(true);
+			}
 		} else {
+			incorrectPasswordLbl.setVisible(false);
 			incorrectUserLbl.setVisible(false);
-			incorrectPasswordLbl.setVisible(true);
 		}
-    	
-
-    }
+	}
 	
 
 	/** 

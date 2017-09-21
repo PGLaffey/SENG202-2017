@@ -29,6 +29,19 @@ public class DataFetcher {
 
 	/**
 	 *
+	 * @param username the username entered for login
+	 * @return returns whether this is a valid user in the database
+	 */
+	public boolean isUser(String username) {
+		if (runQuery("SELECT Username FROM tblUser WHERE Username = '" + username + "'").isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	/**
+	 *
 	 * @param username the username of the user logging in
 	 * @return the LName, FName and YearOfBirth of the user from the database
 	 */
