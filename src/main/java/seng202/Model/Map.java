@@ -25,7 +25,11 @@ public class Map implements Runnable{
     private Location currentLocation;
     private static GeocodingService geoService;
 
-
+    /**
+     * Sends a GET-request to the google geocoding service and parses the returned JSON to find the latitude and longitude.
+     * @param address - Address to find.
+     * @return An array of doubles containing the latitude and longitude.
+     */
     public static double[] getLatLong(String address) {
 
         double latitude = 0;
@@ -39,15 +43,18 @@ public class Map implements Runnable{
         }
 
         try {
+            //Sets the HTTP request
             URL mapsUrl = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=\"" + address.replaceAll(" ", "%20") + ",%20NY\"&sensor=true");
             HttpURLConnection request = (HttpURLConnection) mapsUrl.openConnection();
             request.setRequestMethod("GET");
             request.connect();
 
+            // Parses the main objects of the JSON
             JsonParser jp = new JsonParser();
             JsonElement thing = jp.parse(new InputStreamReader((InputStream) request.getContent()));
             JsonObject thingObj = thing.getAsJsonObject();
 
+            // Slowly works down the JSON to find the correct field.
             JsonObject resultsObj = thingObj.get("results").getAsJsonArray().get(0).getAsJsonObject();
             JsonObject geometry = resultsObj.getAsJsonObject("geometry");
             JsonObject location = geometry.getAsJsonObject("location");
@@ -62,32 +69,6 @@ public class Map implements Runnable{
         CurrentStorage.addCoords(new Coord(address, latitude, longitude));
         return latLong;
     }
-
-//    public static double getLongitude(String address) {
-//
-//        double longitude = 0;
-//        address = address.replaceAll(" ", "%20");
-//        try {
-//            URL mapsUrl = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=\"" + address + ",%20NY\"&sensor=true");
-//            HttpURLConnection request = (HttpURLConnection) mapsUrl.openConnection();
-//            request.setRequestMethod("GET");
-//            request.connect();
-//
-//            JsonParser jp = new JsonParser();
-//            JsonElement thing = jp.parse(new InputStreamReader((InputStream) request.getContent()));
-//            JsonObject thingObj = thing.getAsJsonObject();
-//
-//            JsonObject resultsObj = thingObj.get("results").getAsJsonArray().get(0).getAsJsonObject();
-//            JsonObject geometry = resultsObj.getAsJsonObject("geometry");
-//            JsonObject location = geometry.getAsJsonObject("location");
-//            longitude = location.get("lng").getAsDouble();
-//
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        return longitude;
-//    }
-
 
     /** Calculates the displacement of two latitudes and longitudes by using the Haversine formula
      * @param srcLat - Source Latitude
