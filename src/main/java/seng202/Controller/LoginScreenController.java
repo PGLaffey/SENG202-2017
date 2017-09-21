@@ -50,7 +50,7 @@ public class LoginScreenController {
 			incorrectPasswordLbl.setVisible(false);
 			incorrectUserLbl.setVisible(true);
 		} else if ((data.fetchPassword(usernameText.getText()).toString().equals(passwordText.getText().toString()))) {
-			FileManager.retailerRetriever( new File(getClass().getResource("/data_files/").getFile()).toString() + "/Retailers_subset.csv");
+			FileManager.retailerRetriever( new File(getClass().getResource("/data_files/").getFile()).toString() + "/Lower_Manhattan_Retailers.csv");
 			FileManager.wifiRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/NYC_Free_Public_WiFi_03292017.csv");
 			//FileManager.routeRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-01 - Citi Bike trip data.csv");
 			//FileManager.routeRetriever(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-02 - Citi Bike trip data.csv");

@@ -1,6 +1,6 @@
 package seng202.Model;
 
-import com.lynden.gmapsfx.shapes.Circle;
+import com.lynden.gmapsfx.javascript.object.Marker;
 
 /**
  * Wifi subclass of Location, contains the information of the wifi provider.
@@ -8,7 +8,7 @@ import com.lynden.gmapsfx.shapes.Circle;
 public class Wifi extends Location {
     private String provider;
     private String type;
-    private Circle circle = null;
+    private Marker circle = null;
     private String ssid;
     private String borough;
 
@@ -34,9 +34,9 @@ public class Wifi extends Location {
         return provider;
     }
 
-    public Circle getCircle() { return circle; }
+    public Marker getCircle() { return circle; }
 
-    public void setCircle(Circle circle) { this.circle = circle; }
+    public void setCircle(Marker circle) { this.circle = circle; }
 
     public String getType() {
         return type;

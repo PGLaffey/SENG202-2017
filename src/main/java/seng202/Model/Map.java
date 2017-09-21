@@ -9,12 +9,8 @@ import com.lynden.gmapsfx.service.directions.*;
 import com.lynden.gmapsfx.service.geocoding.GeocoderStatus;
 import com.lynden.gmapsfx.service.geocoding.GeocodingResult;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
-import com.lynden.gmapsfx.shapes.Circle;
-import com.lynden.gmapsfx.shapes.CircleOptions;
-import com.lynden.gmapsfx.util.MarkerImageFactory;
 import javafx.scene.control.Alert;
 
-import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -29,11 +25,19 @@ public class Map extends Thread{
 
 
     public static double[] getLatLong(String address) {
+
         double latitude = 0;
         double longitude = 0;
-        address = address.replaceAll(" ", "%20");
+        for (Coord coord : CurrentStorage.getCoords()) {
+            if (new Coord(address, 0, 0).equals(coord)) {
+                System.out.println("Found one!");
+                double[] latLong = {coord.getLat(), coord.getLng()};
+                return latLong;
+            }
+        }
+
         try {
-            URL mapsUrl = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=\"" + address + ",%20NY\"&sensor=true");
+            URL mapsUrl = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=\"" + address.replaceAll(" ", "%20") + ",%20NY\"&sensor=true");
             HttpURLConnection request = (HttpURLConnection) mapsUrl.openConnection();
             request.setRequestMethod("GET");
             request.connect();
@@ -52,6 +56,7 @@ public class Map extends Thread{
             e.printStackTrace();
         }
         double[] latLong = {latitude, longitude};
+        CurrentStorage.addCoords(new Coord(address, latitude, longitude));
         return latLong;
     }
 
@@ -237,7 +242,7 @@ public class Map extends Thread{
 
     public static void findWifi(Wifi wifi, GoogleMap map) {
         if (wifi.getCircle() == null) {
-            System.out.println("Making new circles");
+            /*
             CircleOptions circleOptns = new CircleOptions()
                     .center(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
                     .radius(70)
@@ -249,16 +254,35 @@ public class Map extends Thread{
                     .strokeWeight(0.2);
             wifi.setCircle(new Circle(circleOptns));
             wifi.getCircle().setVisible(!wifi.getCircle().getVisible());
-            map.addMapShape(wifi.getCircle());
+            map.addMapShape(wifi.getCircle());*/
+
+            MarkerOptions markOptns = new MarkerOptions()
+                    .position(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
+                    .animation(Animation.DROP)
+                    .title(wifi.getName())
+                    .visible(false)
+                    .icon("http://labs.google.com/ridefinder/images/mm_20_blue.png");
+            wifi.setCircle(new Marker(markOptns));
+            wifi.getCircle().setVisible(!wifi.getCircle().getVisible());
+            map.addMarker(wifi.getCircle());
 
         } else {
-            System.out.println("hiding/showing existing");
+
             wifi.getCircle().setVisible(!wifi.getCircle().getVisible());
         }
     }
 
     public static void findRetailers(Retailer retailer, GoogleMap map) {
-        if (retailer.getMarker() == null) {
+        boolean exists = false;
+        for (Coord coord : CurrentStorage.getCoords()) {
+            if (retailer.getAddress().equalsIgnoreCase(coord.getAddress())) {
+                if (coord.hasMarker()) {
+                    exists = true;
+                }
+            }
+        }
+
+        if (retailer.getMarker() == null && !exists) {
             LatLong latLong = new LatLong(retailer.getLatitude(), retailer.getLongitude());
             System.out.println("Making new marker.");
             MarkerOptions markerOptns = new MarkerOptions()
@@ -266,9 +290,14 @@ public class Map extends Thread{
                     .position(latLong)
                     .visible(false)
                     .icon("http://maps.google.com/mapfiles/kml/pal3/icon26.png");
-                retailer.setMarker(new Marker(markerOptns));
-                map.addMarker(retailer.getMarker());
-                retailer.getMarker().setVisible(!retailer.getMarker().getVisible());
+            retailer.setMarker(new Marker(markerOptns));
+            map.addMarker(retailer.getMarker());
+            retailer.getMarker().setVisible(!retailer.getMarker().getVisible());
+            for (Coord coord : CurrentStorage.getCoords()) {
+                if (retailer.getAddress().equalsIgnoreCase(coord.getAddress())) {
+                    coord.setHasMarker(true);
+                }
+            }
         } else {
             System.out.println("Showing/Hiding");
             retailer.getMarker().setVisible(!retailer.getMarker().getVisible());
