@@ -44,9 +44,6 @@ public class DataFetcher {
 		}
 	}
 
-	public void updateUserPassword (String username, String password) {
-		runQuery("UPDATE tblUser SET Password = '" + password + "' WHERE Username = '" + username + "'");
-	}
 	/**
 	 *
 	 * @param username the username of the user logging in
@@ -118,12 +115,15 @@ public class DataFetcher {
 				endID = output.getInt(3);
 				locationOutput = qryLocation.executeQuery("SELECT * FROM tblLocations"
 						+ "WHERE LocationID = '" + startID + "'");
-	    		latitude = locationOutput.getDouble(2);
+	    		locationOutput.next();
+				latitude = locationOutput.getDouble(2);
 	    		longitude = locationOutput.getDouble(3);
 	    		type = locationOutput.getInt(7);
 				start = new Location(latitude, longitude, "Start", type);
+
 				locationOutput = qryLocation.executeQuery("SELECT * FROM tblLocations"
 						+ "WHERE LocationID = '" + endID + "'");
+				locationOutput.next();
 	    		latitude = locationOutput.getDouble(2);
 	    		longitude = locationOutput.getDouble(3);
 	    		type = locationOutput.getInt(7);
