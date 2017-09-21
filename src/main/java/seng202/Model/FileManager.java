@@ -246,7 +246,7 @@ public class FileManager {
 
             int wifiLatIndex = header.indexOf("LAT");
             int wifiLongIndex = header.indexOf("LON");
-            int wifiNameIndex = header.indexOf("NAME");
+            int wifiNameIndex = header.indexOf("SSID");
             int wifiProviderIndex = header.indexOf("PROVIDER");
             int wifiBoroughIndex = header.indexOf("BORONAME");
             int wifiTypeIndex = header.indexOf("TYPE");
