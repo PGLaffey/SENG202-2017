@@ -23,6 +23,10 @@ public class DataFetcher {
     			+ "Username = '" + username +"'"));
     }
 
+    public void updateUserPassword(String username, String newPassword) {
+		runQuery("UPDATE tblUser SET Password = '" + newPassword + "' WHERE Username ='" + username + "'");
+    }
+    
 	public String fetchPassword(String username) {
 		return (runQuery("SELECT Password FROM tblUser WHERE Username = '" + username + "'").get(0).get(0));
 	}
@@ -38,7 +42,12 @@ public class DataFetcher {
 
 
 	public void deleteUser(String username) {
-		runQuery( "DELETE FROM TABLE tblUser WHERE Username = '" + username + "'");
+		int userID = Integer.parseInt(runQuery("SELECT UserID FROM tblUser WHERE Username = '" + username + "'").get(0).get(0));
+		runQuery("UPDATE tblLocations SET User = NULL WHERE User ='" + userID + "'");
+		runQuery("UPDATE tblRoutes SET User = NULL WHERE User ='" + userID + "'");
+		runQuery("DELETE FROM tblUsersRoutes WHERE UserID = '" + userID + "'");
+		runQuery("DELETE FROM tblUsersLocations WHERE UserID = '" + userID + "'");
+		runQuery("DELETE FROM tblUser WHERE UserID = '" + userID + "'");
 	}
 
 
@@ -66,25 +75,49 @@ public class DataFetcher {
     }    	
 
 
-    /**
-     * Loads a location into the application
-     * @param location Location to add into the application
-     */
-    public void loadLocation(Location location) {
-    	double[] coords = location.getCoords();
-    	int type = location.getLocationType();
-    	System.out.print(runQuery("SELECT * FROM tblLocations "
-    			+ "WHERE Latitude = '" + coords[0] + "' AND "
-    					+ "Longitude = '" + coords[1] + "' AND "
-    					+ "Type = '" + type + "'").toString());
-    }
-
     public void loadAllRoutes() {
     	Route route = null;
     	try {
     		Statement qryLoadRoutes = connect.createStatement();
 			ResultSet output = qryLoadRoutes.executeQuery("SELECT * FROM tblRoutes");
-
+			Location start = null;
+			Location end = null;
+			int startID;
+			int endID;
+			boolean secret = false;
+			String name;
+			int bikeID;
+			String gender;
+			User owner;
+			
+			double latitude;
+			double longitude;
+			int type;
+			
+    		Statement qryLocation = connect.createStatement();
+			ResultSet locationOutput; 
+			ResultSet endOutput; 
+			while (output.next()) {
+				startID = output.getInt(2);
+				endID = output.getInt(3);
+				locationOutput = qryLocation.executeQuery("SELECT * FROM tblLocations"
+						+ "WHERE LocationID = '" + startID + "'");
+	    		latitude = locationOutput.getDouble(2);
+	    		longitude = locationOutput.getDouble(3);
+	    		type = locationOutput.getInt(7);
+				start = new Location(latitude, longitude, "Start", type);
+				locationOutput = qryLocation.executeQuery("SELECT * FROM tblLocations"
+						+ "WHERE LocationID = '" + endID + "'");
+	    		latitude = locationOutput.getDouble(2);
+	    		longitude = locationOutput.getDouble(3);
+	    		type = locationOutput.getInt(7);
+				end = new Location(latitude, longitude, "End", type);
+				
+				//do the correct find method in current storage for the type
+				
+				
+				
+			}
 			
     	}
     	catch (SQLException ex) {
@@ -92,162 +125,178 @@ public class DataFetcher {
     	}
     }
     
+    private void loadLocation(ResultSet output) throws SQLException {
+		Statement qryTypeData;
+    	ResultSet typeOutput;
+    	//Initialize all the variables for the different location types
+    	double latitude;
+    	double longitude;
+    	String name;
+    	int type;
+    	boolean secret;
+    	User owner;
+
+    	String ssid;
+    	String provider;
+    	String description;
+    	String product;
+    	String borough;
+    	String wifi_type;
+    	int zip;
+    	String address;
+
+    	double cost;
+    	boolean isDisabled;
+    	boolean unisex;
+    	int typeID;
+    	
+		//Defines the data all location types share
+		latitude = output.getDouble(2);
+		longitude = output.getDouble(3);
+		name = output.getString(4);
+		//user index 5
+		secret = output.getBoolean(6);
+		type = output.getInt(7);
+		borough = output.getString(12);
+		zip = output.getInt(13);
+		address = output.getString(14);
+		qryTypeData = connect.createStatement();
+		//Switch to determine what type of location is being loaded
+		switch (type) {
+		case 0:
+			//Defines the type specific data
+			typeID = output.getInt(8);
+			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblToilets WHERE ToiletID = '" + typeID + "'");
+			typeOutput.next();
+			isDisabled = typeOutput.getBoolean(2);
+			unisex = typeOutput.getBoolean(3);
+			//Add the toilet to the current storage
+			Toilet toilet = new Toilet(latitude, longitude, name, isDisabled, unisex);
+			if (borough != null) {
+				toilet.setBorough(borough);
+			}
+			if (zip != 0) {
+				toilet.setZip(zip);
+			}
+			if (address != null) {
+				toilet.setAddress(address);
+			}
+			if (!secret) {
+				toilet.setSecret(true);
+			}
+			CurrentStorage.addToilet(toilet);
+			break;
+		//Same as the case for toilet but with data for the other types
+		case 1:
+			typeID = output.getInt(9);
+			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblPOI WHERE PoiID = '" + typeID + "'");
+			typeOutput.next();
+			cost = typeOutput.getDouble(2);
+			description = typeOutput.getString(3);
+			Poi poi = new Poi(latitude, longitude, name, description, cost);
+			if (borough != null) {
+				poi.setBorough(borough);
+			}
+			if (zip != 0) {
+				poi.setZip(zip);
+			}
+			if (address != null) {
+				poi.setAddress(address);
+			}
+			if (!secret) {
+				poi.setSecret(true);
+			}
+			CurrentStorage.addPoi(poi);
+			break;
+		case 2:
+			typeID = output.getInt(10);
+			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblRetailers WHERE RetailerID = '" + typeID + "'");
+			typeOutput.next();
+			product = typeOutput.getString(2);
+			description = typeOutput.getString(3);
+			Retailer retailer = new Retailer(latitude, longitude, name, product, description, 0);
+			if (borough != null) {
+				retailer.setBorough(borough);
+			}
+			if (zip != 0) {
+				retailer.setZip(zip);
+			}
+			if (address != null) {
+				retailer.setAddress(address);
+			}
+			if (!secret) {
+				retailer.setSecret(true);
+			}
+			CurrentStorage.addRetailer(retailer);
+			break;
+		case 3:
+			typeID = output.getInt(11);
+			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblWifi WHERE WifiID = '" + typeID + "'");
+			typeOutput.next();
+			ssid = typeOutput.getString(2);
+			provider = typeOutput.getString(3);
+			switch (typeOutput.getInt(4)) {
+			case 0:
+				wifi_type = "Free";
+				break;
+			case 1:
+				wifi_type = "Limited Free";
+				break;
+			case 2:
+				wifi_type = "Provider Site";
+				break;
+			case 4:
+				wifi_type = "Paid";
+				break;
+			default:
+				wifi_type = "Unknown";
+			}
+			Wifi wifi = new Wifi(latitude, longitude, name, wifi_type,  provider, ssid);
+			if (borough != null) {
+				wifi.setBorough(borough);
+			}
+			if (zip != 0) {
+				wifi.setZip(zip);
+			}
+			if (address != null) {
+				wifi.setAddress(address);
+			}
+			if (!secret) {
+				wifi.setSecret(true);
+			}
+			CurrentStorage.addWifi(wifi);
+			break;
+		case 4:
+			Location location = new Location(latitude, longitude, name, 4);
+			if (borough != null) {
+				location.setBorough(borough);
+			}
+			if (zip != 0) {
+				location.setZip(zip);
+			}
+			if (address != null) {
+				location.setAddress(address);
+			}
+			if (!secret) {
+				location.setSecret(true);
+			}
+			CurrentStorage.addGeneral(location);
+			break;
+		}
+    }
+    
     /**
      * Loads all locations in the database into the programs current storage
      */
     public void loadAllLocations() {
-    	Toilet toilet = null;
-    	Poi poi = null;
-    	Retailer retailer = null;
-    	Wifi wifi = null;
-    	Location location = null;
     	try {
     		//Initialize the query to fetch all locations from the database and its result set
     		Statement qryLoadLocations = connect.createStatement();
 			ResultSet output = qryLoadLocations.executeQuery("SELECT * FROM tblLocations");
-			Statement qryTypeData;
-	    	ResultSet typeOutput;
-	    	//Initialize all the variables for the different location types
-	    	double latitude;
-	    	double longitude;
-	    	String name;
-	    	boolean local;
-	    	int type;
-	    	User owner;
 
-	    	String ssid;
-	    	String provider;
-	    	String description;
-	    	String product;
-	    	String borough;
-	    	String wifi_type;
-	    	int zip;
-	    	String address;
-
-	    	double cost;
-	    	boolean isDisabled;
-	    	boolean unisex;
-	    	int typeID;
 	    	//Loop while there a another location to be loaded from the database
 			while (output.next()) {
-				//Defines the data all location types share
-	    		latitude = output.getDouble(2);
-	    		longitude = output.getDouble(3);
-	    		name = output.getString(4);
-	    		//user index 5
-	    		local = output.getBoolean(6);
-				type = output.getInt(7);
-				borough = output.getString(12);
-				zip = output.getInt(13);
-				address = output.getString(14);
-				qryTypeData = connect.createStatement();
-				//Switch to determine what type of location is being loaded
-				switch (type) {
-				case 0:
-					//Defines the type specific data
-					typeID = output.getInt(8);
-					typeOutput = qryTypeData.executeQuery("SELECT * FROM tblToilets WHERE ToiletID = '" + typeID + "'");
-					typeOutput.next();
-					isDisabled = typeOutput.getBoolean(2);
-					unisex = typeOutput.getBoolean(3);
-					//Add the toilet to the current storage
-					toilet = new Toilet(latitude, longitude, name, isDisabled, unisex);
-					if (borough != null) {
-						toilet.setBorough(borough);
-					}
-					if (zip != 0) {
-						toilet.setZip(zip);
-					}
-					if (address != null) {
-						toilet.setAddress(address);
-					}
-					CurrentStorage.addToilet(toilet);
-					break;
-				//Same as the case for toilet but with data for the other types
-				case 1:
-					typeID = output.getInt(9);
-					typeOutput = qryTypeData.executeQuery("SELECT * FROM tblPOI WHERE PoiID = '" + typeID + "'");
-					typeOutput.next();
-					cost = typeOutput.getDouble(2);
-					description = typeOutput.getString(3);
-					poi = new Poi(latitude, longitude, name, description, cost);
-					if (borough != null) {
-						poi.setBorough(borough);
-					}
-					if (zip != 0) {
-						poi.setZip(zip);
-					}
-					if (address != null) {
-						poi.setAddress(address);
-					}
-					CurrentStorage.addPoi(poi);
-					break;
-				case 2:
-					typeID = output.getInt(10);
-					typeOutput = qryTypeData.executeQuery("SELECT * FROM tblRetailers WHERE RetailerID = '" + typeID + "'");
-					typeOutput.next();
-					product = typeOutput.getString(2);
-					description = typeOutput.getString(3);
-					retailer = new Retailer(latitude, longitude, name, product, description, 0);
-					if (borough != null) {
-						retailer.setBorough(borough);
-					}
-					if (zip != 0) {
-						retailer.setZip(zip);
-					}
-					if (address != null) {
-						retailer.setAddress(address);
-					}
-					CurrentStorage.addRetailer(retailer);
-					break;
-				case 3:
-					typeID = output.getInt(11);
-					typeOutput = qryTypeData.executeQuery("SELECT * FROM tblWifi WHERE WifiID = '" + typeID + "'");
-					typeOutput.next();
-					ssid = typeOutput.getString(2);
-					provider = typeOutput.getString(3);
-					switch (typeOutput.getInt(4)) {
-					case 0:
-						wifi_type = "Free";
-						break;
-					case 1:
-						wifi_type = "Limited Free";
-						break;
-					case 2:
-						wifi_type = "Provider Site";
-						break;
-					case 4:
-						wifi_type = "Paid";
-						break;
-					default:
-						wifi_type = "Unknown";
-					}
-					wifi = new Wifi(latitude, longitude, name, wifi_type,  provider, ssid);
-					if (borough != null) {
-						wifi.setBorough(borough);
-					}
-					if (zip != 0) {
-						wifi.setZip(zip);
-					}
-					if (address != null) {
-						wifi.setAddress(address);
-					}
-					CurrentStorage.addWifi(wifi);
-					break;
-				case 4:
-					location = new Location(latitude, longitude, name, 4, 0);
-					if (borough != null) {
-						location.setBorough(borough);
-					}
-					if (zip != 0) {
-						location.setZip(zip);
-					}
-					if (address != null) {
-						location.setAddress(address);
-					}
-					CurrentStorage.addGeneral(location);
-					break;
-				}
+				loadLocation(output);
     		}
 		} 
     	//Prints the correct error statements if an SQLException occurs
@@ -609,12 +658,12 @@ public class DataFetcher {
     	DataFetcher test = new DataFetcher();
     	//test.connectDbTest();				//Tests the connection to the database
     	test.connectDb();
-    	Location testLoc1 = new Location(47.2134400, 172.1232100, "Telecom Hotspot", 3, 0);
+    	Location testLoc1 = new Location(47.2134400, 172.1232100, "Telecom Hotspot", 3);
     	//test.loadLocation(testLoc1);		//Tests loading a valid location
-    	Location testLoc2 = new Location(159.1547895, 0.3256984, "NULL", 4, 0);
+    	Location testLoc2 = new Location(159.1547895, 0.3256984, "NULL", 4);
     	Route testRoute = new Route("fakeBike", testLoc1, testLoc2, "Test", "M");
     	//test.loadRoute(testRoute);		//Tests loading a valid route
-    	Location invalidLoc = new Location(25.1258469, 56.1658468, "NULL", 4, 0);
+    	Location invalidLoc = new Location(25.1258469, 56.1658468, "NULL", 4);
     	//test.loadLocation(invalidLoc);	//Tests loading a invalid location
     }
 }

@@ -25,12 +25,11 @@ public class Location {
      * @param locationType The type of location the new location is (i.e. point of interest, wifi spot, retailer or toilet).
      * @param zip
      */
-    public Location(double latitude, double longitude, String name, int locationType, int zip) {
+    public Location(double latitude, double longitude, String name, int locationType) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.name = name;
         this.locationType = locationType;
-        this.zip = zip;
     }
 
     /**
@@ -39,12 +38,11 @@ public class Location {
      * @param name The name of the new location.
      * @param locationType The type of location the new location is (i.e. point of interest, wifi spot, retailer or toilet).
      */
-    public Location(String address, String name, int locationType, int zip) {
+    public Location(String address, String name, int locationType) {
         double[] latLong = Map.getLatLong(address);
         this.latitude = latLong[0];
         this.longitude = latLong[1];
 		this.address = address;
-		this.zip = zip;
         this.name = name;
         this.locationType = locationType;
     }
