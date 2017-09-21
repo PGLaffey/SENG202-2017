@@ -10,9 +10,13 @@ public class CurrentStorage {
     private static ArrayList<Retailer> retailerArray = new ArrayList<Retailer>();
     private static ArrayList<Integer> addedRetailers = new ArrayList<Integer>();
     private static ArrayList<Wifi> wifiArray = new ArrayList<Wifi>();
+    private static ArrayList<Integer> addedWifi = new ArrayList<Integer>();
     private static ArrayList<Toilet> toiletArray = new ArrayList<Toilet>();
+    private static ArrayList<Integer> addedToilets = new ArrayList<Integer>();
     private static ArrayList<Poi> poiArray = new ArrayList<Poi>();
+    private static ArrayList<Integer> addedPoi = new ArrayList<Integer>();
     private static ArrayList<Location> generalArray = new ArrayList<Location>();
+    private static ArrayList<Integer> addedGeneral = new ArrayList<Integer>();
     private static ArrayList<Coord> coordsArray = new ArrayList<Coord>();
     private static User currentUser;
     
@@ -23,6 +27,7 @@ public class CurrentStorage {
     private static Location locationViewed;
     private static Route routeViewed;
 
+    
     public static Location findLocation(Location find) {
     	int count = 0;
     	while (count < generalArray.size()) {
@@ -124,7 +129,7 @@ public class CurrentStorage {
         retailerArray.add(retailer);
     }
 
-    public static boolean checkRetailer(Retailer retailer) {
+    public static boolean containsRetailer(Retailer retailer) {
     	for (Retailer currentRetailer : CurrentStorage.getRetailerArray()) {
     		if (currentRetailer.equals(retailer)) {
     			return true;
@@ -133,13 +138,46 @@ public class CurrentStorage {
 		return false;
 	}
     
-    public static void addNewRetailer(Retailer retailer) { // Used when user adding new data (from GUI or CSV)
-		if (!(checkRetailer(retailer))) {
+    public static void addNewRetailer(Retailer retailer) { 
+    	// Used when user adding new data (from GUI or CSV)
+		if (!(containsRetailer(retailer))) {
 			retailerArray.add(retailer);
 			addedRetailers.add(retailerArray.indexOf(retailer));
 		}
     }
 
+    public static void addNewToilet(Toilet toilet) { 
+    	// Used when user adding new data (from GUI or CSV)
+		if (!(containsToilet(toilet))) {
+			toiletArray.add(toilet);
+			addedToilets.add(toiletArray.indexOf(toilet));
+		}
+    }
+    
+    public static void addNewPoi(Poi poi) { 
+    	// Used when user adding new data (from GUI or CSV)
+		if (!(containsPoi(poi))) {
+			poiArray.add(poi);
+			addedPoi.add(poiArray.indexOf(poi));
+		}
+    }
+    
+    public static void addNewWifi(Wifi wifi) { 
+    	// Used when user adding new data (from GUI or CSV)
+		if (!(containsWifi(wifi))) {
+			wifiArray.add(wifi);
+			addedWifi.add(wifiArray.indexOf(wifi));
+		}
+    }
+    
+    public static void addNewGeneral(Location location) { 
+    	// Used when user adding new data (from GUI or CSV)
+		if (!(containsGeneral(location))) {
+			generalArray.add(location);
+			addedGeneral.add(generalArray.indexOf(location));
+		}
+    }
+    
     public static boolean containsWifi(Wifi wifi) {
         for (Wifi currentWifi : CurrentStorage.getWifiArray()) {
         	if (currentWifi.equals(wifi)) {
@@ -149,6 +187,20 @@ public class CurrentStorage {
 		return false;
     }
 
+    public static boolean containsPoi(Poi poi) {
+    	if (poiArray.contains(poi)) {
+    		return true;
+    	}
+		return false;
+    }
+    
+    public static boolean containsGeneral(Location location) {
+    	if (generalArray.contains(location)) {
+    		return true;
+    	}
+		return false;
+    }
+    
     public static void addWifi(Wifi wifi) {
     	if (!containsWifi(wifi)) {
     		wifiArray.add(wifi);
@@ -174,9 +226,13 @@ public class CurrentStorage {
     	poiArray.add(poi);
     }
 
-    public static void addCoords(Coord coord) { coordsArray.add(coord); }
+    public static void addCoords(Coord coord) { 
+    	coordsArray.add(coord); 
+    }
 
-    public static ArrayList<Coord> getCoords() { return coordsArray; }
+    public static ArrayList<Coord> getCoords() {
+    	return coordsArray; 
+    }
     
     public static void setWifi(Wifi wifi) {
     	wifiViewed = wifi;
@@ -237,4 +293,24 @@ public class CurrentStorage {
         toiletArray.clear();
         poiArray.clear();
     }
+
+	public static ArrayList<Integer> getAddedWifi() {
+		return addedWifi;
+	}
+
+	public static ArrayList<Integer> getAddedToilets() {
+		return addedToilets;
+	}
+
+	public static ArrayList<Integer> getAddedPoi() {
+		return addedPoi;
+	}
+
+	public static ArrayList<Integer> getAddedGeneral() {
+		return addedGeneral;
+	}
+	
+	public static ArrayList<Integer> getAddedRetailers() {
+		return addedRetailers;
+	}
 }

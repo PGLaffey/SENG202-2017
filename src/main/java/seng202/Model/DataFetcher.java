@@ -63,7 +63,65 @@ public class DataFetcher {
 		runQuery("DELETE FROM tblUser WHERE UserID = '" + userID + "'");
 	}
 
+	public void storeCurrentStorage() {
+		storeNewRetailers();
+		storeNewToilets();
+		storeNewWifi();
+		storeNewPoi();
+		storeNewGeneral();
+	}
 
+	private void storeNewRetailers() {
+		int count = 0;
+		ArrayList<Integer> newRetailers = CurrentStorage.getAddedRetailers();
+		ArrayList<Retailer> retailers = CurrentStorage.getRetailerArray();
+		while (count < newRetailers.size()) {
+			addLocation(retailers.get(newRetailers.get(count)));
+			count += 1;
+		}
+	}
+	
+	
+	private void storeNewToilets() {
+		int count = 0;
+		ArrayList<Integer> newToilets = CurrentStorage.getAddedToilets();
+		ArrayList<Toilet> toilets = CurrentStorage.getToiletArray();
+		while (count < newToilets.size()) {
+			addLocation(toilets.get(newToilets.get(count)));
+			count += 1;
+		}
+	}
+	
+	private void storeNewWifi() {
+		int count = 0;
+		ArrayList<Integer> newWifi = CurrentStorage.getAddedWifi();
+		ArrayList<Wifi> wifi = CurrentStorage.getWifiArray();
+		while (count < newWifi.size()) {
+			addLocation(wifi.get(newWifi.get(count)));
+			count += 1;
+		}
+	}
+	
+	private void storeNewPoi() {
+		int count = 0;
+		ArrayList<Integer> newPoi = CurrentStorage.getAddedPoi();
+		ArrayList<Poi> poi = CurrentStorage.getPoiArray();
+		while (count < newPoi.size()) {
+			addLocation(poi.get(newPoi.get(count)));
+			count += 1;
+		}
+	}
+	
+	private void storeNewGeneral() {
+		int count = 0;
+		ArrayList<Integer> newLocations = CurrentStorage.getAddedGeneral();
+		ArrayList<Location> locations = CurrentStorage.getGeneralArray();
+		while (count < newLocations.size()) {
+			addLocation(locations.get(newLocations.get(count)));
+			count += 1;
+		}
+	}
+	
 	/**
      * Loads a route into the application
      * @param route Route to add into the application
@@ -230,7 +288,7 @@ public class DataFetcher {
 			typeOutput.next();
 			product = typeOutput.getString(2);
 			description = typeOutput.getString(3);
-			Retailer retailer = new Retailer(latitude, longitude, name, product, description, 0);
+			Retailer retailer = new Retailer(latitude, longitude, name, product, description);
 			if (borough != null) {
 				retailer.setBorough(borough);
 			}
