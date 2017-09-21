@@ -66,6 +66,7 @@ public class ChangePasswordScreenController {
                 data.updateUserPassword(user.getUsername(), newPasswordText.getText());
             }
         }
+        data.closeConnection();
     	Stage stage = (Stage) changePasswordButton.getScene().getWindow();
     	stage.hide();	
     }
@@ -77,8 +78,6 @@ public class ChangePasswordScreenController {
         assert newPasswordText != null : "fx:id=\"newPasswordText\" was not injected: check your FXML file 'ChangePasswordScreen.fxml'.";
         assert newPasswordTextAgain != null : "fx:id=\"newPasswordTextAgain\" was not injected: check your FXML file 'ChangePasswordScreen.fxml'.";
         assert oldPasswordText != null : "fx:id=\"oldPasswordText\" was not injected: check your FXML file 'ChangePasswordScreen.fxml'.";
-
-        User user = CurrentStorage.getUser();
 
 
     }
