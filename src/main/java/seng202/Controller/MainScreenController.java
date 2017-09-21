@@ -8,6 +8,8 @@ import com.lynden.gmapsfx.service.geocoding.GeocodingService;
 import com.lynden.gmapsfx.shapes.Circle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -258,30 +260,55 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     
     @FXML
     private AnchorPane addToiletPane;
+    
+    @FXML
+    private Label toiletAddressLabel;
 
     @FXML
     private TextField toiletAddressText;
 
     @FXML
+    private Label toiletBoroughLabel;
+
+    @FXML
     private TextField toiletBoroughText;
 
     @FXML
-    private ChoiceBox<?> toiletDisabledChoice;
+    private ChoiceBox<Boolean> toiletDisabledChoice;
+
+    @FXML
+    private Label toiletDisabledLabel;
+
+    @FXML
+    private Label toiletLatLabel;
 
     @FXML
     private TextField toiletLatText;
 
     @FXML
+    private Label toiletLongLabel;
+
+    @FXML
     private TextField toiletLongText;
+
+    @FXML
+    private Label toiletNameLabel;
 
     @FXML
     private TextField toiletNameText;
 
     @FXML
-    private ChoiceBox<?> toiletUnisexChoice;
+    private ChoiceBox<Boolean> toiletUnisexChoice;
+
+    @FXML
+    private Label toiletUnisexLabel;
+
+    @FXML
+    private Label toiletZipLabel;
 
     @FXML
     private TextField toiletZipText;
+
     
     //Adding retailer pane
     
@@ -343,22 +370,43 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     private AnchorPane addOtherPane;
     
     @FXML
+    private Label otherAddressLabel;
+
+    @FXML
     private TextField otherAddressText;
+
+    @FXML
+    private Label otherBoroughLabel;
 
     @FXML
     private TextField otherBoroughText;
 
     @FXML
+    private Label otherLatLabel;
+
+    @FXML
     private TextField otherLatText;
+
+    @FXML
+    private Label otherLongLabel;
 
     @FXML
     private TextField otherLongText;
 
     @FXML
+    private Label otherNameLabel;
+
+    @FXML
     private TextField otherNameText;
 
     @FXML
+    private Label otherZipLabel;
+
+    @FXML
     private TextField otherZipText;
+    
+    @FXML
+    private Button saveOtherButton;
 
     Service<Void> backgroundThread;
     ArrayList<Circle> wifiCircles = new ArrayList<Circle>();
@@ -614,6 +662,38 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     
     @FXML
     void saveOtherButtonPressed(ActionEvent event) {
+    	if (otherNameText.getText().isEmpty()) {
+    		otherNameLabel.setTextFill(Color.RED);
+    	} else if (otherAddressText.getText().isEmpty() && (otherLatText.getText().isEmpty() || otherLongText.getText().isEmpty())) {
+    		otherNameLabel.setTextFill(Color.BLACK);
+    		otherAddressLabel.setTextFill(Color.RED);
+    		otherLatLabel.setTextFill(Color.RED);
+    		otherLongLabel.setTextFill(Color.RED);
+    	} else {
+    		if (!otherAddressText.getText().isEmpty()) {
+    			Location location = new Location(otherAddressText.getText(), otherNameText.getText(), 4);
+    			if (!otherZipText.getText().isEmpty()) {
+    				location.setZip(Integer.parseInt(otherZipText.getText()));
+    			}
+    			CurrentStorage.addNewGeneral(location);
+    		} else {
+    			Location location = new Location(Integer.parseInt(otherLatText.getText()), Integer.parseInt(otherLongLabel.getText()), otherNameText.getText(), 4);
+    			if (!otherZipText.getText().isEmpty()) {
+    				location.setZip(Integer.parseInt(otherZipText.getText()));
+    			}
+    			CurrentStorage.addNewGeneral(location);
+    		}
+    		otherNameLabel.setTextFill(Color.BLACK);
+    		otherAddressLabel.setTextFill(Color.BLACK);
+    		otherLatLabel.setTextFill(Color.BLACK);
+    		otherLongLabel.setTextFill(Color.BLACK);
+    		otherNameText.setText(null);
+    		otherAddressText.setText(null);
+    		otherLatText.setText(null);
+    		otherLongText.setText(null);
+    		otherZipText.setText(null);
+    		otherBoroughText.setText(null);
+    	}
     }
 
     @FXML
@@ -631,13 +711,13 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         		if (!poiZipText.getText().isEmpty()) {
         			poi.setZip(Integer.parseInt(poiZipText.getText()));
         		}
-        		//CurrentStorage.addNewPoi(poi);
+        		CurrentStorage.addNewPoi(poi);
         	} else {
         		Poi poi = new Poi(Double.parseDouble(poiLatText.getText()), Double.parseDouble(poiLongText.getText()), poiNameText.getText(), poiDescriptionText.getText(), Double.parseDouble(poiCostText.getText()));
         		if (!poiZipText.getText().isEmpty()) {
         			poi.setZip(Integer.parseInt(poiZipText.getText()));
         		}
-        		//CurrentStorage.addNewPoi(poi);
+        		CurrentStorage.addNewPoi(poi);
         	}
     		poiNameLabel.setTextFill(Color.BLACK);
     		poiAddressLabel.setTextFill(Color.BLACK);
@@ -697,6 +777,42 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     void saveToiletButtonPressed(ActionEvent event) {
+    	if (toiletNameText.getText().isEmpty()) {
+    		toiletNameLabel.setTextFill(Color.RED);
+    	} else if (toiletAddressText.getText().isEmpty() && (toiletLatText.getText().isEmpty() || toiletLongText.getText().isEmpty())) {
+    		toiletNameLabel.setTextFill(Color.BLACK);
+    		toiletAddressLabel.setTextFill(Color.RED);
+    		toiletLatLabel.setTextFill(Color.RED);
+    		toiletLongLabel.setTextFill(Color.RED);
+    	} else {
+    		if(!toiletAddressText.getText().isEmpty()) {
+    			//Toilet toilet = new Toilet(Double.parseDouble(toiletAddressText.getText(), toiletNameText.getText(), toiletDisabledChoice.getValue(), toiletUnisexChoice.getValue());
+    			if (!toiletZipText.getText().isEmpty()) {
+    				//toilet.setZip(Integer.parseInt(toiletZipText.getText()));
+    			}
+    			//CurrentStorage.addNewToilet(toilet);
+    		} else {
+    			Toilet toilet = new Toilet(Double.parseDouble(toiletLatText.getText()), Double.parseDouble(toiletLongText.getText()), toiletNameText.getText(), toiletDisabledChoice.getValue(), toiletUnisexChoice.getValue());
+
+    			if (!toiletZipText.getText().isEmpty()) {
+    				toilet.setZip(Integer.parseInt(toiletZipText.getText()));
+    			}
+    			CurrentStorage.addNewToilet(toilet);
+    		}
+    		toiletNameLabel.setTextFill(Color.BLACK);
+    		toiletAddressLabel.setTextFill(Color.BLACK);
+    		toiletLatLabel.setTextFill(Color.BLACK);
+    		toiletLongLabel.setTextFill(Color.BLACK);
+    		toiletNameText.setText(null);
+    		toiletAddressText.setText(null);
+    		toiletLatText.setText(null);
+    		toiletLongText.setText(null);
+    		toiletZipText.setText(null);
+    		toiletBoroughText.setText(null);
+    		
+    		
+    			
+    	}
     }
 
     @FXML
@@ -716,13 +832,12 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     				//wifi.setZip(Integer.parseInt(wifiZipText.getText());
     			}
             	//CurrentStorage.addNewWifi(wifi);
-        	}
-        	else {
+        	} else {
             	Wifi wifi = new Wifi(Double.parseDouble(wifiLatText.getText()), Double.parseDouble(wifiLongText.getText()), wifiNameText.getText(), wifiBoroughText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
             	if (!wifiZipText.getText().isEmpty()) {
     				//wifi.setZip(Integer.parseInt(wifiZipText.getText());
     			}
-            	//CurrentStorage.addNewWifi(wifi);
+            	CurrentStorage.addNewWifi(wifi);
         	}
     		wifiNameLabel.setTextFill(Color.BLACK);
     		wifiAddressLabel.setTextFill(Color.BLACK);
@@ -758,6 +873,12 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	randomRoutePane.setVisible(false);
     	
     	addLocationsMenu.setPopupSide(Side.RIGHT);
+    	
+       	
+    	ObservableList<Boolean> disabledOptions = FXCollections.observableArrayList(true, false);
+    	toiletDisabledChoice.setItems(disabledOptions);
+    	ObservableList<Boolean> unisexOptions = FXCollections.observableArrayList(true, false);
+    	toiletUnisexChoice.setItems(unisexOptions);
 
         assert accountButton != null : "fx:id=\"accountButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert addWifiPane != null : "fx:id=\"addWifiPane\" was not injected: check your FXML file 'MainScreen.fxml'.";
