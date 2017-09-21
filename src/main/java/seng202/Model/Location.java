@@ -126,14 +126,6 @@ public class Location {
         this.local = local;
     }
 
-	/* public String getBorough() { // TODO as these things when adding borough to the location superclass
-		return borough;
-	}
-
-	public void setBorough(String borough) {
-		this.borough = borough;
-	} */
-
 	public String getAddress() {
 		return address;
 	}

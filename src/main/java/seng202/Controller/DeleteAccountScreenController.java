@@ -31,10 +31,22 @@ public class DeleteAccountScreenController {
 
 
     @FXML
-    void noButtonPressed(ActionEvent event) {
-    	Stage stage = (Stage) noButton.getScene().getWindow(); 
-    	stage.hide();	
-    }
+    void noButtonPressed(ActionEvent event) throws IOException {
+/*    	Stage stage = (Stage) noButton.getScene().getWindow(); 
+    	stage.hide();*/
+
+    	Stage primaryStage = (Stage) noButton.getScene().getWindow(); 
+		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
+		
+		primaryStage.setTitle("Profile");
+		primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
+		primaryStage.show();
+/*		
+		Stage primaryStage = (Stage)signInButton.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
+		primaryStage.setTitle("Profile");
+		primaryStage.setScene(new Scene(root));*/
+}
 
     @FXML
     void yesButtonPressed(ActionEvent event) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException {

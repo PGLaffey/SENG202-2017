@@ -111,9 +111,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     private Button shareButton;
     
-    
-    
-    
     //Main map pane
     
     @FXML
