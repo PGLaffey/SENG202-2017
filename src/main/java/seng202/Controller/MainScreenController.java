@@ -492,6 +492,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     
     @FXML
     void showRoutePressed(ActionEvent event) {
+        for (Route route : CurrentStorage.getRouteArray()) {
+            placeMarkerOnMap(route);
+        }
     }
     
     @FXML
@@ -532,8 +535,13 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     void bikeIconPressed(ActionEvent event) {
         for (Route route: CurrentStorage.getRouteArray()) {
-            placeMarkerOnMap(route.getStart());
+            if (route.getStartMarker() == null || route.getEndMarker() == null) {
+                placeMarkerOnMap(route);
+            } else {
+                route.getStartMarker().setVisible(!Map.getRouteVisible());
+            }
         }
+        Map.setRouteStartVisible(!Map.getRouteVisible());
     }
 
     @FXML
@@ -927,8 +935,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     public void placeRetailerOnMap(Retailer retailer) {Map.findRetailers(retailer);}
 
     public void placeMarkerOnMap(Route route) {
-        Map.findLocation(route.getStartString(), map, geocodingService);
-        Map.findLocation(route.getEndString(), map, geocodingService);
+        Map.findRouteMarker(route, map);
     }
 
     @Override

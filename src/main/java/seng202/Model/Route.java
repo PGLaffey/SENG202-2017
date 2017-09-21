@@ -1,6 +1,6 @@
 package seng202.Model;
 
-import seng202.Model.Location;
+import com.lynden.gmapsfx.javascript.object.Marker;
 
 import java.util.Arrays;
 
@@ -19,6 +19,8 @@ public class Route {
     private Location via2;
     private Location via3;
     private boolean secret;
+    private Marker startMarker = null;
+    private Marker endMarker = null;
 
     /**
      * Constructs a route based on the start and end locations.
@@ -127,4 +129,20 @@ public class Route {
 	public void setSecret(boolean secret) {
 		this.secret = secret;
 	}
+
+	public Marker getStartMarker() {
+        return startMarker;
+    }
+
+    public void setStartMarker(Marker marker) {
+        startMarker = marker;
+    }
+
+    public Marker getEndMarker() {
+        return endMarker;
+    }
+
+    public void setEndMarker(Marker marker) {
+        endMarker = marker;
+    }
 }

@@ -1,7 +1,5 @@
 package seng202.Model;
 
-import java.util.logging.FileHandler;
-
 public class RouteImporterThread implements Runnable {
     private String path;
 
