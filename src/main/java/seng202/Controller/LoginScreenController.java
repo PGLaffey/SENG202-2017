@@ -78,6 +78,7 @@ public class LoginScreenController {
 			incorrectPasswordLbl.setVisible(false);
 			incorrectUserLbl.setVisible(false);
 		}
+		data.closeConnection();
 	}
 	
 
