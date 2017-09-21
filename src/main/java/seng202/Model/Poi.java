@@ -9,7 +9,6 @@ public class Poi extends Location {
     private String description;
     private double cost;
     private Marker marker = null;
-    private String borough = null; // TODO Remove this and the getter and setter when the function is rewritten.
 
     /**
      * The POI constructor, creates a new instance of the point of interest object using the location superclass constructor.
@@ -20,13 +19,13 @@ public class Poi extends Location {
      * @param cost The cost of visiting the point of interest.
      */
     public Poi(double latitude, double longitude, String name, String description, double cost) {
-        super(latitude, longitude, name, 1, 0);
+        super(latitude, longitude, name, 1);
         this.description = description;
         this.cost = cost;
     }
 
     public Poi(String address, String name, String description, double cost) {
-        super(address, name, 1, 0);
+        super(address, name, 1);
         this.description = description;
         this.cost = cost;
     }
@@ -39,15 +38,11 @@ public class Poi extends Location {
         return cost;
     }
 
-    public String getBorough() {
-        return this.borough;
+    public Marker getMarker() { 
+    	return marker; 
     }
 
-    public void setBorough(String borough) {
-        this.borough = borough;
+    public void setMarker(Marker marker) { 
+    	this.marker = marker;
     }
-
-    public Marker getMarker() { return marker; }
-
-    public void setMarker(Marker marker) { this.marker = marker;}
 }
