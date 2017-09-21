@@ -63,7 +63,65 @@ public class DataFetcher {
 		runQuery("DELETE FROM tblUser WHERE UserID = '" + userID + "'");
 	}
 
+	public void storeCurrentStorage() {
+		storeNewRetailers();
+		storeNewToilets();
+		storeNewWifi();
+		storeNewPoi();
+		storeNewGeneral();
+	}
 
+	private void storeNewRetailers() {
+		int count = 0;
+		ArrayList<Integer> newRetailers = CurrentStorage.getAddedRetailers();
+		ArrayList<Retailer> retailers = CurrentStorage.getRetailerArray();
+		while (count < newRetailers.size()) {
+			addLocation(retailers.get(newRetailers.get(count)));
+			count += 1;
+		}
+	}
+	
+	
+	private void storeNewToilets() {
+		int count = 0;
+		ArrayList<Integer> newToilets = CurrentStorage.getAddedToilets();
+		ArrayList<Toilet> toilets = CurrentStorage.getToiletArray();
+		while (count < newToilets.size()) {
+			addLocation(toilets.get(newToilets.get(count)));
+			count += 1;
+		}
+	}
+	
+	private void storeNewWifi() {
+		int count = 0;
+		ArrayList<Integer> newWifi = CurrentStorage.getAddedWifi();
+		ArrayList<Wifi> wifi = CurrentStorage.getWifiArray();
+		while (count < newWifi.size()) {
+			addLocation(wifi.get(newWifi.get(count)));
+			count += 1;
+		}
+	}
+	
+	private void storeNewPoi() {
+		int count = 0;
+		ArrayList<Integer> newPoi = CurrentStorage.getAddedPoi();
+		ArrayList<Poi> poi = CurrentStorage.getPoiArray();
+		while (count < newPoi.size()) {
+			addLocation(poi.get(newPoi.get(count)));
+			count += 1;
+		}
+	}
+	
+	private void storeNewGeneral() {
+		int count = 0;
+		ArrayList<Integer> newLocations = CurrentStorage.getAddedGeneral();
+		ArrayList<Location> locations = CurrentStorage.getGeneralArray();
+		while (count < newLocations.size()) {
+			addLocation(locations.get(newLocations.get(count)));
+			count += 1;
+		}
+	}
+	
 	/**
      * Loads a route into the application
      * @param route Route to add into the application
@@ -115,22 +173,23 @@ public class DataFetcher {
 				endID = output.getInt(3);
 				locationOutput = qryLocation.executeQuery("SELECT * FROM tblLocations"
 						+ "WHERE LocationID = '" + startID + "'");
-	    		locationOutput.next();
-				latitude = locationOutput.getDouble(2);
-	    		longitude = locationOutput.getDouble(3);
-	    		type = locationOutput.getInt(7);
-				start = new Location(latitude, longitude, "Start", type);
-
+				locationOutput.next();
+	    		start = loadLocation(locationOutput);
+	    		
 				locationOutput = qryLocation.executeQuery("SELECT * FROM tblLocations"
 						+ "WHERE LocationID = '" + endID + "'");
 				locationOutput.next();
-	    		latitude = locationOutput.getDouble(2);
-	    		longitude = locationOutput.getDouble(3);
-	    		type = locationOutput.getInt(7);
-				end = new Location(latitude, longitude, "End", type);
+				end = loadLocation(locationOutput);
 				
-				//do the correct find method in current storage for the type
-				
+				secret = output.getBoolean(7);
+				name = output.getString(9);
+				bikeID = output.getInt(10);
+				if (output.getBoolean(11)) {
+					gender = "Male";
+				}
+				else {
+					gender = "Female";
+				}
 				
 				
 			}
@@ -141,42 +200,31 @@ public class DataFetcher {
     	}
     }
     
-    private void loadLocation(ResultSet output) throws SQLException {
-		Statement qryTypeData;
-    	ResultSet typeOutput;
+    private Location loadLocation(ResultSet output) throws SQLException {	
     	//Initialize all the variables for the different location types
-    	double latitude;
-    	double longitude;
-    	String name;
-    	int type;
-    	boolean secret;
-    	User owner;
-
     	String ssid;
     	String provider;
     	String description;
     	String product;
-    	String borough;
     	String wifi_type;
-    	int zip;
-    	String address;
-
     	double cost;
     	boolean isDisabled;
     	boolean unisex;
     	int typeID;
     	
+    	ResultSet typeOutput;
+    	
 		//Defines the data all location types share
-		latitude = output.getDouble(2);
-		longitude = output.getDouble(3);
-		name = output.getString(4);
+		double latitude = output.getDouble(2);
+		double longitude = output.getDouble(3);
+		String name = output.getString(4);
 		//user index 5
-		secret = output.getBoolean(6);
-		type = output.getInt(7);
-		borough = output.getString(12);
-		zip = output.getInt(13);
-		address = output.getString(14);
-		qryTypeData = connect.createStatement();
+		boolean secret = output.getBoolean(6);
+		int type = output.getInt(7);
+		String borough = output.getString(12);
+		int zip = output.getInt(13);
+		String address = output.getString(14);
+		Statement qryTypeData = connect.createStatement();
 		//Switch to determine what type of location is being loaded
 		switch (type) {
 		case 0:
@@ -201,7 +249,7 @@ public class DataFetcher {
 				toilet.setSecret(true);
 			}
 			CurrentStorage.addToilet(toilet);
-			break;
+			return toilet;
 		//Same as the case for toilet but with data for the other types
 		case 1:
 			typeID = output.getInt(9);
@@ -223,14 +271,14 @@ public class DataFetcher {
 				poi.setSecret(true);
 			}
 			CurrentStorage.addPoi(poi);
-			break;
+			return poi;
 		case 2:
 			typeID = output.getInt(10);
 			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblRetailers WHERE RetailerID = '" + typeID + "'");
 			typeOutput.next();
 			product = typeOutput.getString(2);
 			description = typeOutput.getString(3);
-			Retailer retailer = new Retailer(latitude, longitude, name, product, description, 0);
+			Retailer retailer = new Retailer(latitude, longitude, name, product, description);
 			if (borough != null) {
 				retailer.setBorough(borough);
 			}
@@ -244,7 +292,7 @@ public class DataFetcher {
 				retailer.setSecret(true);
 			}
 			CurrentStorage.addRetailer(retailer);
-			break;
+			return retailer;
 		case 3:
 			typeID = output.getInt(11);
 			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblWifi WHERE WifiID = '" + typeID + "'");
@@ -281,7 +329,7 @@ public class DataFetcher {
 				wifi.setSecret(true);
 			}
 			CurrentStorage.addWifi(wifi);
-			break;
+			return wifi;
 		case 4:
 			Location location = new Location(latitude, longitude, name, 4);
 			if (borough != null) {
@@ -297,8 +345,9 @@ public class DataFetcher {
 				location.setSecret(true);
 			}
 			CurrentStorage.addGeneral(location);
-			break;
+			return location;
 		}
+		return null;
     }
     
     /**
