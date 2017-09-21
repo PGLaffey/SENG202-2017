@@ -37,6 +37,9 @@ public class RouteInfoScreenController {
 
     @FXML
     private Button okButton;
+    
+    @FXML
+    private Button completedRouteButton;
 
     @FXML
     private Label startLabel;
@@ -49,6 +52,12 @@ public class RouteInfoScreenController {
     	Stage stage = (Stage) okButton.getScene().getWindow(); 
     	stage.hide();
     }
+    
+    @FXML
+    void completedRouteButtonPressed(ActionEvent event) {
+    	CurrentStorage.getUser().addDistance(route.getDistance());
+    	completedRouteButton.setText("Added!");
+    }
 
     @FXML
     void initialize() {
@@ -59,6 +68,8 @@ public class RouteInfoScreenController {
     	startLabel.setText("Start: " + route.getEndString());
     	nameLabel.setText("Name: " + route.getName());
     	genderLabel.setText("Gender: " + route.getGender());
+    	
+    	completedRouteButton.setText("I have completed this route!");
     	
     	
         assert bikeidLabel != null : "fx:id=\"bikeidLabel\" was not injected: check your FXML file 'RouteInfoScreen.fxml'.";
