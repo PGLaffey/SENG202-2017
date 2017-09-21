@@ -86,4 +86,12 @@ public class User implements Serializable {
 	public String getUsername() {
 		return username;
 	}
+	
+	public void addDistance(double dist) {
+		distanceCycled += dist;
+	}
+	
+	public void addTime(double time) {
+		hoursCycled += time;
+	}
 }
