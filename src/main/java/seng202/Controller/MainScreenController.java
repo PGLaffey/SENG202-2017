@@ -620,7 +620,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             String path = selectedFile.getPath();
-            FileManager.poiReader(path);
+            FileManager.poiRetriever(path);
         }
     }
 

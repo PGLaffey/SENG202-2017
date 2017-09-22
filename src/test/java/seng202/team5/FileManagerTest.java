@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.omg.CORBA.Current;
 import seng202.Model.*;
 import seng202.exceptions.WrongFormatException;
 
@@ -71,7 +72,7 @@ public class FileManagerTest extends TestCase {
     }
 
     /**
-     * Test to test FileManager's readFile functions as expected for a .csv with 1 route.
+     * Test to test FileManager's readFile functions work as expected for a .csv with 1 route.
      */
     @Test
     public void testRouteOneEntry()
@@ -98,7 +99,7 @@ public class FileManagerTest extends TestCase {
     }
 
     /**
-     * Test to test FileManager's readFile functions as expected for a .csv with 10 routes.
+     * Test to test FileManager's readFile functions work as expected for a .csv with 10 routes.
      */
     @Test
     public void testRouteTenEntries() {
@@ -108,7 +109,7 @@ public class FileManagerTest extends TestCase {
     }
 
     /**
-     * Test to test the FileManager's readFile functions as expected for a .csv with a WiFi location
+     * Test to test the FileManager's readFile functions work as expected for a .csv with a WiFi location
      */
     @Test
     public void testWifiOneEntry() {
@@ -129,7 +130,7 @@ public class FileManagerTest extends TestCase {
     }
 
     /**
-     * Test to test the FileManager's readFile functions as expected for a .csv with 10 WiFi locations.
+     * Test to test the FileManager's readFile functions work as expected for a .csv with 10 WiFi locations.
      */
     @Test
     public void testWifiTenEntries() {
@@ -138,7 +139,7 @@ public class FileManagerTest extends TestCase {
     }
 
     /**
-     * Test to test the FileManager's readFile functions as expected for a .csv with a Retailer
+     * Test to test the FileManager's readFile functions work as expected for a .csv with a Retailer
      */
     @Test
     public void testRetailerOneEntry() {
@@ -158,7 +159,7 @@ public class FileManagerTest extends TestCase {
     }
 
     /**
-     * Test to test the FileManager's readFile functions as expected for a .csv with 10 Retailers
+     * Test to test the FileManager's readFile functions works as expected for a .csv with 10 Retailers
      */
     @Test
     public void testRetailerTenEntries() {
@@ -167,7 +168,7 @@ public class FileManagerTest extends TestCase {
     }
 
     /**
-     * Tests the FileManager's toiletRetriever function as expected for a .csv file with 1 Toilet
+     * Tests the FileManager's toiletRetriever function works as expected for a .csv file with 1 Toilet
      */
     @Test
     public void testToiletOneEntry() {
@@ -187,7 +188,7 @@ public class FileManagerTest extends TestCase {
     }
 
     /**
-     * Tests the FileManager's toiletRetriever as expected for a .csv file with 10 Toilets
+     * Tests the FileManager's toiletRetriever works as expected for a .csv file with 10 Toilets
      */
     @Test
     public void testToiletTenEntries() {
@@ -195,11 +196,33 @@ public class FileManagerTest extends TestCase {
         assertEquals(10, CurrentStorage.getToiletArray().size());
     }
 
+    /**
+     * Tests the FileManager's poiRetriever works as expected for a .csv with 1 Poi.
+     */
     @Test
     public void testPoiOneEntry() {
-        FileManager.poiReader(TARGET+"/poi_data1.csv");
+        FileManager.poiRetriever(TARGET+"/poi_data1.csv");
         Poi poi = new Poi(40.745968,-73.994039,"siteOne","sherwood forest entrance",0);
         assertTrue(CurrentStorage.getPoiArray().get(0).equals(poi));
+    }
+
+    /**
+     * Tests the poiRetriever in the FileManager class does not add duplicates to the CurrentStorage.
+     */
+    @Test
+    public void testPoiDuplicates() {
+        FileManager.poiRetriever(TARGET+"/poi_data1.csv");
+        FileManager.poiRetriever(TARGET+"/poi_data1.csv");
+        assertEquals(1, CurrentStorage.getPoiArray().size());
+    }
+
+    /**
+     * Tests the FileManager's poiRetriever for the expected result of a .csv with 10 Poi.
+     */
+    @Test
+    public void testPoiTenEnteries() {
+        FileManager.poiRetriever(TARGET+"/poi_data10.csv");
+        assertEquals(10, CurrentStorage.getPoiArray().size());
     }
 
     /**
@@ -210,9 +233,13 @@ public class FileManagerTest extends TestCase {
         FileManager.retailerRetriever(TARGET+"/empty_file.csv");
         FileManager.wifiRetriever(TARGET+"/empty_file.csv");
         FileManager.routeRetriever(TARGET+"/empty_file.csv");
+        FileManager.toiletRetriever(TARGET+"/empty_file.csv");
+        FileManager.poiRetriever(TARGET+"/empty_file.csv");
         assertEquals(0, CurrentStorage.getRetailerArray().size());
         assertEquals(0, CurrentStorage.getRouteArray().size());
         assertEquals(0, CurrentStorage.getWifiArray().size());
+        assertEquals(0, CurrentStorage.getToiletArray().size());
+        assertEquals(0, CurrentStorage.getPoiArray().size());
     }
 
     /**
