@@ -37,7 +37,7 @@ public class RouteInfoScreenController {
 
     @FXML
     private Button okButton;
-    
+
     @FXML
     private Button completedRouteButton;
 
