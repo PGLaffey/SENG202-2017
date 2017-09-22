@@ -167,6 +167,42 @@ public class FileManagerTest extends TestCase {
     }
 
     /**
+     * Tests the FileManager's toiletRetriever function as expected for a .csv file with 1 Toilet
+     */
+    @Test
+    public void testToiletOneEntry() {
+        FileManager.toiletRetriever(TARGET+"/toilet_data1.csv");
+        Toilet toilet = new Toilet(40.745968,-73.994039,"Not a Real Toilet",true,false);
+        assertTrue(CurrentStorage.getToiletArray().get(0).equals(toilet));
+    }
+
+    /**
+     * Tests the FileManager's toiletRetriever function does not save multiple instances of a Toilet.
+     */
+    @Test
+    public void testToiletDuplicates() {
+        FileManager.toiletRetriever(TARGET+"/toilet_data1.csv");
+        FileManager.toiletRetriever(TARGET+"/toilet_data1.csv");
+        assertEquals(1, CurrentStorage.getToiletArray().size());
+    }
+
+    /**
+     * Tests the FileManager's toiletRetriever as expected for a .csv file with 10 Toilets
+     */
+    @Test
+    public void testToiletTenEntries() {
+        FileManager.toiletRetriever(TARGET+"/toilet_data10.csv");
+        assertEquals(10, CurrentStorage.getToiletArray().size());
+    }
+
+    @Test
+    public void testPoiOneEntry() {
+        FileManager.poiReader(TARGET+"/poi_data1.csv");
+        Poi poi = new Poi(40.745968,-73.994039,"siteOne","sherwood forest entrance",0);
+        assertTrue(CurrentStorage.getPoiArray().get(0).equals(poi));
+    }
+
+    /**
      * Test to test FileManager's readfile with an empty .csv file
      */
     @Test
@@ -218,8 +254,6 @@ public class FileManagerTest extends TestCase {
     }
 
 
-
-
     /**
      * Test to test the FileManager's ability to write a file with a filename that contains spaces.
      */
@@ -263,5 +297,4 @@ public class FileManagerTest extends TestCase {
         Retailer expected_retailer = new Retailer("3 New York Plaza", "Starbucks Coffee", "Casual Eating & Takeout", "F-Coffeehouse");
         assertTrue(CurrentStorage.getRetailerArray().get(0).equals(expected_retailer));
     }
-
 }
