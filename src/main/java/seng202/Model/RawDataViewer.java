@@ -37,6 +37,7 @@ public class RawDataViewer {
     public static ArrayList<Poi> searchPoi(ArrayList<Poi> poiArrayList, String condition) {
         ArrayList<Poi> foundPoi = new ArrayList<Poi>();
         for (int i = 0; i < poiArrayList.size(); i++) {
+            System.out.println(poiArrayList.get(i).getAddress());
             if (Double.toString(poiArrayList.get(i).getCost()).toLowerCase().contains(condition.toLowerCase())) {
                 foundPoi.add(poiArrayList.get(i));
             } else if (poiArrayList.get(i).getDescription().toLowerCase().contains(condition.toLowerCase())) {
@@ -44,14 +45,15 @@ public class RawDataViewer {
             } else if (poiArrayList.get(i).getName().toLowerCase().contains(condition.toLowerCase())) {
                 foundPoi.add(poiArrayList.get(i));
             } else if (String.valueOf(poiArrayList.get(i).getLatitude()).toLowerCase().contains(condition.toLowerCase())) {
-            	foundPoi.add(poiArrayList.get(i));
+                foundPoi.add(poiArrayList.get(i));
             } else if (String.valueOf(poiArrayList.get(i).getLongitude()).toLowerCase().contains(condition.toLowerCase())) {
                 foundPoi.add(poiArrayList.get(i));
-            } else if (!poiArrayList.get(i).getAddress().isEmpty()) {
+            } else if (poiArrayList.get(i).getAddress() != null) {
                 if (poiArrayList.get(i).getAddress().toLowerCase().contains(condition.toLowerCase())) {
                     foundPoi.add(poiArrayList.get(i));
                 }
             }
+
         }
         return foundPoi;
     }
@@ -77,7 +79,6 @@ public class RawDataViewer {
             	foundRetailer.add(retailerArrayList.get(i));
             } else if (String.valueOf(retailerArrayList.get(i).getLongitude()).toLowerCase().contains(condition.toLowerCase())) {
             	foundRetailer.add(retailerArrayList.get(i));
-            	System.out.println(retailerArrayList.get(i).getAddress());
             } else if (!retailerArrayList.get(i).getAddress().isEmpty()) {
                 if (retailerArrayList.get(i).getAddress().toLowerCase().contains(condition.toLowerCase())) {
                     foundRetailer.add(retailerArrayList.get(i));
