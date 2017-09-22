@@ -19,6 +19,7 @@ public class DataFetcher {
      */
     public void loadUser(User user) {
     	String username = user.getUsername();
+
     	System.out.print(runQuery("SELECT * FROM tblUser WHERE "
     			+ "Username = '" + username +"'"));
     }
@@ -79,6 +80,7 @@ public class DataFetcher {
 			addLocation(retailers.get(newRetailers.get(count)));
 			count += 1;
 		}
+
 	}
 	
 	
