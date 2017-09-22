@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
@@ -23,7 +30,7 @@
 
 <?import com.lynden.gmapsfx.GoogleMapView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.MainScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.MainScreenController">
   <!--prefHeight="489.0" prefWidth="827.0"-->
   <children>
     <SplitPane dividerPositions="0.10677618069815195" orientation="VERTICAL" prefHeight="489.0" prefWidth="827.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -136,7 +143,15 @@
                             </Menu>
                           </items>
                         </MenuButton>
-                        <Button fx:id="fileChooserButton" mnemonicParsing="false" onAction="#fileChooserPressed" prefHeight="69.0" prefWidth="215.0" style="-fx-background-color: #fafafa;" text="Upload File" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                    <MenuButton id="loadRouteMenu" fx:id="fileChooserMenu" mnemonicParsing="false" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: #fafafa;&#10;" text="Upload File" GridPane.rowIndex="3">
+                                       <items>
+                                          <MenuItem fx:id="uploadWifiMenuBtn" mnemonicParsing="false" onAction="#uploadWifiBtnPressed" text="Wifi" />
+                                          <MenuItem fx:id="uploadRetailerMenuBtn" mnemonicParsing="false" onAction="#uploadRetailerBtnPressed" text="Retailer" />
+                                          <MenuItem fx:id="uploadRouteMenuBtn" mnemonicParsing="false" onAction="#uploadRouteBtnPressed" text="Toilet" />
+                                          <MenuItem fx:id="uploadToiletMenuBtn" mnemonicParsing="false" onAction="#uploadToiletBtnPressed" text="Point of Interest" />
+                                          <MenuItem fx:id="uploadPoiMenuBtn" mnemonicParsing="false" onAction="#uploadPOIBtnPressed" text="Other" />
+                                       </items>
+                                    </MenuButton>
                         <MenuButton id="loadRouteMenu" fx:id="addLocationsMenu" mnemonicParsing="false" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: #fafafa;&#10;" text="Add Location" GridPane.columnIndex="0" GridPane.rowIndex="4">
                           <items>
                             <MenuItem fx:id="addWifiMenuButton" mnemonicParsing="false" onAction="#addWifiMenuPressed" text="Wifi" />
@@ -225,16 +240,7 @@
                         <Button id="saveButton" fx:id="saveRouteButton" mnemonicParsing="false" onAction="#fileChooserPressed" prefHeight="32.0" prefWidth="81.0" text="Save" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="21.0" />
                       </children>
                     </AnchorPane>
-                    <AnchorPane fx:id="fileChooserPane" prefHeight="430.0" prefWidth="637.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                      <children>
-                                    <Button id="uploadWifiBtn" layoutX="20.0" layoutY="73.0" mnemonicParsing="false" onAction="#uploadWifiBtnPressed" prefHeight="35.0" prefWidth="101.0" text="Upload Wifi" />
-                                    <Button id="uploadRouteBtn" layoutX="201.0" layoutY="50.0" mnemonicParsing="false" onAction="#uploadRouteBtnPressed" prefHeight="59.0" prefWidth="115.0" text="Upload Routes" />
-                                    <Button id="uploadToiletBtn" layoutX="451.0" layoutY="48.0" mnemonicParsing="false" onAction="#uploadPOIBtnPressed" prefHeight="59.0" prefWidth="142.0" text="Upload Toilets" />
-                                    <Button id="uploadRetailerBtn" layoutX="126.0" layoutY="193.0" mnemonicParsing="false" onAction="#uploadRetailerBtnPressed" prefHeight="76.0" prefWidth="108.0" text="Upload Retailers" />
-                                    <Button id="uploadPOIBtn" layoutX="425.0" layoutY="169.0" mnemonicParsing="false" prefHeight="85.0" onAction="#uploadPOIBtnPressed" prefWidth="149.0" text="Upload Point of Interest" />
-                      </children>
-                    </AnchorPane>
-                    <AnchorPane fx:id="addWifiPane" layoutX="-1.0" layoutY="2.0" prefHeight="430.0" prefWidth="637.0" visible="true" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="2.0">
+                    <AnchorPane fx:id="addWifiPane" layoutX="-1.0" layoutY="2.0" prefHeight="430.0" prefWidth="637.0" visible="false" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="2.0">
                       <children>
                         <Label layoutX="282.0" layoutY="14.0" text="Add Wifi:" />
                         <Label id="routeNameLabel" fx:id="wifiNameLabel" layoutX="11.0" layoutY="52.0" text="Wifi point name:" />

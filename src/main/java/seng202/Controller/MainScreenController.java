@@ -88,9 +88,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     private Menu savedRoutesMenu;
     
     @FXML
-    private Button fileChooserButton;
-    
-    @FXML
     private MenuButton addLocationsMenu;
 
     @FXML
@@ -139,8 +136,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     
     @FXML
     private TextField searchText;
-    
-    //Random route pane
     
     //Adding wifi pane
     
@@ -259,7 +254,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     private TextField poiZipText;
-
     
     //Adding toilet pane
     
@@ -313,7 +307,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     private TextField toiletZipText;
-
     
     //Adding retailer pane
     
@@ -367,7 +360,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     private TextField retailerZipText;
-
     
     //Adding other pane
     
@@ -413,23 +405,25 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     private Button saveOtherButton;
 
-    @FXML
-    private AnchorPane fileChooserPane;
+    // File chooser
 
     @FXML
-    private Button uploadWifiBtn;
+    private MenuButton fileChooserMenu;
 
     @FXML
-    private Button uploadRetailerBtn;
+    private MenuItem uploadWifiMenuBtn;
 
     @FXML
-    private Button uploadRouteBtn;
+    private MenuItem uploadRetailerMenuBtn;
 
     @FXML
-    private Button uploadToiletBtn;
+    private MenuItem uploadRouteMenuBtn;
 
     @FXML
-    private Button uploadPOIBtn;
+    private MenuItem uploadToiletMenuBtn;
+
+    @FXML
+    private MenuItem uploadPoiMenuBtn;
 
     Service<Void> backgroundThread;
     ArrayList<Circle> wifiCircles = new ArrayList<Circle>();
@@ -548,7 +542,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         addToiletPane.setVisible(false);
         addRetailerPane.setVisible(false);
         addOtherPane.setVisible(false);
-        fileChooserPane.setVisible(true);
     }
 
     /**
@@ -640,7 +633,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     void addLocationsPressed(ActionEvent event) {
     	addWifiPane.setVisible(true);
     	mainMapPane.setVisible(false);
-        fileChooserPane.setVisible(false);
     }
     
     /**
@@ -759,7 +751,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addToiletPane.setVisible(false);
     	addRetailerPane.setVisible(false);
     	addOtherPane.setVisible(true);
-        fileChooserPane.setVisible(false);
     }
 
     /**
@@ -774,7 +765,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addToiletPane.setVisible(false);
     	addRetailerPane.setVisible(false);
     	addOtherPane.setVisible(false);
-        fileChooserPane.setVisible(false);
     }
 
     /**
@@ -789,7 +779,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addToiletPane.setVisible(false);
     	addRetailerPane.setVisible(true);
     	addOtherPane.setVisible(false);
-        fileChooserPane.setVisible(false);
     }
 
     /**
@@ -804,7 +793,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addToiletPane.setVisible(true);
     	addRetailerPane.setVisible(false);
     	addOtherPane.setVisible(false);
-        fileChooserPane.setVisible(false);
     }
 
     /**
@@ -819,7 +807,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addToiletPane.setVisible(false);
     	addRetailerPane.setVisible(false);
     	addOtherPane.setVisible(false);
-        fileChooserPane.setVisible(false);
     }
 
     /**
@@ -1267,8 +1254,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addToiletPane.setVisible(false);
     	addRetailerPane.setVisible(false);
     	addOtherPane.setVisible(false);
-        fileChooserPane.setVisible(false);
-    	
+
+    	fileChooserMenu.setPopupSide(Side.RIGHT);
     	addLocationsMenu.setPopupSide(Side.RIGHT);
     	
        	
@@ -1287,7 +1274,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         assert logoutButton != null : "fx:id=\"logoutButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert mainMapPane != null : "fx:id=\"mainMapPane\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert mapButton != null : "fx:id=\"mapButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert fileChooserButton != null : "fx:id=\"fileChooserButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert retailerIconButton != null : "fx:id=\"retailerIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert saveWifiButton != null : "fx:id=\"saveLocationButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert saveRouteButton != null : "fx:id=\"saveRouteButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
