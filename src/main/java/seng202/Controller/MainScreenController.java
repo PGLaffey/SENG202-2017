@@ -561,8 +561,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         fileChooser.setTitle("Open File");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Data Files", "*.csv"));
         File selectedFile = fileChooser.showOpenDialog(null);
-        String path = selectedFile.getPath();
-        FileManager.wifiRetriever(path);
+        if (selectedFile != null) {
+            String path = selectedFile.getPath();
+            FileManager.wifiRetriever(path);
+        }
     }
 
     /**
@@ -575,8 +577,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         fileChooser.setTitle("Open File");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Data Files", "*.csv"));
         File selectedFile = fileChooser.showOpenDialog(null);
-        String path = selectedFile.getPath();
-        FileManager.retailerRetriever(path);
+        if (selectedFile != null) {
+            String path = selectedFile.getPath();
+            FileManager.retailerRetriever(path);
+        }
     }
 
     /**
@@ -589,8 +593,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         fileChooser.setTitle("Open File");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Data Files", "*.csv"));
         File selectedFile = fileChooser.showOpenDialog(null);
-        String path = selectedFile.getPath();
-        FileManager.routeRetriever(path);
+        if (selectedFile != null) {
+            String path = selectedFile.getPath();
+            FileManager.routeRetriever(path);
+        }
     }
 
     /**
@@ -603,8 +609,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         fileChooser.setTitle("Open File");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Data Files", "*.csv"));
         File selectedFile = fileChooser.showOpenDialog(null);
-        String path = selectedFile.getPath();
-        FileManager.toiletRetriever(path);
+        if (selectedFile != null) {
+            String path = selectedFile.getPath();
+            FileManager.toiletRetriever(path);
+        }
     }
 
     /**
@@ -617,8 +625,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         fileChooser.setTitle("Open File");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Data Files", "*.csv"));
         File selectedFile = fileChooser.showOpenDialog(null);
-        String path = selectedFile.getPath();
-        FileManager.poiReader(path);
+        if (selectedFile != null) {
+            String path = selectedFile.getPath();
+            FileManager.poiReader(path);
+        }
     }
 
 
