@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
@@ -16,12 +21,11 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.TablesScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.TablesScreenController">
 <children>
   <SplitPane dividerPositions="0.1026694045174538" orientation="VERTICAL" prefHeight="489.0" prefWidth="827.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
     <items>
-      <AnchorPane minHeight="49.0" minWidth="0.0" maxHeight="49.0">
+      <AnchorPane maxHeight="49.0" minHeight="49.0" minWidth="0.0">
         <children>
           <GridPane layoutY="-1.0" prefHeight="49.0" prefWidth="825.0">
             <children>
@@ -107,7 +111,7 @@
               </FXCollections>
             </items>
           </ChoiceBox>
-          <TableView fx:id="allLocationsTable" layoutX="13.0" layoutY="119.0" prefHeight="300.0" prefWidth="800.0" visible="false" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="119" AnchorPane.rightAnchor="13.0" AnchorPane.bottomAnchor="13.0">
+          <TableView fx:id="allLocationsTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#allLocationTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="119">
             <columns>
               <TableColumn fx:id="allLocNameCol" prefWidth="200.0" text="Name" />
               <TableColumn fx:id="allLocTypeCol" prefWidth="200.0" text="Type" />
@@ -115,7 +119,7 @@
               <TableColumn fx:id="allLocLongCol" prefWidth="200.0" text="Longitude" />
             </columns>
           </TableView>
-          <TableView id="allLocationsTable" fx:id="wifiTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#wifiTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="119" AnchorPane.rightAnchor="13.0" AnchorPane.bottomAnchor="13.0">
+          <TableView id="allLocationsTable" fx:id="wifiTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#wifiTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="119">
             <columns>
               <TableColumn fx:id="wifiNameCol" prefWidth="160.0" text="Name" />
               <TableColumn fx:id="wifiLatCol" prefWidth="130.0" text="Latitude" />
@@ -125,7 +129,7 @@
               <TableColumn fx:id="wifiProvCol" prefWidth="130.0" text="Provider" />
             </columns>
           </TableView>
-          <TableView id="allLocationsTable" fx:id="retailersTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#retailerTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="119" AnchorPane.rightAnchor="13.0" AnchorPane.bottomAnchor="13.0">
+          <TableView id="allLocationsTable" fx:id="retailersTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#retailerTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="119">
             <columns>
               <TableColumn fx:id="retNameCol" prefWidth="160.0" text="Name" />
               <TableColumn fx:id="retLatCol" prefWidth="160.0" text="Latitude" />
@@ -134,7 +138,7 @@
               <TableColumn fx:id="retDescCol" prefWidth="160.0" text="Description" />
             </columns>
           </TableView>
-          <TableView id="allLocationsTable" fx:id="poiTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#poiTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="119" AnchorPane.rightAnchor="13.0" AnchorPane.bottomAnchor="13.0">
+          <TableView id="allLocationsTable" fx:id="poiTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#poiTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="119">
             <columns>
               <TableColumn fx:id="poiNameCol" prefWidth="160.0" text="Name" />
               <TableColumn fx:id="poiLatCol" prefWidth="160.0" text="Latitude" />
@@ -143,7 +147,7 @@
               <TableColumn fx:id="poiDescCol" prefWidth="160.0" text="Description" />
             </columns>
           </TableView>
-          <TableView id="allLocationsTable" fx:id="toiletsTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#toiletTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="119" AnchorPane.rightAnchor="13.0" AnchorPane.bottomAnchor="13.0">
+          <TableView id="allLocationsTable" fx:id="toiletsTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#toiletTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="119">
             <columns>
               <TableColumn fx:id="toiletNameCol" prefWidth="160.0" text="Name" />
               <TableColumn fx:id="toiletLatCol" prefWidth="160.0" text="Latitude" />
@@ -152,7 +156,7 @@
               <TableColumn fx:id="toiletDisCol" prefWidth="160.0" text="Disabled" />
             </columns>
           </TableView>
-          <TableView id="allLocationsTable" fx:id="routesTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#routeTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="119" AnchorPane.rightAnchor="13.0" AnchorPane.bottomAnchor="13.0">
+          <TableView id="allLocationsTable" fx:id="routesTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#routeTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="119">
             <columns>
               <TableColumn fx:id="routeNameCol" prefWidth="200.0" text="Name" />
               <TableColumn fx:id="routeStartCol" prefWidth="200.0" text="Start" />
@@ -161,7 +165,7 @@
             </columns>
           </TableView>
           <Button fx:id="searchButton" layoutX="727.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchPressed" text="Search" />
-          <Label layoutX="278.0" layoutY="14.0" text="with the keyword " />
+          <Label layoutX="307.0" layoutY="19.0" text="with the keyword " />
         </children>
       </AnchorPane>
     </items>

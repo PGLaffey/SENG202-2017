@@ -23,7 +23,6 @@ public class Location {
      * @param longitude The longitude of the new location.
      * @param name The name of the new location.
      * @param locationType The type of location the new location is (i.e. point of interest, wifi spot, retailer or toilet).
-     * @param zip
      */
     public Location(double latitude, double longitude, String name, int locationType) {
         this.latitude = latitude;
