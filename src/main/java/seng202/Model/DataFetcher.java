@@ -1,5 +1,6 @@
 package seng202.Model;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -27,7 +28,7 @@ public class DataFetcher {
 			preparedStatement.setString(1, username);
 			runQuery(preparedStatement);
 		} catch (SQLException sqlException) {
-    		sqlException.printStackTrace();
+    		System.out.println(sqlException.getMessage());
 		}
     }
 
@@ -41,7 +42,7 @@ public class DataFetcher {
 			preparedStatement.setString(2, username);
 			runUpdate(preparedStatement);
 		} catch (SQLException sqlException) {
-    		sqlException.printStackTrace();
+    		System.out.println(sqlException.getMessage());
 		}
 
     }
@@ -55,7 +56,7 @@ public class DataFetcher {
     		preparedStatement.setString(1, username);
     		return runQuery(preparedStatement).get(0).get(0);
 		} catch (SQLException sqlException) {
-    		sqlException.printStackTrace();
+    		System.out.println(sqlException.getMessage());
 		}
 		return null;
 	}
@@ -78,7 +79,7 @@ public class DataFetcher {
 				return true;
 			}
 		} catch (SQLException sqlException) {
-			sqlException.printStackTrace();
+			System.out.println(sqlException.getMessage());
 		}
 		return false;
 	}
@@ -97,7 +98,7 @@ public class DataFetcher {
 			preparedStatement.setString(1, username);
 			return runQuery(preparedStatement).get(0);
 		} catch (SQLException sqlException) {
-			sqlException.printStackTrace();
+			System.out.println(sqlException.getMessage());
 		}
 		return null;
 	}
@@ -139,7 +140,7 @@ public class DataFetcher {
 			runUpdate(preparedStatement);
 
 		} catch (SQLException sqlException) {
-			sqlException.printStackTrace();
+			System.out.println(sqlException.getMessage());
 		}
 
 	}
@@ -315,7 +316,7 @@ public class DataFetcher {
 		case 0:
 			//Defines the type specific data
 			typeID = output.getInt(8);
-			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblToilets WHERE ToiletID = '" + typeID + "'");
+			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblToilets WHERE ToiletID = " + typeID + "");
 			typeOutput.next();
 			isDisabled = typeOutput.getBoolean(2);
 			unisex = typeOutput.getBoolean(3);
@@ -338,7 +339,7 @@ public class DataFetcher {
 		//Same as the case for toilet but with data for the other types
 		case 1:
 			typeID = output.getInt(9);
-			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblPOI WHERE PoiID = '" + typeID + "'");
+			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblPOI WHERE PoiID = " + typeID + "");
 			typeOutput.next();
 			cost = typeOutput.getDouble(2);
 			description = typeOutput.getString(3);
@@ -359,7 +360,7 @@ public class DataFetcher {
 			return poi;
 		case 2:
 			typeID = output.getInt(10);
-			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblRetailers WHERE RetailerID = '" + typeID + "'");
+			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblRetailers WHERE RetailerID = " + typeID + "");
 			typeOutput.next();
 			product = typeOutput.getString(2);
 			description = typeOutput.getString(3);
@@ -380,26 +381,11 @@ public class DataFetcher {
 			return retailer;
 		case 3:
 			typeID = output.getInt(11);
-			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblWifi WHERE WifiID = '" + typeID + "'");
+			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblWifi WHERE WifiID = " + typeID + "");
 			typeOutput.next();
-			ssid = typeOutput.getString(2);
-			provider = typeOutput.getString(3);
-			switch (typeOutput.getInt(4)) {
-			case 0:
-				wifi_type = "Free";
-				break;
-			case 1:
-				wifi_type = "Limited Free";
-				break;
-			case 2:
-				wifi_type = "Provider Site";
-				break;
-			case 4:
-				wifi_type = "Paid";
-				break;
-			default:
-				wifi_type = "Unknown";
-			}
+			ssid = typeOutput.getString(5);
+			provider = typeOutput.getString(6);
+			wifi_type = typeOutput.getString(4);
 			Wifi wifi = new Wifi(latitude, longitude, name, wifi_type,  provider, ssid);
 			if (borough != null) {
 				wifi.setBorough(borough);
@@ -443,7 +429,7 @@ public class DataFetcher {
     		//Initialize the query to fetch all locations from the database and its result set
     		Statement qryLoadLocations = connect.createStatement();
 			ResultSet output = qryLoadLocations.executeQuery("SELECT * FROM tblLocations");
-
+			System.out.println(output.toString());
 	    	//Loop while there a another location to be loaded from the database
 			while (output.next()) {
 				loadLocation(output);
@@ -540,7 +526,7 @@ public class DataFetcher {
 				return true;
 			}
 		} catch (SQLException sqlException){
-    		sqlException.printStackTrace();
+    		System.out.println(sqlException.getMessage());
 		}
 		return false;
     }
@@ -554,7 +540,6 @@ public class DataFetcher {
     	String firstName = user.getFirstName();
     	String lastName = user.getLastName();
     	String password = user.getPassword();
-    	System.out.println(password);
     	String dob = user.getDob();
     	String username = user.getUsername();
     	int routesCycled = user.getRoutesCycled();
@@ -578,7 +563,7 @@ public class DataFetcher {
 
 				runUpdate(preparedStatement);
 			} catch (SQLException sqlException) {
-    			sqlException.printStackTrace();
+    			System.out.println(sqlException.getMessage());
 			}
 
     	}
@@ -613,7 +598,7 @@ public class DataFetcher {
 
     	String stmt = "INSERT INTO tblRoutes "
 				+ "(StartID, EndID, Name) VALUES "
-				+ "('" + startID + "', '" + endID + "', '" + name + "')";
+				+ "(?, ?, ?)";
     	try {
 			preparedStatement = connect.prepareStatement(stmt);
 			preparedStatement.setInt(1, startID);
@@ -622,7 +607,7 @@ public class DataFetcher {
 
 			runUpdate(preparedStatement);
 		} catch (SQLException sqlException) {
-    		sqlException.printStackTrace();
+    		System.out.println(sqlException.getMessage());
 		}
 
     }
@@ -647,7 +632,7 @@ public class DataFetcher {
     		preparedStatement.setInt(3, type);
     		locationID = runQuery(preparedStatement).get(0).get(0);
     	} catch (SQLException sqlException) {
-    		sqlException.printStackTrace();
+    		System.out.println(sqlException.getMessage());
 		}
     	catch (IndexOutOfBoundsException e) {
     		locationID = "0";
@@ -690,16 +675,20 @@ public class DataFetcher {
     private void addWifi(Wifi wifi) {
     	PreparedStatement preparedStatement;
     	String typeID;
-    	String ssid = null; //Are we going to include SSID? Cause it is in the data we get
+    	String ssid = wifi.getSsid();
     	String provider = wifi.getProvider();
+    	String type = wifi.getType();
 
     	try {
 			String stmt = "INSERT INTO tblWifi "
-					+ "(SSID, Provider) VALUES "
-					+ "(?, '" + provider + "')";
+					+ "(latitude, longitude, SSID, Provider, Type) VALUES "
+					+ "(?, ?, ?, ?, ?)";
 			preparedStatement = connect.prepareStatement(stmt);
-			preparedStatement.setString(1, ssid);
-			preparedStatement.setString(2, provider);
+			preparedStatement.setDouble(1, wifi.getLatitude());
+			preparedStatement.setDouble(2, wifi.getLongitude());
+			preparedStatement.setString(3, ssid);
+			preparedStatement.setString(4, provider);
+			preparedStatement.setString(5, type);
 
 			runUpdate(preparedStatement);
 
@@ -709,7 +698,7 @@ public class DataFetcher {
 			typeID = runQuery(preparedStatement).get(0).get(0);
 			insertLocation(wifi, typeID);
 		} catch (SQLException sqlException){
-    		sqlException.printStackTrace();
+    		System.out.println(sqlException.getMessage());
 		}
     }
     
@@ -738,7 +727,7 @@ public class DataFetcher {
 			typeID = runQuery(preparedStatement).get(0).get(0);
 			insertLocation(retailer, typeID);
 		} catch (SQLException sqlException) {
-    		sqlException.printStackTrace();
+    		System.out.println(sqlException.getMessage());
 		}
     }
     
@@ -767,7 +756,7 @@ public class DataFetcher {
 			typeID = runQuery(preparedStatement).get(0).get(0);
 			insertLocation(poi, typeID);
 		} catch (SQLException sqlException) {
-			sqlException.printStackTrace();
+			System.out.println(sqlException.getMessage());
 		}
     }
     
@@ -802,7 +791,7 @@ public class DataFetcher {
 			typeID = runQuery(preparedStatement).get(0).get(0);
 			insertLocation(toilet, typeID);
 		} catch (SQLException sqlException) {
-			sqlException.printStackTrace();
+			System.out.println(sqlException.getMessage());
 		}
     }
     
@@ -818,7 +807,13 @@ public class DataFetcher {
     	if (location.getLocal()) {
     		local = 0;
     	}
-    	String owner = location.getOwner().getUsername();
+    	String zip = ((Integer) location.getZip()).toString();
+		String borough = location.getBorough();
+    	String owner = null;
+    	if (location.getOwner() != null) {
+			owner = location.getOwner().getUsername();
+		}
+
     	int type = location.getLocationType();
     	double[] coords = location.getCoords();
     	double longitude = coords[1];
@@ -853,14 +848,14 @@ public class DataFetcher {
 
 				runUpdate(preparedStatement);
 			} catch (SQLException sqlException) {
-    			sqlException.printStackTrace();
+    			System.out.println(sqlException.getMessage());
 			}
-
-
     	}
+
 		String stmt = "INSERT INTO tblLocations "
-				+ "(Latitude, Longitude, Name, User, Public, Type, " + typeName + "ID) VALUES "
-				+ "(?, ?, ?, ?, ?, ?, ?)";
+				+ "(Latitude, Longitude, Name, User, Public, Type, " + typeName + "ID, Zip, Borough) VALUES "
+				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
 		try {
 			preparedStatement = connect.prepareStatement(stmt);
 			preparedStatement.setDouble(1, latitude);
@@ -870,10 +865,12 @@ public class DataFetcher {
 			preparedStatement.setInt(5, local);
 			preparedStatement.setInt(6, type);
 			preparedStatement.setString(7, typeID);
+			preparedStatement.setString(8, zip);
+			preparedStatement.setString(9, borough);
 
 			runUpdate(preparedStatement);
 		} catch (SQLException sqlException) {
-			sqlException.printStackTrace();
+			System.out.println(sqlException.getMessage());
 		}
     }
     
@@ -936,10 +933,16 @@ public class DataFetcher {
     	DataFetcher test = new DataFetcher();
     	//test.connectDbTest();				//Tests the connection to the database
     	test.connectDb();
-    	Location testLoc1 = new Location(47.2134400, 172.1232100, "Telecom Hotspot", 3);
+
+		FileManager.wifiRetriever(new File(seng202.Model.DataFetcher.class.getResource("/data_files/NYC_Free_Public_WiFi_03292017.csv").getFile()).toString());
+		for (Wifi newWifi : CurrentStorage.getWifiArray()) {
+			test.addWifi(newWifi);
+		}
     	//test.loadLocation(testLoc1);		//Tests loading a valid location
-    	Location testLoc2 = new Location(159.1547895, 0.3256984, "NULL", 4);
-    	Route testRoute = new Route("fakeBike", testLoc1, testLoc2, "Test", "M");
+    	//Retailer testLoc2 = new Retailer("2 Brockhall Lane", "Testing" , "Testing More stuff", "tests");
+    	//CurrentStorage.addNewRetailer(testLoc2);
+    	//Route testRoute = new Route("fakeBike", testLoc1, testLoc2, "Test", "M");
+    	//CurrentStorage.addNewRoute(testRoute);
     	//test.loadRoute(testRoute);		//Tests loading a valid route
     	Location invalidLoc = new Location(25.1258469, 56.1658468, "NULL", 4);
     	//test.loadLocation(invalidLoc);	//Tests loading a invalid location

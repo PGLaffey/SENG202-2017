@@ -68,7 +68,6 @@ public class Map {
             JsonObject thingObj = thing.getAsJsonObject();
 
             // Slowly works down the JSON to find the correct field.
-
             JsonObject resultsObj = thingObj.get("results").getAsJsonArray().get(0).getAsJsonObject();
             JsonObject geometry = resultsObj.getAsJsonObject("geometry");
             JsonObject location = geometry.getAsJsonObject("location");

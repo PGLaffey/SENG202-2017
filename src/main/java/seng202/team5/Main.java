@@ -3,6 +3,7 @@
 package seng202.team5;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,6 +27,7 @@ public class Main extends Application {
 			exporter.connectDb();
 			exporter.storeCurrentStorage();
 			exporter.closeConnection();
+			System.exit(0);
 		} catch (Exception e) {
 
 		}

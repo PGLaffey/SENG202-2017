@@ -144,7 +144,6 @@ public class FileManager {
             routes.remove(0);
 
             for (String route : routes) {
-                System.out.println("I am still importing routes.");
                 String[] information = route.split(",\"", -1);
 
                 //Obtain the relevant information from the csv.
