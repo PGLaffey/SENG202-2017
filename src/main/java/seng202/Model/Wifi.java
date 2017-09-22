@@ -17,7 +17,6 @@ public class Wifi extends Location {
      * @param latitude  The latitude of the wifi hotspot.
      * @param longitude The longitude of the wifi hotspot.
      * @param name      The name of the wifi hotspot location.
-     * @param borough   The borough in which the wifi is located. // TODO Add borough to the locations class (probs needs to be done in the mornings or very, very late at night)
      * @param type      Distinguishes between free and limited_free wifi
      * @param provider  The name of the provider of the wifi hotspot.
      */
@@ -33,6 +32,10 @@ public class Wifi extends Location {
     	this.provider = provider;
     	this.ssid = ssid;
     	this.type = type;
+    }
+
+    public String getSsid() {
+        return this.ssid;
     }
 
     public String getProvider() {

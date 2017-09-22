@@ -135,6 +135,8 @@ public class RawDataViewer {
             	foundWifi.add(wifiArrayList.get(i));
             } else if (String.valueOf(wifiArrayList.get(i).getLongitude()).toLowerCase().contains(condition.toLowerCase())) {
             	foundWifi.add(wifiArrayList.get(i));
+            } else if (String.valueOf(wifiArrayList.get(i).getSsid()).toLowerCase().contains(condition.toLowerCase())) {
+                foundWifi.add(wifiArrayList.get(i));
             }
         }
         return foundWifi;
