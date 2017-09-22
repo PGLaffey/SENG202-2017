@@ -360,10 +360,10 @@ public class TablesScreenController {
 		stage.show();
     }
     
-/*    @FXML
+    @FXML
     void allLocationTableClicked(MouseEvent event) throws IOException {
     	Location row = allLocationsTable.getSelectionModel().getSelectedItem();
-    	CurrentStorage.setLocation(row);;
+    	CurrentStorage.setLocation(row);
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/LocationInfoScreen.fxml"));
 
@@ -371,7 +371,7 @@ public class TablesScreenController {
 		stage.setTitle("About location point");
 		stage.setScene(scene);
 		stage.show();
-    }*/
+    }
     
     @FXML
     void routeTableClicked(MouseEvent event) throws IOException {
