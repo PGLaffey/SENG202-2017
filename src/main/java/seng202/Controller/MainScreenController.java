@@ -540,14 +540,18 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     void bikeIconPressed(ActionEvent event) {
-        for (Route route: CurrentStorage.getRouteArray()) {
-            if (route.getStartMarker() == null || route.getEndMarker() == null) {
-                placeMarkerOnMap(route);
-            } else {
-                route.getStartMarker().setVisible(!Map.getRouteVisible());
-            }
-        }
+        /*
         Map.setRouteStartVisible(!Map.getRouteVisible());
+        for (Route route : CurrentStorage.getRouteArray()) {
+            if (!(route.getStartMarker() == null) || !(route.getEndMarker() == null)) {
+                route.getStartMarker().setVisible(Map.getRouteVisible());
+                map.addMarker(route.getStartMarker());
+
+            } else {
+                Map.findRouteMarker(route, map);
+                route.getStartMarker().setVisible(Map.getRouteVisible());
+            }
+        }*/
     }
 
     @FXML
@@ -561,24 +565,12 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                 retailer.getMarker().setVisible(!Map.getRetailerVisible());
                 map.addMarker(retailer.getMarker());
             } else {
-                locationMarkers.add(Map.findRetailers(retailer));
+                Marker newMarker = Map.findRetailers(retailer);
+                locationMarkers.add(newMarker);
+                newMarker.setVisible(!Map.getRetailerVisible());
             }
         }
         Map.setRetailerVisible(!Map.getRetailerVisible());
-        /*
-        backgroundThread = new Service<Void>() {
-            @Override
-            protected Task<Void> createTask() {
-                return new Task<Void>() {
-                    @Override
-                    protected Void call() throws Exception {
-
-                        return null;
-                    }
-                };
-            }
-        };
-        backgroundThread.restart();*/
     }
 
     /** 

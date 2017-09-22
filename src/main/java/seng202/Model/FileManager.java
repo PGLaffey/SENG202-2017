@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static jdk.nashorn.internal.objects.NativeString.substring;
-
 /**
  * File Manager class reads and writes files to and from .csv files, and stores the information in the apps current storage.
  * The File Manager class also serializes and deserializes user objects.
@@ -146,6 +144,7 @@ public class FileManager {
             routes.remove(0);
 
             for (String route : routes) {
+                System.out.println("I am still importing routes.");
                 String[] information = route.split(",\"", -1);
 
                 //Obtain the relevant information from the csv.
@@ -172,6 +171,7 @@ public class FileManager {
                 //Log the new object into the storage class.
                 CurrentStorage.addNewRoute(newRoute);
             }
+            System.out.println("Finished!");
         }
     }
 

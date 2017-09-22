@@ -68,13 +68,17 @@ public class Map {
             JsonObject thingObj = thing.getAsJsonObject();
 
             // Slowly works down the JSON to find the correct field.
-            JsonObject resultsObj = thingObj.get("results").getAsJsonArray().get(0).getAsJsonObject();
+
+            JsonElement resultsArr = thingObj.get("results").getAsJsonArray();
+            System.out.println(resultsArr.toString());
+            JsonObject resultsObj = resultsArr.getAsJsonObject();
             JsonObject geometry = resultsObj.getAsJsonObject("geometry");
             JsonObject location = geometry.getAsJsonObject("location");
             latitude = location.get("lat").getAsDouble();
             longitude = location.get("lng").getAsDouble();
 
         } catch (Exception e){
+
             e.printStackTrace();
         }
         double[] latLong = {latitude, longitude};
