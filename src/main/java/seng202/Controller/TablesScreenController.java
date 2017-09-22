@@ -459,6 +459,7 @@ public class TablesScreenController {
     	
     	ObservableList<String> filterOptions = FXCollections.observableArrayList("All locations","Routes", "Retailers", "WiFi", "Toilets", "Points of interest");
     	tableOptions.setItems(filterOptions);
+    	tableOptions.getSelectionModel().selectFirst();
     	
     	// Set up the all locations table
     	allLocNameCol.setCellValueFactory(new PropertyValueFactory<Location,String>("name"));
