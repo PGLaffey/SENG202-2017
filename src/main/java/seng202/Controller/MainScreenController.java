@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -412,6 +413,24 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     private Button saveOtherButton;
 
+    @FXML
+    private AnchorPane fileChooserPane;
+
+    @FXML
+    private Button uploadWifiBtn;
+
+    @FXML
+    private Button uploadRetailerBtn;
+
+    @FXML
+    private Button uploadRouteBtn;
+
+    @FXML
+    private Button uploadToiletBtn;
+
+    @FXML
+    private Button uploadPOIBtn;
+
     Service<Void> backgroundThread;
     ArrayList<Circle> wifiCircles = new ArrayList<Circle>();
     ArrayList<Marker> locationMarkers = new ArrayList<Marker>();
@@ -508,18 +527,77 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     void fileChooserPressed(ActionEvent event) {
+       /* FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open File");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Data Files", "*.csv"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        String path = selectedFile.getPath();
+        FileManager.readFile(path);*/
+        addWifiPane.setVisible(false);
+        mainMapPane.setVisible(false);
+        addPoiPane.setVisible(false);
+        addToiletPane.setVisible(false);
+        addRetailerPane.setVisible(false);
+        addOtherPane.setVisible(false);
+        fileChooserPane.setVisible(true);
+    }
+
+    @FXML
+    void uploadWifiBtnPressed(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open File");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Data Files", "*.csv"));
         File selectedFile = fileChooser.showOpenDialog(null);
         String path = selectedFile.getPath();
-        FileManager.readFile(path);
+        FileManager.wifiRetriever(path);
     }
+
+    @FXML
+    void uploadRetailerBtnPressed(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open File");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Data Files", "*.csv"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        String path = selectedFile.getPath();
+        FileManager.retailerRetriever(path);
+    }
+
+    @FXML
+    void uploadRouteBtnPressed(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open File");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Data Files", "*.csv"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        String path = selectedFile.getPath();
+        FileManager.routeRetriever(path);
+    }
+
+    @FXML
+    void uploadToiletBtnPressed(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open File");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Data Files", "*.csv"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        String path = selectedFile.getPath();
+        FileManager.toiletRetriever(path);
+    }
+
+    @FXML
+    void uploadPOIBtnPressed(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open File");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Data Files", "*.csv"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        String path = selectedFile.getPath();
+        FileManager.poiReader(path);
+    }
+
 
     @FXML
     void addLocationsPressed(ActionEvent event) {
     	addWifiPane.setVisible(true);
     	mainMapPane.setVisible(false);
+        fileChooserPane.setVisible(false);
     }
     
     /**
@@ -634,6 +712,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addToiletPane.setVisible(false);
     	addRetailerPane.setVisible(false);
     	addOtherPane.setVisible(true);
+        fileChooserPane.setVisible(false);
     }
 
     @FXML
@@ -644,6 +723,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addToiletPane.setVisible(false);
     	addRetailerPane.setVisible(false);
     	addOtherPane.setVisible(false);
+        fileChooserPane.setVisible(false);
     }
 
     @FXML
@@ -654,6 +734,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addToiletPane.setVisible(false);
     	addRetailerPane.setVisible(true);
     	addOtherPane.setVisible(false);
+        fileChooserPane.setVisible(false);
     }
 
     @FXML
@@ -664,6 +745,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addToiletPane.setVisible(true);
     	addRetailerPane.setVisible(false);
     	addOtherPane.setVisible(false);
+        fileChooserPane.setVisible(false);
     }
 
     @FXML
@@ -674,6 +756,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addToiletPane.setVisible(false);
     	addRetailerPane.setVisible(false);
     	addOtherPane.setVisible(false);
+        fileChooserPane.setVisible(false);
     }
 
     Boolean isDouble(String s) {
@@ -1091,6 +1174,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addToiletPane.setVisible(false);
     	addRetailerPane.setVisible(false);
     	addOtherPane.setVisible(false);
+        fileChooserPane.setVisible(false);
     	
     	addLocationsMenu.setPopupSide(Side.RIGHT);
     	

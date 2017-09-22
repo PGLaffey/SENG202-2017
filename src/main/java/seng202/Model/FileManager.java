@@ -122,7 +122,7 @@ public class FileManager {
 
 
     /**
-     * Retrieves a list of routes from the readFile function and then converts them indevidually to Route objects stored
+     * Retrieves a list of routes from the readFile function and then converts them individually to Route objects stored
      * in the current storage class for that instance of the app.
      */
     public static void routeRetriever(String filename) {
