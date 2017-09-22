@@ -513,18 +513,27 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 		primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
 		primaryStage.show();
     }
-    
+
+    /**
+     * Places the route markers on the map
+     * @param event
+     */
     @FXML
     void showRoutePressed(ActionEvent event) {
         for (Route route : CurrentStorage.getRouteArray()) {
             placeMarkerOnMap(route);
         }
     }
-    
+
+
     @FXML
     void loadRoutePressed(ActionEvent event) {
     }
 
+    /**
+     * Displays the file chooser pane
+     * @param event
+     */
     @FXML
     void fileChooserPressed(ActionEvent event) {
        /* FileChooser fileChooser = new FileChooser();
@@ -542,6 +551,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         fileChooserPane.setVisible(true);
     }
 
+    /**
+     * Open the file chooser to load a wifi file
+     * @param event
+     */
     @FXML
     void uploadWifiBtnPressed(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -552,6 +565,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         FileManager.wifiRetriever(path);
     }
 
+    /**
+     * Open the file chooser to load a retailer file
+     * @param event
+     */
     @FXML
     void uploadRetailerBtnPressed(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -562,6 +579,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         FileManager.retailerRetriever(path);
     }
 
+    /**
+     * Open the file chooser to load a route file
+     * @param event
+     */
     @FXML
     void uploadRouteBtnPressed(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -572,6 +593,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         FileManager.routeRetriever(path);
     }
 
+    /**
+     * Open the file chooser to load a toilet file
+     * @param event
+     */
     @FXML
     void uploadToiletBtnPressed(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -582,6 +607,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         FileManager.toiletRetriever(path);
     }
 
+    /**
+     * Open the file chooser to load a poi file
+     * @param event
+     */
     @FXML
     void uploadPOIBtnPressed(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -593,6 +622,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     }
 
 
+    /**
+     * Displays the add wifi pane
+     * @param event
+     */
     @FXML
     void addLocationsPressed(ActionEvent event) {
     	addWifiPane.setVisible(true);
@@ -703,7 +736,11 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         map.clearMarkers();
         Map.findLocation(address.get(), map, geocodingService);
     }
-    
+
+    /**
+     * Displays the pane for user to add an other location
+     * @param event
+     */
     @FXML
     void addOtherMenuPressed(ActionEvent event) {
     	addWifiPane.setVisible(false);
@@ -715,6 +752,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         fileChooserPane.setVisible(false);
     }
 
+    /**
+     * Displays the pane for user to add a point of interest location
+     * @param event
+     */
     @FXML
     void addPoiMenuPressed(ActionEvent event) {
     	addWifiPane.setVisible(false);
@@ -726,6 +767,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         fileChooserPane.setVisible(false);
     }
 
+    /**
+     * Displays the pane for user to add a retailer location
+     * @param event
+     */
     @FXML
     void addRetailerMenuPressed(ActionEvent event) {
     	addWifiPane.setVisible(false);
@@ -737,6 +782,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         fileChooserPane.setVisible(false);
     }
 
+    /**
+     * Displays the pane for user to add a toilet location
+     * @param event
+     */
     @FXML
     void addToiletMenuPressed(ActionEvent event) {
     	addWifiPane.setVisible(false);
@@ -748,6 +797,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         fileChooserPane.setVisible(false);
     }
 
+    /**
+     * Displays the pane for user to add a wifi location
+     * @param event
+     */
     @FXML
     void addWifiMenuPressed(ActionEvent event) {
     	addWifiPane.setVisible(true);
@@ -759,6 +812,11 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         fileChooserPane.setVisible(false);
     }
 
+    /**
+     * Checks the input is able to be parsed to a Double
+     * @param s String to be checked
+     * @return true if Double otherwise false
+     */
     Boolean isDouble(String s) {
         try {
             Double.parseDouble(s);
@@ -768,6 +826,11 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         }
     }
 
+    /**
+     * Checks the input is able to be parsed to an Integer
+     * @param s String to be checked
+     * @return true if Integer otherwise false
+     */
     Boolean isInt(String s) {
         try {
             Integer.parseInt(s);
@@ -776,7 +839,11 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             return false;
         }
     }
-    
+
+    /**
+     * Save an other location if all the required fields have the correct text - otherwise labels turn red
+     * @param event
+     */
     @FXML
     void saveOtherButtonPressed(ActionEvent event) {
 
@@ -840,6 +907,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	}
     }
 
+    /**
+     * Save a point of interest location if all the required fields have the correct text - otherwise labels turn red
+     * @param event
+     */
     @FXML
     void savePoiButtonPressed(ActionEvent event) {
 
@@ -922,6 +993,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     }
 
 
+    /**
+     *Save a retailer location if all the required fields have the correct text - otherwise labels turn red
+     * @param event
+     */
     @FXML
     void saveRetailerButtonPressed(ActionEvent event) {
         retailerNameLabel.setTextFill(Color.BLACK);
@@ -1000,6 +1075,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	
     }
 
+    /**
+     * Save a toilet location if all the required fields have the correct text - otherwise labels turn red
+     * @param event
+     */
     @FXML
     void saveToiletButtonPressed(ActionEvent event) {
         toiletNameLabel.setTextFill(Color.BLACK);
@@ -1074,6 +1153,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	}
     }
 
+    /**
+     * Save a wifi location if all the required fields have the correct text - otherwise labels turn red
+     * @param event
+     */
     @FXML
     void saveWifiButtonPressed(ActionEvent event) {
         wifiNameLabel.setTextFill(Color.BLACK);

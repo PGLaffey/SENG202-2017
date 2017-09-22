@@ -30,6 +30,11 @@ public class DeleteAccountScreenController {
     private Button yesButton;
 
 
+    /**
+     * Method when the no button is pressed, hides the pop up without changing the user/account
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void noButtonPressed(ActionEvent event) throws IOException {
 /*    	Stage stage = (Stage) noButton.getScene().getWindow(); 
@@ -48,6 +53,14 @@ public class DeleteAccountScreenController {
 		primaryStage.setScene(new Scene(root));*/
 }
 
+    /**
+     * Method when the yes button is pressed. Deletes the user from the database and returns to the login screen.
+     * @param event
+     * @throws IllegalAccessException
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws IOException
+     */
     @FXML
     void yesButtonPressed(ActionEvent event) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException {
         DataFetcher data = new DataFetcher();

@@ -26,18 +26,30 @@ public class SaveRouteScreenController {
     private Button savePubliclyButton;
 
 
+    /**
+     * Method for when the cancel button is pressed, hides the pop up.
+     * @param event
+     */
     @FXML
     void cancelButtonPressed(ActionEvent event) {
     	Stage stage = (Stage) saveLocallyButton.getScene().getWindow(); 
     	stage.hide();
     }
 
+    /**
+     * Method when the save locally button is pressed, hides the pop up.
+     * @param event
+     */
     @FXML
     void saveLocallyPressed(ActionEvent event) {
     	Stage stage = (Stage) saveLocallyButton.getScene().getWindow(); 
     	stage.hide();
     }
 
+    /**
+     * Method when the save publically button is pressed, hides the pop up.
+     * @param event
+     */
     @FXML
     void savePubliclyPressed(ActionEvent event) {
     	Stage stage = (Stage) savePubliclyButton.getScene().getWindow(); 

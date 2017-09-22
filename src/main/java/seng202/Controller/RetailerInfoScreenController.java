@@ -40,6 +40,10 @@ public class RetailerInfoScreenController {
     private Retailer retailer;
 
 
+    /**
+     * Method when the ok button is pressed, hides the pop up.
+     * @param event
+     */
     @FXML
     void okPressed(ActionEvent event) {
     	Stage stage = (Stage) okButton.getScene().getWindow(); 

@@ -318,8 +318,13 @@ public class TablesScreenController {
     @FXML
     void tablePressed(ActionEvent event) {
     }
-    
-    @FXML
+
+	/**
+	 * Method when a row in the wifi table is pressed, displays a pop up with further information
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
     void wifiTableClicked(MouseEvent event) throws IOException {
     	Wifi row = wifiTable.getSelectionModel().getSelectedItem();
     	CurrentStorage.setWifi(row);
@@ -332,8 +337,13 @@ public class TablesScreenController {
 		stage.show();
 
     }
-    
-    @FXML
+
+	/**
+	 * Method when a row in the retailer table is pressed, displays a pop up with further information
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
     void retailerTableClicked(MouseEvent event) throws IOException {
     	Retailer row = retailersTable.getSelectionModel().getSelectedItem();
     	CurrentStorage.setRetailer(row);
@@ -346,8 +356,13 @@ public class TablesScreenController {
 		stage.show();
     	
     }
-    
-    @FXML
+
+	/**
+	 * Method when a row in the toilet table is pressed, displays a pop up with further information
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
     void toiletTableClicked(MouseEvent event) throws IOException {
     	Toilet row = toiletsTable.getSelectionModel().getSelectedItem();
     	CurrentStorage.setToilet(row);
@@ -359,8 +374,13 @@ public class TablesScreenController {
 		stage.setScene(scene);
 		stage.show();
     }
-    
-    @FXML
+
+	/**
+	 * Method when a row in the all locations table is pressed, displays a pop up with further information
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
     void allLocationTableClicked(MouseEvent event) throws IOException {
     	Location row = allLocationsTable.getSelectionModel().getSelectedItem();
     	CurrentStorage.setLocation(row);
@@ -372,8 +392,13 @@ public class TablesScreenController {
 		stage.setScene(scene);
 		stage.show();
     }
-    
-    @FXML
+
+	/**
+	 * Method when a row in the route table is pressed, displays a pop up with further information
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
     void routeTableClicked(MouseEvent event) throws IOException {
     	Route row = routesTable.getSelectionModel().getSelectedItem();
     	CurrentStorage.setRoute(row);
@@ -385,8 +410,13 @@ public class TablesScreenController {
 		stage.setScene(scene);
 		stage.show();
     }
-    
-    @FXML
+
+	/**
+	 * Method when a row in the point of interest table is pressed, displays a pop up with further information
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
     void poiTableClicked(MouseEvent event) throws IOException {
     	Poi row = poiTable.getSelectionModel().getSelectedItem();
     	CurrentStorage.setPoi(row);

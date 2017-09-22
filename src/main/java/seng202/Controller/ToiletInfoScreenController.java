@@ -41,6 +41,10 @@ public class ToiletInfoScreenController {
     private Toilet toilet;
 
 
+    /**
+     * Method when the ok button is pressed, hides the pop up.
+     * @param event
+     */
     @FXML
     void okPressed(ActionEvent event) {
     	Stage stage = (Stage) okButton.getScene().getWindow(); 

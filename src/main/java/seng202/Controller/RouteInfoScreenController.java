@@ -47,12 +47,20 @@ public class RouteInfoScreenController {
     private Route route;
 
 
+    /**
+     * Method when the ok button is pressed, hides the pop up.
+     * @param event
+     */
     @FXML
     void okPressed(ActionEvent event) {
     	Stage stage = (Stage) okButton.getScene().getWindow(); 
     	stage.hide();
     }
-    
+
+    /**
+     * Method when the completed route button is pressed. Adds the distance of the route to the users statistics and change the button text
+     * @param event
+     */
     @FXML
     void completedRouteButtonPressed(ActionEvent event) {
     	CurrentStorage.getUser().addDistance(route.getDistance());
