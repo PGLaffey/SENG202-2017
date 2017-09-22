@@ -346,6 +346,7 @@ public class FileManager {
             int unisexIndex = header.indexOf("unisex");
 
             toilets.remove(0);
+
             for (String toilet: toilets) {
                 String[] information = toilet.split(",");
 
@@ -359,7 +360,7 @@ public class FileManager {
                 //Creates a new toilet object.
                 Toilet newToilet = new Toilet(toiletLatitude, toiletLongitude, toiletName, disabledAccess, unisex);
 
-                CurrentStorage.addToilet(newToilet);
+                CurrentStorage.addNewToilet(newToilet);
             }
         }
     }
@@ -395,7 +396,7 @@ public class FileManager {
      * Reads Points Of Interest from a csv file and stores them in the current storage class.
      * @param filename The file where the new points of interest csv is.
      */
-    public static void poiReader(String filename) {
+    public static void poiRetriever(String filename) {
         ArrayList<String> pois = readFile(filename);
 
         if (!(pois.isEmpty())) {
@@ -407,6 +408,8 @@ public class FileManager {
             int poiLonIndex = header.indexOf("longitude");
             int poiDescriptionIndex = header.indexOf("description");
             int poiCostIndex = header.indexOf("cost");
+
+            pois.remove(0);
 
             for (String poi : pois) {
                 String[] information = poi.split(",");
@@ -422,7 +425,7 @@ public class FileManager {
                 Poi newPoi = new Poi(poiLatitude, poiLongitude, poiName, poiDescription, poiCost);
 
                 // Stores new object in the current storage class
-                CurrentStorage.addPoi(newPoi);
+                CurrentStorage.addNewPoi(newPoi);
             }
         }
     }

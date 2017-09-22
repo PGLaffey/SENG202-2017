@@ -1,5 +1,7 @@
 package seng202.Model;
 
+import org.omg.CORBA.Current;
+
 import java.util.ArrayList;
 
 /**
@@ -28,247 +30,66 @@ public class CurrentStorage {
     private static Location locationViewed;
     private static Route routeViewed;
 
-    
-    public static Location findLocation(Location find) {
-    	int count = 0;
-    	while (count < generalArray.size()) {
-    		if (generalArray.get(count).equals(find)) {
-    			return generalArray.get(count);
-    		}
-    		count += 1;
-    	}
-    	return null;
-    }
-    
-    public static Retailer findRetailer(Retailer find) {
-    	int count = 0;
-    	while (count < retailerArray.size()) {
-    		if (retailerArray.get(count).equals(find)) {
-    			return retailerArray.get(count);
-    		}
-    		count += 1;
-    	}
-    	return null;
-    }
-    
-    public static Wifi findWifi(Wifi find) {
-    	int count = 0;
-    	while (count < wifiArray.size()) {
-    		if (wifiArray.get(count).equals(find)) {
-    			return wifiArray.get(count);
-    		}
-    		count += 1;
-    	}
-    	return null;
-    }
-    
-    public static Poi findPoi(Poi find) {
-    	int count = 0;
-    	while (count < poiArray.size()) {
-    		if (poiArray.get(count).equals(find)) {
-    			return poiArray.get(count);
-    		}
-    		count += 1;
-    	}
-    	return null;
-    }
-    
-    public static Toilet findToilet(Toilet find) {
-    	int count = 0;
-    	while (count < toiletArray.size()) {
-    		if (toiletArray.get(count).equals(find)) {
-    			return toiletArray.get(count);
-    		}
-    		count += 1;
-    	}
-    	return null;
-    }
-    
-    public static User getUser() {
-    	return currentUser;
-    }
+	public static User getUser() {
+		return currentUser;
+	}
 
 	public static void setUser(User user) {
-    	currentUser = user;
-    }
+		currentUser = user;
+	}
 
-    public static ArrayList<Route> getRouteArray() {
-        return routeArray;
-    }
 
-    public static ArrayList<Retailer> getRetailerArray() {
-        return retailerArray;
-    }
+	public static ArrayList<Route> getRouteArray() {
+		return routeArray;
+	}
 
-    public static ArrayList<Wifi> getWifiArray() {
-        return wifiArray;
-    }
-    
-    public static ArrayList<Toilet> getToiletArray() {
-    	return toiletArray;
-    }
-    
-    public static ArrayList<Poi> getPoiArray() {
-    	return poiArray;
-    }
+	public static ArrayList<Retailer> getRetailerArray() {
+		return retailerArray;
+	}
+
+	public static ArrayList<Wifi> getWifiArray() {
+		return wifiArray;
+	}
+
+	public static ArrayList<Toilet> getToiletArray() {
+		return toiletArray;
+	}
+
+	public static ArrayList<Poi> getPoiArray() {
+		return poiArray;
+	}
 
 	public static ArrayList<Location> getGeneralArray() {
 		return generalArray;
 	}
 
-	public static void addGeneral(Location location) {
-		generalArray.add(location);
-	}
-	
-	
-    public static void addRoute(Route route) {
-        if (!(routeArray.contains(route))) {
-            routeArray.add(route);
-        }
-    }
-    
-    public static boolean containsRoute(Route route) {
-    	for (Route currentRoute : CurrentStorage.getRouteArray()) {
-    		if (currentRoute.equals(route)) {
-    			return true;
-			}
-		}
-		return false;
-    }
 
-    public static void addNewRoute(Route route) {
-    	if (!(containsRoute(route))) {
-			routeArray.add(route);
-			addedRoutes.add(routeArray.indexOf(route));
-		}
+	public static void addCoords(Coord coord) {
+		coordsArray.add(coord);
 	}
 
-    public static void addRetailer(Retailer retailer) { // Used when bringing data in from database
-        retailerArray.add(retailer);
-    }
-
-    public static boolean containsRetailer(Retailer retailer) {
-    	for (Retailer currentRetailer : CurrentStorage.getRetailerArray()) {
-    		if (currentRetailer.equals(retailer)) {
-    			return true;
-			}
-		}
-		return false;
-	}
-    
-    public static void addNewRetailer(Retailer retailer) { 
-    	// Used when user adding new data (from GUI or CSV)
-		if (!(containsRetailer(retailer))) {
-			retailerArray.add(retailer);
-			addedRetailers.add(retailerArray.indexOf(retailer));
-		}
-    }
-
-    public static void addNewToilet(Toilet toilet) { 
-    	// Used when user adding new data (from GUI or CSV)
-		if (!(containsToilet(toilet))) {
-			toiletArray.add(toilet);
-			addedToilets.add(toiletArray.indexOf(toilet));
-		}
-    }
-    
-    public static void addNewPoi(Poi poi) { 
-    	// Used when user adding new data (from GUI or CSV)
-		if (!(containsPoi(poi))) {
-			poiArray.add(poi);
-			addedPoi.add(poiArray.indexOf(poi));
-		}
-    }
-    
-    public static void addNewWifi(Wifi wifi) { 
-    	// Used when user adding new data (from GUI or CSV)
-		if (!(containsWifi(wifi))) {
-			wifiArray.add(wifi);
-			addedWifi.add(wifiArray.indexOf(wifi));
-		}
-    }
-    
-    public static void addNewGeneral(Location location) { 
-    	// Used when user adding new data (from GUI or CSV)
-		if (!(containsGeneral(location))) {
-			generalArray.add(location);
-			addedGeneral.add(generalArray.indexOf(location));
-		}
-    }
-    
-    public static boolean containsWifi(Wifi wifi) {
-        for (Wifi currentWifi : CurrentStorage.getWifiArray()) {
-        	if (currentWifi.equals(wifi)) {
-        		return true;
-			}
-		}
-		return false;
-    }
-
-    public static boolean containsPoi(Poi poi) {
-    	if (poiArray.contains(poi)) {
-    		return true;
-    	}
-		return false;
-    }
-    
-    public static boolean containsGeneral(Location location) {
-    	if (generalArray.contains(location)) {
-    		return true;
-    	}
-		return false;
-    }
-    
-    public static void addWifi(Wifi wifi) {
-    	if (!containsWifi(wifi)) {
-    		wifiArray.add(wifi);
-		}
+	public static ArrayList<Coord> getCoords() {
+		return coordsArray;
 	}
 
-	public static boolean containsToilet(Toilet toilet) {
-    	for (Toilet currentToilet : CurrentStorage.getToiletArray()) {
-    		if (currentToilet.equals(toilet)) {
-    			return true;
-			}
-		}
-		return false;
+
+	public static void setWifi(Wifi wifi) {
+		wifiViewed = wifi;
 	}
-    
-    public static void addToilet(Toilet toilet) {
-		if (!(containsToilet(toilet))) {
-			toiletArray.add(toilet);
-		}
-    }
-    
-    public static void addPoi(Poi poi) {
-    	poiArray.add(poi);
-    }
 
-    public static void addCoords(Coord coord) { 
-    	coordsArray.add(coord); 
-    }
+	public static Wifi getWifi() {
+		return wifiViewed;
+	}
 
-    public static ArrayList<Coord> getCoords() {
-    	return coordsArray; 
-    }
-    
-    public static void setWifi(Wifi wifi) {
-    	wifiViewed = wifi;
-    }
-    
-    public static Wifi getWifi() {
-    	return wifiViewed;
-    }
-    
-    public static void setRetailer(Retailer retailer) {
-    	retailerViewed = retailer;
-    }
-    
-    public static Retailer getRetailer() {
-    	return retailerViewed;
-    }
-    
-    public static Toilet getToilet() {
+	public static void setRetailer(Retailer retailer) {
+		retailerViewed = retailer;
+	}
+
+	public static Retailer getRetailer() {
+		return retailerViewed;
+	}
+
+	public static Toilet getToilet() {
 		return toiletViewed;
 	}
 
@@ -300,17 +121,6 @@ public class CurrentStorage {
 		routeViewed = route;
 	}
 
-    /**
-     * Flushes all data out of arrayLists.
-     */
-    public static void flush() {
-    	currentUser = null;
-        routeArray.clear();
-        retailerArray.clear();
-        wifiArray.clear();
-        toiletArray.clear();
-        poiArray.clear();
-    }
 
 	public static ArrayList<Integer> getAddedWifi() {
 		return addedWifi;
@@ -327,8 +137,223 @@ public class CurrentStorage {
 	public static ArrayList<Integer> getAddedGeneral() {
 		return addedGeneral;
 	}
-	
+
 	public static ArrayList<Integer> getAddedRetailers() {
 		return addedRetailers;
 	}
+
+
+    public static Location findLocation(Location find) {
+    	int count = 0;
+    	while (count < generalArray.size()) {
+    		if (generalArray.get(count).equals(find)) {
+    			return generalArray.get(count);
+    		}
+    		count += 1;
+    	}
+    	return null;
+    }
+
+    
+    public static Retailer findRetailer(Retailer find) {
+    	int count = 0;
+    	while (count < retailerArray.size()) {
+    		if (retailerArray.get(count).equals(find)) {
+    			return retailerArray.get(count);
+    		}
+    		count += 1;
+    	}
+    	return null;
+    }
+
+    
+    public static Wifi findWifi(Wifi find) {
+    	int count = 0;
+    	while (count < wifiArray.size()) {
+    		if (wifiArray.get(count).equals(find)) {
+    			return wifiArray.get(count);
+    		}
+    		count += 1;
+    	}
+    	return null;
+    }
+
+    
+    public static Poi findPoi(Poi find) {
+    	int count = 0;
+    	while (count < poiArray.size()) {
+    		if (poiArray.get(count).equals(find)) {
+    			return poiArray.get(count);
+    		}
+    		count += 1;
+    	}
+    	return null;
+    }
+
+
+    public static Toilet findToilet(Toilet find) {
+    	int count = 0;
+    	while (count < toiletArray.size()) {
+    		if (toiletArray.get(count).equals(find)) {
+    			return toiletArray.get(count);
+    		}
+    		count += 1;
+    	}
+    	return null;
+    }
+
+
+	public static void addWifi(Wifi wifi) {
+		wifiArray.add(wifi);
+	}
+
+
+	public static boolean containsWifi(Wifi wifi) {
+		for (Wifi currentWifi : wifiArray) {
+			if (currentWifi.equals(wifi)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	public static void addNewWifi(Wifi wifi) {
+		// Used when user adding new data (from GUI or CSV)
+		if (!(containsWifi(wifi))) {
+			wifiArray.add(wifi);
+			addedWifi.add(wifiArray.indexOf(wifi));
+		}
+	}
+
+
+	public static void addRetailer(Retailer retailer) { // Used when bringing data in from database
+		retailerArray.add(retailer);
+	}
+
+
+	public static boolean containsRetailer(Retailer retailer) {
+		for (Retailer currentRetailer : retailerArray) {
+			if (currentRetailer.equals(retailer)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static void addNewRetailer(Retailer retailer) {
+		// Used when user adding new data (from GUI or CSV)
+		if (!(containsRetailer(retailer))) {
+			retailerArray.add(retailer);
+			addedRetailers.add(retailerArray.indexOf(retailer));
+		}
+	}
+
+
+	public static void addToilet(Toilet toilet) {
+		toiletArray.add(toilet);
+	}
+
+
+	public static boolean containsToilet(Toilet toilet) {
+		for (Toilet currentToilet : toiletArray) {
+			if (currentToilet.equals(toilet)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	public static void addNewToilet(Toilet toilet) {
+		// Used when user adding new data (from GUI or CSV)
+		if (!(containsToilet(toilet))) {
+			toiletArray.add(toilet);
+			addedToilets.add(toiletArray.indexOf(toilet));
+		}
+	}
+
+
+	public static void addPoi(Poi poi) {
+		poiArray.add(poi);
+	}
+
+
+	public static boolean containsPoi(Poi poi) {
+		for (Poi currentPoi : poiArray) {
+			if (currentPoi == poi) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	public static void addNewPoi(Poi poi) {
+		// Used when user adding new data (from GUI or CSV)
+		if (!(containsPoi(poi))) {
+			poiArray.add(poi);
+			addedPoi.add(poiArray.indexOf(poi));
+		}
+	}
+
+
+    public static void addRoute(Route route) {
+        routeArray.add(route);
+    }
+    
+
+    public static boolean containsRoute(Route route) {
+    	for (Route currentRoute : CurrentStorage.routeArray) {
+    		if (currentRoute.equals(route)) {
+    			return true;
+			}
+		}
+		return false;
+    }
+
+
+    public static void addNewRoute(Route route) {
+    	if (!(containsRoute(route))) {
+			routeArray.add(route);
+			addedRoutes.add(routeArray.indexOf(route));
+		}
+	}
+
+
+	public static void addGeneral(Location location) {
+		generalArray.add(location);
+	}
+
+
+	public static boolean containsGeneral(Location location) {
+		for (Location currentLocation : generalArray) {
+			if (currentLocation.equals(location)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	public static void addNewGeneral(Location location) {
+    	// Used when user adding new data (from GUI or CSV)
+		if (!(containsGeneral(location))) {
+			generalArray.add(location);
+			addedGeneral.add(generalArray.indexOf(location));
+		}
+    }
+
+
+    /**
+     * Flushes all data out of arrayLists.
+     */
+    public static void flush() {
+    	currentUser = null;
+        routeArray.clear();
+        retailerArray.clear();
+        wifiArray.clear();
+        toiletArray.clear();
+        poiArray.clear();
+    }
 }
