@@ -207,7 +207,6 @@ public class RawDataViewerTest extends TestCase {
         retailers.add(SBC);
         retailers.add(HRC);
         retailers.add(AJK);
-        RawDataViewer filterer = new RawDataViewer();
         ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "NY");
         assertEquals(3, found.size());
     }
