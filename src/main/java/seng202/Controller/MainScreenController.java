@@ -36,10 +36,9 @@ import java.util.ResourceBundle;
 
 public class MainScreenController implements MapComponentInitializedListener, DirectionsServiceCallback{
 
-    protected DirectionsService directionsService;
-    protected DirectionsPane directionsPane;
-    protected InfoWindow infoWindow;
-    protected Marker currentMarker;
+    private DirectionsService directionsService;
+    private DirectionsPane directionsPane;
+    private InfoWindow infoWindow;
     
     private GoogleMap map;
 

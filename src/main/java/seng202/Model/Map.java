@@ -57,7 +57,7 @@ public class Map {
 
         try {
             //Sets the HTTP request
-            URL mapsUrl = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=\"" + address.replaceAll(" ", "%20") + ",%20NY\"&sensor=true");
+            URL mapsUrl = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=" + address.replaceAll(" ", "%20") + ",%20NY&sensor=true");
             HttpURLConnection request = (HttpURLConnection) mapsUrl.openConnection();
             request.setRequestMethod("GET");
             request.connect();
@@ -69,9 +69,7 @@ public class Map {
 
             // Slowly works down the JSON to find the correct field.
 
-            JsonElement resultsArr = thingObj.get("results").getAsJsonArray();
-            System.out.println(resultsArr.toString());
-            JsonObject resultsObj = resultsArr.getAsJsonObject();
+            JsonObject resultsObj = thingObj.get("results").getAsJsonArray().get(0).getAsJsonObject();
             JsonObject geometry = resultsObj.getAsJsonObject("geometry");
             JsonObject location = geometry.getAsJsonObject("location");
             latitude = location.get("lat").getAsDouble();

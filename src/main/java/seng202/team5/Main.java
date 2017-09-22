@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import seng202.Model.DataFetcher;
 
 public class Main extends Application {
 
@@ -16,6 +17,19 @@ public class Main extends Application {
 		primaryStage.setTitle("Login");
 		primaryStage.setScene(new Scene(root, 300, 275));
 		primaryStage.show();
+	}
+
+	@Override
+	public void stop() {
+		DataFetcher exporter = new DataFetcher();
+		try {
+			exporter.connectDb();
+			exporter.storeCurrentStorage();
+			exporter.closeConnection();
+		} catch (Exception e) {
+
+		}
+
 	}
 
 	public static void main(String[] args) {
