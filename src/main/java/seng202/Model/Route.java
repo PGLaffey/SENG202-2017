@@ -70,6 +70,10 @@ public class Route {
         return distance;
     }
 
+    public String getDistanceRound() {
+        return String.format("%.2f", distance);
+    }
+
     public boolean getLocal() {
         return local;
     }
