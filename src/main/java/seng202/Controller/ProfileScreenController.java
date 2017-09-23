@@ -56,6 +56,24 @@ public class ProfileScreenController {
 
 	@FXML
 	private ImageView distanceBadge;
+
+    @FXML
+    private ImageView level1Image;
+
+    @FXML
+    private ImageView level2Image;
+
+    @FXML
+    private ImageView level3Image;
+
+    @FXML
+    private ImageView level4Image;
+
+    @FXML
+    private ImageView level5Image;
+
+    @FXML
+    private ImageView level6Image;
 	
 	private User user;
 
@@ -189,9 +207,10 @@ public class ProfileScreenController {
 		usersNameLabel.setText(user.getName()); 
 		usersBirthDateLabel.setText(user.getDob());
 		userBadges = user.getBadges();
-		distanceBadge.setImage(userBadges.get(0).getIcon());
+/*		distanceBadge.setImage(userBadges.get(0).getIcon());
 		timeBadge.setImage(userBadges.get(1).getIcon());
-		routesBadge.setImage(userBadges.get(2).getIcon());
+		routesBadge.setImage(userBadges.get(2).getIcon());*/
+
 	}
 	
 
