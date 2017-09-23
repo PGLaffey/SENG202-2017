@@ -128,11 +128,14 @@
                   <Insets left="125.0" top="40.0" />
                 </GridPane.margin>
               </Label>
-                        <ImageView fx:id="distanceBadge" fitHeight="150.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                        <ImageView fx:id="distanceBadge" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                            <image>
                               <Image url="@images/Badges/badgeDistance0.png" />
-                           </image></ImageView>
-                        <ImageView fx:id="routesBadge" fitHeight="150.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           </image>
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin></ImageView>
+                        <ImageView fx:id="routesBadge" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
@@ -140,10 +143,13 @@
                               <Image url="@images/Badges/badgeRoutes0.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="timeBadge" fitHeight="150.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                        <ImageView fx:id="timeBadge" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                            <image>
                               <Image url="@images/Badges/badgeTime0.png" />
-                           </image></ImageView>
+                           </image>
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin></ImageView>
                         <Label text="Badges key:" GridPane.rowIndex="2" />
                         <GridPane GridPane.rowIndex="2">
                           <columnConstraints>
@@ -200,13 +206,13 @@
                         </GridPane>
             </children>
             <columnConstraints>
-              <ColumnConstraints hgrow="SOMETIMES" maxWidth="640.0" minWidth="10.0" prefWidth="640.0" />
-              <ColumnConstraints hgrow="SOMETIMES" maxWidth="406.0" minWidth="10.0" prefWidth="185.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="640.0" minWidth="10.0" prefWidth="555.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="406.0" minWidth="10.0" prefWidth="270.0" />
             </columnConstraints>
             <rowConstraints>
-              <RowConstraints maxHeight="319.0" minHeight="10.0" prefHeight="118.0" vgrow="SOMETIMES" />
-              <RowConstraints maxHeight="226.0" minHeight="10.0" prefHeight="222.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="226.0" minHeight="10.0" prefHeight="93.0" vgrow="SOMETIMES" />
+              <RowConstraints maxHeight="319.0" minHeight="10.0" prefHeight="137.0" vgrow="SOMETIMES" />
+              <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="218.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="226.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
             </rowConstraints>
           </GridPane>
         </children>
