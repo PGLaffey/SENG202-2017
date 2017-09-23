@@ -143,7 +143,7 @@ public class FileManager {
             genderIndex += header.size();
 
             routes.remove(0);
-            
+
             for (String route : routes) {
                 ArrayList<String> information = new ArrayList<String>(Arrays.asList(route.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1)));
 
@@ -216,15 +216,14 @@ public class FileManager {
             for (String retailer : retailers) {
                 String[] information = retailer.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 
-                //Obtain relevant fields
-                int zip = 0;
-                if (!information[retailerZip].equals("")) {
-                    zip = Integer.parseInt(information[retailerZip]);
-                }
-
                 //Creates a new instance of retailer.
                 Retailer newRetailer = new Retailer(information[addrLine1Index], information[retailerName], information[retailerPrimary], information[retailerSecondary]);
-                newRetailer.setZip(zip);
+
+                //Checks if the zip of the retailer needs to be changed
+                if (!information[retailerZip].equals("")) {
+                    newRetailer.setZip(Integer.parseInt(information[retailerZip]));
+                }
+
                 //Add the retailer to the storage class.
                 CurrentStorage.addNewRetailer(newRetailer);
             }
@@ -413,7 +412,7 @@ public class FileManager {
                 Double poiLatitude = Double.parseDouble(information[poiLatIndex]);
                 Double poiLongitude = Double.parseDouble(information[poiLonIndex]);
                 String poiDescription = information[poiDescriptionIndex];
-                double poiCost = Integer.parseInt(information[poiCostIndex]);
+                double poiCost = Double.parseDouble(information[poiCostIndex]);
 
                 // Creates new Poi object
                 Poi newPoi = new Poi(poiLatitude, poiLongitude, poiName, poiDescription, poiCost);

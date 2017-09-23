@@ -45,4 +45,14 @@ public class Poi extends Location {
     public void setMarker(Marker marker) { 
     	this.marker = marker;
     }
+
+    @Override
+    public boolean equals(Object poi) {
+        Poi otherPoi = (Poi) poi;
+        if (this.getLatitude() == otherPoi.getLatitude() && this.getLongitude() == otherPoi.getLongitude() &&
+                this.getName().equals(otherPoi.getName()) && this.getDescription().equals(otherPoi.getDescription())) {
+            return true;
+        }
+        return false;
+    }
 }
