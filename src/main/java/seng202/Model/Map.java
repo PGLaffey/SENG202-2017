@@ -53,8 +53,14 @@ public class Map {
         return endLoc;
     }
 
+    /**
+     * Repositions or creates the startMarker
+     * @param latLong - A LatLong object of the mouse position
+     * @param map - A googleMap object to place the startMarker on.
+     */
     public static void setStartMarker(LatLong latLong, GoogleMap map) {
         startLoc = latLong;
+        //Sets up the options for the startMarker
         MarkerOptions routeMarkerOptns = new MarkerOptions().animation(Animation.DROP)
                 .visible(true)
                 .title("Start")
@@ -224,15 +230,19 @@ public class Map {
             if (status == GeocoderStatus.ZERO_RESULTS) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "No matching address found");
                 alert.show();
+                //parses the object returned by Google Maps APIs
                 latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
                         results[0].getGeometry().getLocation().getLongitude());
             } else {
+                //parses the object returned by Google Maps APIs
                 latLong = new LatLong(results[0].getGeometry().getLocation().getLatitude(),
                         results[0].getGeometry().getLocation().getLongitude());
             }
+            //Create a new marker on the map to identify the location
             map.addMarker(new Marker(new MarkerOptions()
                     .animation(Animation.DROP)
                     .position(latLong)));
+            // Centres the map on the marker
             map.setCenter(latLong);
         });
     }
@@ -248,7 +258,10 @@ public class Map {
      */
     public static void findRoute(String startAddress, String endAddress, GoogleMapView mapView,
                           DirectionsService service, DirectionsServiceCallback callback, DirectionsPane pane) {
+        // Creates a new directions request for the Google Maps API
         DirectionsRequest request = new DirectionsRequest(startAddress, endAddress, TravelModes.BICYCLING);
+
+        // Obtains the result of the request using the Directions Service.
         service.getRoute(request, callback, new DirectionsRenderer(true, mapView.getMap(), pane));
     }
 
@@ -276,7 +289,6 @@ public class Map {
     public static void findRoute(LatLong startLoc, LatLong endLoc, GoogleMapView mapView, DirectionsService service,
                                  DirectionsServiceCallback callback, DirectionsPane pane) {
         DirectionsRequest request = new DirectionsRequest(startLoc, endLoc, TravelModes.BICYCLING);
-        System.out.println("WEEWOO");
         service.getRoute(request, callback, new DirectionsRenderer(true, mapView.getMap(), pane));
     }
 
@@ -315,9 +327,9 @@ public class Map {
 
     public static Marker findRetailers(Retailer retailer) {
 
-        //Checks if there is already a marker on the same location
+        // Loops through a list of known addresses. This is to reduce the amount of requests that are made.
         for (Coord coord : CurrentStorage.getCoords()) {
-            System.out.println(CurrentStorage.getCoords().size());
+            //TODO: check if the address of the new retailer has already been found.
             if (retailer.getAddress().equalsIgnoreCase(coord.getAddress())) {
                 if (coord.hasMarker()) {
                     retailer.setNoMarker(true);
@@ -367,9 +379,13 @@ public class Map {
 
                 poi.setMarker(marker);
                 map.addMarker(poi.getMarker());
+
+                // Toggles the visibility of the place of interest.
                 poi.getMarker().setVisible(!poi.getMarker().getVisible());
 
         } else {
+
+            // If the place of interest already has a marker, then just toggle its visibility
             poi.getMarker().setVisible(!poi.getMarker().getVisible());
         }
     }
@@ -406,6 +422,8 @@ public class Map {
      */
     public static ArrayList<Location> findNearby(double locLat, double locLong) {
         ArrayList<Location> nearby = new ArrayList<Location>();
+
+        // Loops through the retailers in the list and checks if the location is within 50 metres of the retailer
         for (Retailer retailer : CurrentStorage.getRetailerArray()) {
             if (Map.getDistance(locLat, locLong,
                     retailer.getLatitude(), retailer.getLongitude() ) < 50) {
@@ -413,6 +431,7 @@ public class Map {
             }
         }
 
+        // Loops through the wifi in the list and checks if the location is within 50 metres of the wifi
         for (Wifi wifi : CurrentStorage.getWifiArray()) {
             if (Map.getDistance(locLat, locLong,
                     wifi.getLatitude(), wifi.getLongitude()) < 50) {
@@ -420,12 +439,15 @@ public class Map {
             }
         }
 
+
+        // Loops through the POI in the list and checks if the location is within 50 metres of the POI
         for (Poi poi : CurrentStorage.getPoiArray()) {
             if (Map.getDistance(locLat, locLong, poi.getLatitude(), poi.getLongitude()) < 50) {
                 nearby.add(poi);
             }
         }
 
+        // Loops through the toilets in the list and checks if the location is within 50 metres of the toilet
         for (Toilet toilet : CurrentStorage.getToiletArray()) {
             if (Map.getDistance(toilet.getLatitude(), toilet.getLongitude(), locLat, locLong) < 50) {
                 nearby.add(toilet);
