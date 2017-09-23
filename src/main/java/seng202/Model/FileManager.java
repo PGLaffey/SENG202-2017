@@ -120,8 +120,8 @@ public class FileManager {
                 double startLongitude = Double.parseDouble(information.get(startLongIndex).substring(1, information.get(startLongIndex).length() - 1));
                 double endLatitude = Double.parseDouble(information.get(endLatIndex).substring(1, information.get(endLatIndex).length() - 1));
                 double endLongitude = Double.parseDouble(information.get(endLongIndex).substring(1, information.get(endLongIndex).length() - 1));
+                genderIndex += header.size();
                 String gender = information.get(genderIndex).substring(1, information.get(genderIndex).length() - 1);
-                gender += header.size();
 
                 //Convert the relevant data into the associated classes
                 Location startLocation = new Location(startLatitude, startLongitude, startName, 4);
