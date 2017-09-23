@@ -101,7 +101,7 @@ public class TablesScreenController {
     private TableView<Retailer> retailersTable;
 
     @FXML
-    private TableColumn<Route, Double> routeDistCol;
+    private TableColumn<Route, String> routeDistCol;
 
     @FXML
     private TableColumn<Route, String> routeEndCol;
@@ -494,7 +494,7 @@ public class TablesScreenController {
     	// Set up the routes table
     	routeEndCol.setCellValueFactory(new PropertyValueFactory<Route, String>("endString"));
     	routeStartCol.setCellValueFactory(new PropertyValueFactory<Route, String>("startString"));
-    	routeDistCol.setCellValueFactory(new PropertyValueFactory<Route, Double>("distance"));
+    	routeDistCol.setCellValueFactory(new PropertyValueFactory<Route, String>("distanceRound"));
     	routeNameCol.setCellValueFactory(new PropertyValueFactory<Route, String>("name"));
     	
     	ObservableList<Route> routeData = FXCollections.observableArrayList(CurrentStorage.getRouteArray());
