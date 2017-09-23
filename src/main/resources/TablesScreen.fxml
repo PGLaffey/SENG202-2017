@@ -115,45 +115,44 @@
             <columns>
               <TableColumn fx:id="allLocNameCol" prefWidth="200.0" text="Name" />
               <TableColumn fx:id="allLocTypeCol" prefWidth="200.0" text="Type" />
-              <TableColumn fx:id="allLocLatCol" prefWidth="200.0" text="Latitude" />
-              <TableColumn fx:id="allLocLongCol" prefWidth="200.0" text="Longitude" />
+                        <TableColumn fx:id="allLocAddressCol" prefWidth="200.0" text="Address" />
+                        <TableColumn fx:id="allLocBoroughCol" prefWidth="200.0" text="Borough" />
             </columns>
           </TableView>
           <TableView id="allLocationsTable" fx:id="wifiTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#wifiTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="119">
             <columns>
               <TableColumn fx:id="wifiNameCol" prefWidth="160.0" text="Name" />
-              <TableColumn fx:id="wifiLatCol" prefWidth="130.0" text="Latitude" />
-              <TableColumn fx:id="wifiLongCol" prefWidth="130.0" text="Longitude" />
-              <TableColumn fx:id="wifiBoroughCol" prefWidth="130.0" text="Borough" />
-              <TableColumn fx:id="wifiTypeCol" prefWidth="130.0" text="Type" />
-              <TableColumn fx:id="wifiProvCol" prefWidth="130.0" text="Provider" />
+              <TableColumn fx:id="wifiTypeCol" prefWidth="160.0" text="Type" />
+              <TableColumn fx:id="wifiProvCol" prefWidth="160.0" text="Provider" />
+                        <TableColumn fx:id="wifiAddressCol" prefWidth="160.0" text="Address" />
+                        <TableColumn fx:id="wifiBoroughCol" prefWidth="160.0" text="Borough" />
             </columns>
           </TableView>
           <TableView id="allLocationsTable" fx:id="retailersTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#retailerTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="119">
             <columns>
               <TableColumn fx:id="retNameCol" prefWidth="160.0" text="Name" />
-              <TableColumn fx:id="retLatCol" prefWidth="160.0" text="Latitude" />
-              <TableColumn fx:id="retLongCol" prefWidth="160.0" text="Longitude" />
               <TableColumn fx:id="retProductCol" prefWidth="160.0" text="Product" />
               <TableColumn fx:id="retDescCol" prefWidth="160.0" text="Description" />
+                        <TableColumn fx:id="retAddressCol" prefWidth="160.0" text="Address" />
+                        <TableColumn fx:id="retBoroughCol" prefWidth="160.0" text="Borough" />
             </columns>
           </TableView>
           <TableView id="allLocationsTable" fx:id="poiTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#poiTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="119">
             <columns>
               <TableColumn fx:id="poiNameCol" prefWidth="160.0" text="Name" />
-              <TableColumn fx:id="poiLatCol" prefWidth="160.0" text="Latitude" />
-              <TableColumn fx:id="poiLongCol" prefWidth="160.0" text="Longitude" />
               <TableColumn fx:id="poiCostCol" prefWidth="160.0" text="Cost" />
               <TableColumn fx:id="poiDescCol" prefWidth="160.0" text="Description" />
+                        <TableColumn fx:id="poiAddressCol" prefWidth="160.0" text="Address" />
+                        <TableColumn fx:id="poiBoroughCol" prefWidth="160.0" text="Borough" />
             </columns>
           </TableView>
           <TableView id="allLocationsTable" fx:id="toiletsTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#toiletTableClicked" prefHeight="300.0" prefWidth="800.0" visible="false" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="119">
             <columns>
               <TableColumn fx:id="toiletNameCol" prefWidth="160.0" text="Name" />
-              <TableColumn fx:id="toiletLatCol" prefWidth="160.0" text="Latitude" />
-              <TableColumn fx:id="toiletLongCol" prefWidth="160.0" text="Longitude" />
               <TableColumn fx:id="toiletUniCol" prefWidth="160.0" text="Uni Sex" />
               <TableColumn fx:id="toiletDisCol" prefWidth="160.0" text="Disabled" />
+                        <TableColumn fx:id="toiletAddressCol" prefWidth="160.0" text="Address" />
+                        <TableColumn fx:id="toiletBoroughCol" prefWidth="160.0" text="Borough" />
             </columns>
           </TableView>
           <TableView id="allLocationsTable" fx:id="routesTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#routeTableClicked" prefHeight="300.0" prefWidth="800.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="119">
