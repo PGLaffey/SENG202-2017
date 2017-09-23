@@ -120,7 +120,7 @@ public class RouteInfoScreenController {
     void initialize() {
     	route = CurrentStorage.getRoute();
     	bikeidLabel.setText("Bike ID: "+ route.getBikeID());
-    	distanceLabel.setText("Distance: " + route.getDistance());
+    	distanceLabel.setText("Distance: " + route.getDistanceRound() + "m");
     	endLabel.setText("End: " + route.getStartString());
     	startLabel.setText("Start: " + route.getEndString());
     	nameLabel.setText("Name: " + route.getName());
