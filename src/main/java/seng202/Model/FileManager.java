@@ -139,28 +139,25 @@ public class FileManager {
             int endLatIndex = header.indexOf("end station latitude");
             int endLongIndex = header.indexOf("end station longitude");
             int bikeIdIndex = header.indexOf("bikeid");
-            int genderIndex = header.indexOf("birth year");
+            int genderIndex = header.indexOf("gender");
+            genderIndex += header.size();
 
             routes.remove(0);
 
+            System.out.println(header);
+
             for (String route : routes) {
-                String[] information = route.split(",\"", -1);
+                ArrayList<String> information = new ArrayList<String>(Arrays.asList(route.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1)));
 
                 //Obtain the relevant information from the csv.
-                String bikeID = information[bikeIdIndex].substring(0, information[bikeIdIndex].indexOf("\""));
-                String startName = information[startNameIndex].substring(0, information[startNameIndex].indexOf("\""));
-                String endName = information[endNameIndex].substring(0, information[endNameIndex].indexOf("\""));
-                double startLatitude = Double.parseDouble(information[startLatIndex].substring(0, information[startLatIndex].indexOf("\"")));
-                double startLongitude = Double.parseDouble(information[startLongIndex].substring(0, information[startLongIndex].indexOf("\"")));
-                double endLatitude = Double.parseDouble(information[endLatIndex].substring(0, information[endLatIndex].indexOf("\"")));
-                double endLongitude = Double.parseDouble(information[endLongIndex].substring(0, information[endLongIndex].indexOf("\"")));
-
-                String gender;
-                if (information.length != header.size()) {
-                    gender = information[genderIndex - 1].substring(0, information[genderIndex - 1].indexOf("\""));
-                } else {
-                    gender = information[genderIndex];
-                }
+                String bikeID = information.get(bikeIdIndex).substring(1, information.get(bikeIdIndex).length() - 1);
+                String startName = information.get(startNameIndex).substring(1, information.get(startNameIndex).length() - 1);
+                String endName = information.get(endNameIndex).substring(1, information.get(endNameIndex).length() - 1);
+                double startLatitude = Double.parseDouble(information.get(startLatIndex).substring(1, information.get(startLatIndex).length() - 1));
+                double startLongitude = Double.parseDouble(information.get(startLongIndex).substring(1, information.get(startLongIndex).length() - 1));
+                double endLatitude = Double.parseDouble(information.get(endLatIndex).substring(1, information.get(endLatIndex).length() - 1));
+                double endLongitude = Double.parseDouble(information.get(endLongIndex).substring(1, information.get(endLongIndex).length() - 1));
+                String gender = information.get(genderIndex).substring(1, information.get(genderIndex).length() - 1);
 
                 //Convert the relevant data into the associated classes
                 Location startLocation = new Location(startLatitude, startLongitude, startName, 4);
@@ -170,7 +167,6 @@ public class FileManager {
                 //Log the new object into the storage class.
                 CurrentStorage.addNewRoute(newRoute);
             }
-            System.out.println("Finished!");
         }
     }
 
@@ -297,7 +293,7 @@ public class FileManager {
                 //Creates a new Wifi object.
                 Wifi newHotspot = new Wifi(wifiLatitude, wifiLongitude, wifiName, ssid, type, wifiProvider);
                 newHotspot.setBorough(borough);
-                CurrentStorage.addWifi(newHotspot);
+                CurrentStorage.addNewWifi(newHotspot);
             }
         }
     }

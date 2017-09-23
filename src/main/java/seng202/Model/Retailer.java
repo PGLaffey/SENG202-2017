@@ -21,7 +21,6 @@ public class Retailer extends Location {
      * @param name The name of the retailer.
      * @param product The product the retailer sells.
      * @param description A description of the retailer at the location.
-     * @param zip The zip code in which the retailer resides
 	 */
     public Retailer(double latitude, double longitude, String name, String product, String description) {
     	super(latitude, longitude, name, 2);
@@ -35,8 +34,6 @@ public class Retailer extends Location {
      * @param name The name of the retailer.
      * @param product The product the retailer sells.
      * @param description A description of the retailer at the location.
-     * @param zip The zip code in which the retailer resides
-     *
      */
     public Retailer(String address, String name, String product, String description) {
         super(address, name, 2);
