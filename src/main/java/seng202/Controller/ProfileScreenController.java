@@ -1,6 +1,7 @@
 package seng202.Controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,9 +10,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
 import seng202.Model.User;
+import seng202.team5.Badge;
 
 public class ProfileScreenController {
 	
@@ -44,8 +47,37 @@ public class ProfileScreenController {
 	
 	@FXML 
 	private Label usersBirthDateLabel;
+
+	@FXML
+	private ImageView routesBadge;
+
+	@FXML
+	private ImageView timeBadge;
+
+	@FXML
+	private ImageView distanceBadge;
+
+    @FXML
+    private ImageView level1Image;
+
+    @FXML
+    private ImageView level2Image;
+
+    @FXML
+    private ImageView level3Image;
+
+    @FXML
+    private ImageView level4Image;
+
+    @FXML
+    private ImageView level5Image;
+
+    @FXML
+    private ImageView level6Image;
 	
 	private User user;
+
+	private ArrayList<Badge> userBadges;
 	
 	
 	/**
@@ -174,6 +206,11 @@ public class ProfileScreenController {
 		user = CurrentStorage.getUser();
 		usersNameLabel.setText(user.getName()); 
 		usersBirthDateLabel.setText(user.getDob());
+		userBadges = user.getBadges();
+/*		distanceBadge.setImage(userBadges.get(0).getIcon());
+		timeBadge.setImage(userBadges.get(1).getIcon());
+		routesBadge.setImage(userBadges.get(2).getIcon());*/
+
 	}
 	
 

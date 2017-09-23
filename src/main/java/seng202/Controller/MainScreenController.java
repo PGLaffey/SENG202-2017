@@ -436,6 +436,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     private Label progressBarLabel;
 
+    private static int count;
+
     ArrayList<Circle> wifiCircles = new ArrayList<Circle>();
     ArrayList<Marker> locationMarkers = new ArrayList<Marker>();
     
@@ -662,18 +664,21 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     void bikeIconPressed(ActionEvent event) {
-        /*
-        Map.setRouteStartVisible(!Map.getRouteVisible());
-        for (Route route : CurrentStorage.getRouteArray()) {
-            if (!(route.getStartMarker() == null) || !(route.getEndMarker() == null)) {
-                route.getStartMarker().setVisible(Map.getRouteVisible());
-                map.addMarker(route.getStartMarker());
-
-            } else {
-                Map.findRouteMarker(route, map);
-                route.getStartMarker().setVisible(Map.getRouteVisible());
-            }
-        }*/
+//        int initCount = count;
+//        Map.setRouteStartVisible(!Map.getRouteVisible());
+//        // Places 50 route icons on the map.
+//        while (count < CurrentStorage.getRouteArray().size() && count < initCount + 50) {
+//            Route route = CurrentStorage.getRouteArray().get(count);
+//            if (!(route.getStartMarker() == null) || !(route.getEndMarker() == null)) {
+//                route.getStartMarker().setVisible(Map.getRouteVisible());
+//                map.addMarker(route.getStartMarker());
+//
+//            } else {
+//                Map.findRouteMarker(route, map);
+//                route.getStartMarker().setVisible(Map.getRouteVisible());
+//            }
+//            count++;
+//        }
     }
 
     @FXML
@@ -1386,17 +1391,24 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @Override
     public void directionsReceived(DirectionsResult results, DirectionStatus status){
-        /*
-        infoWindow = new InfoWindow();
-        Double totalDistance = 0.0;
-        int step = results.getRoutes().get(0).getLegs().get(0).getSteps().size() / 2;
+
+        ArrayList<Location> nearby = new ArrayList<Location>();
         for (DirectionsLeg leg : results.getRoutes().get(0).getLegs()) {
-            totalDistance += leg.getDistance().getValue();
+            nearby.addAll(Map.findNearby(leg.getStartLocation().getLatitude(), leg.getStartLocation().getLongitude()));
+            nearby.addAll(Map.findNearby(leg.getEndLocation().getLatitude(), leg.getEndLocation().getLongitude()));
         }
-        infoWindow.setContent(totalDistance.toString() + "km\n" + results.getRoutes().get(0).getLegs().get(0).getDuration().getText()+" minutes");
 
+        for (Location loc : nearby) {
+            if (loc.getLocationType() == 0) {
+                Map.findLocation(loc, map);
+            } else if (loc.getLocationType() == 1) {
+                Map.findPoi((Poi) loc, map);
+            } else if (loc.getLocationType() == 2) {
+                map.addMarker(Map.findRetailers((Retailer) loc));
+            } else if (loc.getLocationType() == 3) {
+                map.addMapShape(Map.findWifi((Wifi) loc));
+            }
+        }
 
-        infoWindow.setPosition(results.getRoutes().get(0).getLegs().get(0).getSteps().get(step).getEndLocation());
-        infoWindow.open(map);*/
     }
 }

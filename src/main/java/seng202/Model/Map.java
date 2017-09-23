@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import static java.lang.Math.toRadians;
 
@@ -316,6 +317,7 @@ public class Map {
 
         //Checks if there is already a marker on the same location
         for (Coord coord : CurrentStorage.getCoords()) {
+            System.out.println(CurrentStorage.getCoords().size());
             if (retailer.getAddress().equalsIgnoreCase(coord.getAddress())) {
                 if (coord.hasMarker()) {
                     retailer.setNoMarker(true);
@@ -394,6 +396,43 @@ public class Map {
             map.addMarker(route.getStartMarker());
             map.addMarker(route.getEndMarker());
         }
+    }
+
+    /**
+     * Method that finds every location near the locations for a route. Called by the directionsReceived method in MainScreenController
+     * @param locLat - Latitude of the location to find nearby places of.
+     * @param locLong - longitude of the location to find nearby places of.
+     * @return - An arrayList of locations that are nearby.
+     */
+    public static ArrayList<Location> findNearby(double locLat, double locLong) {
+        ArrayList<Location> nearby = new ArrayList<Location>();
+        for (Retailer retailer : CurrentStorage.getRetailerArray()) {
+            if (Map.getDistance(locLat, locLong,
+                    retailer.getLatitude(), retailer.getLongitude() ) < 50) {
+                nearby.add(retailer);
+            }
+        }
+
+        for (Wifi wifi : CurrentStorage.getWifiArray()) {
+            if (Map.getDistance(locLat, locLong,
+                    wifi.getLatitude(), wifi.getLongitude()) < 50) {
+                nearby.add(wifi);
+            }
+        }
+
+        for (Poi poi : CurrentStorage.getPoiArray()) {
+            if (Map.getDistance(locLat, locLong, poi.getLatitude(), poi.getLongitude()) < 50) {
+                nearby.add(poi);
+            }
+        }
+
+        for (Toilet toilet : CurrentStorage.getToiletArray()) {
+            if (Map.getDistance(toilet.getLatitude(), toilet.getLongitude(), locLat, locLong) < 50) {
+                nearby.add(toilet);
+            }
+        }
+
+        return nearby;
     }
 
 }
