@@ -207,10 +207,11 @@ public class ProfileScreenController {
 		usersNameLabel.setText(user.getName()); 
 		usersBirthDateLabel.setText(user.getDob());
 		userBadges = user.getBadges();
+
+		// For now have set them all to level 0
 /*		distanceBadge.setImage(userBadges.get(0).getIcon());
 		timeBadge.setImage(userBadges.get(1).getIcon());
 		routesBadge.setImage(userBadges.get(2).getIcon());*/
-
 	}
 	
 
