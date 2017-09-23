@@ -1371,6 +1371,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         directionsService = new DirectionsService();
         directionsPane = mapView.getDirec();
         map.addMouseEventHandler(UIEventType.click, (GMapMouseEvent event) -> {
+            // Sets up an actionEvent where it will create a marker at the clicked location.
             LatLong latLong = event.getLatLong();
             System.out.println(isStart);
             if (isStart) {
@@ -1391,7 +1392,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @Override
     public void directionsReceived(DirectionsResult results, DirectionStatus status){
+        // This is called when a route is created.
 
+        //This section finds the nearby locations. TODO: Fix the markers not appearing on the map.
         ArrayList<Location> nearby = new ArrayList<Location>();
         for (DirectionsLeg leg : results.getRoutes().get(0).getLegs()) {
             nearby.addAll(Map.findNearby(leg.getStartLocation().getLatitude(), leg.getStartLocation().getLongitude()));
