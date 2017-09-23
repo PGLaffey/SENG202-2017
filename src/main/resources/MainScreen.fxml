@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
@@ -116,12 +117,8 @@
                   <children>
                     <GridPane prefHeight="430.0" prefWidth="182.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <Button fx:id="showRouteButton" graphicTextGap="4.0" mnemonicParsing="false" onAction="#showRoutePressed" prefHeight="75.0" prefWidth="215.0" style="-fx-background-color: #fafafa;" text="Show Route on Map" underline="false" wrapText="false" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                          <font>
-                            <Font size="18.0" />
-                          </font>
-                        </Button>
-                        <MenuButton fx:id="loadRouteMenu" mnemonicParsing="false" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: #fafafa;&#10;" text="Load Route" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                        <Button fx:id="showRouteButton" graphicTextGap="4.0" mnemonicParsing="false" onAction="#showRoutePressed" prefHeight="75.0" prefWidth="215.0" style="-fx-background-color: #fafafa;" text="Show Route on Map" underline="false" wrapText="false" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <MenuButton fx:id="loadRouteMenu" mnemonicParsing="false" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: #fafafa;&#10;" text="Load Route" GridPane.columnIndex="0" GridPane.rowIndex="3">
                           <items>
                             <Menu fx:id="favouriteRoutesMenu" mnemonicParsing="false" style="" text="Favourite Routes">
                               <items>
@@ -143,7 +140,7 @@
                             </Menu>
                           </items>
                         </MenuButton>
-                                    <MenuButton id="loadRouteMenu" fx:id="fileChooserMenu" mnemonicParsing="false" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: #fafafa;&#10;" text="Upload File" GridPane.rowIndex="3">
+                                    <MenuButton id="loadRouteMenu" fx:id="fileChooserMenu" mnemonicParsing="false" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: #fafafa;&#10;" text="Upload File" GridPane.rowIndex="4">
                                        <items>
                                           <MenuItem fx:id="uploadWifiMenuBtn" mnemonicParsing="false" onAction="#uploadWifiBtnPressed" text="Wifi" />
                                           <MenuItem fx:id="uploadRetailerMenuBtn" mnemonicParsing="false" onAction="#uploadRetailerBtnPressed" text="Retailer" />
@@ -152,7 +149,7 @@
                                           <MenuItem fx:id="uploadPoiMenuBtn" mnemonicParsing="false" onAction="#uploadPOIBtnPressed" text="Other" />
                                        </items>
                                     </MenuButton>
-                        <MenuButton id="loadRouteMenu" fx:id="addLocationsMenu" mnemonicParsing="false" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: #fafafa;&#10;" text="Add Location" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                        <MenuButton id="loadRouteMenu" fx:id="addLocationsMenu" mnemonicParsing="false" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: #fafafa;&#10;" text="Add Location" GridPane.columnIndex="0" GridPane.rowIndex="5">
                           <items>
                             <MenuItem fx:id="addWifiMenuButton" mnemonicParsing="false" onAction="#addWifiMenuPressed" text="Wifi" />
                             <MenuItem fx:id="addRetailerMenuButton" mnemonicParsing="false" onAction="#addRetailerMenuPressed" text="Retailer" />
@@ -161,18 +158,25 @@
                             <MenuItem fx:id="addOtherMenuButton" mnemonicParsing="false" onAction="#addOtherMenuPressed" text="Other" />
                           </items>
                         </MenuButton>
-                        <Button fx:id="shareButton" mnemonicParsing="false" onAction="#sharePressed" prefHeight="68.0" prefWidth="215.0" style="-fx-background-color: #fafafa;" text="Share" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                        <Button fx:id="shareButton" mnemonicParsing="false" onAction="#sharePressed" prefHeight="68.0" prefWidth="215.0" style="-fx-background-color: #fafafa;" text="Share" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                                    <ProgressBar fx:id="progressBar" prefHeight="20.0" prefWidth="182.0" progress="0.0" />
+                                    <Label text="Loading data...">
+                                       <padding>
+                                          <Insets left="40.0" right="40.0" top="40.0" />
+                                       </padding>
+                                    </Label>
                       </children>
                       <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       </columnConstraints>
                       <rowConstraints>
-                        <RowConstraints maxHeight="164.0" minHeight="10.0" prefHeight="133.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="164.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
                       </rowConstraints>
                     </GridPane>
                   </children>
