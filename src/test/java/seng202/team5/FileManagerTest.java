@@ -265,18 +265,16 @@ public class FileManagerTest extends TestCase {
     public void testWriteRouteFile()
     {
         FileManager.routeRetriever(TARGET+"/route_data1.csv");
-        //TODO: confirm this and potentially require a user as well.
-        FileManager.routeWriter("test_file.csv");
-        assertTrue(new File(WRITE_TARGET+"/test_file.csv").exists());
+        FileManager.routeWriter(WRITE_TARGET+"/route_test_file.csv", CurrentStorage.getRouteArray());
+        assertTrue(new File(WRITE_TARGET+"/route_test_file.csv").exists());
         CurrentStorage.flush();
-        FileManager.routeRetriever(WRITE_TARGET+"/test_file.csv");
+        FileManager.routeRetriever(WRITE_TARGET+"/route_test_file.csv");
         Route expected_route = new Route("16950", new Location(40.75323098, -73.97032517, "E 47 St & 2 Ave", 4),
                 new Location(40.73221853, -73.98165557, "1 Ave & E 15 St", 4),
                 "Expected Route", "0");
 
         assertTrue(CurrentStorage.getRouteArray().get(0).equals(expected_route));
     }
-
 
     /**
      * Test to test the FileManager's ability to write a file with a filename that contains spaces.
@@ -285,9 +283,10 @@ public class FileManagerTest extends TestCase {
     public void testWriteRouteFileSpaces()
     {
         FileManager.routeRetriever(TARGET+"/route_data1.csv");
-        FileManager.routeWriter("test file.csv");
-        assertTrue(new File(WRITE_TARGET+"/test_file.csv").exists());
-        result = FileManager.readFile(WRITE_TARGET+"/test file.csv");
+        FileManager.routeWriter(WRITE_TARGET+"/test file.csv", CurrentStorage.getRouteArray());
+        assertTrue(new File(WRITE_TARGET+"/test file.csv").exists());
+        CurrentStorage.flush();
+        FileManager.routeRetriever(WRITE_TARGET+"/test file.csv");
         Route expected_route = new Route("16950", new Location(40.75323098, -73.97032517, "E 47 St & 2 Ave", 4),
                 new Location(40.73221853, -73.98165557, "1 Ave & E 15 St", 4),
                 "Expected Route", "0");
@@ -302,9 +301,10 @@ public class FileManagerTest extends TestCase {
     public void testWriteWifiFile()
     {
         FileManager.wifiRetriever(TARGET+"/wifi_data1.csv");
-        FileManager.wifiWriter("test_file", CurrentStorage.getWifiArray());
+        FileManager.wifiWriter(WRITE_TARGET+"/test_file.csv", CurrentStorage.getWifiArray());
         assertTrue(new File(WRITE_TARGET+"/test_file.csv").exists());
-        result = FileManager.readFile(WRITE_TARGET+"/test_file.csv");
+        CurrentStorage.flush();
+        FileManager.wifiRetriever(WRITE_TARGET+"/test_file.csv");
         Wifi expected_wifi = new Wifi(40.745968, -73.994039, "mn-05-123662", "Manhattan","Free","LinkNYC - Citybridge");
         assertTrue(CurrentStorage.getWifiArray().get(0).equals(expected_wifi));
     }
@@ -316,9 +316,31 @@ public class FileManagerTest extends TestCase {
     public void testWriteRetailerFile()
     {
         FileManager.retailerRetriever(TARGET+"/retailer_data1.csv");
-        FileManager.retailerWriter("test_file", CurrentStorage.getRetailerArray());
-        assertTrue(new File(WRITE_TARGET+"/test_file.csv").exists());
-        Retailer expected_retailer = new Retailer("3 New York Plaza", "Starbucks Coffee", "Casual Eating & Takeout", "F-Coffeehouse");
-        assertTrue(CurrentStorage.getRetailerArray().get(0).equals(expected_retailer));
+        FileManager.retailerWriter(WRITE_TARGET+"retailer_test_file.csv", CurrentStorage.getRetailerArray());
+        assertTrue(new File(WRITE_TARGET+"/retailer_test_file.csv").exists());
+        CurrentStorage.flush();
+        FileManager.retailerRetriever(WRITE_TARGET+"/retailer_test_file.csv");
+        Retailer expectedRetailer = new Retailer("3 New York Plaza", "Starbucks Coffee", "Casual Eating & Takeout", "F-Coffeehouse");
+        assertTrue(CurrentStorage.getRetailerArray().get(0).equals(expectedRetailer));
+    }
+
+    @Test
+    public void testWriteToiletFile() {
+        FileManager.toiletRetriever(TARGET+"/toilet_data1.csv");
+        FileManager.toiletWriter(WRITE_TARGET+"/toilet_test_file.csv", CurrentStorage.getToiletArray());
+        assertTrue(new File(WRITE_TARGET+"/toilet_test_file.csv").exists());
+        CurrentStorage.flush();
+        FileManager.toiletRetriever(WRITE_TARGET+"/toilet_test_file.csv");
+        Toilet expectedToilet = new Toilet(40.745968,-73.994039,"Not a Real Toilet",true,false);
+        assertTrue(CurrentStorage.getToiletArray().get(0).equals(expectedToilet));
+    }
+
+    @Test
+    public void testWritePoiFile() {
+        FileManager.poiRetriever(TARGET+"/poi_data1.csv");
+        FileManager.poiWriter(WRITE_TARGET+"/poi_test_file.csv", CurrentStorage.getPoiArray());
+        assertTrue(new File(WRITE_TARGET+"/poi_test_file.csv").exists());
+        Poi expectedPoi = new Poi(40.745968,-73.994039,"siteOne","sherwood forest entrance",0);
+        assertTrue(CurrentStorage.getPoiArray().get(0).equals(expectedPoi));
     }
 }
