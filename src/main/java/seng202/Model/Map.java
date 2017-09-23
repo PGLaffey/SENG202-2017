@@ -26,6 +26,11 @@ public class Map {
     private static GeocodingService geoService;
     private static boolean retailerVisible = false;
     private static boolean routeStartVisible = false;
+    private static LatLong startLoc = null;
+    private static LatLong endLoc = null;
+
+    private static Marker startMarker = null;
+    private static Marker endMarker = null;
 
     public static void setRetailerVisible(boolean value) {
         retailerVisible = value;
@@ -38,6 +43,49 @@ public class Map {
     public static boolean getRouteVisible() { return routeStartVisible; }
 
     public static void setRouteStartVisible(boolean value) { routeStartVisible = value; }
+
+    public static LatLong getStartLoc() {
+        return startLoc;
+    }
+
+    public static LatLong getEndLoc() {
+        return endLoc;
+    }
+
+    public static void setStartMarker(LatLong latLong, GoogleMap map) {
+        startLoc = latLong;
+        MarkerOptions routeMarkerOptns = new MarkerOptions().animation(Animation.DROP)
+                .visible(true)
+                .title("Start")
+                .position(startLoc);
+
+        if (startMarker != null) {
+            map.removeMarker(startMarker);
+            startMarker = new Marker(routeMarkerOptns);
+            map.addMarker(startMarker);
+        } else {
+            startMarker = new Marker(routeMarkerOptns);
+            map.addMarker(startMarker);
+        }
+    }
+
+    public static void setEndMarker(LatLong latLong, GoogleMap map) {
+        endLoc = latLong;
+        MarkerOptions routeMarkerOptns = new MarkerOptions().animation(Animation.DROP)
+                .visible(true)
+                .title("End")
+                .position(endLoc);
+
+        if (endMarker != null) {
+            map.removeMarker(endMarker);
+            endMarker = new Marker(routeMarkerOptns);
+            map.addMarker(endMarker);
+        } else {
+            endMarker = new Marker(routeMarkerOptns);
+            map.addMarker(endMarker);
+
+        }
+    }
 
     /**
      * Sends a GET-request to the google geocoding service and parses the returned JSON to find the latitude and longitude.
@@ -197,7 +245,7 @@ public class Map {
      * @param callback - The callback to return the object to.
      * @param pane - The DirectionsPane object used in the DirectionsRenderer for the service.
      */
-    public void findRoute(String startAddress, String endAddress, GoogleMapView mapView,
+    public static void findRoute(String startAddress, String endAddress, GoogleMapView mapView,
                           DirectionsService service, DirectionsServiceCallback callback, DirectionsPane pane) {
         DirectionsRequest request = new DirectionsRequest(startAddress, endAddress, TravelModes.BICYCLING);
         service.getRoute(request, callback, new DirectionsRenderer(true, mapView.getMap(), pane));
@@ -212,12 +260,22 @@ public class Map {
      * @param callback - callback to return the results to
      * @param pane - Directions pane used for the directionsRenderer.
      */
-    public void findRoute(Location startLoc, Location endLoc, GoogleMapView mapView,
+    public static void findRoute(Location startLoc, Location endLoc, GoogleMapView mapView,
                           DirectionsService service, DirectionsServiceCallback callback, DirectionsPane pane) {
 
         DirectionsRequest request = new DirectionsRequest(new LatLong(startLoc.getLatitude(), startLoc.getLongitude()),
                 new LatLong(endLoc.getLatitude(), endLoc.getLongitude()), TravelModes.BICYCLING);
 
+        service.getRoute(request, callback, new DirectionsRenderer(true, mapView.getMap(), pane));
+    }
+
+    /**
+     * Overloaded method to find a route given two LatLongs
+     */
+    public static void findRoute(LatLong startLoc, LatLong endLoc, GoogleMapView mapView, DirectionsService service,
+                                 DirectionsServiceCallback callback, DirectionsPane pane) {
+        DirectionsRequest request = new DirectionsRequest(startLoc, endLoc, TravelModes.BICYCLING);
+        System.out.println("WEEWOO");
         service.getRoute(request, callback, new DirectionsRenderer(true, mapView.getMap(), pane));
     }
 

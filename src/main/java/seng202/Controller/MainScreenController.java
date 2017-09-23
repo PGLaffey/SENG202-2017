@@ -2,6 +2,8 @@ package seng202.Controller;
 
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
+import com.lynden.gmapsfx.javascript.event.GMapMouseEvent;
+import com.lynden.gmapsfx.javascript.event.UIEventType;
 import com.lynden.gmapsfx.javascript.object.*;
 import com.lynden.gmapsfx.service.directions.*;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
@@ -20,7 +22,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -40,6 +41,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     private DirectionsService directionsService;
     private DirectionsPane directionsPane;
     private InfoWindow infoWindow;
+
+    private static boolean isStart = true;
     
     private GoogleMap map;
 
@@ -1326,10 +1329,28 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         map = mapView.createMap(mapOptions);
         directionsService = new DirectionsService();
         directionsPane = mapView.getDirec();
+        map.addMouseEventHandler(UIEventType.click, (GMapMouseEvent event) -> {
+            LatLong latLong = event.getLatLong();
+            System.out.println(isStart);
+            if (isStart) {
+                Map.setStartMarker(latLong, map);
+                isStart = false;
+            } else {
+                Map.setEndMarker(latLong, map);
+                isStart = true;
+            }
+
+            if (Map.getStartLoc() != null && Map.getEndLoc() != null) {
+                Map.findRoute(Map.getStartLoc(), Map.getEndLoc(),
+                        mapView, directionsService, this, directionsPane);
+            }
+        });
     }
+
 
     @Override
     public void directionsReceived(DirectionsResult results, DirectionStatus status){
+        /*
         infoWindow = new InfoWindow();
         Double totalDistance = 0.0;
         int step = results.getRoutes().get(0).getLegs().get(0).getSteps().size() / 2;
@@ -1340,6 +1361,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
 
         infoWindow.setPosition(results.getRoutes().get(0).getLegs().get(0).getSteps().get(step).getEndLocation());
-        infoWindow.open(map);
+        infoWindow.open(map);*/
     }
 }
