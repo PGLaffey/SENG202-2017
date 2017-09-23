@@ -17,30 +17,45 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="452.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.Controller.PoiInfoScreenController">
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="452.0" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.PoiInfoScreenController">
   <children>
     <Button fx:id="okButton" mnemonicParsing="false" onAction="#okPressed" text="Ok" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
     <Label id="objectInfoLabel" fx:id="nameLabel" prefWidth="386.0" text="Name:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP" />
     <Label id="objectInfoLabel" fx:id="latLabel" prefWidth="386.0" text="Latitude:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
-        <Insets top="25.0" />
+        <Insets top="150.0" />
       </GridPane.margin>
     </Label>
     <Label id="objectInfoLabel" fx:id="longLabel" prefWidth="386.0" text="Longitude:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
-        <Insets top="50.0" />
+        <Insets top="175.0" />
       </GridPane.margin>
     </Label>
     <Label id="objectInfoLabel" fx:id="costLabel" prefWidth="386.0" text="Cost:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
-        <Insets top="75.0" />
+        <Insets top="25.0" />
       </GridPane.margin>
     </Label>
     <Label id="objectInfoLabel" fx:id="descriptionLabel" prefWidth="386.0" text="Description:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
-        <Insets top="100.0" />
+        <Insets top="50.0" />
       </GridPane.margin>
     </Label>
+      <Label fx:id="zipLabel" prefHeight="15.0" prefWidth="402.0" text="Zip: " GridPane.columnSpan="2" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="125.0" />
+         </GridPane.margin>
+      </Label>
+      <Label fx:id="boroughLabel" prefHeight="15.0" prefWidth="412.0" text="Borough:" GridPane.columnSpan="2" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="100.0" />
+         </GridPane.margin>
+      </Label>
+      <Label fx:id="addressLabel" prefHeight="15.0" prefWidth="412.0" text="Address:" GridPane.columnSpan="2" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="75.0" />
+         </GridPane.margin>
+      </Label>
   </children>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="196.0" />

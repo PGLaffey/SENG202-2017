@@ -37,7 +37,16 @@ public class ToiletInfoScreenController {
 
     @FXML
     private Label unisexLabel;
-    
+
+    @FXML
+    private Label zipLabel;
+
+    @FXML
+    private Label boroughLabel;
+
+    @FXML
+    private Label addressLabel;
+
     private Toilet toilet;
 
 
@@ -59,6 +68,9 @@ public class ToiletInfoScreenController {
     	longLabel.setText("Longitude " + toilet.getLongitude());
     	nameLabel.setText("Name: " + toilet.getName());
     	unisexLabel.setText("Uni Sex: " + String.valueOf(toilet.getUniSex()));
+    	zipLabel.setText("Zip: " + toilet.getZip());
+    	boroughLabel.setText("Borough: " + toilet.getBorough());
+    	addressLabel.setText("Address: " + toilet.getAddress());
     	
         assert disabledLabel != null : "fx:id=\"disabledLabel\" was not injected: check your FXML file 'ToiletInfoScreen.fxml'.";
         assert latLabel != null : "fx:id=\"latLabel\" was not injected: check your FXML file 'ToiletInfoScreen.fxml'.";

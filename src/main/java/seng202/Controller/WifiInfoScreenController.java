@@ -38,6 +38,15 @@ public class WifiInfoScreenController {
     private Label providerLabel;
 
     @FXML
+    private Label zipLabel;
+
+    @FXML
+    private Label addressLabel;
+
+    @FXML
+    private Label ssidLabel;
+
+    @FXML
     private Label typeLabel;
     
     private Wifi wifi;
@@ -62,6 +71,9 @@ public class WifiInfoScreenController {
     	latLabel.setText("Latitude: " + wifi.getLatitude());
     	longLabel.setText("Longitude: " + wifi.getLongitude());
     	providerLabel.setText("Provider: " + wifi.getProvider());
+    	zipLabel.setText("Zip: " + wifi.getZip());
+    	addressLabel.setText("Address: " + wifi.getAddress());
+    	ssidLabel.setText("Ssid: " + wifi.getSsid());
     	
         assert boroughLabel != null : "fx:id=\"boroughLabel\" was not injected: check your FXML file 'WifiInfoScreen.fxml'.";
         assert latLabel != null : "fx:id=\"latLabel\" was not injected: check your FXML file 'WifiInfoScreen.fxml'.";
