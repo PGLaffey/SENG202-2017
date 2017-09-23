@@ -36,6 +36,15 @@ public class RetailerInfoScreenController {
 
     @FXML
     private Label zipLabel;
+
+    @FXML
+    private Label boroughLabel;
+
+    @FXML
+    private Label productLabel;
+
+    @FXML
+    private Label descriptionLabel;
     
     private Retailer retailer;
 
@@ -58,6 +67,9 @@ public class RetailerInfoScreenController {
     	latLabel.setText("Latitude: " + retailer.getLatitude());
     	longLabel.setText("Longitude: " + retailer.getLongitude());
     	zipLabel.setText("Zip: " + retailer.getZip());
+    	boroughLabel.setText("Borough: " + retailer.getBorough());
+    	productLabel.setText("Product: " + retailer.getProduct());
+    	descriptionLabel.setText("Description: " + retailer.getDescription());
     	
         assert addressLabel != null : "fx:id=\"addressLabel\" was not injected: check your FXML file 'RetailerInfoScreen.fxml'.";
         assert latLabel != null : "fx:id=\"latLabel\" was not injected: check your FXML file 'RetailerInfoScreen.fxml'.";

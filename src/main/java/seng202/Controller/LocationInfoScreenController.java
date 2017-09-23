@@ -28,6 +28,12 @@ public class LocationInfoScreenController {
     @FXML
     private Label latLabel;
 
+    @FXML
+    private Label zipLabel;
+
+    @FXML
+    private Label boroughLabel;
+
     private Location location;
 
     /**
@@ -48,5 +54,7 @@ public class LocationInfoScreenController {
         longLabel.setText("Longitude: " + location.getLongitude());
         addressLabel.setText("Address: " + location.getAddress());
         locationTypeLabel.setText("Location Type: " + location.getTypeString());
+        zipLabel.setText("Zip: " + location.getZip());
+        boroughLabel.setText("Borough: " + location.getBorough());
     }
 }

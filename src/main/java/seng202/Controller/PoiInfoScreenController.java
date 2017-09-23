@@ -36,6 +36,15 @@ public class PoiInfoScreenController {
     private Label nameLabel;
 
     @FXML
+    private Label zipLabel;
+
+    @FXML
+    private Label boroughLabel;
+
+    @FXML
+    private Label addressLabel;
+
+    @FXML
     private Button okButton;
     
     private Poi poi;
@@ -59,6 +68,9 @@ public class PoiInfoScreenController {
     	latLabel.setText("Latitude: " + poi.getLatitude());
     	longLabel.setText("Longitude: " + poi.getLongitude());
     	nameLabel.setText("Name: " + poi.getName());
+    	zipLabel.setText("Zip: " + poi.getZip());
+    	boroughLabel.setText("Borough: " + poi.getBorough());
+    	addressLabel.setText("Address: " + poi.getAddress());
     	
         assert costLabel != null : "fx:id=\"costLabel\" was not injected: check your FXML file 'PoiInfoScreen.fxml'.";
         assert descriptionLabel != null : "fx:id=\"descriptionLabel\" was not injected: check your FXML file 'PoiInfoScreen.fxml'.";
