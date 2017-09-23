@@ -71,6 +71,8 @@ public class User implements Serializable {
         return distanceCycled;
     }
 
+    public String getDistanceRounded() { return String.format("%.2f", distanceCycled); }
+
     public int getRoutesCycled() {
         return routesCycled;
     }
