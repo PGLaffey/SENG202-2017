@@ -46,6 +46,24 @@ public class DataViewerScreenController {
 	@FXML
 	private RadioButton rawDataRadio;
 
+	@FXML
+	private Label distValue;
+
+	@FXML
+	private Label timeValue;
+
+	@FXML
+	private Label routesValue;
+
+	@FXML
+	private Label distNextBadge;
+
+	@FXML
+	private Label timeNextBadge;
+
+	@FXML
+	private Label routesNextbadge;
+
 	
 	/**
 	 * Method for when the map menu button is pressed, shows the main map screen.
@@ -130,5 +148,9 @@ public class DataViewerScreenController {
 	void initialize() {
 		ObservableList<String> filterTypes = FXCollections.observableArrayList("Distance travelled","Time spent cycling");
 		filterGraphBox.setItems(filterTypes);
+
+		distValue.setText(CurrentStorage.getUser().getDistanceRounded() + "m");
+		timeValue.setText(CurrentStorage.getUser().getHours() + " hours");
+		routesValue.setText(CurrentStorage.getUser().getRoutesCycled() + " routes");
 	}
 }

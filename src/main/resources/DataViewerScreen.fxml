@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.chart.CategoryAxis?>
@@ -17,12 +24,11 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="489.0" minWidth="827.0" prefHeight="489.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.DataViewerScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="489.0" minWidth="827.0" prefHeight="489.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.DataViewerScreenController">
 <children>
   <SplitPane dividerPositions="0.10472279260780287" orientation="VERTICAL" prefHeight="489.0" prefWidth="827.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
     <items>
-      <AnchorPane minHeight="49.0" minWidth="0.0" maxHeight="49.0">
+      <AnchorPane maxHeight="49.0" minHeight="49.0" minWidth="0.0">
         <children>
           <GridPane layoutY="-1.0" prefHeight="49.0" prefWidth="825.0">
             <children>
@@ -99,7 +105,7 @@
         <children>
           <SplitPane dividerPositions="0.22600243013365734" focusTraversable="true" prefHeight="433.0" prefWidth="825.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
-              <AnchorPane minHeight="0.0" minWidth="200.0" prefHeight="160.0" maxWidth="200.0">
+              <AnchorPane maxWidth="200.0" minHeight="0.0" minWidth="200.0" prefHeight="160.0">
                 <children>
                   <ChoiceBox fx:id="filterGraphBox" layoutX="36.0" layoutY="70.0">
                     <items>
@@ -118,16 +124,31 @@
                 </children>
               </AnchorPane>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                <children>
-                  <LineChart id="LineChart" prefHeight="431.0" prefWidth="634.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <xAxis>
-                      <CategoryAxis side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis side="LEFT" />
-                    </yAxis>
-                  </LineChart>
-                </children>
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="53.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="53.0" layoutY="275.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="223.0" layoutY="275.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="223.0" layoutY="153.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="53.0" layoutY="153.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="223.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Label layoutX="78.0" layoutY="176.0" text="Completed routes:" />
+                              <Label layoutX="72.0" layoutY="237.0" text="Hours spent cycling:" />
+                              <Label layoutX="85.0" layoutY="298.0" text="Distance cycled:" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="393.0" layoutY="275.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="393.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="393.0" layoutY="153.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="393.0" layoutY="92.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="223.0" layoutY="92.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="54.0" layoutY="92.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Label layoutX="287.0" layoutY="115.0" text="Value:" />
+                              <Label layoutX="427.0" layoutY="115.0" text="Till next badge:" />
+                              <Label fx:id="routesValue" layoutX="299.0" layoutY="176.0" text="0" />
+                              <Label fx:id="distNextBadge" layoutX="470.0" layoutY="298.0" text="0" />
+                              <Label fx:id="distValue" layoutX="299.0" layoutY="298.0" text="0" />
+                              <Label fx:id="timeNextBadge" layoutX="470.0" layoutY="237.0" text="0" />
+                              <Label fx:id="timeValue" layoutX="299.0" layoutY="237.0" text="0" />
+                              <Label fx:id="routesNextbadge" layoutX="470.0" layoutY="176.0" text="0" />
+                           </children>
               </AnchorPane>
             </items>
           </SplitPane>
