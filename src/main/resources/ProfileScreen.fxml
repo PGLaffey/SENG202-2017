@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -11,12 +16,11 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="489.0" minWidth="827.0" prefHeight="489.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.ProfileScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="489.0" minWidth="827.0" prefHeight="489.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.ProfileScreenController">
 <children>
   <SplitPane dividerPositions="0.10472279260780287" orientation="VERTICAL" prefHeight="489.0" prefWidth="827.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
     <items>
-      <AnchorPane minHeight="49.0" minWidth="0.0" maxHeight="49.0">
+      <AnchorPane maxHeight="49.0" minHeight="49.0" minWidth="0.0">
         <children>
           <GridPane layoutY="-1.0" prefHeight="49.0" prefWidth="825.0">
             <children>
@@ -124,10 +128,17 @@
                   <Insets left="125.0" top="40.0" />
                 </GridPane.margin>
               </Label>
+                        <ImageView fx:id="distanceBadge" fitHeight="150.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+                        <ImageView fx:id="routesBadge" fitHeight="150.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </ImageView>
+                        <ImageView fx:id="timeBadge" fitHeight="150.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
             </children>
             <columnConstraints>
-              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="489.0" minWidth="10.0" prefWidth="489.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="406.0" minWidth="10.0" prefWidth="336.0" />
             </columnConstraints>
             <rowConstraints>
               <RowConstraints maxHeight="319.0" minHeight="10.0" prefHeight="215.0" vgrow="SOMETIMES" />
