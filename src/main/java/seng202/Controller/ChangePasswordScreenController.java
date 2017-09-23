@@ -9,8 +9,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
 import seng202.Model.DataFetcher;
@@ -40,7 +42,14 @@ public class ChangePasswordScreenController {
     @FXML
     private TextField oldPasswordText;
 
+    @FXML
+    private Label newPasswordLbl;
 
+    @FXML
+    private Label repeatPasswordLbl;
+
+    @FXML
+    private Label oldPasswordLbl;
     /** 
      * Method for when the cancel button is pressed, closes the window.
      * @param event
@@ -58,17 +67,22 @@ public class ChangePasswordScreenController {
      * @throws IOException
      */
     @FXML
-    void changePasswordButtonPressed(ActionEvent event) throws IOException {
+    void changePasswordButtonPressed(ActionEvent event) throws IOException, IllegalAccessException, ClassNotFoundException, InstantiationException {
         User user = CurrentStorage.getUser();
         DataFetcher data = new DataFetcher();
-        if (user.getPassword().equals(oldPasswordText.getText().toString())) {
-            if (newPasswordText.equals(newPasswordTextAgain)) {
-                data.updateUserPassword(user.getUsername(), newPasswordText.getText());
-            }
-        }
-        //data.closeConnection();
-    	Stage stage = (Stage) changePasswordButton.getScene().getWindow();
-    	stage.hide();	
+        data.connectDb();
+        if (!user.getPassword().equals((oldPasswordText.getText()))) {
+            oldPasswordLbl.setTextFill(Paint.valueOf("RED"));
+        } else if (!newPasswordText.getText().equals(newPasswordTextAgain.getText())) {
+            oldPasswordLbl.setTextFill(Paint.valueOf("BLACK"));
+            newPasswordLbl.setTextFill(Paint.valueOf("RED"));
+            repeatPasswordLbl.setTextFill(Paint.valueOf("RED"));
+        } else {
+            data.updateUserPassword(user.getUsername(), newPasswordText.getText().toString());
+            //data.closeConnection();
+            Stage stage = (Stage) changePasswordButton.getScene().getWindow();
+            stage.hide();
+    }
     }
 
     @FXML
