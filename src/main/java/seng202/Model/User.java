@@ -94,4 +94,6 @@ public class User implements Serializable {
 	public void addTime(double time) {
 		hoursCycled += time;
 	}
+
+	public void addRoute() {routesCycled += 1; }
 }

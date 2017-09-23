@@ -1,14 +1,22 @@
 package seng202.Controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.omg.CORBA.Current;
 import seng202.Model.CurrentStorage;
 import seng202.Model.Route;
+import javafx.scene.paint.Color;
+
 
 
 
@@ -43,6 +51,15 @@ public class RouteInfoScreenController {
 
     @FXML
     private Label startLabel;
+
+    @FXML
+    private Label timeLabel;
+
+    @FXML
+    private TextField timeText;
+
+    @FXML
+    private Button addButton;
     
     private Route route;
 
@@ -63,8 +80,40 @@ public class RouteInfoScreenController {
      */
     @FXML
     void completedRouteButtonPressed(ActionEvent event) {
-    	CurrentStorage.getUser().addDistance(route.getDistance());
-    	completedRouteButton.setText("Added!");
+        //boolean add = false;
+
+        completedRouteButton.setVisible(false);
+        addButton.setVisible(true);
+        timeLabel.setVisible(true);
+        timeText.setVisible(true);
+
+
+    }
+
+    @FXML
+    void addButtonPressed(ActionEvent event) {
+        boolean add = false;
+
+        if (timeText.getText().equals("")) {
+            timeLabel.setTextFill(Color.RED);
+        }
+        try {
+            Double.parseDouble(timeText.getText());
+            add = true;
+        } catch (Exception e) {
+            timeLabel.setTextFill(Color.RED);
+        }
+
+        if (add) {
+            completedRouteButton.setVisible(true);
+            addButton.setVisible(false);
+            timeLabel.setVisible(false);
+            timeText.setVisible(false);
+            CurrentStorage.getUser().addDistance(route.getDistance());
+            CurrentStorage.getUser().addRoute();
+            CurrentStorage.getUser().addTime(Double.parseDouble(timeText.getText()));
+            completedRouteButton.setText("Added!");
+        }
     }
 
     @FXML
@@ -78,6 +127,10 @@ public class RouteInfoScreenController {
     	genderLabel.setText("Gender: " + route.getGender());
     	
     	completedRouteButton.setText("I have completed this route!");
+    	completedRouteButton.setVisible(true);
+    	timeLabel.setVisible(false);
+    	timeText.setVisible(false);
+    	addButton.setVisible(false);
     	
     	
         assert bikeidLabel != null : "fx:id=\"bikeidLabel\" was not injected: check your FXML file 'RouteInfoScreen.fxml'.";

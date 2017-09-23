@@ -77,6 +77,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     private Button logoutButton;
     
     //Side menu bar
+
+    @FXML
+    private ProgressBar progressBar;
     
     @FXML
     private Button showRouteButton;

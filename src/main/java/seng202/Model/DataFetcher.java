@@ -33,7 +33,7 @@ public class DataFetcher {
     }
 
     public void updateUserPassword(String username, String newPassword) {
-    	PreparedStatement preparedStatement;
+    	PreparedStatement preparedStatement = null;
     	String stmt = "UPDATE tblUser SET Password = ? WHERE Username = ?";
 
     	try {
