@@ -77,6 +77,23 @@ public class RawDataViewerTest extends TestCase {
     }
 
     /**
+     * Test to check if searchPoi can filter based on borough
+     */
+    public void testSearchPoiBorough() {
+        ArrayList<Poi> pois = new ArrayList<Poi>();
+
+        // Create new place of interest.
+        Poi SoL = new Poi("45 Rockefeller Plaza, New York, NY", "Rockefeller Center", "Comprised of 19 buildings", 0);
+        SoL.setBorough("Queens");
+
+        // Add the new place of interest to the arrayList
+        pois.add(SoL);
+
+        ArrayList<Poi> found = RawDataViewer.searchPoi(pois, "Queens");
+        assertTrue(found.get(0).equals(SoL));
+    }
+
+    /**
      * Test to check if searchPoi can search for a specific description of Point of Interest.
      */
     public void testSearchPoiDescription() {
@@ -519,6 +536,26 @@ public class RawDataViewerTest extends TestCase {
     }
 
     /**
+     * Test to check if the searchWifi method can still search if no borough was provided.
+     */
+    public void testSearchWifiNoBorough() {
+        ArrayList<Wifi> wifis = new ArrayList<Wifi>();
+
+        // Create new Wifi hotspots.
+        Wifi LnK = new Wifi(40.745968, -73.9940399, "mn-05-123662", "LinkNYC Free Wi-Fi", "FREE", "LinkNYC - Citybridge");
+        Wifi WF = new Wifi(23.15644, -71.51563, "WhyFly", "WhyFly1", "FREE", "Spark");
+        Wifi HYW = new Wifi(35.61213, -72.15961, "Hide yo kids, hide yo wifi", "WhyFly2", "PAID", "Yeezy");
+
+        // Add the wifis to an ArrayList
+        wifis.add(LnK);
+        wifis.add(WF);
+        wifis.add(HYW);
+
+        ArrayList<Wifi> found = RawDataViewer.searchWifi(wifis, "W");
+        assertEquals(3, found.size());
+    }
+
+    /**
      * Test to check if the searchRetailer can search by Name
      */
     public void testSearchRoute() {
@@ -658,6 +695,27 @@ public class RawDataViewerTest extends TestCase {
 
         ArrayList<Route> found = RawDataViewer.searchRoutes(routes, "#");
         assertEquals(0, found.size());
+    }
+
+    /**
+     * Test to check if the searchRoute method will filter by borough
+     */
+    public void testSearchRoutesBoroughs() {
+        ArrayList<Route> routes = new ArrayList<Route>();
+
+        //Only sets the borough for one route
+        Location HWLoc1 = new Location(24.156342, -42.123645, "TestPlace1Start", 4);
+        HWLoc1.setBorough("Manhattan");
+        Location HWLoc2 = new Location(25.156342, -43.123645, "TestPlace1End", 4);
+        HWLoc2.setBorough("Manhattan");
+        Route HW = new Route("1238", HWLoc1, HWLoc2, "Home-Work", "M");
+        Route TP = new Route("12873", new Location(21.157382, -41.128660, "TestPlace2Start", 4), new Location(26.187342, -41.123625, "TestPlace2End", 4), "Test-Place", "F");
+
+        routes.add(HW);
+        routes.add(TP);
+
+        ArrayList<Route> found = RawDataViewer.searchRoutes(routes, "Manhattan");
+        assertTrue(found.get(0).equals(HW));
     }
 
     /**
