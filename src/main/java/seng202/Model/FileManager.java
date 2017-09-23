@@ -143,9 +143,7 @@ public class FileManager {
             genderIndex += header.size();
 
             routes.remove(0);
-
-            System.out.println(header);
-
+            
             for (String route : routes) {
                 ArrayList<String> information = new ArrayList<String>(Arrays.asList(route.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1)));
 
