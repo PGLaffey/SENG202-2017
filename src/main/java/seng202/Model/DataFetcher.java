@@ -6,7 +6,16 @@ import java.util.ArrayList;
 
 public class DataFetcher {
     private Connection connect = null;
+    private boolean hasImported = false;
 
+
+    public boolean isHasImported() {
+    	return hasImported;
+	}
+
+	public void setHasImported(boolean value) {
+    	hasImported = value;
+	}
 	/**
 	 * Getter for the Connection connect
 	 */

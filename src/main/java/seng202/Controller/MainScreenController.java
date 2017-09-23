@@ -42,6 +42,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     private DirectionsPane directionsPane;
     private InfoWindow infoWindow;
 
+    private static DataFetcher data = new DataFetcher();
+
     private static boolean isStart = true;
     
     private GoogleMap map;
@@ -431,7 +433,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     private MenuItem uploadPoiMenuBtn;
 
-    Service<Void> backgroundThread;
+    @FXML
+    private Label progressBarLabel;
+
     ArrayList<Circle> wifiCircles = new ArrayList<Circle>();
     ArrayList<Marker> locationMarkers = new ArrayList<Marker>();
     
@@ -1263,8 +1267,40 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     	fileChooserMenu.setPopupSide(Side.RIGHT);
     	addLocationsMenu.setPopupSide(Side.RIGHT);
-    	
-       	
+
+    	progressBar.setProgress(100);
+
+    	if (!data.isHasImported()) {
+            Service service = new Service() {
+                @Override
+                protected Task createTask() {
+                    return new Task() {
+                        @Override
+                        protected Object call() throws Exception {
+                            data.setHasImported(true);
+
+                            progressBarLabel.setVisible(true);
+                            updateMessage("Connecting to database...");
+                            data.connectDb();
+                            progressBar.setVisible(true);
+                            updateProgress(0, 100);
+                            updateMessage("Retrieving data...");
+                            data.loadAllLocations();
+                            updateProgress(100, 100);
+                            updateMessage("Done!");
+
+                            data.closeConnection();
+                            return null;
+                        }
+                    };
+                }
+            };
+
+            progressBar.progressProperty().bind(service.progressProperty());
+            progressBarLabel.textProperty().bind(service.messageProperty());
+            service.start();
+        }
+
     	ObservableList<Boolean> disabledOptions = FXCollections.observableArrayList(true, false);
     	toiletDisabledChoice.setItems(disabledOptions);
     	ObservableList<Boolean> unisexOptions = FXCollections.observableArrayList(true, false);

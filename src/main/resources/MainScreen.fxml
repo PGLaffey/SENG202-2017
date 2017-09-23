@@ -159,8 +159,8 @@
                           </items>
                         </MenuButton>
                         <Button fx:id="shareButton" mnemonicParsing="false" onAction="#sharePressed" prefHeight="68.0" prefWidth="215.0" style="-fx-background-color: #fafafa;" text="Share" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                                    <ProgressBar fx:id="progressBar" prefHeight="20.0" prefWidth="182.0" progress="0.0" />
-                                    <Label text="Loading data...">
+                                    <ProgressBar fx:id="progressBar" prefHeight="20.0" prefWidth="182.0" progress="0.0"/>
+                                    <Label fx:id="progressBarLabel" text="Done...">
                                        <padding>
                                           <Insets left="40.0" right="40.0" top="40.0" />
                                        </padding>

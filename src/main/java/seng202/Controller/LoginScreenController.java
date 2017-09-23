@@ -49,13 +49,6 @@ public class LoginScreenController {
 					incorrectPasswordLbl.setVisible(false);
 					incorrectUserLbl.setVisible(true);
 				} else if ((data.fetchPassword(usernameText.getText()).equals(passwordText.getText().toString()))) {
-					Thread t = new Thread(new Runnable() {
-						@Override
-						public void run() {
-							data.loadAllLocations();
-						}
-					});
-					t.start();
 
 					Thread retailerImporter = new Thread(new RetailerImporterThread(new File(getClass().getResource("/data_files/").getFile()).toString() + "/Retailers_subset.csv"));
 					retailerImporter.start();
