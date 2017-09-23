@@ -6,15 +6,12 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.omg.CORBA.Current;
 import seng202.Model.*;
 import seng202.exceptions.WrongFormatException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-
-
 
 public class FileManagerTest extends TestCase {
     private String TARGET = new File(this.getClass().getResource("/testdata/").getFile()).getAbsolutePath();

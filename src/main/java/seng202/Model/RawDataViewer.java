@@ -37,7 +37,6 @@ public class RawDataViewer {
     public static ArrayList<Poi> searchPoi(ArrayList<Poi> poiArrayList, String condition) {
         ArrayList<Poi> foundPoi = new ArrayList<Poi>();
         for (int i = 0; i < poiArrayList.size(); i++) {
-            System.out.println(poiArrayList.get(i).getAddress());
             if (Double.toString(poiArrayList.get(i).getCost()).toLowerCase().contains(condition.toLowerCase())) {
                 foundPoi.add(poiArrayList.get(i));
             } else if (poiArrayList.get(i).getDescription().toLowerCase().contains(condition.toLowerCase())) {
