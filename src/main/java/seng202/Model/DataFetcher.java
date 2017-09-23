@@ -161,7 +161,6 @@ public class DataFetcher {
 			addLocation(retailers.get(newRetailers.get(count)));
 			count += 1;
 		}
-
 	}
 	
 	
@@ -368,7 +367,7 @@ public class DataFetcher {
 			if (borough != null) {
 				retailer.setBorough(borough);
 			}
-			if (zip != 0) {
+			if (zip != -1) {
 				retailer.setZip(zip);
 			}
 			if (address != null) {
@@ -626,10 +625,11 @@ public class DataFetcher {
     		preparedStatement = connect.prepareStatement("SELECT LocationID FROM tblLocations "
 					+ "WHERE Latitude = ? AND "
 					+ "Longitude = ? AND "
-					+ "Type = ?");
+					+ "Type = ? AND Name = ?");
     		preparedStatement.setDouble(1, coords[0]);
     		preparedStatement.setDouble(2, coords[1]);
     		preparedStatement.setInt(3, type);
+    		preparedStatement.setString(4, location.getName());
     		locationID = runQuery(preparedStatement).get(0).get(0);
     	} catch (SQLException sqlException) {
     		System.out.println(sqlException.getMessage());
