@@ -281,7 +281,7 @@ public class CurrentStorage {
 
 	public static boolean containsPoi(Poi poi) {
 		for (Poi currentPoi : poiArray) {
-			if (currentPoi == poi) {
+			if (currentPoi.equals(poi)) {
 				return true;
 			}
 		}
@@ -304,7 +304,7 @@ public class CurrentStorage {
     
 
     public static boolean containsRoute(Route route) {
-    	for (Route currentRoute : CurrentStorage.routeArray) {
+    	for (Route currentRoute : routeArray) {
     		if (currentRoute.equals(route)) {
     			return true;
 			}
