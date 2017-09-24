@@ -438,6 +438,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     private static int count;
 
+    private DirectionsRenderer directionsRenderer;
+
     ArrayList<Circle> wifiCircles = new ArrayList<Circle>();
     ArrayList<Marker> locationMarkers = new ArrayList<Marker>();
     
@@ -1414,11 +1416,15 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         map = mapView.createMap(mapOptions);
         directionsService = new DirectionsService();
         directionsPane = mapView.getDirec();
+        directionsRenderer = new DirectionsRenderer(true, map, directionsPane);
         map.addMouseEventHandler(UIEventType.click, (GMapMouseEvent event) -> {
             // Sets up an actionEvent where it will create a marker at the clicked location.
             LatLong latLong = event.getLatLong();
             System.out.println(isStart);
             if (isStart) {
+                map.clearMarkers();
+                directionsRenderer.clearDirections();
+                directionsRenderer = new DirectionsRenderer(true, map, directionsPane);
                 Map.setStartMarker(latLong, map);
                 isStart = false;
             } else {
@@ -1427,8 +1433,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             }
 
             if (Map.getStartLoc() != null && Map.getEndLoc() != null) {
-                Map.findRoute(Map.getStartLoc().getLatitude() + ", " + Map.getStartLoc().getLongitude(),Map.getEndLoc().getLatitude() + ", " + Map.getEndLoc().getLongitude(),
-                        mapView, directionsService, this, directionsPane);
+                map.clearMarkers();
+                Map.findRoute(Map.getStartLoc().getLatitude() + ", " + Map.getStartLoc().getLongitude(),
+                        Map.getEndLoc().getLatitude() + ", " + Map.getEndLoc().getLongitude(),
+                        mapView, directionsService, this, directionsPane, directionsRenderer);
             }
         });
     }
@@ -1438,7 +1446,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     public void directionsReceived(DirectionsResult results, DirectionStatus status){
         // This is called when a route is created.
 
-        //This section finds the nearby locations. TODO: Fix the markers not appearing on the map.
+        //This section finds the nearby locations.
         ArrayList<Location> nearby = new ArrayList<Location>();
         for (DirectionsLeg leg : results.getRoutes().get(0).getLegs()) {
             nearby.addAll(Map.findNearby(leg.getStartLocation().getLatitude(), leg.getStartLocation().getLongitude()));

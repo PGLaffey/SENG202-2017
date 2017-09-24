@@ -85,10 +85,12 @@ public class Map {
                 .position(startLoc);
 
         if (startMarker != null) {
+            map.clearMarkers();
             map.removeMarker(startMarker);
             startMarker = new Marker(routeMarkerOptns);
             map.addMarker(startMarker);
         } else {
+            map.clearMarkers();
             startMarker = new Marker(routeMarkerOptns);
             map.addMarker(startMarker);
         }
@@ -279,12 +281,12 @@ public class Map {
      * @param pane - The DirectionsPane object used in the DirectionsRenderer for the service.
      */
     public static void findRoute(String startAddress, String endAddress, GoogleMapView mapView,
-                          DirectionsService service, DirectionsServiceCallback callback, DirectionsPane pane) {
+                          DirectionsService service, DirectionsServiceCallback callback, DirectionsPane pane, DirectionsRenderer directionsRenderer) {
         // Creates a new directions request for the Google Maps API
         DirectionsRequest request = new DirectionsRequest(startAddress, endAddress, TravelModes.BICYCLING);
 
         // Obtains the result of the request using the Directions Service.
-        service.getRoute(request, callback, new DirectionsRenderer(true, mapView.getMap(), pane));
+        service.getRoute(request, callback, directionsRenderer);
     }
 
     /**
@@ -435,6 +437,7 @@ public class Map {
                     .title(route.getStartString())
                     .visible(routeStartVisible)
                     .icon("http://google.com/mapfiles/ms/micons/cycling.png");
+            map.clearMarkers();
             route.setStartMarker(new Marker(startMarkOptns));
 
             MarkerOptions endMarkOptns = new MarkerOptions()
