@@ -219,23 +219,18 @@ public class ProfileScreenController {
 		usersBirthDateLabel.setText(user.getDob());
 		userBadges = user.getBadges();
 		userDistBadge = userBadges.get(0);
-		//userTimeBadge = userBadges.get(1);
-		//userRouteBadge = userBadges.get(2);
+		userTimeBadge = userBadges.get(1);
+		userRouteBadge = userBadges.get(2);
 
-		File file = new File("src/main/resources/images/Badges/badgeDistance3.png");
-		Image image = new Image(file.toURI().toString());
+		userDistBadge.updateBadge(intValue(user.getDistance()));
+		userTimeBadge.updateBadge(intValue(user.getHours()));
+		userRouteBadge.updateBadge(user.getRoutesCycled());
 
-		try {
-			userDistBadge.updateBadge(intValue(user.getDistance()));
-		} catch (BadgeLevelException e) {
-			e.printStackTrace();
-		}
-		//userTimeBadge.updateBadge(intValue(user.getHours()));
-		//userRouteBadge.updateBadge(user.getRoutesCycled());
 
-		distanceBadge.setImage(image);
-		//timeBadge.setImage();
-		//routesBadge.setImage();
+
+        distanceBadge.setImage(new Image(userDistBadge.getIcon().toString()));
+        timeBadge.setImage(new Image(userTimeBadge.getIcon().toString()));
+		routesBadge.setImage(new Image(userRouteBadge.getIcon().toString()));
 	}
 	
 
