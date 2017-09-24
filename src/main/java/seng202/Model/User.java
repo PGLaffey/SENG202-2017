@@ -18,7 +18,7 @@ public class User implements Serializable {
     private String dateOfBirth;
     private int routesCycled;
     private double distanceCycled;
-    private double hoursCycled;
+    private double minutesCycled;
     private ArrayList<Route> routes;
     private ArrayList<Badge> badges; // First badge is distance, second time and third route
 
@@ -41,22 +41,16 @@ public class User implements Serializable {
         this.dateOfBirth = doB;
         this.routesCycled = 0;
         this.distanceCycled = 0;
-        this.hoursCycled = 0;
+        this.minutesCycled = 0;
         this.routes = new ArrayList<Route>();
         this.badges = new ArrayList<Badge>();
         Badge distBadge = null;
-        try {
-            distBadge = new Badge("Distance");
-        } catch (BadgeLevelException e) {
-            e.printStackTrace();
-        } catch (BadgeTypeException e) {
-            e.printStackTrace();
-        }
-        //Badge timeBadge = new Badge("Time");
-        //Badge routeBadge = new Badge("Route");
+        distBadge = new Badge("Distance");
+        Badge timeBadge = new Badge("Time");
+        Badge routeBadge = new Badge("Routes");
         badges.add(distBadge);
-        //badges.add(timeBadge);
-        //badges.add(routeBadge);
+        badges.add(timeBadge);
+        badges.add(routeBadge);
     }
 
     /**
@@ -98,7 +92,7 @@ public class User implements Serializable {
      * @return
      */
     public double getHours() {
-        return hoursCycled;
+        return minutesCycled;
     }
 
     /**
@@ -152,7 +146,7 @@ public class User implements Serializable {
      * Adds on to the users time spent cycling
      */
 	public void addTime(double time) {
-		hoursCycled += time;
+		minutesCycled += time;
 	}
 
     /**
