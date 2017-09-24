@@ -51,6 +51,10 @@ public class RawDataViewer {
                 if (poiArrayList.get(i).getAddress().toLowerCase().contains(condition.toLowerCase())) {
                     foundPoi.add(poiArrayList.get(i));
                 }
+            } if (poiArrayList.get(i).getBorough() != null) {
+                if (poiArrayList.get(i).getBorough().toLowerCase().contains(condition.toLowerCase())) {
+                    foundPoi.add(poiArrayList.get(i));
+                }
             }
 
         }
@@ -80,6 +84,10 @@ public class RawDataViewer {
             	foundRetailer.add(retailerArrayList.get(i));
             } else if (!retailerArrayList.get(i).getAddress().isEmpty()) {
                 if (retailerArrayList.get(i).getAddress().toLowerCase().contains(condition.toLowerCase())) {
+                    foundRetailer.add(retailerArrayList.get(i));
+                }
+            } else if (retailerArrayList.get(i).getBorough() != (null)) {
+                if (retailerArrayList.get(i).getBorough().toLowerCase().contains(condition.toLowerCase())) {
                     foundRetailer.add(retailerArrayList.get(i));
                 }
             }
@@ -125,8 +133,6 @@ public class RawDataViewer {
         for (int i = 0; i < wifiArrayList.size(); i++) {
             if (wifiArrayList.get(i).getProvider().toLowerCase().contains(condition.toLowerCase())) {
                 foundWifi.add(wifiArrayList.get(i));
-            } else if (wifiArrayList.get(i).getBorough().toLowerCase().contains(condition.toLowerCase())) {
-                foundWifi.add(wifiArrayList.get(i));
             } else if(wifiArrayList.get(i).getType().toLowerCase().contains(condition.toLowerCase())) {
                 foundWifi.add(wifiArrayList.get(i));
             } else if (wifiArrayList.get(i).getName().toLowerCase().contains(condition.toLowerCase())) {
@@ -137,6 +143,10 @@ public class RawDataViewer {
             	foundWifi.add(wifiArrayList.get(i));
             } else if (String.valueOf(wifiArrayList.get(i).getSsid()).toLowerCase().contains(condition.toLowerCase())) {
                 foundWifi.add(wifiArrayList.get(i));
+            } else if (wifiArrayList.get(i).getBorough() != (null)) {
+                if (wifiArrayList.get(i).getBorough().toLowerCase().contains(condition.toLowerCase())) {
+                    foundWifi.add(wifiArrayList.get(i));
+                }
             }
         }
         return foundWifi;

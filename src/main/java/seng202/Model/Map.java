@@ -33,22 +33,40 @@ public class Map {
     private static Marker startMarker = null;
     private static Marker endMarker = null;
 
+    /**
+     * Sets the retailers to visible on the map
+     */
     public static void setRetailerVisible(boolean value) {
         retailerVisible = value;
     }
 
+    /**
+     * Getter for whether the retailers are visible on the map
+     */
     public static boolean getRetailerVisible() {
         return retailerVisible;
     }
 
+    /**
+     * Getter for whether the routes are visible on the map
+     */
     public static boolean getRouteVisible() { return routeStartVisible; }
 
+    /**
+     * Sets the start of the route to visible on the map
+     */
     public static void setRouteStartVisible(boolean value) { routeStartVisible = value; }
 
+    /**
+     * Getter for the start location on the map
+     */
     public static LatLong getStartLoc() {
         return startLoc;
     }
 
+    /**
+     * Getter for the end location on the map
+     */
     public static LatLong getEndLoc() {
         return endLoc;
     }
@@ -76,6 +94,11 @@ public class Map {
         }
     }
 
+    /**
+     * Repositions or sets the end marker
+     * @param latLong - A LatLong object of the mouse position
+     * @param map - A googleMap object to place the startMarker on.
+     */
     public static void setEndMarker(LatLong latLong, GoogleMap map) {
         endLoc = latLong;
         MarkerOptions routeMarkerOptns = new MarkerOptions().animation(Animation.DROP)
@@ -309,6 +332,11 @@ public class Map {
         service.getRoute(request, callback, new DirectionsRenderer(true, mapView.getMap(), pane));
     }
 
+    /**
+     * Sets the pointer for the wifi location on the map
+     * @param wifi Wifi object to use
+     * @return the location of the pointer on the map
+     */
     public static Circle findWifi(Wifi wifi) {
 
         //Creates a new circle and places it on a map.
@@ -325,6 +353,10 @@ public class Map {
         return wifi.getCircle();
     }
 
+    /**
+     * Sets markers for the retailers on the map
+     * @param retailer retailer object to be used
+     */
     public static Marker findRetailers(Retailer retailer) {
 
         // Loops through a list of known addresses. This is to reduce the amount of requests that are made.
@@ -391,6 +423,11 @@ public class Map {
         }
     }
 
+    /**
+     * Sets the route markers on the map
+     * @param route route object to be used
+     * @param map map object to be used
+     */
     public static void findRouteMarker(Route route, GoogleMap map) {
         if (route.getStartMarker() == null) {
             MarkerOptions startMarkOptns  = new MarkerOptions()

@@ -63,66 +63,119 @@ public class Location {
         this.locationType = locationType;
     }
 
+    /**
+     * Getter for the locations latitude
+     */
     public double getLatitude() {
         return latitude;
     }
 
+    /**
+     * Getter for the locations longitude
+     */
     public double getLongitude() {
         return longitude;
     }
 
+    /**
+     * Getter for the locations address
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     * Sets the locations address
+     * @param address address to be set
+     */
     public void setAddress(String address) {
         this.address = address;
     }
 
+    /**
+     * Getter for the location name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Getter for the location type
+     */
     public int getLocationType() {
         return locationType;
     }
 
+    /**
+     * Getter for whether the location is local
+     */
     public boolean getLocal() {
         return local;
     }
 
+    /**
+     * Getter for the owner of the location
+     */
     public User getOwner() {
         return belongsTo;
     }
 
+    /**
+     * Getter for the zip code of the location
+     */
     public int getZip() {
         return zip;
     }
 
+    /**
+     * Sets the zip code of the location
+     * @param zip zip code to be set
+     */
     public void setZip(int zip) {
         this.zip = zip;
     }
 
+    /**
+     * Stores whether the location is local
+     */
     public void storeLocal(boolean local) {
         this.local = local;
     }
 
+    /**
+     * Returns whether the route is secret
+     */
     public boolean isSecret() {
         return secret;
     }
 
+    /**
+     * Sets whether the location is secret
+     * @param secret boolean value for whether the route is secret
+     */
     public void setSecret(boolean secret) {
         this.secret = secret;
     }
 
+    /**
+     * Getter for the borough of the location
+     */
     public String getBorough() {
         return this.borough;
     }
 
+    /**
+     * Sets the name of the borough of the location
+     * @param borough name of the borough to be set
+     */
     public void setBorough(String borough) {
         this.borough = borough;
     }
 
+    /**
+     * Sets the name of the location
+     * @param name string to be set as name
+     */
     public void setName(String name) {
         this.name = name;
     }
@@ -159,6 +212,9 @@ public class Location {
         return coords;
     }
 
+    /**
+     * Getter for the type of location, returns this as a string
+     */
     public String getTypeString() {
         if (locationType == 0) {
             return ("Toilet");
