@@ -52,7 +52,7 @@ public class DataFetcherTest extends TestCase {
         }
         try {
             // Checks if the connection obtained by the fetcher in connectDB is valid
-            assertTrue(fetcher.getConnect().isValid(60));
+            assertTrue(fetcher.getConnect().isValid(180));
         } catch (SQLException exception) {
             fail("SQLException");
         }
