@@ -178,7 +178,7 @@ public class Badge {
             } else {
                 int kilometres = remaining / 1000;
                 int metres = remaining - (kilometres * 1000);
-                strRemaining = Integer.toString(kilometres) + " hours & " + Integer.toString(metres) + " minutes";
+                strRemaining = Integer.toString(kilometres) + " kilometres & " + Integer.toString(metres) + " metres";
             }
         } else {
             strRemaining = Integer.toString(remaining) + " " + units[getBadgeTypeIndex()];
