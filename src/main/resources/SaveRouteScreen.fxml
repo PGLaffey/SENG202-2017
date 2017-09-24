@@ -17,18 +17,30 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="452.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.Controller.SaveRouteScreenController">
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="450.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,4;" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.SaveRouteScreenController">
   <children>
-    <Button id="signInButton" fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelButtonPressed" text="Cancel" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+    <Button id="signInButton" fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelButtonPressed" style="-fx-background-color: #30126D, #B39EDC;" text="Cancel" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
       <GridPane.margin>
         <Insets left="20.0" />
       </GridPane.margin>
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
     </Button>
-    <Label text="Route name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <Label text="Route name:" GridPane.columnIndex="0" GridPane.rowIndex="0">
+         <font>
+            <Font name="KacstOne Bold" size="13.0" />
+         </font></Label>
+    <TextField prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
     <Label text="How would you like to save your route?" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-    <Button fx:id="saveLocallyButton" mnemonicParsing="false" onAction="#saveLocallyPressed" prefWidth="140.0" text="Save locally" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-    <Button id="savePubiclyButton" fx:id="savePubliclyButton" mnemonicParsing="false" onAction="#savePubliclyPressed" prefWidth="140.0" text="Save publicly" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+    <Button fx:id="saveLocallyButton" mnemonicParsing="false" onAction="#saveLocallyPressed" prefWidth="140.0" style="-fx-background-color: #30126D, #B39EDC;" text="Save locally" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font></Button>
+    <Button id="savePubiclyButton" fx:id="savePubliclyButton" mnemonicParsing="false" onAction="#savePubliclyPressed" prefWidth="140.0" style="-fx-background-color: #30126D, #B39EDC;" text="Save publicly" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font></Button>
   </children>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="196.0" />

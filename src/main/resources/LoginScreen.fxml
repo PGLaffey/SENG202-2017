@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
@@ -17,22 +18,37 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="400.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.Controller.LoginScreenController">
+<GridPane alignment="CENTER" hgap="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="450.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0, 4;" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.LoginScreenController">
   <children>
-    <Label alignment="CENTER_LEFT" text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-    <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-    <TextField fx:id="usernameText" onAction="#signInButtonPressed" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-    <PasswordField fx:id="passwordText" onAction="#signInButtonPressed" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cyclrr!" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
-      <font>
-        <Font name="Broadway" size="30.0" />
-      </font>
-    </Text>
-    <Button fx:id="signInButton" mnemonicParsing="false" onAction="#signInButtonPressed" text="Sign In" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
-    <Button fx:id="signUpButton" mnemonicParsing="false" mouseTransparent="false" onAction="#signUpButtonPressed" text="Sign Up" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
-    <CheckBox fx:id="staySignedInCheck" mnemonicParsing="false" text="Stay signed in" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-    <Label fx:id="incorrectPasswordLbl" text="Incorrect Password" textFill="RED" visible="false" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-    <Label fx:id="incorrectUserLbl" text="User does not exist" textAlignment="CENTER" textFill="RED" visible="false" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+    <Label alignment="CENTER_LEFT" text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="1">
+         <font>
+            <Font name="KacstOne Bold" size="13.0" />
+         </font></Label>
+    <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2">
+         <font>
+            <Font name="KacstOne Bold" size="13.0" />
+         </font></Label>
+    <TextField fx:id="usernameText" onAction="#signInButtonPressed" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0, 1.5;" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+    <PasswordField fx:id="passwordText" onAction="#signInButtonPressed" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+    <Button fx:id="signInButton" mnemonicParsing="false" onAction="#signInButtonPressed" style="-fx-background-color: #30126D, #B39EDC;" text="Sign In" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="BOTTOM">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font></Button>
+    <Button fx:id="signUpButton" mnemonicParsing="false" mouseTransparent="false" onAction="#signUpButtonPressed" style="-fx-background-color: #30126D, #B39EDC;" text="Sign Up" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="BOTTOM">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font></Button>
+    <CheckBox fx:id="staySignedInCheck" mnemonicParsing="false" text="Stay signed in" GridPane.columnIndex="0" GridPane.rowIndex="4">
+         <font>
+            <Font name="KacstLetter" size="13.0" />
+         </font></CheckBox>
+    <Label fx:id="incorrectPasswordLbl" text="Incorrect Password" textFill="#573895" visible="false" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+    <Label fx:id="incorrectUserLbl" text="User does not exist" textAlignment="CENTER" textFill="#573895" visible="false" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2" GridPane.halignment="CENTER">
+         <image>
+            <Image url="@images/logo_1_retro.png" />
+         </image>
+      </ImageView>
   </children>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="196.0" />
@@ -45,8 +61,8 @@
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="16.0" minHeight="3.0" prefHeight="3.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="22.0" minHeight="9.0" prefHeight="16.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
   </rowConstraints>
 </GridPane>

@@ -17,46 +17,70 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="452.0" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.RouteInfoScreenController">
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="450.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,4;" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.RouteInfoScreenController">
   <children>
-    <Button fx:id="okButton" mnemonicParsing="false" onAction="#okPressed" text="Ok" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-    <Label id="objectInfoLabel" fx:id="nameLabel" prefWidth="386.0" text="Name:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP" />
+    <Button fx:id="okButton" mnemonicParsing="false" onAction="#okPressed" style="-fx-background-color: #30126D, #B39EDC;" text="Ok" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font></Button>
+    <Label id="objectInfoLabel" fx:id="nameLabel" prefWidth="386.0" text="Name:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
+         <font>
+            <Font name="KacstOne Bold" size="13.0" />
+         </font></Label>
     <Label id="objectInfoLabel" fx:id="distanceLabel" prefWidth="386.0" text="Distance:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
         <Insets top="25.0" />
       </GridPane.margin>
+         <font>
+            <Font name="KacstOne Bold" size="13.0" />
+         </font>
     </Label>
     <Label id="objectInfoLabel" fx:id="startLabel" prefWidth="386.0" text="Start:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
         <Insets top="50.0" />
       </GridPane.margin>
+         <font>
+            <Font name="KacstOne Bold" size="13.0" />
+         </font>
     </Label>
     <Label id="objectInfoLabel" fx:id="endLabel" prefWidth="386.0" text="End:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
         <Insets top="75.0" />
       </GridPane.margin>
+         <font>
+            <Font name="KacstOne Bold" size="13.0" />
+         </font>
     </Label>
     <Label id="objectInfoLabel" fx:id="bikeidLabel" prefWidth="386.0" text="Bike ID:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
         <Insets top="100.0" />
       </GridPane.margin>
+         <font>
+            <Font name="KacstOne Bold" size="13.0" />
+         </font>
     </Label>
     <Label id="objectInfoLabel" fx:id="genderLabel" prefWidth="386.0" text="Gender:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
         <Insets top="125.0" />
       </GridPane.margin>
+         <font>
+            <Font name="KacstOne Bold" size="13.0" />
+         </font>
     </Label>
     <Button fx:id="completedRouteButton" mnemonicParsing="false" onAction="#completedRouteButtonPressed" text="I have completed this route!" visible="false" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
       <Label fx:id="timeLabel" prefHeight="35.0" prefWidth="134.0" text="How long did it take you? (minutes)" wrapText="true" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-      <TextField fx:id="timeText" layoutX="100.0" maxWidth="50.0" prefHeight="13.0" prefWidth="50.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+      <TextField fx:id="timeText" layoutX="100.0" maxWidth="50.0" prefHeight="13.0" prefWidth="50.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
          <GridPane.margin>
             <Insets left="50.0" />
          </GridPane.margin>
       </TextField>
-      <Button fx:id="addButton" layoutX="100.0" maxWidth="75.0" minWidth="50.0" mnemonicParsing="false" onAction="#addButtonPressed" text="Add" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+      <Button fx:id="addButton" layoutX="100.0" maxWidth="75.0" minWidth="50.0" mnemonicParsing="false" onAction="#addButtonPressed" style="-fx-background-color: #30126D, #B39EDC;" text="Add" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
          <GridPane.margin>
             <Insets left="150.0" />
          </GridPane.margin>
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
       </Button>
   </children>
   <columnConstraints>

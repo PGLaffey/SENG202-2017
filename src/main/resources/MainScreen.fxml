@@ -34,22 +34,22 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.MainScreenController">
   <!--prefHeight="489.0" prefWidth="827.0"-->
   <children>
-    <SplitPane dividerPositions="0.10677618069815195" orientation="VERTICAL" prefHeight="489.0" prefWidth="827.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <SplitPane dividerPositions="0.10677618069815195" orientation="VERTICAL" prefHeight="500.0" prefWidth="850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <items>
-        <AnchorPane maxHeight="49.0" minHeight="49.0" minWidth="0.0">
+        <AnchorPane maxHeight="50.0" minHeight="50.0" minWidth="850.0">
           <children>
-            <GridPane minHeight="49.0" prefWidth="825.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane minHeight="50.0" prefWidth="850.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
-                <Label alignment="CENTER" prefHeight="16.0" prefWidth="132.0" text="CYCLRR" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <Label alignment="CENTER" prefHeight="16.0" prefWidth="132.0" text="" GridPane.columnIndex="0" GridPane.rowIndex="0">
                   <graphic>
-                    <ImageView fitHeight="53.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fitHeight="50.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
                       <image>
-                        <Image url="@images/bike.png" />
+                        <Image url="@images/logo_1_retro.png" />
                       </image>
                     </ImageView>
                   </graphic>
                 </Label>
-                <Button fx:id="mapButton" mnemonicParsing="false" onAction="#mapPressed" prefHeight="49.0" prefWidth="203.0" style="-fx-background-color: #599ff9;" text="Map" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <Button fx:id="mapButton" mnemonicParsing="false" onAction="#mapPressed" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #96C6D6;" text="Map" textFill="#30126d" GridPane.columnIndex="1" GridPane.rowIndex="0">
                   <graphic>
                     <ImageView fitHeight="45.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                       <image>
@@ -57,37 +57,49 @@
                       </image>
                     </ImageView>
                   </graphic>
+                              <font>
+                                <Font name="KacstOne Bold" size="13.0" />
+                              </font>
                 </Button>
-                <Button id="statButton" fx:id="tableButton" mnemonicParsing="false" onAction="#tablePressed" prefHeight="49.0" prefWidth="203.0" text="Table" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                <Button id="statButton" fx:id="tableButton" mnemonicParsing="false" onAction="#tablePressed" prefHeight="40.0" prefWidth="160.0" text="Table" GridPane.columnIndex="2" GridPane.rowIndex="0">
                   <graphic>
-                    <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                       <image>
                         <Image url="@images/table.png" />
                       </image>
                     </ImageView>
                   </graphic>
+                  <font>
+                    <Font name="KacstOne" size="13.0" />
+                  </font>
                 </Button>
-                <Button fx:id="statButton" mnemonicParsing="false" onAction="#statPressed" prefHeight="49.0" prefWidth="203.0" text="Statistics" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                <Button fx:id="statButton" mnemonicParsing="false" onAction="#statPressed" prefHeight="50.0" prefWidth="160.0" text="Statistics" GridPane.columnIndex="3" GridPane.rowIndex="0">
                   <graphic>
-                    <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                       <image>
                         <Image url="@images/pie_chart.png" />
                       </image>
                     </ImageView>
                   </graphic>
+                  <font>
+                    <Font name="KacstOne" size="13.0" />
+                  </font>
                 </Button>
-                <Button fx:id="accountButton" mnemonicParsing="false" onAction="#accountPressed" prefHeight="49.0" prefWidth="202.0" text="Account" GridPane.columnIndex="4" GridPane.rowIndex="0">
+                <Button fx:id="accountButton" mnemonicParsing="false" onAction="#accountPressed" prefHeight="50.0" prefWidth="160.0" text="Account" GridPane.columnIndex="4" GridPane.rowIndex="0">
                   <graphic>
-                    <ImageView fitHeight="51.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                       <image>
                         <Image url="@images/account.png" />
                       </image>
                     </ImageView>
                   </graphic>
+                  <font>
+                    <Font name="KacstOne" size="13.0" />
+                  </font>
                 </Button>
-                <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#logoutPressed" prefHeight="51.0" prefWidth="57.0" GridPane.columnIndex="5" GridPane.rowIndex="0">
+                <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#logoutPressed" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="5" GridPane.rowIndex="0">
                   <graphic>
-                    <ImageView fitHeight="43.0" fitWidth="51.0" pickOnBounds="true">
+                    <ImageView fitHeight="43.0" fitWidth="50.0" pickOnBounds="true">
                       <image>
                         <Image url="@images/logout.png" />
                       </image>
@@ -113,7 +125,7 @@
           <children>
             <SplitPane dividerPositions="0.22235722964763063" prefHeight="432.0" prefWidth="825.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" SplitPane.resizableWithParent="false">
               <items>
-                <AnchorPane maxWidth="200.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <AnchorPane maxWidth="200.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #D1D7F1;">
                   <children>
                     <GridPane prefHeight="430.0" prefWidth="182.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
