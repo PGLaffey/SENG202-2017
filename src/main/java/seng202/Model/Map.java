@@ -113,7 +113,6 @@ public class Map {
         } else {
             endMarker = new Marker(routeMarkerOptns);
             map.addMarker(endMarker);
-
         }
     }
 

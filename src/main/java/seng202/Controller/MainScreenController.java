@@ -1427,7 +1427,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             }
 
             if (Map.getStartLoc() != null && Map.getEndLoc() != null) {
-                Map.findRoute(Map.getStartLoc(), Map.getEndLoc(),
+                Map.findRoute(Map.getStartLoc().getLatitude() + ", " + Map.getStartLoc().getLongitude(),Map.getEndLoc().getLatitude() + ", " + Map.getEndLoc().getLongitude(),
                         mapView, directionsService, this, directionsPane);
             }
         });
