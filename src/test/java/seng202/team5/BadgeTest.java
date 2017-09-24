@@ -47,8 +47,9 @@ public class BadgeTest extends TestCase {
      */
     @Test
     public void testGetStrRemaingDistanceZero() {
-        distanceBadge.setValue(distanceBadge.getLevelCap());
+        distanceBadge.setValue(2000);
         String strRemaining = distanceBadge.getStrRemaining();
+        System.out.println(distanceBadge.getLevel());
         assertEquals("8 kilometres", strRemaining);
     }
 
@@ -106,7 +107,7 @@ public class BadgeTest extends TestCase {
     @Test
     public void testGetStrRemainingTimeMinutes() {
         timeBadge.setValue(542);
-        timeBadge.setLevel(4);
+        timeBadge.setLevel(1);
         String strRemaining = timeBadge.getStrRemaining();
         assertEquals("58 minutes", strRemaining);
     }

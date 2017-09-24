@@ -249,6 +249,10 @@ public class Badge implements Serializable{
     public void updateRemaining() {
         int remaining = (getLevelCap() - value);
         this.remaining = remaining;
+        if (remaining <= 0) {
+            updateLevel();
+            updateRemaining();
+        }
     }
 
     /**
