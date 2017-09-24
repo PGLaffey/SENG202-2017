@@ -14,8 +14,13 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
+import org.omg.CORBA.Current;
 import seng202.Model.CurrentStorage;
+import seng202.Model.User;
 import seng202.exceptions.BadgeLevelException;
+import sun.util.resources.cldr.uk.CurrencyNames_uk;
+
+import static oracle.jrockit.jfr.events.Bits.intValue;
 
 public class DataViewerScreenController {
 	
@@ -154,12 +159,15 @@ public class DataViewerScreenController {
 		timeValue.setText(CurrentStorage.getUser().getHours() + " hours");
 		routesValue.setText(CurrentStorage.getUser().getRoutesCycled() + " routes");
 
-		try {
-			distNextBadge.setText(CurrentStorage.getUser().getBadges().get(0).getStrRemaining());
-			timeNextBadge.setText(CurrentStorage.getUser().getBadges().get(1).getStrRemaining());
-			routesNextbadge.setText(CurrentStorage.getUser().getBadges().get(2).getStrRemaining());
-		} catch (BadgeLevelException e) {
-			e.printStackTrace();
-		}
+		User user = CurrentStorage.getUser();
+
+        user.getBadges().get(0).updateBadge(intValue(user.getDistance()));
+        user.getBadges().get(1).updateBadge(intValue(user.getHours()));
+        user.getBadges().get(2).updateBadge(user.getRoutesCycled());
+
+        distNextBadge.setText(CurrentStorage.getUser().getBadges().get(0).getStrRemaining());
+        timeNextBadge.setText(CurrentStorage.getUser().getBadges().get(1).getStrRemaining());
+		routesNextbadge.setText(CurrentStorage.getUser().getBadges().get(2).getStrRemaining());
+
 	}
 }

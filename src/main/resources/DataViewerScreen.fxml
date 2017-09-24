@@ -125,29 +125,29 @@
               </AnchorPane>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="53.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="53.0" layoutY="275.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="223.0" layoutY="275.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="223.0" layoutY="153.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="53.0" layoutY="153.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="223.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
-                              <Label layoutX="78.0" layoutY="176.0" text="Completed routes:" />
-                              <Label layoutX="72.0" layoutY="237.0" text="Hours spent cycling:" />
-                              <Label layoutX="85.0" layoutY="298.0" text="Distance cycled:" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="393.0" layoutY="275.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="393.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="393.0" layoutY="153.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="393.0" layoutY="92.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="223.0" layoutY="92.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="54.0" layoutY="92.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
-                              <Label layoutX="287.0" layoutY="115.0" text="Value:" />
-                              <Label layoutX="427.0" layoutY="115.0" text="Till next badge:" />
-                              <Label fx:id="routesValue" layoutX="299.0" layoutY="176.0" text="0" />
-                              <Label fx:id="distNextBadge" layoutX="470.0" layoutY="298.0" text="0" />
-                              <Label fx:id="distValue" layoutX="299.0" layoutY="298.0" text="0" />
-                              <Label fx:id="timeNextBadge" layoutX="470.0" layoutY="237.0" text="0" />
-                              <Label fx:id="timeValue" layoutX="299.0" layoutY="237.0" text="0" />
-                              <Label fx:id="routesNextbadge" layoutX="470.0" layoutY="176.0" text="0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="20.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="20.0" layoutY="275.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="190.0" layoutY="275.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="190.0" layoutY="153.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="20.0" layoutY="153.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="190.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Label layoutX="45.0" layoutY="176.0" text="Completed routes:" />
+                              <Label layoutX="39.0" layoutY="237.0" text="Hours spent cycling:" />
+                              <Label layoutX="52.0" layoutY="298.0" text="Distance cycled:" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="360.0" layoutY="275.0" stroke="BLACK" strokeType="INSIDE" width="234.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="360.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" width="234.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="360.0" layoutY="153.0" stroke="BLACK" strokeType="INSIDE" width="234.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="360.0" layoutY="92.0" stroke="BLACK" strokeType="INSIDE" width="234.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="190.0" layoutY="92.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="20.0" layoutY="92.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+                              <Label layoutX="254.0" layoutY="115.0" text="Value:" />
+                              <Label layoutX="394.0" layoutY="115.0" text="Till next badge:" />
+                              <Label fx:id="routesValue" layoutX="209.0" layoutY="176.0" text="0" />
+                              <Label fx:id="distNextBadge" layoutX="377.0" layoutY="298.0" text="0" />
+                              <Label fx:id="distValue" layoutX="209.0" layoutY="298.0" text="0" />
+                              <Label fx:id="timeNextBadge" layoutX="377.0" layoutY="237.0" text="0" />
+                              <Label fx:id="timeValue" layoutX="209.0" layoutY="237.0" text="0" />
+                              <Label fx:id="routesNextbadge" layoutX="377.0" layoutY="176.0" text="0" />
                            </children>
               </AnchorPane>
             </items>
