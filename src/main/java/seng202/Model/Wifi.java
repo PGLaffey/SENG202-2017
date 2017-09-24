@@ -34,22 +34,40 @@ public class Wifi extends Location {
     	this.type = type;
     }
 
+    /**
+     * Getter for the SSID
+     */
     public String getSsid() {
         return this.ssid;
     }
 
+    /**
+     * Getter for the wifi provider
+     */
     public String getProvider() {
         return provider;
     }
 
+    /**
+     * Getter for the marker of the wifi point
+     */
     public Circle getCircle() { return circle; }
 
+    /**
+     * Sets the marker for the wifi
+     */
     public void setCircle(Circle circle) { this.circle = circle; }
 
+    /**
+     * Getter for the wifi type
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     *  @return True if wifi objects are equal
+     */
     public boolean equals(Wifi other) {
 
         if (!getName().equals(other.getName())) {

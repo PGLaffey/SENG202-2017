@@ -368,7 +368,7 @@ public class Badge {
         icon = image;
     }
 
-    public static void main() {
+    public static void main() throws BadgeLevelException, BadgeTypeException {
         Badge badge = new Badge("Distance");
 
     }

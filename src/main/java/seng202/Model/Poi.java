@@ -30,18 +30,30 @@ public class Poi extends Location {
         this.cost = cost;
     }
 
+    /**
+     * Getter for the description of the POI
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Getter for the cost of the POI
+     */
     public double getCost() {
         return cost;
     }
 
+    /**
+     * Getter for the marker for the POI
+     */
     public Marker getMarker() { 
     	return marker; 
     }
 
+    /**
+     * Sets the marker for the POI
+     */
     public void setMarker(Marker marker) { 
     	this.marker = marker;
     }
