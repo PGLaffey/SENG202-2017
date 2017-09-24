@@ -328,17 +328,18 @@ public class Map {
     public static Marker findRetailers(Retailer retailer) {
 
         // Loops through a list of known addresses. This is to reduce the amount of requests that are made.
-        for (Coord coord : CurrentStorage.getCoords()) {
-            //TODO: check if the address of the new retailer has already been found.
-            if (retailer.getAddress().equalsIgnoreCase(coord.getAddress())) {
-                if (coord.hasMarker()) {
-                    retailer.setNoMarker(true);
-                    retailer.setCoord(coord);
-                    break;
+        if (retailer.getLatitude() == -91 || retailer.getLongitude() == -181) {
+            for (Coord coord : CurrentStorage.getCoords()) {
+                //TODO: check if the address of the new retailer has already been found.
+                if (retailer.getAddress().equalsIgnoreCase(coord.getAddress())) {
+                    if (coord.hasMarker()) {
+                        retailer.setNoMarker(true);
+                        retailer.setCoord(coord);
+                        break;
+                    }
                 }
             }
         }
-
         //Obtain the position for the marker and convert into the format required.
         LatLong latLong = new LatLong(retailer.getLatitude(), retailer.getLongitude());
 

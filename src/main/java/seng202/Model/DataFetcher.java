@@ -816,6 +816,7 @@ public class DataFetcher {
     	if (location.getLocal()) {
     		local = 0;
     	}
+    	String address = location.getAddress();
     	String zip = ((Integer) location.getZip()).toString();
 		String borough = location.getBorough();
     	String owner = null;
@@ -844,8 +845,8 @@ public class DataFetcher {
     	}
     	if (type == 4 || typeID == null) {
     		String stmt = "INSERT INTO tblLocations "
-					+ "(Latitude, Longitude, Name, User, Public, Type) VALUES "
-					+ "(?, ?, ?, ?, ?, ?)";
+					+ "(Latitude, Longitude, Name, User, Public, Type, Address) VALUES "
+					+ "(?, ?, ?, ?, ?, ?, ?)";
     		try {
 				preparedStatement = connect.prepareStatement(stmt);
 				preparedStatement.setDouble(1, latitude);
@@ -854,6 +855,7 @@ public class DataFetcher {
 				preparedStatement.setString(4, owner);
 				preparedStatement.setInt(5, local);
 				preparedStatement.setInt(6, type);
+				preparedStatement.setString(7, address);
 
 				runUpdate(preparedStatement);
 			} catch (SQLException sqlException) {
@@ -862,8 +864,8 @@ public class DataFetcher {
     	}
 
 		String stmt = "INSERT INTO tblLocations "
-				+ "(Latitude, Longitude, Name, User, Public, Type, " + typeName + "ID, Zip, Borough) VALUES "
-				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "(Latitude, Longitude, Name, User, Public, Type, " + typeName + "ID, Zip, Borough, Address) VALUES "
+				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			preparedStatement = connect.prepareStatement(stmt);
@@ -876,6 +878,7 @@ public class DataFetcher {
 			preparedStatement.setString(7, typeID);
 			preparedStatement.setString(8, zip);
 			preparedStatement.setString(9, borough);
+			preparedStatement.setString(10, address);
 
 			runUpdate(preparedStatement);
 		} catch (SQLException sqlException) {
@@ -943,9 +946,9 @@ public class DataFetcher {
     	//test.connectDbTest();				//Tests the connection to the database
     	test.connectDb();
 
-		FileManager.wifiRetriever(new File(seng202.Model.DataFetcher.class.getResource("/data_files/NYC_Free_Public_WiFi_03292017.csv").getFile()).toString());
-		for (Wifi newWifi : CurrentStorage.getWifiArray()) {
-			test.addWifi(newWifi);
+		FileManager.retailerRetriever(new File(seng202.Model.DataFetcher.class.getResource("/data_files/Lower_Manhattan_Retailers.csv").getFile()).toString());
+		for (Retailer newWifi : CurrentStorage.getRetailerArray()) {
+			test.addRetailer(newWifi);
 		}
     	//test.loadLocation(testLoc1);		//Tests loading a valid location
     	//Retailer testLoc2 = new Retailer("2 Brockhall Lane", "Testing" , "Testing More stuff", "tests");

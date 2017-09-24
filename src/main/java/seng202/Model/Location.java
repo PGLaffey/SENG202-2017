@@ -4,8 +4,8 @@ package seng202.Model;
  * Location object stores the information about a specific location (i.e. wifi hotspot, retailer, toilet or point of interest).
  */
 public class Location {
-    private double latitude;
-    private double longitude;
+    private double latitude = -91; // Maximum range for latitude is -90 to 90, so setting it outside this range tells up it was never set
+    private double longitude = -181; // Maximum range for longitude is -180 to 180, so setting it outside this range tells us it was never set.
     //TODO added type to location
     private int locationType; //toilet = 0, poi = 1, retailer = 2, wifi = 3, general = 4
     private String name;
@@ -42,6 +42,22 @@ public class Location {
         double[] latLong = Map.getLatLong(address);
         this.latitude = latLong[0];
         this.longitude = latLong[1];
+        this.address = address;
+        this.name = name;
+        this.locationType = locationType;
+    }
+
+    /**
+     * Overloaded constructor
+     * @param latitude - Latitude of the location
+     * @param longitude - Longitude of the location
+     * @param address - Address of the location
+     * @param name - Name of the location
+     * @param locationType - Type of location, 0
+     */
+    public Location(double latitude, double longitude, String address, String name, int locationType) {
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.address = address;
         this.name = name;
         this.locationType = locationType;

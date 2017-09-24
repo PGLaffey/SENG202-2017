@@ -33,10 +33,25 @@ public class Retailer extends Location {
      * @param address The address of the retailer
      * @param name The name of the retailer.
      * @param product The product the retailer sells.
-     * @param description A description of the retailer at the location.
+     * @param description A general description of what the retailer sells.
      */
     public Retailer(String address, String name, String product, String description) {
         super(address, name, 2);
+        this.product = product;
+        this.description = description;
+    }
+
+    /**
+     * Specific overloaded constructor that is provided all the information.
+     * @param latitude - Latitude of the retailer.
+     * @param longitude - Longitude of the retailer.
+     * @param address - The address of the retailer.
+     * @param name - The name of the retailer.
+     * @param product - The product that the retailer sells.
+     * @param description - A general description of what the retailer sells.
+     */
+    public Retailer(double latitude, double longitude, String address, String name, String product, String description) {
+        super(latitude, longitude, address, name, 2);
         this.product = product;
         this.description = description;
     }
