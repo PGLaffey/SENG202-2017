@@ -22,6 +22,7 @@ public class FileManagerTest extends TestCase {
     @Rule
     private ExpectedException thrown = ExpectedException.none();
 
+
     /**
      * Constructor for FileManagerTest
      * @param testName The name of the test.
@@ -31,6 +32,7 @@ public class FileManagerTest extends TestCase {
         super(testName);
     }
 
+
     /**
      * Gets the suite to which the test belongs
      * @return The suite that the test belongs to.
@@ -39,6 +41,7 @@ public class FileManagerTest extends TestCase {
     {
         return new TestSuite(FileManagerTest.class);
     }
+
 
     /**
      * Set up a new FileManager object and create a new instance of the storage of the app.
@@ -50,6 +53,7 @@ public class FileManagerTest extends TestCase {
         CurrentStorage.flush();
     }
 
+
     /**
      * Test to ensure that the readFile method can read a text file.
      */
@@ -58,6 +62,7 @@ public class FileManagerTest extends TestCase {
         result = FileManager.readFile(TARGET+"/someText.txt");
         assertEquals("this is a string", result.get(0));
     }
+
 
     /**
      * Test to read multiple lines
@@ -69,6 +74,9 @@ public class FileManagerTest extends TestCase {
     }
 
 
+    /**
+     * Testing whether a user object can be serialized and deserialized without values changing.
+     */
     @Test
     public void testUserSerialize() {
         User newUser = new User("first", "last", "username", "doB", "password");
@@ -94,6 +102,7 @@ public class FileManagerTest extends TestCase {
         assertTrue(CurrentStorage.getRouteArray().get(0).equals(expected_route));
     }
 
+
     /**
      * Test to ensure that duplicates are handled properly.
      */
@@ -106,6 +115,7 @@ public class FileManagerTest extends TestCase {
         assertEquals(1, CurrentStorage.getRouteArray().size());
     }
 
+
     /**
      * Test to test FileManager's readFile functions work as expected for a .csv with 10 routes.
      */
@@ -115,6 +125,7 @@ public class FileManagerTest extends TestCase {
         FileManager.routeRetriever(TARGET+"/route_data10.csv");
         assertEquals(10, CurrentStorage.getRouteArray().size());
     }
+
 
     /**
      * Test to test the FileManager's readFile functions work as expected for a .csv with a WiFi location
@@ -127,6 +138,7 @@ public class FileManagerTest extends TestCase {
         assertTrue(CurrentStorage.getWifiArray().get(0).equals(expected_wifi));
     }
 
+
     /**
      * Test to ensure duplicate WiFi data is handled correctly.
      */
@@ -137,6 +149,7 @@ public class FileManagerTest extends TestCase {
         assertEquals(1, CurrentStorage.getWifiArray().size());
     }
 
+
     /**
      * Test to test the FileManager's readFile functions work as expected for a .csv with 10 WiFi locations.
      */
@@ -145,6 +158,7 @@ public class FileManagerTest extends TestCase {
         FileManager.wifiRetriever(TARGET+"/wifi_data10.csv");
         assertEquals(10, CurrentStorage.getWifiArray().size());
     }
+
 
     /**
      * Test to test the FileManager's readFile functions work as expected for a .csv with a Retailer
@@ -156,6 +170,7 @@ public class FileManagerTest extends TestCase {
         assertTrue(CurrentStorage.getRetailerArray().get(0).equals(expected_retailer));
     }
 
+
     /**
      * Test to check if duplicate retailer entries are handled properly.
      */
@@ -166,14 +181,16 @@ public class FileManagerTest extends TestCase {
         assertEquals(1, CurrentStorage.getRetailerArray().size());
     }
 
+
     /**
-     * Test to test the FileManager's readFile functions works as expected for a .csv with 10 Retailers
+     * Test to test the FileManager's readFile functions work as expected for a .csv with 10 Retailers
      */
     @Test
     public void testRetailerTenEntries() {
         FileManager.retailerRetriever(TARGET+"/retailer_data10.csv");
         assertEquals(10, CurrentStorage.getRetailerArray().size());
     }
+
 
     /**
      * Tests the FileManager's toiletRetriever function works as expected for a .csv file with 1 Toilet
@@ -185,6 +202,7 @@ public class FileManagerTest extends TestCase {
         assertTrue(CurrentStorage.getToiletArray().get(0).equals(toilet));
     }
 
+
     /**
      * Tests the FileManager's toiletRetriever function does not save multiple instances of a Toilet.
      */
@@ -195,6 +213,7 @@ public class FileManagerTest extends TestCase {
         assertEquals(1, CurrentStorage.getToiletArray().size());
     }
 
+
     /**
      * Tests the FileManager's toiletRetriever works as expected for a .csv file with 10 Toilets
      */
@@ -203,6 +222,7 @@ public class FileManagerTest extends TestCase {
         FileManager.toiletRetriever(TARGET+"/toilet_data10.csv");
         assertEquals(10, CurrentStorage.getToiletArray().size());
     }
+
 
     /**
      * Tests the FileManager's poiRetriever works as expected for a .csv with 1 Poi.
@@ -214,6 +234,7 @@ public class FileManagerTest extends TestCase {
         assertTrue(CurrentStorage.getPoiArray().get(0).equals(poi));
     }
 
+
     /**
      * Tests the poiRetriever in the FileManager class does not add duplicates to the CurrentStorage.
      */
@@ -224,6 +245,7 @@ public class FileManagerTest extends TestCase {
         assertEquals(1, CurrentStorage.getPoiArray().size());
     }
 
+
     /**
      * Tests the FileManager's poiRetriever for the expected result of a .csv with 10 Poi.
      */
@@ -233,8 +255,9 @@ public class FileManagerTest extends TestCase {
         assertEquals(10, CurrentStorage.getPoiArray().size());
     }
 
+
     /**
-     * Test to test FileManager's readfile with an empty .csv file
+     * Tests file Reading functions with an empty .csv file
      */
     @Test
     public void testEmpty() {
@@ -250,8 +273,9 @@ public class FileManagerTest extends TestCase {
         assertEquals(0, CurrentStorage.getPoiArray().size());
     }
 
+
     /**
-     * Test to test FileManager's ability to throw a FileNotFound exception
+     * Tests the ability of the readFile function to throw a FileNotFound exception
      */
     @Test(expected = FileNotFoundException.class)
     public void testNonExistant()
@@ -260,8 +284,9 @@ public class FileManagerTest extends TestCase {
         FileManager.readFile(TARGET+"/gibbletyfook.csv");
     }
 
+
     /**
-     * Test to test FileManager's ability to handle files of the wrong format.
+     * Tests the ability of the readFile function to handle files of the wrong format.
      */
     @Test(expected = WrongFormatException.class)
     public void testWrongFormat()
@@ -270,8 +295,9 @@ public class FileManagerTest extends TestCase {
         FileManager.readFile(TARGET+"/terrible_format.csv");
     }
 
+
     /**
-     * Test to test the FileManager's ability to write a file.
+     * Test the ability of the routeRetriever to write a file containing one route object.
      */
     @Test
     public void testWriteRouteFile()
@@ -288,6 +314,10 @@ public class FileManagerTest extends TestCase {
         assertTrue(CurrentStorage.getRouteArray().get(0).equals(expected_route));
     }
 
+
+    /**
+     * Tests the ability of the routeRetriever to write a file containing ten route objects.
+     */
     @Test
     public void testWriteRouteTenFile() {
         FileManager.routeRetriever(TARGET+"/route_data10.csv");
@@ -298,8 +328,9 @@ public class FileManagerTest extends TestCase {
         assertEquals(10, CurrentStorage.getRouteArray().size());
     }
 
+
     /**
-     * Test to test the FileManager's ability to write a file with a filename that contains spaces.
+     * Tests the ability of the routeRetriever to write a file with a filename that contains spaces.
      */
     @Test
     public void testWriteRouteFileSpaces()
@@ -316,8 +347,9 @@ public class FileManagerTest extends TestCase {
         assertTrue(CurrentStorage.getRouteArray().get(0).equals(expected_route));
     }
 
+
     /**
-     * Test to test the FileManager's ability to write a file.
+     * Tests the ability of the wifiRetriever to write a file containing one wifi hotspot.
      */
     @Test
     public void testWriteWifiFile()
@@ -331,8 +363,9 @@ public class FileManagerTest extends TestCase {
         assertTrue(CurrentStorage.getWifiArray().get(0).equals(expected_wifi));
     }
 
+
     /**
-     * Test the ability of wifiWriter to write a file with 10 wifis.
+     * Tests the ability of wifiWriter to write a file with 10 wifis.
      */
     @Test
     public void testWriteTenWifiFile(){
@@ -344,8 +377,9 @@ public class FileManagerTest extends TestCase {
         assertEquals(10, CurrentStorage.getWifiArray().size());
     }
 
+
     /**
-     * Test to test the FileManager's ability to write a file.
+     * Tests the ability of the retailerRetriever to write a file with one retailer.
      */
     @Test
     public void testWriteRetailerFile()
@@ -359,6 +393,10 @@ public class FileManagerTest extends TestCase {
         assertTrue(CurrentStorage.getRetailerArray().get(0).equals(expectedRetailer));
     }
 
+
+    /**
+     * Tests the ability of the retailerRetriever to write a file containing ten retailers.
+     */
     @Test
     public void testWriteRetailerTenFile() {
         FileManager.retailerRetriever(TARGET+"/retailer_data10.csv");
@@ -369,6 +407,10 @@ public class FileManagerTest extends TestCase {
         assertEquals(10, CurrentStorage.getRetailerArray().size());
     }
 
+
+    /**
+     * Tests the ability of the toiletWriter function to write a file containing one toilet.
+     */
     @Test
     public void testWriteToiletFile() {
         FileManager.toiletRetriever(TARGET+"/toilet_data1.csv");
@@ -380,6 +422,10 @@ public class FileManagerTest extends TestCase {
         assertTrue(CurrentStorage.getToiletArray().get(0).equals(expectedToilet));
     }
 
+
+    /**
+     * Tests the ability of the toiletWriter function to write a file containing ten toilets.
+     */
     @Test
     public void testWriteToiletTenFile() {
         FileManager.toiletRetriever(TARGET+"/toilet_data10.csv");
@@ -390,20 +436,31 @@ public class FileManagerTest extends TestCase {
         assertEquals(10, CurrentStorage.getToiletArray().size());
     }
 
+
+    /**
+     * Tests the ability of the poiWriter function to write a file containing a point of interest.
+     */
     @Test
     public void testWritePoiFile() {
         FileManager.poiRetriever(TARGET+"/poi_data1.csv");
         FileManager.poiWriter(WRITE_TARGET+"/poi_test_file.csv", CurrentStorage.getPoiArray());
         assertTrue(new File(WRITE_TARGET+"/poi_test_file.csv").exists());
+        CurrentStorage.flush();
+        FileManager.poiRetriever(WRITE_TARGET+"/poi_test_file.csv");
         Poi expectedPoi = new Poi(40.745968,-73.994039,"siteOne","sherwood forest entrance",0);
         assertTrue(CurrentStorage.getPoiArray().get(0).equals(expectedPoi));
     }
 
+
+    /**
+     * Tests the ability of the poiWriter function to write a file containing ten points of interest.
+     */
     @Test
     public void testWritePoiTenFile() {
         FileManager.poiRetriever(TARGET+"/poi_data10.csv");
         FileManager.poiWriter(WRITE_TARGET+"/poi_test10_file.csv", CurrentStorage.getPoiArray());
         assertTrue(new File(WRITE_TARGET+"/poi_test10_file.csv").exists());
+        CurrentStorage.flush();
         FileManager.poiRetriever(WRITE_TARGET+"/poi_test10_file.csv");
         assertEquals(10, CurrentStorage.getPoiArray().size());
     }

@@ -13,7 +13,8 @@ public class FileManager {
 
     /**
      * Serializes an instance of the User class (exporting out of the program).
-     * @param user The User object to be stored in a file
+     * @param user The User object to be stored in a file.
+     * @param filePath The filepath that the user object is to be stored at.
      */
     public static void userSerialize(User user, String filePath){
         try {
@@ -33,6 +34,7 @@ public class FileManager {
 
     /**
      * Deserializes an instance of the User class (importing into the program).
+     * @param filePath The filepath of the file where the user object should be.
      * @return The User object stored in the named file.
      */
     public static User userDeserialize(String filePath) {
@@ -77,6 +79,12 @@ public class FileManager {
     }
 
 
+    /**
+     * Checks if an index if less than zero and returns a positive index for the same value.
+     * @param index The current index of the string.
+     * @param header The header of the current csv file.
+     * @return The positive integer index for an item in the list.
+     */
     private static int indexer(int index, List header) {
         if (index < 0) {
             index += header.size();
@@ -88,6 +96,7 @@ public class FileManager {
     /**
      * Retrieves a list of routes from the readFile function and then converts them individually to Route objects stored
      * in the current storage class for that instance of the app.
+     * @param filename The filename where the .csv file is stored.
      */
     public static void routeRetriever(String filename) {
         ArrayList<String> routes = readFile(filename);
@@ -135,6 +144,7 @@ public class FileManager {
     /**
      * Stores the route data stored in the current storage class.
      * @param filename The filename where the csv file is to be stored.
+     * @param routeArray The array of routes to be stored.
      */
     public static void routeWriter(String filename, ArrayList<Route> routeArray) {
         File file = new File(filename);
@@ -434,53 +444,6 @@ public class FileManager {
 
                     String strPoi = poiName + "," + poiLat + "," + poiLon + "," + poiDescription + "," + poiCost + "\n";
                     bufferedWriter.write(strPoi);
-                }
-                bufferedWriter.flush();
-                bufferedWriter.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void generalRetriever(String filename) {
-        ArrayList<String> locations = readFile(filename);
-        if (!locations.isEmpty()) {
-            List header = Arrays.asList(locations.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
-
-            int nameIndex = header.indexOf("name");
-            int latIndex = header.indexOf("latitude");
-            int lonIndex = header.indexOf("longitude");
-
-            locations.remove(0);
-
-            for (String location : locations) {
-                String[] information = location.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-
-                String name = information[nameIndex];
-                Double latitude = Double.parseDouble(information[latIndex]);
-                Double longitude = Double.parseDouble(information[lonIndex]);
-
-                Location newLoc = new Location(latitude, longitude, name, 4);
-                CurrentStorage.addNewGeneral(newLoc);
-            }
-        }
-    }
-
-    public static void generalWriter(String filename, ArrayList<Location> locations) {
-        File newFile = new File(filename);
-        try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(newFile));
-            if (!locations.isEmpty()) {
-                String header = "name, latitude, longitude";
-                bufferedWriter.write(header);
-                for (Location location : locations) {
-                    String name = location.getName();
-                    String latitude = Double.toString(location.getLatitude());
-                    String longitude = Double.toString(location.getLongitude());
-
-                    String strLocation = name + "," + latitude + "," + longitude + "\n";
-                    bufferedWriter.write(strLocation);
                 }
                 bufferedWriter.flush();
                 bufferedWriter.close();

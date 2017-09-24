@@ -183,28 +183,15 @@ public class Location {
 
     @Override
     public boolean equals(Object other) {
-        if (other == null) {
-            return false;
-        }
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof Location)) {
-            return false;
-        }
         Location otherLocation = (Location) other;
-        if (otherLocation.getCoords() != this.getCoords()) {
-            return false;
-        }
-        if (otherLocation.getLocationType() != this.getLocationType()) {
-            return false;
-        }
-        return true;
+        return (!(other != null | getCoords() != otherLocation.getCoords() |
+                getLocationType() != otherLocation.getLocationType() |
+                getName().equals(otherLocation.getName())));
     }
+
 
     /**
      * Function that returns the longitude and latitude of the location in an Array.
-     *
      * @return The latitude and longitude of the location in an Array.
      */
     public double[] getCoords() {
