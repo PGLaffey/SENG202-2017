@@ -5,8 +5,8 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.junit.Ignore;
 import seng202.Model.Badge;
-import seng202.exceptions.BadgeLevelException;
-import seng202.exceptions.BadgeTypeException;
+
+import static java.lang.Integer.MAX_VALUE;
 
 public class BadgeTest extends TestCase {
     private Badge distanceBadge;
@@ -32,7 +32,7 @@ public class BadgeTest extends TestCase {
     /**
      * Sets up a new dataFetcher before every test
      */
-    public void setUp() throws BadgeLevelException, BadgeTypeException {
+    public void setUp() {
         distanceBadge = new Badge("Distance");
         timeBadge = new Badge("Time");
         routesBadge = new Badge("Routes");
@@ -49,7 +49,6 @@ public class BadgeTest extends TestCase {
     public void testGetStrRemaingDistanceZero() {
         distanceBadge.setValue(2000);
         String strRemaining = distanceBadge.getStrRemaining();
-        System.out.println(distanceBadge.getLevel());
         assertEquals("8 kilometres", strRemaining);
     }
 
@@ -134,6 +133,137 @@ public class BadgeTest extends TestCase {
         routesBadge.setLevel(5);
         String strRemaining = routesBadge.getStrRemaining();
         assertEquals("42 trips", strRemaining);
+    }
+
+    /**
+     * Test to check getStrRemaining with level 6 boundary case
+     */
+    @Test
+    public void testGetStrRemainingBoundarySix() {
+        routesBadge.setValue(200);
+        routesBadge.setLevel(6);
+        assertEquals("Max level achieved", routesBadge.getStrRemaining());
+    }
+
+
+    /**
+     * Test to check updateName
+     */
+    @Test
+    public void testUpdateName() {
+        routesBadge.setLevel(5);
+        routesBadge.updateName();
+        assertTrue(routesBadge.getName().equals("Routes badge, level 5"));
+    }
+
+    /**
+     * Test for updateRemaining for 0 border case
+     */
+    @Test
+    public void testUpdateRemainingZeroBoundary() {
+        distanceBadge.setValue(50000);
+        distanceBadge.setLevel(2);
+        distanceBadge.updateRemaining();
+        assertTrue(distanceBadge.getRemaining() == 50000);
+    }
+
+    /**
+     * Test for updateRemaining for beyond border case
+     */
+    @Test
+    public void testUpdateRemainingNegative() {
+        routesBadge.setValue(23);
+        routesBadge.setLevel(1);
+        routesBadge.updateRemaining();
+        assertTrue(routesBadge.getRemaining() == 27);
+    }
+
+    /**
+     * Test for updateRemaining within bounds
+     */
+    @Test
+    public void testUpdateRemainingWithinBounds() {
+        timeBadge.setValue(550);
+        timeBadge.setLevel(1);
+        timeBadge.updateRemaining();
+        assertTrue(timeBadge.getRemaining() == 50);
+    }
+
+
+    /**
+     * Test for updateLevel at 0
+     */
+    @Test
+    public void testUpdateLevelZero() {
+        distanceBadge.updateLevel();
+        assertTrue(distanceBadge.getLevel() == 0);
+    }
+
+    /**
+     * Test updateLevel on boundary
+     */
+    @Test
+    public void testUpdateLevelBoundary() {
+        routesBadge.setValue(200);
+        routesBadge.updateLevel();
+        assertTrue(routesBadge.getLevel() == 6);
+    }
+
+    /**
+     * Test updateLevel on extreme value
+     */
+    @Test
+    public void testUpdateLevelExtreme() {
+        routesBadge.setValue(MAX_VALUE);
+        routesBadge.updateLevel();
+        assertTrue(routesBadge.getLevel() == 6);
+    }
+
+    /**
+     * Test updateIcon
+     */
+    @Test
+    public void testUpdateIcon() {
+        timeBadge.setLevel(4);
+        timeBadge.updateIcon();
+        assertTrue(timeBadge.getIcon().equals("images/Badges/badgeTime4.png"));
+    }
+
+
+    /**
+     * Test updateDescription on level 0
+     */
+    @Test
+    public void testUpdateDescriptionZero() {
+        routesBadge.updateDescription();
+        String check = "You don't have a Routes badge yet.\nTake 2 trips to earn one.";
+        assertTrue(routesBadge.getDescription().equals(check));
+    }
+
+    /**
+     * Test updateDescription on level between 0 and 6
+     */
+    @Test
+    public void testUpdateDescriptionMidrange() {
+        distanceBadge.setLevel(3);
+        distanceBadge.setValue(74500);
+        distanceBadge.updateBadge();
+        String check = "This is your beautiful, red, level 3 Distance badge." +
+                "\nTravel 25 kilometres & 500 metres to earn the next one.";
+        assertTrue(distanceBadge.getDescription().equals(check));
+    }
+
+    /**
+     * Test updateDescription on level 6
+     */
+    @Test
+    public void testUpdateDescriptionBoundary() {
+        timeBadge.setLevel(6);
+        timeBadge.setValue(30000);
+        timeBadge.updateDescription();
+        String check = "Wow! This is your amazing, gold, level 6 Time badge." +
+                "\nYou seem to be at the top of your game, and we've run out of Time badges to give you!";
+        assertTrue(timeBadge.getDescription().equals(check));
     }
 }
 

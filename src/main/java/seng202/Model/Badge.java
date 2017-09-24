@@ -5,6 +5,8 @@ package seng202.Model;
 import java.io.Serializable;
 import java.util.Arrays;
 
+import static java.lang.Integer.MAX_VALUE;
+
 /**
  * Badge class that serves as a superclass to all the different types of badges.
  */
@@ -16,7 +18,7 @@ public class Badge implements Serializable{
     //Badge types array
     private String[] types = {"Distance","Time","Routes"};
     //Requirements for each level of a badge, arranged [type index from types array][level]
-    private int[][] requirements = {{0,2000,10000,50000,100000,200000,500000},{0,120,600,3000,6000,12000,30000},{0,2,5,10,50,100,200}};
+    private int[][] requirements = {{0,2000,10000,50000,100000,200000,500000, MAX_VALUE},{0,120,600,3000,6000,12000,30000, MAX_VALUE},{0,2,5,10,50,100,200, MAX_VALUE}};
     //Units for each badge type, arranged [type index from types array]
     private String[] units = {"metres","minutes","trips"};
     //Method of gaining each badge type, [type index from types array]
@@ -154,13 +156,22 @@ public class Badge implements Serializable{
     public int getLevelCap() { return requirements[getBadgeTypeIndex()][level+1]; }
 
     /**
+     * Getter for remaining
+     * @return remaining Amount of remaining units until level-up
+     */
+    public int getRemaining() { return remaining; }
+
+    /**
      * Getter for a string representation ofremaining
      * @return strRemaining A string representation of remaining including units
      * //@throws BadgeLevelException If level is not in range 0<=level<=6
      */
     public String getStrRemaining() {
-        String strRemaining = "";
+        String strRemaining;
         updateRemaining();
+        if (level == 6) {
+            return "Max level achieved";
+        }
         if (units[getBadgeTypeIndex()].equals("minutes")) {
             if (remaining % 60 == 0) {
                 strRemaining = Integer.toString(remaining/60) + " hours";
@@ -211,9 +222,11 @@ public class Badge implements Serializable{
      * //@throws BadgeLevelException If level is not in range 0<=level<=6
      */
     public void setLevel(int level) {
+        /*
         if (level < 0 || level > 6) {
-            //throw new BadgeLevelException(level, badgeType);
+            throw new BadgeLevelException(level, badgeType);
         }
+        */
         this.level = level;
     }
 
@@ -250,7 +263,7 @@ public class Badge implements Serializable{
         int remaining = (getLevelCap() - value);
         this.remaining = remaining;
         if (remaining <= 0) {
-            updateLevel();
+            level += 1;
             updateRemaining();
         }
     }
@@ -263,15 +276,15 @@ public class Badge implements Serializable{
         int level = 0;
         if (value >= requirements[getBadgeTypeIndex()][1]) {
             level = 1;
-        } else if (value >= requirements[getBadgeTypeIndex()][2]) {
+        } if (value >= requirements[getBadgeTypeIndex()][2]) {
             level = 2;
-        } else if (value >= requirements[getBadgeTypeIndex()][3]) {
+        } if (value >= requirements[getBadgeTypeIndex()][3]) {
             level = 3;
-        } else if (value >= requirements[getBadgeTypeIndex()][4]) {
+        } if (value >= requirements[getBadgeTypeIndex()][4]) {
             level = 4;
-        } else if (value >= requirements[getBadgeTypeIndex()][5]) {
+        } if (value >= requirements[getBadgeTypeIndex()][5]) {
             level = 5;
-        } else if (value >= requirements[getBadgeTypeIndex()][6]) {
+        } if (value >= requirements[getBadgeTypeIndex()][6]) {
             level = 6;
         }
         this.level = level;
@@ -294,9 +307,9 @@ public class Badge implements Serializable{
      */
     public void updateDescription() {
         int type = getBadgeTypeIndex();
-        String output = "";
+        String output;
         if (level == 0) {
-            output = "You don't have a " + badgeType + " yet.";
+            output = "You don't have a " + badgeType + " badge yet.";
         } else if (level >= 1 && level <= 6) {
             if (level == 6) {
                 output = "Wow! This is your amazing, ";
