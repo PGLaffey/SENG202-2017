@@ -1,5 +1,6 @@
 package seng202.Controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -10,11 +11,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
 import seng202.Model.User;
 import seng202.Model.Badge;
+import seng202.exceptions.BadgeLevelException;
+
+import static oracle.jrockit.jfr.events.Bits.intValue;
 
 public class ProfileScreenController {
 	
@@ -78,6 +83,12 @@ public class ProfileScreenController {
 	private User user;
 
 	private ArrayList<Badge> userBadges;
+
+	private Badge userDistBadge;
+
+	private Badge userTimeBadge;
+
+	private Badge userRouteBadge;
 	
 	
 	/**
@@ -207,11 +218,24 @@ public class ProfileScreenController {
 		usersNameLabel.setText(user.getName()); 
 		usersBirthDateLabel.setText(user.getDob());
 		userBadges = user.getBadges();
+		userDistBadge = userBadges.get(0);
+		//userTimeBadge = userBadges.get(1);
+		//userRouteBadge = userBadges.get(2);
 
-		// For now have set them all to level 0
-/*		distanceBadge.setImage(userBadges.get(0).getIcon());
-		timeBadge.setImage(userBadges.get(1).getIcon());
-		routesBadge.setImage(userBadges.get(2).getIcon());*/
+		File file = new File("src/main/resources/images/Badges/badgeDistance3.png");
+		Image image = new Image(file.toURI().toString());
+
+		try {
+			userDistBadge.updateBadge(intValue(user.getDistance()));
+		} catch (BadgeLevelException e) {
+			e.printStackTrace();
+		}
+		//userTimeBadge.updateBadge(intValue(user.getHours()));
+		//userRouteBadge.updateBadge(user.getRoutesCycled());
+
+		distanceBadge.setImage(image);
+		//timeBadge.setImage();
+		//routesBadge.setImage();
 	}
 	
 

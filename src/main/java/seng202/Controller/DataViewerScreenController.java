@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
+import seng202.exceptions.BadgeLevelException;
 
 public class DataViewerScreenController {
 	
@@ -152,5 +153,13 @@ public class DataViewerScreenController {
 		distValue.setText(CurrentStorage.getUser().getDistanceRounded() + "m");
 		timeValue.setText(CurrentStorage.getUser().getHours() + " hours");
 		routesValue.setText(CurrentStorage.getUser().getRoutesCycled() + " routes");
+
+		try {
+			distNextBadge.setText(CurrentStorage.getUser().getBadges().get(0).getStrRemaining());
+			timeNextBadge.setText(CurrentStorage.getUser().getBadges().get(1).getStrRemaining());
+			routesNextbadge.setText(CurrentStorage.getUser().getBadges().get(2).getStrRemaining());
+		} catch (BadgeLevelException e) {
+			e.printStackTrace();
+		}
 	}
 }

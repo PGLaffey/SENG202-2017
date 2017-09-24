@@ -1,5 +1,8 @@
 package seng202.Model;
 
+import seng202.exceptions.BadgeLevelException;
+import seng202.exceptions.BadgeTypeException;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -17,7 +20,7 @@ public class User implements Serializable {
     private double distanceCycled;
     private double hoursCycled;
     private ArrayList<Route> routes;
-    private ArrayList<Badge> badges;
+    private ArrayList<Badge> badges; // First badge is distance, second time and third route
 
     private static final long serialVersionUID = 1L;
 
@@ -41,6 +44,19 @@ public class User implements Serializable {
         this.hoursCycled = 0;
         this.routes = new ArrayList<Route>();
         this.badges = new ArrayList<Badge>();
+        Badge distBadge = null;
+        try {
+            distBadge = new Badge("Distance");
+        } catch (BadgeLevelException e) {
+            e.printStackTrace();
+        } catch (BadgeTypeException e) {
+            e.printStackTrace();
+        }
+        //Badge timeBadge = new Badge("Time");
+        //Badge routeBadge = new Badge("Route");
+        badges.add(distBadge);
+        //badges.add(timeBadge);
+        //badges.add(routeBadge);
     }
 
     /**
