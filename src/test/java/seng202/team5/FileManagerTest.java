@@ -69,6 +69,16 @@ public class FileManagerTest extends TestCase {
     }
 
 
+    @Test
+    public void testUserSerialize() {
+        User newUser = new User("first", "last", "username", "doB", "password");
+        FileManager.userSerialize(newUser, WRITE_TARGET);
+        assertTrue(new File(WRITE_TARGET + "/" + newUser.getUsername() + ".ser").exists());
+        User outputUser = FileManager.userDeserialize(WRITE_TARGET + "/" + newUser.getUsername() + ".ser");
+        assertTrue(newUser.equals(outputUser));
+    }
+
+
     /**
      * Test to test FileManager's readFile functions work as expected for a .csv with 1 route.
      */
