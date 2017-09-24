@@ -1,3 +1,5 @@
+/*
+
 package seng202.team5;
 
 import org.junit.Test;
@@ -13,25 +15,31 @@ public class BadgeTest extends TestCase {
     private Badge timeBadge;
     private Badge routesBadge;
 
-    /**
+    */
+/**
      * @param testName The name of the test
-     */
+     *//*
+
     public BadgeTest(String testName)
     {
         super(testName);
     }
 
-    /**
+    */
+/**
      * @return the test suite that the test belongs to.
-     */
+     *//*
+
     public static junit.framework.Test suite()
     {
         return new TestSuite(BadgeTest.class);
     }
 
-    /**
+    */
+/**
      * Sets up a new dataFetcher before every test
-     */
+     *//*
+
     public void setUp() throws BadgeLevelException, BadgeTypeException {
         distanceBadge = new Badge("Distance");
         timeBadge = new Badge("Time");
@@ -40,13 +48,17 @@ public class BadgeTest extends TestCase {
 
 
 
-    /**
+    */
+/**
      * Group of tests for testing getStrRemaining on a distance badge
-     */
+     *//*
 
-    /**
+
+    */
+/**
      * Test to check the 0 boundary case (same test for all badge types)
-     */
+     *//*
+
     @Test
     public void testGetStrRemaingDistanceZero() {
         distanceBadge.setValue(distanceBadge.getLevelCap());
@@ -58,9 +70,11 @@ public class BadgeTest extends TestCase {
         }
     }
 
-    /**
+    */
+/**
      * Test to check kilometres only conditional
-     */
+     *//*
+
     @Test
     public void testGetStrRemainingDistanceKilometres() {
         distanceBadge.setValue(130000);
@@ -75,9 +89,11 @@ public class BadgeTest extends TestCase {
         assertTrue(strRemaining == "70 kilometres");
     }
 
-    /**
+    */
+/**
      * Test to check metres only conditional
-     */
+     *//*
+
     @Test
     public void testGetStrRemainingDistanceMetres() {
         distanceBadge.setValue(9643);
@@ -92,9 +108,11 @@ public class BadgeTest extends TestCase {
         assertTrue(strRemaining == "357 metres");
     }
 
-    /**
+    */
+/**
      * Test to check else conditional
-     */
+     *//*
+
     @Test
     public void testGetStrRemainingDistanceElse() {
         distanceBadge.setValue(11742);
@@ -109,13 +127,17 @@ public class BadgeTest extends TestCase {
         assertTrue(strRemaining == "38 kilometres & 258 metres");
     }
 
-    /**
+    */
+/**
      * Group of tests to check getStrRemaining with a time badge
-     */
+     *//*
 
-    /**
+
+    */
+/**
      * Test to check hours only conditional
-     */
+     *//*
+
     @Test
     public void testGetStrRemainingTimeHours() {
         timeBadge.setValue(11520);
@@ -130,9 +152,11 @@ public class BadgeTest extends TestCase {
         assertTrue(strRemaining == "8 hours");
     }
 
-    /**
+    */
+/**
      * Test to check minutes only conditional
-     */
+     *//*
+
     @Test
     public void testGetStrRemainingTimeMinutes() {
         timeBadge.setValue(542);
@@ -147,9 +171,11 @@ public class BadgeTest extends TestCase {
         assertTrue(strRemaining == "58 minutes");
     }
 
-    /**
+    */
+/**
      * Test to check else conditional
-     */
+     *//*
+
     @Test
     public void testGetStrRemainingTimeElse() {
         timeBadge.setValue(670);
@@ -165,9 +191,11 @@ public class BadgeTest extends TestCase {
     }
 
 
-    /**
+    */
+/**
      * Test to check getStrRemaining with routes badge
-     */
+     *//*
+
     @Test
     public void testGetStrRemainingRoutes() {
         routesBadge.setValue(158);
@@ -187,3 +215,4 @@ public class BadgeTest extends TestCase {
 
 
 }
+*/
