@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class Badge {
 
-    private String filePath = "file:./src/main/java/resources/images/badges/";
+    private String filePath = "images/Badges/";
 
     //Badge types array
     private String[] types = {"Distance","Time","Routes"};
@@ -150,7 +150,7 @@ public class Badge {
      * Getter for level cap
      * @return levelCap The value at which the badgetype will update to the next level
      */
-    public int getLevelCap() { return requirements[getBadgeTypeIndex()][level]; }
+    public int getLevelCap() { return requirements[getBadgeTypeIndex()][level+1]; }
 
     /**
      * Getter for a string representation ofremaining
@@ -248,9 +248,6 @@ public class Badge {
     public void updateRemaining() {
         int remaining = (getLevelCap() - value);
         this.remaining = remaining;
-        if (remaining <= 0) {
-            updateBadge();
-        }
     }
 
     /**
