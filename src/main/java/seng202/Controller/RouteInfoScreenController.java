@@ -90,6 +90,10 @@ public class RouteInfoScreenController {
 
     }
 
+    /**
+     * Method for when the add button is pressed. Verifies then adds the route
+     * @param event
+     */
     @FXML
     void addButtonPressed(ActionEvent event) {
         boolean add = false;

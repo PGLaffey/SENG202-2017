@@ -662,6 +662,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	stage.show();
     }
 
+    /**
+     * Method for when the bike button is pressed, displays all the routes on the map.
+     * @param event
+     */
     @FXML
     void bikeIconPressed(ActionEvent event) {
 //        int initCount = count;
@@ -681,10 +685,20 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 //        }
     }
 
+    /**
+     * Method for when the favourite button is pressed, displays all the
+     * users favourite routes on the map.
+     * @param event
+     */
     @FXML
     void favouriteIconPressed(ActionEvent event) {
     }
 
+    /**
+     * Method for when the retailer button is pressed, displays all the
+     * retailers on the map
+     * @param event
+     */
     @FXML
     void retailerIconPressed(ActionEvent event) {
         for (Retailer retailer : CurrentStorage.getRetailerArray()) {
@@ -701,7 +715,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     }
 
     /** 
-     * Method for when the save route button is pressed, open the pop up.
+     * Method for when the save route button is pressed, opens the pop up.
      * @param event
      * @throws IOException
      */
@@ -716,11 +730,21 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 		stage.show();
     }
 
+    /**
+     * Method for when the toilet button is pressed, displays all the toilet
+     * locations on the map
+     * @param event
+     */
     @FXML
     void toiletIconPressed(ActionEvent event) {
         ArrayList<Toilet> toilets = new ArrayList<Toilet>();
     }
 
+    /**
+     * Method for when the wifi button is pressed, displays all the wifi
+     * locations on the map
+     * @param event
+     */
     @FXML
     void wifiIconPressed(ActionEvent event) {
         Service<Void> wifiLoaderService = new Service<Void>() {
@@ -747,6 +771,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     }
 
+    /**
+     * Method for when a search is performed on the map.
+     * @param event
+     */
     @FXML
     public void searchTextAction(ActionEvent event) {
         //Obtains a geocode location around latLong
@@ -1336,17 +1364,33 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     }
 
+    /**
+     * Places the wifi marker on the map
+     * @param wifi wifi object
+     */
     public void placeCircleOnMap(Wifi wifi) {
         Map.findWifi(wifi);
 
     }
 
+    /**
+     * Places a marker for the location on the map
+     * @param loc location object
+     */
     public void placeMarkerOnMap(Location loc) {
         Map.findLocation(loc.getAddress(), map, geocodingService);
     }
 
+    /**
+     * Places the retailer marker on the map
+     * @param retailer retailer object
+     */
     public void placeRetailerOnMap(Retailer retailer) {Map.findRetailers(retailer);}
 
+    /**
+     * Places a route marker on map
+     * @param route
+     */
     public void placeMarkerOnMap(Route route) {
         Map.findRouteMarker(route, map);
     }
