@@ -1,11 +1,7 @@
 package seng202.Model;
-//TODO check that this is the correct import statement for image. jack push test
-//TODO is requirement a String or an int; different in two places in the UML diagram.
 
-import seng202.exceptions.BadgeLevelException;
-import seng202.exceptions.BadgeTypeException;
-
-import javafx.scene.image.Image;
+//import seng202.exceptions.BadgeLevelException;
+//import seng202.exceptions.BadgeTypeException;
 import java.util.Arrays;
 
 /**
@@ -14,7 +10,7 @@ import java.util.Arrays;
 
 public class Badge {
 
-    private String filePath = "./src/main/java/resources/images/badges/";
+    private String filePath = "file:./src/main/java/resources/images/badges/";
 
     //Badge types array
     private String[] types = {"Distance","Time","Routes"};
@@ -39,7 +35,7 @@ public class Badge {
     //Description of badge
     private String description;
     //Icon object of badge
-    private Image icon = new Image(filePath + "badgeBlank0.png");
+    private String icon = "";
     //Name of badge
     private String name;
 
@@ -50,23 +46,27 @@ public class Badge {
      * @param level Level of badge
      * @param description Description of badge
      * @param name Name of badge
-     * @param icon Image object of badge
-     * @throws BadgeTypeException If badge type is not in approved list (types array)
-     * @throws BadgeLevelException If Level is not in range 0<=level<=6
+     * @param icon filiName of badge image
+     * //@throws BadgeTypeException If badge type is not in approved list (types array)
+     * //@throws BadgeLevelException If Level is not in range 0<=level<=6
      */
-    public Badge(String badgeType, int value, int level, String description, String name, Image icon) throws BadgeTypeException, BadgeLevelException {
+    public Badge(String badgeType, int value, int level, String description, String name, String icon) {
+        /*
         if (!(Arrays.asList(types).contains(badgeType))) {
             throw new BadgeTypeException(badgeType);
         }
         if (level < 0 || level > 6) {
             throw new BadgeLevelException(level, badgeType);
         }
+         */
         this.badgeType = badgeType;
         this.value = value;
         this.level = level;
         this.description = description;
         this.name = name;
-        if (icon != null) {
+        if (icon == null) {
+            this.icon = filePath + "badgeBlank0.png";
+        } else {
             this.icon = icon;
         }
     }
@@ -77,10 +77,10 @@ public class Badge {
      *  all other variables are formed using built-in algorithms
      * @param badgeType Type of badge
      * @param value Number of units user has earned towards badge
-     * @throws BadgeLevelException If badge type is not in array types
-     * @throws BadgeTypeException If level is not in range 0<=level<=6
+     * //@throws BadgeLevelException If badge type is not in array types
+     * //@throws BadgeTypeException If level is not in range 0<=level<=6
      */
-    public Badge(String badgeType, int value) throws BadgeLevelException, BadgeTypeException {
+    public Badge(String badgeType, int value) {
         this(badgeType, value, 0, "", "", null);
         updateBadge();
     }
@@ -89,18 +89,14 @@ public class Badge {
      * Overloaded constructor for Badge class
      *  For constructing badge from scratch using only badge type
      *  all other variables are formed using built-in algorithms based on value being 0
-     * @param badgeType
-     * @throws BadgeLevelException
-     * @throws BadgeTypeException
+     * @param badgeType Type of badge
+     * //@throws BadgeLevelException
+     * //@throws BadgeTypeException
      */
-    public Badge(String badgeType) throws BadgeLevelException, BadgeTypeException {
+    public Badge(String badgeType) {
         this(badgeType, 0, 0, "", "",  null);
         updateBadge();
     }
-
-    /**
-     * Getters and Setters
-     */
 
     /**
      * Getter for badge type
@@ -128,9 +124,9 @@ public class Badge {
 
     /**
      * Getter for icon
-     * @return icon Image object of badge
+     * @return icon Filename of badge image
      */
-    public Image getIcon() { return icon; }
+    public String getIcon() { return icon; }
 
     /**
      * Getter for name
@@ -159,12 +155,12 @@ public class Badge {
     /**
      * Getter for a string representation ofremaining
      * @return strRemaining A string representation of remaining including units
-     * @throws BadgeLevelException If level is not in range 0<=level<=6
+     * //@throws BadgeLevelException If level is not in range 0<=level<=6
      */
-    public String getStrRemaining() throws BadgeLevelException {
+    public String getStrRemaining() {
         String strRemaining = "";
         updateRemaining();
-        if (units[getBadgeTypeIndex()] == "minutes") {
+        if (units[getBadgeTypeIndex()].equals("minutes")) {
             if (remaining % 60 == 0) {
                 strRemaining = Integer.toString(remaining/60) + " hours";
             } else if (remaining < 60) {
@@ -174,7 +170,7 @@ public class Badge {
                 int minutes = remaining - (hours * 60);
                 strRemaining = Integer.toString(hours) + " hours & " + Integer.toString(minutes) + " minutes";
             }
-        } else if (units[getBadgeTypeIndex()] == "metres") {
+        } else if (units[getBadgeTypeIndex()].equals("metres")) {
             if (remaining % 1000 == 0) {
                 strRemaining = Integer.toString(remaining/1000) + " kilometres";
             } else if (remaining < 1000) {
@@ -193,12 +189,12 @@ public class Badge {
     /**
      * Setter for badgeType
      * @param badgeType The type of badge
-     * @throws BadgeTypeException If badgeType is not in array types
+     * //@throws BadgeTypeException If badgeType is not in array types
      */
-    public void setBadgeType(String badgeType) throws BadgeTypeException {
-        if (badgeType != "Distance" || badgeType != "Time" || badgeType != "Routes") {
-            throw new BadgeTypeException(badgeType);
-        }
+    public void setBadgeType(String badgeType) {
+        //if (!(Arrays.asList(types).contains(badgeType))) {
+        //    throw new BadgeTypeException(badgeType);
+        //}
         this.badgeType = badgeType;
     }
 
@@ -211,11 +207,11 @@ public class Badge {
     /**
      * Setter for level
      * @param level The level of badge the user as attained
-     * @throws BadgeLevelException If level is not in range 0<=level<=6
+     * //@throws BadgeLevelException If level is not in range 0<=level<=6
      */
-    public void setLevel(int level) throws BadgeLevelException {
+    public void setLevel(int level) {
         if (level < 0 || level > 6) {
-            throw new BadgeLevelException(level, badgeType);
+            //throw new BadgeLevelException(level, badgeType);
         }
         this.level = level;
     }
@@ -228,9 +224,9 @@ public class Badge {
 
     /**
      * Setter for icon
-     * @param icon Image type object of the badge
+     * @param icon Filename of badge image
      */
-    public void setIcon(Image icon) { this.icon = icon; }
+    public void setIcon(String icon) { this.icon = icon; }
 
     /**
      * Setter for name
@@ -238,26 +234,18 @@ public class Badge {
      */
     public void setName(String name) { this.name = name; }
 
-
-    /**
-     * Updaters for badge class
-     */
-
     /**
      * Updater for name
      *      Creates name using badgeType and Level
      */
-    public void updateName() {
-        String name = badgeType + " badge, level " + level;
-        this.name = name;
-    }
+    public void updateName() { this.name = badgeType + " badge, level " + level; }
 
     /**
      * Updater for remaining
      *      Calculates remaining based on value and levelCap
-     * @throws BadgeLevelException
+     * //@throws BadgeLevelException
      */
-    public void updateRemaining() throws BadgeLevelException {
+    public void updateRemaining() {
         int remaining = (getLevelCap() - value);
         this.remaining = remaining;
         if (remaining <= 0) {
@@ -294,15 +282,15 @@ public class Badge {
     public void updateIcon() {
         String fileName = "badge";
         fileName = fileName + badgeType + (Integer.toString(level));
-        pullIcon(fileName);
+        icon = filePath + fileName + ".png";
     }
 
     /**
      * Updater for description
      *      Writes a description of the badge using level, badgeType, and remaining
-     * @throws BadgeLevelException If badge level isn't in range 0<=level<=6
+     * //@throws BadgeLevelException If badge level isn't in range 0<=level<=6
      */
-    public void updateDescription() throws BadgeLevelException {
+    public void updateDescription() {
         int type = getBadgeTypeIndex();
         String output = "";
         if (level == 0) {
@@ -335,9 +323,9 @@ public class Badge {
      *      Calls all updater methods
      *      Also sets value given a new value
      * @param value The number of units the user has gained towards the badge
-     * @throws BadgeLevelException If level is not in range 0<=level<=6
+     * //@throws BadgeLevelException If level is not in range 0<=level<=6
      */
-    public void updateBadge(int value) throws BadgeLevelException {
+    public void updateBadge(int value) {
         this.setValue(value);
         this.updateLevel();
         this.updateIcon();
@@ -350,27 +338,9 @@ public class Badge {
      * Overloaded core updater for badge class
      *      Calls all updater methods
      *      Uses existing value
-     * @throws BadgeLevelException If level not in range 0<=level<=6
+     * //@throws BadgeLevelException If level not in range 0<=level<=6
      */
-    public void updateBadge() throws BadgeLevelException {
+    public void updateBadge() {
         this.updateBadge(this.getValue());
     }
-
-    /**
-     * Pulls the icon given the appropriate filename sans path and suffix
-     * @param fileName Name of badge file
-     */
-    //TODO check path:
-    public void pullIcon(String fileName) {
-        fileName = filePath + fileName + ".png";
-        System.out.println(fileName);
-        Image image = new Image(fileName);
-        icon = image;
-    }
-
-    public static void main() throws BadgeLevelException, BadgeTypeException {
-        Badge badge = new Badge("Distance");
-
-    }
-
 }
