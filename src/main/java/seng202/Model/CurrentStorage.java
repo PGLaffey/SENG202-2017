@@ -30,6 +30,9 @@ public class CurrentStorage {
     private static Location locationViewed;
     private static Route routeViewed;
 
+    private static Location newRouteStart;
+    private static Location newRouteEnd;
+
 	public static User getUser() {
 		return currentUser;
 	}
@@ -38,6 +41,13 @@ public class CurrentStorage {
 		currentUser = user;
 	}
 
+	public static void setNewRouteStart(Location location) { newRouteStart = location; }
+
+	public static Location getNewRouteStart() { return newRouteStart; }
+
+	public static void setNewRouteEnd(Location location) { newRouteEnd = location; }
+
+	public static Location getNewRouteEnd() { return newRouteEnd; }
 
 	public static ArrayList<Route> getRouteArray() {
 		return routeArray;
