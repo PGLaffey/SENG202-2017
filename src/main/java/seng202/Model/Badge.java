@@ -14,6 +14,8 @@ import java.util.Arrays;
 
 public class Badge {
 
+    private String filePath = "./src/main/java/resources/images/badges/";
+
     //Badge types array
     private String[] types = {"Distance","Time","Routes"};
     //Requirements for each level of a badge, arranged [type index from types array][level]
@@ -37,7 +39,7 @@ public class Badge {
     //Description of badge
     private String description;
     //Icon object of badge
-    private Image icon;
+    private Image icon = new Image(filePath + "badgeBlank0.png");
     //Name of badge
     private String name;
 
@@ -64,7 +66,9 @@ public class Badge {
         this.level = level;
         this.description = description;
         this.name = name;
-        this.icon = icon;
+        if (icon != null) {
+            this.icon = icon;
+        }
     }
 
     /**
@@ -77,7 +81,7 @@ public class Badge {
      * @throws BadgeTypeException If level is not in range 0<=level<=6
      */
     public Badge(String badgeType, int value) throws BadgeLevelException, BadgeTypeException {
-        this(badgeType, value, 0, "", "",  null);
+        this(badgeType, value, 0, "", "", null);
         updateBadge();
     }
 
@@ -358,9 +362,15 @@ public class Badge {
      */
     //TODO check path:
     public void pullIcon(String fileName) {
-        fileName = "./src/main/java/resources/images/badges/" + fileName + ".png";
+        fileName = filePath + fileName + ".png";
+        System.out.println(fileName);
         Image image = new Image(fileName);
         icon = image;
+    }
+
+    public static void main() {
+        Badge badge = new Badge("Distance");
+
     }
 
 }
