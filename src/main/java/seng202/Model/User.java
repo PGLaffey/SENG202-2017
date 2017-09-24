@@ -19,8 +19,8 @@ public class User implements Serializable {
     private ArrayList<Route> routes;
     private ArrayList<Badge> badges;
 
-    //TODO There is a suggestion that this should be packet-private, should this be something to consider?
-    //TODO Did we agree that the id was to be randomly generated or chosen by the user?
+    private static final long serialVersionUID = 1L;
+
     /**
     Constructor for the User class, creates a new user instance
      @param first The first name of the user.
@@ -143,4 +143,17 @@ public class User implements Serializable {
      * Increments the number of routes the user has cycled
      */
 	public void addRoute() {routesCycled += 1; }
+
+    /**
+     * Overrides the .equals function in the user class so it compares key values of the class to check if the
+     * objects are equal to one another.
+     * @param user The user to be compared.
+     * @return Whether the current user has the same key values as the previous user.
+     */
+    @Override
+    public boolean equals(Object user) {
+        User currentUser = (User) user;
+        return (getFirstName().equals(currentUser.getFirstName()) && getLastName().equals(currentUser.getLastName()) &&
+                getUsername().equals(currentUser.getUsername())) && getClass().equals(user.getClass());
+    }
 }

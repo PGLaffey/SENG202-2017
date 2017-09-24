@@ -10,25 +10,18 @@ import java.util.List;
  * The File Manager class also serializes and deserializes user objects.
  */
 public class FileManager {
-    private static final String DEST_TARGET = new File(seng202.Model.FileManager.class.getResource("/data_files/").getFile()).toString();
-
-    public static int indexChecker(int index, ArrayList<String> string) {
-        if (index < 0) {
-            index += string.size();
-        }
-        return index;
-    }
 
     /**
      * Serializes an instance of the User class (exporting out of the program).
      * @param user The User object to be stored in a file
      */
-    public static void userSerialize(User user){
+    public static void userSerialize(User user, String filePath){
         try {
-            String filePath = "SENG202-Team5-Cyclr/src/main/resources/data_files" + user.getName() + ".ser";
-            FileOutputStream userOutFile = new FileOutputStream(filePath);
+            File newFile = new File(filePath + "/" + user.getUsername() + ".ser");
+            FileOutputStream userOutFile = new FileOutputStream(newFile);
             ObjectOutputStream out = new ObjectOutputStream(userOutFile);
             out.writeObject(user);
+            out.flush();
             out.close();
             userOutFile.close();
 
@@ -40,19 +33,17 @@ public class FileManager {
 
     /**
      * Deserializes an instance of the User class (importing into the program).
-     * @param nameOfUser The name of the user to be deserialized.
      * @return The User object stored in the named file.
      */
-    public static User userDeserialize(String nameOfUser) {
+    public static User userDeserialize(String filePath) {
         User user = null;
         try {
-            String filePath = "SENG202-Team5-Cyclr/src/main/resources/data_files" + nameOfUser + ".ser";
             FileInputStream userInFile = new FileInputStream(filePath);
             ObjectInputStream userObjectStream = new ObjectInputStream(userInFile);
             try {
                 user = (User) userObjectStream.readObject();
+
                 userObjectStream.close();
-                userInFile.close();
                 return user;
             } catch (ClassNotFoundException classException) {
                 System.out.println("User class not found");
@@ -86,6 +77,14 @@ public class FileManager {
     }
 
 
+    private static int indexer(int index, List header) {
+        if (index < 0) {
+            index += header.size();
+        }
+        return index;
+    }
+
+
     /**
      * Retrieves a list of routes from the readFile function and then converts them individually to Route objects stored
      * in the current storage class for that instance of the app.
@@ -97,14 +96,14 @@ public class FileManager {
             List header = Arrays.asList(routes.get(0).split("\",\""));
 
             //Get the index of each of the key fields for the route class from the header of the csv.
-            int startNameIndex = header.indexOf("start station name");
-            int startLatIndex = header.indexOf("start station latitude");
-            int startLongIndex = header.indexOf("start station longitude");
-            int endNameIndex = header.indexOf("end station name");
-            int endLatIndex = header.indexOf("end station latitude");
-            int endLongIndex = header.indexOf("end station longitude");
-            int bikeIdIndex = header.indexOf("bikeid");
-            int genderIndex = header.indexOf("gender");
+            int startNameIndex = indexer(header.indexOf("start station name"),header);
+            int startLatIndex = indexer(header.indexOf("start station latitude"), header);
+            int startLongIndex = indexer(header.indexOf("start station longitude"), header);
+            int endNameIndex = indexer(header.indexOf("end station name"), header);
+            int endLatIndex = indexer(header.indexOf("end station latitude"), header);
+            int endLongIndex = indexer(header.indexOf("end station longitude"), header);
+            int bikeIdIndex = indexer(header.indexOf("bikeid"), header);
+            int genderIndex = indexer(header.indexOf("gender"), header);
 
             routes.remove(0);
 
@@ -112,15 +111,14 @@ public class FileManager {
                 ArrayList<String> information = new ArrayList<String>(Arrays.asList(route.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1)));
 
                 //Obtain the relevant information from the csv.
-                String bikeID = information.get(bikeIdIndex).substring(1, information.get(bikeIdIndex).length() - 1);
-                String startName = information.get(startNameIndex).substring(1, information.get(startNameIndex).length() - 1);
-                String endName = information.get(endNameIndex).substring(1, information.get(endNameIndex).length() - 1);
-                double startLatitude = Double.parseDouble(information.get(startLatIndex).substring(1, information.get(startLatIndex).length() - 1));
-                double startLongitude = Double.parseDouble(information.get(startLongIndex).substring(1, information.get(startLongIndex).length() - 1));
-                double endLatitude = Double.parseDouble(information.get(endLatIndex).substring(1, information.get(endLatIndex).length() - 1));
-                double endLongitude = Double.parseDouble(information.get(endLongIndex).substring(1, information.get(endLongIndex).length() - 1));
-                genderIndex += header.size();
-                String gender = information.get(genderIndex).substring(1, information.get(genderIndex).length() - 1);
+                String bikeID = information.get(bikeIdIndex).substring(1, information.get(bikeIdIndex).lastIndexOf("\""));
+                String startName = information.get(startNameIndex).substring(1, information.get(startNameIndex).lastIndexOf("\""));
+                String endName = information.get(endNameIndex).substring(1, information.get(endNameIndex).lastIndexOf("\""));
+                double startLatitude = Double.parseDouble(information.get(startLatIndex).substring(1, information.get(startLatIndex).lastIndexOf("\"")));
+                double startLongitude = Double.parseDouble(information.get(startLongIndex).substring(1, information.get(startLongIndex).lastIndexOf("\"")));
+                double endLatitude = Double.parseDouble(information.get(endLatIndex).substring(1, information.get(endLatIndex).lastIndexOf("\"")));
+                double endLongitude = Double.parseDouble(information.get(endLongIndex).substring(1, information.get(endLongIndex).lastIndexOf("\"")));
+                String gender = information.get(genderIndex).substring(1, information.get(genderIndex).lastIndexOf("\""));
 
                 //Convert the relevant data into the associated classes
                 Location startLocation = new Location(startLatitude, startLongitude, startName, 4);
@@ -154,7 +152,7 @@ public class FileManager {
                 String bikeID = route.getBikeID();
                 String gender = route.getGender();
 
-                String strRoute = startName + "," + startLatitude + "," + startLongitude + "," + endName + "," + endLatitude + "," + endLongitude + "," + bikeID + "," + gender + "\n";
+                String strRoute = "\"" + startName + "\",\"" + startLatitude + "\",\"" + startLongitude + "\",\"" + endName + "\",\"" + endLatitude + "\",\"" + endLongitude + "\",\"" + bikeID + "\",\"" + gender + "\"\n";
                 bufferedWriter.write(strRoute);
             }
             bufferedWriter.flush();
@@ -442,6 +440,53 @@ public class FileManager {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        };
+        }
+    }
+
+    public static void generalRetriever(String filename) {
+        ArrayList<String> locations = readFile(filename);
+        if (!locations.isEmpty()) {
+            List header = Arrays.asList(locations.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
+
+            int nameIndex = header.indexOf("name");
+            int latIndex = header.indexOf("latitude");
+            int lonIndex = header.indexOf("longitude");
+
+            locations.remove(0);
+
+            for (String location : locations) {
+                String[] information = location.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+
+                String name = information[nameIndex];
+                Double latitude = Double.parseDouble(information[latIndex]);
+                Double longitude = Double.parseDouble(information[lonIndex]);
+
+                Location newLoc = new Location(latitude, longitude, name, 4);
+                CurrentStorage.addNewGeneral(newLoc);
+            }
+        }
+    }
+
+    public static void generalWriter(String filename, ArrayList<Location> locations) {
+        File newFile = new File(filename);
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(newFile));
+            if (!locations.isEmpty()) {
+                String header = "name, latitude, longitude";
+                bufferedWriter.write(header);
+                for (Location location : locations) {
+                    String name = location.getName();
+                    String latitude = Double.toString(location.getLatitude());
+                    String longitude = Double.toString(location.getLongitude());
+
+                    String strLocation = name + "," + latitude + "," + longitude + "\n";
+                    bufferedWriter.write(strLocation);
+                }
+                bufferedWriter.flush();
+                bufferedWriter.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

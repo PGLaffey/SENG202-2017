@@ -68,6 +68,7 @@ public class FileManagerTest extends TestCase {
         assertEquals(11, result.size());
     }
 
+
     /**
      * Test to test FileManager's readFile functions work as expected for a .csv with 1 route.
      */
@@ -277,6 +278,16 @@ public class FileManagerTest extends TestCase {
         assertTrue(CurrentStorage.getRouteArray().get(0).equals(expected_route));
     }
 
+    @Test
+    public void testWriteRouteTenFile() {
+        FileManager.routeRetriever(TARGET+"/route_data10.csv");
+        FileManager.routeWriter(WRITE_TARGET+"/route_test_10_file.csv", CurrentStorage.getRouteArray());
+        assertTrue(new File(WRITE_TARGET+"/route_test_10_file.csv").exists());
+        CurrentStorage.flush();
+        FileManager.routeRetriever(WRITE_TARGET+"/route_test_10_file.csv");
+        assertEquals(10, CurrentStorage.getRouteArray().size());
+    }
+
     /**
      * Test to test the FileManager's ability to write a file with a filename that contains spaces.
      */
@@ -336,6 +347,16 @@ public class FileManagerTest extends TestCase {
         FileManager.retailerRetriever(WRITE_TARGET+"/retailer_test_file.csv");
         Retailer expectedRetailer = new Retailer("3 New York Plaza", "Starbucks Coffee", "Casual Eating & Takeout", "F-Coffeehouse");
         assertTrue(CurrentStorage.getRetailerArray().get(0).equals(expectedRetailer));
+    }
+
+    @Test
+    public void testWriteRetailerTenFile() {
+        FileManager.retailerRetriever(TARGET+"/retailer_data10.csv");
+        FileManager.retailerWriter(WRITE_TARGET+"retailer_test_10_file.csv", CurrentStorage.getRetailerArray());
+        assertTrue(new File(WRITE_TARGET+"/retailer_test_10_file.csv").exists());
+        CurrentStorage.flush();
+        FileManager.retailerRetriever(WRITE_TARGET+"/retailer_test_10_file.csv");
+        assertEquals(10, CurrentStorage.getRetailerArray().size());
     }
 
     @Test
