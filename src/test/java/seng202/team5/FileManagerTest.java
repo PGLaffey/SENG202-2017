@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.omg.CORBA.Current;
 import seng202.Model.*;
 import seng202.exceptions.WrongFormatException;
 
@@ -310,6 +311,19 @@ public class FileManagerTest extends TestCase {
     }
 
     /**
+     * Test the ability of wifiWriter to write a file with 10 wifis.
+     */
+    @Test
+    public void testWriteTenWifiFile(){
+        FileManager.wifiRetriever(TARGET+"/wifi_data10.csv");
+        FileManager.wifiWriter(WRITE_TARGET+"/test_wifi_10.csv", CurrentStorage.getWifiArray());
+        assertTrue(new File(WRITE_TARGET+"/test_wifi_10.csv").exists());
+        CurrentStorage.flush();
+        FileManager.wifiRetriever(WRITE_TARGET+"/test_wifi_10.csv");
+        assertEquals(10, CurrentStorage.getWifiArray().size());
+    }
+
+    /**
      * Test to test the FileManager's ability to write a file.
      */
     @Test
@@ -336,11 +350,30 @@ public class FileManagerTest extends TestCase {
     }
 
     @Test
+    public void testWriteToiletTenFile() {
+        FileManager.toiletRetriever(TARGET+"/toilet_data10.csv");
+        FileManager.toiletWriter(WRITE_TARGET+"/toilet_test_10_file.csv", CurrentStorage.getToiletArray());
+        assertTrue(new File(WRITE_TARGET+"/toilet_test_10_file.csv").exists());
+        CurrentStorage.flush();
+        FileManager.toiletRetriever(WRITE_TARGET+"/toilet_test_10_file.csv");
+        assertEquals(10, CurrentStorage.getToiletArray().size());
+    }
+
+    @Test
     public void testWritePoiFile() {
         FileManager.poiRetriever(TARGET+"/poi_data1.csv");
         FileManager.poiWriter(WRITE_TARGET+"/poi_test_file.csv", CurrentStorage.getPoiArray());
         assertTrue(new File(WRITE_TARGET+"/poi_test_file.csv").exists());
         Poi expectedPoi = new Poi(40.745968,-73.994039,"siteOne","sherwood forest entrance",0);
         assertTrue(CurrentStorage.getPoiArray().get(0).equals(expectedPoi));
+    }
+
+    @Test
+    public void testWritePoiTenFile() {
+        FileManager.poiRetriever(TARGET+"/poi_data10.csv");
+        FileManager.poiWriter(WRITE_TARGET+"/poi_test10_file.csv", CurrentStorage.getPoiArray());
+        assertTrue(new File(WRITE_TARGET+"/poi_test10_file.csv").exists());
+        FileManager.poiRetriever(WRITE_TARGET+"/poi_test10_file.csv");
+        assertEquals(10, CurrentStorage.getPoiArray().size());
     }
 }

@@ -111,7 +111,6 @@ public class FileManager {
             for (String route : routes) {
                 ArrayList<String> information = new ArrayList<String>(Arrays.asList(route.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1)));
 
-                System.out.println(startNameIndex);
                 //Obtain the relevant information from the csv.
                 String bikeID = information.get(bikeIdIndex).substring(1, information.get(bikeIdIndex).length() - 1);
                 String startName = information.get(startNameIndex).substring(1, information.get(startNameIndex).length() - 1);
@@ -365,8 +364,7 @@ public class FileManager {
                     String toiletLon = Double.toString(toilet.getLongitude());
                     String accessable = Boolean.toString(toilet.getForDisabled());
                     String unisex = Boolean.toString(toilet.getUniSex());
-
-                    String strToilet = toiletName + "," + toiletLat + "," + toiletLon + "," + accessable + "," + unisex;
+                    String strToilet = toiletName + "," + toiletLat + "," + toiletLon + "," + accessable + "," + unisex + "\n";
                     bufferedWriter.write(strToilet);
                 }
                 bufferedWriter.flush();
