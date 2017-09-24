@@ -1,4 +1,4 @@
-package seng202.team5;
+package seng202.Model;
 //TODO check that this is the correct import statement for image. jack push test
 //TODO is requirement a String or an int; different in two places in the UML diagram.
 
@@ -15,9 +15,9 @@ import java.util.Arrays;
 public class Badge {
 
     private String[] types = {"Distance","Time","Routes"};
-    private int[][] requirements = {{0,2000,10000,50000,100000,200000,500000},{0,2,10,50,100,200,500},{0,2,5,10,50,100,200}};
+    private int[][] requirements = {{0,2000,10000,50000,100000,200000,500000},{0,120,600,3000,6000,12000,30000},{0,2,5,10,50,100,200}};
         //{{Distance(m)},{Routes(n)},{Time(h)}}
-    private String[] units = {"metres","hours","trips"};
+    private String[] units = {"metres","minutes","trips"};
     private String[] methods = {"Travel","Cycle for","Take"};
     private String[] colours = {"blank","black","green","red","bronze","silver","gold"};
 
@@ -76,6 +76,35 @@ public class Badge {
     public int[] getRequirements() { return requirements[getBadgeTypeIndex()]; }
 
     public int getLevelCap() { return requirements[getBadgeTypeIndex()][level]; }
+
+    public String getStrRemaining() throws BadgeLevelException {
+        String strRemaining = "";
+        updateRemaining();
+        if (units[getBadgeTypeIndex()] == "minutes") {
+            if (remaining % 60 == 0) {
+                strRemaining = Integer.toString(remaining/60) + " hours";
+            } else if (remaining < 60) {
+                strRemaining = Integer.toString(remaining) + " minutes";
+            } else {
+                int hours = remaining / 60;
+                int minutes = remaining - (hours * 60);
+                strRemaining = Integer.toString(hours) + " hours & " + Integer.toString(minutes) + " minutes";
+            }
+        } else if (units[getBadgeTypeIndex()] == "metres") {
+            if (remaining % 1000 == 0) {
+                strRemaining = Integer.toString(remaining/1000) + " kilometres";
+            } else if (remaining < 1000) {
+                strRemaining = Integer.toString(remaining) + " metres";
+            } else {
+                int kilometres = remaining / 1000;
+                int metres = remaining - (kilometres * 1000);
+                strRemaining = Integer.toString(kilometres) + " hours & " + Integer.toString(metres) + " minutes";
+            }
+        } else {
+            strRemaining = Integer.toString(remaining) + " " + units[getBadgeTypeIndex()];
+        }
+        return strRemaining;
+    }
 
     public void setBadgeType(String badgeType) throws BadgeTypeException {
         if (badgeType != "Distance" || badgeType != "Time" || badgeType != "Routes") {
@@ -142,7 +171,7 @@ public class Badge {
         pullIcon(fileName);
     }
 
-    public void updateDescription() {
+    public void updateDescription() throws BadgeLevelException {
         int type = getBadgeTypeIndex();
         String output = "";
         if (level == 0) {
@@ -158,8 +187,8 @@ public class Badge {
             output = "To be quite honest, we're not entirely sure what this is...";
         }
 
-        if (level < 6) {
-            output += ("\n" + methods[type] + " " + (Integer.toString(remaining)) + " more " + units[type] + " to earn");
+        if (level < 6 && level >= 0) {
+            output += ("\n" + methods[type] + " " + getStrRemaining() + " to earn");
             if (level > 0) {
                 output += " the next";
             }

@@ -1,6 +1,4 @@
 package seng202.Model;
-import seng202.Model.Route;
-import seng202.team5.Badge;
 
 import java.io.Serializable;
 import java.util.ArrayList;

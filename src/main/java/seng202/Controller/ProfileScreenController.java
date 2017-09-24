@@ -14,7 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
 import seng202.Model.User;
-import seng202.team5.Badge;
+import seng202.Model.Badge;
 
 public class ProfileScreenController {
 	
