@@ -2,13 +2,14 @@ package seng202.Model;
 
 //import seng202.exceptions.BadgeLevelException;
 //import seng202.exceptions.BadgeTypeException;
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
  * Badge class that serves as a superclass to all the different types of badges.
  */
 
-public class Badge {
+public class Badge implements Serializable{
 
     private String filePath = "images/Badges/";
 
