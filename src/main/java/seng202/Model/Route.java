@@ -58,6 +58,16 @@ public class Route {
         via3 = null;
     }
 
+    public Route(Location start, Location end, String name) {
+        this.name = name;
+        this.start = start;
+        this.end = end;
+        this.distance = Map.getDistance(start.getLatitude(), start.getLongitude(), end.getLatitude(), end.getLongitude());
+        via1 = null;
+        via2 = null;
+        via3 = null;
+    }
+
     /**
      * Getter for the route name
      */
