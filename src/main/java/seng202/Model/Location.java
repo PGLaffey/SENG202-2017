@@ -63,6 +63,12 @@ public class Location {
         this.locationType = locationType;
     }
 
+    public Location(double latitude, double longitude, int locationType) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.locationType = locationType;
+    }
+
     /**
      * Getter for the locations latitude
      */

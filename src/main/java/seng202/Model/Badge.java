@@ -344,12 +344,8 @@ public class Badge implements Serializable{
         this.setValue(value);
         this.updateLevel();
         this.updateIcon();
-        if (level != 7) {
-            this.updateRemaining();
-        } else {
-            remaining = 0;
-        }
 
+        this.updateRemaining();
         this.updateDescription();
         this.updateName();
     }
