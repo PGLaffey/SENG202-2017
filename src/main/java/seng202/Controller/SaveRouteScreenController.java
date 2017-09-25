@@ -88,6 +88,8 @@ public class SaveRouteScreenController {
             Route route = new Route(start, end, routeNameText.getText());
             CurrentStorage.addNewRoute(route);
 
+            CurrentStorage.setNewRouteEnd(null);
+
             Stage stage = (Stage) saveButton.getScene().getWindow();
             stage.hide();
         }
