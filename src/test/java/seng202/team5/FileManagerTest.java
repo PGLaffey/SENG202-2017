@@ -6,12 +6,11 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.omg.CORBA.Current;
 import seng202.Model.*;
-import seng202.exceptions.WrongFormatException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class FileManagerTest extends TestCase {
@@ -288,10 +287,10 @@ public class FileManagerTest extends TestCase {
     /**
      * Tests the ability of the readFile function to handle files of the wrong format.
      */
-    @Test(expected = WrongFormatException.class)
+    @Test
     public void testWrongFormat()
     {
-        thrown.expect(WrongFormatException.class);
+        thrown.expect(IOException.class);
         FileManager.readFile(TARGET+"/terrible_format.csv");
     }
 
