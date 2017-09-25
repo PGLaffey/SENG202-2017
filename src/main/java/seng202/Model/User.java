@@ -1,8 +1,5 @@
 package seng202.Model;
 
-import seng202.exceptions.BadgeLevelException;
-import seng202.exceptions.BadgeTypeException;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -76,7 +73,6 @@ public class User implements Serializable {
      * Getter for the users routes
      */
     public Route getRoute(int id) {
-        //TODO how are we using the route ID?
         return routes.get(id);
     }
 
