@@ -66,7 +66,7 @@ public class LoginScreenController {
 					    user = FileManager.userDeserialize("./src/main/resources/data_files/" + usernameText.getText() + ".ser");
 					} else {
 						user = new User(userInfo.get(0), userInfo.get(1), usernameText.getText().toLowerCase(), userInfo.get(2), passwordText.getText().toString());
-						FileManager.userSerialize(user, "./src/main/resources/data_files/" + usernameText.getText() + ".ser");
+						FileManager.userSerialize(user, "./src/main/resources/data_files/");
 					}
 
 					CurrentStorage.setUser(user);
