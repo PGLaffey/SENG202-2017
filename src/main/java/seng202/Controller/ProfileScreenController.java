@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -59,6 +60,24 @@ public class ProfileScreenController {
 	@FXML
 	private ImageView distanceBadge;
 
+	@FXML
+	private Label distBadgeNameLabel;
+
+	@FXML
+	private Label timeBadgeNameLabel;
+
+	@FXML
+	private Label routesBadgeNameLabel;
+
+	@FXML
+	private Tooltip distBadgeTooltip;
+
+	@FXML
+	private Tooltip timeBadgeTooltip;
+
+	@FXML
+	private Tooltip routesBadgeTooltip;
+
     @FXML
     private ImageView level1Image;
 
@@ -96,8 +115,12 @@ public class ProfileScreenController {
 		
 		Stage primaryStage = (Stage) mapButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
-		
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
+
+		Scene currentScene = primaryStage.getScene();
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Map");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -111,13 +134,27 @@ public class ProfileScreenController {
 	 */
 	@FXML
     void tablePressed(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) tableButton.getScene().getWindow(); 
-		Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
-		
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
-		primaryStage.setTitle("Table");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		try {
+			Stage primaryStage = (Stage) tableButton.getScene().getWindow();
+			Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
+
+			Scene currentScene = primaryStage.getScene();
+			Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+					: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+			//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
+			primaryStage.setTitle("Table");
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch (Exception e){
+			Stage stage = new Stage();
+			Parent root = FXMLLoader.load(getClass().getResource("/DataLoadingScreen.fxml"));
+
+			Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+			stage.setTitle("Still Loading");
+			stage.setScene(scene);
+			stage.show();
+		}
     }
 	
 	
@@ -129,8 +166,12 @@ public class ProfileScreenController {
 		
 		Stage primaryStage = (Stage) statButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/DataViewerScreen.fxml"));
-		
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
+
+		Scene currentScene = primaryStage.getScene();
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Statistics");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -144,8 +185,12 @@ public class ProfileScreenController {
 	public void accountPressed() throws IOException {
 		Stage primaryStage = (Stage) accountButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
-		
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
+
+		Scene currentScene = primaryStage.getScene();
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Profile");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -226,6 +271,14 @@ public class ProfileScreenController {
         distanceBadge.setImage(new Image(userDistBadge.getIcon().toString()));
         timeBadge.setImage(new Image(userTimeBadge.getIcon().toString()));
 		routesBadge.setImage(new Image(userRouteBadge.getIcon().toString()));
+
+		distBadgeNameLabel.setText(userDistBadge.getName());
+		timeBadgeNameLabel.setText(userTimeBadge.getName());
+		routesBadgeNameLabel.setText(userRouteBadge.getName());
+
+		distBadgeTooltip.setText(userDistBadge.getDescription());
+		timeBadgeTooltip.setText(userTimeBadge.getDescription());
+		routesBadgeTooltip.setText(userRouteBadge.getDescription());
 	}
 	
 

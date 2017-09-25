@@ -196,20 +196,41 @@
                                           <Insets />
                                        </GridPane.margin>
                                     </ImageView>
-                                    <Label fx:id="distBadgeName" text="Distance badge, level 0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                                    <Label fx:id="distBadgeNameLabel" text="Distance badge, level 0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
+                                       <tooltip>
+                                          <Tooltip fx:id="distBadgeTooltip" text="Empty Tooltip">
+                                             <font>
+                                                <Font size="11.0" />
+                                             </font>
+                                          </Tooltip>
+                                       </tooltip>
                                     </Label>
-                                    <Label fx:id="timeBadgeName" text="Time Badge, level 0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                                    <Label fx:id="timeBadgeNameLabel" text="Time Badge, level 0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
+                                       <tooltip>
+                                          <Tooltip fx:id="timeBadgeTooltip" text="Empty Tooltip">
+                                             <font>
+                                                <Font size="11.0" />
+                                             </font>
+                                          </Tooltip>
+                                       </tooltip>
                                     </Label>
-                                    <Label fx:id="routesBadgeName" text="Routes badge, level 0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                                    <Label fx:id="routesBadgeNameLabel" text="Routes badge, level 0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
+                                       <tooltip>
+                                          <Tooltip fx:id="routesBadgeTooltip" text="Empty Tooltip">
+                                             <font>
+                                                <Font size="11.0" />
+                                             </font>
+                                          </Tooltip>
+                                       </tooltip>
                                     </Label>
                                  </children>
                               </GridPane>

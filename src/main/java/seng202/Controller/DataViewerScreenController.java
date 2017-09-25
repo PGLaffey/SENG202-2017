@@ -79,8 +79,12 @@ public class DataViewerScreenController {
 	public void mapPressed() throws IOException {
 		Stage primaryStage = (Stage) mapButton.getScene().getWindow(); // Here the window is the stage
 		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
-		
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
+
+		Scene currentScene = primaryStage.getScene();
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Map");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -94,13 +98,27 @@ public class DataViewerScreenController {
 	 */
 	@FXML
     void tablePressed(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) tableButton.getScene().getWindow(); // Here the window is the stage
-		Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
-		
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
-		primaryStage.setTitle("Table");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		try {
+			Stage primaryStage = (Stage) tableButton.getScene().getWindow();
+			Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
+
+			Scene currentScene = primaryStage.getScene();
+			Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+					: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+			//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
+			primaryStage.setTitle("Table");
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch (Exception e){
+			Stage stage = new Stage();
+			Parent root = FXMLLoader.load(getClass().getResource("/DataLoadingScreen.fxml"));
+
+			Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+			stage.setTitle("Still Loading");
+			stage.setScene(scene);
+			stage.show();
+		}
     }
 	
 	
@@ -112,8 +130,12 @@ public class DataViewerScreenController {
 		
 		Stage primaryStage = (Stage) statButton.getScene().getWindow(); // Here the window is the stage
 		Parent root = FXMLLoader.load(getClass().getResource("/DataViewerScreen.fxml"));
+
+		Scene currentScene = primaryStage.getScene();
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
 		
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
+		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Statistics");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -127,8 +149,12 @@ public class DataViewerScreenController {
 	public void accountPressed() throws IOException {
 		Stage primaryStage = (Stage) accountButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
-		
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
+
+		Scene currentScene = primaryStage.getScene();
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Profile");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -158,8 +184,8 @@ public class DataViewerScreenController {
 		ObservableList<String> filterTypes = FXCollections.observableArrayList("Distance travelled","Time spent cycling");
 		filterGraphBox.setItems(filterTypes);
 
-		distValue.setText(CurrentStorage.getUser().getDistanceRounded() + "m");
-		timeValue.setText(CurrentStorage.getUser().getHours() + " hours");
+		distValue.setText(CurrentStorage.getUser().getDistanceRounded() + " metres");
+		timeValue.setText(CurrentStorage.getUser().getHours() + " minutes");
 		routesValue.setText(CurrentStorage.getUser().getRoutesCycled() + " routes");
 
 		User user = CurrentStorage.getUser();

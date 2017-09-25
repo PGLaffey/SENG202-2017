@@ -182,7 +182,11 @@ public class TablesScreenController {
     	Stage primaryStage = (Stage) accountButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
 
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
+		Scene currentScene = primaryStage.getScene();
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Profile");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -218,7 +222,11 @@ public class TablesScreenController {
     	Stage primaryStage = (Stage) mapButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
+		Scene currentScene = primaryStage.getScene();
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Map");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -352,14 +360,41 @@ public class TablesScreenController {
     	Stage primaryStage = (Stage) statButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/DataViewerScreen.fxml"));
 
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
+		Scene currentScene = primaryStage.getScene();
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Statistics");
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
 
     @FXML
-    void tablePressed(ActionEvent event) {
+    void tablePressed(ActionEvent event) throws IOException {
+
+		try {
+			Stage primaryStage = (Stage) tableButton.getScene().getWindow();
+			Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
+
+			Scene currentScene = primaryStage.getScene();
+			Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+					: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+			//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
+			primaryStage.setTitle("Table");
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch (Exception e){
+			Stage stage = new Stage();
+			Parent root = FXMLLoader.load(getClass().getResource("/DataLoadingScreen.fxml"));
+
+			Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+			stage.setTitle("Still Loading");
+			stage.setScene(scene);
+			stage.show();
+		}
+
     }
 
 	/**
@@ -373,6 +408,7 @@ public class TablesScreenController {
     	CurrentStorage.setWifi(row);
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/WifiInfoScreen.fxml"));
+
 
 		Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
 		stage.setTitle("About wifi point");

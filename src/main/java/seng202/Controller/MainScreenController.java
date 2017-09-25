@@ -457,8 +457,12 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     void mapPressed(ActionEvent event) throws IOException {
     	Stage primaryStage = (Stage) mapButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
-		
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
+
+        Scene currentScene = primaryStage.getScene();
+        Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+                : new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+        //Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Map");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -476,7 +480,11 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             Stage primaryStage = (Stage) tableButton.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
 
-            Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
+            Scene currentScene = primaryStage.getScene();
+            Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+                    : new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+            //Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
             primaryStage.setTitle("Table");
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -501,9 +509,16 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     void statPressed(ActionEvent event) throws IOException {
     	Stage primaryStage = (Stage) statButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/DataViewerScreen.fxml"));
+
+
+        Scene currentScene = primaryStage.getScene();
+        Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+                : new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+        //Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		
 		primaryStage.setTitle("Statistics");
-		primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
+		primaryStage.setScene(scene);
 		primaryStage.show();
     }
 
@@ -516,9 +531,16 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     void accountPressed(ActionEvent event) throws IOException {
     	Stage primaryStage = (Stage) accountButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
+
+
+        Scene currentScene = primaryStage.getScene();
+        Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+                : new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+        //Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		
 		primaryStage.setTitle("Profile");
-		primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
+		primaryStage.setScene(scene);
 		primaryStage.show();
     }
     
@@ -1341,6 +1363,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                             data.connectDb();
                             progressBar.setVisible(true);
                             updateProgress(0, 100);
+                            //progressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
                             updateMessage("Retrieving data...");
                             data.loadAllLocations();
                             updateProgress(100, 100);
