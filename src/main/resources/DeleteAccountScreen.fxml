@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
@@ -17,19 +18,38 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="452.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.Controller.DeleteAccountScreenController">
+<GridPane alignment="CENTER" hgap="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="450.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,4;" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.DeleteAccountScreenController">
   <children>
-    <Label prefHeight="114.0" prefWidth="400.0" text="Are you sure you want to delete your &#10;Cyclrr account?&#10;&#10;This cannot be undone" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
-    <Button id="signInButton" fx:id="noButton" mnemonicParsing="false" onAction="#noButtonPressed" text="No" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+    <Label prefHeight="114.0" text="Are you sure you want to delete your account?" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+         <font>
+            <Font name="KacstOne Bold" size="14.0" />
+         </font></Label>
+    <Button id="signInButton" fx:id="noButton" mnemonicParsing="false" onAction="#noButtonPressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="No" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
       <GridPane.margin>
         <Insets left="20.0" />
       </GridPane.margin>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
     </Button>
-    <Button id="signUpButton" fx:id="yesButton" mnemonicParsing="false" mouseTransparent="false" onAction="#yesButtonPressed" text="Yes" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+    <Button id="signUpButton" fx:id="yesButton" mnemonicParsing="false" mouseTransparent="false" onAction="#yesButtonPressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="Yes" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
       <GridPane.margin>
         <Insets right="20.0" />
       </GridPane.margin>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
     </Button>
+      <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2" GridPane.halignment="CENTER">
+         <image>
+            <Image url="@images/logo_1_retro.png" />
+         </image>
+      </ImageView>
+      <Label text="This cannot be undone" textAlignment="CENTER" textFill="#30126d" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+         <font>
+            <Font name="KacstOne Bold" size="13.0" />
+         </font>
+      </Label>
   </children>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="196.0" />
@@ -39,7 +59,9 @@
     <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
   </padding>
   <rowConstraints>
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
   </rowConstraints>
 </GridPane>

@@ -1,6 +1,4 @@
 package seng202.Model;
-import seng202.Model.Route;
-import seng202.team5.Badge;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,12 +15,12 @@ public class User implements Serializable {
     private String dateOfBirth;
     private int routesCycled;
     private double distanceCycled;
-    private double hoursCycled;
+    private double minutesCycled;
     private ArrayList<Route> routes;
-    private ArrayList<Badge> badges;
+    private ArrayList<Badge> badges; // First badge is distance, second time and third route
 
-    //TODO There is a suggestion that this should be packet-private, should this be something to consider?
-    //TODO Did we agree that the id was to be randomly generated or chosen by the user?
+    private static final long serialVersionUID = 1L;
+
     /**
     Constructor for the User class, creates a new user instance
      @param first The first name of the user.
@@ -40,60 +38,128 @@ public class User implements Serializable {
         this.dateOfBirth = doB;
         this.routesCycled = 0;
         this.distanceCycled = 0;
-        this.hoursCycled = 0;
+        this.minutesCycled = 0;
         this.routes = new ArrayList<Route>();
         this.badges = new ArrayList<Badge>();
+        Badge distBadge = null;
+        distBadge = new Badge("Distance");
+        Badge timeBadge = new Badge("Time");
+        Badge routeBadge = new Badge("Routes");
+        badges.add(distBadge);
+        badges.add(timeBadge);
+        badges.add(routeBadge);
     }
 
+    /**
+     * Getter for the users full name
+     */
     public String getName() { return name; }
+
+    /**
+     * Getter for the users first name
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Getter for the users last name
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * Getter for the users routes
+     */
     public Route getRoute(int id) {
-        //TODO how are we using the route ID?
         return routes.get(id);
     }
 
+    /**
+     * Getter for the users date of birth
+     */
     public String getDob() {
     	return dateOfBirth;
     }
-    
+
+    /**
+     * Getter for the users hours
+     * @return
+     */
     public double getHours() {
-        return hoursCycled;
+        return minutesCycled;
     }
 
+    /**
+     * Getter for the users distance stat
+     */
     public double getDistance() {
         return distanceCycled;
     }
 
+    /**
+     * Getter for the distance the user has cycled, rounded
+     */
+    public String getDistanceRounded() { return String.format("%.2f", distanceCycled); }
+
+    /**
+     * Getter for the users routes that they have cycled
+     */
     public int getRoutesCycled() {
         return routesCycled;
     }
-    
+
+    /**
+     * Getter for the users password
+     */
     public String getPassword() {
     	return password;
     }
 
+    /**
+     * Getter for an arrayList of the users badges
+     */
     public ArrayList<Badge> getBadges() {
         return badges;
     }
 
+    /**
+     * Getter for the users username
+     */
 	public String getUsername() {
 		return username;
 	}
-	
+
+    /**
+     * Adds on to the users distance stat
+     */
 	public void addDistance(double dist) {
 		distanceCycled += dist;
 	}
-	
+
+    /**
+     * Adds on to the users time spent cycling
+     */
 	public void addTime(double time) {
-		hoursCycled += time;
+		minutesCycled += time;
 	}
 
+    /**
+     * Increments the number of routes the user has cycled
+     */
 	public void addRoute() {routesCycled += 1; }
+
+    /**
+     * Overrides the .equals function in the user class so it compares key values of the class to check if the
+     * objects are equal to one another.
+     * @param user The user to be compared.
+     * @return Whether the current user has the same key values as the previous user.
+     */
+    @Override
+    public boolean equals(Object user) {
+        User currentUser = (User) user;
+        return (getFirstName().equals(currentUser.getFirstName()) && getLastName().equals(currentUser.getLastName()) &&
+                getUsername().equals(currentUser.getUsername())) && getClass().equals(user.getClass());
+    }
 }

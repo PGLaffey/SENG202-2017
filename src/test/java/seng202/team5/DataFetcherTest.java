@@ -39,7 +39,7 @@ public class DataFetcherTest extends TestCase {
      * Test to ensure that the connectDB function results in a functional connection.
      */
     @Test
-    public void testConnectDB()
+    public void connectDbTest()
     {
         try {
             fetcher.connectDb();
@@ -52,7 +52,7 @@ public class DataFetcherTest extends TestCase {
         }
         try {
             // Checks if the connection obtained by the fetcher in connectDB is valid
-            assertTrue(fetcher.getConnect().isValid(60));
+            assertTrue(fetcher.getConnect().isValid(180));
         } catch (SQLException exception) {
             fail("SQLException");
         }

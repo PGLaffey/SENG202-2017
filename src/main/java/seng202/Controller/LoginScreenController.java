@@ -50,17 +50,25 @@ public class LoginScreenController {
 					incorrectUserLbl.setVisible(true);
 				} else if ((data.fetchPassword(usernameText.getText()).equals(passwordText.getText().toString()))) {
 
-					Thread retailerImporter = new Thread(new RetailerImporterThread(new File(getClass().getResource("/data_files/").getFile()).toString() + "/Retailers_subset.csv"));
-					retailerImporter.start();
-					Thread wifiImporter = new Thread(new WifiImporterThread(new File(getClass().getResource("/data_files/").getFile()).toString() + "/NYC_Free_Public_WiFi_03292017.csv"));
-					wifiImporter.start();
+				/*	Thread retailerImporter = new Thread(new RetailerImporterThread(new File(getClass().getResource("/data_files/").getFile()).toString() + "/Retailers_subset.csv"));
+					retailerImporter.start();*/
+			/*		Thread wifiImporter = new Thread(new WifiImporterThread(new File(getClass().getResource("/data_files/").getFile()).toString() + "/NYC_Free_Public_WiFi_03292017.csv"));
+					wifiImporter.start();*/
 					Thread routeImporter = new Thread(new RouteImporterThread(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-01 - Citi Bike trip data.csv"));
 					routeImporter.start();
 					//Thread routeImporter(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-02 - Citi Bike trip data.csv"));
 					ArrayList<String> userInfo;
 					userInfo = data.fetchUserInfo(usernameText.getText());
 
-					User user = new User(userInfo.get(0), userInfo.get(1), usernameText.getText().toLowerCase(), userInfo.get(2), passwordText.getText().toString());
+					User user;
+					if (new File("./src/main/resources/data_files/" + usernameText.getText() + ".ser").exists()) {
+						//user = new User("Courtney","Hoskin", "cgh", "2017-08-06","password");
+					    user = FileManager.userDeserialize("./src/main/resources/data_files/" + usernameText.getText() + ".ser");
+					} else {
+						user = new User(userInfo.get(0), userInfo.get(1), usernameText.getText().toLowerCase(), userInfo.get(2), passwordText.getText().toString());
+						FileManager.userSerialize(user, "./src/main/resources/data_files/");
+					}
+
 					CurrentStorage.setUser(user);
 
 					Stage primaryStage = (Stage) signInButton.getScene().getWindow();
@@ -79,7 +87,6 @@ public class LoginScreenController {
 			incorrectPasswordLbl.setVisible(false);
 			incorrectUserLbl.setVisible(false);
 		}
-		//data.closeConnection();
 	}
 	
 
@@ -91,7 +98,7 @@ public class LoginScreenController {
     	Stage primaryStage = (Stage) signUpButton.getScene().getWindow();
     	
     	Parent root = FXMLLoader.load(getClass().getResource("/SignupScreen.fxml"));
-    	
+
     	primaryStage.setTitle("Sign Up");
     	primaryStage.setScene(new Scene(root));
         

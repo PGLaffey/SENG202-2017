@@ -31,63 +31,87 @@
 
 <?import com.lynden.gmapsfx.GoogleMapView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.MainScreenController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="450.0" prefHeight="500.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.MainScreenController">
   <!--prefHeight="489.0" prefWidth="827.0"-->
   <children>
-    <SplitPane dividerPositions="0.10677618069815195" orientation="VERTICAL" prefHeight="489.0" prefWidth="827.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <SplitPane dividerPositions="0.10677618069815195" orientation="VERTICAL" prefHeight="500.0" prefWidth="850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <items>
-        <AnchorPane maxHeight="49.0" minHeight="49.0" minWidth="0.0">
+        <AnchorPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="450.0" prefHeight="50.0" prefWidth="850.0" SplitPane.resizableWithParent="false">
           <children>
-            <GridPane minHeight="49.0" prefWidth="825.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane depthTest="DISABLE" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="450.0" prefHeight="50.0" prefWidth="850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
-                <Label alignment="CENTER" prefHeight="16.0" prefWidth="132.0" text="CYCLRR" GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <ImageView fitHeight="50.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                <image>
+                  <Image url="@images/logo_1_retro.png" />
+                </image>
+              </ImageView>
+                        <GridPane depthTest="DISABLE" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="240.0" prefHeight="50.0" prefWidth="640.0" GridPane.columnIndex="1">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="60.0" percentWidth="25.0" prefWidth="160.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="60.0" percentWidth="25.0" prefWidth="160.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="60.0" percentWidth="25.0" prefWidth="160.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="60.0" percentWidth="25.0" prefWidth="160.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                      <Button fx:id="statButton" depthTest="DISABLE" maxWidth="1.7976931348623157E308" minWidth="60.0" mnemonicParsing="false" onAction="#statPressed" prefHeight="50.0" prefWidth="160.0" text="Statistics" GridPane.columnIndex="2">
+                        <graphic>
+                          <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                              <Image url="@images/pie_chart.png" />
+                            </image>
+                          </ImageView>
+                        </graphic>
+                        <font>
+                          <Font name="KacstOne" size="13.0" />
+                        </font>
+                      </Button>
+                      <Button id="statButton" fx:id="tableButton" depthTest="DISABLE" maxWidth="1.7976931348623157E308" minWidth="60.0" mnemonicParsing="false" onAction="#tablePressed" prefHeight="40.0" prefWidth="160.0" text="Table" GridPane.columnIndex="1">
+                        <graphic>
+                          <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                              <Image url="@images/table.png" />
+                            </image>
+                          </ImageView>
+                        </graphic>
+                        <font>
+                          <Font name="KacstOne" size="13.0" />
+                        </font>
+                      </Button>
+                      <Button fx:id="mapButton" depthTest="DISABLE" maxWidth="1.7976931348623157E308" minWidth="60.0" mnemonicParsing="false" onAction="#mapPressed" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #96C6D6;" text="Map" textFill="#30126d">
+                        <graphic>
+                          <ImageView fitHeight="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                              <Image url="@images/map.png" />
+                            </image>
+                                       <viewport>
+                                          <Rectangle2D height="50.0" />
+                                       </viewport>
+                          </ImageView>
+                        </graphic>
+                                    <font>
+                                      <Font name="KacstOne Bold" size="13.0" />
+                                    </font>
+                      </Button>
+                      <Button fx:id="accountButton" depthTest="DISABLE" maxWidth="1.7976931348623157E308" minWidth="60.0" mnemonicParsing="false" onAction="#accountPressed" prefHeight="50.0" prefWidth="160.0" text="Account" GridPane.columnIndex="3">
+                        <graphic>
+                          <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                              <Image url="@images/account.png" />
+                            </image>
+                          </ImageView>
+                        </graphic>
+                        <font>
+                          <Font name="KacstOne" size="13.0" />
+                        </font>
+                      </Button>
+                           </children>
+                        </GridPane>
+                <Button fx:id="logoutButton" depthTest="DISABLE" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logoutPressed" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
                   <graphic>
-                    <ImageView fitHeight="53.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
-                      <image>
-                        <Image url="@images/bike.png" />
-                      </image>
-                    </ImageView>
-                  </graphic>
-                </Label>
-                <Button fx:id="mapButton" mnemonicParsing="false" onAction="#mapPressed" prefHeight="49.0" prefWidth="203.0" style="-fx-background-color: #599ff9;" text="Map" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                  <graphic>
-                    <ImageView fitHeight="45.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-                      <image>
-                        <Image url="@images/map.png" />
-                      </image>
-                    </ImageView>
-                  </graphic>
-                </Button>
-                <Button id="statButton" fx:id="tableButton" mnemonicParsing="false" onAction="#tablePressed" prefHeight="49.0" prefWidth="203.0" text="Table" GridPane.columnIndex="2" GridPane.rowIndex="0">
-                  <graphic>
-                    <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
-                      <image>
-                        <Image url="@images/table.png" />
-                      </image>
-                    </ImageView>
-                  </graphic>
-                </Button>
-                <Button fx:id="statButton" mnemonicParsing="false" onAction="#statPressed" prefHeight="49.0" prefWidth="203.0" text="Statistics" GridPane.columnIndex="3" GridPane.rowIndex="0">
-                  <graphic>
-                    <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
-                      <image>
-                        <Image url="@images/pie_chart.png" />
-                      </image>
-                    </ImageView>
-                  </graphic>
-                </Button>
-                <Button fx:id="accountButton" mnemonicParsing="false" onAction="#accountPressed" prefHeight="49.0" prefWidth="202.0" text="Account" GridPane.columnIndex="4" GridPane.rowIndex="0">
-                  <graphic>
-                    <ImageView fitHeight="51.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
-                      <image>
-                        <Image url="@images/account.png" />
-                      </image>
-                    </ImageView>
-                  </graphic>
-                </Button>
-                <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#logoutPressed" prefHeight="51.0" prefWidth="57.0" GridPane.columnIndex="5" GridPane.rowIndex="0">
-                  <graphic>
-                    <ImageView fitHeight="43.0" fitWidth="51.0" pickOnBounds="true">
+                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                       <image>
                         <Image url="@images/logout.png" />
                       </image>
@@ -96,12 +120,9 @@
                 </Button>
               </children>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="216.0" minWidth="10.0" prefWidth="153.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="214.0" minWidth="10.0" prefWidth="153.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="279.0" minWidth="10.0" prefWidth="153.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="279.0" minWidth="10.0" prefWidth="153.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="229.0" minWidth="10.0" prefWidth="153.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" prefWidth="50.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="160.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="240.0" prefWidth="640.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -109,16 +130,15 @@
             </GridPane>
           </children>
         </AnchorPane>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="355.0" prefWidth="642.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="355.0" prefWidth="642.0" SplitPane.resizableWithParent="false">
           <children>
             <SplitPane dividerPositions="0.22235722964763063" prefHeight="432.0" prefWidth="825.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" SplitPane.resizableWithParent="false">
               <items>
-                <AnchorPane maxWidth="200.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="160.0" style="-fx-background-color: #D1D7F1;" SplitPane.resizableWithParent="false">
                   <children>
-                    <GridPane prefHeight="430.0" prefWidth="182.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <GridPane maxHeight="1.7976931348623157E308" maxWidth="160.0" prefHeight="450.0" prefWidth="182.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <Button fx:id="showRouteButton" graphicTextGap="4.0" mnemonicParsing="false" onAction="#showRoutePressed" prefHeight="75.0" prefWidth="215.0" style="-fx-background-color: #fafafa;" text="Show Route on Map" underline="false" wrapText="false" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                        <MenuButton fx:id="loadRouteMenu" mnemonicParsing="false" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: #fafafa;&#10;" text="Load Route" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                        <MenuButton fx:id="loadRouteMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #0B4D63, #CCE6EF;" text="Load Route" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                           <items>
                             <Menu fx:id="favouriteRoutesMenu" mnemonicParsing="false" style="" text="Favourite Routes">
                               <items>
@@ -139,8 +159,11 @@
                               </items>
                             </Menu>
                           </items>
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
                         </MenuButton>
-                                    <MenuButton id="loadRouteMenu" fx:id="fileChooserMenu" mnemonicParsing="false" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: #fafafa;&#10;" text="Upload File" GridPane.rowIndex="4">
+                                    <MenuButton id="loadRouteMenu" fx:id="fileChooserMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #0B4D63, #CCE6EF;" text="Upload File" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                                        <items>
                                           <MenuItem fx:id="uploadWifiMenuBtn" mnemonicParsing="false" onAction="#uploadWifiBtnPressed" text="Wifi" />
                                           <MenuItem fx:id="uploadRetailerMenuBtn" mnemonicParsing="false" onAction="#uploadRetailerBtnPressed" text="Retailer" />
@@ -148,8 +171,11 @@
                                           <MenuItem fx:id="uploadToiletMenuBtn" mnemonicParsing="false" onAction="#uploadToiletBtnPressed" text="Point of Interest" />
                                           <MenuItem fx:id="uploadPoiMenuBtn" mnemonicParsing="false" onAction="#uploadPOIBtnPressed" text="Other" />
                                        </items>
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
                                     </MenuButton>
-                        <MenuButton id="loadRouteMenu" fx:id="addLocationsMenu" mnemonicParsing="false" prefHeight="70.0" prefWidth="215.0" style="-fx-background-color: #fafafa;&#10;" text="Add Location" GridPane.columnIndex="0" GridPane.rowIndex="5">
+                        <MenuButton id="loadRouteMenu" fx:id="addLocationsMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #0B4D63, #CCE6EF;" text="Add Location" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                           <items>
                             <MenuItem fx:id="addWifiMenuButton" mnemonicParsing="false" onAction="#addWifiMenuPressed" text="Wifi" />
                             <MenuItem fx:id="addRetailerMenuButton" mnemonicParsing="false" onAction="#addRetailerMenuPressed" text="Retailer" />
@@ -157,36 +183,49 @@
                             <MenuItem fx:id="addPoiMenuButton" mnemonicParsing="false" onAction="#addPoiMenuPressed" text="Point of Interest" />
                             <MenuItem fx:id="addOtherMenuButton" mnemonicParsing="false" onAction="#addOtherMenuPressed" text="Other" />
                           </items>
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
                         </MenuButton>
-                        <Button fx:id="shareButton" mnemonicParsing="false" onAction="#sharePressed" prefHeight="68.0" prefWidth="215.0" style="-fx-background-color: #fafafa;" text="Share" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                                    <ProgressBar fx:id="progressBar" prefHeight="20.0" prefWidth="182.0" progress="0.0"/>
-                                    <Label fx:id="progressBarLabel" text="Done...">
+                        <Button fx:id="shareButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#sharePressed" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #30126D, #B39EDC;" text="Share" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font></Button>
+                                    <ProgressBar fx:id="progressBar" prefHeight="20.0" prefWidth="160.0" progress="1.0" style="-fx-text-box-border: #30126D; -fx-text-box-border-width: 1.5; -fx-accent: #573895;" visible="false" />
+                                    <Label fx:id="progressBarLabel" text="Done..." textFill="#573895" visible="false">
                                        <padding>
-                                          <Insets left="40.0" right="40.0" top="40.0" />
+                                          <Insets left="10.0" right="10.0" top="40.0" />
                                        </padding>
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
                                     </Label>
+                                    <Label fx:id="latLongDistanceLabel" text="  Distance:" wrapText="true" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font></Label>
                       </children>
                       <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       </columnConstraints>
                       <rowConstraints>
-                                    <RowConstraints maxHeight="164.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="80.0" vgrow="SOMETIMES" />
+                        <RowConstraints prefHeight="120.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
                       </rowConstraints>
                     </GridPane>
                   </children>
                 </AnchorPane>
-                <AnchorPane maxHeight="+Infinity" maxWidth="+Infinity" minHeight="0.0" minWidth="0.0" prefHeight="430.0" prefWidth="660.0">
+                <AnchorPane maxHeight="+Infinity" maxWidth="+Infinity" minHeight="0.0" minWidth="0.0" prefHeight="430.0" prefWidth="660.0" style="-fx-background-color: #D1D7F1;">
                   <children>
                     <AnchorPane fx:id="mainMapPane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
                         <GoogleMapView fx:id="mapView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" SplitPane.resizableWithParent="true"/>
-                        <TextField fx:id="searchText" maxHeight="32.0" maxWidth="199.0" onAction="#searchTextAction" prefHeight="32.0" prefWidth="199.0" promptText="Search" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="14.0" />
+                        <TextField fx:id="searchText" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" onAction="#searchTextAction" prefHeight="30.0" prefWidth="200.0" promptText="Search" style="-fx-background-color: #0B4D63, #FFFFFF; -fx-background-insets: 0,1.5;" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
                         <Button fx:id="wifiIconButton" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#wifiIconPressed" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="21.0">
                           <graphic>
                             <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
@@ -241,84 +280,102 @@
                             </ImageView>
                           </graphic>
                         </Button>
-                        <Button id="saveButton" fx:id="saveRouteButton" mnemonicParsing="false" onAction="#fileChooserPressed" prefHeight="32.0" prefWidth="81.0" text="Save" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="21.0" />
+                        <Button id="saveButton" fx:id="saveRouteButton" layoutX="510.0" layoutY="392.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#saveRouteButtonPressed" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #30126D, #B39EDC;" text="Save" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="70.0">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font></Button>
                       </children>
                     </AnchorPane>
-                    <AnchorPane fx:id="addWifiPane" layoutX="-1.0" layoutY="2.0" prefHeight="430.0" prefWidth="637.0" visible="false" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="2.0">
+                    <AnchorPane fx:id="addWifiPane" layoutX="-1.0" layoutY="2.0" prefHeight="430.0" prefWidth="637.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,2;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <Label layoutX="282.0" layoutY="14.0" text="Add Wifi:" />
-                        <Label id="routeNameLabel" fx:id="wifiNameLabel" layoutX="11.0" layoutY="52.0" text="Wifi point name:" />
-                        <TextField id="locationNameText" fx:id="wifiNameText" layoutX="131.0" layoutY="46.0" prefWidth="200.0" />
-                                    <Label fx:id="wifiSsidLabel" layoutX="373.0" layoutY="52.0" text="Wifi ssid:" />
-                                    <TextField fx:id="wifiSsidText" layoutX="445.0" layoutY="47.0" />
-                        <Line endX="499.0" endY="-1.0" layoutX="116.0" layoutY="109.0" startX="-100.0" />
-                        <Label fx:id="wifiAddressLabel" layoutX="7.0" layoutY="123.0" text="Address:" />
-                        <TextField fx:id="wifiAddressText" layoutX="115.0" layoutY="123.0" prefWidth="160.0" />
-                        <Label layoutX="16.0" layoutY="160.0" text="OR" />
-                        <Label fx:id="wifiLatLabel" layoutX="11.0" layoutY="192.0" text="Latitude:" />
-                        <TextField fx:id="wifiLatText" layoutX="115.0" layoutY="189.0" prefWidth="200.0" />
-                        <Label fx:id="wifiLongLabel" layoutX="346.0" layoutY="192.0" text="Longitude:" />
-                        <TextField fx:id="wifiLongText" layoutX="458.0" layoutY="189.0" prefWidth="160.0" />
-                        <Line endX="494.0" endY="119.0" layoutX="126.0" layoutY="119.0" startX="-110.0" startY="123.0" />
-                        <Label fx:id="wifiZipLabel" layoutX="14.0" layoutY="258.0" text="Zip:" />
-                        <TextField fx:id="wifiZipText" layoutX="60.0" layoutY="252.0" prefWidth="142.0" />
-                        <Label fx:id="wifiBoroughLabel" layoutX="261.0" layoutY="258.0" text="Borough:" />
-                        <TextField fx:id="wifiBoroughText" layoutX="355.0" layoutY="252.0" prefWidth="200.0" />
-                        <Line endX="483.0" endY="170.0" layoutX="136.0" layoutY="129.0" startX="-121.0" startY="173.0" />
-                        <Label fx:id="wifiTypeLabel" layoutX="14.0" layoutY="323.0" text="Type:" />
-                        <TextField fx:id="wifiTypeText" layoutX="75.0" layoutY="317.0" prefWidth="200.0" />
-                        <Label fx:id="wifiProviderLabel" layoutX="11.0" layoutY="376.0" text="Provider:" />
-                        <TextField fx:id="wifiProviderText" layoutX="98.0" layoutY="376.0" prefWidth="200.0" />
-                        <Button id="saveButton" fx:id="saveWifiButton" layoutX="555.0" layoutY="384.0" mnemonicParsing="false" onAction="#saveWifiButtonPressed" text="Save" />
+                        <Label layoutX="299.0" layoutY="5.0" text="Add Wifi:" textAlignment="CENTER" underline="true" AnchorPane.leftAnchor="299.0" AnchorPane.topAnchor="15.0">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></Label>
+                        <Label id="routeNameLabel" fx:id="wifiNameLabel" layoutX="11.0" layoutY="52.0" text="Wifi point name:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="55.0" />
+                        <TextField id="locationNameText" fx:id="wifiNameText" layoutX="131.0" layoutY="46.0" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="50.0" />
+                                    <Label fx:id="wifiSsidLabel" layoutX="373.0" layoutY="52.0" text="Wifi ssid:" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="55.0" />
+                                    <TextField fx:id="wifiSsidText" layoutX="445.0" layoutY="47.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="50.0" />
+                        <Line endX="499.0" endY="-1.0" layoutX="116.0" layoutY="109.0" startX="-100.0" AnchorPane.leftAnchor="15.292892456054688" AnchorPane.rightAnchor="62.29292297363281" AnchorPane.topAnchor="107.29289317131042" />
+                        <Label fx:id="wifiAddressLabel" layoutX="7.0" layoutY="123.0" text="Address:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="125.0" />
+                        <TextField fx:id="wifiAddressText" layoutX="115.0" layoutY="123.0" prefWidth="160.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="120.0" />
+                        <Label layoutX="16.0" layoutY="160.0" text="OR" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="160.0" />
+                        <Label fx:id="wifiLatLabel" layoutX="11.0" layoutY="192.0" text="Latitude:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="195.0" />
+                        <TextField fx:id="wifiLatText" layoutX="115.0" layoutY="189.0" prefWidth="150.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="190.0" />
+                        <Label fx:id="wifiLongLabel" layoutX="346.0" layoutY="192.0" text="Longitude:" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="195.0" />
+                        <TextField fx:id="wifiLongText" layoutX="458.0" layoutY="189.0" prefWidth="150.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="190.0" />
+                        <Line endX="494.0" endY="119.0" layoutX="126.0" layoutY="119.0" startX="-110.0" startY="123.0" AnchorPane.leftAnchor="15.292892456054688" AnchorPane.rightAnchor="62.29292297363281" AnchorPane.topAnchor="237.2928924560547" />
+                        <Label fx:id="wifiZipLabel" layoutX="14.0" layoutY="258.0" text="Zip:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="265.0" />
+                        <TextField fx:id="wifiZipText" layoutX="60.0" layoutY="252.0" prefWidth="142.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="260.0" />
+                        <Label fx:id="wifiBoroughLabel" layoutX="261.0" layoutY="258.0" text="Borough:" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="265.0" />
+                        <TextField fx:id="wifiBoroughText" layoutX="355.0" layoutY="252.0" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="260.0" />
+                        <Line endX="483.0" endY="170.0" layoutX="136.0" layoutY="129.0" startX="-121.0" startY="173.0" AnchorPane.leftAnchor="15.292892456054688" AnchorPane.rightAnchor="62.29292297363281" AnchorPane.topAnchor="298.2928924560547" />
+                        <Label fx:id="wifiTypeLabel" layoutX="14.0" layoutY="323.0" text="Type:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="325.0" />
+                        <TextField fx:id="wifiTypeText" layoutX="75.0" layoutY="317.0" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="320.0" />
+                        <Label fx:id="wifiProviderLabel" layoutX="11.0" layoutY="376.0" text="Provider:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="375.0" />
+                        <TextField fx:id="wifiProviderText" layoutX="98.0" layoutY="376.0" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="370.0" />
+                        <Button id="saveButton" fx:id="saveWifiButton" layoutX="555.0" layoutY="384.0" mnemonicParsing="false" onAction="#saveWifiButtonPressed" style="-fx-background-color: #30126D, #B39EDC;" text="Save" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="70.0">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font></Button>
                       </children>
                     </AnchorPane>
-                    <AnchorPane id="addWifiPane" fx:id="addRetailerPane" prefHeight="431.0" prefWidth="637.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <AnchorPane id="addWifiPane" fx:id="addRetailerPane" prefHeight="431.0" prefWidth="637.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,2;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <Label layoutX="282.0" layoutY="14.0" text="Add Retailer:" />
-                        <Label id="routeNameLabel" fx:id="retailerNameLabel" layoutX="11.0" layoutY="52.0" text="Retailer name:" />
-                        <TextField id="locationNameText" fx:id="retailerNameText" layoutX="153.0" layoutY="46.0" prefWidth="200.0" />
-                        <Line endX="507.0" endY="-11.0" layoutX="115.0" layoutY="99.0" startX="-107.0" startY="-8.0" />
-                        <Label fx:id="retailerAddressLabel" layoutX="7.0" layoutY="111.0" text="Address:" />
-                        <TextField id="wifiAddressText" fx:id="retailerAddressText" layoutX="115.0" layoutY="111.0" prefWidth="160.0" />
-                        <Label layoutX="16.0" layoutY="148.0" text="OR" />
-                        <Label id="retiler" fx:id="retailerLatLabel" layoutX="11.0" layoutY="180.0" text="Latitude:" />
-                        <TextField id="wifiLatText" fx:id="retailerLatText" layoutX="115.0" layoutY="177.0" prefWidth="200.0" />
-                        <Label fx:id="retailerLongLabel" layoutX="346.0" layoutY="180.0" text="Longitude:" />
-                        <TextField id="wifiLongText" fx:id="retailerLongText" layoutX="458.0" layoutY="177.0" prefWidth="160.0" />
-                        <Line endX="500.0" endY="112.0" layoutX="125.0" layoutY="109.0" startX="-112.0" startY="113.0" />
-                        <Label fx:id="retailerZipLabel" layoutX="11.0" layoutY="235.0" text="Zip: " />
-                        <TextField fx:id="retailerZipText" layoutX="53.0" layoutY="232.0" prefWidth="149.0" />
-                        <Label fx:id="retailerBoroughLabel" layoutX="242.0" layoutY="238.0" text="Borough:" />
-                        <TextField fx:id="retailerBoroughText" layoutX="346.0" layoutY="235.0" prefWidth="200.0" />
-                        <Line endX="489.0" endY="160.0" layoutX="135.0" layoutY="119.0" startX="-121.0" startY="159.0" />
-                        <Label fx:id="retailerProductLabel" layoutX="14.0" layoutY="290.0" text="Product:" />
-                        <TextField fx:id="retailerProductText" layoutX="95.0" layoutY="290.0" prefWidth="200.0" />
-                        <Label fx:id="retailerDescriptionLabel" layoutX="16.0" layoutY="334.0" text="Description:" />
-                        <TextArea fx:id="retailerDescriptionText" layoutX="128.0" layoutY="333.0" prefHeight="85.0" prefWidth="234.0" wrapText="true" />
-                        <Button id="saveButton" fx:id="saveRetailerButton" layoutX="555.0" layoutY="384.0" mnemonicParsing="false" onAction="#saveRetailerButtonPressed" text="Save" />
+                        <Label layoutX="304.0" layoutY="14.0" text="Add Retailer:" underline="true" AnchorPane.leftAnchor="304.0" AnchorPane.topAnchor="14.0">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></Label>
+                        <Label id="routeNameLabel" fx:id="retailerNameLabel" layoutX="11.0" layoutY="52.0" text="Retailer name:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="50.0" />
+                        <TextField id="locationNameText" fx:id="retailerNameText" layoutX="153.0" layoutY="46.0" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="45.0" />
+                        <Line endX="507.0" endY="-11.0" layoutX="115.0" layoutY="99.0" startX="-107.0" startY="-8.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="87.292893409729" />
+                        <Label fx:id="retailerAddressLabel" layoutX="7.0" layoutY="111.0" text="Address:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="110.0" />
+                        <TextField id="wifiAddressText" fx:id="retailerAddressText" layoutX="115.0" layoutY="111.0" prefWidth="160.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="105.0" />
+                        <Label layoutX="16.0" layoutY="148.0" text="OR" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="145.0" />
+                        <Label id="retiler" fx:id="retailerLatLabel" layoutX="11.0" layoutY="180.0" text="Latitude:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="180.0" />
+                        <TextField id="wifiLatText" fx:id="retailerLatText" layoutX="115.0" layoutY="177.0" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="175.0" />
+                        <Label fx:id="retailerLongLabel" layoutX="346.0" layoutY="180.0" text="Longitude:" AnchorPane.leftAnchor="350.0" />
+                        <TextField id="wifiLongText" fx:id="retailerLongText" layoutX="458.0" layoutY="177.0" prefWidth="160.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="175.0" />
+                        <Line endX="500.0" endY="112.0" layoutX="125.0" layoutY="109.0" startX="-112.0" startY="113.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="220.2928924560547" />
+                        <Label fx:id="retailerZipLabel" layoutX="11.0" layoutY="235.0" text="Zip: " AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="245.0" />
+                        <TextField fx:id="retailerZipText" layoutX="53.0" layoutY="232.0" prefWidth="149.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="240.0" />
+                        <Label fx:id="retailerBoroughLabel" layoutX="242.0" layoutY="238.0" text="Borough:" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="245.0" />
+                        <TextField fx:id="retailerBoroughText" layoutX="346.0" layoutY="235.0" prefWidth="150.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="240.0" />
+                        <Line endX="489.0" endY="160.0" layoutX="135.0" layoutY="119.0" startX="-121.0" startY="159.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="277.2928924560547" />
+                        <Label fx:id="retailerProductLabel" layoutX="14.0" layoutY="290.0" text="Product:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="295.0" />
+                        <TextField fx:id="retailerProductText" layoutX="95.0" layoutY="290.0" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="290.0" />
+                        <Label fx:id="retailerDescriptionLabel" layoutX="16.0" layoutY="334.0" text="Description:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="335.0" />
+                        <TextArea fx:id="retailerDescriptionText" layoutX="128.0" layoutY="333.0" prefHeight="80.0" prefWidth="234.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" wrapText="true" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="335.0" />
+                        <Button id="saveButton" fx:id="saveRetailerButton" layoutX="555.0" layoutY="384.0" mnemonicParsing="false" onAction="#saveRetailerButtonPressed" style="-fx-background-color: #30126D, #B39EDC;" text="Save" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="70.0">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font></Button>
                       </children>
                     </AnchorPane>
-                    <AnchorPane id="addLocationsPane" fx:id="addToiletPane" prefHeight="431.0" prefWidth="637.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <AnchorPane id="addLocationsPane" fx:id="addToiletPane" prefHeight="431.0" prefWidth="637.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,2;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <Label layoutX="282.0" layoutY="14.0" text="Add Toilet:" />
-                        <Label id="routeNameLabel" fx:id="toiletNameLabel" layoutX="11.0" layoutY="52.0" text="Toilet name:" />
-                        <TextField id="locationNameText" fx:id="toiletNameText" layoutX="153.0" layoutY="46.0" prefWidth="200.0" />
-                        <Line endX="508.0" endY="-2.0" layoutX="112.0" layoutY="85.0" startX="-100.0" />
-                        <Label fx:id="toiletAddressLabel" layoutX="7.0" layoutY="99.0" text="Address:" />
-                        <TextField id="wifiAddressText" fx:id="toiletAddressText" layoutX="115.0" layoutY="99.0" prefWidth="160.0" />
-                        <Label layoutX="16.0" layoutY="136.0" text="OR" />
-                        <Label fx:id="toiletLatLabel" layoutX="11.0" layoutY="168.0" text="Latitude:" />
-                        <TextField id="wifiLatText" fx:id="toiletLatText" layoutX="115.0" layoutY="165.0" prefWidth="200.0" />
-                        <Label fx:id="toiletLongLabel" layoutX="346.0" layoutY="168.0" text="Longitude:" />
-                        <TextField id="wifiLongText" fx:id="toiletLongText" layoutX="458.0" layoutY="165.0" prefWidth="160.0" />
-                        <Line endX="503.0" endY="122.0" layoutX="122.0" layoutY="95.0" startX="-107.0" startY="124.0" />
-                        <Label fx:id="toiletZipLabel" layoutX="16.0" layoutY="235.0" text="Zip:" />
-                        <TextField fx:id="toiletZipText" layoutX="60.0" layoutY="229.0" prefWidth="154.0" />
-                        <Label fx:id="toiletBoroughLabel" layoutX="261.0" layoutY="232.0" text="Borough:" />
-                        <TextField fx:id="toiletBoroughText" layoutX="338.0" layoutY="229.0" prefWidth="200.0" />
-                        <Line endX="490.0" endY="166.0" layoutX="132.0" layoutY="105.0" startX="-118.0" startY="172.0" />
-                        <Label fx:id="toiletDisabledLabel" layoutX="14.0" layoutY="289.0" text="For Disabled:" />
-                        <ChoiceBox fx:id="toiletDisabledChoice" layoutX="142.0" layoutY="286.0">
+                        <Label layoutX="286.0" layoutY="7.0" text="Add Toilet:" underline="true" AnchorPane.leftAnchor="285.0" AnchorPane.topAnchor="15.0">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></Label>
+                        <Label id="routeNameLabel" fx:id="toiletNameLabel" layoutX="11.0" layoutY="52.0" text="Toilet name:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="55.0" />
+                        <TextField id="locationNameText" fx:id="toiletNameText" layoutX="118.0" layoutY="46.0" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="50.0" />
+                        <Line endX="508.0" endY="-2.0" layoutX="112.0" layoutY="85.0" startX="-100.0" AnchorPane.leftAnchor="14.292892456054688" AnchorPane.rightAnchor="52.29292297363281" AnchorPane.topAnchor="82.29289317131042" />
+                        <Label fx:id="toiletAddressLabel" layoutX="7.0" layoutY="99.0" text="Address:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="105.0" />
+                        <TextField id="wifiAddressText" fx:id="toiletAddressText" layoutX="115.0" layoutY="99.0" prefWidth="160.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="100.0" />
+                        <Label layoutX="16.0" layoutY="136.0" text="OR" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="140.0" />
+                        <Label fx:id="toiletLatLabel" layoutX="11.0" layoutY="168.0" text="Latitude:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="170.0" />
+                        <TextField id="wifiLatText" fx:id="toiletLatText" layoutX="115.0" layoutY="165.0" prefWidth="150.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="165.0" />
+                        <Label fx:id="toiletLongLabel" layoutX="292.0" layoutY="170.0" text="Longitude:" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="170.0" />
+                        <TextField id="wifiLongText" fx:id="toiletLongText" layoutX="398.0" layoutY="165.0" prefWidth="160.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="395.0" AnchorPane.topAnchor="165.0" />
+                        <Line endX="503.0" endY="122.0" layoutX="122.0" layoutY="95.0" startX="-107.0" startY="124.0" AnchorPane.leftAnchor="14.292892456054688" AnchorPane.rightAnchor="52.29292297363281" AnchorPane.topAnchor="216.2928924560547" />
+                        <Label fx:id="toiletZipLabel" layoutX="16.0" layoutY="235.0" text="Zip:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="240.0" />
+                        <TextField fx:id="toiletZipText" layoutX="60.0" layoutY="229.0" prefWidth="154.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="235.0" />
+                        <Label fx:id="toiletBoroughLabel" layoutX="261.0" layoutY="232.0" text="Borough:" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="240.0" />
+                        <TextField fx:id="toiletBoroughText" layoutX="446.0" layoutY="229.0" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="395.0" AnchorPane.topAnchor="235.0" />
+                        <Line endX="490.0" endY="166.0" layoutX="132.0" layoutY="105.0" startX="-118.0" startY="172.0" AnchorPane.leftAnchor="14.292892456054688" AnchorPane.rightAnchor="52.29292297363281" AnchorPane.topAnchor="270.2928924560547" />
+                        <Label fx:id="toiletDisabledLabel" layoutX="14.0" layoutY="289.0" text="For Disabled:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="295.0" />
+                        <ChoiceBox fx:id="toiletDisabledChoice" layoutX="142.0" layoutY="286.0" prefWidth="70.0" style="-fx-background-color: #0B4D63, #CCE6EF;" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="290.0">
                           <items>
                             <FXCollections fx:factory="observableArrayList">
                               <String fx:value="Item 1" />
@@ -327,8 +384,8 @@
                             </FXCollections>
                           </items>
                         </ChoiceBox>
-                        <Label fx:id="toiletUnisexLabel" layoutX="14.0" layoutY="335.0" text="For UniSex:" />
-                        <ChoiceBox fx:id="toiletUnisexChoice" layoutX="142.0" layoutY="331.0">
+                        <Label fx:id="toiletUnisexLabel" layoutX="14.0" layoutY="335.0" text="For UniSex:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="335.0" />
+                        <ChoiceBox fx:id="toiletUnisexChoice" layoutX="142.0" layoutY="331.0" prefWidth="70.0" style="-fx-background-color: #0B4D63, #CCE6EF;" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="330.0">
                           <items>
                             <FXCollections fx:factory="observableArrayList">
                               <String fx:value="Item 1" />
@@ -337,54 +394,69 @@
                             </FXCollections>
                           </items>
                         </ChoiceBox>
-                        <Button id="saveButton" fx:id="saveToiletButton" layoutX="555.0" layoutY="384.0" mnemonicParsing="false" onAction="#saveToiletButtonPressed" text="Save" />
+                        <Button id="saveButton" fx:id="saveToiletButton" layoutX="557.0" layoutY="384.0" mnemonicParsing="false" onAction="#saveToiletButtonPressed" style="-fx-background-color: #30126D, #B39EDC;" text="Save" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="70.0">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></Button>
                       </children>
                     </AnchorPane>
-                    <AnchorPane id="addLocationsPane" fx:id="addPoiPane" prefHeight="431.0" prefWidth="637.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <AnchorPane id="addLocationsPane" fx:id="addPoiPane" prefHeight="431.0" prefWidth="637.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,2;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <Label layoutX="234.0" layoutY="14.0" text="Add Point of Interest:" />
-                        <Label id="routeNameLabel" fx:id="poiNameLabel" layoutX="11.0" layoutY="49.0" text="Point of Interest Name:" />
-                        <TextField id="locationNameText" fx:id="poiNameText" layoutX="203.0" layoutY="46.0" prefWidth="200.0" />
-                        <Line endX="507.0" endY="-2.0" layoutX="116.0" layoutY="91.0" startX="-100.0" />
-                        <Label fx:id="poiAddressLabel" layoutX="10.0" layoutY="108.0" text="Address:" />
-                        <TextField id="wifiAddressText" fx:id="poiAddressText" layoutX="118.0" layoutY="108.0" prefWidth="160.0" />
-                        <Label layoutX="19.0" layoutY="145.0" text="OR" />
-                        <Label fx:id="poiLatLabel" layoutX="14.0" layoutY="177.0" text="Latitude:" />
-                        <TextField id="wifiLatText" fx:id="poiLatText" layoutX="118.0" layoutY="174.0" prefWidth="200.0" />
-                        <Label fx:id="poiLongLabel" layoutX="349.0" layoutY="177.0" text="Longitude:" />
-                        <TextField id="wifiLongText" fx:id="poiLongText" layoutX="461.0" layoutY="174.0" prefWidth="160.0" />
-                        <Line endX="504.0" endY="118.0" layoutX="126.0" layoutY="101.0" startX="-114.0" startY="120.0" />
-                        <Label fx:id="poiZipLabel" layoutX="14.0" layoutY="235.0" text="Zip:" />
-                        <TextField fx:id="poiZipText" layoutX="61.0" layoutY="229.0" prefWidth="154.0" />
-                        <Label fx:id="poiBoroughLabel" layoutX="256.0" layoutY="235.0" text="Borough:" />
-                        <TextField fx:id="poiBoroughText" layoutX="354.0" layoutY="229.0" prefWidth="200.0" />
-                        <Line endX="492.0" endY="161.0" layoutX="136.0" layoutY="111.0" startX="-126.0" startY="162.0" />
-                        <Label fx:id="poiCostLabel" layoutX="14.0" layoutY="287.0" text="Cost:" />
-                        <TextField fx:id="poiCostText" layoutX="61.0" layoutY="281.0" prefWidth="155.0" />
-                        <Label fx:id="poiDescriptionLabel" layoutX="14.0" layoutY="322.0" text="Description:" />
-                        <TextArea fx:id="poiDescriptionText" layoutX="118.0" layoutY="321.0" prefHeight="97.0" prefWidth="214.0" wrapText="true" />
-                        <Button id="saveButton" fx:id="savePoiButton" layoutX="555.0" layoutY="384.0" mnemonicParsing="false" onAction="#savePoiButtonPressed" text="Save" />
+                        <Label layoutX="249.0" layoutY="14.0" text="Add Point of Interest:" underline="true" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="15.0">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></Label>
+                        <Label id="routeNameLabel" fx:id="poiNameLabel" layoutX="11.0" layoutY="49.0" text="Point of Interest Name:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="55.0" />
+                        <TextField id="locationNameText" fx:id="poiNameText" layoutX="182.0" layoutY="46.0" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="50.0" />
+                        <Line endX="507.0" endY="-2.0" layoutX="116.0" layoutY="91.0" startX="-100.0" AnchorPane.leftAnchor="15.292892456054688" AnchorPane.rightAnchor="54.29292297363281" AnchorPane.topAnchor="88.29289317131042" />
+                        <Label fx:id="poiAddressLabel" layoutX="10.0" layoutY="108.0" text="Address:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="110.0" />
+                        <TextField id="wifiAddressText" fx:id="poiAddressText" layoutX="101.0" layoutY="108.0" prefWidth="160.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="105.0" />
+                        <Label layoutX="19.0" layoutY="145.0" text="OR" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="145.0" />
+                        <Label fx:id="poiLatLabel" layoutX="14.0" layoutY="177.0" text="Latitude:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="180.0" />
+                        <TextField id="wifiLatText" fx:id="poiLatText" layoutX="118.0" layoutY="174.0" prefWidth="150.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="175.0" />
+                        <Label fx:id="poiLongLabel" layoutX="290.0" layoutY="177.0" text="Longitude:" AnchorPane.leftAnchor="290.0" AnchorPane.topAnchor="180.0" />
+                        <TextField id="wifiLongText" fx:id="poiLongText" layoutX="380.0" layoutY="174.0" prefWidth="160.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="380.0" AnchorPane.topAnchor="175.0" />
+                        <Line endX="504.0" endY="118.0" layoutX="126.0" layoutY="101.0" startX="-114.0" startY="120.0" AnchorPane.leftAnchor="15.292892456054688" AnchorPane.rightAnchor="54.29292297363281" AnchorPane.topAnchor="218.2928924560547" />
+                        <Label fx:id="poiZipLabel" layoutX="14.0" layoutY="235.0" text="Zip:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="240.0" />
+                        <TextField fx:id="poiZipText" layoutX="61.0" layoutY="229.0" prefWidth="154.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="235.0" />
+                        <Label fx:id="poiBoroughLabel" layoutX="290.0" layoutY="235.0" text="Borough:" AnchorPane.leftAnchor="290.0" AnchorPane.topAnchor="240.0" />
+                        <TextField fx:id="poiBoroughText" layoutX="380.0" layoutY="229.0" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="380.0" AnchorPane.topAnchor="235.0" />
+                        <Line endX="492.0" endY="161.0" layoutX="136.0" layoutY="111.0" startX="-126.0" startY="162.0" AnchorPane.leftAnchor="15.292892456054688" AnchorPane.rightAnchor="54.29292297363281" AnchorPane.topAnchor="271.2928924560547" />
+                        <Label fx:id="poiCostLabel" layoutX="14.0" layoutY="287.0" text="Cost:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="290.0" />
+                        <TextField fx:id="poiCostText" layoutX="61.0" layoutY="281.0" prefWidth="155.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="285.0" />
+                        <Label fx:id="poiDescriptionLabel" layoutX="14.0" layoutY="322.0" text="Description:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="325.0" />
+                        <TextArea fx:id="poiDescriptionText" layoutX="118.0" layoutY="321.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" wrapText="true" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="325.0" />
+                        <Button id="saveButton" fx:id="savePoiButton" layoutX="555.0" layoutY="384.0" mnemonicParsing="false" onAction="#savePoiButtonPressed" style="-fx-background-color: #30126D, #B39EDC;" text="Save" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="70.0">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font></Button>
                       </children>
                     </AnchorPane>
-                    <AnchorPane id="addLocationsPane" fx:id="addOtherPane" prefHeight="431.0" prefWidth="637.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <AnchorPane id="addLocationsPane" fx:id="addOtherPane" prefHeight="431.0" prefWidth="637.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,2;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <Label layoutX="239.0" layoutY="14.0" text="Add Other Location:" />
-                        <Label id="routeNameLabel" fx:id="otherNameLabel" layoutX="11.0" layoutY="49.0" text="Location name:" />
-                        <TextField id="locationNameText" fx:id="otherNameText" layoutX="153.0" layoutY="46.0" prefWidth="200.0" />
-                        <Line endX="511.0" endY="0.0" layoutX="112.0" layoutY="87.0" startX="-100.0" />
-                        <Label fx:id="otherAddressLabel" layoutX="12.0" layoutY="99.0" text="Address:" />
-                        <TextField id="wifiAddressText" fx:id="otherAddressText" layoutX="120.0" layoutY="99.0" prefWidth="160.0" />
-                        <Label layoutX="21.0" layoutY="136.0" text="OR" />
-                        <Label fx:id="otherLatLabel" layoutX="16.0" layoutY="168.0" text="Latitude:" />
-                        <TextField id="wifiLatText" fx:id="otherLatText" layoutX="120.0" layoutY="165.0" prefWidth="200.0" />
-                        <Label fx:id="otherLongLabel" layoutX="351.0" layoutY="168.0" text="Longitude:" />
-                        <TextField id="wifiLongText" fx:id="otherLongText" layoutX="463.0" layoutY="165.0" prefWidth="160.0" />
-                        <Line endX="505.0" endY="123.0" layoutX="122.0" layoutY="97.0" startX="-109.0" startY="123.0" />
-                        <Label fx:id="otherZipLabel" layoutX="12.0" layoutY="235.0" text="Zip:" />
-                        <TextField fx:id="otherZipText" layoutX="53.0" layoutY="232.0" prefWidth="154.0" />
-                        <Label fx:id="otherBoroughLabel" layoutX="253.0" layoutY="235.0" text="Borough:" />
-                        <TextField fx:id="otherBoroughText" layoutX="343.0" layoutY="232.0" prefWidth="200.0" />
-                        <Button id="saveButton" fx:id="saveOtherButton" layoutX="555.0" layoutY="384.0" mnemonicParsing="false" onAction="#saveOtherButtonPressed" text="Save" />
+                        <Label layoutX="281.0" layoutY="14.0" text="Add Other Location:" underline="true" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="15.0">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></Label>
+                        <Label id="routeNameLabel" fx:id="otherNameLabel" layoutX="11.0" layoutY="49.0" text="Location name:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="50.0" />
+                        <TextField id="locationNameText" fx:id="otherNameText" layoutX="135.0" layoutY="46.0" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="135.0" AnchorPane.topAnchor="45.0" />
+                        <Line endX="511.0" endY="0.0" layoutX="112.0" layoutY="87.0" startX="-100.0" AnchorPane.leftAnchor="11.5" AnchorPane.rightAnchor="54.5" />
+                        <Label fx:id="otherAddressLabel" layoutX="12.0" layoutY="99.0" text="Address:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="105.0" />
+                        <TextField id="wifiAddressText" fx:id="otherAddressText" layoutX="120.0" layoutY="99.0" prefWidth="160.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="135.0" AnchorPane.topAnchor="100.0" />
+                        <Label layoutX="21.0" layoutY="136.0" text="OR" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="140.0" />
+                        <Label fx:id="otherLatLabel" layoutX="16.0" layoutY="168.0" text="Latitude:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="175.0" />
+                        <TextField id="wifiLatText" fx:id="otherLatText" layoutX="120.0" layoutY="165.0" prefWidth="150.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="135.0" AnchorPane.topAnchor="170.0" />
+                        <Label fx:id="otherLongLabel" layoutX="314.0" layoutY="168.0" text="Longitude:" AnchorPane.leftAnchor="315.0" AnchorPane.topAnchor="175.0" />
+                        <TextField id="wifiLongText" fx:id="otherLongText" layoutX="410.0" layoutY="165.0" prefWidth="160.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="170.0" />
+                        <Line endX="505.0" endY="123.0" layoutX="122.0" layoutY="97.0" startX="-109.0" startY="123.0" AnchorPane.leftAnchor="11.5" AnchorPane.rightAnchor="54.5" />
+                        <Label fx:id="otherZipLabel" layoutX="12.0" layoutY="235.0" text="Zip:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="245.0" />
+                        <TextField fx:id="otherZipText" layoutX="53.0" layoutY="232.0" prefWidth="154.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="135.0" AnchorPane.topAnchor="240.0" />
+                        <Label fx:id="otherBoroughLabel" layoutX="253.0" layoutY="235.0" text="Borough:" AnchorPane.leftAnchor="315.0" AnchorPane.topAnchor="245.0" />
+                        <TextField fx:id="otherBoroughText" layoutX="343.0" layoutY="232.0" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="240.0" />
+                        <Button id="saveButton" fx:id="saveOtherButton" layoutX="555.0" layoutY="384.0" mnemonicParsing="false" onAction="#saveOtherButtonPressed" style="-fx-background-color: #30126D, #B39EDC;" text="Save" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="70.0">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font></Button>
                       </children>
                     </AnchorPane>
                   </children>

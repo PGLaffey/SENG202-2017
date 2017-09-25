@@ -5,7 +5,13 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import seng202.Model.CurrentStorage;
+import seng202.Model.Location;
+import seng202.Model.Route;
 
 
 public class SaveRouteScreenController {
@@ -20,10 +26,27 @@ public class SaveRouteScreenController {
     private Button cancelButton;
 
     @FXML
-    private Button saveLocallyButton;
+    private Button saveButton;
 
     @FXML
-    private Button savePubliclyButton;
+    private Label routeNameLabel;
+
+    @FXML
+    private TextField routeNameText;
+
+    @FXML
+    private Label routeStartLabel;
+
+    @FXML
+    private TextField routeStartText;
+
+    @FXML
+    private Label routeEndLabel;
+
+    @FXML
+    private TextField routeEndText;
+
+
 
 
     /**
@@ -32,35 +55,51 @@ public class SaveRouteScreenController {
      */
     @FXML
     void cancelButtonPressed(ActionEvent event) {
-    	Stage stage = (Stage) saveLocallyButton.getScene().getWindow(); 
+    	Stage stage = (Stage) cancelButton.getScene().getWindow();
     	stage.hide();
     }
 
-    /**
-     * Method when the save locally button is pressed, hides the pop up.
-     * @param event
-     */
-    @FXML
-    void saveLocallyPressed(ActionEvent event) {
-    	Stage stage = (Stage) saveLocallyButton.getScene().getWindow(); 
-    	stage.hide();
-    }
 
     /**
-     * Method when the save publically button is pressed, hides the pop up.
+     * Method when the save button is pressed, saves the route and hides the pop up.
      * @param event
      */
     @FXML
-    void savePubliclyPressed(ActionEvent event) {
-    	Stage stage = (Stage) savePubliclyButton.getScene().getWindow(); 
-    	stage.hide();
+    void savePressed(ActionEvent event) {
+        boolean allValid = true;
+        routeStartLabel.setTextFill(Color.BLACK);
+        routeEndLabel.setTextFill(Color.BLACK);
+        routeNameLabel.setTextFill(Color.BLACK);
+        if (routeNameText.getText().equals("")) {
+            routeNameLabel.setTextFill(Color.RED);
+            allValid = false;
+        } if (routeEndText.getText().equals("")) {
+            routeEndLabel.setTextFill(Color.RED);
+            allValid = false;
+        } if (routeStartText.getText().equals("")) {
+            routeStartLabel.setTextFill(Color.RED);
+            allValid = false;
+        } if (allValid) {
+            Location start = CurrentStorage.getNewRouteStart();
+            Location end = CurrentStorage.getNewRouteEnd();
+            start.setName(routeStartText.getText());
+            end.setName(routeEndText.getText());
+
+            Route route = new Route(start, end, routeNameText.getText());
+            CurrentStorage.addNewRoute(route);
+
+            CurrentStorage.setNewRouteEnd(null);
+
+            Stage stage = (Stage) saveButton.getScene().getWindow();
+            stage.hide();
+        }
     }
+
 
     @FXML
     void initialize() {
         assert cancelButton != null : "fx:id=\"cancelButton\" was not injected: check your FXML file 'SaveRouteScreen.fxml'.";
-        assert saveLocallyButton != null : "fx:id=\"saveLocallyButton\" was not injected: check your FXML file 'SaveRouteScreen.fxml'.";
-        assert savePubliclyButton != null : "fx:id=\"savePubliclyButton\" was not injected: check your FXML file 'SaveRouteScreen.fxml'.";
+        assert saveButton != null : "fx:id=\"saveLocallyButton\" was not injected: check your FXML file 'SaveRouteScreen.fxml'.";
 
 
     }

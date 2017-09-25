@@ -141,6 +141,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     
     @FXML
     private Button saveRouteButton;
+
+    @FXML
+    private Label latLongDistanceLabel;
     
     @FXML
     private TextField searchText;
@@ -438,6 +441,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     private static int count;
 
+    private DirectionsRenderer directionsRenderer;
+
+
+
     ArrayList<Circle> wifiCircles = new ArrayList<Circle>();
     ArrayList<Marker> locationMarkers = new ArrayList<Marker>();
     
@@ -450,8 +457,12 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     void mapPressed(ActionEvent event) throws IOException {
     	Stage primaryStage = (Stage) mapButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
-		
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
+
+        Scene currentScene = primaryStage.getScene();
+        Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+                : new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+        //Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Map");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -464,13 +475,29 @@ public class MainScreenController implements MapComponentInitializedListener, Di
      */
 	@FXML
     void tablePressed(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) tableButton.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
-		
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
-		primaryStage.setTitle("Table");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+
+	    try {
+            Stage primaryStage = (Stage) tableButton.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
+
+            Scene currentScene = primaryStage.getScene();
+            Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+                    : new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+            //Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
+            primaryStage.setTitle("Table");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e){
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/DataLoadingScreen.fxml"));
+
+            Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+            stage.setTitle("Still Loading");
+            stage.setScene(scene);
+            stage.show();
+        }
+
     }
     
 	/**
@@ -482,9 +509,16 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     void statPressed(ActionEvent event) throws IOException {
     	Stage primaryStage = (Stage) statButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/DataViewerScreen.fxml"));
+
+
+        Scene currentScene = primaryStage.getScene();
+        Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+                : new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+        //Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		
 		primaryStage.setTitle("Statistics");
-		primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
+		primaryStage.setScene(scene);
 		primaryStage.show();
     }
 
@@ -497,9 +531,16 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     void accountPressed(ActionEvent event) throws IOException {
     	Stage primaryStage = (Stage) accountButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
+
+
+        Scene currentScene = primaryStage.getScene();
+        Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+                : new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+        //Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		
 		primaryStage.setTitle("Profile");
-		primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
+		primaryStage.setScene(scene);
 		primaryStage.show();
     }
     
@@ -510,14 +551,17 @@ public class MainScreenController implements MapComponentInitializedListener, Di
      */
     @FXML
     void logoutPressed(ActionEvent event) throws IOException {
-    	CurrentStorage.flush();
-    	
-    	Stage primaryStage = (Stage) logoutButton.getScene().getWindow(); 
-		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
-		
-		primaryStage.setTitle("Login");
-		primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
-		primaryStage.show();
+        DataFetcher exporter = new DataFetcher();
+        try {
+            //exporter.connectDb();
+            //exporter.storeCurrentStorage();
+            //exporter.closeConnection();
+            FileManager.userSerialize(CurrentStorage.getUser(), "./src/main/resources/data_files/");
+            CurrentStorage.flush();
+            System.exit(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -662,6 +706,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	stage.show();
     }
 
+    /**
+     * Method for when the bike button is pressed, displays all the routes on the map.
+     * @param event
+     */
     @FXML
     void bikeIconPressed(ActionEvent event) {
 //        int initCount = count;
@@ -681,10 +729,20 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 //        }
     }
 
+    /**
+     * Method for when the favourite button is pressed, displays all the
+     * users favourite routes on the map.
+     * @param event
+     */
     @FXML
     void favouriteIconPressed(ActionEvent event) {
     }
 
+    /**
+     * Method for when the retailer button is pressed, displays all the
+     * retailers on the map
+     * @param event
+     */
     @FXML
     void retailerIconPressed(ActionEvent event) {
         for (Retailer retailer : CurrentStorage.getRetailerArray()) {
@@ -701,26 +759,38 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     }
 
     /** 
-     * Method for when the save route button is pressed, open the pop up.
+     * Method for when the save route button is pressed, opens the pop up.
      * @param event
      * @throws IOException
      */
     @FXML
     void saveRouteButtonPressed(ActionEvent event) throws IOException {
-    	Stage stage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/SaveRouteScreen.fxml"));
-		
-		Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
-		stage.setTitle("Save Route");
-		stage.setScene(scene);
-		stage.show();
+        if (CurrentStorage.getNewRouteEnd() != null) {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/SaveRouteScreen.fxml"));
+
+            Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+            stage.setTitle("Save Route");
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
+    /**
+     * Method for when the toilet button is pressed, displays all the toilet
+     * locations on the map
+     * @param event
+     */
     @FXML
     void toiletIconPressed(ActionEvent event) {
         ArrayList<Toilet> toilets = new ArrayList<Toilet>();
     }
 
+    /**
+     * Method for when the wifi button is pressed, displays all the wifi
+     * locations on the map
+     * @param event
+     */
     @FXML
     void wifiIconPressed(ActionEvent event) {
         Service<Void> wifiLoaderService = new Service<Void>() {
@@ -747,6 +817,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     }
 
+    /**
+     * Method for when a search is performed on the map.
+     * @param event
+     */
     @FXML
     public void searchTextAction(ActionEvent event) {
         //Obtains a geocode location around latLong
@@ -1289,6 +1363,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                             data.connectDb();
                             progressBar.setVisible(true);
                             updateProgress(0, 100);
+                            //progressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
                             updateMessage("Retrieving data...");
                             data.loadAllLocations();
                             updateProgress(100, 100);
@@ -1336,23 +1411,41 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     }
 
+    /**
+     * Places the wifi marker on the map
+     * @param wifi wifi object
+     */
     public void placeCircleOnMap(Wifi wifi) {
         Map.findWifi(wifi);
 
     }
 
+    /**
+     * Places a marker for the location on the map
+     * @param loc location object
+     */
     public void placeMarkerOnMap(Location loc) {
         Map.findLocation(loc.getAddress(), map, geocodingService);
     }
 
+    /**
+     * Places the retailer marker on the map
+     * @param retailer retailer object
+     */
     public void placeRetailerOnMap(Retailer retailer) {Map.findRetailers(retailer);}
 
+    /**
+     * Places a route marker on map
+     * @param route
+     */
     public void placeMarkerOnMap(Route route) {
         Map.findRouteMarker(route, map);
     }
 
     @Override
     public void mapInitialized() {
+
+        CurrentStorage currentStorage = new CurrentStorage();
         geocodingService = new GeocodingService();
         MapOptions mapOptions = new MapOptions();
 
@@ -1370,28 +1463,55 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         map = mapView.createMap(mapOptions);
         directionsService = new DirectionsService();
         directionsPane = mapView.getDirec();
+        directionsRenderer = new DirectionsRenderer(true, map, directionsPane);
         map.addMouseEventHandler(UIEventType.click, (GMapMouseEvent event) -> {
+            // Sets up an actionEvent where it will create a marker at the clicked location.
             LatLong latLong = event.getLatLong();
-            System.out.println(isStart);
             if (isStart) {
+                Location location = new Location(latLong.getLatitude(), latLong.getLongitude(), 4);
+                currentStorage.setNewRouteStart(location);
+                map.clearMarkers();
+                directionsRenderer.clearDirections();
+                directionsRenderer = new DirectionsRenderer(true, map, directionsPane);
                 Map.setStartMarker(latLong, map);
                 isStart = false;
             } else {
+                Location location = new Location(latLong.getLatitude(), latLong.getLongitude(), 4);
+                currentStorage.setNewRouteEnd(location);
                 Map.setEndMarker(latLong, map);
                 isStart = true;
+
+
             }
 
             if (Map.getStartLoc() != null && Map.getEndLoc() != null) {
-                Map.findRoute(Map.getStartLoc(), Map.getEndLoc(),
-                        mapView, directionsService, this, directionsPane);
+                map.clearMarkers();
+                Map.findRoute(Map.getStartLoc().getLatitude() + ", " + Map.getStartLoc().getLongitude(),
+                        Map.getEndLoc().getLatitude() + ", " + Map.getEndLoc().getLongitude(),
+                        mapView, directionsService, this, directionsPane, directionsRenderer);
+                latLongDistanceLabel.setText("Distance: " + distance(CurrentStorage.getNewRouteStart().getLatitude(), CurrentStorage.getNewRouteStart().getLongitude(),
+                        CurrentStorage.getNewRouteEnd().getLatitude(),
+                         CurrentStorage.getNewRouteEnd().getLongitude()) + "Km");
             }
         });
     }
 
+    private String distance(double lat1, double lon1, double lat2, double lon2) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2)) + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.toRadians(theta));
+        dist = Math.acos(dist);
+        dist = Math.toDegrees(dist);
+        dist = dist * 60 * 1.1515;
+
+        dist = dist * 1.609344;
+        return String.format("%.2f", dist);
+    }
 
     @Override
     public void directionsReceived(DirectionsResult results, DirectionStatus status){
+        // This is called when a route is created.
 
+        //This section finds the nearby locations.
         ArrayList<Location> nearby = new ArrayList<Location>();
         for (DirectionsLeg leg : results.getRoutes().get(0).getLegs()) {
             nearby.addAll(Map.findNearby(leg.getStartLocation().getLatitude(), leg.getStartLocation().getLongitude()));

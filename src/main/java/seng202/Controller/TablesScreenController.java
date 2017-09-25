@@ -1,23 +1,19 @@
 package seng202.Controller;
 
 
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import seng202.Model.CurrentStorage;
-import seng202.Model.Location;
-import seng202.Model.Poi;
-import seng202.Model.RawDataViewer;
-import seng202.Model.Retailer;
-import seng202.Model.Route;
-import seng202.Model.Toilet;
-import seng202.Model.User;
-import seng202.Model.Wifi;
+import seng202.Model.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -172,6 +168,9 @@ public class TablesScreenController {
     @FXML
     private TableColumn<Wifi, String> wifiTypeCol;
 
+    @FXML
+	private Label noDataLabel;
+
 
     /**
      * Method for when account menu button pressed, shows the profile screen.
@@ -183,7 +182,11 @@ public class TablesScreenController {
     	Stage primaryStage = (Stage) accountButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
 
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
+		Scene currentScene = primaryStage.getScene();
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Profile");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -196,15 +199,17 @@ public class TablesScreenController {
      */
     @FXML
     void logoutPressed(ActionEvent event) throws IOException {
-    	CurrentStorage.flush();
-
-    	Stage primaryStage = (Stage) logoutButton.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
-
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
-		primaryStage.setTitle("Login");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		DataFetcher exporter = new DataFetcher();
+		try {
+			//exporter.connectDb();
+			//exporter.storeCurrentStorage();
+			//exporter.closeConnection();
+			FileManager.userSerialize(CurrentStorage.getUser(), "./src/main/resources/data_files/");
+			CurrentStorage.flush();
+			System.exit(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
 
     /**
@@ -217,7 +222,11 @@ public class TablesScreenController {
     	Stage primaryStage = (Stage) mapButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
+		Scene currentScene = primaryStage.getScene();
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Map");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -241,8 +250,13 @@ public class TablesScreenController {
     		ArrayList<Location> locFiltered = RawDataViewer.searchLocations(locations, keywordText.getText().toString());
     		ObservableList<Location> locData = FXCollections.observableArrayList(locFiltered);
     		allLocationsTable.setItems(locData);
-
-    		allLocationsTable.setVisible(true);
+    		if (allLocationsTable.getItems().isEmpty()) {
+				allLocationsTable.setVisible(false);
+				noDataLabel.setVisible(true);
+			} else {
+				allLocationsTable.setVisible(true);
+				noDataLabel.setVisible(false);
+			}
     		poiTable.setVisible(false);
     		retailersTable.setVisible(false);
     		wifiTable.setVisible(false);
@@ -252,9 +266,15 @@ public class TablesScreenController {
     		ArrayList<Retailer> retFiltered = RawDataViewer.searchRetailer(CurrentStorage.getRetailerArray(), keywordText.getText().toString());
     		ObservableList<Retailer> retData = FXCollections.observableArrayList(retFiltered);
         	retailersTable.setItems(retData);
+        	if (retailersTable.getItems().isEmpty()) {
+				retailersTable.setVisible(false);
+				noDataLabel.setVisible(true);
+			} else {
+				retailersTable.setVisible(true);
+				noDataLabel.setVisible(false);
+			}
     		allLocationsTable.setVisible(false);
     		poiTable.setVisible(false);
-    		retailersTable.setVisible(true);
     		wifiTable.setVisible(false);
     		toiletsTable.setVisible(false);
     		routesTable.setVisible(false);
@@ -262,28 +282,50 @@ public class TablesScreenController {
     		ArrayList<Wifi> wifiFiltered = RawDataViewer.searchWifi(CurrentStorage.getWifiArray(), keywordText.getText().toString());
     		ObservableList<Wifi> wifiData = FXCollections.observableArrayList(wifiFiltered);
     		wifiTable.setItems(wifiData);
+    		if (wifiTable.getItems().isEmpty()) {
+    			noDataLabel.setVisible(true);
+				wifiTable.setVisible(false);
+
+			} else {
+				wifiTable.setVisible(true);
+				noDataLabel.setVisible(false);
+			}
     		allLocationsTable.setVisible(false);
     		poiTable.setVisible(false);
     		retailersTable.setVisible(false);
-    		wifiTable.setVisible(true);
     		toiletsTable.setVisible(false);
     		routesTable.setVisible(false);
     	} else if (option == "Toilets") {
     		ArrayList<Toilet> toiletFiltered = RawDataViewer.searchToilets(CurrentStorage.getToiletArray(), keywordText.getText().toString());
     		ObservableList<Toilet> toiletData = FXCollections.observableArrayList(toiletFiltered);
     		toiletsTable.setItems(toiletData);
-    		allLocationsTable.setVisible(false);
-    		poiTable.setVisible(false);
-    		retailersTable.setVisible(false);
-    		wifiTable.setVisible(false);
-    		toiletsTable.setVisible(true);
-    		routesTable.setVisible(false);
+
+    		if (toiletsTable.getItems().isEmpty()) {
+    			noDataLabel.setVisible(true);
+				toiletsTable.setVisible(false);
+			}
+    		else {
+				toiletsTable.setVisible(true);
+				noDataLabel.setVisible(false);
+			}
+			allLocationsTable.setVisible(false);
+			poiTable.setVisible(false);
+			retailersTable.setVisible(false);
+			wifiTable.setVisible(false);
+			routesTable.setVisible(false);
+
     	} else if (option == "Points of interest")  {
     		ArrayList<Poi> poiFiltered = RawDataViewer.searchPoi(CurrentStorage.getPoiArray(), keywordText.getText().toString());
     		ObservableList<Poi> poiData = FXCollections.observableArrayList(poiFiltered);
     		poiTable.setItems(poiData);
+    		if (poiTable.getItems().isEmpty()) {
+    			noDataLabel.setVisible(true);
+				poiTable.setVisible(false);
+			} else {
+    			poiTable.setVisible(true);
+    			noDataLabel.setVisible(false);
+			}
     		allLocationsTable.setVisible(false);
-    		poiTable.setVisible(true);
     		retailersTable.setVisible(false);
     		wifiTable.setVisible(false);
     		toiletsTable.setVisible(false);
@@ -292,12 +334,18 @@ public class TablesScreenController {
     		ArrayList<Route> routeFiltered = RawDataViewer.searchRoutes(CurrentStorage.getRouteArray(), keywordText.getText().toString());
     		ObservableList<Route> routeData = FXCollections.observableArrayList(routeFiltered);
     		routesTable.setItems(routeData);
+    		if (routesTable.getItems().isEmpty()) {
+    			noDataLabel.setVisible(true);
+    			routesTable.setVisible(false);
+			} else {
+    			noDataLabel.setVisible(false);
+    			routesTable.setVisible(true);
+			}
     		allLocationsTable.setVisible(false);
     		poiTable.setVisible(false);
     		retailersTable.setVisible(false);
     		wifiTable.setVisible(false);
     		toiletsTable.setVisible(false);
-    		routesTable.setVisible(true);
     	}
     }
 
@@ -312,14 +360,41 @@ public class TablesScreenController {
     	Stage primaryStage = (Stage) statButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/DataViewerScreen.fxml"));
 
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
+		Scene currentScene = primaryStage.getScene();
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Statistics");
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
 
     @FXML
-    void tablePressed(ActionEvent event) {
+    void tablePressed(ActionEvent event) throws IOException {
+
+		try {
+			Stage primaryStage = (Stage) tableButton.getScene().getWindow();
+			Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
+
+			Scene currentScene = primaryStage.getScene();
+			Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+					: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+			//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
+			primaryStage.setTitle("Table");
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch (Exception e){
+			Stage stage = new Stage();
+			Parent root = FXMLLoader.load(getClass().getResource("/DataLoadingScreen.fxml"));
+
+			Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+			stage.setTitle("Still Loading");
+			stage.setScene(scene);
+			stage.show();
+		}
+
     }
 
 	/**
@@ -333,6 +408,7 @@ public class TablesScreenController {
     	CurrentStorage.setWifi(row);
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/WifiInfoScreen.fxml"));
+
 
 		Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
 		stage.setTitle("About wifi point");

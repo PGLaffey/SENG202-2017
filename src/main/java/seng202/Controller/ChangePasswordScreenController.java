@@ -63,6 +63,7 @@ public class ChangePasswordScreenController {
 
     /**
      * Method for when the change password button is pressed.
+     * Verifies the old and new password then runs the database query to update the users password
      * @param event
      * @throws IOException
      */

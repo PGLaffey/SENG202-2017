@@ -8,14 +8,21 @@ public class DataFetcher {
     private Connection connect = null;
     private boolean hasImported = false;
 
-
+	/**
+	 * @return true if an object has already been imported to the database
+	 */
     public boolean isHasImported() {
     	return hasImported;
 	}
 
+	/**
+	 * Sets the value of hasImported to true if the object is already in the database
+	 * @param value boolean value for whether an object has been imported previously
+	 */
 	public void setHasImported(boolean value) {
     	hasImported = value;
 	}
+
 	/**
 	 * Getter for the Connection connect
 	 */
@@ -41,7 +48,12 @@ public class DataFetcher {
 		}
     }
 
-    public void updateUserPassword(String username, String newPassword) {
+	/**
+	 * Changes the password of a user in the database
+	 * @param username username of the user trying to change their password
+	 * @param newPassword desired password
+	 */
+	public void updateUserPassword(String username, String newPassword) {
     	PreparedStatement preparedStatement = null;
     	String stmt = "UPDATE tblUser SET Password = ? WHERE Username = ?";
 
@@ -55,7 +67,12 @@ public class DataFetcher {
 		}
 
     }
-    
+
+	/**
+	 * Fetches the users password to verify that they have the correct credentials
+	 * @param username Username of user logging in
+	 * @return The users password if the user exists, null otherwise
+	 */
 	public String fetchPassword(String username) {
     	PreparedStatement preparedStatement;
     	String stmt = "SELECT Password FROM tblUser WHERE Username = ?";
@@ -112,7 +129,11 @@ public class DataFetcher {
 		return null;
 	}
 
-
+	/**
+	 * Deletes the user from the database, as well as all corresponding
+	 * user locations and routes,
+	 * @param username Username of the user
+	 */
 	public void deleteUser(String username) {
 		PreparedStatement preparedStatement;
 		int userID;
@@ -154,6 +175,9 @@ public class DataFetcher {
 
 	}
 
+	/**
+	 * Stores the new retailers, toilets, wifi's, Poi's in to the database
+	 */
 	public void storeCurrentStorage() {
 		storeNewRetailers();
 		storeNewToilets();
@@ -162,6 +186,9 @@ public class DataFetcher {
 		storeNewGeneral();
 	}
 
+	/**
+	 * Stores the new retailers from CurrentStorage into the database
+	 */
 	private void storeNewRetailers() {
 		int count = 0;
 		ArrayList<Integer> newRetailers = CurrentStorage.getAddedRetailers();
@@ -171,8 +198,10 @@ public class DataFetcher {
 			count += 1;
 		}
 	}
-	
-	
+
+	/**
+	 * Stores the new toilets from CurrentStorage into the database
+	 */
 	private void storeNewToilets() {
 		int count = 0;
 		ArrayList<Integer> newToilets = CurrentStorage.getAddedToilets();
@@ -182,7 +211,10 @@ public class DataFetcher {
 			count += 1;
 		}
 	}
-	
+
+	/**
+	 * Stores the new Wifi's from CurrentStorage into the database
+	 */
 	private void storeNewWifi() {
 		int count = 0;
 		ArrayList<Integer> newWifi = CurrentStorage.getAddedWifi();
@@ -192,7 +224,10 @@ public class DataFetcher {
 			count += 1;
 		}
 	}
-	
+
+	/**
+	 * Stores the new Poi's from CurrentStorage into the database
+	 */
 	private void storeNewPoi() {
 		int count = 0;
 		ArrayList<Integer> newPoi = CurrentStorage.getAddedPoi();
@@ -202,7 +237,10 @@ public class DataFetcher {
 			count += 1;
 		}
 	}
-	
+
+	/**
+	 * Stores the new General locations from CurrentStorage into the database
+	 */
 	private void storeNewGeneral() {
 		int count = 0;
 		ArrayList<Integer> newLocations = CurrentStorage.getAddedGeneral();
@@ -234,10 +272,13 @@ public class DataFetcher {
     	//System.out.print(runQuery("SELECT Route.*, Start.*, End.* FROM tblRoutes as Route "
     	//		+ "inner join tblLocations as Start on Route.StartID = Start.LocationID "
     	//		+ "inner join tblLocations as End on Route.EndID = End.LocationID"));
-    }    	
+    }
 
 
-    public void loadAllRoutes() {
+	/**
+	 * Fetches all of the routes out of the database to be loaded in to the app
+	 */
+	public void loadAllRoutes() {
     	Route route = null;
     	try {
     		PreparedStatement qryLoadRoutes = connect.prepareStatement("SELECT * FROM tblRoutes");
@@ -293,7 +334,10 @@ public class DataFetcher {
     		printSqlError(ex);
     	}
     }
-    
+
+	/**
+	 * Fetches all of the locations out of the database to be loaded in to the app
+	 */
     private Location loadLocation(ResultSet output) throws SQLException {	
     	//Initialize all the variables for the different location types
     	String ssid;
@@ -816,6 +860,7 @@ public class DataFetcher {
     	if (location.getLocal()) {
     		local = 0;
     	}
+    	String address = location.getAddress();
     	String zip = ((Integer) location.getZip()).toString();
 		String borough = location.getBorough();
     	String owner = null;
@@ -844,8 +889,8 @@ public class DataFetcher {
     	}
     	if (type == 4 || typeID == null) {
     		String stmt = "INSERT INTO tblLocations "
-					+ "(Latitude, Longitude, Name, User, Public, Type) VALUES "
-					+ "(?, ?, ?, ?, ?, ?)";
+					+ "(Latitude, Longitude, Name, User, Public, Type, Address) VALUES "
+					+ "(?, ?, ?, ?, ?, ?, ?)";
     		try {
 				preparedStatement = connect.prepareStatement(stmt);
 				preparedStatement.setDouble(1, latitude);
@@ -854,6 +899,7 @@ public class DataFetcher {
 				preparedStatement.setString(4, owner);
 				preparedStatement.setInt(5, local);
 				preparedStatement.setInt(6, type);
+				preparedStatement.setString(7, address);
 
 				runUpdate(preparedStatement);
 			} catch (SQLException sqlException) {
@@ -862,8 +908,8 @@ public class DataFetcher {
     	}
 
 		String stmt = "INSERT INTO tblLocations "
-				+ "(Latitude, Longitude, Name, User, Public, Type, " + typeName + "ID, Zip, Borough) VALUES "
-				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "(Latitude, Longitude, Name, User, Public, Type, " + typeName + "ID, Zip, Borough, Address) VALUES "
+				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			preparedStatement = connect.prepareStatement(stmt);
@@ -876,6 +922,7 @@ public class DataFetcher {
 			preparedStatement.setString(7, typeID);
 			preparedStatement.setString(8, zip);
 			preparedStatement.setString(9, borough);
+			preparedStatement.setString(10, address);
 
 			runUpdate(preparedStatement);
 		} catch (SQLException sqlException) {
@@ -920,7 +967,6 @@ public class DataFetcher {
     		//Following line the 192.168.1.70 needs to be 222.152.179.135 if outside of Patrick's network
     		Connection connectTest = DriverManager.getConnection("jdbc:mysql://125.239.188.8:3306/cyclrr","monitor","Team5Pass");
     		testConnection(connectTest);
-    		connectTest.close();
     	}
     	catch (SQLException ex) {
     		printSqlError(ex);
@@ -935,25 +981,5 @@ public class DataFetcher {
     		System.out.println(result.getString(1));
     	}
     }
-    
-    
-    //Purely for testing, will be removed later
-    public static void main(String[] argv) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-    	DataFetcher test = new DataFetcher();
-    	//test.connectDbTest();				//Tests the connection to the database
-    	test.connectDb();
 
-		FileManager.wifiRetriever(new File(seng202.Model.DataFetcher.class.getResource("/data_files/NYC_Free_Public_WiFi_03292017.csv").getFile()).toString());
-		for (Wifi newWifi : CurrentStorage.getWifiArray()) {
-			test.addWifi(newWifi);
-		}
-    	//test.loadLocation(testLoc1);		//Tests loading a valid location
-    	//Retailer testLoc2 = new Retailer("2 Brockhall Lane", "Testing" , "Testing More stuff", "tests");
-    	//CurrentStorage.addNewRetailer(testLoc2);
-    	//Route testRoute = new Route("fakeBike", testLoc1, testLoc2, "Test", "M");
-    	//CurrentStorage.addNewRoute(testRoute);
-    	//test.loadRoute(testRoute);		//Tests loading a valid route
-    	Location invalidLoc = new Location(25.1258469, 56.1658468, "NULL", 4);
-    	//test.loadLocation(invalidLoc);	//Tests loading a invalid location
-    }
 }

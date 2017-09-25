@@ -58,43 +58,99 @@ public class Route {
         via3 = null;
     }
 
+    public Route(Location start, Location end, String name) {
+        this.name = name;
+        this.start = start;
+        this.end = end;
+        this.distance = Map.getDistance(start.getLatitude(), start.getLongitude(), end.getLatitude(), end.getLongitude());
+        this.gender = "0";
+        this.bikeID = "0";
+        via1 = null;
+        via2 = null;
+        via3 = null;
+    }
+
+    /**
+     * Getter for the route name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Getter for the bike id
+     */
     public String getBikeID() { return bikeID; }
 
+    /**
+     * Getter for the route gender
+     */
     public String getGender() { return gender; }
 
+    public String getGenderType() {
+        if (gender.equals("1")) {
+            return "Male";
+        } else if (gender.equals("2")) {
+            return "Female";
+        } else {
+            return "Unknown";
+        }
+    }
+
+    /**
+     * Getter for the route distance
+     */
     public double getDistance() {
         return distance;
     }
 
+    /**
+     * Getter for the route distance rounded
+     */
     public String getDistanceRound() {
         return String.format("%.2f", distance);
     }
 
+    /**
+     * Getter for whether the route is local
+    */
     public boolean getLocal() {
         return local;
     }
 
+    /**
+     * Getter for the start of the route
+     */
     public Location getStart() {
         return start;
     }
 
+    /**
+     * Getter for the a location array containing all of the locations the
+     * route goes via
+     */
     public Location[] getVia() {
     	Location[] vias = {via1, via2, via3};
     	return vias;
     }
 
+    /**
+     * Getter for the end of the route
+     */
     public Location getEnd() {
         return end;
     }
-    
+
+    /**
+     * Getter for the name of the start of the route
+     */
     public String getStartString() {
     	return start.getName();
     }
-    
+
+    /**
+     * Getter for the name of the end of the route
+     */
     public String getEndString() {
     	return end.getName();
     }
@@ -126,26 +182,44 @@ public class Route {
         return true;
     }
 
+    /**
+     * Returns whether the route is private
+     */
 	public boolean isSecret() {
 		return secret;
 	}
 
+    /**
+     * Sets the route private
+     */
 	public void setSecret(boolean secret) {
 		this.secret = secret;
 	}
 
+    /**
+     * Getter for the start marker for the route
+     */
 	public Marker getStartMarker() {
         return startMarker;
     }
 
+    /**
+     * Setter for the start marker for the route
+     */
     public void setStartMarker(Marker marker) {
         startMarker = marker;
     }
 
+    /**
+     * Getter for the end marker for the route
+     */
     public Marker getEndMarker() {
         return endMarker;
     }
 
+    /**
+     * Setter for the end marker for the route
+     */
     public void setEndMarker(Marker marker) {
         endMarker = marker;
     }

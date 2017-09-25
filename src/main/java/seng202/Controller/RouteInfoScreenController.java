@@ -90,6 +90,10 @@ public class RouteInfoScreenController {
 
     }
 
+    /**
+     * Method for when the add button is pressed. Verifies then adds the route
+     * @param event
+     */
     @FXML
     void addButtonPressed(ActionEvent event) {
         boolean add = false;
@@ -120,11 +124,11 @@ public class RouteInfoScreenController {
     void initialize() {
     	route = CurrentStorage.getRoute();
     	bikeidLabel.setText("Bike ID: "+ route.getBikeID());
-    	distanceLabel.setText("Distance: " + route.getDistance());
+    	distanceLabel.setText("Distance: " + route.getDistanceRound() + "m");
     	endLabel.setText("End: " + route.getStartString());
     	startLabel.setText("Start: " + route.getEndString());
     	nameLabel.setText("Name: " + route.getName());
-    	genderLabel.setText("Gender: " + route.getGender());
+    	genderLabel.setText("Gender: " + route.getGenderType());
     	
     	completedRouteButton.setText("I have completed this route!");
     	completedRouteButton.setVisible(true);

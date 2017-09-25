@@ -22,21 +22,32 @@ public class Toilet extends Location {
         this.forDisabled = forDisabled;
         this.uniSex = uniSex;
     }
-    
+
     public Toilet(String address, String name, boolean forDisabled, boolean uniSex) {
     	super(address, name, 0);
     	this.forDisabled = forDisabled;
     	this.uniSex = uniSex;
     }
 
+    /**
+     * Getter for if the toilet is disabled
+     */
     public boolean getForDisabled() {
         return forDisabled;
     }
 
+    /**
+     * Getter for whether the toilet is unisex
+     * @return boolean for if the toilet is unisex
+     */
     public boolean getUniSex() {
         return uniSex;
     }
 
+    /**
+     * Returns whether the toilet locations are equal
+     * @param other the toilet to be compared
+     */
     public boolean equals(Toilet other) {
         if (!getName().equals(other.getName())) {
             return false;

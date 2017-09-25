@@ -10,39 +10,19 @@ import java.util.List;
  * The File Manager class also serializes and deserializes user objects.
  */
 public class FileManager {
-    private static final String DEST_TARGET = new File(seng202.Model.FileManager.class.getResource("/data_files/").getFile()).toString();
-
-
-    /**
-     * Converts a filename to a string with no " ".
-     * @param filename The filename to be checked and converted.
-     * @return The converted filename to be used by the writer functions.
-     */
-    public static String filenameConverter(String filename) {
-        String empty = " ";
-        String newString = "";
-        for (int i = 0; i < filename.length(); i++) {
-            char character = filename.charAt(i);
-            if (!(character == empty.charAt(0))) {
-                newString += "_";
-            } else {
-                newString += filename.charAt(i);
-            }
-        }
-        return newString;
-    }
-
 
     /**
      * Serializes an instance of the User class (exporting out of the program).
-     * @param user The User object to be stored in a file
+     * @param user The User object to be stored in a file.
+     * @param filePath The filepath that the user object is to be stored at.
      */
-    public static void userSerialize(User user){
+    public static void userSerialize(User user, String filePath){
         try {
-            String filePath = "SENG202-Team5-Cyclr/src/main/resources/data_files" + user.getName() + ".ser";
-            FileOutputStream userOutFile = new FileOutputStream(filePath);
+            File newFile = new File(filePath + "/" + user.getUsername() + ".ser");
+            FileOutputStream userOutFile = new FileOutputStream(newFile);
             ObjectOutputStream out = new ObjectOutputStream(userOutFile);
             out.writeObject(user);
+            out.flush();
             out.close();
             userOutFile.close();
 
@@ -54,19 +34,18 @@ public class FileManager {
 
     /**
      * Deserializes an instance of the User class (importing into the program).
-     * @param nameOfUser The name of the user to be deserialized.
+     * @param filePath The filepath of the file where the user object should be.
      * @return The User object stored in the named file.
      */
-    public static User userDeserialize(String nameOfUser) {
+    public static User userDeserialize(String filePath) {
         User user = null;
         try {
-            String filePath = "SENG202-Team5-Cyclr/src/main/resources/data_files" + nameOfUser + ".ser";
             FileInputStream userInFile = new FileInputStream(filePath);
             ObjectInputStream userObjectStream = new ObjectInputStream(userInFile);
             try {
                 user = (User) userObjectStream.readObject();
+
                 userObjectStream.close();
-                userInFile.close();
                 return user;
             } catch (ClassNotFoundException classException) {
                 System.out.println("User class not found");
@@ -101,29 +80,23 @@ public class FileManager {
 
 
     /**
-     * Function to write a .csv file to import to other instances of the app.
-     * @param fileName The name of the file for the .csv to
-     * @param content The content for the .csv file.
+     * Checks if an index if less than zero and returns a positive index for the same value.
+     * @param index The current index of the string.
+     * @param header The header of the current csv file.
+     * @return The positive integer index for an item in the list.
      */
-    public static void writeFile(String destination, String fileName, ArrayList<String> content) {
-        try {
-            PrintWriter printWriter = new PrintWriter(new File(destination+"/"+fileName));
-            StringBuilder stringBuilder = new StringBuilder();
-            for (String line : content) {
-                stringBuilder.append(line);
-                stringBuilder.append('\n');
-            }
-            printWriter.write(stringBuilder.toString());
-            printWriter.close();
-        } catch (FileNotFoundException exception) {
-            exception.printStackTrace();
+    private static int indexer(int index, List header) {
+        if (index < 0) {
+            index += header.size();
         }
+        return index;
     }
 
 
     /**
      * Retrieves a list of routes from the readFile function and then converts them individually to Route objects stored
      * in the current storage class for that instance of the app.
+     * @param filename The filename where the .csv file is stored.
      */
     public static void routeRetriever(String filename) {
         ArrayList<String> routes = readFile(filename);
@@ -132,32 +105,29 @@ public class FileManager {
             List header = Arrays.asList(routes.get(0).split("\",\""));
 
             //Get the index of each of the key fields for the route class from the header of the csv.
-            int startNameIndex = header.indexOf("start station name");
-            int startLatIndex = header.indexOf("start station latitude");
-            int startLongIndex = header.indexOf("start station longitude");
-            int endNameIndex = header.indexOf("end station name");
-            int endLatIndex = header.indexOf("end station latitude");
-            int endLongIndex = header.indexOf("end station longitude");
-            int bikeIdIndex = header.indexOf("bikeid");
-            int genderIndex = header.indexOf("gender");
-            genderIndex += header.size();
+            int startNameIndex = indexer(header.indexOf("start station name"),header);
+            int startLatIndex = indexer(header.indexOf("start station latitude"), header);
+            int startLongIndex = indexer(header.indexOf("start station longitude"), header);
+            int endNameIndex = indexer(header.indexOf("end station name"), header);
+            int endLatIndex = indexer(header.indexOf("end station latitude"), header);
+            int endLongIndex = indexer(header.indexOf("end station longitude"), header);
+            int bikeIdIndex = indexer(header.indexOf("bikeid"), header);
+            int genderIndex = indexer(header.indexOf("gender"), header);
 
             routes.remove(0);
-
-            System.out.println(header);
 
             for (String route : routes) {
                 ArrayList<String> information = new ArrayList<String>(Arrays.asList(route.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1)));
 
                 //Obtain the relevant information from the csv.
-                String bikeID = information.get(bikeIdIndex).substring(1, information.get(bikeIdIndex).length() - 1);
-                String startName = information.get(startNameIndex).substring(1, information.get(startNameIndex).length() - 1);
-                String endName = information.get(endNameIndex).substring(1, information.get(endNameIndex).length() - 1);
-                double startLatitude = Double.parseDouble(information.get(startLatIndex).substring(1, information.get(startLatIndex).length() - 1));
-                double startLongitude = Double.parseDouble(information.get(startLongIndex).substring(1, information.get(startLongIndex).length() - 1));
-                double endLatitude = Double.parseDouble(information.get(endLatIndex).substring(1, information.get(endLatIndex).length() - 1));
-                double endLongitude = Double.parseDouble(information.get(endLongIndex).substring(1, information.get(endLongIndex).length() - 1));
-                String gender = information.get(genderIndex).substring(1, information.get(genderIndex).length() - 1);
+                String bikeID = information.get(bikeIdIndex).substring(1, information.get(bikeIdIndex).lastIndexOf("\""));
+                String startName = information.get(startNameIndex).substring(1, information.get(startNameIndex).lastIndexOf("\""));
+                String endName = information.get(endNameIndex).substring(1, information.get(endNameIndex).lastIndexOf("\""));
+                double startLatitude = Double.parseDouble(information.get(startLatIndex).substring(1, information.get(startLatIndex).lastIndexOf("\"")));
+                double startLongitude = Double.parseDouble(information.get(startLongIndex).substring(1, information.get(startLongIndex).lastIndexOf("\"")));
+                double endLatitude = Double.parseDouble(information.get(endLatIndex).substring(1, information.get(endLatIndex).lastIndexOf("\"")));
+                double endLongitude = Double.parseDouble(information.get(endLongIndex).substring(1, information.get(endLongIndex).lastIndexOf("\"")));
+                String gender = information.get(genderIndex).substring(1, information.get(genderIndex).lastIndexOf("\""));
 
                 //Convert the relevant data into the associated classes
                 Location startLocation = new Location(startLatitude, startLongitude, startName, 4);
@@ -174,22 +144,32 @@ public class FileManager {
     /**
      * Stores the route data stored in the current storage class.
      * @param filename The filename where the csv file is to be stored.
+     * @param routeArray The array of routes to be stored.
      */
-    public static void routeWriter(String filename) {
-        filename = filenameConverter(filename);
-        ArrayList<Route> routes = CurrentStorage.getRouteArray();
-        ArrayList<String> strRoutes = new ArrayList<String>();
-        for (Route route : routes) {
-            String startName = route.getStart().getName();
-            String endName = route.getEnd().getName();
-            String startLatitude = Double.toString(route.getStart().getCoords()[0]);
-            String startLongitude = Double.toString(route.getStart().getCoords()[1]);
-            String endLatitude = Double.toString(route.getEnd().getCoords()[0]);
-            String endLongitude = Double.toString(route.getEnd().getCoords()[1]);
-            String strRoute = startName + "," + startLatitude + "," + startLongitude + "," + endName + "," + endLatitude + "," + endLongitude;
-            strRoutes.add(strRoute);
+    public static void routeWriter(String filename, ArrayList<Route> routeArray) {
+        File file = new File(filename);
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+            bufferedWriter.write("\"start station name\",\"start station latitude\",\"start station longitude\"," +
+                    "\"end station name\",\"end station latitude\",\"end station longitude\",\"bikeid\",\"gender\"\n");
+            for (Route route : routeArray) {
+                String startName = route.getStart().getName();
+                String endName = route.getEnd().getName();
+                String startLatitude = Double.toString(route.getStart().getCoords()[0]);
+                String startLongitude = Double.toString(route.getStart().getCoords()[1]);
+                String endLatitude = Double.toString(route.getEnd().getCoords()[0]);
+                String endLongitude = Double.toString(route.getEnd().getCoords()[1]);
+                String bikeID = route.getBikeID();
+                String gender = route.getGender();
+
+                String strRoute = "\"" + startName + "\",\"" + startLatitude + "\",\"" + startLongitude + "\",\"" + endName + "\",\"" + endLatitude + "\",\"" + endLongitude + "\",\"" + bikeID + "\",\"" + gender + "\"\n";
+                bufferedWriter.write(strRoute);
+            }
+            bufferedWriter.flush();
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        writeFile(DEST_TARGET,filename+".csv", strRoutes);
     }
 
 
@@ -218,15 +198,14 @@ public class FileManager {
             for (String retailer : retailers) {
                 String[] information = retailer.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 
-                //Obtain relevant fields
-                int zip = 0;
-                if (!information[retailerZip].equals("")) {
-                    zip = Integer.parseInt(information[retailerZip]);
-                }
-
                 //Creates a new instance of retailer.
                 Retailer newRetailer = new Retailer(information[addrLine1Index], information[retailerName], information[retailerPrimary], information[retailerSecondary]);
-                newRetailer.setZip(zip);
+
+                //Checks if the zip of the retailer needs to be changed
+                if (!information[retailerZip].equals("")) {
+                    newRetailer.setZip(Integer.parseInt(information[retailerZip]));
+                }
+
                 //Add the retailer to the storage class.
                 CurrentStorage.addNewRetailer(newRetailer);
             }
@@ -240,22 +219,27 @@ public class FileManager {
      * @param retailers The arrayList of retailers to be stored as a csv file.
      */
     public static void retailerWriter(String filename, ArrayList<Retailer> retailers) {
-        filename = filenameConverter(filename);
-        ArrayList<String> strRetailers = new ArrayList<String>();
-        for (Retailer retailer : retailers) {
-
-            //Obtain relevant information to write.
-            String address = retailer.getAddress();
-            String product = retailer.getProduct();
-            String description = retailer.getDescription();
-            int zip = retailer.getZip();
-            double latitude = retailer.getLatitude();
-            double longitude = retailer.getLongitude();
-
-            String strRetailer = address + "," + zip + "," + product + "," + description + "," + latitude + "," + longitude;
-            strRetailers.add(strRetailer);
+        File newFile = new File(filename);
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(newFile));
+            if (!retailers.isEmpty()) {
+                bufferedWriter.write("CnBio_Org_Name,CnAdrPrf_Addrline1,CnAdrPrf_ZIP,Primary,Secondary\n");
+                for (Retailer retailer : retailers) {
+                    //Obtain relevant information to write.
+                    String name = retailer.getName();
+                    String address = retailer.getAddress();
+                    String zip = Integer.toString(retailer.getZip());
+                    String product = retailer.getProduct();
+                    String description = retailer.getDescription();
+                    String strRetailer = name + "," + address + "," + zip + "," + product + "," + description + "\n";
+                    bufferedWriter.write(strRetailer);
+                }
+                bufferedWriter.flush();
+                bufferedWriter.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        writeFile(DEST_TARGET, filename+".csv", strRetailers);
     }
 
 
@@ -305,23 +289,31 @@ public class FileManager {
      * @param wifis The list of wifi objects to be converted to a csv file.
      */
     public static void wifiWriter(String filename, ArrayList<Wifi> wifis) {
-        filename = filenameConverter(filename);
-        ArrayList<String> strWifis = new ArrayList<String>();
-        if (!(wifis.isEmpty())) {
-            String header = "LAT,LON,NAME,PROVIDER,BORONAME,TYPE";
-            strWifis.add(header);
-            for (Wifi  wifi : wifis) {
-                String SSID = wifi.getName();
-                String wifiLatitude = Double.toString(wifi.getCoords()[0]);
-                String wifiLongitude = Double.toString(wifi.getCoords()[1]);
-                String wifiType = wifi.getType();
-                String wifiBorough = wifi.getBorough();
-                String wifiProvider = wifi.getProvider();
-                String strWifi = wifiLatitude + "," + wifiLongitude + "," + SSID + "," + wifiProvider + "," + wifiBorough + "," + wifiType;
-                strWifis.add(strWifi);
+        //filename = filenameConverter(filename);
+        File newFile = new File(filename);
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(newFile));
+            if (!(wifis.isEmpty())) {
+                String header = "LAT,LON,NAME,PROVIDER,SSID,BORONAME,TYPE\n";
+                bufferedWriter.write(header);
+                for (Wifi  wifi : wifis) {
+                    String SSID = wifi.getSsid();
+                    String name = wifi.getName();
+                    String wifiLatitude = Double.toString(wifi.getCoords()[0]);
+                    String wifiLongitude = Double.toString(wifi.getCoords()[1]);
+                    String wifiType = wifi.getType();
+                    String wifiBorough = wifi.getBorough();
+                    String wifiProvider = wifi.getProvider();
+                    String strWifi = wifiLatitude + "," + wifiLongitude + "," + name + "," + wifiProvider + "," + SSID + "," + wifiBorough + "," + wifiType + "\n";
+                    bufferedWriter.write(strWifi);
+                }
+                bufferedWriter.flush();
+                bufferedWriter.close();
             }
-            writeFile(DEST_TARGET,filename+".csv", strWifis);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 
 
@@ -364,26 +356,30 @@ public class FileManager {
 
     /**
      * Writes an arrayList of toilet objects to a string.
-     * @param fileName The file where the csv will be placed.
+     * @param filename The file where the csv will be placed.
      * @param toilets The arrayList of toilet objects to be stored in the csv.
      */
-    public static void toiletWriter(String fileName, ArrayList<Toilet> toilets) {
-        fileName = filenameConverter(fileName);
-        ArrayList<String> strToilets = new ArrayList<String>();
-        if (!(toilets.isEmpty())) {
-            String header = "name,disabled access,latitude,longitude,unisex";
-            strToilets.add(header);
-            for (Toilet toilet : toilets) {
-                String toiletName = toilet.getName();
-                Double toiletLat = toilet.getLatitude();
-                Double toiletLon = toilet.getLongitude();
-                boolean accessable = toilet.getForDisabled();
-                boolean unisex = toilet.getUniSex();
-
-                String strToilet = toiletName + "," + toiletLat + "," + toiletLon + "," + accessable + "," + unisex;
-                strToilets.add(strToilet);
+    public static void toiletWriter(String filename, ArrayList<Toilet> toilets) {
+        File newFile = new File(filename);
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(newFile));
+            if (!(toilets.isEmpty())) {
+                String header = "name,latitude,longitude,disabled access,unisex\n";
+                bufferedWriter.write(header);
+                for (Toilet toilet : toilets) {
+                    String toiletName = toilet.getName();
+                    String toiletLat = Double.toString(toilet.getLatitude());
+                    String toiletLon = Double.toString(toilet.getLongitude());
+                    String accessable = Boolean.toString(toilet.getForDisabled());
+                    String unisex = Boolean.toString(toilet.getUniSex());
+                    String strToilet = toiletName + "," + toiletLat + "," + toiletLon + "," + accessable + "," + unisex + "\n";
+                    bufferedWriter.write(strToilet);
+                }
+                bufferedWriter.flush();
+                bufferedWriter.close();
             }
-            writeFile(DEST_TARGET, fileName + ".csv", strToilets);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -415,7 +411,7 @@ public class FileManager {
                 Double poiLatitude = Double.parseDouble(information[poiLatIndex]);
                 Double poiLongitude = Double.parseDouble(information[poiLonIndex]);
                 String poiDescription = information[poiDescriptionIndex];
-                double poiCost = Integer.parseInt(information[poiCostIndex]);
+                double poiCost = Double.parseDouble(information[poiCostIndex]);
 
                 // Creates new Poi object
                 Poi newPoi = new Poi(poiLatitude, poiLongitude, poiName, poiDescription, poiCost);
@@ -429,26 +425,31 @@ public class FileManager {
 
     /**
      * Writes a csv file of a supplied arrayList of Poi objects.
-     * @param fileName The filename for the csv to be saved to.
+     * @param filename The filename for the csv to be saved to.
      * @param pois The list of points of interest to be saved as a csv.
      */
-    public static void poiWriter(String fileName, ArrayList<Poi> pois) {
-        fileName = filenameConverter(fileName);
-        ArrayList<String> strPois = new ArrayList<String>();
-        if (!(pois.isEmpty())) {
-            String header = "name,latitude,longitude,description,cost";
-            strPois.add(header);
-            for (Poi poi : pois) {
-                String poiName = poi.getName();
-                Double poiLat = poi.getLatitude();
-                Double poiLon = poi.getLongitude();
-                String poiDescription = poi.getDescription();
-                double poiCost = poi.getCost();
+    public static void poiWriter(String filename, ArrayList<Poi> pois) {
+        File newFile = new File(filename);
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(newFile));
+            if (!(pois.isEmpty())) {
+                String header = "name,latitude,longitude,description,cost\n";
+                bufferedWriter.write(header);
+                for (Poi poi : pois) {
+                    String poiName = poi.getName();
+                    String poiLat = Double.toString(poi.getLatitude());
+                    String poiLon = Double.toString(poi.getLongitude());
+                    String poiDescription = poi.getDescription();
+                    String poiCost = Double.toString(poi.getCost());
 
-                String strPoi = poiName + "," + poiLat + "," + poiLon + "," + poiDescription + "," + poiCost;
-                strPois.add(strPoi);
+                    String strPoi = poiName + "," + poiLat + "," + poiLon + "," + poiDescription + "," + poiCost + "\n";
+                    bufferedWriter.write(strPoi);
+                }
+                bufferedWriter.flush();
+                bufferedWriter.close();
             }
-            writeFile(DEST_TARGET, fileName + ".csv", strPois);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
