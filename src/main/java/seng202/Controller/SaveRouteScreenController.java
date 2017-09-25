@@ -46,8 +46,9 @@ public class SaveRouteScreenController {
     	stage.hide();
     }
 
+
     /**
-     * Method when the save locally button is pressed, hides the pop up.
+     * Method when the save button is pressed, saves the route and hides the pop up.
      * @param event
      */
     @FXML
