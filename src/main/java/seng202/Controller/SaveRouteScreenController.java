@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
+import seng202.Model.Location;
 import seng202.Model.Route;
 
 
@@ -33,6 +34,18 @@ public class SaveRouteScreenController {
     @FXML
     private TextField routeNameText;
 
+    @FXML
+    private Label routeStartLabel;
+
+    @FXML
+    private TextField routeStartText;
+
+    @FXML
+    private Label routeEndLabel;
+
+    @FXML
+    private TextField routeEndText;
+
 
 
 
@@ -53,18 +66,31 @@ public class SaveRouteScreenController {
      */
     @FXML
     void savePressed(ActionEvent event) {
+        boolean allValid = true;
+        routeStartLabel.setTextFill(Color.BLACK);
+        routeEndLabel.setTextFill(Color.BLACK);
+        routeNameLabel.setTextFill(Color.BLACK);
         if (routeNameText.getText().equals("")) {
             routeNameLabel.setTextFill(Color.RED);
-        } else {
-            Route route = new Route(CurrentStorage.getNewRouteStart(), CurrentStorage.getNewRouteEnd(), routeNameText.getText());
+            allValid = false;
+        } if (routeEndText.getText().equals("")) {
+            routeEndLabel.setTextFill(Color.RED);
+            allValid = false;
+        } if (routeStartText.getText().equals("")) {
+            routeStartLabel.setTextFill(Color.RED);
+            allValid = false;
+        } if (allValid) {
+            Location start = CurrentStorage.getNewRouteStart();
+            Location end = CurrentStorage.getNewRouteEnd();
+            start.setName(routeStartText.getText());
+            end.setName(routeEndText.getText());
+
+            Route route = new Route(start, end, routeNameText.getText());
             CurrentStorage.addNewRoute(route);
 
             Stage stage = (Stage) saveButton.getScene().getWindow();
             stage.hide();
         }
-
-
-
     }
 
 
