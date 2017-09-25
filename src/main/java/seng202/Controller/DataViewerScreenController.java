@@ -16,6 +16,8 @@ import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 import org.omg.CORBA.Current;
 import seng202.Model.CurrentStorage;
+import seng202.Model.DataFetcher;
+import seng202.Model.FileManager;
 import seng202.Model.User;
 import seng202.exceptions.BadgeLevelException;
 import sun.util.resources.cldr.uk.CurrencyNames_uk;
@@ -139,15 +141,17 @@ public class DataViewerScreenController {
 	 * @throws IOException 
 	 */
 	public void logoutPressed() throws IOException {
-		CurrentStorage.flush();
-		
-		Stage primaryStage = (Stage) logoutButton.getScene().getWindow(); 
-		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
-		
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
-		primaryStage.setTitle("Login");
-		primaryStage.setScene(scene);
-		primaryStage.show();	
+		DataFetcher exporter = new DataFetcher();
+		try {
+			exporter.connectDb();
+			exporter.storeCurrentStorage();
+			exporter.closeConnection();
+			FileManager.userSerialize(CurrentStorage.getUser(), "./src/main/resources/data_files/");
+			CurrentStorage.flush();
+			System.exit(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML

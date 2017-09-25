@@ -60,7 +60,15 @@ public class LoginScreenController {
 					ArrayList<String> userInfo;
 					userInfo = data.fetchUserInfo(usernameText.getText());
 
-					User user = new User(userInfo.get(0), userInfo.get(1), usernameText.getText().toLowerCase(), userInfo.get(2), passwordText.getText().toString());
+					User user;
+					if (new File("./src/main/resources/data_files/" + usernameText.getText() + ".ser").exists()) {
+						//user = new User("Courtney","Hoskin", "cgh", "2017-08-06","password");
+					    user = FileManager.userDeserialize("./src/main/resources/data_files/" + usernameText.getText() + ".ser");
+					} else {
+						user = new User(userInfo.get(0), userInfo.get(1), usernameText.getText().toLowerCase(), userInfo.get(2), passwordText.getText().toString());
+						FileManager.userSerialize(user, "./src/main/resources/data_files/" + usernameText.getText() + ".ser");
+					}
+
 					CurrentStorage.setUser(user);
 
 					Stage primaryStage = (Stage) signInButton.getScene().getWindow();
@@ -90,7 +98,7 @@ public class LoginScreenController {
     	Stage primaryStage = (Stage) signUpButton.getScene().getWindow();
     	
     	Parent root = FXMLLoader.load(getClass().getResource("/SignupScreen.fxml"));
-    	
+
     	primaryStage.setTitle("Sign Up");
     	primaryStage.setScene(new Scene(root));
         

@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.scene.control.DatePicker;
 import seng202.Model.DataFetcher;
+import seng202.Model.FileManager;
 import seng202.Model.User;
 
 import java.io.IOException;
@@ -66,12 +67,13 @@ public class SignupScreenController {
         DataFetcher data = new DataFetcher();
         data.connectDb();
         data.addUser(newUser);
-            Stage primaryStage = (Stage)createButton.getScene().getWindow();
 
-            Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
+        FileManager.userSerialize(newUser, "./src/main/resources/data_files/");
 
-            primaryStage.setTitle("Login");
-            primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
+        Stage primaryStage = (Stage)createButton.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
+        primaryStage.setTitle("Login");
+        primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
         }
     }
     

@@ -529,8 +529,17 @@ public class MainScreenController implements MapComponentInitializedListener, Di
      */
     @FXML
     void logoutPressed(ActionEvent event) throws IOException {
-
-    	System.exit(1);
+        DataFetcher exporter = new DataFetcher();
+        try {
+            exporter.connectDb();
+            exporter.storeCurrentStorage();
+            exporter.closeConnection();
+            FileManager.userSerialize(CurrentStorage.getUser(), "./src/main/resources/data_files/");
+            CurrentStorage.flush();
+            System.exit(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

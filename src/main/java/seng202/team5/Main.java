@@ -8,7 +8,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import seng202.Model.CurrentStorage;
 import seng202.Model.DataFetcher;
+import seng202.Model.FileManager;
 
 public class Main extends Application {
 
@@ -27,9 +29,11 @@ public class Main extends Application {
 			exporter.connectDb();
 			exporter.storeCurrentStorage();
 			exporter.closeConnection();
+			FileManager.userSerialize(CurrentStorage.getUser(), "./src/main/resources/data_files/");
+			CurrentStorage.flush();
 			System.exit(0);
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 
 	}
