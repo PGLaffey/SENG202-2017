@@ -1,8 +1,9 @@
 //Main class to set up and test the GUI until we incorporate it with the actual implementation
 
-package seng202.Controller;
+package seng202.team5;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
