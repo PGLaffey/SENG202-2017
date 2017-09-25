@@ -39,7 +39,7 @@ public class DataFetcherTest extends TestCase {
      * Test to ensure that the connectDB function results in a functional connection.
      */
     @Test
-    public void connectDbTest()
+    public void testConnectDb()
     {
         try {
             fetcher.connectDb();
