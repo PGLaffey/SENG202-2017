@@ -85,6 +85,16 @@ public class Route {
      */
     public String getGender() { return gender; }
 
+    public String getGenderType() {
+        if (gender.equals("1")) {
+            return "Male";
+        } else if (gender.equals("2")) {
+            return "Female";
+        } else {
+            return "Unknown";
+        }
+    }
+
     /**
      * Getter for the route distance
      */
