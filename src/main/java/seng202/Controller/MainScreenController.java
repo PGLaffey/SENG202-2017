@@ -443,6 +443,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     private DirectionsRenderer directionsRenderer;
 
+
+
     ArrayList<Circle> wifiCircles = new ArrayList<Circle>();
     ArrayList<Marker> locationMarkers = new ArrayList<Marker>();
     
@@ -1414,6 +1416,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @Override
     public void mapInitialized() {
+
+        CurrentStorage currentStorage = new CurrentStorage();
         geocodingService = new GeocodingService();
         MapOptions mapOptions = new MapOptions();
 
@@ -1437,12 +1441,16 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             LatLong latLong = event.getLatLong();
             System.out.println(isStart);
             if (isStart) {
+                Location location = new Location(latLong.getLatitude(), latLong.getLongitude(), 4);
+                currentStorage.setNewRouteStart(location);
                 map.clearMarkers();
                 directionsRenderer.clearDirections();
                 directionsRenderer = new DirectionsRenderer(true, map, directionsPane);
                 Map.setStartMarker(latLong, map);
                 isStart = false;
             } else {
+                Location location = new Location(latLong.getLatitude(), latLong.getLongitude(), 4);
+                currentStorage.setNewRouteEnd(location);
                 Map.setEndMarker(latLong, map);
                 isStart = true;
             }
