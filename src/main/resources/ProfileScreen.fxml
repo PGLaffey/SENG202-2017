@@ -117,7 +117,7 @@
             </AnchorPane>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="355.0" prefWidth="642.0" style="-fx-background-color: #D1D7F1;">
         <children>
-                  <SplitPane dividerPositions="0.29797979797979796" prefHeight="450.0" prefWidth="850.0">
+                  <SplitPane dividerPositions="0.29797979797979796" prefHeight="450.0" prefWidth="850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
                       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="160.0" style="-fx-background-color: #D1D7F1;" SplitPane.resizableWithParent="false">
                            <children>
@@ -221,6 +221,7 @@
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="80.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="80.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="80.0" />
+                                    <ColumnConstraints />
                                 </columnConstraints>
                                 <rowConstraints>
                                     <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />

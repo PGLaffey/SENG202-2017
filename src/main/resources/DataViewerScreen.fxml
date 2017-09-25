@@ -184,7 +184,7 @@
                                  </font></Label>
                 </children>
               </AnchorPane>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #ededed;">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #D1D7F1;">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="52.0" layoutY="219.0" stroke="#14246c" strokeType="INSIDE" width="170.0" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="52.0" layoutY="280.0" stroke="#14246c" strokeType="INSIDE" width="170.0" />

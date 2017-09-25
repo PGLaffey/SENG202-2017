@@ -72,7 +72,7 @@
                                     <Font name="KacstOne" size="13.0" />
                                  </font>
                     </Button>
-                    <Button id="statButtonq" fx:id="statButton" alignment="CENTER_LEFT" depthTest="DISABLE" maxWidth="1.7976931348623157E308" minWidth="60.0" mnemonicParsing="false" onAction="#statPressed" prefHeight="50.0" prefWidth="160.0" text="Statistics" GridPane.columnIndex="2">
+                    <Button id="statButtonq" fx:id="statButton" alignment="CENTER_LEFT" depthTest="DISABLE" maxWidth="1.7976931348623157E308" minWidth="60.0" mnemonicParsing="false" onAction="#statPressed" prefHeight="50.0" prefWidth="160.0" text="Statistics" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                       <graphic>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                           <image>
