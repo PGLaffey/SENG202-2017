@@ -1301,12 +1301,15 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	if (allValid) {
     	    Wifi wifi;
     		if (!wifiAddressText.getText().equals("")) {
-            	wifi = new Wifi(wifiAddressText.getText(), wifiNameText.getText(), wifiBoroughText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
+            	wifi = new Wifi(wifiAddressText.getText(), wifiNameText.getText(), wifiSsidText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
         	} else {
-            	wifi = new Wifi(Double.parseDouble(wifiLatText.getText()), Double.parseDouble(wifiLongText.getText()), wifiNameText.getText(), wifiBoroughText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
+            	wifi = new Wifi(Double.parseDouble(wifiLatText.getText()), Double.parseDouble(wifiLongText.getText()), wifiNameText.getText(), wifiSsidText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
         	}
             if (!wifiZipText.getText().equals("")) {
                 wifi.setZip(Integer.parseInt(wifiZipText.getText()));
+            }
+            if (!wifiBoroughText.getText().equals("")) {
+    		    wifi.setBorough(wifiBoroughText.getText());
             }
             CurrentStorage.addNewWifi(wifi);
 
