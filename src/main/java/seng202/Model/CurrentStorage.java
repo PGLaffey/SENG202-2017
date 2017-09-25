@@ -1,7 +1,5 @@
 package seng202.Model;
 
-import org.omg.CORBA.Current;
-
 import java.util.ArrayList;
 
 /**
@@ -232,7 +230,7 @@ public class CurrentStorage {
 		// Used when user adding new data (from GUI or CSV)
 		if (!(containsWifi(wifi))) {
 			wifiArray.add(wifi);
-			addedWifi.add(wifiArray.indexOf(wifi));
+			addedWifi.add(wifiArray.size()-1);
 		}
 	}
 
@@ -255,7 +253,7 @@ public class CurrentStorage {
 		// Used when user adding new data (from GUI or CSV)
 		if (!(containsRetailer(retailer))) {
 			retailerArray.add(retailer);
-			addedRetailers.add(retailerArray.indexOf(retailer));
+			addedRetailers.add(retailerArray.size()-1);
 		}
 	}
 
@@ -279,7 +277,7 @@ public class CurrentStorage {
 		// Used when user adding new data (from GUI or CSV)
 		if (!(containsToilet(toilet))) {
 			toiletArray.add(toilet);
-			addedToilets.add(toiletArray.indexOf(toilet));
+			addedToilets.add(toiletArray.size()-1);
 		}
 	}
 
@@ -303,7 +301,7 @@ public class CurrentStorage {
 		// Used when user adding new data (from GUI or CSV)
 		if (!(containsPoi(poi))) {
 			poiArray.add(poi);
-			addedPoi.add(poiArray.indexOf(poi));
+			addedPoi.add(poiArray.size()-1);
 		}
 	}
 
@@ -326,7 +324,7 @@ public class CurrentStorage {
     public static void addNewRoute(Route route) {
     	if (!(containsRoute(route))) {
 			routeArray.add(route);
-			addedRoutes.add(routeArray.indexOf(route));
+			addedRoutes.add(routeArray.size()-1);
 		}
 	}
 
@@ -350,7 +348,7 @@ public class CurrentStorage {
     	// Used when user adding new data (from GUI or CSV)
 		if (!(containsGeneral(location))) {
 			generalArray.add(location);
-			addedGeneral.add(generalArray.indexOf(location));
+			addedGeneral.add(generalArray.size()-1);
 		}
     }
 

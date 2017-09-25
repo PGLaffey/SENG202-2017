@@ -1,6 +1,5 @@
 package seng202.Model;
 
-import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -220,6 +219,7 @@ public class DataFetcher {
 		ArrayList<Integer> newWifi = CurrentStorage.getAddedWifi();
 		ArrayList<Wifi> wifi = CurrentStorage.getWifiArray();
 		while (count < newWifi.size()) {
+			System.out.println(count + "\n" + newWifi.get(count));
 			addLocation(wifi.get(newWifi.get(count)));
 			count += 1;
 		}

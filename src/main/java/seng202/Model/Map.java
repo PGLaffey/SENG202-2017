@@ -338,8 +338,8 @@ public class Map {
      * @param wifi Wifi object to use
      * @return the location of the pointer on the map
      */
-    public static Circle findWifi(Wifi wifi) {
-
+    public static void findWifi(Wifi wifi, GoogleMap map) {
+        System.out.println("WEEWOO");
         //Creates a new circle and places it on a map.
         CircleOptions circleOptns = new CircleOptions()
                 .center(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
@@ -351,7 +351,8 @@ public class Map {
                 .strokeColor("Blue")
                 .strokeWeight(0.2);
         wifi.setCircle(new Circle(circleOptns));
-        return wifi.getCircle();
+        map.addMapShape(wifi.getCircle());
+
     }
 
     /**

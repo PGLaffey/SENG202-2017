@@ -805,8 +805,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                     protected Void call() throws Exception {
                         for (Wifi wifi : CurrentStorage.getWifiArray()) {
                             if (wifi.getCircle() == null) {
-                                wifiCircles.add(Map.findWifi(wifi));
-                                map.addMapShape(wifi.getCircle());
+                                Map.findWifi(wifi, map);
                             } else {
                                 wifi.getCircle().setVisible(!wifi.getCircle().getVisible());
                             }
@@ -1420,7 +1419,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
      * @param wifi wifi object
      */
     public void placeCircleOnMap(Wifi wifi) {
-        Map.findWifi(wifi);
+        Map.findWifi(wifi, map);
 
     }
 
@@ -1530,7 +1529,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             } else if (loc.getLocationType() == 2) {
                 map.addMarker(Map.findRetailers((Retailer) loc));
             } else if (loc.getLocationType() == 3) {
-                map.addMapShape(Map.findWifi((Wifi) loc));
+                Map.findWifi((Wifi) loc, map);
             }
         }
 
