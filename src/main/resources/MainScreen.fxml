@@ -167,9 +167,9 @@
                                        <items>
                                           <MenuItem fx:id="uploadWifiMenuBtn" mnemonicParsing="false" onAction="#uploadWifiBtnPressed" text="Wifi" />
                                           <MenuItem fx:id="uploadRetailerMenuBtn" mnemonicParsing="false" onAction="#uploadRetailerBtnPressed" text="Retailer" />
-                                          <MenuItem fx:id="uploadRouteMenuBtn" mnemonicParsing="false" onAction="#uploadRouteBtnPressed" text="Toilet" />
-                                          <MenuItem fx:id="uploadToiletMenuBtn" mnemonicParsing="false" onAction="#uploadToiletBtnPressed" text="Point of Interest" />
-                                          <MenuItem fx:id="uploadPoiMenuBtn" mnemonicParsing="false" onAction="#uploadPOIBtnPressed" text="Other" />
+                                          <MenuItem fx:id="uploadRouteMenuBtn" mnemonicParsing="false" onAction="#uploadRouteBtnPressed" text="Route" />
+                                          <MenuItem fx:id="uploadToiletMenuBtn" mnemonicParsing="false" onAction="#uploadToiletBtnPressed" text="Toilet" />
+                                          <MenuItem fx:id="uploadPoiMenuBtn" mnemonicParsing="false" onAction="#uploadPOIBtnPressed" text="Point of Interest" />
                                        </items>
                                        <font>
                                           <Font name="System Bold" size="13.0" />

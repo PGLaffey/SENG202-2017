@@ -612,7 +612,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             String path = selectedFile.getPath();
-            FileManager.wifiRetriever(path);
+            Thread wifiThread = new Thread(new WifiImporterThread(path));
+            wifiThread.start();
         }
     }
 
@@ -628,7 +629,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             String path = selectedFile.getPath();
-            FileManager.retailerRetriever(path);
+            Thread retailerThread = new Thread(new RetailerImporterThread(path));
+            retailerThread.start();
         }
     }
 
@@ -644,7 +646,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             String path = selectedFile.getPath();
-            FileManager.routeRetriever(path);
+            Thread t = new Thread(new RouteImporterThread(path));
+            t.start();
+
         }
     }
 
