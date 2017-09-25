@@ -203,15 +203,7 @@ public class TablesScreenController {
      */
     @FXML
     void logoutPressed(ActionEvent event) throws IOException {
-    	CurrentStorage.flush();
-
-    	Stage primaryStage = (Stage) logoutButton.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
-
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
-		primaryStage.setTitle("Login");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		System.exit(1);
     }
 
     /**

@@ -63,6 +63,8 @@ public class Route {
         this.start = start;
         this.end = end;
         this.distance = Map.getDistance(start.getLatitude(), start.getLongitude(), end.getLatitude(), end.getLongitude());
+        this.gender = "0";
+        this.bikeID = "0";
         via1 = null;
         via2 = null;
         via3 = null;
