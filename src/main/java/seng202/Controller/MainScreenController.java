@@ -529,14 +529,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
      */
     @FXML
     void logoutPressed(ActionEvent event) throws IOException {
-    	CurrentStorage.flush();
-    	
-    	Stage primaryStage = (Stage) logoutButton.getScene().getWindow(); 
-		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
-		
-		primaryStage.setTitle("Login");
-		primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
-		primaryStage.show();
+
+    	System.exit(1);
     }
 
     /**
@@ -740,13 +734,15 @@ public class MainScreenController implements MapComponentInitializedListener, Di
      */
     @FXML
     void saveRouteButtonPressed(ActionEvent event) throws IOException {
-    	Stage stage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/SaveRouteScreen.fxml"));
-		
-		Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
-		stage.setTitle("Save Route");
-		stage.setScene(scene);
-		stage.show();
+        if (CurrentStorage.getNewRouteEnd() != null) {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/SaveRouteScreen.fxml"));
+
+            Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+            stage.setTitle("Save Route");
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     /**
@@ -1439,7 +1435,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         map.addMouseEventHandler(UIEventType.click, (GMapMouseEvent event) -> {
             // Sets up an actionEvent where it will create a marker at the clicked location.
             LatLong latLong = event.getLatLong();
-            System.out.println(isStart);
             if (isStart) {
                 Location location = new Location(latLong.getLatitude(), latLong.getLongitude(), 4);
                 currentStorage.setNewRouteStart(location);
@@ -1453,6 +1448,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                 currentStorage.setNewRouteEnd(location);
                 Map.setEndMarker(latLong, map);
                 isStart = true;
+
+
             }
 
             if (Map.getStartLoc() != null && Map.getEndLoc() != null) {
@@ -1460,10 +1457,23 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                 Map.findRoute(Map.getStartLoc().getLatitude() + ", " + Map.getStartLoc().getLongitude(),
                         Map.getEndLoc().getLatitude() + ", " + Map.getEndLoc().getLongitude(),
                         mapView, directionsService, this, directionsPane, directionsRenderer);
+                latLongDistanceLabel.setText("Distance: " + distance(CurrentStorage.getNewRouteStart().getLatitude(), CurrentStorage.getNewRouteStart().getLongitude(),
+                        CurrentStorage.getNewRouteEnd().getLatitude(),
+                         CurrentStorage.getNewRouteEnd().getLongitude()) + "Km");
             }
         });
     }
 
+    private String distance(double lat1, double lon1, double lat2, double lon2) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2)) + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.toRadians(theta));
+        dist = Math.acos(dist);
+        dist = Math.toDegrees(dist);
+        dist = dist * 60 * 1.1515;
+
+        dist = dist * 1.609344;
+        return String.format("%.2f", dist);
+    }
 
     @Override
     public void directionsReceived(DirectionsResult results, DirectionStatus status){
