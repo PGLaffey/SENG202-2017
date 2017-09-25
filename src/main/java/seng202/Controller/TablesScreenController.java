@@ -197,9 +197,9 @@ public class TablesScreenController {
     void logoutPressed(ActionEvent event) throws IOException {
 		DataFetcher exporter = new DataFetcher();
 		try {
-			exporter.connectDb();
-			exporter.storeCurrentStorage();
-			exporter.closeConnection();
+			//exporter.connectDb();
+			//exporter.storeCurrentStorage();
+			//exporter.closeConnection();
 			FileManager.userSerialize(CurrentStorage.getUser(), "./src/main/resources/data_files/");
 			CurrentStorage.flush();
 			System.exit(0);
