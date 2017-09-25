@@ -141,6 +141,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     
     @FXML
     private Button saveRouteButton;
+
+    @FXML
+    private Label latLongDistanceLabel;
     
     @FXML
     private TextField searchText;
