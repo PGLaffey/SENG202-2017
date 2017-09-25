@@ -14,9 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import seng202.Model.CurrentStorage;
-import seng202.Model.User;
-import seng202.Model.Badge;
+import seng202.Model.*;
 import seng202.exceptions.BadgeLevelException;
 
 import static oracle.jrockit.jfr.events.Bits.intValue;
@@ -160,7 +158,17 @@ public class ProfileScreenController {
 	 * @throws IOException 
 	 */
 	public void logoutPressed() throws IOException {
-		System.exit(1);
+		DataFetcher exporter = new DataFetcher();
+		try {
+			exporter.connectDb();
+			exporter.storeCurrentStorage();
+			exporter.closeConnection();
+			FileManager.userSerialize(CurrentStorage.getUser(), "./src/main/resources/data_files/");
+			CurrentStorage.flush();
+			System.exit(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -198,8 +206,6 @@ public class ProfileScreenController {
 		stage.setTitle("Delete Account");
 		stage.setScene(scene);
 		stage.show();
-		
-		
 		Stage primaryStage = (Stage) accountButton.getScene().getWindow(); 
 		primaryStage.hide();
 	}
@@ -217,8 +223,6 @@ public class ProfileScreenController {
 		userDistBadge.updateBadge(intValue(user.getDistance()));
 		userTimeBadge.updateBadge(intValue(user.getHours()));
 		userRouteBadge.updateBadge(user.getRoutesCycled());
-
-
 
         distanceBadge.setImage(new Image(userDistBadge.getIcon().toString()));
         timeBadge.setImage(new Image(userTimeBadge.getIcon().toString()));

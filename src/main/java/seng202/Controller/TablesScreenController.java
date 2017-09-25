@@ -6,15 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import seng202.Model.CurrentStorage;
-import seng202.Model.Location;
-import seng202.Model.Poi;
-import seng202.Model.RawDataViewer;
-import seng202.Model.Retailer;
-import seng202.Model.Route;
-import seng202.Model.Toilet;
-import seng202.Model.User;
-import seng202.Model.Wifi;
+import seng202.Model.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -203,7 +195,17 @@ public class TablesScreenController {
      */
     @FXML
     void logoutPressed(ActionEvent event) throws IOException {
-		System.exit(1);
+		DataFetcher exporter = new DataFetcher();
+		try {
+			exporter.connectDb();
+			exporter.storeCurrentStorage();
+			exporter.closeConnection();
+			FileManager.userSerialize(CurrentStorage.getUser(), "./src/main/resources/data_files/");
+			CurrentStorage.flush();
+			System.exit(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
 
     /**
