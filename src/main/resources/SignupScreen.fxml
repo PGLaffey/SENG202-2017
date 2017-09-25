@@ -21,6 +21,7 @@
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="361.0" minWidth="10.0" prefWidth="227.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.0" minWidth="10.0" prefWidth="204.0" />
+      <ColumnConstraints />
   </columnConstraints>
   <rowConstraints>
       <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
@@ -84,13 +85,13 @@
             <Insets right="8.0" />
          </GridPane.margin>
       </DatePicker>
-      <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonPressed" style="-fx-background-color: #30126D, #B39EDC;" text="Back" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+      <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonPressed" prefWidth="80.0" style="-fx-background-color: #30126D, #B39EDC;" text="Back" GridPane.halignment="CENTER" GridPane.rowIndex="8">
          <font>
-            <Font name="System Bold" size="11.0" />
+            <Font name="System Bold" size="12.0" />
          </font></Button>
-      <Button fx:id="createButton" mnemonicParsing="false" onAction="#createBtnPressed" style="-fx-background-color: #30126D, #B39EDC;" text="Create" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+      <Button fx:id="createButton" mnemonicParsing="false" onAction="#createBtnPressed" prefWidth="80.0" style="-fx-background-color: #30126D, #B39EDC;" text="Create" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="8">
          <font>
-            <Font name="System Bold" size="11.0" />
+            <Font name="System Bold" size="12.0" />
          </font></Button>
       <Label fx:id="missingField" prefHeight="16.0" prefWidth="240.0" text="One or more fields were left blank" textAlignment="CENTER" textFill="RED" visible="false" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
       <Label fx:id="wrongPasswordLbl" text="Passwords do not match" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" />

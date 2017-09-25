@@ -19,12 +19,12 @@
 
 <GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="450.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,4;" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.SaveRouteScreenController">
   <children>
-    <Button id="signInButton" fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelButtonPressed" style="-fx-background-color: #30126D, #B39EDC;" text="Cancel" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+    <Button id="signInButton" fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelButtonPressed" prefWidth="80.0" style="-fx-background-color: #30126D, #B39EDC;" text="Cancel" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
       <GridPane.margin>
         <Insets left="20.0" />
       </GridPane.margin>
          <font>
-            <Font name="System Bold" size="11.0" />
+            <Font name="System Bold" size="12.0" />
          </font>
     </Button>
     <Label fx:id="routeNameLabel" text="Route name:" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
@@ -32,9 +32,9 @@
             <Font name="KacstOne Bold" size="13.0" />
          </font></Label>
     <TextField fx:id="routeNameText" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.valignment="TOP" />
-    <Button fx:id="saveButton" mnemonicParsing="false" onAction="#savePressed" prefHeight="22.0" prefWidth="70.0" style="-fx-background-color: #30126D, #B39EDC;" text="Save" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+    <Button fx:id="saveButton" mnemonicParsing="false" onAction="#savePressed" prefHeight="22.0" prefWidth="80.0" style="-fx-background-color: #30126D, #B39EDC;" text="Save" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
          <font>
-            <Font name="System Bold" size="11.0" />
+            <Font name="System Bold" size="12.0" />
          </font>
          <GridPane.margin>
             <Insets right="20.0" />
