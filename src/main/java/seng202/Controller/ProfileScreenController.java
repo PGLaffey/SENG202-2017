@@ -15,7 +15,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import seng202.Model.*;
-import seng202.exceptions.BadgeLevelException;
 
 import static oracle.jrockit.jfr.events.Bits.intValue;
 

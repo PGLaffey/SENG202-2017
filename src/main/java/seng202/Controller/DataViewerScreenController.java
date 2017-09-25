@@ -19,7 +19,6 @@ import seng202.Model.CurrentStorage;
 import seng202.Model.DataFetcher;
 import seng202.Model.FileManager;
 import seng202.Model.User;
-import seng202.exceptions.BadgeLevelException;
 import sun.util.resources.cldr.uk.CurrencyNames_uk;
 
 import static oracle.jrockit.jfr.events.Bits.intValue;
