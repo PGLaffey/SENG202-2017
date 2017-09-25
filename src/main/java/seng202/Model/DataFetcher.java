@@ -981,25 +981,5 @@ public class DataFetcher {
     		System.out.println(result.getString(1));
     	}
     }
-    
-    
-    //Purely for testing, will be removed later
-    public static void main(String[] argv) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-    	DataFetcher test = new DataFetcher();
-    	//test.connectDbTest();				//Tests the connection to the database
-    	test.connectDb();
 
-		FileManager.retailerRetriever(new File(seng202.Model.DataFetcher.class.getResource("/data_files/Lower_Manhattan_Retailers.csv").getFile()).toString());
-		for (Retailer newWifi : CurrentStorage.getRetailerArray()) {
-			test.addRetailer(newWifi);
-		}
-    	//test.loadLocation(testLoc1);		//Tests loading a valid location
-    	//Retailer testLoc2 = new Retailer("2 Brockhall Lane", "Testing" , "Testing More stuff", "tests");
-    	//CurrentStorage.addNewRetailer(testLoc2);
-    	//Route testRoute = new Route("fakeBike", testLoc1, testLoc2, "Test", "M");
-    	//CurrentStorage.addNewRoute(testRoute);
-    	//test.loadRoute(testRoute);		//Tests loading a valid route
-    	Location invalidLoc = new Location(25.1258469, 56.1658468, "NULL", 4);
-    	//test.loadLocation(invalidLoc);	//Tests loading a invalid location
-    }
 }
