@@ -466,13 +466,25 @@ public class MainScreenController implements MapComponentInitializedListener, Di
      */
 	@FXML
     void tablePressed(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) tableButton.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
-		
-		Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
-		primaryStage.setTitle("Table");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+
+	    try {
+            Stage primaryStage = (Stage) tableButton.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
+
+            Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
+            primaryStage.setTitle("Table");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e){
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/DataLoadingScreen.fxml"));
+
+            Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+            stage.setTitle("Still Loading");
+            stage.setScene(scene);
+            stage.show();
+        }
+
     }
     
 	/**
