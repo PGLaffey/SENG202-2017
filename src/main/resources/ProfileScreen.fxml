@@ -21,91 +21,87 @@
 <children>
   <SplitPane dividerPositions="0.10472279260780287" orientation="VERTICAL" prefHeight="489.0" prefWidth="827.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
     <items>
-      <AnchorPane maxHeight="49.0" minHeight="49.0" minWidth="0.0">
-        <children>
-          <GridPane layoutY="-1.0" prefHeight="50.0" prefWidth="850.0">
-            <children>
-              <Label alignment="CENTER" contentDisplay="LEFT" disable="false" focusTraversable="false" graphicTextGap="-50.0" prefHeight="47.0" prefWidth="183.0" textOverrun="ELLIPSIS" visible="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                      <Image url="@images/logo_1_retro.png" />
-                    </image>
-                  </ImageView>
-                </graphic>
-              </Label>
-              <Button fx:id="mapButton" mnemonicParsing="false" onAction="#mapPressed" prefHeight="50.0" prefWidth="160.0" style="-: ;" text="Map" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                <graphic>
-                  <ImageView fitHeight="45.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                      <Image url="@images/map.png" />
-                    </image>
-                  </ImageView>
-                </graphic>
-                           <font>
-                              <Font name="KacstOne" size="13.0" />
-                           </font>
-              </Button>
-              <Button id="statButtonq" fx:id="statButton" mnemonicParsing="false" onAction="#statPressed" prefHeight="50.0" prefWidth="160.0" text="Statistics" GridPane.columnIndex="3" GridPane.rowIndex="0">
-                <graphic>
-                  <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                      <Image url="@images/pie_chart.png" />
-                    </image>
-                  </ImageView>
-                </graphic>
-                           <font>
-                              <Font name="KacstOne" size="13.0" />
-                           </font>
-              </Button>
-              <Button fx:id="accountButton" mnemonicParsing="false" onAction="#accountPressed" prefHeight="49.0" prefWidth="202.0" style="-fx-background-color: #96C6D6;" text="Account" textFill="#30126d" GridPane.columnIndex="4" GridPane.rowIndex="0">
-                <graphic>
-                  <ImageView fitHeight="51.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                      <Image url="@images/account.png" />
-                    </image>
-                  </ImageView>
-                </graphic>
-                           <font>
-                              <Font name="KacstOne Bold" size="13.0" />
-                           </font>
-              </Button>
-              <Button fx:id="logoutButton" alignment="CENTER_LEFT" contentDisplay="CENTER" graphicTextGap="-100.0" mnemonicParsing="false" onAction="#logoutPressed" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="5" GridPane.rowIndex="0">
-                <graphic>
-                  <ImageView fitHeight="43.0" fitWidth="36.0" pickOnBounds="true">
-                    <image>
-                      <Image url="@images/logout.png" />
-                    </image>
-                  </ImageView>
-                </graphic>
-              </Button>
-              <Button id="statButtonq" fx:id="tableButton" mnemonicParsing="false" onAction="#tablePressed" prefHeight="50.0" prefWidth="160.0" text="Table" GridPane.columnIndex="2" GridPane.rowIndex="0">
-                <graphic>
-                  <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                      <Image url="@images/table.png" />
-                    </image>
-                  </ImageView>
-                </graphic>
-                           <font>
-                              <Font name="KacstOne" size="13.0" />
-                           </font>
-              </Button>
-            </children>
-            <columnConstraints>
-              <ColumnConstraints hgrow="SOMETIMES" maxWidth="216.0" minWidth="10.0" prefWidth="153.0" />
-              <ColumnConstraints hgrow="SOMETIMES" maxWidth="214.0" minWidth="10.0" prefWidth="153.0" />
-              <ColumnConstraints hgrow="SOMETIMES" maxWidth="279.0" minWidth="10.0" prefWidth="153.0" />
-              <ColumnConstraints hgrow="SOMETIMES" maxWidth="279.0" minWidth="10.0" prefWidth="153.0" />
-              <ColumnConstraints hgrow="SOMETIMES" maxWidth="229.0" minWidth="10.0" prefWidth="153.0" />
-              <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" prefWidth="50.0" />
-            </columnConstraints>
-            <rowConstraints>
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-          </GridPane>
-        </children>
-      </AnchorPane>
+    <GridPane layoutY="-1.0" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <Label alignment="CENTER" contentDisplay="LEFT" disable="false" focusTraversable="false" graphicTextGap="-50.0" prefHeight="47.0" prefWidth="183.0" textOverrun="ELLIPSIS" visible="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <graphic>
+            <ImageView fitHeight="50.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@images/logo_1_retro.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Label>
+        <Button fx:id="mapButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mapPressed" prefHeight="50.0" prefWidth="160.0" style="-: ;" text="Map" GridPane.columnIndex="1">
+          <graphic>
+            <ImageView fitHeight="45.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@images/map.png" />
+              </image>
+            </ImageView>
+          </graphic>
+                     <font>
+                        <Font name="KacstOne" size="13.0" />
+                     </font>
+        </Button>
+        <Button id="statButtonq" fx:id="statButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#statPressed" prefHeight="50.0" prefWidth="160.0" text="Statistics" GridPane.columnIndex="3" GridPane.rowIndex="0">
+          <graphic>
+            <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@images/pie_chart.png" />
+              </image>
+            </ImageView>
+          </graphic>
+                     <font>
+                        <Font name="KacstOne" size="13.0" />
+                     </font>
+        </Button>
+        <Button fx:id="accountButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#accountPressed" prefHeight="49.0" prefWidth="202.0" style="-fx-background-color: #96C6D6;" text="Account" textFill="#30126d" GridPane.columnIndex="4" GridPane.rowIndex="0">
+          <graphic>
+            <ImageView fitHeight="51.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@images/account.png" />
+              </image>
+            </ImageView>
+          </graphic>
+                     <font>
+                        <Font name="KacstOne Bold" size="13.0" />
+                     </font>
+        </Button>
+        <Button fx:id="logoutButton" alignment="CENTER_LEFT" contentDisplay="CENTER" graphicTextGap="-100.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#logoutPressed" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="5" GridPane.rowIndex="0">
+          <graphic>
+            <ImageView fitHeight="43.0" fitWidth="36.0" pickOnBounds="true">
+              <image>
+                <Image url="@images/logout.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="statButtonq" fx:id="tableButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#tablePressed" prefHeight="50.0" prefWidth="160.0" text="Table" GridPane.columnIndex="2" GridPane.rowIndex="0">
+          <graphic>
+            <ImageView fitHeight="52.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@images/table.png" />
+              </image>
+            </ImageView>
+          </graphic>
+                     <font>
+                        <Font name="KacstOne" size="13.0" />
+                     </font>
+        </Button>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="153.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="153.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="153.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="153.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="153.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="50.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="355.0" prefWidth="642.0" style="-fx-background-color: #D1D7F1;">
         <children>
           <GridPane prefHeight="433.0" prefWidth="825.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
