@@ -1,7 +1,5 @@
 package seng202.Model;
 
-//import seng202.exceptions.BadgeLevelException;
-//import seng202.exceptions.BadgeTypeException;
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -50,18 +48,8 @@ public class Badge implements Serializable{
      * @param description Description of badge
      * @param name Name of badge
      * @param icon filiName of badge image
-     * //@throws BadgeTypeException If badge type is not in approved list (types array)
-     * //@throws BadgeLevelException If Level is not in range 0<=level<=6
      */
     public Badge(String badgeType, int value, int level, String description, String name, String icon) {
-        /*
-        if (!(Arrays.asList(types).contains(badgeType))) {
-            throw new BadgeTypeException(badgeType);
-        }
-        if (level < 0 || level > 6) {
-            throw new BadgeLevelException(level, badgeType);
-        }
-         */
         this.badgeType = badgeType;
         this.value = value;
         this.level = level;
@@ -80,8 +68,6 @@ public class Badge implements Serializable{
      *  all other variables are formed using built-in algorithms
      * @param badgeType Type of badge
      * @param value Number of units user has earned towards badge
-     * //@throws BadgeLevelException If badge type is not in array types
-     * //@throws BadgeTypeException If level is not in range 0<=level<=6
      */
     public Badge(String badgeType, int value) {
         this(badgeType, value, 0, "", "", null);
@@ -93,8 +79,6 @@ public class Badge implements Serializable{
      *  For constructing badge from scratch using only badge type
      *  all other variables are formed using built-in algorithms based on value being 0
      * @param badgeType Type of badge
-     * //@throws BadgeLevelException
-     * //@throws BadgeTypeException
      */
     public Badge(String badgeType) {
         this(badgeType, 0, 0, "", "",  null);
@@ -164,7 +148,6 @@ public class Badge implements Serializable{
     /**
      * Getter for a string representation ofremaining
      * @return strRemaining A string representation of remaining including units
-     * //@throws BadgeLevelException If level is not in range 0<=level<=6
      */
     public String getStrRemaining() {
         String strRemaining;
@@ -201,12 +184,8 @@ public class Badge implements Serializable{
     /**
      * Setter for badgeType
      * @param badgeType The type of badge
-     * //@throws BadgeTypeException If badgeType is not in array types
      */
     public void setBadgeType(String badgeType) {
-        //if (!(Arrays.asList(types).contains(badgeType))) {
-        //    throw new BadgeTypeException(badgeType);
-        //}
         this.badgeType = badgeType;
     }
 
@@ -219,14 +198,8 @@ public class Badge implements Serializable{
     /**
      * Setter for level
      * @param level The level of badge the user as attained
-     * //@throws BadgeLevelException If level is not in range 0<=level<=6
      */
     public void setLevel(int level) {
-        /*
-        if (level < 0 || level > 6) {
-            throw new BadgeLevelException(level, badgeType);
-        }
-        */
         this.level = level;
     }
 
@@ -256,8 +229,7 @@ public class Badge implements Serializable{
 
     /**
      * Updater for remaining
-     *      Calculates remaining based on value and levelCap
-     * //@throws BadgeLevelException
+     * Calculates remaining based on value and levelCap
      */
     public void updateRemaining() {
         int remaining = (getLevelCap() - value);
@@ -302,8 +274,7 @@ public class Badge implements Serializable{
 
     /**
      * Updater for description
-     *      Writes a description of the badge using level, badgeType, and remaining
-     * //@throws BadgeLevelException If badge level isn't in range 0<=level<=6
+     * Writes a description of the badge using level, badgeType, and remaining
      */
     public void updateDescription() {
         int type = getBadgeTypeIndex();
@@ -335,10 +306,9 @@ public class Badge implements Serializable{
 
     /**
      * Core updater for Badge class
-     *      Calls all updater methods
-     *      Also sets value given a new value
+     * Calls all updater methods
+     * Also sets value given a new value
      * @param value The number of units the user has gained towards the badge
-     * //@throws BadgeLevelException If level is not in range 0<=level<=6
      */
     public void updateBadge(int value) {
         this.setValue(value);
@@ -352,9 +322,8 @@ public class Badge implements Serializable{
 
     /**
      * Overloaded core updater for badge class
-     *      Calls all updater methods
-     *      Uses existing value
-     * //@throws BadgeLevelException If level not in range 0<=level<=6
+     * Calls all updater methods
+     * Uses existing value
      */
     public void updateBadge() {
         this.updateBadge(this.getValue());
