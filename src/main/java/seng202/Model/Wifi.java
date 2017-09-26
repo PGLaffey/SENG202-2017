@@ -88,6 +88,10 @@ public class Wifi extends Location {
         return true;
     }
 
+    /**
+     * Overrides the toString method for a wifi object
+     * @return A string representation of a wifi object
+     */
     @Override
     public String toString() {
         return "SSID: " + getName() + "\nLocation: (" + getLatitude() + ", " + getLongitude() + ")\nProvider: "

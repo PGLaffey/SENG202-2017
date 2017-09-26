@@ -14,6 +14,11 @@ import seng202.Model.FileManager;
 
 public class Main extends Application {
 
+	/**
+	 * Begins the application and loads the GUI
+	 * @param primaryStage
+	 * @throws Exception
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception{
 		Parent root = FXMLLoader.load(Main.class.getResource("/LoginScreen.fxml"));
@@ -22,6 +27,9 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 
+	/**
+	 * Overrides the method for when the GUI is closed. Loads newly entered data into database, serializes the user and flushes CurrentStorage
+	 */
 	@Override
 	public void stop() {
 		DataFetcher exporter = new DataFetcher();

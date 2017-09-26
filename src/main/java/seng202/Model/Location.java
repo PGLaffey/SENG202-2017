@@ -187,6 +187,11 @@ public class Location {
     }
 
 
+    /**
+     * Overrides the equals methods for comparing when two location objects are equal
+     * @param other
+     * @return
+     */
     @Override
     public boolean equals(Object other) {
         Location otherLocation = (Location) other;

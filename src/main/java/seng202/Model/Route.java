@@ -58,6 +58,12 @@ public class Route {
         via3 = null;
     }
 
+    /**
+     * Overloaded contructor for the route class, used when creating a route in the GUI
+     * @param start The start location of the route
+     * @param end The end location of the route
+     * @param name The name of route
+     */
     public Route(Location start, Location end, String name) {
         this.name = name;
         this.start = start;
