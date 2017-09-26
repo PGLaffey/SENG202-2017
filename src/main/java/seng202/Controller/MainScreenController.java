@@ -1370,8 +1370,11 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                             progressBar.setVisible(true);
                             updateProgress(0, 100);
                             //progressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
-                            updateMessage("Retrieving data...");
+                            updateMessage("Retrieving Locations...");
                             data.loadAllLocations();
+                            updateProgress(50, 100);
+                            updateMessage("Retrieving Routes...");
+                            data.loadAllRoutes();
                             updateProgress(100, 100);
                             updateMessage("Done!");
 

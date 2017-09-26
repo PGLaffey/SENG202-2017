@@ -21,6 +21,9 @@ import java.util.ArrayList;
 
 import static java.lang.Math.toRadians;
 
+/**
+ * Class to handle all the GoogleMapAPI services.
+ */
 public class Map {
     private Route currentRoute;
     private Location currentLocation;

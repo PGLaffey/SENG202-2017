@@ -1,5 +1,6 @@
 package seng202.Model;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -289,7 +290,7 @@ public class DataFetcher {
 			int endID;
 			boolean secret = false;
 			String name;
-			int bikeID;
+			String bikeID;
 			String gender;
 			User owner;
 			
@@ -310,9 +311,12 @@ public class DataFetcher {
 
 				locationOutput = qryLocation.executeQuery();
 
+
 				locationOutput.next();
 	    		start = loadLocation(locationOutput);
 
+				qryLocation = connect.prepareStatement("SELECT * FROM tblLocations" +
+						" WHERE LocationID = ?");
 	    		qryLocation.setInt(1, endID);
 				locationOutput = qryLocation.executeQuery();
 				locationOutput.next();
@@ -320,14 +324,18 @@ public class DataFetcher {
 				
 				secret = output.getBoolean(7);
 				name = output.getString(9);
-				bikeID = output.getInt(10);
+				bikeID = output.getString(10);
 				if (output.getBoolean(11)) {
 					gender = "Male";
 				}
 				else {
 					gender = "Female";
 				}
+
+				route = new Route(bikeID, start, end, name, gender);
+				CurrentStorage.addRoute(route);
 			}
+
 			
     	}
     	catch (SQLException ex) {
@@ -639,23 +647,29 @@ public class DataFetcher {
     	int startID = findLocation(start);
     	int endID = findLocation(end);
 
+    	System.out.println(start.getName() + " " + startID);
+    	System.out.println(end.getName() + " " + endID);
+
     	if (startID == 0) {
     		addLocation(start);
     		startID = findLocation(start);
     	}
+
     	if (endID == 0) {
     		addLocation(end);
     		endID = findLocation(end);
     	}
 
     	String stmt = "INSERT INTO tblRoutes "
-				+ "(StartID, EndID, Name) VALUES "
-				+ "(?, ?, ?)";
+				+ "(StartID, EndID, Name, BikeID, Gender) VALUES "
+				+ "(?, ?, ?, ?, ?)";
     	try {
 			preparedStatement = connect.prepareStatement(stmt);
 			preparedStatement.setInt(1, startID);
 			preparedStatement.setInt(2, endID);
 			preparedStatement.setString(3, name);
+			preparedStatement.setString(4, route.getBikeID());
+			preparedStatement.setString(5, route.getGender());
 
 			runUpdate(preparedStatement);
 		} catch (SQLException sqlException) {
@@ -675,14 +689,12 @@ public class DataFetcher {
     	double[] coords = location.getCoords();
     	int type = location.getLocationType();
     	try {
-    		preparedStatement = connect.prepareStatement("SELECT LocationID FROM tblLocations "
-					+ "WHERE Latitude = ? AND "
-					+ "Longitude = ? AND "
-					+ "Type = ? AND Name = ?");
+    		preparedStatement = connect.prepareStatement("SELECT LocationID FROM tblLocations WHERE Latitude = ? AND Longitude = ? AND Type = ? AND Name = ?");
     		preparedStatement.setDouble(1, coords[0]);
     		preparedStatement.setDouble(2, coords[1]);
     		preparedStatement.setInt(3, type);
     		preparedStatement.setString(4, location.getName());
+    		System.out.println(preparedStatement);
     		locationID = runQuery(preparedStatement).get(0).get(0);
     	} catch (SQLException sqlException) {
     		System.out.println(sqlException.getMessage());
@@ -905,28 +917,29 @@ public class DataFetcher {
 			} catch (SQLException sqlException) {
     			System.out.println(sqlException.getMessage());
 			}
-    	}
+    	} else {
 
-		String stmt = "INSERT INTO tblLocations "
-				+ "(Latitude, Longitude, Name, User, Public, Type, " + typeName + "ID, Zip, Borough, Address) VALUES "
-				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String stmt = "INSERT INTO tblLocations "
+					+ "(Latitude, Longitude, Name, User, Public, Type, " + typeName + "ID, Zip, Borough, Address) VALUES "
+					+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-		try {
-			preparedStatement = connect.prepareStatement(stmt);
-			preparedStatement.setDouble(1, latitude);
-			preparedStatement.setDouble(2, longitude);
-			preparedStatement.setString(3, name);
-			preparedStatement.setString(4, owner);
-			preparedStatement.setInt(5, local);
-			preparedStatement.setInt(6, type);
-			preparedStatement.setString(7, typeID);
-			preparedStatement.setString(8, zip);
-			preparedStatement.setString(9, borough);
-			preparedStatement.setString(10, address);
+			try {
+				preparedStatement = connect.prepareStatement(stmt);
+				preparedStatement.setDouble(1, latitude);
+				preparedStatement.setDouble(2, longitude);
+				preparedStatement.setString(3, name);
+				preparedStatement.setString(4, owner);
+				preparedStatement.setInt(5, local);
+				preparedStatement.setInt(6, type);
+				preparedStatement.setString(7, typeID);
+				preparedStatement.setString(8, zip);
+				preparedStatement.setString(9, borough);
+				preparedStatement.setString(10, address);
 
-			runUpdate(preparedStatement);
-		} catch (SQLException sqlException) {
-			System.out.println(sqlException.getMessage());
+				runUpdate(preparedStatement);
+			} catch (SQLException sqlException) {
+				System.out.println(sqlException.getMessage());
+			}
 		}
     }
     
@@ -981,5 +994,19 @@ public class DataFetcher {
     		System.out.println(result.getString(1));
     	}
     }
+
+    public static void main(String[] argv) {
+    	DataFetcher doot = new DataFetcher();
+    	try {
+			doot.connectDb();
+			FileManager.routeRetriever(new File(seng202.Model.DataFetcher.class.getResource("/data_files/").getFile()).toString() + "/2014-01 - Citi Bike trip data.csv");
+			for (Route route : CurrentStorage.getRouteArray()) {
+				doot.addRoute(route);
+			}
+		} catch (Exception e) {
+    		e.printStackTrace();
+		}
+
+	}
 
 }

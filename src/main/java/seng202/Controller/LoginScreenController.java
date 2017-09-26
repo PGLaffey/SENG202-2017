@@ -54,8 +54,9 @@ public class LoginScreenController {
 					retailerImporter.start();*/
 			/*		Thread wifiImporter = new Thread(new WifiImporterThread(new File(getClass().getResource("/data_files/").getFile()).toString() + "/NYC_Free_Public_WiFi_03292017.csv"));
 					wifiImporter.start();*/
-					Thread routeImporter = new Thread(new RouteImporterThread(new File(/*getClass().getResource("/data_files/").getFile()).toString() + */"/data_files/2014-01 - Citi Bike trip data.csv").toString()));
-					routeImporter.start();
+			//new File(getClass().getResource("/data_files/").getFile()).toString() +"/2014-01 - Citi Bike trip data.csv"
+					//Thread routeImporter = new Thread(new RouteImporterThread(new File(getClass().getResource("/data_files/2014-01 - Citi Bike trip data.csv").getPath().replaceAll("%20", " ")).getPath()));
+					//routeImporter.start();
 					//Thread routeImporter(new File(getClass().getResource("/data_files/").getFile()).toString() + "/2014-02 - Citi Bike trip data.csv"));
 					ArrayList<String> userInfo;
 					userInfo = data.fetchUserInfo(usernameText.getText());
