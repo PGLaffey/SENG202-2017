@@ -38,6 +38,7 @@ public class TablesScreenController {
 
     @FXML
     private Button accountButton;
+    
 
     @FXML
     private TableColumn<Location, Double> allLocLatCol;
@@ -119,6 +120,9 @@ public class TablesScreenController {
 
     @FXML
     private Button searchButton;
+    
+    @FXML
+    private Button exportButton;
 
     @FXML
     private Button statButton;
@@ -170,6 +174,9 @@ public class TablesScreenController {
 
     @FXML
 	private Label noDataLabel;
+    
+    @FXML
+    private Label nothingLabel;
 
 
     /**
@@ -507,14 +514,20 @@ public class TablesScreenController {
 		stage.setScene(scene);
 		stage.show();
     }
-
-
+	
+	void exportPressed(ActionEvent event)  {
+		if (noDataLabel.isVisible()) {
+			nothingLabel.setVisible(true);
+		}
+	}
 
     /**
      * Initialises all the nodes. Also fills all columns in each tables with the correct objects from current storage.
      */
     @FXML
     void initialize() {
+    	
+    	noDataLabel.setVisible(true);
 
     	// Random objects for testing
 
