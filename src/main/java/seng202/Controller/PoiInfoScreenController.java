@@ -47,6 +47,9 @@ public class PoiInfoScreenController {
     @FXML
     private Button okButton;
     
+    @FXML
+    private Button updateButton;
+    
     private Poi poi;
 
 
@@ -59,7 +62,17 @@ public class PoiInfoScreenController {
     	Stage stage = (Stage) okButton.getScene().getWindow(); 
     	stage.hide();
     }
-
+    
+    /**
+     * Method for when the update button is pressed, displays screen for updating selected poi
+     * @param event
+     */
+    @FXML
+    void updatePressed(ActionEvent event) {
+    	Stage stage = (Stage) updateButton.getScene().getWindow(); 
+    	stage.hide();
+    }
+    
     @FXML
     void initialize() {
     	poi = CurrentStorage.getPoi();

@@ -36,6 +36,9 @@ public class ToiletInfoScreenController {
     private Button okButton;
 
     @FXML
+    private Button updateButton;
+
+    @FXML
     private Label unisexLabel;
 
     @FXML
@@ -57,6 +60,16 @@ public class ToiletInfoScreenController {
     @FXML
     void okPressed(ActionEvent event) {
     	Stage stage = (Stage) okButton.getScene().getWindow(); 
+    	stage.hide();
+    }
+    
+    /**
+     * Method when the update button is pressed, displays screen to update the selected toilet
+     * @param event
+     */
+    @FXML
+    void updatePressed(ActionEvent event) {
+    	Stage stage = (Stage) updateButton.getScene().getWindow(); 
     	stage.hide();
     }
 

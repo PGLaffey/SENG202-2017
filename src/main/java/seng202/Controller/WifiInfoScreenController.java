@@ -33,6 +33,9 @@ public class WifiInfoScreenController {
 
     @FXML
     private Button okButton;
+    
+    @FXML
+    private Button updateButton;
 
     @FXML
     private Label providerLabel;
@@ -59,6 +62,16 @@ public class WifiInfoScreenController {
     @FXML
     void okPressed(ActionEvent event) {
     	Stage stage = (Stage) okButton.getScene().getWindow(); 
+    	stage.hide();
+    }
+    
+    /**
+     * Method when the update button is pressed, displays screen to update selected wifi point
+     * @param event
+     */
+    @FXML
+    void updatePressed(ActionEvent event) {
+    	Stage stage = (Stage) updateButton.getScene().getWindow(); 
     	stage.hide();
     }
 

@@ -45,6 +45,9 @@ public class RouteInfoScreenController {
 
     @FXML
     private Button okButton;
+    
+    @FXML
+    private Button updateButton;
 
     @FXML
     private Button completedRouteButton;
@@ -71,6 +74,16 @@ public class RouteInfoScreenController {
     @FXML
     void okPressed(ActionEvent event) {
     	Stage stage = (Stage) okButton.getScene().getWindow(); 
+    	stage.hide();
+    }
+    
+    /**
+     * Method when the update button is pressed, displays screen to change the selected route
+     * @param event
+     */
+    @FXML
+    void updatePressed(ActionEvent event) {
+    	Stage stage = (Stage) updateButton.getScene().getWindow(); 
     	stage.hide();
     }
 
