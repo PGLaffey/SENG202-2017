@@ -121,6 +121,11 @@ public class RouteInfoScreenController {
     }
 
     @FXML
+    void showRouteBtnPressed(ActionEvent event) {
+
+    }
+
+    @FXML
     void initialize() {
     	route = CurrentStorage.getRoute();
     	bikeidLabel.setText("Bike ID: "+ route.getBikeID());

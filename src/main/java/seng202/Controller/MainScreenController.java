@@ -36,11 +36,10 @@ import java.util.ResourceBundle;
 //import java.awt.Color;
 
 
-public class MainScreenController implements MapComponentInitializedListener, DirectionsServiceCallback{
+public class MainScreenController implements MapComponentInitializedListener, DirectionsServiceCallback {
 
     private DirectionsService directionsService;
     private DirectionsPane directionsPane;
-    private InfoWindow infoWindow;
 
     private static DataFetcher data = new DataFetcher();
 
@@ -571,7 +570,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     void showRoutePressed(ActionEvent event) {
         for (Route route : CurrentStorage.getRouteArray()) {
-            placeMarkerOnMap(route);
+            DirectionsRequest request = new DirectionsRequest(new LatLong(route.getStart().getLatitude(),
+                    route.getStart().getLongitude()),
+                    new LatLong(route.getEnd().getLatitude(), route.getEnd().getLongitude()), TravelModes.DRIVING);
+            directionsService.getRoute(request, this, new DirectionsRenderer(true, mapView.getMap(), directionsPane));
         }
     }
 
@@ -750,13 +752,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     void retailerIconPressed(ActionEvent event) {
         for (Retailer retailer : CurrentStorage.getRetailerArray()) {
-            if (!retailer.hasNoMarker() && retailer.getMarker() != null) {
-                retailer.getMarker().setVisible(!Map.getRetailerVisible());
-                map.addMarker(retailer.getMarker());
+            if (retailer.getCoord() != null) {
+                retailer.getCoord().getMarker().setVisible(!Map.getRetailerVisible());
             } else {
-                Marker newMarker = Map.findRetailers(retailer);
-                locationMarkers.add(newMarker);
-                newMarker.setVisible(!Map.getRetailerVisible());
+                Map.findRetailers(retailer, map);
             }
         }
         Map.setRetailerVisible(!Map.getRetailerVisible());
@@ -1420,37 +1419,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     }
 
-    /**
-     * Places the wifi marker on the map
-     * @param wifi wifi object
-     */
-    public void placeCircleOnMap(Wifi wifi) {
-        Map.findWifi(wifi, map);
-
-    }
-
-    /**
-     * Places a marker for the location on the map
-     * @param loc location object
-     */
-    public void placeMarkerOnMap(Location loc) {
-        Map.findLocation(loc.getAddress(), map, geocodingService);
-    }
-
-    /**
-     * Places the retailer marker on the map
-     * @param retailer retailer object
-     */
-    public void placeRetailerOnMap(Retailer retailer) {Map.findRetailers(retailer);}
-
-    /**
-     * Places a route marker on map
-     * @param route
-     */
-    public void placeMarkerOnMap(Route route) {
-        Map.findRouteMarker(route, map);
-    }
-
     @Override
     public void mapInitialized() {
 
@@ -1533,7 +1501,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             } else if (loc.getLocationType() == 1) {
                 Map.findPoi((Poi) loc, map);
             } else if (loc.getLocationType() == 2) {
-                map.addMarker(Map.findRetailers((Retailer) loc));
+                Map.findRetailers((Retailer) loc, map);
             } else if (loc.getLocationType() == 3) {
                 Map.findWifi((Wifi) loc, map);
             }

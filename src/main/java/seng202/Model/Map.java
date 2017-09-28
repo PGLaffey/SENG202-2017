@@ -312,6 +312,12 @@ public class Map {
 
     /**
      * Overloaded method to find a route given two LatLongs
+     * @param startLoc - Start location in a LatLong object
+     * @param endLoc - End location in a LatLong object
+     * @param mapView - GoogleMapView object from the GMapsFX wrapper classes
+     * @param service - DirectionsService object from the GMapsFX wrapper classes
+     * @param callback - A DirectionsServiceCallback item to return the results to
+     * @param pane - A DirectionsPane object from the GMapsFX wrapper classes
      */
     public static void findRoute(LatLong startLoc, LatLong endLoc, GoogleMapView mapView, DirectionsService service,
                                  DirectionsServiceCallback callback, DirectionsPane pane) {
@@ -327,7 +333,7 @@ public class Map {
      * @param callback - The DirectionsServiceCallback to return the results to.
      * @param pane - The directionsPane to use in the DirectionsRenderer.
      */
-    public void findRoute(Route route, GoogleMapView mapView,
+    public static void findRoute(Route route, GoogleMapView mapView,
                           DirectionsService service, DirectionsServiceCallback callback, DirectionsPane pane) {
 
         DirectionsRequest request = new DirectionsRequest(new LatLong(route.getStart().getLatitude(), route.getStart().getLongitude()),
@@ -342,7 +348,6 @@ public class Map {
      * @return the location of the pointer on the map
      */
     public static void findWifi(Wifi wifi, GoogleMap map) {
-        System.out.println("WEEWOO");
         //Creates a new circle and places it on a map.
         CircleOptions circleOptns = new CircleOptions()
                 .center(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
@@ -362,44 +367,39 @@ public class Map {
      * Sets markers for the retailers on the map
      * @param retailer retailer object to be used
      */
-    public static Marker findRetailers(Retailer retailer) {
+    public static void findRetailers(Retailer retailer, GoogleMap map) {
 
         // Loops through a list of known addresses. This is to reduce the amount of requests that are made.
         if (retailer.getLatitude() == -91 || retailer.getLongitude() == -181) {
             for (Coord coord : CurrentStorage.getCoords()) {
                 //TODO: check if the address of the new retailer has already been found.
                 if (retailer.getAddress().equalsIgnoreCase(coord.getAddress())) {
-                    if (coord.hasMarker()) {
-                        retailer.setNoMarker(true);
-                        retailer.setCoord(coord);
-                        break;
-                    }
+                    retailer.setCoord(coord);
                 }
             }
         }
-        //Obtain the position for the marker and convert into the format required.
-        LatLong latLong = new LatLong(retailer.getLatitude(), retailer.getLongitude());
 
-        // Set up the marker options
-        MarkerOptions markerOptns = new MarkerOptions()
-                .animation(Animation.DROP)
-                .position(latLong)
-                .title(retailer.toString())
-                .visible(retailerVisible) // sets it to false and inverts it.
-                .icon("http://maps.google.com/mapfiles/kml/pal3/icon26.png"); //Obtains the correct image for the marker.
-        retailer.setMarker(new Marker(markerOptns));
+        if (retailer.getCoord() == null) {
+            //Obtain the position for the marker and convert into the format required.
+            LatLong latLong = new LatLong(retailer.getLatitude(), retailer.getLongitude());
 
-        retailer.getMarker().setVisible(!retailerVisible);
+            // Set up the marker options
+            MarkerOptions markerOptns = new MarkerOptions()
+                    .animation(Animation.DROP)
+                    .position(latLong)
+                    .title(retailer.toString())
+                    .visible(retailerVisible) // sets it to false and inverts it.
+                    .icon("http://maps.google.com/mapfiles/kml/pal3/icon26.png"); //Obtains the correct image for the marker.
+            retailer.getCoord().setMarker(new Marker(markerOptns));
 
-        // Sets the corresponding coord so that it has a marker.
-        for (Coord coord : CurrentStorage.getCoords()) {
-            if (retailer.getAddress().equalsIgnoreCase(coord.getAddress())) {
-                retailer.setCoord(coord);
-                coord.setHasMarker(true);
+            retailer.getCoord().getMarker().setVisible(!retailerVisible);
+            map.addMarker(retailer.getCoord().getMarker());
+        } else {
+            if (retailer.getCoord().getMarker().getVisible() == retailerVisible) {
+                retailer.getCoord().getMarker().setVisible(!retailerVisible);
             }
         }
 
-        return retailer.getMarker();
     }
 
     /**

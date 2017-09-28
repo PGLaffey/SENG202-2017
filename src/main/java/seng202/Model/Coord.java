@@ -1,5 +1,7 @@
 package seng202.Model;
 
+import com.lynden.gmapsfx.javascript.object.Marker;
+
 /**
  * Class to store known coordinates of addresses.
  * Created by Eiran Ling on 21/09/17.
@@ -8,7 +10,7 @@ public class Coord {
     private String address;
     private double lat;
     private double lng;
-    private boolean hasMarker = false;
+    private Marker locMark;
 
     public Coord(String address, double lattitude, double longitude) {
         this.address = address;
@@ -40,16 +42,16 @@ public class Coord {
     /**
      * @return whether the Coord has a marker
      */
-    public boolean hasMarker() {
-        return hasMarker;
+    public Marker getMarker() {
+        return locMark;
     }
 
     /**
      * Sets whether the coord has a marker
-     * @param value boolean value for whether the marker has been set
+     * @param marker Marker to set the locMark
      */
-    public void setHasMarker(boolean value) {
-        hasMarker = value;
+    public void setMarker(Marker marker) {
+        locMark = marker;
     }
 
     /**
