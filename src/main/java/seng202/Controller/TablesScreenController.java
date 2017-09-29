@@ -518,6 +518,29 @@ public class TablesScreenController {
 	void exportPressed(ActionEvent event)  {
 		if (noDataLabel.isVisible()) {
 			nothingLabel.setVisible(true);
+/*		} else if (allLocationsTable.isVisible()) { TODO: At the moment can't edit as they're locations so wont have all the data (e.g. cost for poi)
+			nothingLabel.setVisible(false);
+			ArrayList<Location> locData = (ArrayList<Location>) allLocationsTable.getItems();*/
+		} else if (poiTable.isVisible()) {
+			nothingLabel.setVisible(false);
+			ArrayList<Poi> poiData = (ArrayList<Poi>) poiTable.getItems();
+			//FileManager.poiWriter(filename, poiData);
+		} else if (retailersTable.isVisible()) {
+			nothingLabel.setVisible(false);
+			ArrayList<Retailer> retData = (ArrayList<Retailer>) retailersTable.getItems();
+			//FileManager.retailerWriter(filename, retData);
+		} else if (wifiTable.isVisible()) {
+			nothingLabel.setVisible(false);
+			ArrayList<Wifi> wifiData = (ArrayList<Wifi>) wifiTable.getItems();
+			//FileManager.wifiWriter(filename, wifiData);
+		} else if (toiletsTable.isVisible()) {
+			nothingLabel.setVisible(false);
+			ArrayList<Toilet> toiletData = (ArrayList<Toilet>) toiletsTable.getItems();
+			//FileManager.toiletWriter(filename, toiletData);
+		} else if (routesTable.isVisible()) {
+			nothingLabel.setVisible(false);
+			ArrayList<Route> routeData = (ArrayList<Route>) routesTable.getItems();
+			//FileManager.routeWriter(filename, routeData);
 		}
 	}
 
