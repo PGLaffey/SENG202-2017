@@ -438,8 +438,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     private Label progressBarLabel;
 
-    private static int count;
-
     private DirectionsRenderer directionsRenderer;
 
 
@@ -751,9 +749,11 @@ public class MainScreenController implements MapComponentInitializedListener, Di
      */
     @FXML
     void retailerIconPressed(ActionEvent event) {
+        map.clearMarkers();
+        directionsRenderer.clearDirections();
         for (Retailer retailer : CurrentStorage.getRetailerArray()) {
             if (retailer.getCoord() != null) {
-                retailer.getCoord().getMarker().setVisible(!Map.getRetailerVisible());
+                map.addMarker(retailer.getCoord().getMarker());
             } else {
                 Map.findRetailers(retailer, map);
             }
@@ -796,27 +796,15 @@ public class MainScreenController implements MapComponentInitializedListener, Di
      */
     @FXML
     void wifiIconPressed(ActionEvent event) {
-        Service<Void> wifiLoaderService = new Service<Void>() {
-            @Override
-            protected Task<Void> createTask() {
-                return new Task<Void>() {
-                    @Override
-                    protected Void call() throws Exception {
-                        for (Wifi wifi : CurrentStorage.getWifiArray()) {
-                            if (wifi.getCircle() == null) {
-                                Map.findWifi(wifi, map);
-                            } else {
-                                wifi.getCircle().setVisible(!wifi.getCircle().getVisible());
-                            }
-                        }
-                        return null;
-                    }
-                };
+        map.clearMarkers();
+        directionsRenderer.clearDirections();
+        for (Wifi wifi : CurrentStorage.getWifiArray()) {
+            if (wifi.getCircle() == null) {
+                Map.findWifi(wifi, map);
+            } else {
+                wifi.getCircle().setVisible(!wifi.getCircle().getVisible());
             }
-        };
-
-        wifiLoaderService.start();
-
+        }
     }
 
     /**
@@ -826,7 +814,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     public void searchTextAction(ActionEvent event) {
         //Obtains a geocode location around latLong
-        map.clearMarkers();
+
+        directionsRenderer.clearDirections();
         Map.findLocation(address.get(), map, geocodingService);
     }
 
@@ -1483,6 +1472,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         dist = dist * 1.609344;
         return String.format("%.2f", dist);
     }
+
 
     @Override
     public void directionsReceived(DirectionsResult results, DirectionStatus status){

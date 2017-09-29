@@ -373,8 +373,11 @@ public class Map {
         if (retailer.getLatitude() == -91 || retailer.getLongitude() == -181) {
             for (Coord coord : CurrentStorage.getCoords()) {
                 //TODO: check if the address of the new retailer has already been found.
-                if (retailer.getAddress().equalsIgnoreCase(coord.getAddress())) {
+                if (retailer.getAddress().equalsIgnoreCase(coord.getAddress()) ||
+                        retailer.getAddress().toLowerCase().contains(coord.getAddress().toLowerCase()) ||
+                        coord.getAddress().toLowerCase().contains(retailer.getAddress().toLowerCase())) {
                     retailer.setCoord(coord);
+                    coord.getMarker().setTitle(coord.getMarker().getTitle() + "<br>" + retailer.getName());
                 }
             }
         }
@@ -382,12 +385,14 @@ public class Map {
         if (retailer.getCoord() == null) {
             //Obtain the position for the marker and convert into the format required.
             LatLong latLong = new LatLong(retailer.getLatitude(), retailer.getLongitude());
+            Coord newCoord = new Coord(retailer.getAddress(), retailer.getLatitude(), retailer.getLongitude());
+            retailer.setCoord(newCoord);
 
             // Set up the marker options
             MarkerOptions markerOptns = new MarkerOptions()
                     .animation(Animation.DROP)
                     .position(latLong)
-                    .title(retailer.toString())
+                    .title(retailer.getName())
                     .visible(retailerVisible) // sets it to false and inverts it.
                     .icon("http://maps.google.com/mapfiles/kml/pal3/icon26.png"); //Obtains the correct image for the marker.
             retailer.getCoord().setMarker(new Marker(markerOptns));

@@ -59,7 +59,9 @@ public class Coord {
      * @return boolean for whether the coordinates are equal
      */
     public boolean equals(Coord c2) {
-        if (address.contains(c2.getAddress()) || c2.getAddress().contains(address) || address.equalsIgnoreCase(c2.getAddress())) {
+        if (address.toLowerCase().contains(c2.getAddress().toLowerCase())
+                || c2.getAddress().toLowerCase().contains(address.toLowerCase())
+                || address.equalsIgnoreCase(c2.getAddress())) {
             return true;
         } else {
             return false;
