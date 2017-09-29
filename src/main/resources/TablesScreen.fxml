@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
 <?import java.lang.*?>
-<?import javafx.collections.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
 <?import java.lang.String?>
+<?import javafx.collections.*?>
 <?import javafx.collections.FXCollections?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -17,38 +13,36 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.TablesScreenController">
-<children>
-  <SplitPane dividerPositions="0.1026694045174538" orientation="VERTICAL" prefHeight="500.0" prefWidth="850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-    <items>
-      <AnchorPane depthTest="DISABLE" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="450.0" prefHeight="50.0" prefWidth="850.0" SplitPane.resizableWithParent="false">
-        <children>
-          <GridPane depthTest="DISABLE" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="450.0" prefHeight="50.0" prefWidth="850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-            <ImageView fitHeight="50.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
-              <image>
-                <Image url="@images/logo_1_retro.png" />
-              </image>
-            </ImageView>
-                        <GridPane depthTest="DISABLE" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="240.0" prefHeight="50.0" prefWidth="640.0" GridPane.columnIndex="1">
-                           <columnConstraints>
-                              <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="60.0" percentWidth="25.0" prefWidth="160.0" />
-                              <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="60.0" percentWidth="25.0" prefWidth="160.0" />
-                              <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="60.0" percentWidth="25.0" prefWidth="160.0" />
-                              <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="60.0" percentWidth="25.0" prefWidth="160.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.Controller.TablesScreenController">
+  <children>
+    <SplitPane dividerPositions="0.10642570281124498" orientation="VERTICAL" prefHeight="500.0" prefWidth="850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <items>
+        <AnchorPane depthTest="DISABLE" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="450.0" prefHeight="50.0" prefWidth="850.0" SplitPane.resizableWithParent="false">
+          <children>
+            <GridPane depthTest="DISABLE" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="450.0" prefHeight="50.0" prefWidth="850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <children>
+                <ImageView fitHeight="50.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                  <image>
+                    <Image url="@images/logo_1_retro.png" />
+                  </image>
+                </ImageView>
+                <GridPane depthTest="DISABLE" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="240.0" prefHeight="50.0" prefWidth="640.0" GridPane.columnIndex="1">
+                  <children>
                     <Button id="accountButton" fx:id="tableButton" depthTest="DISABLE" maxWidth="1.7976931348623157E308" minWidth="60.0" mnemonicParsing="false" onAction="#tablePressed" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #96C6D6;" text="Table" textFill="#30126d" GridPane.columnIndex="1">
+                      <font>
+                        <Font size="13.0" fx:id="x1" />
+                      </font>
                       <graphic>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                           <image>
@@ -56,11 +50,8 @@
                           </image>
                         </ImageView>
                       </graphic>
-                                 <font>
-                                    <Font name="KacstOne Bold" size="13.0" />
-                                 </font>
                     </Button>
-                    <Button fx:id="accountButton" depthTest="DISABLE" maxWidth="1.7976931348623157E308" minWidth="60.0" mnemonicParsing="false" onAction="#accountPressed" prefHeight="50.0" prefWidth="160.0" style="" text="Account" GridPane.columnIndex="3">
+                    <Button fx:id="accountButton" depthTest="DISABLE" font="$x1" maxWidth="1.7976931348623157E308" minWidth="60.0" mnemonicParsing="false" onAction="#accountPressed" prefHeight="50.0" prefWidth="160.0" style="" text="Account" GridPane.columnIndex="3">
                       <graphic>
                         <ImageView fitHeight="50.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                           <image>
@@ -68,11 +59,8 @@
                           </image>
                         </ImageView>
                       </graphic>
-                                 <font>
-                                    <Font name="KacstOne" size="13.0" />
-                                 </font>
                     </Button>
-                    <Button id="statButtonq" fx:id="statButton" alignment="CENTER_LEFT" depthTest="DISABLE" maxWidth="1.7976931348623157E308" minWidth="60.0" mnemonicParsing="false" onAction="#statPressed" prefHeight="50.0" prefWidth="160.0" text="Statistics" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                    <Button id="statButtonq" fx:id="statButton" alignment="CENTER_LEFT" depthTest="DISABLE" font="$x1" maxWidth="1.7976931348623157E308" minWidth="60.0" mnemonicParsing="false" onAction="#statPressed" prefHeight="50.0" prefWidth="160.0" text="Statistics" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                       <graphic>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                           <image>
@@ -80,128 +68,128 @@
                           </image>
                         </ImageView>
                       </graphic>
-                                 <font>
-                                    <Font name="KacstOne" size="13.0" />
-                                 </font>
                     </Button>
-                    <Button fx:id="mapButton" depthTest="DISABLE" maxWidth="1.7976931348623157E308" minWidth="60.0" mnemonicParsing="false" onAction="#mapPressed" prefHeight="50.0" prefWidth="160.0" style="-: ;" text="Map">
+                    <Button fx:id="mapButton" depthTest="DISABLE" font="$x1" maxWidth="1.7976931348623157E308" minWidth="60.0" mnemonicParsing="false" onAction="#mapPressed" prefHeight="50.0" prefWidth="160.0" style="-: ;" text="Map">
                       <graphic>
                         <ImageView fitHeight="45.0" pickOnBounds="true" preserveRatio="true">
                           <image>
                             <Image url="@images/map.png" />
                           </image>
-                                       <viewport>
-                                          <Rectangle2D height="50.0" />
-                                       </viewport>
+                          <viewport>
+                            <Rectangle2D height="50.0" />
+                          </viewport>
                         </ImageView>
                       </graphic>
-                                 <font>
-                                    <Font name="KacstOne" size="13.0" />
-                                 </font>
                     </Button>
-                           </children>
-                        </GridPane>
-              <Button fx:id="logoutButton" alignment="CENTER_LEFT" contentDisplay="CENTER" depthTest="DISABLE" graphicTextGap="-100.0" mnemonicParsing="false" onAction="#logoutPressed" prefHeight="51.0" prefWidth="27.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
-                <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                      <Image url="@images/logout.png" />
-                    </image>
-                  </ImageView>
-                </graphic>
-              </Button>
-            </children>
-            <columnConstraints>
-              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="160.0" />
-              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="240.0" prefWidth="640.0" />
-              <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" />
-            </columnConstraints>
-            <rowConstraints>
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-          </GridPane>
-        </children>
-      </AnchorPane>
-      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="355.0" prefWidth="642.0" style="-fx-background-color: #D1D7F1;">
-        <children>
-          <TextField fx:id="keywordText" layoutX="434.0" layoutY="15.0" maxWidth="200.0" minWidth="100.0" onAction="#searchPressed" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="445.0" AnchorPane.topAnchor="15.0" />
-          <Label layoutX="14.0" layoutY="20.0" text="I want to view" textAlignment="RIGHT" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
-                     <font>
-                        <Font name="KacstOne" size="13.0" />
-                     </font></Label>
-          <ChoiceBox fx:id="tableOptions" layoutX="118.0" layoutY="15.0" maxWidth="200.0" minWidth="100.0" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF;" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="15.0">
-            <items>
-              <FXCollections fx:factory="observableArrayList">
-                <String fx:value="Item 1" />
-                <String fx:value="Item 2" />
-                <String fx:value="Item 3" />
-              </FXCollections>
-            </items>
-          </ChoiceBox>
-          <TableView fx:id="allLocationsTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#allLocationTableClicked" prefHeight="300.0" prefWidth="800.0" style="-fx-background-color: #DBD0F1; -fx-border-color: #30126D; -fx-border-width: 3;" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0">
-            <columns>
-              <TableColumn fx:id="allLocNameCol" prefWidth="200.0" text="Name" />
-              <TableColumn fx:id="allLocTypeCol" prefWidth="200.0" text="Type" />
-                        <TableColumn fx:id="allLocAddressCol" prefWidth="200.0" text="Address" />
-                        <TableColumn fx:id="allLocBoroughCol" prefWidth="200.0" text="Borough" />
-            </columns>
-          </TableView>
-          <TableView id="allLocationsTable" fx:id="wifiTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#wifiTableClicked" prefHeight="300.0" prefWidth="800.0" style="-fx-background-color: #DBD0F1; -fx-border-color: #30126D; -fx-border-width: 3;" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0">
-            <columns>
-              <TableColumn fx:id="wifiNameCol" prefWidth="160.0" text="Name" />
-              <TableColumn fx:id="wifiTypeCol" prefWidth="160.0" text="Type" />
-              <TableColumn fx:id="wifiProvCol" prefWidth="160.0" text="Provider" />
-                        <TableColumn fx:id="wifiAddressCol" prefWidth="160.0" text="Address" />
-                        <TableColumn fx:id="wifiBoroughCol" prefWidth="160.0" text="Borough" />
-            </columns>
-          </TableView>
-          <TableView id="allLocationsTable" fx:id="retailersTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#retailerTableClicked" prefHeight="300.0" prefWidth="800.0" style="-fx-background-color: #DBD0F1; -fx-border-color: #30126D; -fx-border-width: 3;" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0">
-            <columns>
-              <TableColumn fx:id="retNameCol" prefWidth="160.0" text="Name" />
-              <TableColumn fx:id="retProductCol" prefWidth="160.0" text="Product" />
-              <TableColumn fx:id="retDescCol" prefWidth="160.0" text="Description" />
-                        <TableColumn fx:id="retAddressCol" prefWidth="160.0" text="Address" />
-                        <TableColumn fx:id="retBoroughCol" prefWidth="160.0" text="Borough" />
-            </columns>
-          </TableView>
-          <TableView id="allLocationsTable" fx:id="poiTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#poiTableClicked" prefHeight="300.0" prefWidth="800.0" style="-fx-background-color: #DBD0F1; -fx-border-color: #30126D; -fx-border-width: 3;" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0">
-            <columns>
-              <TableColumn fx:id="poiNameCol" prefWidth="160.0" text="Name" />
-              <TableColumn fx:id="poiCostCol" prefWidth="160.0" text="Cost" />
-              <TableColumn fx:id="poiDescCol" prefWidth="160.0" text="Description" />
-                        <TableColumn fx:id="poiAddressCol" prefWidth="160.0" text="Address" />
-                        <TableColumn fx:id="poiBoroughCol" prefWidth="160.0" text="Borough" />
-            </columns>
-          </TableView>
-          <TableView id="allLocationsTable" fx:id="toiletsTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#toiletTableClicked" prefHeight="300.0" prefWidth="800.0" style="-fx-background-color: #DBD0F1; -fx-border-color: #30126D; -fx-border-width: 3;" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0">
-            <columns>
-              <TableColumn fx:id="toiletNameCol" prefWidth="160.0" text="Name" />
-              <TableColumn fx:id="toiletUniCol" prefWidth="160.0" text="Uni Sex" />
-              <TableColumn fx:id="toiletDisCol" prefWidth="160.0" text="Disabled" />
-                        <TableColumn fx:id="toiletAddressCol" prefWidth="160.0" text="Address" />
-                        <TableColumn fx:id="toiletBoroughCol" prefWidth="160.0" text="Borough" />
-            </columns>
-          </TableView>
-          <TableView id="allLocationsTable" fx:id="routesTable" layoutX="13.0" layoutY="119.0" onMouseClicked="#routeTableClicked" prefHeight="300.0" prefWidth="800.0" style="-fx-background-color: #DBD0F1; -fx-border-color: #30126D; -fx-border-width: 3;" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0">
-            <columns>
-              <TableColumn fx:id="routeNameCol" prefWidth="200.0" text="Name" />
-              <TableColumn fx:id="routeStartCol" prefWidth="200.0" text="Start" />
-              <TableColumn fx:id="routeEndCol" prefWidth="200.0" text="End" />
-              <TableColumn fx:id="routeDistCol" prefWidth="200.0" text="Distance (m)" />
-            </columns>
-          </TableView>
-          <Button fx:id="searchButton" layoutX="727.0" layoutY="15.0" mnemonicParsing="false" onAction="#searchPressed" prefWidth="100.0" style="-fx-background-color: #30126D, #B39EDC;" text="Search" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="15.0">
-                     <font>
-                        <Font name="System Bold" size="11.0" />
-                     </font></Button>
-          <Label layoutX="307.0" layoutY="20.0" text="with the keyword " AnchorPane.leftAnchor="325.0" AnchorPane.topAnchor="15.0">
-                     <font>
-                        <Font name="KacstOne" size="13.0" />
-                     </font></Label>
-                  <Label fx:id="noDataLabel" layoutX="311.0" layoutY="208.0" text="No data to show for this search" visible="false" />
-        </children>
-      </AnchorPane>
-    </items>
-  </SplitPane>
-</children>
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="60.0" percentWidth="25.0" prefWidth="160.0" />
+                    <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="60.0" percentWidth="25.0" prefWidth="160.0" />
+                    <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="60.0" percentWidth="25.0" prefWidth="160.0" />
+                    <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="60.0" percentWidth="25.0" prefWidth="160.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <Button fx:id="logoutButton" alignment="CENTER_LEFT" contentDisplay="CENTER" depthTest="DISABLE" graphicTextGap="-100.0" mnemonicParsing="false" onAction="#logoutPressed" prefHeight="51.0" prefWidth="27.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                  <graphic>
+                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                        <Image url="@images/logout.png" />
+                      </image>
+                    </ImageView>
+                  </graphic>
+                </Button>
+              </children>
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="160.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="240.0" prefWidth="640.0" />
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+          </children>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="355.0" prefWidth="642.0" style="-fx-background-color: #D1D7F1;">
+          <children>
+            <TextField fx:id="keywordText" maxWidth="200.0" minWidth="100.0" onAction="#searchPressed" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" AnchorPane.leftAnchor="445.0" AnchorPane.topAnchor="15.0" />
+            <Label font="$x1" text="I want to view" textAlignment="RIGHT" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
+            <ChoiceBox fx:id="tableOptions" maxWidth="200.0" minWidth="100.0" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF;" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="15.0">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ChoiceBox>
+            <TableView fx:id="allLocationsTable" onMouseClicked="#allLocationTableClicked" prefHeight="325.0" prefWidth="818.0" style="-fx-background-color: #DBD0F1; -fx-border-color: #30126D; -fx-border-width: 3;" visible="false" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0">
+              <columns>
+                <TableColumn prefWidth="200.0" text="Name" fx:id="allLocNameCol" />
+                <TableColumn prefWidth="200.0" text="Type" fx:id="allLocTypeCol" />
+                <TableColumn prefWidth="200.0" text="Address" fx:id="allLocAddressCol" />
+                <TableColumn prefWidth="200.0" text="Borough" fx:id="allLocBoroughCol" />
+              </columns>
+            </TableView>
+            <TableView id="allLocationsTable" fx:id="wifiTable" onMouseClicked="#wifiTableClicked" prefHeight="325.0" prefWidth="818.0" style="-fx-background-color: #DBD0F1; -fx-border-color: #30126D; -fx-border-width: 3;" visible="false" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0">
+              <columns>
+                <TableColumn prefWidth="160.0" text="Name" fx:id="wifiNameCol" />
+                <TableColumn prefWidth="160.0" text="Type" fx:id="wifiTypeCol" />
+                <TableColumn prefWidth="160.0" text="Provider" fx:id="wifiProvCol" />
+                <TableColumn prefWidth="160.0" text="Address" fx:id="wifiAddressCol" />
+                <TableColumn prefWidth="160.0" text="Borough" fx:id="wifiBoroughCol" />
+              </columns>
+            </TableView>
+            <TableView id="allLocationsTable" fx:id="retailersTable" onMouseClicked="#retailerTableClicked" prefHeight="325.0" prefWidth="818.0" style="-fx-background-color: #DBD0F1; -fx-border-color: #30126D; -fx-border-width: 3;" visible="false" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0">
+              <columns>
+                <TableColumn prefWidth="160.0" text="Name" fx:id="retNameCol" />
+                <TableColumn prefWidth="160.0" text="Product" fx:id="retProductCol" />
+                <TableColumn prefWidth="160.0" text="Description" fx:id="retDescCol" />
+                <TableColumn prefWidth="160.0" text="Address" fx:id="retAddressCol" />
+                <TableColumn prefWidth="160.0" text="Borough" fx:id="retBoroughCol" />
+              </columns>
+            </TableView>
+            <TableView id="allLocationsTable" fx:id="poiTable" onMouseClicked="#poiTableClicked" prefHeight="325.0" prefWidth="818.0" style="-fx-background-color: #DBD0F1; -fx-border-color: #30126D; -fx-border-width: 3;" visible="false" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0">
+              <columns>
+                <TableColumn prefWidth="160.0" text="Name" fx:id="poiNameCol" />
+                <TableColumn prefWidth="160.0" text="Cost" fx:id="poiCostCol" />
+                <TableColumn prefWidth="160.0" text="Description" fx:id="poiDescCol" />
+                <TableColumn prefWidth="160.0" text="Address" fx:id="poiAddressCol" />
+                <TableColumn prefWidth="160.0" text="Borough" fx:id="poiBoroughCol" />
+              </columns>
+            </TableView>
+            <TableView id="allLocationsTable" fx:id="toiletsTable" onMouseClicked="#toiletTableClicked" prefHeight="325.0" prefWidth="818.0" style="-fx-background-color: #DBD0F1; -fx-border-color: #30126D; -fx-border-width: 3;" visible="false" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0">
+              <columns>
+                <TableColumn prefWidth="160.0" text="Name" fx:id="toiletNameCol" />
+                <TableColumn prefWidth="160.0" text="Uni Sex" fx:id="toiletUniCol" />
+                <TableColumn prefWidth="160.0" text="Disabled" fx:id="toiletDisCol" />
+                <TableColumn prefWidth="160.0" text="Address" fx:id="toiletAddressCol" />
+                <TableColumn prefWidth="160.0" text="Borough" fx:id="toiletBoroughCol" />
+              </columns>
+            </TableView>
+            <TableView id="allLocationsTable" fx:id="routesTable" onMouseClicked="#routeTableClicked" prefHeight="325.0" prefWidth="818.0" style="-fx-background-color: #DBD0F1; -fx-border-color: #30126D; -fx-border-width: 3;" visible="false" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0">
+              <columns>
+                <TableColumn prefWidth="200.0" text="Name" fx:id="routeNameCol" />
+                <TableColumn prefWidth="200.0" text="Start" fx:id="routeStartCol" />
+                <TableColumn prefWidth="200.0" text="End" fx:id="routeEndCol" />
+                <TableColumn prefWidth="200.0" text="Distance (m)" fx:id="routeDistCol" />
+              </columns>
+            </TableView>
+            <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchPressed" prefWidth="100.0" style="-fx-background-color: #30126D, #B39EDC;" text="Search" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="15.0">
+              <font>
+                <Font name="System Bold" size="11.0" fx:id="x2" />
+              </font>
+            </Button>
+            <Label font="$x1" text="with the keyword " AnchorPane.leftAnchor="325.0" AnchorPane.topAnchor="15.0" />
+            <Label fx:id="noDataLabel" layoutX="311.0" layoutY="208.0" text="No data to show for this search" visible="false" />
+            <Button id="searchButton" fx:id="exportButton" font="$x2" layoutX="15.0" layoutY="408.0" mnemonicParsing="false" onAction="#exportPressed" prefWidth="100.0" style="-fx-background-color: #30126D, #B39EDC;" text="Export" />
+            <Label fx:id="nothingLabel" layoutX="137.0" layoutY="404.0" text="No data currently selected" textFill="RED" visible="false" />
+          </children>
+        </AnchorPane>
+      </items>
+    </SplitPane>
+  </children>
 </AnchorPane>

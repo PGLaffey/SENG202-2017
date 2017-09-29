@@ -17,72 +17,54 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="450.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,4;" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.RetailerInfoScreenController">
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="450.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,4;" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.Controller.RetailerInfoScreenController">
   <children>
-    <Button fx:id="okButton" mnemonicParsing="false" onAction="#okPressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="Ok" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Button>
     <Label id="objectInfoLabel" fx:id="nameLabel" prefWidth="386.0" text="Name:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
-         <font>
-            <Font name="KacstOne Bold" size="13.0" />
-         </font></Label>
-    <Label id="objectInfoLabel" fx:id="addressLabel" prefWidth="386.0" text="Address:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
+      <font>
+        <Font size="13.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label id="objectInfoLabel" fx:id="addressLabel" font="$x1" prefWidth="386.0" text="Address:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
         <Insets top="75.0" />
       </GridPane.margin>
-         <font>
-            <Font name="KacstOne Bold" size="13.0" />
-         </font>
     </Label>
-    <Label id="objectInfoLabel" fx:id="latLabel" prefWidth="386.0" text="Latitude:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
+    <Label id="objectInfoLabel" fx:id="latLabel" font="$x1" prefWidth="386.0" text="Latitude:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
         <Insets top="150.0" />
       </GridPane.margin>
-         <font>
-            <Font name="KacstOne Bold" size="13.0" />
-         </font>
     </Label>
-    <Label id="objectInfoLabel" fx:id="longLabel" prefWidth="386.0" text="Longitude:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
+    <Label id="objectInfoLabel" fx:id="longLabel" font="$x1" prefWidth="386.0" text="Longitude:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
         <Insets top="175.0" />
       </GridPane.margin>
-         <font>
-            <Font name="KacstOne Bold" size="13.0" />
-         </font>
     </Label>
-    <Label id="objectInfoLabel" fx:id="zipLabel" prefWidth="386.0" text="Zip:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
+    <Label id="objectInfoLabel" fx:id="zipLabel" font="$x1" prefWidth="386.0" text="Zip:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
         <Insets top="125.0" />
       </GridPane.margin>
-         <font>
-            <Font name="KacstOne Bold" size="13.0" />
-         </font>
     </Label>
-      <Label fx:id="boroughLabel" prefHeight="15.0" prefWidth="407.0" text="Borough:" GridPane.columnSpan="2" GridPane.valignment="TOP">
-         <GridPane.margin>
-            <Insets top="100.0" />
-         </GridPane.margin>
-         <font>
-            <Font name="KacstOne Bold" size="13.0" />
-         </font>
-      </Label>
-      <Label fx:id="productLabel" prefHeight="15.0" prefWidth="400.0" text="Product;" GridPane.columnSpan="2" GridPane.valignment="TOP">
-         <GridPane.margin>
-            <Insets top="25.0" />
-         </GridPane.margin>
-         <font>
-            <Font name="KacstOne Bold" size="13.0" />
-         </font>
-      </Label>
-      <Label fx:id="descriptionLabel" prefHeight="15.0" prefWidth="400.0" text="Description:" GridPane.columnSpan="2" GridPane.valignment="TOP">
-         <GridPane.margin>
-            <Insets top="50.0" />
-         </GridPane.margin>
-         <font>
-            <Font name="KacstOne Bold" size="13.0" />
-         </font>
-      </Label>
+    <Label fx:id="boroughLabel" font="$x1" prefHeight="15.0" prefWidth="407.0" text="Borough:" GridPane.columnSpan="2" GridPane.valignment="TOP">
+      <GridPane.margin>
+        <Insets top="100.0" />
+      </GridPane.margin>
+    </Label>
+    <Label fx:id="productLabel" font="$x1" prefHeight="15.0" prefWidth="400.0" text="Product;" GridPane.columnSpan="2" GridPane.valignment="TOP">
+      <GridPane.margin>
+        <Insets top="25.0" />
+      </GridPane.margin>
+    </Label>
+    <Label fx:id="descriptionLabel" font="$x1" prefHeight="15.0" prefWidth="400.0" text="Description:" GridPane.columnSpan="2" GridPane.valignment="TOP">
+      <GridPane.margin>
+        <Insets top="50.0" />
+      </GridPane.margin>
+    </Label>
+    <Button fx:id="okButton" mnemonicParsing="false" onAction="#okPressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="Ok" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+      <font>
+        <Font name="System Bold" size="12.0" fx:id="x2" />
+      </font>
+    </Button>
+    <Button id="okButton" fx:id="updateButton" font="$x2" mnemonicParsing="false" onAction="#updatePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Update" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
   </children>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="196.0" />
@@ -92,7 +74,7 @@
     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
   </padding>
   <rowConstraints>
-    <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="191.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="149.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
   </rowConstraints>
 </GridPane>
