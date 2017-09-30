@@ -1031,8 +1031,8 @@ public class DataFetcher {
     	PreparedStatement preparedStatement;
     	try {
     		ArrayList<String> output = new ArrayList<String>();
-			preparedStatement = connect.prepareStatement("SELECT * FROM tblLocations WHERE address LIKE '%?%'");
-			preparedStatement.setString(1, condition);
+			preparedStatement = connect.prepareStatement("SELECT * FROM tblLocations WHERE address LIKE ?");
+			preparedStatement.setString(1, "%"+condition+"%");
 			output = runQuery(preparedStatement).get(0);
 
 		} catch (SQLException sqlException) {
