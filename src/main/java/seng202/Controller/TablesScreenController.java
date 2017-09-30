@@ -515,31 +515,32 @@ public class TablesScreenController {
 		stage.show();
     }
 	
+	@FXML
 	void exportPressed(ActionEvent event)  {
 		if (noDataLabel.isVisible()) {
 			nothingLabel.setVisible(true);
-/*		} else if (allLocationsTable.isVisible()) { TODO: At the moment can't edit as they're locations so wont have all the data (e.g. cost for poi)
+		} else if (allLocationsTable.isVisible()) { //TODO: At the moment can't edit as they're locations so wont have all the data (e.g. cost for poi)
 			nothingLabel.setVisible(false);
-			ArrayList<Location> locData = (ArrayList<Location>) allLocationsTable.getItems();*/
+			ArrayList<Location> locData =  new ArrayList<Location>(allLocationsTable.getItems());
 		} else if (poiTable.isVisible()) {
 			nothingLabel.setVisible(false);
-			ArrayList<Poi> poiData = (ArrayList<Poi>) poiTable.getItems();
+			ArrayList<Poi> poiData = new ArrayList<Poi>(poiTable.getItems());
 			//FileManager.poiWriter(filename, poiData);
 		} else if (retailersTable.isVisible()) {
 			nothingLabel.setVisible(false);
-			ArrayList<Retailer> retData = (ArrayList<Retailer>) retailersTable.getItems();
+			ArrayList<Retailer> retData = new ArrayList<Retailer>(retailersTable.getItems());
 			//FileManager.retailerWriter(filename, retData);
 		} else if (wifiTable.isVisible()) {
 			nothingLabel.setVisible(false);
-			ArrayList<Wifi> wifiData = (ArrayList<Wifi>) wifiTable.getItems();
+			ArrayList<Wifi> wifiData = new ArrayList<Wifi>(wifiTable.getItems());
 			//FileManager.wifiWriter(filename, wifiData);
 		} else if (toiletsTable.isVisible()) {
 			nothingLabel.setVisible(false);
-			ArrayList<Toilet> toiletData = (ArrayList<Toilet>) toiletsTable.getItems();
+			ArrayList<Toilet> toiletData = new ArrayList<Toilet>(toiletsTable.getItems());
 			//FileManager.toiletWriter(filename, toiletData);
 		} else if (routesTable.isVisible()) {
 			nothingLabel.setVisible(false);
-			ArrayList<Route> routeData = (ArrayList<Route>) routesTable.getItems();
+			ArrayList<Route> routeData = new ArrayList<Route>(routesTable.getItems());
 			//FileManager.routeWriter(filename, routeData);
 		}
 	}
@@ -551,6 +552,7 @@ public class TablesScreenController {
     void initialize() {
     	
     	noDataLabel.setVisible(true);
+    	nothingLabel.setVisible(false);
 
     	// Random objects for testing
 
@@ -575,6 +577,8 @@ public class TablesScreenController {
     	ObservableList<String> filterOptions = FXCollections.observableArrayList("All locations","Routes", "Retailers", "WiFi", "Toilets", "Points of interest");
     	tableOptions.setItems(filterOptions);
     	tableOptions.getSelectionModel().selectFirst();
+    	
+    	// TODO: Dont think we need to set table items here
 
     	// Set up the all locations table
     	allLocNameCol.setCellValueFactory(new PropertyValueFactory<Location,String>("name"));
