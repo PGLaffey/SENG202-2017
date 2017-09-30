@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="450.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0, 4;" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.Controller.ToiletInfoScreenController">
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0, 4;" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.Controller.ToiletInfoScreenController">
   <children>
     <Label id="objectInfoLabel" fx:id="nameLabel" prefWidth="386.0" text="Name:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <font>
@@ -26,37 +26,37 @@
     </Label>
     <Label id="objectInfoLabel" fx:id="latLabel" font="$x1" prefWidth="386.0" text="Latitude:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
-        <Insets top="150.0" />
+        <Insets top="210.0" />
       </GridPane.margin>
     </Label>
     <Label id="objectInfoLabel" fx:id="longLabel" font="$x1" prefWidth="386.0" text="Longitude:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
-        <Insets top="175.0" />
+        <Insets top="245.0" />
       </GridPane.margin>
     </Label>
     <Label id="objectInfoLabel" fx:id="disabledLabel" font="$x1" prefWidth="386.0" text="Disabled: " GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
-        <Insets top="25.0" />
+        <Insets top="35.0" />
       </GridPane.margin>
     </Label>
     <Label id="objectInfoLabel" fx:id="unisexLabel" font="$x1" prefWidth="386.0" text="Uni Sex:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
-        <Insets top="50.0" />
+        <Insets top="70.0" />
       </GridPane.margin>
     </Label>
     <Label fx:id="zipLabel" font="$x1" prefHeight="15.0" prefWidth="400.0" text="Zip:" GridPane.columnSpan="2" GridPane.valignment="TOP">
       <GridPane.margin>
-        <Insets top="125.0" />
+        <Insets top="175.0" />
       </GridPane.margin>
     </Label>
     <Label fx:id="boroughLabel" font="$x1" prefHeight="15.0" prefWidth="399.0" text="Borough:" GridPane.columnSpan="2" GridPane.valignment="TOP">
       <GridPane.margin>
-        <Insets top="100.0" />
+        <Insets top="140.0" />
       </GridPane.margin>
     </Label>
     <Label fx:id="addressLabel" font="$x1" text="Address:" GridPane.columnSpan="2" GridPane.valignment="TOP">
       <GridPane.margin>
-        <Insets top="75.0" />
+        <Insets top="105.0" />
       </GridPane.margin>
     </Label>
     <Button fx:id="okButton" mnemonicParsing="false" onAction="#okPressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="Ok" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
@@ -65,16 +65,57 @@
       </font>
     </Button>
     <Button id="okButton" fx:id="updateButton" font="$x2" mnemonicParsing="false" onAction="#updatePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Update" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+    <Button id="okButton" fx:id="saveButton" font="$x2" mnemonicParsing="false" onAction="#savePressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="Save" visible="false" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+    <TextField fx:id="nameText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
+      <GridPane.margin>
+        <Insets left="50.0" top="-5.0" />
+      </GridPane.margin>
+    </TextField>
+    <TextField id="nameText" fx:id="disabledText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
+      <GridPane.margin>
+        <Insets left="60.0" top="30.0" />
+      </GridPane.margin>
+    </TextField>
+    <TextField id="nameText" fx:id="unisexText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
+      <GridPane.margin>
+        <Insets left="55.0" top="65.0" />
+      </GridPane.margin>
+    </TextField>
+    <TextField id="nameText" fx:id="addressText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
+      <GridPane.margin>
+        <Insets left="60.0" top="100.0" />
+      </GridPane.margin>
+    </TextField>
+    <TextField id="nameText" fx:id="boroughText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
+      <GridPane.margin>
+        <Insets left="60.0" top="135.0" />
+      </GridPane.margin>
+    </TextField>
+    <TextField id="nameText" fx:id="zipText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
+      <GridPane.margin>
+        <Insets left="30.0" top="170.0" />
+      </GridPane.margin>
+    </TextField>
+    <TextField id="nameText" fx:id="latitudeText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
+      <GridPane.margin>
+        <Insets left="60.0" top="205.0" />
+      </GridPane.margin>
+    </TextField>
+    <TextField id="nameText" fx:id="longitudeText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
+      <GridPane.margin>
+        <Insets left="70.0" top="240.0" />
+      </GridPane.margin>
+    </TextField>
   </children>
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="196.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="10.0" prefWidth="194.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="250.0" prefWidth="-1.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="250.0" prefWidth="-1.0" />
   </columnConstraints>
   <padding>
-    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+    <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
   </padding>
   <rowConstraints>
-    <RowConstraints maxHeight="194.0" minHeight="10.0" prefHeight="151.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="400.0" minHeight="200.0" prefHeight="306.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="-1.0" minHeight="60.0" prefHeight="-1.0" vgrow="SOMETIMES" />
   </rowConstraints>
 </GridPane>

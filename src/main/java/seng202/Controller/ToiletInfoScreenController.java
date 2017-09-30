@@ -4,8 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
 import seng202.Model.Toilet;
@@ -14,41 +13,68 @@ import seng202.Model.Toilet;
 
 public class ToiletInfoScreenController {
 
-    @FXML
+	@FXML
     private ResourceBundle resources;
 
     @FXML
     private URL location;
 
     @FXML
-    private Label disabledLabel;
+    private Label addressLabel;
 
     @FXML
-    private Label latLabel;
-
-    @FXML
-    private Label longLabel;
-
-    @FXML
-    private Label nameLabel;
-
-    @FXML
-    private Button okButton;
-
-    @FXML
-    private Button updateButton;
-
-    @FXML
-    private Label unisexLabel;
-
-    @FXML
-    private Label zipLabel;
+    private TextField addressText;
 
     @FXML
     private Label boroughLabel;
 
     @FXML
-    private Label addressLabel;
+    private TextField boroughText;
+
+    @FXML
+    private Label disabledLabel;
+
+    @FXML
+    private TextField disabledText;
+
+    @FXML
+    private Label latLabel;
+
+    @FXML
+    private TextField latitudeText;
+
+    @FXML
+    private Label longLabel;
+
+    @FXML
+    private TextField longitudeText;
+
+    @FXML
+    private Label nameLabel;
+
+    @FXML
+    private TextField nameText;
+
+    @FXML
+    private Button okButton;
+
+    @FXML
+    private Button saveButton;
+
+    @FXML
+    private Label unisexLabel;
+
+    @FXML
+    private TextField unisexText;
+
+    @FXML
+    private Button updateButton;
+
+    @FXML
+    private Label zipLabel;
+
+    @FXML
+    private TextField zipText;
 
     private Toilet toilet;
 
@@ -69,8 +95,41 @@ public class ToiletInfoScreenController {
      */
     @FXML
     void updatePressed(ActionEvent event) {
-    	Stage stage = (Stage) updateButton.getScene().getWindow(); 
-    	stage.hide();
+    	addressText.setVisible(true);
+    	addressText.setText(toilet.getAddress());
+    	boroughText.setVisible(true);
+    	boroughText.setText(toilet.getBorough());
+    	unisexText.setVisible(true);
+    	unisexText.setText(String.valueOf(toilet.getUniSex()));
+    	disabledText.setVisible(true);
+    	disabledText.setText(String.valueOf(toilet.getForDisabled()));
+    	latitudeText.setVisible(true);
+    	latitudeText.setText(String.valueOf(toilet.getLatitude()));
+    	longitudeText.setVisible(true);
+    	longitudeText.setText(String.valueOf(toilet.getLongitude()));
+    	nameText.setVisible(true);
+    	nameText.setText(toilet.getName());
+    	zipText.setVisible(true);
+    	zipText.setText(String.valueOf(toilet.getZip()));;
+    	addressLabel.setText("Address: ");
+    	boroughLabel.setText("Borough: ");
+    	unisexLabel.setText("Unisex: ");
+    	disabledLabel.setText("Disabled: ");
+    	latLabel.setText("Latitude: ");
+    	longLabel.setText("Longitude: ");
+    	nameLabel.setText("Name: ");
+    	zipLabel.setText("Zip: ");
+    	okButton.setVisible(false);
+    	updateButton.setVisible(false);
+    	saveButton.setVisible(true);
+    }
+    
+    /**
+     * Method when the save button is pressed, updates the selected location
+     * @param event
+     */
+    @FXML
+    void savePressed(ActionEvent event) {
     }
 
     @FXML
