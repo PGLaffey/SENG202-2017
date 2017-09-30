@@ -514,7 +514,8 @@ public class TablesScreenController {
 		stage.setScene(scene);
 		stage.show();
     }
-	
+
+    @FXML
 	void exportPressed(ActionEvent event)  {
 		if (noDataLabel.isVisible()) {
 			nothingLabel.setVisible(true);
@@ -671,6 +672,6 @@ public class TablesScreenController {
         assert wifiTypeCol != null : "fx:id=\"wifiTypeCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
 
 
-    }
+}
 
 }

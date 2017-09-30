@@ -473,7 +473,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 	@FXML
     void tablePressed(ActionEvent event) throws IOException {
 
-	    try {
+//	    try {
             Stage primaryStage = (Stage) tableButton.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
 
@@ -485,15 +485,15 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             primaryStage.setTitle("Table");
             primaryStage.setScene(scene);
             primaryStage.show();
-        } catch (Exception e){
-            Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/DataLoadingScreen.fxml"));
-
-            Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
-            stage.setTitle("Still Loading");
-            stage.setScene(scene);
-            stage.show();
-        }
+//        } catch (Exception e){
+//            Stage stage = new Stage();
+//            Parent root = FXMLLoader.load(getClass().getResource("/DataLoadingScreen.fxml"));
+//
+//            Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+//            stage.setTitle("Still Loading");
+//            stage.setScene(scene);
+//            stage.show();
+//        }
 
     }
     
@@ -1359,7 +1359,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                             updateProgress(0, 100);
                             //progressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
                             updateMessage("Retrieving Locations...");
-                            data.loadAllLocations();
+                            data.loadNextLocations();
                             updateProgress(50, 100);
                             updateMessage("Retrieving Routes...");
                             data.loadAllRoutes();

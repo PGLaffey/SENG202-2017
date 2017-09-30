@@ -7,6 +7,11 @@ import java.util.ArrayList;
 public class DataFetcher {
     private Connection connect = null;
     private boolean hasImported = false;
+    static int wifiOffset = 0;
+    static int retailerOffset = 0;
+    static int routeOffset = 0;
+    static int poiOffset = 0;
+    static int toiletOffset = 0;
 
 	/**
 	 * @return true if an object has already been imported to the database
@@ -282,8 +287,10 @@ public class DataFetcher {
 	public void loadAllRoutes() {
     	Route route = null;
     	try {
-    		PreparedStatement qryLoadRoutes = connect.prepareStatement("SELECT * FROM tblRoutes");
+    		PreparedStatement qryLoadRoutes = connect.prepareStatement("SELECT * FROM tblRoutes LIMIT ?, 50");
+    		qryLoadRoutes.setInt(1, routeOffset);
 			ResultSet output = qryLoadRoutes.executeQuery();
+			routeOffset += output.getFetchSize();
 			Location start = null;
 			Location end = null;
 			int startID;
@@ -484,16 +491,41 @@ public class DataFetcher {
     /**
      * Loads all locations in the database into the programs current storage
      */
-    public void loadAllLocations() {
+    public void loadNextLocations() {
     	try {
     		//Initialize the query to fetch all locations from the database and its result set
-    		Statement qryLoadLocations = connect.createStatement();
-			ResultSet output = qryLoadLocations.executeQuery("SELECT * FROM tblLocations");
-			System.out.println(output.toString());
-	    	//Loop while there a another location to be loaded from the database
-			while (output.next()) {
-				loadLocation(output);
-    		}
+			String[] locationTypes = {"Retailer", "Toilet", "Poi", "Wifi"};
+			for (String location : locationTypes) {
+				PreparedStatement qryLoadLocations = connect.prepareStatement("SELECT * FROM tblLocations WHERE " + location + "ID IS NOT NULL LIMIT ?, 50");
+				switch(location) {
+					case("Retailer"): qryLoadLocations.setInt(1, retailerOffset);
+						break;
+					case("Toilet"): qryLoadLocations.setInt(1, toiletOffset);
+						break;
+					case("Poi"): qryLoadLocations.setInt(1, poiOffset);
+						break;
+					case("Wifi"): qryLoadLocations.setInt(1, wifiOffset);
+						break;
+				}
+
+				ResultSet output = qryLoadLocations.executeQuery();
+				//Loop while there a another location to be loaded from the database
+				while (output.next()) {
+					loadLocation(output);
+				}
+				output.last();
+				switch(location) {
+					case("Retailer"): retailerOffset += output.getRow();
+						break;
+					case("Toilet"): toiletOffset += output.getRow();
+						break;
+					case("Poi"): poiOffset += output.getRow();
+						break;
+					case("Wifi"): wifiOffset += output.getRow();
+						break;
+				}
+			}
+
 		} 
     	//Prints the correct error statements if an SQLException occurs
     	catch (SQLException ex) {
