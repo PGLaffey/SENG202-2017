@@ -114,7 +114,7 @@ public class PoiInfoScreenController {
     	zipText.setVisible(true);
     	zipText.setText(String.valueOf(poi.getZip()));;
     	addressLabel.setText("Address: ");
-    	boroughLabel.setText("Label: ");
+    	boroughLabel.setText("Borough: ");
     	costLabel.setText("Cost: ");
     	descriptionLabel.setText("Description: ");
     	latLabel.setText("Latitude: ");
