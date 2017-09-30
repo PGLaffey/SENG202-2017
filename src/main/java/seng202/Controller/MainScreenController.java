@@ -475,8 +475,18 @@ public class MainScreenController implements MapComponentInitializedListener, Di
      */
 	@FXML
     void tablePressed(ActionEvent event) throws IOException {
+        Stage primaryStage = (Stage) tableButton.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
 
-	    try {
+        Scene currentScene = primaryStage.getScene();
+        Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+                : new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+        //Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
+        primaryStage.setTitle("Table");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+/*	    try {
             Stage primaryStage = (Stage) tableButton.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
 
@@ -496,7 +506,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             stage.setTitle("Still Loading");
             stage.setScene(scene);
             stage.show();
-        }
+        }*/
 
     }
     
