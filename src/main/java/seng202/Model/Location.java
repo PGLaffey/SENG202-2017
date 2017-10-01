@@ -6,7 +6,6 @@ package seng202.Model;
 public class Location {
     private double latitude = -91; // Maximum range for latitude is -90 to 90, so setting it outside this range tells up it was never set
     private double longitude = -181; // Maximum range for longitude is -180 to 180, so setting it outside this range tells us it was never set.
-    //TODO added type to location
     private int locationType; //toilet = 0, poi = 1, retailer = 2, wifi = 3, general = 4
     private String name;
     private boolean local;
@@ -186,20 +185,19 @@ public class Location {
         this.name = name;
     }
 
-
     /**
      * Overrides the equals methods for comparing when two location objects are equal
-     * @param other
-     * @return
+     * @param other The value to be compared to the current object.
+     * @return Whether the two objects are equal.
      */
     @Override
     public boolean equals(Object other) {
         Location otherLocation = (Location) other;
-        return (!(other != null | getCoords() != otherLocation.getCoords() |
-                getLocationType() != otherLocation.getLocationType() |
-                getName().equals(otherLocation.getName())));
+        return other != null && getLatitude() == otherLocation.getLatitude() &&
+                getLongitude() == otherLocation.getLongitude() &&
+                getLocationType() == otherLocation.getLocationType() &&
+                getName().equals(otherLocation.getName());
     }
-
 
     /**
      * Function that returns the longitude and latitude of the location in an Array.

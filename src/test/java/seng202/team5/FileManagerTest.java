@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.omg.CORBA.Current;
 import seng202.Model.*;
 
 import java.io.File;
@@ -256,6 +257,38 @@ public class FileManagerTest extends TestCase {
 
 
     /**
+     * Tests the general location retriever for one location.
+     */
+    @Test
+    public void testGeneralOneEntry() {
+        FileManager.generalRetriever(TARGET+"/general_data1.csv");
+        Location location = new Location(40.745968480330795,-73.99403913047428,"general1", 4);
+        assertTrue(CurrentStorage.getGeneralArray().get(0).equals(location));
+    }
+
+
+    /**
+     * Tests the generalRetrievers ability to not add duplicates.
+     */
+    @Test
+    public void testGeneralDuplicates() {
+        FileManager.generalRetriever(TARGET+"/general_data1.csv");
+        FileManager.generalRetriever(TARGET+"/general_data1.csv");
+        assertEquals(1, CurrentStorage.getGeneralArray().size());
+    }
+
+
+    /**
+     * Tests the general location retriever for ten locations.
+     */
+    @Test
+    public void testGeneralTenEntries() {
+        FileManager.generalRetriever(TARGET+"/general_data10.csv");
+        assertEquals(10, CurrentStorage.getGeneralArray().size());
+    }
+
+
+    /**
      * Tests file Reading functions with an empty .csv file
      */
     @Test
@@ -462,5 +495,36 @@ public class FileManagerTest extends TestCase {
         CurrentStorage.flush();
         FileManager.poiRetriever(WRITE_TARGET+"/poi_test10_file.csv");
         assertEquals(10, CurrentStorage.getPoiArray().size());
+    }
+
+
+    /**
+     * Tests the ability of the generalWriter function to write a file containing one general location.
+     */
+    @Test
+    public void testWriteGeneralFile() {
+        FileManager.generalRetriever(TARGET+"/general_data1.csv");
+        FileManager.generalWriter(WRITE_TARGET+"/general_test_file1.csv", CurrentStorage.getGeneralArray());
+        assertTrue(new File(WRITE_TARGET+"/general_test_file1.csv").exists());
+        CurrentStorage.flush();
+        Location expectedLocation = new Location(40.745968480330795,-73.99403913047428,"general1",4);
+        FileManager.generalRetriever(WRITE_TARGET+"/general_test_file1.csv");
+
+        assertTrue(CurrentStorage.getGeneralArray().get(0).equals(expectedLocation));
+    }
+
+
+    /**
+     * Tests the ability of the generalWriter function to write a file containing ten general locations.
+     */
+    @Test
+    public void testWriteGeneralFileTen() {
+        FileManager.generalRetriever(TARGET+"/general_data10.csv");
+        FileManager.generalWriter(WRITE_TARGET+"/general_test_10.csv", CurrentStorage.getGeneralArray());
+        assertTrue(new File(WRITE_TARGET+"/general_test_10.csv").exists());
+        CurrentStorage.flush();
+        assertEquals(0, CurrentStorage.getGeneralArray().size());
+        FileManager.generalRetriever(WRITE_TARGET+"/general_test_10.csv");
+        assertEquals(10, CurrentStorage.getGeneralArray().size());
     }
 }
