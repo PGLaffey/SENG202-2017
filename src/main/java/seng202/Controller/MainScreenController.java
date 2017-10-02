@@ -1137,6 +1137,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         }
         if (!retailerZipText.getText().equals("") && !isInt(retailerZipText.getText())) {
             retailerZipLabel.setTextFill(Color.RED);
+            allValid = false;
         }
 
         if (allValid) {

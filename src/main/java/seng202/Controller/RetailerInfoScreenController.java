@@ -4,8 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
 import seng202.Model.Retailer;
@@ -13,7 +13,7 @@ import seng202.Model.Retailer;
 
 public class RetailerInfoScreenController {
 
-    @FXML
+	@FXML
     private ResourceBundle resources;
 
     @FXML
@@ -23,17 +23,50 @@ public class RetailerInfoScreenController {
     private Label addressLabel;
 
     @FXML
+    private TextField addressText;
+
+    @FXML
+    private Label boroughLabel;
+
+    @FXML
+    private TextField boroughText;
+
+    @FXML
+    private Label descriptionLabel;
+
+    @FXML
+    private TextField descriptionText;
+
+    @FXML
     private Label latLabel;
+
+    @FXML
+    private TextField latitudeText;
 
     @FXML
     private Label longLabel;
 
     @FXML
+    private TextField longitudeText;
+
+    @FXML
     private Label nameLabel;
 
     @FXML
+    private TextField nameText;
+
+    @FXML
     private Button okButton;
-    
+
+    @FXML
+    private Label productLabel;
+
+    @FXML
+    private TextField productText;
+
+    @FXML
+    private Button saveButton;
+
     @FXML
     private Button updateButton;
 
@@ -41,13 +74,7 @@ public class RetailerInfoScreenController {
     private Label zipLabel;
 
     @FXML
-    private Label boroughLabel;
-
-    @FXML
-    private Label productLabel;
-
-    @FXML
-    private Label descriptionLabel;
+    private TextField zipText;
     
     private Retailer retailer;
 
@@ -68,9 +95,121 @@ public class RetailerInfoScreenController {
      */
     @FXML
     void updatePressed(ActionEvent event) {
-    	Stage stage = (Stage) updateButton.getScene().getWindow(); 
-    	stage.hide();
+    	addressText.setVisible(true);
+    	addressText.setText(retailer.getAddress());
+    	boroughText.setVisible(true);
+    	boroughText.setText(retailer.getBorough());
+    	productText.setVisible(true);
+    	productText.setText(retailer.getProduct());
+    	descriptionText.setVisible(true);
+    	descriptionText.setText(retailer.getDescription());
+    	latitudeText.setVisible(true);
+    	latitudeText.setText(String.valueOf(retailer.getLatitude()));
+    	longitudeText.setVisible(true);
+    	longitudeText.setText(String.valueOf(retailer.getLongitude()));
+    	nameText.setVisible(true);
+    	nameText.setText(retailer.getName());
+    	zipText.setVisible(true);
+    	zipText.setText(String.valueOf(retailer.getZip()));;
+    	addressLabel.setText("Address: ");
+    	boroughLabel.setText("Borough: ");
+    	productLabel.setText("Product: ");
+    	descriptionLabel.setText("Description: ");
+    	latLabel.setText("Latitude: ");
+    	longLabel.setText("Longitude: ");
+    	nameLabel.setText("Name: ");
+    	zipLabel.setText("Zip: ");
+    	okButton.setVisible(false);
+    	updateButton.setVisible(false);
+    	saveButton.setVisible(true);
     }
+    
+    /**
+     * Checks the input is able to be parsed to a Double
+     * @param s String to be checked
+     * @return true if Double otherwise false
+     */
+    Boolean isDouble(String s) {
+        try {
+            Double.parseDouble(s);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+
+    /**
+     * Checks the input is able to be parsed to an Integer
+     * @param s String to be checked
+     * @return true if Integer otherwise false
+     */
+    Boolean isInt(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+    
+    @FXML
+    void savePressed(ActionEvent event) {
+    	// TODO: Check user has inputed the correct data
+    	
+    	nameLabel.setTextFill(Color.BLACK);
+        addressLabel.setTextFill(Color.BLACK);
+        latLabel.setTextFill(Color.BLACK);
+        longLabel.setTextFill(Color.BLACK);
+        productLabel.setTextFill(Color.BLACK);
+        descriptionLabel.setTextFill(Color.BLACK);
+        zipLabel.setTextFill(Color.BLACK);
+        boroughLabel.setTextFill(Color.BLACK);
+        
+        boolean allValid = true;
+
+    	if (nameText.getText().equals("")) {
+    		nameLabel.setTextFill(Color.RED);
+    		allValid = false;
+    	}
+    	if (addressText.getText().equals("") && (latitudeText.getText().equals("") || longitudeText.getText().equals(""))) {
+            addressLabel.setTextFill(Color.RED);
+            latLabel.setTextFill(Color.RED);
+            longLabel.setTextFill(Color.RED);
+            allValid = false;
+        }
+        if (productText.getText().equals("")) {
+            productLabel.setTextFill(Color.RED);
+            allValid = false;
+        }
+        if (descriptionText.getText().equals("")) {
+            descriptionLabel.setTextFill(Color.RED);
+            allValid = false;
+        }
+        if (addressText.getText().equals("") && !isDouble(latitudeText.getText())) {
+            latLabel.setTextFill(Color.RED);
+            allValid = false;
+        }
+        if (addressText.getText().equals("") && !isDouble(longitudeText.getText())) {
+            longLabel.setTextFill(Color.RED);
+            allValid = false;
+        }
+        if (!zipText.getText().equals("") && !isInt(zipText.getText())) {
+            zipLabel.setTextFill(Color.RED);
+            allValid = false;
+        }
+        
+    	// TODO: Update the retailer instance and in database
+        if (allValid) {
+        	retailer.setAddress(addressText.getText());
+        	retailer.setBorough(boroughText.getText());
+        	retailer.setName(nameText.getText());
+        	retailer.setZip(Integer.parseInt(zipText.getText()));
+        }
+    	// TODO: Create a whole heap of setters
+
+    	// TODO: Redisplay the label and hide text fields and change buttons
+    }
+    
 
     @FXML
     void initialize() {

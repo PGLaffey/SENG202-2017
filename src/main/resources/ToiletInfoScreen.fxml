@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
@@ -71,16 +72,6 @@
         <Insets left="50.0" top="-5.0" />
       </GridPane.margin>
     </TextField>
-    <TextField id="nameText" fx:id="disabledText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
-      <GridPane.margin>
-        <Insets left="60.0" top="30.0" />
-      </GridPane.margin>
-    </TextField>
-    <TextField id="nameText" fx:id="unisexText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
-      <GridPane.margin>
-        <Insets left="55.0" top="65.0" />
-      </GridPane.margin>
-    </TextField>
     <TextField id="nameText" fx:id="addressText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
         <Insets left="60.0" top="100.0" />
@@ -106,6 +97,30 @@
         <Insets left="70.0" top="240.0" />
       </GridPane.margin>
     </TextField>
+    <ChoiceBox fx:id="disabledChoice" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+      <GridPane.margin>
+        <Insets left="60.0" top="30.0" />
+      </GridPane.margin>
+    </ChoiceBox>
+    <ChoiceBox id="disabledChoice" fx:id="unisexChoice" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+      <GridPane.margin>
+        <Insets left="55.0" top="65.0" />
+      </GridPane.margin>
+    </ChoiceBox>
   </children>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="250.0" prefWidth="-1.0" />
