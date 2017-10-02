@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seng202.Model.*;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +24,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import java.io.File;
 
 
 import javafx.scene.control.*;
@@ -517,31 +519,39 @@ public class TablesScreenController {
 	
 	@FXML
 	void exportPressed(ActionEvent event)  {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Export Data");
 		if (noDataLabel.isVisible()) {
 			nothingLabel.setVisible(true);
 		} else if (allLocationsTable.isVisible()) { //TODO: At the moment can't edit as they're locations so wont have all the data (e.g. cost for poi)
 			nothingLabel.setVisible(false);
 			ArrayList<Location> locData =  new ArrayList<Location>(allLocationsTable.getItems());
+			File file = fileChooser.showSaveDialog(null);
 		} else if (poiTable.isVisible()) {
 			nothingLabel.setVisible(false);
 			ArrayList<Poi> poiData = new ArrayList<Poi>(poiTable.getItems());
-			//FileManager.poiWriter(filename, poiData);
+			File file = fileChooser.showSaveDialog(null);
+			FileManager.poiWriter(file.toString() + ".csv", poiData);
 		} else if (retailersTable.isVisible()) {
 			nothingLabel.setVisible(false);
 			ArrayList<Retailer> retData = new ArrayList<Retailer>(retailersTable.getItems());
-			//FileManager.retailerWriter(filename, retData);
+			File file = fileChooser.showSaveDialog(null);
+			FileManager.retailerWriter(file.toString() + ".csv", retData);
 		} else if (wifiTable.isVisible()) {
 			nothingLabel.setVisible(false);
 			ArrayList<Wifi> wifiData = new ArrayList<Wifi>(wifiTable.getItems());
-			//FileManager.wifiWriter(filename, wifiData);
+			File file = fileChooser.showSaveDialog(null);
+			FileManager.wifiWriter(file.toString() + ".csv", wifiData);
 		} else if (toiletsTable.isVisible()) {
 			nothingLabel.setVisible(false);
 			ArrayList<Toilet> toiletData = new ArrayList<Toilet>(toiletsTable.getItems());
-			//FileManager.toiletWriter(filename, toiletData);
+			File file = fileChooser.showSaveDialog(null);
+			FileManager.toiletWriter(file.toString() + ".csv", toiletData);
 		} else if (routesTable.isVisible()) {
 			nothingLabel.setVisible(false);
 			ArrayList<Route> routeData = new ArrayList<Route>(routesTable.getItems());
-			//FileManager.routeWriter(filename, routeData);
+			File file = fileChooser.showSaveDialog(null);
+			FileManager.routeWriter(file.toString() + ".csv", routeData);
 		}
 	}
 
