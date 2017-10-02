@@ -40,8 +40,8 @@ public class LoginScreenController {
 	 * @throws Exception 
 	 */
 	public void signInButtonPressed() throws Exception {
-		signUpButtonPressed();
-/*		DataFetcher data = new DataFetcher();
+
+		DataFetcher data = new DataFetcher();
 		data.connectDb();
 		if (!usernameText.getText().isEmpty() && !passwordText.getText().isEmpty()) {
 			if (data.isUser(usernameText.getText()) == true) {
@@ -87,7 +87,7 @@ public class LoginScreenController {
 		} else {
 			incorrectPasswordLbl.setVisible(false);
 			incorrectUserLbl.setVisible(false);
-		}*/
+		}
 	}
 	
 
