@@ -452,4 +452,64 @@ public class FileManager {
             e.printStackTrace();
         }
     }
+
+
+    /**
+     * Reads an arrayList of strings from a file, converts each item to a Location object, and adds them to the currentStorage class.
+     * @param filename The name of the file where the information is being stored.
+     */
+    public static void generalRetriever(String filename) {
+        ArrayList<String> locations = readFile(filename);
+        if (!locations.isEmpty()) {
+
+            List header = Arrays.asList(locations.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
+            int nameIndex = indexer(header.indexOf("name"), header);
+            int latIndex = indexer(header.indexOf("latitude"), header);
+            int lonIndex = indexer(header.indexOf("longitude"), header);
+
+            locations.remove(0);
+
+            for (String location : locations) {
+
+                String[] information = location.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+
+                String name = information[nameIndex];
+                Double latitude = Double.parseDouble(information[latIndex]);
+                Double longitude = Double.parseDouble(information[lonIndex]);
+
+                Location newLoc = new Location(latitude, longitude, name, 4);
+
+                CurrentStorage.addNewGeneral(newLoc);
+            }
+        }
+    }
+
+
+    /**
+     * Takes an arrayList of locations and converts them into a .csv file at a specific location.
+     * @param filename The file the csv file is to be put in.
+     * @param locations An arrayList of the general locations to be stored.
+     */
+    public static void generalWriter(String filename, ArrayList<Location> locations) {
+        File newFile = new File(filename);
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(newFile));
+            if (!locations.isEmpty()) {
+                String header = "name,latitude,longitude\n";
+                bufferedWriter.write(header);
+                for (Location location : locations) {
+                    String name = location.getName();
+                    String latitude = Double.toString(location.getLatitude());
+                    String longitude = Double.toString(location.getLongitude());
+
+                    String strLocation = name + "," + latitude + "," + longitude + "\n";
+                    bufferedWriter.write(strLocation);
+                }
+                bufferedWriter.flush();
+                bufferedWriter.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

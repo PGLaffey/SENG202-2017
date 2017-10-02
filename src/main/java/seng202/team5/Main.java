@@ -37,7 +37,7 @@ public class Main extends Application {
 			exporter.connectDb();
 			exporter.storeCurrentStorage();
 			exporter.closeConnection();
-			FileManager.userSerialize(CurrentStorage.getUser(), "./src/main/resources/data_files/");
+			//FileManager.userSerialize(CurrentStorage.getUser(), "./src/main/resources/data_files/");
 			CurrentStorage.flush();
 			System.exit(0);
 		} catch (Exception e) {

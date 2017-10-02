@@ -540,7 +540,6 @@ public class CurrentStorage {
 		}
     }
 
-
     /**
      * Flushes all data out of arrayLists.
      */
@@ -551,5 +550,6 @@ public class CurrentStorage {
         wifiArray.clear();
         toiletArray.clear();
         poiArray.clear();
+        generalArray.clear();
     }
 }
