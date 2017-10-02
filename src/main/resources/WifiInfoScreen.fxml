@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0, 4;" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.Controller.WifiInfoScreenController">
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0, 4;" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.WifiInfoScreenController">
   <children>
     <Label id="objectInfoLabel" fx:id="nameLabel" prefWidth="386.0" text="Name:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <font>
@@ -116,6 +116,7 @@
     </Button>
     <Button id="okButton" fx:id="updateButton" font="$x2" mnemonicParsing="false" onAction="#updatePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Update" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
     <Button id="okButton" fx:id="saveButton" font="$x2" mnemonicParsing="false" onAction="#savePressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="Save" visible="false" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+      <Button id="okButton" fx:id="cancelButton" font="$x2" mnemonicParsing="false" onAction="#cancelPressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Cancel" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
   </children>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="250.0" prefWidth="-1.0" />
