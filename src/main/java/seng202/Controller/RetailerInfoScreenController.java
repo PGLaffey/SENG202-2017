@@ -66,6 +66,9 @@ public class RetailerInfoScreenController {
 
     @FXML
     private Button saveButton;
+    
+    @FXML
+    private Button cancelButton;
 
     @FXML
     private Button updateButton;
@@ -122,6 +125,7 @@ public class RetailerInfoScreenController {
     	okButton.setVisible(false);
     	updateButton.setVisible(false);
     	saveButton.setVisible(true);
+    	cancelButton.setVisible(true);
     }
     
     /**
@@ -200,14 +204,45 @@ public class RetailerInfoScreenController {
         
     	// TODO: Update the retailer instance and in database
         if (allValid) {
+        	if (addressText.getText().equals("")) {
+        		retailer.setLatitude(Double.parseDouble(latitudeText.getText()));
+        		retailer.setLongitude(Double.parseDouble(longitudeText.getText()));
+        	} else {
+        		retailer.setAddress(addressText.getText());
+        	}
         	retailer.setAddress(addressText.getText());
         	retailer.setBorough(boroughText.getText());
         	retailer.setName(nameText.getText());
-        	retailer.setZip(Integer.parseInt(zipText.getText()));
-        }
-    	// TODO: Create a whole heap of setters
+        	if (!zipText.getText().equals("")) {
+            	retailer.setZip(Integer.parseInt(zipText.getText()));
 
-    	// TODO: Redisplay the label and hide text fields and change buttons
+        	}
+        }
+        cancelPressed(event);
+    }
+    
+    @FXML
+    void cancelPressed(ActionEvent event) {
+    	nameLabel.setText("Name: " + retailer.getName());
+    	nameText.setVisible(false);
+    	addressLabel.setText("Address: " + retailer.getAddress());
+    	addressText.setVisible(false);
+    	latLabel.setText("Latitude: " + retailer.getLatitude());
+    	latitudeText.setVisible(false);
+    	longLabel.setText("Longitude: " + retailer.getLongitude());
+    	longitudeText.setVisible(false);
+    	zipLabel.setText("Zip: " + retailer.getZip());
+    	zipText.setVisible(false);
+    	boroughLabel.setText("Borough: " + retailer.getBorough());
+    	boroughText.setVisible(false);
+    	productLabel.setText("Product: " + retailer.getProduct());
+    	productText.setVisible(false);
+    	descriptionLabel.setText("Description: " + retailer.getDescription());
+    	descriptionText.setVisible(false);
+    	okButton.setVisible(true);
+    	updateButton.setVisible(true);
+    	saveButton.setVisible(false);
+    	cancelButton.setVisible(false);
     }
     
 

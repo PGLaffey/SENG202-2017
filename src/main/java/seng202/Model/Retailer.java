@@ -137,4 +137,12 @@ public class Retailer extends Location {
     public void setCoord(Coord coord) {
         this.coord = coord;
     }
+    
+    public void setProduct(String prod) {
+    	product = prod;
+    }
+    
+    public void setDescription(String desc) {
+    	description = desc;
+    }
 }
