@@ -74,12 +74,20 @@ public class Location {
     public double getLatitude() {
         return latitude;
     }
+    
+    public void setLatitude(double lat) {
+    	latitude = lat;
+    }
 
     /**
      * Getter for the locations longitude
      */
     public double getLongitude() {
         return longitude;
+    }
+    
+    public void setLongitude(double lon) {
+    	longitude = lon;
     }
 
     /**
