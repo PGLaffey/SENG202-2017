@@ -37,11 +37,11 @@ public class LoginScreenController {
 	
 	/** 
 	 * Method for when the Sign In button is pressed. Checks the login, informing if information is wrong otherwise shows login screen.
-	 * @throws IOException 
+	 * @throws Exception 
 	 */
-	public void signInButtonPressed() throws IOException, IllegalAccessException, ClassNotFoundException, InstantiationException {
-
-		DataFetcher data = new DataFetcher();
+	public void signInButtonPressed() throws Exception {
+		signUpButtonPressed();
+/*		DataFetcher data = new DataFetcher();
 		data.connectDb();
 		if (!usernameText.getText().isEmpty() && !passwordText.getText().isEmpty()) {
 			if (data.isUser(usernameText.getText()) == true) {
@@ -50,10 +50,10 @@ public class LoginScreenController {
 					incorrectUserLbl.setVisible(true);
 				} else if ((data.fetchPassword(usernameText.getText()).equals(passwordText.getText().toString()))) {
 
-				/*	Thread retailerImporter = new Thread(new RetailerImporterThread(new File(getClass().getResource("/data_files/").getFile()).toString() + "/Retailers_subset.csv"));
-					retailerImporter.start();*/
-			/*		Thread wifiImporter = new Thread(new WifiImporterThread(new File(getClass().getResource("/data_files/").getFile()).toString() + "/NYC_Free_Public_WiFi_03292017.csv"));
-					wifiImporter.start();*/
+					Thread retailerImporter = new Thread(new RetailerImporterThread(new File(getClass().getResource("/data_files/").getFile()).toString() + "/Retailers_subset.csv"));
+					retailerImporter.start();
+					Thread wifiImporter = new Thread(new WifiImporterThread(new File(getClass().getResource("/data_files/").getFile()).toString() + "/NYC_Free_Public_WiFi_03292017.csv"));
+					wifiImporter.start();
 			//new File(getClass().getResource("/data_files/").getFile()).toString() +"/2014-01 - Citi Bike trip data.csv"
 					//Thread routeImporter = new Thread(new RouteImporterThread(new File(getClass().getResource("/data_files/2014-01 - Citi Bike trip data.csv").getPath().replaceAll("%20", " ")).getPath()));
 					//routeImporter.start();
@@ -87,7 +87,7 @@ public class LoginScreenController {
 		} else {
 			incorrectPasswordLbl.setVisible(false);
 			incorrectUserLbl.setVisible(false);
-		}
+		}*/
 	}
 	
 

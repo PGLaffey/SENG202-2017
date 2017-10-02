@@ -115,7 +115,7 @@
       </font>
     </Button>
     <Button id="okButton" fx:id="updateButton" font="$x2" mnemonicParsing="false" onAction="#updatePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Update" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-    <Button id="okButton" fx:id="saveButton" font="$x2" mnemonicParsing="false" onAction="#savePressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="Ok" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <Button id="okButton" fx:id="saveButton" font="$x2" mnemonicParsing="false" onAction="#savePressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="Save" visible="false" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
   </children>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="250.0" prefWidth="-1.0" />
