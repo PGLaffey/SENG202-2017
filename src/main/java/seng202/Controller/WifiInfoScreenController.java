@@ -82,6 +82,9 @@ public class WifiInfoScreenController {
     @FXML
     private TextField zipText;
 
+    @FXML
+    private Button cancelButton;
+
     
     private Wifi wifi;
 
@@ -132,6 +135,7 @@ public class WifiInfoScreenController {
     	okButton.setVisible(false);
     	updateButton.setVisible(false);
     	saveButton.setVisible(true);
+    	cancelButton.setVisible(true);
     }
     
     /**
@@ -168,7 +172,7 @@ public class WifiInfoScreenController {
      */
     @FXML
     void savePressed(ActionEvent event) {
-    	// TODO: Check user has inputed the correct data
+
     	nameLabel.setTextFill(Color.BLACK);
         ssidLabel.setTextFill(Color.BLACK);
         addressLabel.setTextFill(Color.BLACK);
@@ -177,6 +181,7 @@ public class WifiInfoScreenController {
         boroughLabel.setTextFill(Color.BLACK);
         typeLabel.setTextFill(Color.BLACK);
         providerLabel.setTextFill(Color.BLACK);
+        zipLabel.setTextFill(Color.BLACK);
 
         boolean allValid = true;
 
@@ -218,18 +223,52 @@ public class WifiInfoScreenController {
     	    zipLabel.setTextFill(Color.RED);
     	    allValid = false;
     	}
-    	// TODO: Update the poi instance and in database
         
         if (allValid) {
-        	wifi.setAddress(addressText.getText());
-        	wifi.setBorough(boroughText.getText());
-        	wifi.setName(nameText.getText());
-        	wifi.setZip(Integer.parseInt(zipText.getText()));
-        }
-    	// TODO: Create a whole heap of setters
+            if (addressText.getText().equals("")) {
+                wifi.setLatitude(Double.parseDouble(latitudeText.getText()));
+                wifi.setLongitude(Double.parseDouble(longitudeText.getText()));
+            } else {
+                wifi.setAddress(addressText.getText());
+            }
+            wifi.setBorough(boroughText.getText());
+            wifi.setName(nameText.getText());
+            wifi.setSsid(ssidText.getText());
+            wifi.setProvider(providerText.getText());
+            wifi.setType(typeText.getText());
+            if (!zipText.getText().equals("")) {
+                wifi.setZip(Integer.parseInt(zipText.getText()));
+            }
+            // TODO: Update the database
 
-    	// TODO: Redisplay the label and hide text fields and change buttons
-    	
+            cancelPressed(event);
+        }
+    }
+
+    @FXML
+    void cancelPressed (ActionEvent event) {
+        nameLabel.setText("Name: " + wifi.getName());
+        nameText.setVisible(false);
+        typeLabel.setText("Type: " + wifi.getType());
+        typeText.setVisible(false);
+        boroughLabel.setText("Borough: " + wifi.getBorough());
+        boroughText.setVisible(false);
+        latLabel.setText("Latitude: " + wifi.getLatitude());
+        latitudeText.setVisible(false);
+        longLabel.setText("Longitude: " + wifi.getLongitude());
+        longitudeText.setVisible(false);
+        providerLabel.setText("Provider: " + wifi.getProvider());
+        providerText.setVisible(false);
+        zipLabel.setText("Zip: " + wifi.getZip());
+        zipText.setVisible(false);
+        addressLabel.setText("Adress: " + wifi.getAddress());
+        addressText.setVisible(false);
+        ssidLabel.setText("Ssid: " + wifi.getSsid());
+        ssidText.setVisible(false);
+        cancelButton.setVisible(false);
+        saveButton.setVisible(false);
+        okButton.setVisible(true);
+        updateButton.setVisible(true);
     }
 
     @FXML

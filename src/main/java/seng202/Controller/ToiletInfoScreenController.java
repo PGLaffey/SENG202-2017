@@ -39,7 +39,7 @@ public class ToiletInfoScreenController {
     private Label disabledLabel;
 
     @FXML
-    private ChoiceBox disabledChoice;
+    private ChoiceBox<Boolean> disabledChoice;
 
     @FXML
     private Label latLabel;
@@ -69,7 +69,7 @@ public class ToiletInfoScreenController {
     private Label unisexLabel;
 
     @FXML
-    private ChoiceBox unisexChoice;
+    private ChoiceBox<Boolean> unisexChoice;
 
     @FXML
     private Button updateButton;
@@ -79,6 +79,9 @@ public class ToiletInfoScreenController {
 
     @FXML
     private TextField zipText;
+
+    @FXML
+    private Button cancelButton;
 
     private Toilet toilet;
 
@@ -126,6 +129,7 @@ public class ToiletInfoScreenController {
     	okButton.setVisible(false);
     	updateButton.setVisible(false);
     	saveButton.setVisible(true);
+    	cancelButton.setVisible(true);
     }
     
     /**
@@ -162,7 +166,7 @@ public class ToiletInfoScreenController {
      */
     @FXML
     void savePressed(ActionEvent event) {
-    	// TODO: Check user has inputed the correct data
+
     	nameLabel.setTextFill(Color.BLACK);
         addressLabel.setTextFill(Color.BLACK);
         latLabel.setTextFill(Color.BLACK);
@@ -204,17 +208,52 @@ public class ToiletInfoScreenController {
             zipLabel.setTextFill(Color.RED);
             allValid = false;
         }
-    	// TODO: Update the toilet instance and in database
+
         if (allValid) {
-        	toilet.setAddress(addressText.getText());
+    	    if (addressText.getText().equals("")) {
+    	        toilet.setLatitude(Double.parseDouble(latitudeText.getText()));
+    	        toilet.setLongitude(Double.parseDouble(longitudeText.getText()));
+            } else {
+                toilet.setAddress(addressText.getText());
+            }
         	toilet.setBorough(boroughText.getText());
         	toilet.setName(nameText.getText());
-        	toilet.setZip(Integer.parseInt(zipText.getText()));
-        }
-    	// TODO: Create a whole heap of setters
+        	if (!zipText.getText().equals("")) {
+                toilet.setZip(Integer.parseInt(zipText.getText()));
+            }
+            toilet.setForDisabled(disabledChoice.getValue());
+        	toilet.setUniSex(unisexChoice.getValue());
 
-    	// TODO: Redisplay the label and hide text fields and change buttons
+        	// TODO: Update the database
+
+        	cancelPressed(event);
+        }
     }
+
+    @FXML
+    void cancelPressed (ActionEvent event) {
+        disabledLabel.setText("Disabled: " + String.valueOf(toilet.getForDisabled()));
+        disabledChoice.setVisible(false);
+        latLabel.setText("Latitude: " + toilet.getLatitude());
+        latitudeText.setVisible(false);
+        longLabel.setText("Longitude " + toilet.getLongitude());
+        longitudeText.setVisible(false);
+        nameLabel.setText("Name: " + toilet.getName());
+        nameText.setVisible(false);
+        unisexLabel.setText("Uni Sex: " + String.valueOf(toilet.getUniSex()));
+        unisexChoice.setVisible(false);
+        zipLabel.setText("Zip: " + toilet.getZip());
+        zipText.setVisible(false);
+        boroughLabel.setText("Borough: " + toilet.getBorough());
+        boroughText.setVisible(false);
+        addressLabel.setText("Address: " + toilet.getAddress());
+        addressText.setVisible(false);
+        cancelButton.setVisible(false);
+        saveButton.setVisible(false);
+        okButton.setVisible(true);
+        updateButton.setVisible(true);
+    }
+
 
     @FXML
     void initialize() {

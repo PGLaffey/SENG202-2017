@@ -1,6 +1,7 @@
 package seng202.Controller;
 
 import java.net.URL;
+import java.util.DoubleSummaryStatistics;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -78,6 +79,9 @@ public class PoiInfoScreenController {
     
     @FXML
     private Button saveButton;
+
+    @FXML
+    private Button cancelButton;
     
     private Poi poi;
 
@@ -125,6 +129,7 @@ public class PoiInfoScreenController {
     	okButton.setVisible(false);
     	updateButton.setVisible(false);
     	saveButton.setVisible(true);
+    	cancelButton.setVisible(true);
     }
     
     /**
@@ -157,7 +162,7 @@ public class PoiInfoScreenController {
     
     @FXML
     void savePressed(ActionEvent event) {
-    	// TODO: Check user has inputed the correct data
+
     	nameLabel.setTextFill(Color.BLACK);
     	addressLabel.setTextFill(Color.BLACK);
     	longLabel.setTextFill(Color.BLACK);
@@ -203,95 +208,51 @@ public class PoiInfoScreenController {
             costLabel.setTextFill(Color.RED);
             allValid = false;
     	}
-    	// TODO: Update the poi instance and in database
+
         if (allValid) {
-        	poi.setAddress(addressText.getText());
+    	    if (addressText.getText().equals("")) {
+    	        poi.setLongitude(Double.parseDouble(longitudeText.getText()));
+    	        poi.setLatitude(Double.parseDouble(latitudeText.getText()));
+            } else {
+                poi.setAddress(addressText.getText());
+            }
         	poi.setBorough(boroughText.getText());
         	poi.setName(nameText.getText());
-        	poi.setZip(Integer.parseInt(zipText.getText()));
+        	if (!zipText.getText().equals("")) {
+                poi.setZip(Integer.parseInt(zipText.getText()));
+            }
+            poi.setDescription(descriptionText.getText());
+        	poi.setCost(Double.parseDouble(costText.getText()));
+
+        	// TODO: Update database
+
+        	cancelPressed(event);
         }
-    	// TODO: Create a whole heap of setters
-    	// TODO: Redisplay the label and hide text fields and change buttons
     }
     
-    
-    
-    
-/*    poiNameLabel.setTextFill(Color.BLACK);
-    poiAddressLabel.setTextFill(Color.BLACK);
-    poiLatLabel.setTextFill(Color.BLACK);
-    poiLongLabel.setTextFill(Color.BLACK);
-    poiCostLabel.setTextFill(Color.BLACK);
-    poiDescriptionLabel.setTextFill(Color.BLACK);
-    poiZipLabel.setTextFill(Color.BLACK);
-
-    boolean allValid = true;
-
-	if (poiNameText.getText().equals("")) {
-		poiNameLabel.setTextFill(Color.RED);
-        allValid = false;
+    @FXML
+    void cancelPressed(ActionEvent event) {
+        costLabel.setText("Cost: $" + poi.getCost());
+        costText.setVisible(false);
+        descriptionLabel.setText("Description: " + poi.getDescription());
+        descriptionText.setVisible(false);
+        latLabel.setText("Latitude: " + poi.getLatitude());
+        latitudeText.setVisible(false);
+        longLabel.setText("Longitude: " + poi.getLongitude());
+        longitudeText.setVisible(false);
+        nameLabel.setText("Name: " + poi.getName());
+        nameText.setVisible(false);
+        zipLabel.setText("Zip: " + poi.getZip());
+        zipText.setVisible(false);
+        boroughLabel.setText("Borough: " + poi.getBorough());
+        boroughText.setVisible(false);
+        addressLabel.setText("Address: " + poi.getAddress());
+        addressText.setVisible(false);
+        cancelButton.setVisible(false);
+        saveButton.setVisible(false);
+        okButton.setVisible(true);
+        updateButton.setVisible(true);
     }
-	if (poiAddressText.getText().equals("") && (poiLatText.getText().equals("") || poiLongText.getText().equals(""))) {
-        poiAddressLabel.setTextFill(Color.RED);
-        poiLatLabel.setTextFill(Color.RED);
-        poiLongLabel.setTextFill(Color.RED);
-        allValid = false;
-    }
-    if(poiCostText.getText().equals("")) {
-        poiCostLabel.setTextFill(Color.RED);
-        allValid = false;
-    }
-    if (poiDescriptionText.getText().equals("")) {
-        poiDescriptionLabel.setTextFill(Color.RED);
-        allValid = false;
-    }
-    if (poiAddressText.getText().equals("") && !isDouble(poiLatText.getText())) {
-        poiLatLabel.setTextFill(Color.RED);
-        allValid = false;
-    }
-    if (poiAddressText.getText().equals("") && !isDouble(poiLongText.getText())) {
-        poiLongLabel.setTextFill(Color.RED);
-        allValid = false;
-    }
-    if (!poiZipText.getText().equals("") && !isInt(poiZipText.getText())) {
-        poiZipLabel.setTextFill(Color.RED);
-        allValid = false;
-    }
-    if (!poiCostText.getText().equals("") && !isDouble(poiCostText.getText())) {
-        poiCostLabel.setTextFill(Color.RED);
-        allValid = false;
-	}
-
-	if (allValid) {
-        Poi poi;
-        if (!poiAddressText.getText().equals("")) {
-            poi = new Poi(poiAddressText.getText(), poiNameText.getText(), poiDescriptionText.getText(), Double.parseDouble(poiCostText.getText()));
-        } else {
-            poi = new Poi(Double.parseDouble(poiLatText.getText()), Double.parseDouble(poiLongText.getText()), poiNameText.getText(), poiDescriptionText.getText(), Double.parseDouble(poiCostText.getText()));
-        }
-        if (!poiZipText.getText().equals("")) {
-            poi.setZip(Integer.parseInt(poiZipText.getText()));
-        }
-        if (!poiBoroughText.getText().equals("")) {
-            poi.setBorough(poiBoroughText.getText());
-        }
-        CurrentStorage.addNewPoi(poi);
-
-        poiNameLabel.setTextFill(Color.BLACK);
-        poiAddressLabel.setTextFill(Color.BLACK);
-        poiLatLabel.setTextFill(Color.BLACK);
-        poiLongLabel.setTextFill(Color.BLACK);
-        poiCostLabel.setTextFill(Color.BLACK);
-        poiDescriptionLabel.setTextFill(Color.BLACK);
-        poiZipLabel.setTextFill(Color.BLACK);
-        poiNameText.setText("");
-        poiAddressText.setText("");
-        poiLatText.setText("");
-        poiLongText.setText("");
-        poiZipText.setText("");
-        poiBoroughText.setText("");
-        poiCostText.setText("");
-        poiDescriptionText.setText("");*/
     
     @FXML
     void initialize() {

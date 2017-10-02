@@ -158,7 +158,6 @@ public class RetailerInfoScreenController {
     
     @FXML
     void savePressed(ActionEvent event) {
-    	// TODO: Check user has inputed the correct data
     	
     	nameLabel.setTextFill(Color.BLACK);
         addressLabel.setTextFill(Color.BLACK);
@@ -201,8 +200,7 @@ public class RetailerInfoScreenController {
             zipLabel.setTextFill(Color.RED);
             allValid = false;
         }
-        
-    	// TODO: Update the retailer instance and in database
+
         if (allValid) {
         	if (addressText.getText().equals("")) {
         		retailer.setLatitude(Double.parseDouble(latitudeText.getText()));
@@ -210,15 +208,21 @@ public class RetailerInfoScreenController {
         	} else {
         		retailer.setAddress(addressText.getText());
         	}
-        	retailer.setAddress(addressText.getText());
         	retailer.setBorough(boroughText.getText());
         	retailer.setName(nameText.getText());
         	if (!zipText.getText().equals("")) {
             	retailer.setZip(Integer.parseInt(zipText.getText()));
 
         	}
+        	retailer.setDescription(descriptionText.getText());
+        	retailer.setProduct(productText.getText());
+
+        	// TODO: Work out how to update the database
+
+            cancelPressed(event);
+
         }
-        cancelPressed(event);
+
     }
     
     @FXML
