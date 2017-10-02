@@ -37,12 +37,16 @@ public class Poi extends Location {
         return description;
     }
 
+    public void setDescription(String desc) { description = desc; }
+
     /**
      * Getter for the cost of the POI
      */
     public double getCost() {
         return cost;
     }
+
+    public void setCost(Double c) { cost = c; }
 
     /**
      * Getter for the marker for the POI
