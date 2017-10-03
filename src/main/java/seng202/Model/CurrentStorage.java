@@ -24,12 +24,19 @@ public class CurrentStorage {
     private static Wifi wifiViewed;
     private static Retailer retailerViewed;
     private static Toilet toiletViewed;
+    
+    private static Integer toiletIndex;
+    
     private static Poi poiViewed;
     private static Location locationViewed;
     private static Route routeViewed;
 
     private static Location newRouteStart;
     private static Location newRouteEnd;
+    
+    public static void setToiletIndex(Integer i) { toiletIndex = i; }
+    
+    public static Integer getToiletIndex() {return toiletIndex; }
 
 	/**
 	 * Getter for the current user

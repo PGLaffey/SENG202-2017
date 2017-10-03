@@ -453,7 +453,8 @@ public class TablesScreenController {
 	@FXML
     void toiletTableClicked(MouseEvent event) throws IOException {
     	Toilet row = toiletsTable.getSelectionModel().getSelectedItem();
-    	CurrentStorage.setToilet(row);
+    	//CurrentStorage.setToilet(row);
+    	CurrentStorage.setToiletIndex(CurrentStorage.getToiletArray().indexOf(row));
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/ToiletInfoScreen.fxml"));
 
