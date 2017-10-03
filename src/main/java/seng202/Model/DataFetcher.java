@@ -1027,16 +1027,69 @@ public class DataFetcher {
     	}
     }
 
-    private ArrayList<ArrayList<String>> searchData(String condition) {
+    private ArrayList<ArrayList<String>> searchData(String condition, String type) {
     	PreparedStatement preparedStatement;
     	try {
-    		ArrayList<String> output = new ArrayList<String>();
-			preparedStatement = connect.prepareStatement("SELECT * FROM tblLocations WHERE address LIKE ?");
-			preparedStatement.setString(1, "%"+condition+"%");
-			output = runQuery(preparedStatement).get(0);
+			ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
+    		switch (type) {
+				case("Route"):
+					preparedStatement = connect.prepareStatement("SELECT tblRoutes.*, loc1.latitude, loc1.longitude, " +
+							"loc1.name, loc1.public, loc1.borough, loc1.zip, loc1.address, loc2.latitude, loc2.longitude, " +
+							"loc2.name, loc2.public, loc2.borough, loc2.zip, loc2.address FROM tblRoutes, " +
+							"tblLocations loc1, tblLocations loc2 WHERE tblRoutes.startID=loc1.locationID AND " +
+							"tblRoutes.endID = loc2.locationID AND (LOWER(tblRoutes.name) LIKE ? OR " +
+							"LOWER(loc1.name) LIKE ? OR LOWER(loc2.name) LIKE ? " +
+							"LOWER(tblRoutes.name) LIKE ? OR LOWER(loc1.borough) LIKE ? OR LOWER(loc2.borough) LIKE ? " +
+							"tblRoutes.bikeID LIKE ? OR tblRoutes.gender LIKE ? OR LOWER(loc1.address) LIKE ? " +
+							"OR LOWER(loc2.address) LIKE ? OR loc1.latitude LIKE ? OR loc2.latitude LIKE ? OR " +
+							"loc1.longitude LIKE ? OR loc2.longitude LIKE ? OR" +
+							"loc1.zip LIKE ? OR loc2.zip LIKE ?)");
+					for (int i = 1; i <= 16; i++) {
+						preparedStatement.setString(i, "%" + condition.toLowerCase() + "%");
+					}
+					output = runQuery(preparedStatement);
+					break;
+				case("Retailer"):
+					preparedStatement = connect.prepareStatement("SELECT tblRetailers.*, loc1.latitude, loc1.longitude, " +
+							"loc1.name, loc1.public, loc1.borough, loc1.zip, loc1.address FROM tblRetailers, " +
+							"tblLocations loc1 WHERE tblRetailers.RetailerID=tblLocations.RetailerID AND " +
+							"(LOWER(tblRetailers.retailerType) LIKE ? OR LOWER(tblRetailers.Description) LIKE ?" +
+							"LOWER(loc1.name) LIKE ? OR LOWER(loc1.zip) LIKE ? OR LOWER(loc1.latitude) LIKE ? OR" +
+							"LOWER(loc1.borough) LIKE ? OR LOWER(loc1.longitude) LIKE ? OR LOWER(loc1.address) LIKE ?" +
+							") ");
+					for (int i = 1; i <= 8; i++) {
+						preparedStatement.setString(i, "%" + condition.toLowerCase() + "%");
+					}
+					output = runQuery(preparedStatement);
+					break;
+
+				case("Wifi"):
+					preparedStatement = connect.prepareStatement("SELECT tblRetailers.*, loc1.latitude, loc1.longitude, " +
+							"loc1.name, loc1.public, loc1.borough, loc1.zip, loc1.address FROM tblRetailers, " +
+							"tblLocations loc1 WHERE tblRetailers.RetailerID=tblLocations.RetailerID AND " +
+							"(LOWER(tblRetailers.retailerType) LIKE ? OR LOWER(tblRetailers.Description) LIKE ?" +
+							"LOWER(loc1.name) LIKE ? OR LOWER(loc1.zip) LIKE ? OR LOWER(loc1.latitude) LIKE ? OR" +
+							"LOWER(loc1.borough) LIKE ? OR LOWER(loc1.longitude) LIKE ? OR LOWER(loc1.address) LIKE ?" +
+							") ");
+					for (int i = 1; i <= 8; i++) {
+						preparedStatement.setString(i, "%" + condition.toLowerCase() + "%");
+					}
+					output = runQuery(preparedStatement);
+					break;
+			}
+
+
+
+
+
+
+
+
+
+
 
 		} catch (SQLException sqlException) {
-
+			printSqlError(sqlException);
 		}
 		return null;
 	}
