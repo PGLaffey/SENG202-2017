@@ -1064,14 +1064,14 @@ public class DataFetcher {
 					break;
 
 				case("Wifi"):
-					preparedStatement = connect.prepareStatement("SELECT tblRetailers.*, loc1.latitude, loc1.longitude, " +
-							"loc1.name, loc1.public, loc1.borough, loc1.zip, loc1.address FROM tblRetailers, " +
-							"tblLocations loc1 WHERE tblRetailers.RetailerID=tblLocations.RetailerID AND " +
-							"(LOWER(tblRetailers.retailerType) LIKE ? OR LOWER(tblRetailers.Description) LIKE ?" +
+					preparedStatement = connect.prepareStatement("SELECT tblWifi.*, loc1.latitude, loc1.longitude, " +
+							"loc1.name, loc1.public, loc1.borough, loc1.zip, loc1.address FROM tblWifi, " +
+							"tblLocations loc1 WHERE tblRetailers.WifiID=tblLocations.WifiID AND " +
+							"(LOWER(tblWifi.SSID) LIKE ? OR LOWER(tblWifi.Provider) LIKE ? OR LOWER(tblWifi.Type) LIKE ?" +
 							"LOWER(loc1.name) LIKE ? OR LOWER(loc1.zip) LIKE ? OR LOWER(loc1.latitude) LIKE ? OR" +
 							"LOWER(loc1.borough) LIKE ? OR LOWER(loc1.longitude) LIKE ? OR LOWER(loc1.address) LIKE ?" +
 							") ");
-					for (int i = 1; i <= 8; i++) {
+					for (int i = 1; i <= 9; i++) {
 						preparedStatement.setString(i, "%" + condition.toLowerCase() + "%");
 					}
 					output = runQuery(preparedStatement);
