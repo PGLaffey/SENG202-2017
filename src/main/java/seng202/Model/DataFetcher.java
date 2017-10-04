@@ -287,7 +287,7 @@ public class DataFetcher {
 	public void loadAllRoutes() {
     	Route route = null;
     	try {
-    		PreparedStatement qryLoadRoutes = connect.prepareStatement("SELECT * FROM tblRoutes LIMIT ?, 50");
+    		PreparedStatement qryLoadRoutes = connect.prepareStatement("SELECT * FROM tblRoutes LIMIT ?, 1000");
     		qryLoadRoutes.setInt(1, routeOffset);
 			ResultSet output = qryLoadRoutes.executeQuery();
 			routeOffset += output.getFetchSize();
@@ -496,7 +496,7 @@ public class DataFetcher {
     		//Initialize the query to fetch all locations from the database and its result set
 			String[] locationTypes = {"Retailer", "Toilet", "Poi", "Wifi"};
 			for (String location : locationTypes) {
-				PreparedStatement qryLoadLocations = connect.prepareStatement("SELECT * FROM tblLocations WHERE " + location + "ID IS NOT NULL LIMIT ?, 50");
+				PreparedStatement qryLoadLocations = connect.prepareStatement("SELECT * FROM tblLocations WHERE " + location + "ID IS NOT NULL LIMIT ?, 1000");
 				switch(location) {
 					case("Retailer"): qryLoadLocations.setInt(1, retailerOffset);
 						break;
