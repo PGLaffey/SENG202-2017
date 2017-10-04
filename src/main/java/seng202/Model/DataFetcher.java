@@ -13,6 +13,7 @@ public class DataFetcher {
 	/**
 	 * @return true if an object has already been imported to the database
 	 */
+	// TODO: Change docstring
     public boolean isHasImported() {
     	return hasImported;
 	}
@@ -21,6 +22,7 @@ public class DataFetcher {
 	 * Sets the value of hasImported to true if the object is already in the database
 	 * @param value boolean value for whether an object has been imported previously
 	 */
+	// TODO: Change docstring
 	public void setHasImported(boolean value) {
     	hasImported = value;
 	}
@@ -283,7 +285,6 @@ public class DataFetcher {
      * Loads a route into the application
      * @param route Route to add into the application
      */
-
     public void loadRoute(Route route) {
     	double[] startCoords = route.getStart().getCoords();
     	double[] endCoords = route.getEnd().getCoords();

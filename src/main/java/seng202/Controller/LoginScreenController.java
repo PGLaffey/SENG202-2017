@@ -43,6 +43,7 @@ public class LoginScreenController {
 
 		DataFetcher data = new DataFetcher();
 		data.connectDb();
+		//TODO: Jack to change
 		if (!usernameText.getText().isEmpty() && !passwordText.getText().isEmpty()) {
 			if (data.isUser(usernameText.getText()) == true) {
 				if (data.fetchPassword(usernameText.getText()).isEmpty()) {
@@ -61,7 +62,6 @@ public class LoginScreenController {
 					user = new User(userInfo.get(0), userInfo.get(1), usernameText.getText().toLowerCase(), userInfo.get(2), passwordText.getText().toString(),
 							Integer.parseInt(userInfo.get(3)), Double.parseDouble(userInfo.get(4)), Double.parseDouble(userInfo.get(5)));
 						//FileManager.userSerialize(user, "./src/main/resources/data_files/");
-
 					CurrentStorage.setUser(user);
 					System.out.println(userInfo.get(5));
 					Stage primaryStage = (Stage) signInButton.getScene().getWindow();
