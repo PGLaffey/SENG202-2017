@@ -4,6 +4,8 @@ import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 
+import static seng202.Model.CurrentStorage.getUser;
+
 public class DataFetcher {
     private Connection connect = null;
     private boolean hasImported = false;
@@ -122,7 +124,7 @@ public class DataFetcher {
 	 */
 	public ArrayList<String> fetchUserInfo(String username) {
 		PreparedStatement preparedStatement;
-		String stmt = "SELECT FName, LNAME, YearOfBirth FROM tblUser WHERE Username = ?";
+		String stmt = "SELECT FName, LNAME, YearOfBirth, NumRoutesCycled, DistanceCycled, HoursCycled FROM tblUser WHERE Username = ?";
 
 		try {
 			preparedStatement = connect.prepareStatement(stmt);
@@ -189,6 +191,31 @@ public class DataFetcher {
 		storeNewWifi();
 		storeNewPoi();
 		storeNewGeneral();
+		storeUser();
+	}
+
+	/**
+	 * Updates the user's information on the database
+	 */
+
+	private void storeUser() {
+		User user = getUser();
+		PreparedStatement preparedStatement;
+		String username = user.getUsername();
+		int routesCycled = user.getRoutesCycled();
+		double hoursCycled = user.getHours();
+		double distanceCycled = user.getDistance();
+			String stmt = "UPDATE tblUser SET NumRoutesCycled = ?, HoursCycled = ?, DistanceCycled = ? WHERE Username = ?";
+			try {
+				preparedStatement = connect.prepareStatement(stmt);
+				preparedStatement.setInt(1, routesCycled);
+				preparedStatement.setDouble(2, hoursCycled);
+				preparedStatement.setDouble(3, distanceCycled);
+				preparedStatement.setString(4, username);
+				runUpdate(preparedStatement);
+			} catch (SQLException sqlException) {
+				System.out.println(sqlException.getMessage());
+		}
 	}
 
 	/**

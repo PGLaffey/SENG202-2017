@@ -549,10 +549,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     void logoutPressed(ActionEvent event) throws IOException {
         DataFetcher exporter = new DataFetcher();
         try {
-            //exporter.connectDb();
-            //exporter.storeCurrentStorage();
-            //exporter.closeConnection();
-            FileManager.userSerialize(CurrentStorage.getUser(), "./src/main/resources/data_files/");
+            exporter.connectDb();
+            exporter.storeCurrentStorage();
+            exporter.closeConnection();
             CurrentStorage.flush();
             System.exit(0);
         } catch (Exception e) {
@@ -1114,6 +1113,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         }
         if (!retailerZipText.getText().equals("") && !isInt(retailerZipText.getText())) {
             retailerZipLabel.setTextFill(Color.RED);
+            allValid = false;
         }
 
         if (allValid) {

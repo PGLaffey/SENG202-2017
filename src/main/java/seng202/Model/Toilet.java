@@ -43,6 +43,8 @@ public class Toilet extends Location {
         return forDisabled;
     }
 
+    public void setForDisabled(boolean bool) { forDisabled = bool; }
+
     /**
      * Getter for whether the toilet is unisex
      * @return boolean for if the toilet is unisex
@@ -50,6 +52,8 @@ public class Toilet extends Location {
     public boolean getUniSex() {
         return uniSex;
     }
+
+    public void setUniSex(boolean bool) { uniSex = bool; }
 
     /**
      * Returns whether the toilet locations are equal

@@ -41,12 +41,16 @@ public class Wifi extends Location {
         return this.ssid;
     }
 
+    public void setSsid(String ss) { ssid = ss; }
+
     /**
      * Getter for the wifi provider
      */
     public String getProvider() {
         return provider;
     }
+
+    public void setProvider(String prov) { provider = prov; }
 
     /**
      * Getter for the marker of the wifi point
@@ -64,6 +68,8 @@ public class Wifi extends Location {
     public String getType() {
         return type;
     }
+
+    public void setType(String ty) { type = ty; }
 
     /**
      *  @return True if wifi objects are equal

@@ -12,53 +12,6 @@ import java.util.List;
 public class FileManager {
 
     /**
-     * Serializes an instance of the User class (exporting out of the program).
-     * @param user The User object to be stored in a file.
-     * @param filePath The filepath that the user object is to be stored at.
-     */
-    public static void userSerialize(User user, String filePath){
-        try {
-            File newFile = new File(filePath + "/" + user.getUsername() + ".ser");
-            FileOutputStream userOutFile = new FileOutputStream(newFile);
-            ObjectOutputStream out = new ObjectOutputStream(userOutFile);
-            out.writeObject(user);
-            out.flush();
-            out.close();
-            userOutFile.close();
-
-        } catch (IOException ioExcept) {
-            ioExcept.printStackTrace();
-        }
-    }
-
-
-    /**
-     * Deserializes an instance of the User class (importing into the program).
-     * @param filePath The filepath of the file where the user object should be.
-     * @return The User object stored in the named file.
-     */
-    public static User userDeserialize(String filePath) {
-        User user = null;
-        try {
-            FileInputStream userInFile = new FileInputStream(filePath);
-            ObjectInputStream userObjectStream = new ObjectInputStream(userInFile);
-            try {
-                user = (User) userObjectStream.readObject();
-
-                userObjectStream.close();
-                return user;
-            } catch (ClassNotFoundException classException) {
-                System.out.println("User class not found");
-                classException.printStackTrace();
-            }
-        } catch (IOException ioExcept) {
-            ioExcept.printStackTrace();
-        }
-        return user;
-    }
-
-
-    /**
      * Method to read a .csv file from a chosen folder.
      * @param fileName The name of the .csv file to be read.
      * @return An arrayList of the data from the .csv file.
@@ -444,6 +397,66 @@ public class FileManager {
 
                     String strPoi = poiName + "," + poiLat + "," + poiLon + "," + poiDescription + "," + poiCost + "\n";
                     bufferedWriter.write(strPoi);
+                }
+                bufferedWriter.flush();
+                bufferedWriter.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * Reads an arrayList of strings from a file, converts each item to a Location object, and adds them to the currentStorage class.
+     * @param filename The name of the file where the information is being stored.
+     */
+    public static void generalRetriever(String filename) {
+        ArrayList<String> locations = readFile(filename);
+        if (!locations.isEmpty()) {
+
+            List header = Arrays.asList(locations.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
+            int nameIndex = indexer(header.indexOf("name"), header);
+            int latIndex = indexer(header.indexOf("latitude"), header);
+            int lonIndex = indexer(header.indexOf("longitude"), header);
+
+            locations.remove(0);
+
+            for (String location : locations) {
+
+                String[] information = location.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+
+                String name = information[nameIndex];
+                Double latitude = Double.parseDouble(information[latIndex]);
+                Double longitude = Double.parseDouble(information[lonIndex]);
+
+                Location newLoc = new Location(latitude, longitude, name, 4);
+
+                CurrentStorage.addNewGeneral(newLoc);
+            }
+        }
+    }
+
+
+    /**
+     * Takes an arrayList of locations and converts them into a .csv file at a specific location.
+     * @param filename The file the csv file is to be put in.
+     * @param locations An arrayList of the general locations to be stored.
+     */
+    public static void generalWriter(String filename, ArrayList<Location> locations) {
+        File newFile = new File(filename);
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(newFile));
+            if (!locations.isEmpty()) {
+                String header = "name,latitude,longitude\n";
+                bufferedWriter.write(header);
+                for (Location location : locations) {
+                    String name = location.getName();
+                    String latitude = Double.toString(location.getLatitude());
+                    String longitude = Double.toString(location.getLongitude());
+
+                    String strLocation = name + "," + latitude + "," + longitude + "\n";
+                    bufferedWriter.write(strLocation);
                 }
                 bufferedWriter.flush();
                 bufferedWriter.close();

@@ -1,10 +1,12 @@
 package seng202.Controller;
 
 import java.net.URL;
+import java.util.DoubleSummaryStatistics;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
 import seng202.Model.Poi;
@@ -77,6 +79,9 @@ public class PoiInfoScreenController {
     
     @FXML
     private Button saveButton;
+
+    @FXML
+    private Button cancelButton;
     
     private Poi poi;
 
@@ -124,18 +129,129 @@ public class PoiInfoScreenController {
     	okButton.setVisible(false);
     	updateButton.setVisible(false);
     	saveButton.setVisible(true);
+    	cancelButton.setVisible(true);
+    }
+    
+    /**
+     * Checks the input is able to be parsed to a Double
+     * @param s String to be checked
+     * @return true if Double otherwise false
+     */
+    Boolean isDouble(String s) {
+        try {
+            Double.parseDouble(s);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+
+    /**
+     * Checks the input is able to be parsed to an Integer
+     * @param s String to be checked
+     * @return true if Integer otherwise false
+     */
+    Boolean isInt(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
     
     @FXML
     void savePressed(ActionEvent event) {
-    	// TODO: Check user has inputed the correct data
-    	// TODO: Update the poi
-    	// TODO: Create a whole heap of setters
-    	poi.setAddress(addressText.getText());
-    	poi.setBorough(boroughText.getText());
-    	poi.setName(nameText.getText());
-    	poi.setZip(Integer.parseInt(zipText.getText()));
-    	// TODO: Redisplay the label and hide text fields and change buttons
+
+    	nameLabel.setTextFill(Color.BLACK);
+    	addressLabel.setTextFill(Color.BLACK);
+    	longLabel.setTextFill(Color.BLACK);
+    	latLabel.setTextFill(Color.BLACK);
+    	costLabel.setTextFill(Color.BLACK);
+    	descriptionLabel.setTextFill(Color.BLACK);
+    	zipLabel.setTextFill(Color.BLACK);
+    	boroughLabel.setTextFill(Color.BLACK);
+    	
+    	boolean allValid = true;
+    	
+    	if (nameText.getText().equals("")) {
+    		nameLabel.setTextFill(Color.RED);
+    		allValid = false;
+    	}
+    	if (addressText.getText().equals("") && (latitudeText.getText().equals("") || longitudeText.getText().equals(""))) {
+            addressLabel.setTextFill(Color.RED);
+            latLabel.setTextFill(Color.RED);
+            longLabel.setTextFill(Color.RED);
+            allValid = false;
+        }
+        if(costText.getText().equals("")) {
+            costLabel.setTextFill(Color.RED);
+            allValid = false;
+        }
+        if (descriptionText.getText().equals("")) {
+            descriptionLabel.setTextFill(Color.RED);
+            allValid = false;
+        }
+        if (addressText.getText().equals("") && !isDouble(latitudeText.getText())) {
+            latLabel.setTextFill(Color.RED);
+            allValid = false;
+        }
+        if (addressText.getText().equals("") && !isDouble(longitudeText.getText())) {
+            longLabel.setTextFill(Color.RED);
+            allValid = false;
+        }
+        if (!zipText.getText().equals("") && !isInt(zipText.getText())) {
+            zipLabel.setTextFill(Color.RED);
+            allValid = false;
+        }
+        if (!costText.getText().equals("") && !isDouble(costText.getText())) {
+            costLabel.setTextFill(Color.RED);
+            allValid = false;
+    	}
+
+        if (allValid) {
+    	    if (addressText.getText().equals("")) {
+    	        poi.setLongitude(Double.parseDouble(longitudeText.getText()));
+    	        poi.setLatitude(Double.parseDouble(latitudeText.getText()));
+            } else {
+                poi.setAddress(addressText.getText());
+            }
+        	poi.setBorough(boroughText.getText());
+        	poi.setName(nameText.getText());
+        	if (!zipText.getText().equals("")) {
+                poi.setZip(Integer.parseInt(zipText.getText()));
+            }
+            poi.setDescription(descriptionText.getText());
+        	poi.setCost(Double.parseDouble(costText.getText()));
+
+        	// TODO: Update database
+
+        	cancelPressed(event);
+        }
+    }
+    
+    @FXML
+    void cancelPressed(ActionEvent event) {
+        costLabel.setText("Cost: $" + poi.getCost());
+        costText.setVisible(false);
+        descriptionLabel.setText("Description: " + poi.getDescription());
+        descriptionText.setVisible(false);
+        latLabel.setText("Latitude: " + poi.getLatitude());
+        latitudeText.setVisible(false);
+        longLabel.setText("Longitude: " + poi.getLongitude());
+        longitudeText.setVisible(false);
+        nameLabel.setText("Name: " + poi.getName());
+        nameText.setVisible(false);
+        zipLabel.setText("Zip: " + poi.getZip());
+        zipText.setVisible(false);
+        boroughLabel.setText("Borough: " + poi.getBorough());
+        boroughText.setVisible(false);
+        addressLabel.setText("Address: " + poi.getAddress());
+        addressText.setVisible(false);
+        cancelButton.setVisible(false);
+        saveButton.setVisible(false);
+        okButton.setVisible(true);
+        updateButton.setVisible(true);
     }
     
     @FXML

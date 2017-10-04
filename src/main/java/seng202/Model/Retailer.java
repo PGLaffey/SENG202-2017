@@ -10,7 +10,9 @@ public class Retailer extends Location {
     private String product;
     private String description;
 
-    private Coord coord = null;
+    private Marker marker = null;
+    private boolean noMarker = false;
+    Coord coord = null;
 
 	/**
 	 * Constructor for the retailer subclass, uses the location superclass constructor.
@@ -69,6 +71,21 @@ public class Retailer extends Location {
     }
 
     /**
+     * Getter for the marker of the retailer
+     */
+    public Marker getMarker() { 
+    	return marker; 
+    }
+
+    /**
+     * Sets the marker for the current retailer
+     * @param marker marker object to be set for the retailer
+     */
+    public void setMarker(Marker marker) {
+        this.marker = marker;
+    }
+
+    /**
      * A .equals method for retailer.
      * @param other - The object to compare to.
      * @return a boolean value based on whether the contents are similar.
@@ -91,6 +108,22 @@ public class Retailer extends Location {
     }
 
     /**
+     * Finds whether the retailer already has a marker set
+     * @return True of the retailer already has a marker
+     */
+    public boolean hasNoMarker() {
+        return noMarker;
+    }
+
+    /**
+     * Sets the value of noMarker to true if there is no marker associated with the retailer
+     * @param bool
+     */
+    public void setNoMarker(boolean bool) {
+        noMarker = bool;
+    }
+
+    /**
      * Getter for the coordinates of the retailer
      */
     public Coord getCoord() {
@@ -103,5 +136,13 @@ public class Retailer extends Location {
      */
     public void setCoord(Coord coord) {
         this.coord = coord;
+    }
+    
+    public void setProduct(String prod) {
+    	product = prod;
+    }
+    
+    public void setDescription(String desc) {
+    	description = desc;
     }
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
 User class stores the users information to be used in the app and stored.
  */
-public class User implements Serializable {
+public class User {
     private String name;
     private String firstName;
     private String lastName;
@@ -19,7 +19,6 @@ public class User implements Serializable {
     private ArrayList<Route> routes;
     private ArrayList<Badge> badges; // First badge is distance, second time and third route
 
-    private static final long serialVersionUID = 1L;
 
     /**
     Constructor for the User class, creates a new user instance
@@ -50,6 +49,26 @@ public class User implements Serializable {
         badges.add(routeBadge);
     }
 
+    public User(String first, String last, String username, String doB, String password, int routes, double distance, double minutes) {
+        this.name = first + " " + last;
+        this.firstName = first;
+        this.lastName = last;
+        this.password = password;
+        this.username = username;
+        this.dateOfBirth = doB;
+        this.routesCycled = routes;
+        this.distanceCycled = distance;
+        this.minutesCycled = minutes;
+        this.routes = new ArrayList<Route>();
+        this.badges = new ArrayList<Badge>();
+        Badge distBadge = null;
+        distBadge = new Badge("Distance");
+        Badge timeBadge = new Badge("Time");
+        Badge routeBadge = new Badge("Routes");
+        badges.add(distBadge);
+        badges.add(timeBadge);
+        badges.add(routeBadge);
+    }
     /**
      * Getter for the users full name
      */

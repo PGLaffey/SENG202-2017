@@ -24,12 +24,19 @@ public class CurrentStorage {
     private static Wifi wifiViewed;
     private static Retailer retailerViewed;
     private static Toilet toiletViewed;
+    
+    private static Integer toiletIndex;
+    
     private static Poi poiViewed;
     private static Location locationViewed;
     private static Route routeViewed;
 
     private static Location newRouteStart;
     private static Location newRouteEnd;
+    
+    public static void setToiletIndex(Integer i) { toiletIndex = i; }
+    
+    public static Integer getToiletIndex() {return toiletIndex; }
 
 	/**
 	 * Getter for the current user
@@ -272,70 +279,6 @@ public class CurrentStorage {
 		return addedRetailers;
 	}
 
-	/**
-	 *
-	 * @param find
-	 * @return
-	 */
-    public static Location findLocation(Location find) {
-    	int count = 0;
-    	while (count < generalArray.size()) {
-    		if (generalArray.get(count).equals(find)) {
-    			return generalArray.get(count);
-    		}
-    		count += 1;
-    	}
-    	return null;
-    }
-
-    
-    public static Retailer findRetailer(Retailer find) {
-    	int count = 0;
-    	while (count < retailerArray.size()) {
-    		if (retailerArray.get(count).equals(find)) {
-    			return retailerArray.get(count);
-    		}
-    		count += 1;
-    	}
-    	return null;
-    }
-
-    
-    public static Wifi findWifi(Wifi find) {
-    	int count = 0;
-    	while (count < wifiArray.size()) {
-    		if (wifiArray.get(count).equals(find)) {
-    			return wifiArray.get(count);
-    		}
-    		count += 1;
-    	}
-    	return null;
-    }
-
-    
-    public static Poi findPoi(Poi find) {
-    	int count = 0;
-    	while (count < poiArray.size()) {
-    		if (poiArray.get(count).equals(find)) {
-    			return poiArray.get(count);
-    		}
-    		count += 1;
-    	}
-    	return null;
-    }
-
-
-    public static Toilet findToilet(Toilet find) {
-    	int count = 0;
-    	while (count < toiletArray.size()) {
-    		if (toiletArray.get(count).equals(find)) {
-    			return toiletArray.get(count);
-    		}
-    		count += 1;
-    	}
-    	return null;
-    }
-
 
 	/**
 	 * Adds an existing wifi to the application, adding to wifiArray
@@ -540,7 +483,6 @@ public class CurrentStorage {
 		}
     }
 
-
     /**
      * Flushes all data out of arrayLists.
      */
@@ -551,5 +493,6 @@ public class CurrentStorage {
         wifiArray.clear();
         toiletArray.clear();
         poiArray.clear();
+        generalArray.clear();
     }
 }
