@@ -69,5 +69,6 @@ public class LocationInfoScreenController {
         locationTypeLabel.setText("Location Type: " + location.getTypeString());
         zipLabel.setText("Zip: " + location.getZip());
         boroughLabel.setText("Borough: " + location.getBorough());
+        updateButton.setVisible(false);
     }
 }
