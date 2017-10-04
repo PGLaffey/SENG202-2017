@@ -590,10 +590,10 @@ public class TablesScreenController {
 
 		ObservableList<Location> locData = FXCollections.observableArrayList(CurrentStorage.getToiletArray()); // TODO: Make a list in Current Storage that has all the locations, getLocationArray()
 		allLocationsTable.setItems(locData);
-		allLocationsTable.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
+		allLocationsTable.addEventHandler(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
 			@Override
 			public void handle(ScrollEvent event) {
-				System.out.println("Scrolled All Locs");
+				if (true){}
 			}
 		});
 
