@@ -23,9 +23,6 @@ public class WifiInfoScreenController {
     private Label addressLabel;
 
     @FXML
-    private TextField addressText;
-
-    @FXML
     private Label boroughLabel;
 
     @FXML
@@ -35,13 +32,7 @@ public class WifiInfoScreenController {
     private Label latLabel;
 
     @FXML
-    private TextField latitudeText;
-
-    @FXML
     private Label longLabel;
-
-    @FXML
-    private TextField longitudeText;
 
     @FXML
     private Label nameLabel;
@@ -105,8 +96,6 @@ public class WifiInfoScreenController {
      */
     @FXML
     void updatePressed(ActionEvent event) {
-    	addressText.setVisible(true);
-    	addressText.setText(wifi.getAddress());
     	boroughText.setVisible(true);
     	boroughText.setText(wifi.getBorough());
     	ssidText.setVisible(true);
@@ -115,21 +104,14 @@ public class WifiInfoScreenController {
     	typeText.setText(wifi.getType());
     	providerText.setVisible(true);
     	providerText.setText(wifi.getProvider());
-    	latitudeText.setVisible(true);
-    	latitudeText.setText(String.valueOf(wifi.getLatitude()));
-    	longitudeText.setVisible(true);
-    	longitudeText.setText(String.valueOf(wifi.getLongitude()));
     	nameText.setVisible(true);
     	nameText.setText(wifi.getName());
     	zipText.setVisible(true);
     	zipText.setText(String.valueOf(wifi.getZip()));;
-    	addressLabel.setText("Address: ");
     	boroughLabel.setText("Borough: ");
     	ssidLabel.setText("Ssid: ");
     	typeLabel.setText("Type: ");
     	providerLabel.setText("Provider: ");
-    	latLabel.setText("Latitude: ");
-    	longLabel.setText("Longitude: ");
     	nameLabel.setText("Name: ");
     	zipLabel.setText("Zip: ");
     	okButton.setVisible(false);
@@ -193,12 +175,6 @@ public class WifiInfoScreenController {
     	    ssidLabel.setTextFill(Color.RED);
     	    allValid = false;
     	}
-    	if (addressText.getText().equals("") && (latitudeText.getText().equals("") || longitudeText.getText().equals(""))) {
-            addressLabel.setTextFill(Color.RED);
-            latLabel.setTextFill(Color.RED);
-            longLabel.setTextFill(Color.RED);
-            allValid = false;
-        }
         if(boroughText.getText().equals("")) {
             boroughLabel.setTextFill(Color.RED);
             allValid = false;
@@ -211,26 +187,12 @@ public class WifiInfoScreenController {
             providerLabel.setTextFill(Color.RED);
             allValid = false;
         }
-        if (addressText.getText().equals("") && !isDouble(latitudeText.getText())) {
-            latLabel.setTextFill(Color.RED);
-            allValid = false;
-        }
-        if (addressText.getText().equals("") && !isDouble(longitudeText.getText())) {
-            longLabel.setTextFill(Color.RED);
-            allValid = false;
-        }
         if (!zipText.getText().equals("") && !isInt(zipText.getText())) {
     	    zipLabel.setTextFill(Color.RED);
     	    allValid = false;
     	}
         
         if (allValid) {
-            if (addressText.getText().equals("")) {
-                wifi.setLatitude(Double.parseDouble(latitudeText.getText()));
-                wifi.setLongitude(Double.parseDouble(longitudeText.getText()));
-            } else {
-                wifi.setAddress(addressText.getText());
-            }
             wifi.setBorough(boroughText.getText());
             wifi.setName(nameText.getText());
             wifi.setSsid(ssidText.getText());
@@ -253,16 +215,10 @@ public class WifiInfoScreenController {
         typeText.setVisible(false);
         boroughLabel.setText("Borough: " + wifi.getBorough());
         boroughText.setVisible(false);
-        latLabel.setText("Latitude: " + wifi.getLatitude());
-        latitudeText.setVisible(false);
-        longLabel.setText("Longitude: " + wifi.getLongitude());
-        longitudeText.setVisible(false);
         providerLabel.setText("Provider: " + wifi.getProvider());
         providerText.setVisible(false);
         zipLabel.setText("Zip: " + wifi.getZip());
         zipText.setVisible(false);
-        addressLabel.setText("Adress: " + wifi.getAddress());
-        addressText.setVisible(false);
         ssidLabel.setText("Ssid: " + wifi.getSsid());
         ssidText.setVisible(false);
         cancelButton.setVisible(false);

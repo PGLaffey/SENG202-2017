@@ -23,9 +23,6 @@ public class RetailerInfoScreenController {
     private Label addressLabel;
 
     @FXML
-    private TextField addressText;
-
-    @FXML
     private Label boroughLabel;
 
     @FXML
@@ -41,13 +38,7 @@ public class RetailerInfoScreenController {
     private Label latLabel;
 
     @FXML
-    private TextField latitudeText;
-
-    @FXML
     private Label longLabel;
-
-    @FXML
-    private TextField longitudeText;
 
     @FXML
     private Label nameLabel;
@@ -98,28 +89,19 @@ public class RetailerInfoScreenController {
      */
     @FXML
     void updatePressed(ActionEvent event) {
-    	addressText.setVisible(true);
-    	addressText.setText(retailer.getAddress());
     	boroughText.setVisible(true);
     	boroughText.setText(retailer.getBorough());
     	productText.setVisible(true);
     	productText.setText(retailer.getProduct());
     	descriptionText.setVisible(true);
     	descriptionText.setText(retailer.getDescription());
-    	latitudeText.setVisible(true);
-    	latitudeText.setText(String.valueOf(retailer.getLatitude()));
-    	longitudeText.setVisible(true);
-    	longitudeText.setText(String.valueOf(retailer.getLongitude()));
     	nameText.setVisible(true);
     	nameText.setText(retailer.getName());
     	zipText.setVisible(true);
     	zipText.setText(String.valueOf(retailer.getZip()));;
-    	addressLabel.setText("Address: ");
     	boroughLabel.setText("Borough: ");
     	productLabel.setText("Product: ");
     	descriptionLabel.setText("Description: ");
-    	latLabel.setText("Latitude: ");
-    	longLabel.setText("Longitude: ");
     	nameLabel.setText("Name: ");
     	zipLabel.setText("Zip: ");
     	okButton.setVisible(false);
@@ -174,12 +156,6 @@ public class RetailerInfoScreenController {
     		nameLabel.setTextFill(Color.RED);
     		allValid = false;
     	}
-    	if (addressText.getText().equals("") && (latitudeText.getText().equals("") || longitudeText.getText().equals(""))) {
-            addressLabel.setTextFill(Color.RED);
-            latLabel.setTextFill(Color.RED);
-            longLabel.setTextFill(Color.RED);
-            allValid = false;
-        }
         if (productText.getText().equals("")) {
             productLabel.setTextFill(Color.RED);
             allValid = false;
@@ -188,26 +164,12 @@ public class RetailerInfoScreenController {
             descriptionLabel.setTextFill(Color.RED);
             allValid = false;
         }
-        if (addressText.getText().equals("") && !isDouble(latitudeText.getText())) {
-            latLabel.setTextFill(Color.RED);
-            allValid = false;
-        }
-        if (addressText.getText().equals("") && !isDouble(longitudeText.getText())) {
-            longLabel.setTextFill(Color.RED);
-            allValid = false;
-        }
         if (!zipText.getText().equals("") && !isInt(zipText.getText())) {
             zipLabel.setTextFill(Color.RED);
             allValid = false;
         }
 
         if (allValid) {
-        	if (addressText.getText().equals("")) {
-        		retailer.setLatitude(Double.parseDouble(latitudeText.getText()));
-        		retailer.setLongitude(Double.parseDouble(longitudeText.getText()));
-        	} else {
-        		retailer.setAddress(addressText.getText());
-        	}
         	retailer.setBorough(boroughText.getText());
         	retailer.setName(nameText.getText());
         	if (!zipText.getText().equals("")) {
@@ -229,12 +191,6 @@ public class RetailerInfoScreenController {
     void cancelPressed(ActionEvent event) {
     	nameLabel.setText("Name: " + retailer.getName());
     	nameText.setVisible(false);
-    	addressLabel.setText("Address: " + retailer.getAddress());
-    	addressText.setVisible(false);
-    	latLabel.setText("Latitude: " + retailer.getLatitude());
-    	latitudeText.setVisible(false);
-    	longLabel.setText("Longitude: " + retailer.getLongitude());
-    	longitudeText.setVisible(false);
     	zipLabel.setText("Zip: " + retailer.getZip());
     	zipText.setVisible(false);
     	boroughLabel.setText("Borough: " + retailer.getBorough());

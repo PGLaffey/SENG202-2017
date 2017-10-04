@@ -18,7 +18,7 @@ public class Route {
     private Location via1;
     private Location via2;
     private Location via3;
-    private boolean secret;
+    private boolean secret; // true if private, false if public
     private Marker startMarker = null;
     private Marker endMarker = null;
 
