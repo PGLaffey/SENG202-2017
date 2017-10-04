@@ -19,7 +19,7 @@ public class User {
     private ArrayList<Route> routes; // TODO: Possibly delete this, added saved and favourite routes (wasnt sure if this was being used of not)
     private ArrayList<Badge> badges; // First badge is distance, second time and third route
     private ArrayList<Route> savedRoutes;
-    private ArrayList<Route> favouriteRoutes;
+    private ArrayList<Route> favouriteRoutes = new ArrayList<>(); // Temporary placeholder
 
 
     /**

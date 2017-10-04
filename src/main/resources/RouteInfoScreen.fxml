@@ -1,32 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 <GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="450.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,4;" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.RouteInfoScreenController">
-  <children>
-    <Button fx:id="okButton" mnemonicParsing="false" onAction="#okPressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="Ok" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Button>
-    <Label id="objectInfoLabel" fx:id="nameLabel" prefHeight="19.0" prefWidth="285.0" text="Name:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
-         <font>
-            <Font name="KacstOne Bold" size="13.0" />
-         </font></Label>
-    <Label id="objectInfoLabel" fx:id="distanceLabel" prefWidth="386.0" text="Distance:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
-=======
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="450.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,4;" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.Controller.RouteInfoScreenController">
-=======
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="450.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,4;" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.RouteInfoScreenController">
->>>>>>> 7da7f7d20fc147b1a1f76fa1825d950eb1099fe1
   <children>
     <Label id="objectInfoLabel" fx:id="nameLabel" prefWidth="386.0" text="Name:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <font>
@@ -34,7 +26,6 @@
       </font>
     </Label>
     <Label id="objectInfoLabel" fx:id="distanceLabel" font="$x1" prefWidth="386.0" text="Distance:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
->>>>>>> 8d21caf79752e85c9e4c7491c0b496e0b631e021
       <GridPane.margin>
         <Insets top="25.0" />
       </GridPane.margin>
@@ -59,31 +50,11 @@
         <Insets top="125.0" />
       </GridPane.margin>
     </Label>
-<<<<<<< HEAD
-    <Button fx:id="completedRouteButton" mnemonicParsing="false" onAction="#completedRouteButtonPressed" style="-fx-background-color: #30126D, #B39EDC;" text="I have completed this route!" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Button>
-      <Label fx:id="timeLabel" prefHeight="35.0" prefWidth="134.0" text="How long did it take you? (minutes)" wrapText="true" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-      <TextField fx:id="timeText" layoutX="100.0" maxWidth="50.0" prefHeight="13.0" prefWidth="50.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-         <GridPane.margin>
-            <Insets left="50.0" />
-         </GridPane.margin>
-      </TextField>
-      <Button fx:id="addButton" layoutX="100.0" maxWidth="75.0" minWidth="50.0" mnemonicParsing="false" onAction="#addButtonPressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="Add" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-         <GridPane.margin>
-            <Insets left="150.0" />
-         </GridPane.margin>
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
       <Button fx:id="showRoute" alignment="CENTER" mnemonicParsing="false" onAction="#showRouteBtnPressed" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: #30126D, #B39EDC;" text="Show on Map" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.valignment="TOP">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-=======
     <Button fx:id="completedRouteButton" mnemonicParsing="false" onAction="#completedRouteButtonPressed" text="I have completed this route!" visible="false" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
     <Label fx:id="timeLabel" prefHeight="35.0" prefWidth="134.0" text="How long did it take you? (minutes)" wrapText="true" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
     <TextField fx:id="timeText" maxWidth="50.0" prefHeight="13.0" prefWidth="50.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
@@ -100,14 +71,10 @@
       </GridPane.margin>
     </Button>
     <Button fx:id="okButton" font="$x2" mnemonicParsing="false" onAction="#okPressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="Ok" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-<<<<<<< HEAD
-    <Button id="okButton" fx:id="updateButton" font="$x2" mnemonicParsing="false" onAction="#updatePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Update" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
->>>>>>> 8d21caf79752e85c9e4c7491c0b496e0b631e021
-=======
+
     <Button id="okButton" fx:id="updateButton" font="$x2" mnemonicParsing="false" onAction="#updatePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Update" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
       <Label fx:id="addedLabel" text="Added!" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
       <Button id="okButton" fx:id="favouriteButton" font="$x2" layoutX="360.0" layoutY="184.0" mnemonicParsing="false" onAction="#favouritePressed" prefHeight="23.0" prefWidth="141.0" style="-fx-background-color: #30126D, #B39EDC;" text="Mark as favourite" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" />
->>>>>>> 7da7f7d20fc147b1a1f76fa1825d950eb1099fe1
   </children>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="286.0" />

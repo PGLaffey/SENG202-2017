@@ -42,7 +42,6 @@ public class TablesScreenController {
 
     @FXML
     private Button accountButton;
-    
 
     @FXML
     private TableColumn<Location, Double> allLocLatCol;
@@ -600,12 +599,7 @@ public class TablesScreenController {
 
 		ObservableList<Location> locData = FXCollections.observableArrayList(CurrentStorage.getToiletArray()); // TODO: Make a list in Current Storage that has all the locations, getLocationArray()
 		allLocationsTable.setItems(locData);
-		allLocationsTable.addEventHandler(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
-			@Override
-			public void handle(ScrollEvent event) {
-				if (true){}
-			}
-		});
+
 
     	// Set up the toilets table
     	toiletDisCol.setCellValueFactory(new PropertyValueFactory<Toilet, Boolean>("forDisabled"));
@@ -616,12 +610,7 @@ public class TablesScreenController {
 
     	ObservableList<Toilet> toiletData = FXCollections.observableArrayList(CurrentStorage.getToiletArray());
     	toiletsTable.setItems(toiletData);
-		toiletsTable.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
-			@Override
-			public void handle(ScrollEvent event) {
-				System.out.println("Scrolled Toilets");
-			}
-		});
+
 
     	// Set up the wifi table
     	wifiProvCol.setCellValueFactory(new PropertyValueFactory<Wifi, String>("provider"));
@@ -633,12 +622,7 @@ public class TablesScreenController {
 
     	ObservableList<Wifi> wifiData = FXCollections.observableArrayList(CurrentStorage.getWifiArray());
     	wifiTable.setItems(wifiData);
-    	wifiTable.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
-			@Override
-			public void handle(ScrollEvent event) {
-				System.out.println("Scrolled All Locs");
-			}
-		});
+
 
     	// Set up the routes table
     	routeEndCol.setCellValueFactory(new PropertyValueFactory<Route, String>("endString"));
@@ -648,12 +632,7 @@ public class TablesScreenController {
 
     	ObservableList<Route> routeData = FXCollections.observableArrayList(CurrentStorage.getRouteArray());
     	routesTable.setItems(routeData);
-		routesTable.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
-			@Override
-			public void handle(ScrollEvent event) {
-				System.out.println("Scrolled All Locs");
-			}
-		});;
+
 
     	// Set up the retailers table
     	retAddressCol.setCellValueFactory(new PropertyValueFactory<Retailer, String>("address"));
@@ -664,12 +643,7 @@ public class TablesScreenController {
 
     	ObservableList<Retailer> retData = FXCollections.observableArrayList(CurrentStorage.getRetailerArray());
     	retailersTable.setItems(retData);
-    	retailersTable.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
-			@Override
-			public void handle(ScrollEvent event) {
-				System.out.println("Scrolled All Locs");
-			}
-		});
+
 
     	// Set up the poi table
     	poiAddressCol.setCellValueFactory(new PropertyValueFactory<Poi, String>("address"));
@@ -679,12 +653,7 @@ public class TablesScreenController {
     	poiCostCol.setCellValueFactory(new PropertyValueFactory<Poi, Double>("cost"));
     	ObservableList<Poi> poiData = FXCollections.observableArrayList(CurrentStorage.getPoiArray());
     	poiTable.setItems(poiData);
-    	poiTable.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
-			@Override
-			public void handle(ScrollEvent event) {
-				System.out.println("Scrolled All Locs");
-			}
-		});
+
 
 
     	assert accountButton != null : "fx:id=\"accountButton\" was not injected: check your FXML file 'TablesScreen.fxml'.";
