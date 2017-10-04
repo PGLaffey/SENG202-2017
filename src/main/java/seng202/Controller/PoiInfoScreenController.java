@@ -17,8 +17,7 @@ public class PoiInfoScreenController {
 	
 
 
-    @FXML
-    private TextField addressText;
+
 
     @FXML
     private TextField boroughText;
@@ -28,12 +27,6 @@ public class PoiInfoScreenController {
 
     @FXML
     private TextField descriptionText;
-
-    @FXML
-    private TextField latitudeText;
-
-    @FXML
-    private TextField longitudeText;
 
     @FXML
     private TextField nameText;
@@ -102,28 +95,20 @@ public class PoiInfoScreenController {
      */
     @FXML
     void updatePressed(ActionEvent event) {
-    	addressText.setVisible(true);
-    	addressText.setText(poi.getAddress());
+
     	boroughText.setVisible(true);
     	boroughText.setText(poi.getBorough());
     	costText.setVisible(true);
     	costText.setText(String.valueOf(poi.getCost()));
     	descriptionText.setVisible(true);
     	descriptionText.setText(poi.getDescription());
-    	latitudeText.setVisible(true);
-    	latitudeText.setText(String.valueOf(poi.getLatitude()));
-    	longitudeText.setVisible(true);
-    	longitudeText.setText(String.valueOf(poi.getLongitude()));
     	nameText.setVisible(true);
     	nameText.setText(poi.getName());
     	zipText.setVisible(true);
-    	zipText.setText(String.valueOf(poi.getZip()));;
-    	addressLabel.setText("Address: ");
+    	zipText.setText(String.valueOf(poi.getZip()));
     	boroughLabel.setText("Borough: ");
     	costLabel.setText("Cost: ");
     	descriptionLabel.setText("Description: ");
-    	latLabel.setText("Latitude: ");
-    	longLabel.setText("Longitude: ");
     	nameLabel.setText("Name: ");
     	zipLabel.setText("Zip: ");
     	okButton.setVisible(false);
@@ -178,26 +163,12 @@ public class PoiInfoScreenController {
     		nameLabel.setTextFill(Color.RED);
     		allValid = false;
     	}
-    	if (addressText.getText().equals("") && (latitudeText.getText().equals("") || longitudeText.getText().equals(""))) {
-            addressLabel.setTextFill(Color.RED);
-            latLabel.setTextFill(Color.RED);
-            longLabel.setTextFill(Color.RED);
-            allValid = false;
-        }
         if(costText.getText().equals("")) {
             costLabel.setTextFill(Color.RED);
             allValid = false;
         }
         if (descriptionText.getText().equals("")) {
             descriptionLabel.setTextFill(Color.RED);
-            allValid = false;
-        }
-        if (addressText.getText().equals("") && !isDouble(latitudeText.getText())) {
-            latLabel.setTextFill(Color.RED);
-            allValid = false;
-        }
-        if (addressText.getText().equals("") && !isDouble(longitudeText.getText())) {
-            longLabel.setTextFill(Color.RED);
             allValid = false;
         }
         if (!zipText.getText().equals("") && !isInt(zipText.getText())) {
@@ -210,12 +181,6 @@ public class PoiInfoScreenController {
     	}
 
         if (allValid) {
-    	    if (addressText.getText().equals("")) {
-    	        poi.setLongitude(Double.parseDouble(longitudeText.getText()));
-    	        poi.setLatitude(Double.parseDouble(latitudeText.getText()));
-            } else {
-                poi.setAddress(addressText.getText());
-            }
         	poi.setBorough(boroughText.getText());
         	poi.setName(nameText.getText());
         	if (!zipText.getText().equals("")) {
@@ -236,18 +201,12 @@ public class PoiInfoScreenController {
         costText.setVisible(false);
         descriptionLabel.setText("Description: " + poi.getDescription());
         descriptionText.setVisible(false);
-        latLabel.setText("Latitude: " + poi.getLatitude());
-        latitudeText.setVisible(false);
-        longLabel.setText("Longitude: " + poi.getLongitude());
-        longitudeText.setVisible(false);
         nameLabel.setText("Name: " + poi.getName());
         nameText.setVisible(false);
         zipLabel.setText("Zip: " + poi.getZip());
         zipText.setVisible(false);
         boroughLabel.setText("Borough: " + poi.getBorough());
         boroughText.setVisible(false);
-        addressLabel.setText("Address: " + poi.getAddress());
-        addressText.setVisible(false);
         cancelButton.setVisible(false);
         saveButton.setVisible(false);
         okButton.setVisible(true);
