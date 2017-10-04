@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
 User class stores the users information to be used in the app and stored.
  */
-public class User implements Serializable {
+public class User {
     private String name;
     private String firstName;
     private String lastName;
@@ -21,7 +21,6 @@ public class User implements Serializable {
     private ArrayList<Route> savedRoutes;
     private ArrayList<Route> favouriteRoutes;
 
-    private static final long serialVersionUID = 1L;
 
     /**
     Constructor for the User class, creates a new user instance

@@ -68,8 +68,6 @@ public class SignupScreenController {
         data.connectDb();
         data.addUser(newUser);
 
-        FileManager.userSerialize(newUser, "./src/main/resources/data_files/");
-
         Stage primaryStage = (Stage)createButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
         primaryStage.setTitle("Login");
