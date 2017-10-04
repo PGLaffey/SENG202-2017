@@ -573,6 +573,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         }
     }
 
+    public void displayRouteOnMap(Route route) {
+        Map.findRoute(route, mapView, directionsService, this, directionsPane);
+    }
+
 
     @FXML
     void loadRoutePressed(ActionEvent event) {

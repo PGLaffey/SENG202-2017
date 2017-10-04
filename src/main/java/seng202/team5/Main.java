@@ -14,6 +14,12 @@ import seng202.Model.FileManager;
 
 public class Main extends Application {
 
+	private static Stage mainStage;
+
+	public static Stage getStage() {
+		return mainStage;
+	}
+
 	/**
 	 * Begins the application and loads the GUI
 	 * @param primaryStage
@@ -21,6 +27,7 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception{
+		mainStage = primaryStage;
 		Parent root = FXMLLoader.load(Main.class.getResource("/LoginScreen.fxml"));
 		primaryStage.setTitle("Login");
 		primaryStage.setScene(new Scene(root, 300, 275));

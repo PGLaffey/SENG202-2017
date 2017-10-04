@@ -2,6 +2,7 @@ package seng202.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -14,6 +15,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import seng202.Model.User;
+import seng202.team5.Main;
 
 
 public class RouteInfoScreenController {
@@ -150,7 +152,11 @@ public class RouteInfoScreenController {
 
     @FXML
     void showRouteBtnPressed(ActionEvent event) {
-
+        FXMLLoader loader = (FXMLLoader) Main.getStage().getScene().getUserData();
+        if (loader.getController() instanceof MainScreenController) {
+            MainScreenController controller = loader.getController();
+            controller.displayRouteOnMap(route);
+        }
     }
 
     @FXML
