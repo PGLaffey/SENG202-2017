@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="450.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,4;" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="seng202.Controller.RouteInfoScreenController">
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="450.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,4;" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.RouteInfoScreenController">
   <children>
     <Label id="objectInfoLabel" fx:id="nameLabel" prefWidth="386.0" text="Name:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <font>
@@ -65,7 +65,9 @@
       </GridPane.margin>
     </Button>
     <Button fx:id="okButton" font="$x2" mnemonicParsing="false" onAction="#okPressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="Ok" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-    <Button id="okButton" fx:id="updateButton" font="$x2" mnemonicParsing="false" onAction="#updatePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Update" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+    <Button id="okButton" fx:id="updateButton" font="$x2" mnemonicParsing="false" onAction="#updatePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Update" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+      <Label fx:id="addedLabel" text="Added!" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+      <Button id="okButton" fx:id="favouriteButton" font="$x2" layoutX="360.0" layoutY="184.0" mnemonicParsing="false" onAction="#favouritePressed" prefHeight="23.0" prefWidth="141.0" style="-fx-background-color: #30126D, #B39EDC;" text="Mark as favourite" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" />
   </children>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="286.0" />
@@ -75,7 +77,7 @@
     <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
   </padding>
   <rowConstraints>
-    <RowConstraints maxHeight="158.0" minHeight="10.0" prefHeight="139.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="158.0" minHeight="10.0" prefHeight="93.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="97.0" vgrow="SOMETIMES" />
   </rowConstraints>
 </GridPane>
