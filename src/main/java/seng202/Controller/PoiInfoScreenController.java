@@ -76,7 +76,7 @@ public class PoiInfoScreenController {
     @FXML
     private Button cancelButton;
     
-    private Poi poi;
+    private Integer poiIndex;
 
 
     /**
@@ -97,15 +97,15 @@ public class PoiInfoScreenController {
     void updatePressed(ActionEvent event) {
 
     	boroughText.setVisible(true);
-    	boroughText.setText(poi.getBorough());
+    	boroughText.setText(CurrentStorage.getPoiArray().get(poiIndex).getBorough());
     	costText.setVisible(true);
-    	costText.setText(String.valueOf(poi.getCost()));
+    	costText.setText(String.valueOf(CurrentStorage.getPoiArray().get(poiIndex).getCost()));
     	descriptionText.setVisible(true);
-    	descriptionText.setText(poi.getDescription());
+    	descriptionText.setText(CurrentStorage.getPoiArray().get(poiIndex).getDescription());
     	nameText.setVisible(true);
-    	nameText.setText(poi.getName());
+    	nameText.setText(CurrentStorage.getPoiArray().get(poiIndex).getName());
     	zipText.setVisible(true);
-    	zipText.setText(String.valueOf(poi.getZip()));
+    	zipText.setText(String.valueOf(CurrentStorage.getPoiArray().get(poiIndex).getZip()));
     	boroughLabel.setText("Borough: ");
     	costLabel.setText("Cost: ");
     	descriptionLabel.setText("Description: ");
@@ -181,13 +181,13 @@ public class PoiInfoScreenController {
     	}
 
         if (allValid) {
-        	poi.setBorough(boroughText.getText());
-        	poi.setName(nameText.getText());
+            CurrentStorage.getPoiArray().get(poiIndex).setBorough(boroughText.getText());
+            CurrentStorage.getPoiArray().get(poiIndex).setName(nameText.getText());
         	if (!zipText.getText().equals("")) {
-                poi.setZip(Integer.parseInt(zipText.getText()));
+                CurrentStorage.getPoiArray().get(poiIndex).setZip(Integer.parseInt(zipText.getText()));
             }
-            poi.setDescription(descriptionText.getText());
-        	poi.setCost(Double.parseDouble(costText.getText()));
+            CurrentStorage.getPoiArray().get(poiIndex).setDescription(descriptionText.getText());
+            CurrentStorage.getPoiArray().get(poiIndex).setCost(Double.parseDouble(costText.getText()));
 
         	// TODO: Update database
 
@@ -197,15 +197,15 @@ public class PoiInfoScreenController {
     
     @FXML
     void cancelPressed(ActionEvent event) {
-        costLabel.setText("Cost: $" + poi.getCost());
+        costLabel.setText("Cost: $" + CurrentStorage.getPoiArray().get(poiIndex).getCost());
         costText.setVisible(false);
-        descriptionLabel.setText("Description: " + poi.getDescription());
+        descriptionLabel.setText("Description: " + CurrentStorage.getPoiArray().get(poiIndex).getDescription());
         descriptionText.setVisible(false);
-        nameLabel.setText("Name: " + poi.getName());
+        nameLabel.setText("Name: " + CurrentStorage.getPoiArray().get(poiIndex).getName());
         nameText.setVisible(false);
-        zipLabel.setText("Zip: " + poi.getZip());
+        zipLabel.setText("Zip: " + CurrentStorage.getPoiArray().get(poiIndex).getZip());
         zipText.setVisible(false);
-        boroughLabel.setText("Borough: " + poi.getBorough());
+        boroughLabel.setText("Borough: " + CurrentStorage.getPoiArray().get(poiIndex).getBorough());
         boroughText.setVisible(false);
         cancelButton.setVisible(false);
         saveButton.setVisible(false);
@@ -215,15 +215,15 @@ public class PoiInfoScreenController {
     
     @FXML
     void initialize() {
-    	poi = CurrentStorage.getPoi();
-    	costLabel.setText("Cost: $" + poi.getCost());
-    	descriptionLabel.setText("Description: " + poi.getDescription());
-    	latLabel.setText("Latitude: " + poi.getLatitude());
-    	longLabel.setText("Longitude: " + poi.getLongitude());
-    	nameLabel.setText("Name: " + poi.getName());
-    	zipLabel.setText("Zip: " + poi.getZip());
-    	boroughLabel.setText("Borough: " + poi.getBorough());
-    	addressLabel.setText("Address: " + poi.getAddress());
+        poiIndex = CurrentStorage.getPoiIndex();;
+    	costLabel.setText("Cost: $" + CurrentStorage.getPoiArray().get(poiIndex).getCost());
+    	descriptionLabel.setText("Description: " + CurrentStorage.getPoiArray().get(poiIndex).getDescription());
+    	latLabel.setText("Latitude: " + CurrentStorage.getPoiArray().get(poiIndex).getLatitude());
+    	longLabel.setText("Longitude: " + CurrentStorage.getPoiArray().get(poiIndex).getLongitude());
+    	nameLabel.setText("Name: " + CurrentStorage.getPoiArray().get(poiIndex).getName());
+    	zipLabel.setText("Zip: " + CurrentStorage.getPoiArray().get(poiIndex).getZip());
+    	boroughLabel.setText("Borough: " + CurrentStorage.getPoiArray().get(poiIndex).getBorough());
+    	addressLabel.setText("Address: " + CurrentStorage.getPoiArray().get(poiIndex).getAddress());
     	
         assert costLabel != null : "fx:id=\"costLabel\" was not injected: check your FXML file 'PoiInfoScreen.fxml'.";
         assert descriptionLabel != null : "fx:id=\"descriptionLabel\" was not injected: check your FXML file 'PoiInfoScreen.fxml'.";

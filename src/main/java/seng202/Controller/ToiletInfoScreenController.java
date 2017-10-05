@@ -113,20 +113,6 @@ public class ToiletInfoScreenController {
     	saveButton.setVisible(true);
     	cancelButton.setVisible(true);
     }
-    
-    /**
-     * Checks the input is able to be parsed to a Double
-     * @param s String to be checked
-     * @return true if Double otherwise false
-     */
-    Boolean isDouble(String s) {
-        try {
-            Double.parseDouble(s);
-            return true;
-        } catch (Exception e){
-            return false;
-        }
-    }
 
     /**
      * Checks the input is able to be parsed to an Integer

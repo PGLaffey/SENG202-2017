@@ -433,7 +433,7 @@ public class TablesScreenController {
 	@FXML
     void retailerTableClicked(MouseEvent event) throws IOException {
     	Retailer row = retailersTable.getSelectionModel().getSelectedItem();
-    	CurrentStorage.setRetailer(row);
+    	CurrentStorage.setRetailerIndex(CurrentStorage.getRetailerArray().indexOf(row));
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/RetailerInfoScreen.fxml"));
 
@@ -452,7 +452,6 @@ public class TablesScreenController {
 	@FXML
     void toiletTableClicked(MouseEvent event) throws IOException {
     	Toilet row = toiletsTable.getSelectionModel().getSelectedItem();
-    	//CurrentStorage.setToilet(row);
     	CurrentStorage.setToiletIndex(CurrentStorage.getToiletArray().indexOf(row));
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/ToiletInfoScreen.fxml"));

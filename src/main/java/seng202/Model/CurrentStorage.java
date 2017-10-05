@@ -21,15 +21,14 @@ public class CurrentStorage {
     private static ArrayList<Coord> coordsArray = new ArrayList<Coord>();
     private static User currentUser;
     
-    private static Wifi wifiViewed;
-    private static Retailer retailerViewed;
-    private static Toilet toiletViewed;
-    
-    private static Integer toiletIndex;
-    
-    private static Poi poiViewed;
     private static Location locationViewed;
     private static Route routeViewed;
+
+
+	private static Integer toiletIndex;
+	private static Integer retailerIndex;
+	private static Integer poiIndex;
+	private static Integer wifiIndex;
 
     private static Location newRouteStart;
     private static Location newRouteEnd;
@@ -37,6 +36,19 @@ public class CurrentStorage {
     public static void setToiletIndex(Integer i) { toiletIndex = i; }
     
     public static Integer getToiletIndex() {return toiletIndex; }
+
+    public static void setRetailerIndex(Integer i) { retailerIndex = i; }
+
+    public static Integer getRetailerIndex() {return retailerIndex; }
+
+    public static void setPoiIndex(Integer i) {poiIndex = i; }
+
+    public static Integer getPoiIndex() {return poiIndex; }
+
+    public static void setWifiIndex(Integer i) { wifiIndex = i; }
+
+    public static Integer getWifiIndex() { return wifiIndex; }
+
 
 	/**
 	 * Getter for the current user
@@ -142,69 +154,69 @@ public class CurrentStorage {
 		return coordsArray;
 	}
 
-	/**
+/*	*//**
 	 * Setter for the wifi that is being viewed in a pop up
 	 * @param wifi Wifi being viewed
-	 */
+	 *//*
 	public static void setWifi(Wifi wifi) {
 		wifiViewed = wifi;
 	}
 
-	/**
+	*//**
 	 * Getter for the wifi being viewed in a pop up
 	 * @return Wifi being viewed
-	 */
+	 *//*
 	public static Wifi getWifi() {
 		return wifiViewed;
 	}
 
-	/**
+	*//**
 	 * Setter for the retailer that is being viewed in a pop up
 	 * @param retailer Retailer being viewed
-	 */
+	 *//*
 	public static void setRetailer(Retailer retailer) {
 		retailerViewed = retailer;
 	}
 
-	/**
+	*//**
 	 * Getter for the retailer being viewed in a pop up
 	 * @return Retailer being viewed
-	 */
+	 *//*
 	public static Retailer getRetailer() {
 		return retailerViewed;
 	}
 
-	/**
+	*//**
 	 * Getter for the toilet being viewed in a pop up
 	 * @return Toilet being viewed
-	 */
+	 *//*
 	public static Toilet getToilet() {
 		return toiletViewed;
 	}
 
-	/**
+	*//**
 	 * Setter for the toilet that is being viewed in a pop up
 	 * @param toilet Toilet being viewed
-	 */
+	 *//*
 	public static void setToilet(Toilet toilet) {
 		toiletViewed = toilet;
 	}
 
-	/**
+	*//**
 	 * Getter for the poi being viewed in a pop up
 	 * @return Poi being viewed
-	 */
+	 *//*
 	public static Poi getPoi() {
 		return poiViewed;
 	}
 
-	/**
+	*//**
 	 * Setter for the poi that is being viewed in a pop up
 	 * @param poi Poi being viewed
-	 */
+	 *//*
 	public static void setPoi(Poi poi) {
 		poiViewed = poi;
-	}
+	}*/
 
 	/**
 	 * Getter for the location being viewed in a pop up
