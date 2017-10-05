@@ -413,7 +413,7 @@ public class TablesScreenController {
 	@FXML
     void wifiTableClicked(MouseEvent event) throws IOException {
     	Wifi row = wifiTable.getSelectionModel().getSelectedItem();
-    	CurrentStorage.setWifi(row);
+    	CurrentStorage.setWifiIndex(CurrentStorage.getWifiArray().indexOf(row));
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/WifiInfoScreen.fxml"));
 
@@ -506,7 +506,7 @@ public class TablesScreenController {
 	@FXML
     void poiTableClicked(MouseEvent event) throws IOException {
     	Poi row = poiTable.getSelectionModel().getSelectedItem();
-    	CurrentStorage.setPoi(row);
+    	CurrentStorage.setPoiIndex(CurrentStorage.getPoiArray().indexOf(row));
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/PoiInfoScreen.fxml"));
 
