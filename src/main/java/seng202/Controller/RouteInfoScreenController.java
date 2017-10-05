@@ -1,16 +1,24 @@
 package seng202.Controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.w3c.dom.Document;
 import seng202.Model.CurrentStorage;
 import seng202.Model.Route;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -151,12 +159,28 @@ public class RouteInfoScreenController {
 
 
     @FXML
-    void showRouteBtnPressed(ActionEvent event) {
-        FXMLLoader loader = (FXMLLoader) Main.getStage().getScene().getUserData();
-        if (loader.getController() instanceof MainScreenController) {
-            MainScreenController controller = loader.getController();
-            controller.displayRouteOnMap(route);
-        }
+    void showRouteBtnPressed(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
+        Parent root = loader.load();
+        Main.getStage().setScene(new Scene(root, Main.getStage().getScene().getWidth(), Main.getStage().getScene().getHeight()));
+        Main.getStage().setTitle("Map");
+
+        MainScreenController controller = loader.<MainScreenController>getController();
+
+
+        Main.getStage().show();
+        System.out.println(controller.getMapWebEngine());
+        controller.getMapWebEngine().getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+            @Override
+            public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
+                if ( newValue != Worker.State.SUCCEEDED) {
+                    return;
+                }
+                controller.displayRouteOnMap(route);
+            }
+        });
+
+
     }
 
     @FXML

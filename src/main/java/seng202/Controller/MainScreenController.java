@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.web.WebEngine;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seng202.Model.*;
@@ -52,7 +53,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     private StringProperty address = new SimpleStringProperty();
 
     @FXML
-    private GoogleMapView mapView;
+    private GoogleMapView mapView = new GoogleMapView();
 
     @FXML
     private ResourceBundle resources;
@@ -440,7 +441,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     private DirectionsRenderer directionsRenderer;
 
-
+    private WebEngine mapEngine = mapView.getWebview().getEngine();
 
     ArrayList<Circle> wifiCircles = new ArrayList<Circle>();
     ArrayList<Marker> locationMarkers = new ArrayList<Marker>();
@@ -1478,6 +1479,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         dist = dist * 1.609344;
         return String.format("%.2f", dist);
     }
+
+    public WebEngine getMapWebEngine() { return mapEngine; }
 
 
     @Override
