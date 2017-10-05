@@ -1408,7 +1408,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         assert toiletIconButton != null : "fx:id=\"toiletIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert wifiIconButton != null : "fx:id=\"wifiIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
 
-
     }
 
     @Override
@@ -1449,18 +1448,22 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                 currentStorage.setNewRouteEnd(location);
                 Map.setEndMarker(latLong, map);
                 isStart = true;
-
-
             }
 
             if (Map.getStartLoc() != null && Map.getEndLoc() != null) {
-                map.clearMarkers();
+
+                for (Retailer retailer : CurrentStorage.getRetailerArray()) {
+                    Map.findRetailers(retailer, map);
+                }
                 Map.findRoute(Map.getStartLoc().getLatitude() + ", " + Map.getStartLoc().getLongitude(),
                         Map.getEndLoc().getLatitude() + ", " + Map.getEndLoc().getLongitude(),
                         mapView, directionsService, this, directionsPane, directionsRenderer);
+
                 latLongDistanceLabel.setText("Distance: " + distance(CurrentStorage.getNewRouteStart().getLatitude(), CurrentStorage.getNewRouteStart().getLongitude(),
                         CurrentStorage.getNewRouteEnd().getLatitude(),
                          CurrentStorage.getNewRouteEnd().getLongitude()) + "Km");
+                Map.resetStartMarker();
+                Map.resetEndMarker();
             }
         });
     }
@@ -1480,14 +1483,17 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @Override
     public void directionsReceived(DirectionsResult results, DirectionStatus status){
         // This is called when a route is created.
+        System.out.println("STUFF");
 
         //This section finds the nearby locations.
         ArrayList<Location> nearby = new ArrayList<Location>();
         for (DirectionsLeg leg : results.getRoutes().get(0).getLegs()) {
             nearby.addAll(Map.findNearby(leg.getStartLocation().getLatitude(), leg.getStartLocation().getLongitude()));
+            System.out.println(nearby);
             nearby.addAll(Map.findNearby(leg.getEndLocation().getLatitude(), leg.getEndLocation().getLongitude()));
         }
 
+        System.out.println(nearby);
         for (Location loc : nearby) {
             if (loc.getLocationType() == 0) {
                 Map.findLocation(loc, map);

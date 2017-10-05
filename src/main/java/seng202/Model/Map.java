@@ -9,8 +9,6 @@ import com.lynden.gmapsfx.service.directions.*;
 import com.lynden.gmapsfx.service.geocoding.GeocoderStatus;
 import com.lynden.gmapsfx.service.geocoding.GeocodingResult;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
-import com.lynden.gmapsfx.shapes.Circle;
-import com.lynden.gmapsfx.shapes.CircleOptions;
 import javafx.scene.control.Alert;
 
 import java.io.InputStream;
@@ -97,6 +95,14 @@ public class Map {
             startMarker = new Marker(routeMarkerOptns);
             map.addMarker(startMarker);
         }
+    }
+
+    public static void resetStartMarker() {
+        startMarker = null;
+    }
+
+    public static void resetEndMarker() {
+        endMarker = null;
     }
 
     /**
@@ -349,17 +355,12 @@ public class Map {
      */
     public static void findWifi(Wifi wifi, GoogleMap map) {
         //Creates a new circle and places it on a map.
-        CircleOptions circleOptns = new CircleOptions()
-                .center(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
-                .radius(70)
-                .draggable(false)
-                .clickable(false)
-                .fillOpacity(0.01)
-                .fillColor("Blue")
-                .strokeColor("Blue")
-                .strokeWeight(0.2);
-        wifi.setCircle(new Circle(circleOptns));
-        map.addMapShape(wifi.getCircle());
+        MarkerOptions wifiMarkOptns = new MarkerOptions()
+                .title(wifi.getSsid())
+                .animation(Animation.DROP)
+                .position(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
+                .icon(seng202.Model.Map.class.getResource("/images/wifiMarker.png").toString());
+        Marker wifiMarker = new Marker(wifiMarkOptns);
 
     }
 
@@ -475,7 +476,7 @@ public class Map {
         // Loops through the retailers in the list and checks if the location is within 50 metres of the retailer
         for (Retailer retailer : CurrentStorage.getRetailerArray()) {
             if (Map.getDistance(locLat, locLong,
-                    retailer.getLatitude(), retailer.getLongitude() ) < 50) {
+                    retailer.getLatitude(), retailer.getLongitude() ) < 200) {
                 nearby.add(retailer);
             }
         }
@@ -483,7 +484,7 @@ public class Map {
         // Loops through the wifi in the list and checks if the location is within 50 metres of the wifi
         for (Wifi wifi : CurrentStorage.getWifiArray()) {
             if (Map.getDistance(locLat, locLong,
-                    wifi.getLatitude(), wifi.getLongitude()) < 50) {
+                    wifi.getLatitude(), wifi.getLongitude()) < 200) {
                 nearby.add(wifi);
             }
         }
@@ -491,14 +492,14 @@ public class Map {
 
         // Loops through the POI in the list and checks if the location is within 50 metres of the POI
         for (Poi poi : CurrentStorage.getPoiArray()) {
-            if (Map.getDistance(locLat, locLong, poi.getLatitude(), poi.getLongitude()) < 50) {
+            if (Map.getDistance(locLat, locLong, poi.getLatitude(), poi.getLongitude()) < 200) {
                 nearby.add(poi);
             }
         }
 
         // Loops through the toilets in the list and checks if the location is within 50 metres of the toilet
         for (Toilet toilet : CurrentStorage.getToiletArray()) {
-            if (Map.getDistance(toilet.getLatitude(), toilet.getLongitude(), locLat, locLong) < 50) {
+            if (Map.getDistance(toilet.getLatitude(), toilet.getLongitude(), locLat, locLong) < 200) {
                 nearby.add(toilet);
             }
         }
