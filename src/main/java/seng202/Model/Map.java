@@ -358,10 +358,12 @@ public class Map {
         MarkerOptions wifiMarkOptns = new MarkerOptions()
                 .title(wifi.getSsid())
                 .animation(Animation.DROP)
+                .visible(true)
                 .position(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
                 .icon(seng202.Model.Map.class.getResource("/images/wifiMarker.png").toString());
         Marker wifiMarker = new Marker(wifiMarkOptns);
-
+        wifi.setMarker(wifiMarker);
+        map.addMarker(wifiMarker);
     }
 
     /**
