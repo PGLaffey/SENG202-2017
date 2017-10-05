@@ -75,6 +75,10 @@ public class Location {
         return latitude;
     }
     
+    public boolean getSecret() {
+    	return secret;
+    }
+    
     public void setLatitude(double lat) {
     	latitude = lat;
     }

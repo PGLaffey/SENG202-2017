@@ -18,9 +18,10 @@ public class Route {
     private Location via1;
     private Location via2;
     private Location via3;
-    private boolean secret; // true if private, false if public
+    private boolean secret = false; // true if private, false if public
     private Marker startMarker = null;
     private Marker endMarker = null;
+    private User owner = null;
 
     /**
      * Constructs a route based on the start and end locations.
@@ -76,6 +77,14 @@ public class Route {
         via3 = null;
     }
 
+    public User getOwner() {
+    	return owner;
+    }
+    
+    public void setOwner(User user) {
+    	owner = user;
+    }
+    
     /**
      * Getter for the route name
      */
@@ -83,15 +92,23 @@ public class Route {
         return name;
     }
 
+    public boolean getSecret() {
+    	return secret;
+    }
+    
     /**
      * Getter for the bike id
      */
-    public String getBikeID() { return bikeID; }
+    public String getBikeID() { 
+    	return bikeID; 
+    }
 
     /**
      * Getter for the route gender
      */
-    public String getGender() { return gender; }
+    public String getGender() { 
+    	return gender; 
+    }
 
     public String getGenderType() {
         if (gender.equals("1")) {
