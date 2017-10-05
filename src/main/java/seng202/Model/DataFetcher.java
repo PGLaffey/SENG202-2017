@@ -410,86 +410,117 @@ public class DataFetcher {
 		}
 	}
 
-
+	
+	/**
+	 * Loads a single Route from the database and returns a Route object
+	 * @param output The ResultSet of the Route to be loaded from the database
+	 * @return A Route object made of the data from the database
+	 * @throws SQLException If there is an error reading data from the database
+	 */
+	private Route loadRoute(ResultSet output) throws SQLException {
+		int startID = output.getInt(2);
+		int endID = output.getInt(3);
+		Location start = loadRouteLocation(startID);
+		Location end = loadRouteLocation(endID);
+		boolean secret = output.getBoolean(7);
+		String name = output.getString(9);;
+		String bikeID = output.getString(10);;
+		String gender;
+		if (output.getBoolean(11)) {
+			gender = "Male";
+		}
+		else {
+			gender = "Female";
+		}
+		Route route = new Route(bikeID, start, end, name, gender);
+		route.setSecret(secret);
+		return route;
+	}
+	
+	
+	/**
+	 * Loads a location along a route.EG Start or End
+	 * @param locationID The database ID of the location to be loaded
+	 * @return A location object made of the data from the database
+	 * @throws SQLException If there is an error reading data from the database
+	 */
+	private Location loadRouteLocation(int locationID) throws SQLException {
+		PreparedStatement qryLocation = connect.prepareStatement("SELECT * FROM tblLocations" +
+				" WHERE LocationID = ?");
+		qryLocation.setInt(1, locationID);
+		ResultSet locationOutput = qryLocation.executeQuery();
+		locationOutput.next();
+		return loadLocation(locationOutput);
+	}
+	
+	
+	/**
+	 * Adds the Route to the current Users saved routes or fav routes if it is set to
+	 * @param output ResultSet of information about the currently loading Route
+	 * @param index The index of the currently loading Route in current storage
+	 * @throws SQLException If there is an error reading data from the database
+	 */
+	private void addRouteToList(ResultSet output, int index) throws SQLException {
+		int routeID = output.getInt(1);
+		int currUser = findUser(CurrentStorage.getUser());
+		int userList = 0;
+		PreparedStatement qryBelongsTo = connect.prepareStatement("SELECT * FROM tblUsersRoutes" +
+				" WHERE UserID = ? AND RouteID = ?");
+		qryBelongsTo.setInt(1, currUser);
+		qryBelongsTo.setInt(2, routeID);
+		ResultSet belongsToOutput = qryBelongsTo.executeQuery();
+		while (belongsToOutput.next()) {
+			userList = belongsToOutput.getInt(3);
+			if (userList == 1) {
+				CurrentStorage.addSavedRoute(index);
+			}
+			else if (userList == 2) {
+				CurrentStorage.addFavRoute(index);
+			}
+		}
+	}
+	
+	
 	/**
 	 * Fetches all of the routes out of the database to be loaded in to the app
 	 */
 	public void loadAllRoutes() {
-    	Route route = null;
     	try {
+    		//Initializes the result set of all Routes from the database
     		PreparedStatement qryLoadRoutes = connect.prepareStatement("SELECT * FROM tblRoutes");
 			ResultSet output = qryLoadRoutes.executeQuery();
-			int routeID = 0;
-			int usersaved = findUser(CurrentStorage.getUser());
-			int userList = 0;
-			Location start = null;
-			Location end = null;
-			int startID;
-			int endID;
-			boolean secret = false;
-			String name;
-			String bikeID;
-			String gender;
-			User owner = null;
-			double latitude;
-			double longitude;
-			int type;
-
-			ResultSet locationOutput; 
-			ResultSet endOutput; 
+			//Loops while there is another Route to be loaded
 			while (output.next()) {
-				routeID = output.getInt(1);
-				startID = output.getInt(2);
-				endID = output.getInt(3);
-
-				PreparedStatement qryLocation = connect.prepareStatement("SELECT * FROM tblLocations" +
-						" WHERE LocationID = ?");
-				qryLocation.setInt(1, startID);
-
-				locationOutput = qryLocation.executeQuery();
-
-
-				locationOutput.next();
-	    		start = loadLocation(locationOutput);
-
-				qryLocation = connect.prepareStatement("SELECT * FROM tblLocations" +
-						" WHERE LocationID = ?");
-	    		qryLocation.setInt(1, endID);
-				locationOutput = qryLocation.executeQuery();
-				locationOutput.next();
-				end = loadLocation(locationOutput);
-				
-				secret = output.getBoolean(7);
-				name = output.getString(9);
-				bikeID = output.getString(10);
-				if (output.getBoolean(11)) {
-					gender = "Male";
+				boolean secret = output.getBoolean(7);
+				//Checks if the Route is set to be secret
+				if (secret) {
+					int ownerID = output.getInt(8);
+					//Checks if the Route belongs to a User
+					if (ownerID != 0) {
+						String currUser = CurrentStorage.getUser().getUsername();
+						PreparedStatement qryOwner = connect.prepareStatement("SELECT Username FROM tblUser WHERE UserID = ?");
+						qryOwner.setInt(1, ownerID);
+						ResultSet ownerOutput = qryOwner.executeQuery();
+						String owner = ownerOutput.getString(1);
+						//Checks if the currently loaded User is the Owner of the Route
+						//If so add the Route to current storage
+						if (currUser.equals(owner)) {
+							CurrentStorage.addRoute(loadRoute(output));
+							int addedIndex = CurrentStorage.getRouteArray().size() - 1;
+							addRouteToList(output, addedIndex);
+						}
+					}
+					//If the Route does not belong to a User, don't add it because it is secret
 				}
+				//If the Route is not secret add it to current storage
 				else {
-					gender = "Female";
+					CurrentStorage.addRoute(loadRoute(output));
+					int addedIndex = CurrentStorage.getRouteArray().size() - 1;
+					addRouteToList(output, addedIndex);
 				}
-
-				route = new Route(bikeID, start, end, name, gender);
-				CurrentStorage.addRoute(route);
-				
-				userList = 0;
-				qryLocation = connect.prepareStatement("SELECT * FROM tblUsersRoutes" +
-						" WHERE UserID = ? AND RouteID = ?");
-				qryLocation.setInt(1, usersaved);
-				qryLocation.setInt(2, routeID);
-				locationOutput = qryLocation.executeQuery();
-				while (locationOutput.next()) {
-					userList = locationOutput.getInt(3);
-					if (userList == 1) {
-						//Save to Saved Routes
-					}
-					else if (userList == 2) {
-						//Save to Favourite Routes
-					}
-				}
-				
 			}
     	}
+    	//Prints the correct error statements if an SQLException occurs
     	catch (SQLException ex) {
     		printSqlError(ex);
     	}

@@ -21,6 +21,9 @@ public class CurrentStorage {
     private static ArrayList<Coord> coordsArray = new ArrayList<Coord>();
     private static User currentUser;
     
+    private static ArrayList<Integer> usersSavedRoutes = new ArrayList<Integer>();
+    private static ArrayList<Integer> usersFavRoutes = new ArrayList<Integer>();
+    
     private static Location locationViewed;
     private static Route routeViewed;
 
@@ -33,21 +36,53 @@ public class CurrentStorage {
     private static Location newRouteStart;
     private static Location newRouteEnd;
     
-    public static void setToiletIndex(Integer i) { toiletIndex = i; }
+    public static ArrayList<Integer> getSavedRoutes() {
+    	return usersSavedRoutes;
+    }
     
-    public static Integer getToiletIndex() {return toiletIndex; }
+    public static ArrayList<Integer> getFavRoutes() {
+    	return usersFavRoutes;
+    }
+    
+    public static void addSavedRoute(int index) {
+    	usersSavedRoutes.add(index);
+    }
+    
+    public static void addFavRoute(int index) {
+    	usersFavRoutes.add(index);
+    }
+    
+    public static void setToiletIndex(Integer i) { 
+    	toiletIndex = i; 
+    }
+    
+    public static Integer getToiletIndex() {
+    	return toiletIndex; 
+    }
 
-    public static void setRetailerIndex(Integer i) { retailerIndex = i; }
+    public static void setRetailerIndex(Integer i) { 
+    	retailerIndex = i; 
+    }
 
-    public static Integer getRetailerIndex() {return retailerIndex; }
+    public static Integer getRetailerIndex() {
+    	return retailerIndex; 
+    }
 
-    public static void setPoiIndex(Integer i) {poiIndex = i; }
+    public static void setPoiIndex(Integer i) {
+    	poiIndex = i; 
+    }
 
-    public static Integer getPoiIndex() {return poiIndex; }
+    public static Integer getPoiIndex() {
+    	return poiIndex; 
+    }
 
-    public static void setWifiIndex(Integer i) { wifiIndex = i; }
+    public static void setWifiIndex(Integer i) { 
+    	wifiIndex = i; 
+    }
 
-    public static Integer getWifiIndex() { return wifiIndex; }
+    public static Integer getWifiIndex() { 
+    	return wifiIndex; 
+    }
 
 
 	/**
