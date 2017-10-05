@@ -53,7 +53,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     private StringProperty address = new SimpleStringProperty();
 
     @FXML
-    private GoogleMapView mapView = new GoogleMapView();
+    private GoogleMapView mapView;
 
     @FXML
     private ResourceBundle resources;
@@ -441,7 +441,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     private DirectionsRenderer directionsRenderer;
 
-    private WebEngine mapEngine = mapView.getWebview().getEngine();
+    private WebEngine mapEngine;
 
     ArrayList<Circle> wifiCircles = new ArrayList<Circle>();
     ArrayList<Marker> locationMarkers = new ArrayList<Marker>();
@@ -1330,7 +1330,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     
     @FXML
     void initialize() {
+
         mapView.addMapInializedListener(this);
+        mapEngine = mapView.getWebview().getEngine();
         address.bind(searchText.textProperty());
 
     	loadRouteMenu.setPopupSide(Side.RIGHT);
@@ -1363,7 +1365,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                             updateProgress(0, 100);
                             //progressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
                             updateMessage("Retrieving Locations...");
-                            data.loadNextLocations();
+                            //data.loadNextLocations();
                             updateProgress(50, 100);
                             updateMessage("Retrieving Routes...");
                             data.loadAllRoutes();
@@ -1430,6 +1432,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                 .zoom(12);
 
         map = mapView.createMap(mapOptions);
+
         directionsService = new DirectionsService();
         directionsPane = mapView.getDirec();
         directionsRenderer = new DirectionsRenderer(true, map, directionsPane);
@@ -1482,6 +1485,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     public WebEngine getMapWebEngine() { return mapEngine; }
 
+    public GoogleMapView getMapView() { return mapView; }
+
+    public DirectionsService getDirectionsService() { return directionsService; }
 
     @Override
     public void directionsReceived(DirectionsResult results, DirectionStatus status){

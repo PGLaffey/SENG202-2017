@@ -11,19 +11,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import org.w3c.dom.Document;
 import seng202.Model.CurrentStorage;
+import seng202.Model.Map;
 import seng202.Model.Route;
+import seng202.Model.User;
+import seng202.team5.Main;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import seng202.Model.User;
-import seng202.team5.Main;
 
 
 public class RouteInfoScreenController {
@@ -162,21 +160,16 @@ public class RouteInfoScreenController {
     void showRouteBtnPressed(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
         Parent root = loader.load();
+
         Main.getStage().setScene(new Scene(root, Main.getStage().getScene().getWidth(), Main.getStage().getScene().getHeight()));
         Main.getStage().setTitle("Map");
-
-        MainScreenController controller = loader.<MainScreenController>getController();
-
-
         Main.getStage().show();
-        System.out.println(controller.getMapWebEngine());
+
+        MainScreenController controller = loader.getController();
         controller.getMapWebEngine().getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
             @Override
             public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
-                if ( newValue != Worker.State.SUCCEEDED) {
-                    return;
-                }
-                controller.displayRouteOnMap(route);
+                Map.findRoute(route, controller.getMapView(), controller.getDirectionsService(), controller, controller.getMapView().getDirec());
             }
         });
 
