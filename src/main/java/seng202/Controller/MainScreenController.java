@@ -25,6 +25,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.omg.CORBA.Current;
 import seng202.Model.*;
 
 import java.io.File;
@@ -1364,6 +1365,19 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addLocationsMenu.setPopupSide(Side.RIGHT);
 
     	progressBar.setProgress(100);
+
+    	ArrayList<Route> favRoutes = CurrentStorage.getUser().getFavouriteRoutes();
+    	ArrayList<Route> savedRoutes = CurrentStorage.getUser().getSavedRoutes();
+
+    	for (Route route : favRoutes) {
+    	    // TODO: add to favourite routes menu
+            favouriteRoutesMenu.getItems().add(new MenuItem(route.getName()));
+        }
+
+        for (Route route : savedRoutes) {
+    	    //TODO: add to to saved routes menu
+            savedRoutesMenu.getItems().add(new MenuItem(route.getName()));
+        }
 
     	if (!data.isHasImported()) {
             Service service = new Service() {
