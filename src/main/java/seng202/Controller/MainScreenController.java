@@ -1330,7 +1330,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     
     @FXML
     void initialize() {
-
+        //mapView = new GoogleMapView();
         mapView.addMapInializedListener(this);
         mapEngine = mapView.getWebview().getEngine();
         address.bind(searchText.textProperty());
@@ -1365,7 +1365,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                             updateProgress(0, 100);
                             //progressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
                             updateMessage("Retrieving Locations...");
-                            //data.loadNextLocations();
+                            data.loadNextLocations();
                             updateProgress(50, 100);
                             updateMessage("Retrieving Routes...");
                             data.loadAllRoutes();
@@ -1489,10 +1489,16 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     public DirectionsService getDirectionsService() { return directionsService; }
 
+    public void updateDistanceLabel(double distance) {
+        latLongDistanceLabel.setText(String.format("Distance: %.2fkm", distance));
+    }
+
     @Override
     public void directionsReceived(DirectionsResult results, DirectionStatus status){
         // This is called when a route is created.
-        System.out.println("STUFF");
+        latLongDistanceLabel.setText("Distance: " + distance(CurrentStorage.getNewRouteStart().getLatitude(), CurrentStorage.getNewRouteStart().getLongitude(),
+                CurrentStorage.getNewRouteEnd().getLatitude(),
+                CurrentStorage.getNewRouteEnd().getLongitude()) + "Km");
 
         //This section finds the nearby locations.
         ArrayList<Location> nearby = new ArrayList<Location>();

@@ -1,8 +1,6 @@
 package seng202.Controller;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Worker;
+import com.lynden.gmapsfx.MapReadyListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -163,17 +161,16 @@ public class RouteInfoScreenController {
 
         Main.getStage().setScene(new Scene(root, Main.getStage().getScene().getWidth(), Main.getStage().getScene().getHeight()));
         Main.getStage().setTitle("Map");
-        Main.getStage().show();
 
         MainScreenController controller = loader.getController();
-        controller.getMapWebEngine().getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+        controller.getMapView().addMapReadyListener(new MapReadyListener() {
             @Override
-            public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
+            public void mapReady() {
                 Map.findRoute(route, controller.getMapView(), controller.getDirectionsService(), controller, controller.getMapView().getDirec());
             }
         });
-
-
+        controller.updateDistanceLabel(route.getDistance()/1000);
+        Main.getStage().show();
     }
 
     @FXML

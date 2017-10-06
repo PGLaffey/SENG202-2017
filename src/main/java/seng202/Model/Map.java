@@ -342,8 +342,8 @@ public class Map {
     public static void findRoute(Route route, GoogleMapView mapView,
                           DirectionsService service, DirectionsServiceCallback callback, DirectionsPane pane) {
 
-        DirectionsRequest request = new DirectionsRequest(new LatLong(route.getStart().getLatitude(), route.getStart().getLongitude()),
-                new LatLong(route.getEnd().getLatitude(), route.getEnd().getLongitude()), TravelModes.BICYCLING);
+        DirectionsRequest request = new DirectionsRequest(route.getStart().getLatitude()+", "+ route.getStart().getLongitude(),
+                route.getEnd().getLatitude()+","+ route.getEnd().getLongitude(), TravelModes.BICYCLING);
 
         service.getRoute(request, callback, new DirectionsRenderer(true, mapView.getMap(), pane));
     }
