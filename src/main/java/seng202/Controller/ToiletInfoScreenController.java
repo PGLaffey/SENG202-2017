@@ -180,10 +180,8 @@ public class ToiletInfoScreenController {
             DataFetcher exporter = new DataFetcher();
             try {
                 exporter.connectDb();
-                exporter.storeCurrentStorage();
                 exporter.updateLocation(oldToilet, CurrentStorage.getToiletArray().get(toiletIndex));
-                CurrentStorage.flush();
-                System.exit(0);
+                exporter.closeConnection();
             } catch (Exception e) {
                 e.printStackTrace();
             }
