@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
@@ -26,6 +27,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.web.WebEngine;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.omg.CORBA.Current;
 import seng202.Model.*;
 
 import java.io.File;
@@ -211,6 +213,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     private TextField wifiZipText;
+
+    @FXML
+    private CheckBox wifiPrivateCheck;
     
     //Adding poi pane
     
@@ -267,6 +272,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     private TextField poiZipText;
+
+    @FXML
+    private CheckBox poiPrivateCheck;
     
     //Adding toilet pane
     
@@ -320,6 +328,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     private TextField toiletZipText;
+
+    @FXML
+    private CheckBox toiletPrivateCheck;
     
     //Adding retailer pane
     
@@ -373,6 +384,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     private TextField retailerZipText;
+
+    @FXML
+    private CheckBox retailerPrivateCheck;
     
     //Adding other pane
     
@@ -417,6 +431,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     
     @FXML
     private Button saveOtherButton;
+
+    @FXML
+    private CheckBox otherPrivateCheck;
 
     // File chooser
 
@@ -972,6 +989,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             if (!otherBoroughText.getText().equals("")) {
     		    location.setBorough(otherBoroughText.getText());
             }
+            location.setSecret(otherPrivateCheck.isSelected());
             CurrentStorage.addNewGeneral(location);
 
     		otherNameLabel.setTextFill(Color.BLACK);
@@ -1052,6 +1070,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             if (!poiBoroughText.getText().equals("")) {
                 poi.setBorough(poiBoroughText.getText());
             }
+            poi.setSecret(poiPrivateCheck.isSelected());
             CurrentStorage.addNewPoi(poi);
 
             poiNameLabel.setTextFill(Color.BLACK);
@@ -1135,6 +1154,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             if (!retailerBoroughText.getText().equals("")) {
     		    retailer.setBorough(retailerBoroughText.getText());
             }
+            retailer.setSecret(retailerPrivateCheck.isSelected());
             CurrentStorage.addNewRetailer(retailer);
 
             retailerNameLabel.setTextFill(Color.BLACK);
@@ -1216,6 +1236,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             if(!toiletBoroughText.getText().equals("")) {
     		    toilet.setBorough(toiletBoroughText.getText());
             }
+            toilet.setSecret(toiletPrivateCheck.isSelected());
             CurrentStorage.addNewToilet(toilet);
 
             toiletNameLabel.setTextFill(Color.BLACK);
@@ -1303,6 +1324,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             if (!wifiBoroughText.getText().equals("")) {
     		    wifi.setBorough(wifiBoroughText.getText());
             }
+            wifi.setSecret(wifiPrivateCheck.isSelected());
             CurrentStorage.addNewWifi(wifi);
 
 
@@ -1348,6 +1370,35 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addLocationsMenu.setPopupSide(Side.RIGHT);
 
     	progressBar.setVisible(true);
+
+    	ArrayList<Integer> favRoutes = CurrentStorage.getFavRoutes();
+    	ArrayList<Integer> savedRoutes = CurrentStorage.getSavedRoutes();
+
+    	for (Integer index : favRoutes) {
+    	    Route route = CurrentStorage.getRouteArray().get(index);
+            MenuItem menuItem = new MenuItem(route.getName());
+            menuItem.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    //TODO: display route on map
+                    displayRouteOnMap(route);
+                }
+            });
+            favouriteRoutesMenu.getItems().add(menuItem);
+        }
+
+        for (Integer index : savedRoutes) {
+    	    Route route = CurrentStorage.getRouteArray().get(index);
+    	    MenuItem menuItem = new MenuItem(route.getName());
+    	    menuItem.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    //TODO: display route on map
+                    displayRouteOnMap(route);
+                }
+            });
+            savedRoutesMenu.getItems().add(menuItem);
+        }
 
     	if (!data.isHasImported()) {
             Service service = new Service() {

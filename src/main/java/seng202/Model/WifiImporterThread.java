@@ -7,10 +7,12 @@ package seng202.Model;
 public class WifiImporterThread implements Runnable {
     private String path;
 
+    
     public WifiImporterThread(String path) {
         this.path = path;
     }
 
+    
     public void run(){
         FileManager.wifiRetriever(path);
     }

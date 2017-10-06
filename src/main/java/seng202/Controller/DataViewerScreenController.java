@@ -178,20 +178,21 @@ public class DataViewerScreenController {
 		}
 	}
 
+
 	@FXML
 	void initialize() {
 		ObservableList<String> filterTypes = FXCollections.observableArrayList("Distance travelled","Time spent cycling");
 		filterGraphBox.setItems(filterTypes);
-
-		distValue.setText(CurrentStorage.getUser().getDistanceRounded() + " metres");
-		timeValue.setText(CurrentStorage.getUser().getHours() + " minutes");
-		routesValue.setText(CurrentStorage.getUser().getRoutesCycled() + " routes");
 
 		User user = CurrentStorage.getUser();
 
         user.getBadges().get(0).updateBadge(intValue(user.getDistance()));
         user.getBadges().get(1).updateBadge(intValue(user.getHours()));
         user.getBadges().get(2).updateBadge(user.getRoutesCycled());
+
+		distValue.setText(CurrentStorage.getUser().getBadges().get(0).achievedString());
+		timeValue.setText(CurrentStorage.getUser().getBadges().get(1).achievedString());
+		routesValue.setText(CurrentStorage.getUser().getRoutesCycled() + " routes");
 
         distNextBadge.setText(CurrentStorage.getUser().getBadges().get(0).getStrRemaining());
         timeNextBadge.setText(CurrentStorage.getUser().getBadges().get(1).getStrRemaining());

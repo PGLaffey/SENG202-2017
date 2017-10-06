@@ -4,7 +4,6 @@ import com.lynden.gmapsfx.javascript.object.Marker;
 
 /**
  * Class to store known coordinates of addresses.
- * Created by Eiran Ling on 21/09/17.
  */
 public class Coord {
     private String address;
@@ -12,12 +11,14 @@ public class Coord {
     private double lng;
     private Marker locMark;
 
+    
     public Coord(String address, double lattitude, double longitude) {
         this.address = address;
         lat = lattitude;
         lng = longitude;
     }
 
+    
     /**
      * Getter for the latitude
      */
@@ -25,6 +26,7 @@ public class Coord {
         return lat;
     }
 
+    
     /**
      * Getter for the longitude
      */
@@ -32,6 +34,7 @@ public class Coord {
         return lng;
     }
 
+    
     /**
      * Getter for the address
      */
@@ -39,6 +42,7 @@ public class Coord {
         return address;
     }
 
+    
     /**
      * @return whether the Coord has a marker
      */
@@ -46,6 +50,7 @@ public class Coord {
         return locMark;
     }
 
+    
     /**
      * Sets whether the coord has a marker
      * @param marker Marker to set the locMark
@@ -54,6 +59,7 @@ public class Coord {
         locMark = marker;
     }
 
+    
     /**
      * Checks whether two coordinates are equal
      * @return boolean for whether the coordinates are equal

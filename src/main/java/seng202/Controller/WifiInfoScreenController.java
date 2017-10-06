@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
 import seng202.Model.*;
 import seng202.team5.Main;
 
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 
 
 public class WifiInfoScreenController {
@@ -89,10 +91,16 @@ public class WifiInfoScreenController {
     @FXML
     private Button cancelButton;
 
+
     @FXML
     private Button showOnMapBtn;
 
     private Wifi wifi;
+
+    private Integer wifiIndex;
+
+    private Wifi oldWifi;
+
 
 
     /**
@@ -112,17 +120,17 @@ public class WifiInfoScreenController {
     @FXML
     void updatePressed(ActionEvent event) {
     	boroughText.setVisible(true);
-    	boroughText.setText(wifi.getBorough());
+    	boroughText.setText(CurrentStorage.getWifiArray().get(wifiIndex).getBorough());
     	ssidText.setVisible(true);
-    	ssidText.setText(wifi.getSsid());
+    	ssidText.setText(CurrentStorage.getWifiArray().get(wifiIndex).getSsid());
     	typeText.setVisible(true);
-    	typeText.setText(wifi.getType());
+    	typeText.setText(CurrentStorage.getWifiArray().get(wifiIndex).getType());
     	providerText.setVisible(true);
-    	providerText.setText(wifi.getProvider());
+    	providerText.setText(CurrentStorage.getWifiArray().get(wifiIndex).getProvider());
     	nameText.setVisible(true);
-    	nameText.setText(wifi.getName());
+    	nameText.setText(CurrentStorage.getWifiArray().get(wifiIndex).getName());
     	zipText.setVisible(true);
-    	zipText.setText(String.valueOf(wifi.getZip()));;
+    	zipText.setText(String.valueOf(CurrentStorage.getWifiArray().get(wifiIndex).getZip()));;
     	boroughLabel.setText("Borough: ");
     	ssidLabel.setText("Ssid: ");
     	typeLabel.setText("Type: ");
@@ -208,15 +216,24 @@ public class WifiInfoScreenController {
     	}
         
         if (allValid) {
-            wifi.setBorough(boroughText.getText());
-            wifi.setName(nameText.getText());
-            wifi.setSsid(ssidText.getText());
-            wifi.setProvider(providerText.getText());
-            wifi.setType(typeText.getText());
+            CurrentStorage.getWifiArray().get(wifiIndex).setBorough(boroughText.getText());
+            CurrentStorage.getWifiArray().get(wifiIndex).setName(nameText.getText());
+            CurrentStorage.getWifiArray().get(wifiIndex).setSsid(ssidText.getText());
+            CurrentStorage.getWifiArray().get(wifiIndex).setProvider(providerText.getText());
+            CurrentStorage.getWifiArray().get(wifiIndex).setType(typeText.getText());
             if (!zipText.getText().equals("")) {
-                wifi.setZip(Integer.parseInt(zipText.getText()));
+                CurrentStorage.getWifiArray().get(wifiIndex).setZip(Integer.parseInt(zipText.getText()));
             }
             // TODO: Update the database
+
+            DataFetcher exporter = new DataFetcher();
+            try {
+                exporter.connectDb();
+                exporter.updateLocation(oldWifi, CurrentStorage.getWifiArray().get(wifiIndex));
+                exporter.closeConnection();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             cancelPressed(event);
         }
@@ -224,17 +241,17 @@ public class WifiInfoScreenController {
 
     @FXML
     void cancelPressed (ActionEvent event) {
-        nameLabel.setText("Name: " + wifi.getName());
+        nameLabel.setText("Name: " + CurrentStorage.getWifiArray().get(wifiIndex).getName());
         nameText.setVisible(false);
-        typeLabel.setText("Type: " + wifi.getType());
+        typeLabel.setText("Type: " + CurrentStorage.getWifiArray().get(wifiIndex).getType());
         typeText.setVisible(false);
-        boroughLabel.setText("Borough: " + wifi.getBorough());
+        boroughLabel.setText("Borough: " + CurrentStorage.getWifiArray().get(wifiIndex).getBorough());
         boroughText.setVisible(false);
-        providerLabel.setText("Provider: " + wifi.getProvider());
+        providerLabel.setText("Provider: " + CurrentStorage.getWifiArray().get(wifiIndex).getProvider());
         providerText.setVisible(false);
-        zipLabel.setText("Zip: " + wifi.getZip());
+        zipLabel.setText("Zip: " + CurrentStorage.getWifiArray().get(wifiIndex).getZip());
         zipText.setVisible(false);
-        ssidLabel.setText("Ssid: " + wifi.getSsid());
+        ssidLabel.setText("Ssid: " + CurrentStorage.getWifiArray().get(wifiIndex).getSsid());
         ssidText.setVisible(false);
         cancelButton.setVisible(false);
         saveButton.setVisible(false);
@@ -283,16 +300,17 @@ public class WifiInfoScreenController {
 
     @FXML
     void initialize() {
-    	wifi = CurrentStorage.getWifi();
-    	nameLabel.setText("Name: " + wifi.getName());
-    	typeLabel.setText("Type: " + wifi.getType());
-    	boroughLabel.setText("Borough: " + wifi.getBorough());
-    	latLabel.setText("Latitude: " + wifi.getLatitude());
-    	longLabel.setText("Longitude: " + wifi.getLongitude());
-    	providerLabel.setText("Provider: " + wifi.getProvider());
-    	zipLabel.setText("Zip: " + wifi.getZip());
-    	addressLabel.setText("Address: " + wifi.getAddress());
-    	ssidLabel.setText("Ssid: " + wifi.getSsid());
+        oldWifi = new Wifi(CurrentStorage.getWifiArray().get(CurrentStorage.getWifiIndex()));
+    	wifiIndex = CurrentStorage.getWifiIndex();
+    	nameLabel.setText("Name: " + CurrentStorage.getWifiArray().get(wifiIndex).getName());
+    	typeLabel.setText("Type: " + CurrentStorage.getWifiArray().get(wifiIndex).getType());
+    	boroughLabel.setText("Borough: " + CurrentStorage.getWifiArray().get(wifiIndex).getBorough());
+    	latLabel.setText("Latitude: " + CurrentStorage.getWifiArray().get(wifiIndex).getLatitude());
+    	longLabel.setText("Longitude: " + CurrentStorage.getWifiArray().get(wifiIndex).getLongitude());
+    	providerLabel.setText("Provider: " + CurrentStorage.getWifiArray().get(wifiIndex).getProvider());
+    	zipLabel.setText("Zip: " + CurrentStorage.getWifiArray().get(wifiIndex).getZip());
+    	addressLabel.setText("Address: " + CurrentStorage.getWifiArray().get(wifiIndex).getAddress());
+    	ssidLabel.setText("Ssid: " + CurrentStorage.getWifiArray().get(wifiIndex).getSsid());
     	
         assert boroughLabel != null : "fx:id=\"boroughLabel\" was not injected: check your FXML file 'WifiInfoScreen.fxml'.";
         assert latLabel != null : "fx:id=\"latLabel\" was not injected: check your FXML file 'WifiInfoScreen.fxml'.";

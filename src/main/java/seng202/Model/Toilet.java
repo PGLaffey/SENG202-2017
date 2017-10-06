@@ -12,6 +12,7 @@ public class Toilet extends Location {
     private boolean uniSex;
     private Marker marker = null;
 
+    
     /**
      * Toilet constructor, creates a new instance of the toilet object using the location superclass constructor.
      * @param latitude The latitude of the toilet location.
@@ -26,6 +27,18 @@ public class Toilet extends Location {
         this.uniSex = uniSex;
     }
 
+    
+    /**
+     * Overloaded constructor used for cloning a toilet
+     * @param toilet The toilet to be cloned
+     */
+    public Toilet(Toilet toilet) {
+    	super(toilet);
+    	this.forDisabled = toilet.getForDisabled();
+    	this.uniSex = toilet.getUniSex();
+    }
+    
+    
     /**
      * Toilet contructor, creates a new instance of the toilet object using the location superclass constructor.
      * @param address The address of the toilet location.
@@ -39,14 +52,6 @@ public class Toilet extends Location {
     	this.uniSex = uniSex;
     }
 
-    /**
-     * Getter for if the toilet is disabled friendly
-     */
-    public boolean getForDisabled() {
-        return forDisabled;
-    }
-
-    public void setForDisabled(boolean bool) { forDisabled = bool; }
 
     public void setMarker(Marker marker) {
         this.marker = marker;
@@ -56,16 +61,9 @@ public class Toilet extends Location {
         return marker;
     }
 
-    /**
-     * Getter for whether the toilet is unisex
-     * @return boolean for if the toilet is unisex
-     */
-    public boolean getUniSex() {
-        return uniSex;
-    }
-
-    public void setUniSex(boolean bool) { uniSex = bool; }
-
+    
+    //TODO
+    //Replace with proper equals override like in Location
     /**
      * Returns whether the toilet locations are equal
      * @param other the toilet to be compared
@@ -85,7 +83,41 @@ public class Toilet extends Location {
         }
         return true;
     }
+    
+    
+    /**
+     * Getter for if the toilet is disabled
+     * @return If the toilets are for disabled
+     */
+    public boolean getForDisabled() {
+        return forDisabled;
+    }
 
+    
+    /**
+     * Setter for if a toilet is for disabled
+     * @param bool If a toilet has disabled
+     */
+    public void setForDisabled(boolean bool) { 
+    	forDisabled = bool; 
+    }
 
+    
+    /**
+     * Getter for whether the toilet is unisex
+     * @return boolean for if the toilet is unisex
+     */
+    public boolean getUniSex() {
+        return uniSex;
+    }
+
+    
+    /**
+     * Setter for if the toilet is unisex
+     * @param bool If the toilet is unisex
+     */
+    public void setUniSex(boolean bool) { 
+    	uniSex = bool; 
+    }
 }
 

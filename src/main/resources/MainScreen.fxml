@@ -140,24 +140,8 @@
                       <children>
                         <MenuButton fx:id="loadRouteMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #0B4D63, #CCE6EF;" text="Load Route" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                           <items>
-                            <Menu fx:id="favouriteRoutesMenu" mnemonicParsing="false" style="" text="Favourite Routes">
-                              <items>
-                                <MenuItem mnemonicParsing="false" style="" text="Action 1">
-                                  <graphic>
-                                    <ScrollBar orientation="VERTICAL" />
-                                  </graphic>
-                                </MenuItem>
-                              </items>
-                            </Menu>
-                            <Menu fx:id="savedRoutesMenu" mnemonicParsing="false" style="" text="Saved Routes">
-                              <items>
-                                <MenuItem mnemonicParsing="false" style="" text="Action 1">
-                                  <graphic>
-                                    <ScrollBar orientation="VERTICAL" />
-                                  </graphic>
-                                </MenuItem>
-                              </items>
-                            </Menu>
+                            <Menu fx:id="favouriteRoutesMenu" mnemonicParsing="false" style="" text="Favourite Routes" />
+                            <Menu fx:id="savedRoutesMenu" mnemonicParsing="false" style="" text="Saved Routes" />
                           </items>
                                        <font>
                                           <Font name="System Bold" size="13.0" />
@@ -318,6 +302,7 @@
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font></Button>
+                                    <CheckBox fx:id="wifiPrivateCheck" layoutX="410.0" layoutY="386.0" mnemonicParsing="false" text="Save privately " />
                       </children>
                     </AnchorPane>
                     <AnchorPane id="addWifiPane" fx:id="addRetailerPane" prefHeight="431.0" prefWidth="637.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,2;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -350,6 +335,7 @@
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font></Button>
+                                    <CheckBox fx:id="retailerPrivateCheck" layoutX="410.0" layoutY="386.0" mnemonicParsing="false" text="Save privately" />
                       </children>
                     </AnchorPane>
                     <AnchorPane id="addLocationsPane" fx:id="addToiletPane" prefHeight="431.0" prefWidth="637.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,2;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -398,6 +384,7 @@
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font></Button>
+                                    <CheckBox fx:id="toiletPrivateCheck" layoutX="417.0" layoutY="385.0" mnemonicParsing="false" text="Save privately" />
                       </children>
                     </AnchorPane>
                     <AnchorPane id="addLocationsPane" fx:id="addPoiPane" prefHeight="431.0" prefWidth="637.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,2;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -430,9 +417,10 @@
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font></Button>
+                                    <CheckBox fx:id="poiPrivateCheck" layoutX="421.0" layoutY="396.0" mnemonicParsing="false" text="Save privately" />
                       </children>
                     </AnchorPane>
-                    <AnchorPane id="addLocationsPane" fx:id="addOtherPane" prefHeight="431.0" prefWidth="637.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,2;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <AnchorPane id="addLocationsPane" fx:id="addOtherPane" prefHeight="431.0" prefWidth="637.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0,2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
                         <Label layoutX="281.0" layoutY="14.0" text="Add Other Location:" underline="true" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="15.0">
                                        <font>
@@ -457,6 +445,7 @@
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font></Button>
+                                    <CheckBox fx:id="otherPrivateCheck" layoutX="429.0" layoutY="386.0" mnemonicParsing="false" text="Save privately" />
                       </children>
                     </AnchorPane>
                   </children>

@@ -247,9 +247,9 @@ public class TablesScreenController {
      */
     @FXML
     void searchPressed(ActionEvent event) {
-
     	String option = tableOptions.getValue().toString();
     	if (option == "All locations") {
+    		allLocationsTable.refresh();
     		ArrayList<Location> locations = new ArrayList<Location>();
     		locations.addAll(CurrentStorage.getPoiArray());
     		locations.addAll(CurrentStorage.getRetailerArray());
@@ -272,6 +272,7 @@ public class TablesScreenController {
     		toiletsTable.setVisible(false);
     		routesTable.setVisible(false);
     	} else if (option == "Retailers") {
+    		retailersTable.refresh();
     		ArrayList<Retailer> retFiltered = RawDataViewer.searchRetailer(CurrentStorage.getRetailerArray(), keywordText.getText().toString());
     		ObservableList<Retailer> retData = FXCollections.observableArrayList(retFiltered);
         	retailersTable.setItems(retData);
@@ -288,6 +289,7 @@ public class TablesScreenController {
     		toiletsTable.setVisible(false);
     		routesTable.setVisible(false);
     	} else if (option == "WiFi") {
+    		wifiTable.refresh();
     		ArrayList<Wifi> wifiFiltered = RawDataViewer.searchWifi(CurrentStorage.getWifiArray(), keywordText.getText().toString());
     		ObservableList<Wifi> wifiData = FXCollections.observableArrayList(wifiFiltered);
     		wifiTable.setItems(wifiData);
@@ -305,6 +307,7 @@ public class TablesScreenController {
     		toiletsTable.setVisible(false);
     		routesTable.setVisible(false);
     	} else if (option == "Toilets") {
+    		toiletsTable.refresh();
     		ArrayList<Toilet> toiletFiltered = RawDataViewer.searchToilets(CurrentStorage.getToiletArray(), keywordText.getText().toString());
     		ObservableList<Toilet> toiletData = FXCollections.observableArrayList(toiletFiltered);
     		toiletsTable.setItems(toiletData);
@@ -324,6 +327,7 @@ public class TablesScreenController {
 			routesTable.setVisible(false);
 
     	} else if (option == "Points of interest")  {
+    		poiTable.refresh();
     		ArrayList<Poi> poiFiltered = RawDataViewer.searchPoi(CurrentStorage.getPoiArray(), keywordText.getText().toString());
     		ObservableList<Poi> poiData = FXCollections.observableArrayList(poiFiltered);
     		poiTable.setItems(poiData);
@@ -340,6 +344,7 @@ public class TablesScreenController {
     		toiletsTable.setVisible(false);
     		routesTable.setVisible(false);
     	} else if (option == "Routes") {
+    		routesTable.refresh();
     		ArrayList<Route> routeFiltered = RawDataViewer.searchRoutes(CurrentStorage.getRouteArray(), keywordText.getText().toString());
     		ObservableList<Route> routeData = FXCollections.observableArrayList(routeFiltered);
     		routesTable.setItems(routeData);
@@ -414,7 +419,7 @@ public class TablesScreenController {
 	@FXML
     void wifiTableClicked(MouseEvent event) throws IOException {
     	Wifi row = wifiTable.getSelectionModel().getSelectedItem();
-    	CurrentStorage.setWifi(row);
+    	CurrentStorage.setWifiIndex(CurrentStorage.getWifiArray().indexOf(row));
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/WifiInfoScreen.fxml"));
 
@@ -434,7 +439,7 @@ public class TablesScreenController {
 	@FXML
     void retailerTableClicked(MouseEvent event) throws IOException {
     	Retailer row = retailersTable.getSelectionModel().getSelectedItem();
-    	CurrentStorage.setRetailer(row);
+    	CurrentStorage.setRetailerIndex(CurrentStorage.getRetailerArray().indexOf(row));
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/RetailerInfoScreen.fxml"));
 
@@ -453,7 +458,6 @@ public class TablesScreenController {
 	@FXML
     void toiletTableClicked(MouseEvent event) throws IOException {
     	Toilet row = toiletsTable.getSelectionModel().getSelectedItem();
-    	//CurrentStorage.setToilet(row);
     	CurrentStorage.setToiletIndex(CurrentStorage.getToiletArray().indexOf(row));
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/ToiletInfoScreen.fxml"));
@@ -508,7 +512,7 @@ public class TablesScreenController {
 	@FXML
     void poiTableClicked(MouseEvent event) throws IOException {
     	Poi row = poiTable.getSelectionModel().getSelectedItem();
-    	CurrentStorage.setPoi(row);
+    	CurrentStorage.setPoiIndex(CurrentStorage.getPoiArray().indexOf(row));
     	Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/PoiInfoScreen.fxml"));
 

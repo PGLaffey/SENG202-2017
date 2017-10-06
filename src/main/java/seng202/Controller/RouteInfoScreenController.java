@@ -149,8 +149,9 @@ public class RouteInfoScreenController {
 
     @FXML
     void favouritePressed(ActionEvent event) {
-        user.addFavouriteRoute(route);
-        favouriteButton.setVisible(false);
+        //CurrentStorage.addFavouriteRoute(route);
+        //favouriteButton.setVisible(false);
+        // TODO: PATRICK...
     }
 
 
@@ -179,7 +180,7 @@ public class RouteInfoScreenController {
         route = CurrentStorage.getRoute();
         user = CurrentStorage.getUser();
 
-        if (user.getFavouriteRoutes().contains(route)) { // TODO: Is this checking correctly, i.e. not any route that is the same, not necessarily the same instance
+        if (CurrentStorage.getFavRoutes().contains(CurrentStorage.getRouteArray().indexOf(route))) {
             favouriteButton.setVisible(false);
         } else {
             favouriteButton.setVisible(true);

@@ -1,10 +1,17 @@
 package seng202.Controller;
 
+
 import com.lynden.gmapsfx.MapReadyListener;
 import com.lynden.gmapsfx.javascript.object.Animation;
 import com.lynden.gmapsfx.javascript.object.LatLong;
 import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import com.sun.org.apache.bcel.internal.generic.RET;
+import com.sun.org.apache.regexp.internal.RE;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
 import seng202.Model.*;
 import seng202.team5.Main;
 
@@ -22,6 +30,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 
 
 public class RetailerInfoScreenController {
@@ -86,7 +95,9 @@ public class RetailerInfoScreenController {
     @FXML
     private TextField zipText;
     
-    private Retailer retailer;
+    private Integer retailerIndex;
+
+    private Retailer oldRetailer;
 
 
     /**
@@ -106,15 +117,15 @@ public class RetailerInfoScreenController {
     @FXML
     void updatePressed(ActionEvent event) {
     	boroughText.setVisible(true);
-    	boroughText.setText(retailer.getBorough());
+    	boroughText.setText(CurrentStorage.getRetailerArray().get(retailerIndex).getBorough());
     	productText.setVisible(true);
-    	productText.setText(retailer.getProduct());
+    	productText.setText(CurrentStorage.getRetailerArray().get(retailerIndex).getProduct());
     	descriptionText.setVisible(true);
-    	descriptionText.setText(retailer.getDescription());
+    	descriptionText.setText(CurrentStorage.getRetailerArray().get(retailerIndex).getDescription());
     	nameText.setVisible(true);
-    	nameText.setText(retailer.getName());
+    	nameText.setText(CurrentStorage.getRetailerArray().get(retailerIndex).getName());
     	zipText.setVisible(true);
-    	zipText.setText(String.valueOf(retailer.getZip()));;
+    	zipText.setText(String.valueOf(CurrentStorage.getRetailerArray().get(retailerIndex).getZip()));;
     	boroughLabel.setText("Borough: ");
     	productLabel.setText("Product: ");
     	descriptionLabel.setText("Description: ");
@@ -156,6 +167,7 @@ public class RetailerInfoScreenController {
 
     @FXML
     void showRetailerOnMap(ActionEvent event) throws IOException{
+        Retailer retailer = CurrentStorage.getRetailerArray().get(retailerIndex);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
         Parent root = loader.load();
 
@@ -225,16 +237,25 @@ public class RetailerInfoScreenController {
         }
 
         if (allValid) {
-        	retailer.setBorough(boroughText.getText());
-        	retailer.setName(nameText.getText());
+            CurrentStorage.getRetailerArray().get(retailerIndex).setBorough(boroughText.getText());
+            CurrentStorage.getRetailerArray().get(retailerIndex).setName(nameText.getText());
         	if (!zipText.getText().equals("")) {
-            	retailer.setZip(Integer.parseInt(zipText.getText()));
+                CurrentStorage.getRetailerArray().get(retailerIndex).setZip(Integer.parseInt(zipText.getText()));
 
         	}
-        	retailer.setDescription(descriptionText.getText());
-        	retailer.setProduct(productText.getText());
+            CurrentStorage.getRetailerArray().get(retailerIndex).setDescription(descriptionText.getText());
+            CurrentStorage.getRetailerArray().get(retailerIndex).setProduct(productText.getText());
 
         	// TODO: Work out how to update the database
+
+            DataFetcher exporter = new DataFetcher();
+            try {
+                exporter.connectDb();
+                exporter.updateLocation(oldRetailer, CurrentStorage.getRetailerArray().get(retailerIndex));
+                exporter.closeConnection();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             cancelPressed(event);
 
@@ -244,15 +265,15 @@ public class RetailerInfoScreenController {
     
     @FXML
     void cancelPressed(ActionEvent event) {
-    	nameLabel.setText("Name: " + retailer.getName());
+    	nameLabel.setText("Name: " + CurrentStorage.getRetailerArray().get(retailerIndex).getName());
     	nameText.setVisible(false);
-    	zipLabel.setText("Zip: " + retailer.getZip());
+    	zipLabel.setText("Zip: " + CurrentStorage.getRetailerArray().get(retailerIndex).getZip());
     	zipText.setVisible(false);
-    	boroughLabel.setText("Borough: " + retailer.getBorough());
+    	boroughLabel.setText("Borough: " + CurrentStorage.getRetailerArray().get(retailerIndex).getBorough());
     	boroughText.setVisible(false);
-    	productLabel.setText("Product: " + retailer.getProduct());
+    	productLabel.setText("Product: " + CurrentStorage.getRetailerArray().get(retailerIndex).getProduct());
     	productText.setVisible(false);
-    	descriptionLabel.setText("Description: " + retailer.getDescription());
+    	descriptionLabel.setText("Description: " + CurrentStorage.getRetailerArray().get(retailerIndex).getDescription());
     	descriptionText.setVisible(false);
     	okButton.setVisible(true);
     	updateButton.setVisible(true);
@@ -263,15 +284,17 @@ public class RetailerInfoScreenController {
 
     @FXML
     void initialize() {
-    	retailer = CurrentStorage.getRetailer();
-    	nameLabel.setText("Name: " + retailer.getName());
-    	addressLabel.setText("Address: " + retailer.getAddress());
-    	latLabel.setText("Latitude: " + retailer.getLatitude());
-    	longLabel.setText("Longitude: " + retailer.getLongitude());
-    	zipLabel.setText("Zip: " + retailer.getZip());
-    	boroughLabel.setText("Borough: " + retailer.getBorough());
-    	productLabel.setText("Product: " + retailer.getProduct());
-    	descriptionLabel.setText("Description: " + retailer.getDescription());
+        oldRetailer = new Retailer(CurrentStorage.getRetailerArray().get(CurrentStorage.getRetailerIndex()));
+        retailerIndex = CurrentStorage.getRetailerIndex();
+
+    	nameLabel.setText("Name: " + CurrentStorage.getRetailerArray().get(retailerIndex).getName());
+    	addressLabel.setText("Address: " + CurrentStorage.getRetailerArray().get(retailerIndex).getAddress());
+    	latLabel.setText("Latitude: " + CurrentStorage.getRetailerArray().get(retailerIndex).getLatitude());
+    	longLabel.setText("Longitude: " + CurrentStorage.getRetailerArray().get(retailerIndex).getLongitude());
+    	zipLabel.setText("Zip: " + CurrentStorage.getRetailerArray().get(retailerIndex).getZip());
+    	boroughLabel.setText("Borough: " + CurrentStorage.getRetailerArray().get(retailerIndex).getBorough());
+    	productLabel.setText("Product: " + CurrentStorage.getRetailerArray().get(retailerIndex).getProduct());
+    	descriptionLabel.setText("Description: " + CurrentStorage.getRetailerArray().get(retailerIndex).getDescription());
     	
         assert addressLabel != null : "fx:id=\"addressLabel\" was not injected: check your FXML file 'RetailerInfoScreen.fxml'.";
         assert latLabel != null : "fx:id=\"latLabel\" was not injected: check your FXML file 'RetailerInfoScreen.fxml'.";
