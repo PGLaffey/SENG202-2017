@@ -168,7 +168,11 @@ public class DataFetcher {
 	public String fetchPassword(String username) {
     	String stmt = "SELECT Password FROM tblUser WHERE Username = ?";
 		ArrayList<String> params = new ArrayList<String>();
-		Collections.addAll(params, username);
+		params.add(username);
+		if (runQuery(stmt, params).get(0).isEmpty()) {
+			System.out.print("---\n---\n---\n---\n---\nUser not found\n---\n---\n---\n---\n---\n");
+			return null;
+		}
 		return runQuery(stmt, params).get(0).get(0);
 	}
 
