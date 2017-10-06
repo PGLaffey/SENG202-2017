@@ -2,12 +2,16 @@ package seng202.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.sun.org.apache.bcel.internal.generic.RET;
+import com.sun.org.apache.regexp.internal.RE;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
+import seng202.Model.DataFetcher;
 import seng202.Model.Retailer;
 
 
@@ -71,6 +75,8 @@ public class RetailerInfoScreenController {
     private TextField zipText;
     
     private Integer retailerIndex;
+
+    private Retailer oldRetailer;
 
 
     /**
@@ -181,6 +187,15 @@ public class RetailerInfoScreenController {
 
         	// TODO: Work out how to update the database
 
+            DataFetcher exporter = new DataFetcher();
+            try {
+                exporter.connectDb();
+                exporter.updateLocation(oldRetailer, CurrentStorage.getToiletArray().get(retailerIndex));
+                exporter.closeConnection();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             cancelPressed(event);
 
         }
@@ -208,6 +223,7 @@ public class RetailerInfoScreenController {
 
     @FXML
     void initialize() {
+        oldRetailer = CurrentStorage.getRetailerArray().get(CurrentStorage.getRetailerIndex());
         retailerIndex = CurrentStorage.getRetailerIndex();
 
     	nameLabel.setText("Name: " + CurrentStorage.getRetailerArray().get(retailerIndex).getName());

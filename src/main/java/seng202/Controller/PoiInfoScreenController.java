@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
+import seng202.Model.DataFetcher;
 import seng202.Model.Poi;
 
 
@@ -77,6 +78,8 @@ public class PoiInfoScreenController {
     private Button cancelButton;
     
     private Integer poiIndex;
+
+    private Poi oldPoi;
 
 
     /**
@@ -191,6 +194,15 @@ public class PoiInfoScreenController {
 
         	// TODO: Update database
 
+            DataFetcher exporter = new DataFetcher();
+            try {
+                exporter.connectDb();
+                exporter.updateLocation(oldPoi, CurrentStorage.getToiletArray().get(poiIndex));
+                exporter.closeConnection();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         	cancelPressed(event);
         }
     }
@@ -215,6 +227,7 @@ public class PoiInfoScreenController {
     
     @FXML
     void initialize() {
+        oldPoi = CurrentStorage.getPoiArray().get(CurrentStorage.getPoiIndex());
         poiIndex = CurrentStorage.getPoiIndex();;
     	costLabel.setText("Cost: $" + CurrentStorage.getPoiArray().get(poiIndex).getCost());
     	descriptionLabel.setText("Description: " + CurrentStorage.getPoiArray().get(poiIndex).getDescription());

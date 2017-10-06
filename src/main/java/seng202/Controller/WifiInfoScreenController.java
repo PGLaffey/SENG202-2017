@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
+import seng202.Model.DataFetcher;
 import seng202.Model.Wifi;
 
 
@@ -78,6 +79,8 @@ public class WifiInfoScreenController {
 
     
     private Integer wifiIndex;
+
+    private Wifi oldWifi;
 
 
     /**
@@ -203,6 +206,15 @@ public class WifiInfoScreenController {
             }
             // TODO: Update the database
 
+            DataFetcher exporter = new DataFetcher();
+            try {
+                exporter.connectDb();
+                exporter.updateLocation(oldWifi, CurrentStorage.getToiletArray().get(wifiIndex));
+                exporter.closeConnection();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             cancelPressed(event);
         }
     }
@@ -229,6 +241,7 @@ public class WifiInfoScreenController {
 
     @FXML
     void initialize() {
+        oldWifi = CurrentStorage.getWifiArray().get(CurrentStorage.getWifiIndex());
     	wifiIndex = CurrentStorage.getWifiIndex();
     	nameLabel.setText("Name: " + CurrentStorage.getWifiArray().get(wifiIndex).getName());
     	typeLabel.setText("Type: " + CurrentStorage.getWifiArray().get(wifiIndex).getType());
