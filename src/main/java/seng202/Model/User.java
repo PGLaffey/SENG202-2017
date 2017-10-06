@@ -16,8 +16,10 @@ public class User {
     private int routesCycled;
     private double distanceCycled;
     private double minutesCycled;
-    private ArrayList<Route> routes;
+    private ArrayList<Route> routes; // TODO: Possibly delete this, added saved and favourite routes (wasnt sure if this was being used of not)
     private ArrayList<Badge> badges; // First badge is distance, second time and third route
+    private ArrayList<Route> savedRoutes;
+    private ArrayList<Route> favouriteRoutes = new ArrayList<>(); // Temporary placeholder
 
 
     /**
@@ -168,6 +170,18 @@ public class User {
      * Increments the number of routes the user has cycled
      */
 	public void addRoute() {routesCycled += 1; }
+
+	public void setSavedRoutes(ArrayList<Route> routes) { savedRoutes = routes; }
+
+	public ArrayList<Route> getSavedRoutes() { return savedRoutes; }
+
+	public void addSavedRoutes(Route route) { savedRoutes.add(route); }
+
+	public void setFavouriteRoutes(ArrayList<Route> routes) { favouriteRoutes = routes; }
+
+	public ArrayList<Route> getFavouriteRoutes() { return favouriteRoutes; }
+
+	public void addFavouriteRoute(Route route) { favouriteRoutes.add(route); }
 
     /**
      * Overrides the .equals function in the user class so it compares key values of the class to check if the

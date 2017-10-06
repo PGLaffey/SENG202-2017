@@ -1,17 +1,26 @@
 package seng202.Controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
+import com.lynden.gmapsfx.MapReadyListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
-import seng202.Model.Toilet;
+import seng202.Model.Map;
+import seng202.team5.Main;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
 
@@ -25,9 +34,6 @@ public class ToiletInfoScreenController {
 
     @FXML
     private Label addressLabel;
-
-    @FXML
-    private TextField addressText;
 
     @FXML
     private Label boroughLabel;
@@ -45,13 +51,7 @@ public class ToiletInfoScreenController {
     private Label latLabel;
 
     @FXML
-    private TextField latitudeText;
-
-    @FXML
     private Label longLabel;
-
-    @FXML
-    private TextField longitudeText;
 
     @FXML
     private Label nameLabel;
@@ -73,6 +73,9 @@ public class ToiletInfoScreenController {
 
     @FXML
     private Button updateButton;
+
+    @FXML
+    private Button showOnMapBtn;
 
     @FXML
     private Label zipLabel;
@@ -102,28 +105,19 @@ public class ToiletInfoScreenController {
      */
     @FXML
     void updatePressed(ActionEvent event) {
-    	addressText.setVisible(true);
-    	addressText.setText(CurrentStorage.getToiletArray().get(toiletIndex).getAddress());
     	boroughText.setVisible(true);
     	boroughText.setText(CurrentStorage.getToiletArray().get(toiletIndex).getBorough());
     	unisexChoice.setVisible(true);
     	unisexChoice.setValue(CurrentStorage.getToiletArray().get(toiletIndex).getUniSex());
     	disabledChoice.setVisible(true);
     	disabledChoice.setValue(CurrentStorage.getToiletArray().get(toiletIndex).getForDisabled());
-    	latitudeText.setVisible(true);
-    	latitudeText.setText(String.valueOf(CurrentStorage.getToiletArray().get(toiletIndex).getLatitude()));
-    	longitudeText.setVisible(true);
-    	longitudeText.setText(String.valueOf(CurrentStorage.getToiletArray().get(toiletIndex).getLongitude()));
     	nameText.setVisible(true);
     	nameText.setText(CurrentStorage.getToiletArray().get(toiletIndex).getName());
     	zipText.setVisible(true);
     	zipText.setText(String.valueOf(CurrentStorage.getToiletArray().get(toiletIndex).getZip()));;
-    	addressLabel.setText("Address: ");
     	boroughLabel.setText("Borough: ");
     	unisexLabel.setText("Unisex: ");
     	disabledLabel.setText("Disabled: ");
-    	latLabel.setText("Latitude: ");
-    	longLabel.setText("Longitude: ");
     	nameLabel.setText("Name: ");
     	zipLabel.setText("Zip: ");
     	okButton.setVisible(false);
@@ -181,12 +175,6 @@ public class ToiletInfoScreenController {
     	if (nameText.getText().equals("")) {
     		nameLabel.setTextFill(Color.RED);
     		allValid = false;
-    	}
-    	if (addressText.getText().equals("") && (latitudeText.getText().equals("") || longitudeText.getText().equals(""))) {
-            addressLabel.setTextFill(Color.RED);
-            latLabel.setTextFill(Color.RED);
-            longLabel.setTextFill(Color.RED);
-            allValid = false;
         }
         if(disabledChoice.getSelectionModel().isEmpty()) {
             disabledLabel.setTextFill(Color.RED);
@@ -196,26 +184,12 @@ public class ToiletInfoScreenController {
             unisexLabel.setTextFill(Color.RED);
             allValid = false;
         }
-        if (addressText.getText().equals("") && !isDouble(latitudeText.getText())) {
-            latLabel.setTextFill(Color.RED);
-            allValid = false;
-        }
-        if (addressText.getText().equals("") && !isDouble(longitudeText.getText())) {
-            longLabel.setTextFill(Color.RED);
-            allValid = false;
-        }
         if (!zipText.getText().equals("") && !isInt(zipText.getText())) {
             zipLabel.setTextFill(Color.RED);
             allValid = false;
         }
 
         if (allValid) {
-    	    if (addressText.getText().equals("")) {
-    	    	CurrentStorage.getToiletArray().get(toiletIndex).setLatitude(Double.parseDouble(latitudeText.getText()));
-    	        CurrentStorage.getToiletArray().get(toiletIndex).setLongitude(Double.parseDouble(longitudeText.getText()));
-            } else {
-            	CurrentStorage.getToiletArray().get(toiletIndex).setAddress(addressText.getText());
-            }
     	    CurrentStorage.getToiletArray().get(toiletIndex).setBorough(boroughText.getText());
         	CurrentStorage.getToiletArray().get(toiletIndex).setName(nameText.getText());
         	if (!zipText.getText().equals("")) {
@@ -234,10 +208,6 @@ public class ToiletInfoScreenController {
     void cancelPressed (ActionEvent event) {
         disabledLabel.setText("Disabled: " + String.valueOf(CurrentStorage.getToiletArray().get(toiletIndex).getForDisabled()));
         disabledChoice.setVisible(false);
-        latLabel.setText("Latitude: " + CurrentStorage.getToiletArray().get(toiletIndex).getLatitude());
-        latitudeText.setVisible(false);
-        longLabel.setText("Longitude " + CurrentStorage.getToiletArray().get(toiletIndex).getLongitude());
-        longitudeText.setVisible(false);
         nameLabel.setText("Name: " + CurrentStorage.getToiletArray().get(toiletIndex).getName());
         nameText.setVisible(false);
         unisexLabel.setText("Uni Sex: " + String.valueOf(CurrentStorage.getToiletArray().get(toiletIndex).getUniSex()));
@@ -246,15 +216,30 @@ public class ToiletInfoScreenController {
         zipText.setVisible(false);
         boroughLabel.setText("Borough: " + CurrentStorage.getToiletArray().get(toiletIndex).getBorough());
         boroughText.setVisible(false);
-        addressLabel.setText("Address: " + CurrentStorage.getToiletArray().get(toiletIndex).getAddress());
-        addressText.setVisible(false);
         cancelButton.setVisible(false);
         saveButton.setVisible(false);
         okButton.setVisible(true);
         updateButton.setVisible(true);
     }
 
+    @FXML
+    void showToiletOnMap(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
+        Parent root = loader.load();
 
+        Main.getStage().setScene(new Scene(root, Main.getStage().getScene().getWidth(), Main.getStage().getScene().getHeight()));
+        Main.getStage().setTitle("Map");
+
+        MainScreenController controller = loader.getController();
+        controller.getMapView().addMapReadyListener(new MapReadyListener() {
+            @Override
+            public void mapReady() {
+                Map.findLocation(CurrentStorage.getToiletArray().get(toiletIndex), controller.getMapView().getMap());
+            }
+        });
+
+        Main.getStage().show();
+    }
     @FXML
     void initialize() {
     	toiletIndex = CurrentStorage.getToiletIndex();

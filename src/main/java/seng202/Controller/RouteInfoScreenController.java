@@ -1,19 +1,25 @@
 package seng202.Controller;
 
+import com.lynden.gmapsfx.MapReadyListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
+import seng202.Model.Map;
 import seng202.Model.Route;
+import seng202.Model.User;
+import seng202.team5.Main;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-
 
 
 public class RouteInfoScreenController {
@@ -43,6 +49,9 @@ public class RouteInfoScreenController {
     private Button okButton;
 
     @FXML
+    private Button updateButton;
+
+    @FXML
     private Button completedRouteButton;
 
     @FXML
@@ -56,22 +65,43 @@ public class RouteInfoScreenController {
 
     @FXML
     private Button addButton;
-    
+
+    @FXML
+    private Button favouriteButton;
+
+    @FXML
+    private Label addedLabel;
+
     private Route route;
+
+    private User user;
 
 
     /**
      * Method when the ok button is pressed, hides the pop up.
+     *routes
      * @param event
      */
     @FXML
     void okPressed(ActionEvent event) {
-    	Stage stage = (Stage) okButton.getScene().getWindow(); 
-    	stage.hide();
+        Stage stage = (Stage) okButton.getScene().getWindow();
+        stage.hide();
+    }
+
+    /**
+     * Method when the update button is pressed, displays screen to change the selected route
+     *
+     * @param event
+     */
+    @FXML
+    void updatePressed(ActionEvent event) {
+        Stage stage = (Stage) updateButton.getScene().getWindow();
+        stage.hide();
     }
 
     /**
      * Method when the completed route button is pressed. Adds the distance of the route to the users statistics and change the button text
+     *
      * @param event
      */
     @FXML
@@ -88,6 +118,7 @@ public class RouteInfoScreenController {
 
     /**
      * Method for when the add button is pressed. Verifies then adds the route
+     *routes
      * @param event
      */
     @FXML
@@ -105,25 +136,56 @@ public class RouteInfoScreenController {
         }
 
         if (add) {
-            completedRouteButton.setVisible(true);
+            addedLabel.setVisible(true);
             addButton.setVisible(false);
             timeLabel.setVisible(false);
             timeText.setVisible(false);
             CurrentStorage.getUser().addDistance(route.getDistance());
             CurrentStorage.getUser().addRoute();
             CurrentStorage.getUser().addTime(Double.parseDouble(timeText.getText()));
-            completedRouteButton.setText("Added!");
         }
     }
 
-    @FXML
-    void showRouteBtnPressed(ActionEvent event) {
 
+    @FXML
+    void favouritePressed(ActionEvent event) {
+        user.addFavouriteRoute(route);
+        favouriteButton.setVisible(false);
+    }
+
+
+    @FXML
+    void showRouteBtnPressed(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
+        Parent root = loader.load();
+
+        Main.getStage().setScene(new Scene(root, Main.getStage().getScene().getWidth(), Main.getStage().getScene().getHeight()));
+        Main.getStage().setTitle("Map");
+
+        MainScreenController controller = loader.getController();
+        controller.getMapView().addMapReadyListener(new MapReadyListener() {
+            @Override
+            public void mapReady() {
+                Map.findRoute(route, controller.getMapView(), controller.getDirectionsService(), controller, controller.getMapView().getDirec());
+            }
+        });
+        controller.updateDistanceLabel(route.getDistance()/1000);
+        Main.getStage().show();
     }
 
     @FXML
     void initialize() {
-    	route = CurrentStorage.getRoute();
+
+        route = CurrentStorage.getRoute();
+        user = CurrentStorage.getUser();
+
+        if (user.getFavouriteRoutes().contains(route)) { // TODO: Is this checking correctly, i.e. not any route that is the same, not necessarily the same instance
+            favouriteButton.setVisible(false);
+        } else {
+            favouriteButton.setVisible(true);
+        }
+
+
     	bikeidLabel.setText("Bike ID: "+ route.getBikeID());
     	distanceLabel.setText("Distance: " + route.getDistanceRound() + "m");
     	endLabel.setText("End: " + route.getStartString());

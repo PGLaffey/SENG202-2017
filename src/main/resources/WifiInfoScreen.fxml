@@ -19,7 +19,7 @@
 
 <GridPane alignment="CENTER" hgap="10.0" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #14246C, #D1D7F1; -fx-background-insets: 0, 4;" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.Controller.WifiInfoScreenController">
   <children>
-    <Label id="objectInfoLabel" fx:id="nameLabel" prefWidth="386.0" text="Name:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
+    <Label id="objectInfoLabel" fx:id="nameLabel" prefHeight="15.0" prefWidth="304.0" text="Name:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <font>
         <Font size="13.0" fx:id="x1" />
       </font>
@@ -84,11 +84,6 @@
         <Insets left="60.0" top="100.0" />
       </GridPane.margin>
     </TextField>
-    <TextField id="nameText" fx:id="addressText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
-      <GridPane.margin>
-        <Insets left="55.0" top="135.0" />
-      </GridPane.margin>
-    </TextField>
     <TextField id="nameText" fx:id="boroughText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
         <Insets left="60.0" top="170.0" />
@@ -99,24 +94,15 @@
         <Insets left="30.0" top="205.0" />
       </GridPane.margin>
     </TextField>
-    <TextField id="nameText" fx:id="latitudeText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
-      <GridPane.margin>
-        <Insets left="60.0" top="240.0" />
-      </GridPane.margin>
-    </TextField>
-    <TextField id="nameText" fx:id="longitudeText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
-      <GridPane.margin>
-        <Insets left="70.0" top="275.0" />
-      </GridPane.margin>
-    </TextField>
     <Button fx:id="okButton" mnemonicParsing="false" onAction="#okPressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="Ok" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
       <font>
         <Font name="System Bold" size="12.0" fx:id="x2" />
       </font>
     </Button>
-    <Button id="okButton" fx:id="updateButton" font="$x2" mnemonicParsing="false" onAction="#updatePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Update" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+    <Button id="okButton" fx:id="updateButton" font="$x2" mnemonicParsing="false" onAction="#updatePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Update" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
     <Button id="okButton" fx:id="saveButton" font="$x2" mnemonicParsing="false" onAction="#savePressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="Save" visible="false" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
       <Button id="okButton" fx:id="cancelButton" font="$x2" mnemonicParsing="false" onAction="#cancelPressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Cancel" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+      <Button id="showOnMapBtn" fx:id="showOnMapBtn" font="$x2" mnemonicParsing="false" onAction="#showWifiOnMap" prefHeight="23.0" prefWidth="149.0" style="-fx-background-color: #30126D, #B39EDC;" text="Show Wifi On Map" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP" />
   </children>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="250.0" prefWidth="-1.0" />
@@ -126,7 +112,7 @@
     <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
   </padding>
   <rowConstraints>
-    <RowConstraints maxHeight="400.0" minHeight="200.0" prefHeight="309.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="59.0" minHeight="31.0" prefHeight="31.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="400.0" minHeight="200.0" prefHeight="281.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="59.0" minHeight="31.0" prefHeight="59.0" vgrow="SOMETIMES" />
   </rowConstraints>
 </GridPane>

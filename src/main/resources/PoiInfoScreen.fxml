@@ -80,11 +80,6 @@
         <Insets left="75.0" top="65.0" />
       </GridPane.margin>
     </TextField>
-    <TextField fx:id="addressText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
-      <GridPane.margin>
-        <Insets left="55.0" top="100.0" />
-      </GridPane.margin>
-    </TextField>
     <TextField fx:id="boroughText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
         <Insets left="60.0" top="135.0" />
@@ -93,16 +88,6 @@
     <TextField fx:id="zipText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
         <Insets left="30.0" top="170.0" />
-      </GridPane.margin>
-    </TextField>
-    <TextField fx:id="latitudeText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
-      <GridPane.margin>
-        <Insets left="60.0" top="205.0" />
-      </GridPane.margin>
-    </TextField>
-    <TextField fx:id="longitudeText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
-      <GridPane.margin>
-        <Insets left="70.0" top="240.0" />
       </GridPane.margin>
     </TextField>
     <Button id="okButton" fx:id="saveButton" font="$x2" mnemonicParsing="false" onAction="#savePressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="Save" visible="false" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />

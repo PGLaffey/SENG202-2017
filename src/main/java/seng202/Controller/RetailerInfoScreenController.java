@@ -1,14 +1,24 @@
 package seng202.Controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import com.lynden.gmapsfx.MapReadyListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
+import seng202.Model.Map;
 import seng202.Model.Retailer;
+import seng202.team5.Main;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
 public class RetailerInfoScreenController {
@@ -21,9 +31,6 @@ public class RetailerInfoScreenController {
 
     @FXML
     private Label addressLabel;
-
-    @FXML
-    private TextField addressText;
 
     @FXML
     private Label boroughLabel;
@@ -41,13 +48,7 @@ public class RetailerInfoScreenController {
     private Label latLabel;
 
     @FXML
-    private TextField latitudeText;
-
-    @FXML
     private Label longLabel;
-
-    @FXML
-    private TextField longitudeText;
 
     @FXML
     private Label nameLabel;
@@ -74,6 +75,9 @@ public class RetailerInfoScreenController {
     private Button updateButton;
 
     @FXML
+    private Button showOnMapButton;
+
+    @FXML
     private Label zipLabel;
 
     @FXML
@@ -98,28 +102,19 @@ public class RetailerInfoScreenController {
      */
     @FXML
     void updatePressed(ActionEvent event) {
-    	addressText.setVisible(true);
-    	addressText.setText(retailer.getAddress());
     	boroughText.setVisible(true);
     	boroughText.setText(retailer.getBorough());
     	productText.setVisible(true);
     	productText.setText(retailer.getProduct());
     	descriptionText.setVisible(true);
     	descriptionText.setText(retailer.getDescription());
-    	latitudeText.setVisible(true);
-    	latitudeText.setText(String.valueOf(retailer.getLatitude()));
-    	longitudeText.setVisible(true);
-    	longitudeText.setText(String.valueOf(retailer.getLongitude()));
     	nameText.setVisible(true);
     	nameText.setText(retailer.getName());
     	zipText.setVisible(true);
     	zipText.setText(String.valueOf(retailer.getZip()));;
-    	addressLabel.setText("Address: ");
     	boroughLabel.setText("Borough: ");
     	productLabel.setText("Product: ");
     	descriptionLabel.setText("Description: ");
-    	latLabel.setText("Latitude: ");
-    	longLabel.setText("Longitude: ");
     	nameLabel.setText("Name: ");
     	zipLabel.setText("Zip: ");
     	okButton.setVisible(false);
@@ -155,7 +150,25 @@ public class RetailerInfoScreenController {
             return false;
         }
     }
-    
+
+    @FXML
+    void showRetailerOnMap(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
+        Parent root = loader.load();
+
+        Main.getStage().setScene(new Scene(root, Main.getStage().getScene().getWidth(), Main.getStage().getScene().getHeight()));
+        Main.getStage().setTitle("Map");
+
+        MainScreenController controller = loader.getController();
+        controller.getMapView().addMapReadyListener(new MapReadyListener() {
+            @Override
+            public void mapReady() {
+                Map.findRetailers(retailer, controller.getMapView().getMap());
+            }
+        });
+        Main.getStage().show();
+    }
+
     @FXML
     void savePressed(ActionEvent event) {
     	
@@ -174,12 +187,6 @@ public class RetailerInfoScreenController {
     		nameLabel.setTextFill(Color.RED);
     		allValid = false;
     	}
-    	if (addressText.getText().equals("") && (latitudeText.getText().equals("") || longitudeText.getText().equals(""))) {
-            addressLabel.setTextFill(Color.RED);
-            latLabel.setTextFill(Color.RED);
-            longLabel.setTextFill(Color.RED);
-            allValid = false;
-        }
         if (productText.getText().equals("")) {
             productLabel.setTextFill(Color.RED);
             allValid = false;
@@ -188,26 +195,12 @@ public class RetailerInfoScreenController {
             descriptionLabel.setTextFill(Color.RED);
             allValid = false;
         }
-        if (addressText.getText().equals("") && !isDouble(latitudeText.getText())) {
-            latLabel.setTextFill(Color.RED);
-            allValid = false;
-        }
-        if (addressText.getText().equals("") && !isDouble(longitudeText.getText())) {
-            longLabel.setTextFill(Color.RED);
-            allValid = false;
-        }
         if (!zipText.getText().equals("") && !isInt(zipText.getText())) {
             zipLabel.setTextFill(Color.RED);
             allValid = false;
         }
 
         if (allValid) {
-        	if (addressText.getText().equals("")) {
-        		retailer.setLatitude(Double.parseDouble(latitudeText.getText()));
-        		retailer.setLongitude(Double.parseDouble(longitudeText.getText()));
-        	} else {
-        		retailer.setAddress(addressText.getText());
-        	}
         	retailer.setBorough(boroughText.getText());
         	retailer.setName(nameText.getText());
         	if (!zipText.getText().equals("")) {
@@ -229,12 +222,6 @@ public class RetailerInfoScreenController {
     void cancelPressed(ActionEvent event) {
     	nameLabel.setText("Name: " + retailer.getName());
     	nameText.setVisible(false);
-    	addressLabel.setText("Address: " + retailer.getAddress());
-    	addressText.setVisible(false);
-    	latLabel.setText("Latitude: " + retailer.getLatitude());
-    	latitudeText.setVisible(false);
-    	longLabel.setText("Longitude: " + retailer.getLongitude());
-    	longitudeText.setVisible(false);
     	zipLabel.setText("Zip: " + retailer.getZip());
     	zipText.setVisible(false);
     	boroughLabel.setText("Borough: " + retailer.getBorough());

@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
@@ -46,7 +47,8 @@ public class SaveRouteScreenController {
     @FXML
     private TextField routeEndText;
 
-
+    @FXML
+    private CheckBox saveRoutePrivateCheck;
 
 
     /**
@@ -86,12 +88,17 @@ public class SaveRouteScreenController {
             end.setName(routeEndText.getText());
 
             Route route = new Route(start, end, routeNameText.getText());
+            route.setSecret(saveRoutePrivateCheck.isSelected());
+
             CurrentStorage.addNewRoute(route);
 
             CurrentStorage.setNewRouteEnd(null);
 
             Stage stage = (Stage) saveButton.getScene().getWindow();
             stage.hide();
+
+            // TODO: Check if saving privately and do whatever need to do for it
+
         }
     }
 

@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.web.WebEngine;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seng202.Model.*;
@@ -440,7 +441,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     private DirectionsRenderer directionsRenderer;
 
-
+    private WebEngine mapEngine;
 
     ArrayList<Circle> wifiCircles = new ArrayList<Circle>();
     ArrayList<Marker> locationMarkers = new ArrayList<Marker>();
@@ -571,6 +572,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                     new LatLong(route.getEnd().getLatitude(), route.getEnd().getLongitude()), TravelModes.DRIVING);
             directionsService.getRoute(request, this, new DirectionsRenderer(true, mapView.getMap(), directionsPane));
         }
+    }
+
+    public void displayRouteOnMap(Route route) {
+        Map.findRoute(route, mapView, directionsService, this, directionsPane);
     }
 
 
@@ -1325,7 +1330,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     
     @FXML
     void initialize() {
+        //mapView = new GoogleMapView();
         mapView.addMapInializedListener(this);
+        mapEngine = mapView.getWebview().getEngine();
         address.bind(searchText.textProperty());
 
     	loadRouteMenu.setPopupSide(Side.RIGHT);
@@ -1404,7 +1411,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         assert toiletIconButton != null : "fx:id=\"toiletIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
         assert wifiIconButton != null : "fx:id=\"wifiIconButton\" was not injected: check your FXML file 'MainScreen.fxml'.";
 
-
     }
 
     @Override
@@ -1426,6 +1432,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                 .zoom(12);
 
         map = mapView.createMap(mapOptions);
+
         directionsService = new DirectionsService();
         directionsPane = mapView.getDirec();
         directionsRenderer = new DirectionsRenderer(true, map, directionsPane);
@@ -1445,18 +1452,22 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                 currentStorage.setNewRouteEnd(location);
                 Map.setEndMarker(latLong, map);
                 isStart = true;
-
-
             }
 
             if (Map.getStartLoc() != null && Map.getEndLoc() != null) {
-                map.clearMarkers();
+
+                for (Retailer retailer : CurrentStorage.getRetailerArray()) {
+                    Map.findRetailers(retailer, map);
+                }
                 Map.findRoute(Map.getStartLoc().getLatitude() + ", " + Map.getStartLoc().getLongitude(),
                         Map.getEndLoc().getLatitude() + ", " + Map.getEndLoc().getLongitude(),
                         mapView, directionsService, this, directionsPane, directionsRenderer);
+
                 latLongDistanceLabel.setText("Distance: " + distance(CurrentStorage.getNewRouteStart().getLatitude(), CurrentStorage.getNewRouteStart().getLongitude(),
                         CurrentStorage.getNewRouteEnd().getLatitude(),
                          CurrentStorage.getNewRouteEnd().getLongitude()) + "Km");
+                Map.resetStartMarker();
+                Map.resetEndMarker();
             }
         });
     }
@@ -1472,6 +1483,15 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         return String.format("%.2f", dist);
     }
 
+    public WebEngine getMapWebEngine() { return mapEngine; }
+
+    public GoogleMapView getMapView() { return mapView; }
+
+    public DirectionsService getDirectionsService() { return directionsService; }
+
+    public void updateDistanceLabel(double distance) {
+        latLongDistanceLabel.setText(String.format("Distance: %.2fkm", distance));
+    }
 
     @Override
     public void directionsReceived(DirectionsResult results, DirectionStatus status){
@@ -1481,8 +1501,11 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         ArrayList<Location> nearby = new ArrayList<Location>();
         for (DirectionsLeg leg : results.getRoutes().get(0).getLegs()) {
             nearby.addAll(Map.findNearby(leg.getStartLocation().getLatitude(), leg.getStartLocation().getLongitude()));
+            System.out.println(nearby);
             nearby.addAll(Map.findNearby(leg.getEndLocation().getLatitude(), leg.getEndLocation().getLongitude()));
         }
+
+        System.out.println(nearby.size());
 
         for (Location loc : nearby) {
             if (loc.getLocationType() == 0) {
