@@ -1065,8 +1065,7 @@ public class DataFetcher {
     	DataFetcher ba = new DataFetcher();
     	try {
 			ba.connectDb();
-			Location loc = new Location(10, 10, 4);
-			ba.addLocation(loc);
+
 			
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block

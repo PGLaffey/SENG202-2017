@@ -45,10 +45,11 @@ public class LoginScreenController {
 		data.connectDb();
 		//TODO: Jack to change
 		if (!usernameText.getText().isEmpty() && !passwordText.getText().isEmpty()) {
-			if (data.fetchPassword(usernameText.getText()).isEmpty()) {
-				incorrectPasswordLbl.setVisible(false);
+			if (data.fetchPassword(usernameText.getText()) == null) {
+				incorrectPasswordLbl.setVisible(true);
 				incorrectUserLbl.setVisible(true);
-			} else if ((data.fetchPassword(usernameText.getText()).equals(passwordText.getText().toString()))) {
+			} 
+			else if ((data.fetchPassword(usernameText.getText()).equals(passwordText.getText().toString()))) {
 
 				ArrayList<String> userInfo;
 				userInfo = data.fetchUserInfo(usernameText.getText());
@@ -67,12 +68,14 @@ public class LoginScreenController {
 				Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 				primaryStage.setTitle("Profile");
 				primaryStage.setScene(new Scene(root));
-			} else {
+			} 
+			else {
 				incorrectUserLbl.setVisible(false);
 				incorrectPasswordLbl.setVisible(true);
 			}
 		
-		} else {
+		} 
+		else {
 			incorrectPasswordLbl.setVisible(false);
 			incorrectUserLbl.setVisible(false);
 		}
