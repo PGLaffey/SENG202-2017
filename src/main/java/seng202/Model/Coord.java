@@ -2,7 +2,6 @@ package seng202.Model;
 
 /**
  * Class to store known coordinates of addresses.
- * Created by Eiran Ling on 21/09/17.
  */
 public class Coord {
     private String address;
@@ -10,12 +9,14 @@ public class Coord {
     private double lng;
     private boolean hasMarker = false;
 
+    
     public Coord(String address, double lattitude, double longitude) {
         this.address = address;
         lat = lattitude;
         lng = longitude;
     }
 
+    
     /**
      * Getter for the latitude
      */
@@ -23,6 +24,7 @@ public class Coord {
         return lat;
     }
 
+    
     /**
      * Getter for the longitude
      */
@@ -30,6 +32,7 @@ public class Coord {
         return lng;
     }
 
+    
     /**
      * Getter for the address
      */
@@ -37,6 +40,7 @@ public class Coord {
         return address;
     }
 
+    
     /**
      * @return whether the Coord has a marker
      */
@@ -44,6 +48,7 @@ public class Coord {
         return hasMarker;
     }
 
+    
     /**
      * Sets whether the coord has a marker
      * @param value boolean value for whether the marker has been set
@@ -52,6 +57,7 @@ public class Coord {
         hasMarker = value;
     }
 
+    
     /**
      * Checks whether two coordinates are equal
      * @return boolean for whether the coordinates are equal

@@ -1,12 +1,12 @@
 package seng202.Model;
 
-import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static seng202.Model.CurrentStorage.getUser;
-
+/**
+ * Class to communicate with the remote database.
+ */
 public class DataFetcher {
     private Connection connect = null;
     private boolean hasImported = false;
@@ -254,6 +254,12 @@ public class DataFetcher {
 		checkSavedRoutes(CurrentStorage.getFavRoutes(), 2);
 	}
 
+	
+	/**
+	 * Checks if there are any changes in the users saved routes for the list, listNo
+	 * @param savedList The list of indices that reference routes
+	 * @param listNo The number assigned to the savedList
+	 */
 	private void checkSavedRoutes(ArrayList<Integer> savedList, int listNo) {
 		int count = 0;
 		ArrayList<Route> routes = CurrentStorage.getRouteArray();
@@ -284,6 +290,12 @@ public class DataFetcher {
 	}
 	
 	
+	/**
+	 * Adds a route to a users list of saved routes in a specified list on the database
+	 * @param userID The database ID of the user that is saving the route
+	 * @param routeID The database ID of the route being saved
+	 * @param listID The database ID of the list the route is being saved in
+	 */
 	private void addSavedRoute(int userID, int routeID, int listID) {
     	String stmt = "INSERT INTO tblUsersRoutes (UserID, RouteID, ListID) VALUES (?, ?, ?)";
 		ArrayList<String> params = new ArrayList<String>();
@@ -291,6 +303,10 @@ public class DataFetcher {
 		runUpdate(stmt, params);
 	}
 	
+	
+	/**
+	 * Stores all new routes created in this session into the database
+	 */
 	private void storeNewRoutes() {
 		int count = 0;
 		ArrayList<Integer> newRoutes = CurrentStorage.getNewRoutes();
@@ -864,6 +880,11 @@ public class DataFetcher {
     }
 
     
+    /**
+     * Returns the ID of the route in the database or 0 if it is not found
+     * @param route The route to find
+     * @return The ID of the route of 0 if it is not found
+     */
     private int findRoute(Route route) {
     	int startID = findLocation(route.getStart());
     	if (startID == 0) {
@@ -885,7 +906,7 @@ public class DataFetcher {
     
     
     /**
-     * 
+     * Returns the ID of the location in the database or 0 if it is not found
      * @param location The location to find in the database.
      * @return The ID of the location in the database, returns 0 if location not found.
      */
@@ -1163,25 +1184,6 @@ public class DataFetcher {
 
     
     public static void main(String[] argv) {
-//    	DataFetcher doot = new DataFetcher();
-//    	try {
-//			doot.connectDb();
-//			FileManager.routeRetriever(new File(seng202.Model.DataFetcher.class.getResource("/data_files/").getFile()).toString() + "/2014-01 - Citi Bike trip data.csv");
-//			for (Route route : CurrentStorage.getRouteArray()) {
-//				doot.addRoute(route);
-//			}
-//		} catch (Exception e) {
-//    		e.printStackTrace();
-//		}
-    	DataFetcher ba = new DataFetcher();
-    	try {
-			ba.connectDb();
-			System.out.println(ba.fetchPassword("adsfds"));
-			
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
     	
 	}
 
