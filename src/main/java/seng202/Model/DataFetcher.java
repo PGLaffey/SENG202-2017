@@ -169,8 +169,7 @@ public class DataFetcher {
     	String stmt = "SELECT Password FROM tblUser WHERE Username = ?";
 		ArrayList<String> params = new ArrayList<String>();
 		params.add(username);
-		if (runQuery(stmt, params).get(0).isEmpty()) {
-			System.out.print("---\n---\n---\n---\n---\nUser not found\n---\n---\n---\n---\n---\n");
+		if (runQuery(stmt, params).isEmpty()) {
 			return null;
 		}
 		return runQuery(stmt, params).get(0).get(0);
@@ -1065,7 +1064,7 @@ public class DataFetcher {
     	DataFetcher ba = new DataFetcher();
     	try {
 			ba.connectDb();
-
+			System.out.println(ba.fetchPassword("adsfds"));
 			
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
