@@ -96,7 +96,7 @@ public class DataFetcherTest extends TestCase {
     public void testClose() {
     	fetcher.closeConnection();
     	try {
-    		Location testLoc = new Location(10, 10, "Test", 4)
+    		Location testLoc = new Location(10, 10, "Test", 4);
     		fetcher.addLocation(testLoc);
     		fetcher.deleteLocation(testLoc);
     		fail("Did not successfully disconnect from database");
