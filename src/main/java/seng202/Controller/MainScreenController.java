@@ -30,8 +30,10 @@ import seng202.Model.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 //import java.awt.Color;
@@ -743,6 +745,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
      */
     @FXML
     void favouriteIconPressed(ActionEvent event) {
+
     }
 
     /**
@@ -755,11 +758,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         map.clearMarkers();
         directionsRenderer.clearDirections();
         for (Retailer retailer : CurrentStorage.getRetailerArray()) {
-            if (retailer.getCoord() != null) {
-                map.addMarker(retailer.getCoord().getMarker());
-            } else {
                 Map.findRetailers(retailer, map);
-            }
         }
         Map.setRetailerVisible(!Map.getRetailerVisible());
     }
@@ -789,7 +788,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
      */
     @FXML
     void toiletIconPressed(ActionEvent event) {
-        ArrayList<Toilet> toilets = new ArrayList<Toilet>();
+        map.clearMarkers();
+        for (Toilet toilet : CurrentStorage.getToiletArray()) {
+            Map.findToilets(toilet, map);
+        }
     }
 
     /**
@@ -802,11 +804,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         map.clearMarkers();
         directionsRenderer.clearDirections();
         for (Wifi wifi : CurrentStorage.getWifiArray()) {
-            if (wifi.getCircle() == null) {
-                Map.findWifi(wifi, map);
-            } else {
-                wifi.getCircle().setVisible(!wifi.getCircle().getVisible());
-            }
+            Map.findWifi(wifi, map);
         }
     }
 
@@ -817,7 +815,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     public void searchTextAction(ActionEvent event) {
         //Obtains a geocode location around latLong
-
+        map.clearMarkers();
         directionsRenderer.clearDirections();
         Map.findLocation(address.get(), map, geocodingService);
     }
@@ -1347,7 +1345,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	fileChooserMenu.setPopupSide(Side.RIGHT);
     	addLocationsMenu.setPopupSide(Side.RIGHT);
 
-    	progressBar.setProgress(100);
+    	progressBar.setVisible(true);
 
     	if (!data.isHasImported()) {
             Service service = new Service() {
@@ -1358,17 +1356,34 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                         protected Object call() throws Exception {
                             data.setHasImported(true);
 
+                            int progress = 0;
+                            Integer[] oldOffsets = {0, 0, 0, 0, 0};
                             progressBarLabel.setVisible(true);
                             updateMessage("Connecting to database...");
                             data.connectDb();
                             progressBar.setVisible(true);
-                            updateProgress(0, 100);
+                            updateProgress(progress, 100);
                             //progressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
-                            updateMessage("Retrieving Locations...");
+                            updateMessage("Retrieving Base Locations...");
                             data.loadNextLocations();
-                            updateProgress(50, 100);
-                            updateMessage("Retrieving Routes...");
+                            progress += 15;
+                            updateProgress(progress, 100);
+                            updateMessage("Retrieving Base Routes...");
                             data.loadAllRoutes();
+                            progress += 20;
+                            updateProgress(progress, 100);
+                            Integer[] newOffsets = data.getOffsets();
+                            while (!Arrays.deepEquals(oldOffsets, newOffsets)) {
+                                data.loadNextLocations();
+                                progress += 10;
+                                updateProgress(progress, 100);
+                                updateMessage("Loading remaining data...");
+                                data.loadAllRoutes();
+                                progress += 10;
+                                updateProgress(progress, 100);
+                                oldOffsets = newOffsets.clone();
+                                newOffsets = data.getOffsets();
+                            }
                             updateProgress(100, 100);
                             updateMessage("Done!");
 
@@ -1456,9 +1471,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
             if (Map.getStartLoc() != null && Map.getEndLoc() != null) {
 
-                for (Retailer retailer : CurrentStorage.getRetailerArray()) {
-                    Map.findRetailers(retailer, map);
-                }
                 Map.findRoute(Map.getStartLoc().getLatitude() + ", " + Map.getStartLoc().getLongitude(),
                         Map.getEndLoc().getLatitude() + ", " + Map.getEndLoc().getLongitude(),
                         mapView, directionsService, this, directionsPane, directionsRenderer);
@@ -1466,8 +1478,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                 latLongDistanceLabel.setText("Distance: " + distance(CurrentStorage.getNewRouteStart().getLatitude(), CurrentStorage.getNewRouteStart().getLongitude(),
                         CurrentStorage.getNewRouteEnd().getLatitude(),
                          CurrentStorage.getNewRouteEnd().getLongitude()) + "Km");
-                Map.resetStartMarker();
-                Map.resetEndMarker();
+                //Map.resetStartMarker();
+                //Map.resetEndMarker();
             }
         });
     }
@@ -1509,7 +1521,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
         for (Location loc : nearby) {
             if (loc.getLocationType() == 0) {
-                Map.findLocation(loc, map);
+                Map.findToilets((Toilet) loc, map);
             } else if (loc.getLocationType() == 1) {
                 Map.findPoi((Poi) loc, map);
             } else if (loc.getLocationType() == 2) {

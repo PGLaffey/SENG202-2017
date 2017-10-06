@@ -33,6 +33,15 @@ public class DataFetcher {
 	}
 
 	/**
+	 * Returns an array of the offsets. Used to check if there is stuff to import
+	 * @return the array of offsets in the form toilets, poi, wifi, retailer, route
+	 */
+	public Integer[] getOffsets() {
+		Integer[] offsets={toiletOffset, poiOffset, wifiOffset, retailerOffset, routeOffset};
+		return offsets;
+	}
+
+	/**
 	 * Getter for the Connection connect
 	 */
 	public Connection getConnect() {
@@ -479,8 +488,8 @@ public class DataFetcher {
 			typeID = output.getInt(11);
 			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblWifi WHERE WifiID = " + typeID + "");
 			typeOutput.next();
-			ssid = typeOutput.getString(5);
-			provider = typeOutput.getString(6);
+			ssid = typeOutput.getString(2);
+			provider = typeOutput.getString(3);
 			wifi_type = typeOutput.getString(4);
 			Wifi wifi = new Wifi(latitude, longitude, name, wifi_type,  provider, ssid);
 			if (borough != null) {

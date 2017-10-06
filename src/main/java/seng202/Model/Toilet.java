@@ -1,6 +1,8 @@
 package seng202.Model;
 
+import com.lynden.gmapsfx.javascript.object.Marker;
 import seng202.Model.Location;
+import seng202.team5.Main;
 
 /**
  * Toilet subclass of Location, stores whether the toilet has facilities for wheelchair users, and whether the toilet is unisex or not.
@@ -8,6 +10,7 @@ import seng202.Model.Location;
 public class Toilet extends Location {
     private boolean forDisabled;
     private boolean uniSex;
+    private Marker marker = null;
 
     /**
      * Toilet constructor, creates a new instance of the toilet object using the location superclass constructor.
@@ -37,13 +40,21 @@ public class Toilet extends Location {
     }
 
     /**
-     * Getter for if the toilet is disabled
+     * Getter for if the toilet is disabled friendly
      */
     public boolean getForDisabled() {
         return forDisabled;
     }
 
     public void setForDisabled(boolean bool) { forDisabled = bool; }
+
+    public void setMarker(Marker marker) {
+        this.marker = marker;
+    }
+
+    public Marker getMarker() {
+        return marker;
+    }
 
     /**
      * Getter for whether the toilet is unisex

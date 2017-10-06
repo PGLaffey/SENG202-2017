@@ -1,6 +1,7 @@
 package seng202.Controller;
 
 import com.lynden.gmapsfx.MapReadyListener;
+import com.lynden.gmapsfx.javascript.object.LatLong;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -252,6 +253,7 @@ public class WifiInfoScreenController {
             @Override
             public void mapReady() {
                 Map.findWifi(wifi, controller.getMapView().getMap());
+                controller.getMapView().getMap().setCenter(new LatLong(wifi.getLatitude(), wifi.getLongitude()));
             }
         });
         Main.getStage().show();

@@ -6,6 +6,7 @@ import java.util.DoubleSummaryStatistics;
 import java.util.ResourceBundle;
 
 import com.lynden.gmapsfx.MapReadyListener;
+import com.lynden.gmapsfx.javascript.object.LatLong;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -78,6 +79,9 @@ public class PoiInfoScreenController {
 
     @FXML
     private Button cancelButton;
+
+    @FXML
+    private Button showOnMapBtn;
     
     private Poi poi;
 
@@ -119,7 +123,7 @@ public class PoiInfoScreenController {
     	saveButton.setVisible(true);
     	cancelButton.setVisible(true);
     }
-    
+
     /**
      * Checks the input is able to be parsed to a Double
      * @param s String to be checked
@@ -216,6 +220,7 @@ public class PoiInfoScreenController {
         updateButton.setVisible(true);
     }
 
+    @FXML
     void showPoiOnMap(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
         Parent root = loader.load();
@@ -228,6 +233,7 @@ public class PoiInfoScreenController {
             @Override
             public void mapReady() {
                 Map.findPoi(poi, controller.getMapView().getMap());
+                controller.getMapView().getMap().setCenter(new LatLong(poi.getLatitude(), poi.getLongitude()));
             }
         });
 

@@ -1,6 +1,7 @@
 package seng202.Controller;
 
 import com.lynden.gmapsfx.MapReadyListener;
+import com.lynden.gmapsfx.javascript.object.LatLong;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
 import seng202.Model.Map;
+import seng202.Model.Toilet;
 import seng202.team5.Main;
 
 import java.io.IOException;
@@ -226,6 +228,7 @@ public class ToiletInfoScreenController {
     void showToiletOnMap(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
         Parent root = loader.load();
+        Toilet toilet = CurrentStorage.getToiletArray().get(toiletIndex);
 
         Main.getStage().setScene(new Scene(root, Main.getStage().getScene().getWidth(), Main.getStage().getScene().getHeight()));
         Main.getStage().setTitle("Map");
@@ -234,7 +237,8 @@ public class ToiletInfoScreenController {
         controller.getMapView().addMapReadyListener(new MapReadyListener() {
             @Override
             public void mapReady() {
-                Map.findToilets(CurrentStorage.getToiletArray().get(toiletIndex), controller.getMapView().getMap());
+                Map.findToilets(toilet, controller.getMapView().getMap());
+                controller.getMapView().getMap().setCenter(new LatLong(toilet.getLatitude(), toilet.getLongitude()));
             }
         });
 

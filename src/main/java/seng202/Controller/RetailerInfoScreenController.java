@@ -1,6 +1,7 @@
 package seng202.Controller;
 
 import com.lynden.gmapsfx.MapReadyListener;
+import com.lynden.gmapsfx.javascript.object.LatLong;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -164,6 +165,7 @@ public class RetailerInfoScreenController {
             @Override
             public void mapReady() {
                 Map.findRetailers(retailer, controller.getMapView().getMap());
+                controller.getMapView().getMap().setCenter(new LatLong(retailer.getLatitude(), retailer.getLongitude()));
             }
         });
         Main.getStage().show();
