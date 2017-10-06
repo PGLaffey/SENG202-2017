@@ -494,14 +494,14 @@ public class Map {
 
         // Loops through the POI in the list and checks if the location is within 50 metres of the POI
         for (Poi poi : CurrentStorage.getPoiArray()) {
-            if (Map.getDistance(locLat, locLong, poi.getLatitude(), poi.getLongitude()) < 200) {
+            if (Map.getDistance(locLat, locLong, poi.getLatitude(), poi.getLongitude()) < 100) {
                 nearby.add(poi);
             }
         }
 
         // Loops through the toilets in the list and checks if the location is within 50 metres of the toilet
         for (Toilet toilet : CurrentStorage.getToiletArray()) {
-            if (Map.getDistance(toilet.getLatitude(), toilet.getLongitude(), locLat, locLong) < 200) {
+            if (Map.getDistance(toilet.getLatitude(), toilet.getLongitude(), locLat, locLong) < 100) {
                 nearby.add(toilet);
             }
         }

@@ -1,14 +1,24 @@
 package seng202.Controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import com.lynden.gmapsfx.MapReadyListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
+import seng202.Model.Map;
 import seng202.Model.Retailer;
+import seng202.team5.Main;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
 public class RetailerInfoScreenController {
@@ -63,6 +73,9 @@ public class RetailerInfoScreenController {
 
     @FXML
     private Button updateButton;
+
+    @FXML
+    private Button showOnMapButton;
 
     @FXML
     private Label zipLabel;
@@ -137,7 +150,25 @@ public class RetailerInfoScreenController {
             return false;
         }
     }
-    
+
+    @FXML
+    void showRetailerOnMap(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
+        Parent root = loader.load();
+
+        Main.getStage().setScene(new Scene(root, Main.getStage().getScene().getWidth(), Main.getStage().getScene().getHeight()));
+        Main.getStage().setTitle("Map");
+
+        MainScreenController controller = loader.getController();
+        controller.getMapView().addMapReadyListener(new MapReadyListener() {
+            @Override
+            public void mapReady() {
+                Map.findRetailers(retailer, controller.getMapView().getMap());
+            }
+        });
+        Main.getStage().show();
+    }
+
     @FXML
     void savePressed(ActionEvent event) {
     	

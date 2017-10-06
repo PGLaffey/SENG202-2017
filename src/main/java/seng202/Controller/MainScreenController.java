@@ -1496,9 +1496,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @Override
     public void directionsReceived(DirectionsResult results, DirectionStatus status){
         // This is called when a route is created.
-        latLongDistanceLabel.setText("Distance: " + distance(CurrentStorage.getNewRouteStart().getLatitude(), CurrentStorage.getNewRouteStart().getLongitude(),
-                CurrentStorage.getNewRouteEnd().getLatitude(),
-                CurrentStorage.getNewRouteEnd().getLongitude()) + "Km");
 
         //This section finds the nearby locations.
         ArrayList<Location> nearby = new ArrayList<Location>();
@@ -1508,7 +1505,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             nearby.addAll(Map.findNearby(leg.getEndLocation().getLatitude(), leg.getEndLocation().getLongitude()));
         }
 
-        System.out.println(nearby);
+        System.out.println(nearby.size());
+
         for (Location loc : nearby) {
             if (loc.getLocationType() == 0) {
                 Map.findLocation(loc, map);
