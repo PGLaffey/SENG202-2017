@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
+import seng202.Model.DataFetcher;
 import seng202.Model.Toilet;
 
 
@@ -75,6 +76,8 @@ public class ToiletInfoScreenController {
     private Button cancelButton;
 
     private Integer toiletIndex;
+
+    private Toilet oldToilet;
 
 
     /**
@@ -174,6 +177,19 @@ public class ToiletInfoScreenController {
 
         	// TODO: Update the database
 
+            DataFetcher exporter = new DataFetcher();
+            try {
+                exporter.connectDb();
+                exporter.storeCurrentStorage();
+                exporter.updateLocation(oldToilet, CurrentStorage.getToiletArray().get(toiletIndex));
+                CurrentStorage.flush();
+                System.exit(0);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+
         	cancelPressed(event);
         }
     }
@@ -199,6 +215,8 @@ public class ToiletInfoScreenController {
 
     @FXML
     void initialize() {
+
+        oldToilet = CurrentStorage.getToiletArray().get(CurrentStorage.getToiletIndex());
     	toiletIndex = CurrentStorage.getToiletIndex();
     	disabledLabel.setText("Disabled: " + String.valueOf(CurrentStorage.getToiletArray().get(toiletIndex).getForDisabled()));
     	latLabel.setText("Latitude: " + CurrentStorage.getToiletArray().get(toiletIndex).getLatitude());
