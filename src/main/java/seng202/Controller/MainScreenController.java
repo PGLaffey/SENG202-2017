@@ -1375,7 +1375,12 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             menuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-
+                    addWifiPane.setVisible(false);
+                    mainMapPane.setVisible(false);
+                    addPoiPane.setVisible(false);
+                    addToiletPane.setVisible(false);
+                    addRetailerPane.setVisible(false);
+                    addOtherPane.setVisible(true);
                 }
             });
             favouriteRoutesMenu.getItems().add(menuItem);
@@ -1386,10 +1391,15 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	    menuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-
+                    addWifiPane.setVisible(false);
+                    mainMapPane.setVisible(false);
+                    addPoiPane.setVisible(false);
+                    addToiletPane.setVisible(false);
+                    addRetailerPane.setVisible(false);
+                    addOtherPane.setVisible(true);
                 }
             });
-            savedRoutesMenu.getItems().add(new MenuItem(route.getName()));
+            savedRoutesMenu.getItems().add(menuItem);
         }
 
     	if (!data.isHasImported()) {
