@@ -45,37 +45,33 @@ public class LoginScreenController {
 		data.connectDb();
 		//TODO: Jack to change
 		if (!usernameText.getText().isEmpty() && !passwordText.getText().isEmpty()) {
-			if (data.isUser(usernameText.getText()) == true) {
-				if (data.fetchPassword(usernameText.getText()).isEmpty()) {
-					incorrectPasswordLbl.setVisible(false);
-					incorrectUserLbl.setVisible(true);
-				} else if ((data.fetchPassword(usernameText.getText()).equals(passwordText.getText().toString()))) {
-
-					ArrayList<String> userInfo;
-					userInfo = data.fetchUserInfo(usernameText.getText());
-
-					User user;
-					//if (new File("./src/main/resources/data_files/" + usernameText.getText() + ".ser").exists()) {
-					//	//user = new User("Courtney","Hoskin", "cgh", "2017-08-06","password");
-					//    user = FileManager.userDeserialize("./src/main/resources/data_files/" + usernameText.getText() + ".ser");
-					//} else {
-					user = new User(userInfo.get(0), userInfo.get(1), usernameText.getText().toLowerCase(), userInfo.get(2), passwordText.getText().toString(),
-							Integer.parseInt(userInfo.get(3)), Double.parseDouble(userInfo.get(4)), Double.parseDouble(userInfo.get(5)));
-						//FileManager.userSerialize(user, "./src/main/resources/data_files/");
-					CurrentStorage.setUser(user);
-					System.out.println(userInfo.get(5));
-					Stage primaryStage = (Stage) signInButton.getScene().getWindow();
-					Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
-					primaryStage.setTitle("Profile");
-					primaryStage.setScene(new Scene(root));
-				} else {
-					incorrectUserLbl.setVisible(false);
-					incorrectPasswordLbl.setVisible(true);
-				}
-			} else {
+			if (data.fetchPassword(usernameText.getText()).isEmpty()) {
 				incorrectPasswordLbl.setVisible(false);
 				incorrectUserLbl.setVisible(true);
+			} else if ((data.fetchPassword(usernameText.getText()).equals(passwordText.getText().toString()))) {
+
+				ArrayList<String> userInfo;
+				userInfo = data.fetchUserInfo(usernameText.getText());
+
+				User user;
+				//if (new File("./src/main/resources/data_files/" + usernameText.getText() + ".ser").exists()) {
+				//	//user = new User("Courtney","Hoskin", "cgh", "2017-08-06","password");
+				//    user = FileManager.userDeserialize("./src/main/resources/data_files/" + usernameText.getText() + ".ser");
+				//} else {
+				user = new User(userInfo.get(0), userInfo.get(1), usernameText.getText().toLowerCase(), userInfo.get(2), passwordText.getText().toString(),
+						Integer.parseInt(userInfo.get(3)), Double.parseDouble(userInfo.get(4)), Double.parseDouble(userInfo.get(5)));
+					//FileManager.userSerialize(user, "./src/main/resources/data_files/");
+				CurrentStorage.setUser(user);
+				System.out.println(userInfo.get(5));
+				Stage primaryStage = (Stage) signInButton.getScene().getWindow();
+				Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
+				primaryStage.setTitle("Profile");
+				primaryStage.setScene(new Scene(root));
+			} else {
+				incorrectUserLbl.setVisible(false);
+				incorrectPasswordLbl.setVisible(true);
 			}
+		
 		} else {
 			incorrectPasswordLbl.setVisible(false);
 			incorrectUserLbl.setVisible(false);

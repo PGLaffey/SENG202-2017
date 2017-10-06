@@ -3,6 +3,7 @@ package seng202.Model;
 import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static seng202.Model.CurrentStorage.getUser;
 
@@ -54,40 +55,28 @@ public class DataFetcher {
     	String borough = newLocation.getBorough();
     	int zip = newLocation.getZip();
     	int oldID = findLocation(oldLocation);
-    	PreparedStatement preparedStatement = null;
+
     	String stmt = "UPDATE tblToilets SET Latitude = ?, Longitude = ?, Name = ?, Public = ?, "
     			+ "Borough = ?, Zip = ?, Address = ? WHERE LocationID = ?";
-    	try {
-    		preparedStatement = connect.prepareStatement(stmt);
-    		preparedStatement.setDouble(1, latitude);
-    		preparedStatement.setDouble(2, longitude);
-    		preparedStatement.setString(3, name);
-    		preparedStatement.setInt(4, secret);
-    		preparedStatement.setString(5, borough);
-    		preparedStatement.setString(6, String.valueOf(zip));
-    		preparedStatement.setString(7, address);
-    		preparedStatement.setInt(8, oldID);
-    		runUpdate(preparedStatement);
-    		
-    		stmt = "SELECT * FROM tblLocations WHERE LocationID = ?";
-    		preparedStatement = connect.prepareStatement(stmt);
-    		preparedStatement.setInt(1, oldID);
-    		ArrayList<String> location = runQuery(preparedStatement).get(0);
-    		switch(type) {
-    		case 0:
-    			updateToilet((Toilet) newLocation, Integer.parseInt(location.get(7)));
-    		case 1:
-    			updatePoi((Poi) newLocation, Integer.parseInt(location.get(8)));
-    		case 2:
-    			updateRetailer((Retailer) newLocation, Integer.parseInt(location.get(9)));
-    		case 3:
-    			updateWifi((Wifi) newLocation, Integer.parseInt(location.get(10)));
-    		}
-    		
-    	}
-    	catch (SQLException ex) {
-    		printSqlError(ex);
-    	}
+    	ArrayList<String> params = new ArrayList<String>();
+    	Collections.addAll(params, String.valueOf(latitude), String.valueOf(longitude), 
+			    				name, String.valueOf(secret), borough, String.valueOf(zip), address, String.valueOf(oldID));
+		runUpdate(stmt, params);
+		
+		stmt = "SELECT * FROM tblLocations WHERE LocationID = ?";
+		params = new ArrayList<String>();
+		params.add(String.valueOf(oldID));
+		ArrayList<String> location = runQuery(stmt, params).get(0);
+		switch(type) {
+		case 0:
+			updateToilet((Toilet) newLocation, Integer.parseInt(location.get(7)));
+		case 1:
+			updatePoi((Poi) newLocation, Integer.parseInt(location.get(8)));
+		case 2:
+			updateRetailer((Retailer) newLocation, Integer.parseInt(location.get(9)));
+		case 3:
+			 	updateWifi((Wifi) newLocation, Integer.parseInt(location.get(10)));
+		}
     }
    
     
@@ -100,20 +89,10 @@ public class DataFetcher {
     	String ssid = wifi.getSsid();
     	String type = wifi.getType();
     	String provider = wifi.getProvider();
-    	PreparedStatement preparedStatement = null;
     	String stmt = "UPDATE tblWifi SET SSID = ?, Provider = ?, Type = ? WHERE WifiID = ?";
-    	
-    	try {
-    		preparedStatement = connect.prepareStatement(stmt);
-    		preparedStatement.setString(1, ssid);
-    		preparedStatement.setString(2, provider);
-    		preparedStatement.setString(3, type);
-    		preparedStatement.setInt(4, typeID);
-    		runUpdate(preparedStatement);
-    	}
-    	catch (SQLException ex) {
-    		printSqlError(ex);
-    	}
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, ssid, provider, type, String.valueOf(typeID));
+		runUpdate(stmt, params);
     }
     
     
@@ -125,19 +104,10 @@ public class DataFetcher {
     private void updatePoi(Poi poi, int typeID) {
     	String description = poi.getDescription();
     	double cost = poi.getCost();
-    	PreparedStatement preparedStatement = null;
     	String stmt = "UPDATE tblPOI SET Cost = ?, Description = ? WHERE PoiID = ?";
-    	
-    	try {
-    		preparedStatement = connect.prepareStatement(stmt);
-    		preparedStatement.setDouble(1, cost);
-    		preparedStatement.setString(2, description);
-    		preparedStatement.setInt(3, typeID);
-    		runUpdate(preparedStatement);
-    	}
-    	catch (SQLException ex) {
-    		printSqlError(ex);
-    	}
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, String.valueOf(cost), description, String.valueOf(typeID));
+		runUpdate(stmt, params);
     }
     
     
@@ -155,19 +125,10 @@ public class DataFetcher {
     	if (toilet.getUniSex()) {
     		unisex = 1;
     	}
-    	PreparedStatement preparedStatement = null;
     	String stmt = "UPDATE tblToilets SET IsDisabled = ?, MixedGender = ? WHERE ToiletID = ?";
-    	
-    	try {
-    		preparedStatement = connect.prepareStatement(stmt);
-    		preparedStatement.setString(1, String.valueOf(isDisabled));
-    		preparedStatement.setString(2, String.valueOf(unisex));
-    		preparedStatement.setInt(3, typeID);
-    		runUpdate(preparedStatement);
-    	}
-    	catch (SQLException ex) {
-    		printSqlError(ex);
-    	}
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, String.valueOf(isDisabled), String.valueOf(unisex));
+		runUpdate(stmt, params);
     }
     
     
@@ -179,19 +140,10 @@ public class DataFetcher {
     private void updateRetailer(Retailer retailer, int typeID) {
     	String retailerType = retailer.getProduct();
     	String description = retailer.getDescription();
-    	PreparedStatement preparedStatement = null;
     	String stmt = "UPDATE tblRetailers SET RetailerType = ?, Description = ? WHERE RetailerID = ?";
-    	
-    	try {
-    		preparedStatement = connect.prepareStatement(stmt);
-    		preparedStatement.setString(1, retailerType);
-    		preparedStatement.setString(2, description);
-    		preparedStatement.setInt(3, typeID);
-    		runUpdate(preparedStatement);
-    	}
-    	catch (SQLException ex) {
-    		printSqlError(ex);
-    	}
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, retailerType, description, String.valueOf(typeID));
+		runUpdate(stmt, params);
     }
     
     
@@ -201,19 +153,10 @@ public class DataFetcher {
 	 * @param newPassword desired password
 	 */
 	public void updateUserPassword(String username, String newPassword) {
-    	PreparedStatement preparedStatement = null;
     	String stmt = "UPDATE tblUser SET Password = ? WHERE Username = ?";
-
-    	try {
-			preparedStatement = connect.prepareStatement(stmt);
-			preparedStatement.setString(1, newPassword);
-			preparedStatement.setString(2, username);
-			runUpdate(preparedStatement);
-		}
-	    catch (SQLException ex) {
-	    	printSqlError(ex);
-	    }
-
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, newPassword, username);
+		runUpdate(stmt, params);
     }
 
 	
@@ -223,17 +166,10 @@ public class DataFetcher {
 	 * @return The users password if the user exists, null otherwise
 	 */
 	public String fetchPassword(String username) {
-    	PreparedStatement preparedStatement;
     	String stmt = "SELECT Password FROM tblUser WHERE Username = ?";
-    	try {
-    		preparedStatement = connect.prepareStatement(stmt);
-    		preparedStatement.setString(1, username);
-    		return runQuery(preparedStatement).get(0).get(0);
-		}
-	    catch (SQLException ex) {
-	    	printSqlError(ex);
-	    }
-		return null;
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, username);
+		return runQuery(stmt, params).get(0).get(0);
 	}
 
 	
@@ -243,17 +179,10 @@ public class DataFetcher {
 	 * @return the LName, FName and YearOfBirth of the user from the database
 	 */
 	public ArrayList<String> fetchUserInfo(String username) {
-		PreparedStatement preparedStatement;
 		String stmt = "SELECT FName, LNAME, YearOfBirth, NumRoutesCycled, DistanceCycled, HoursCycled FROM tblUser WHERE Username = ?";
-		try {
-			preparedStatement = connect.prepareStatement(stmt);
-			preparedStatement.setString(1, username);
-			return runQuery(preparedStatement).get(0);
-		} 
-    	catch (SQLException ex) {
-    		printSqlError(ex);
-    	}
-		return null;
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, username);
+		return runQuery(stmt, params).get(0);
 	}
 
 	
@@ -263,42 +192,36 @@ public class DataFetcher {
 	 * @param username Username of the user
 	 */
 	public void deleteUser(String username) {
-		PreparedStatement preparedStatement;
-		int userID;
 		String stmt = "SELECT UserID FROM tblUser WHERE Username = ?";
-		try {
-			preparedStatement = connect.prepareStatement(stmt);
-			preparedStatement.setString(1, username);
-			userID = Integer.parseInt(runQuery(preparedStatement).get(0).get(0));
-
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, username);
+		Integer userID = Integer.parseInt(runQuery(stmt, params).get(0).get(0));
+		if (userID != null) {
 			stmt = "UPDATE tblLocations SET User = NULL WHERE User = ?";
-			preparedStatement = connect.prepareStatement(stmt);
-			preparedStatement.setInt(1, userID);
-			runUpdate(preparedStatement);
+			params = new ArrayList<String>();
+			Collections.addAll(params, String.valueOf(userID));
+			runUpdate(stmt, params);
 
 			stmt = "UPDATE tblRoutes SET User = NULL WHERE User = ?";
-			preparedStatement = connect.prepareStatement(stmt);
-			preparedStatement.setInt(1, userID);
-			runUpdate(preparedStatement);
+			params = new ArrayList<String>();
+			Collections.addAll(params, String.valueOf(userID));
+			runUpdate(stmt, params);
 
 			stmt = "DELETE FROM tblUsersRoutes WHERE UserID = ?";
-			preparedStatement = connect.prepareStatement(stmt);
-			preparedStatement.setInt(1, userID);
-			runUpdate(preparedStatement);
+			params = new ArrayList<String>();
+			Collections.addAll(params,String.valueOf(userID));
+			runUpdate(stmt, params);
 
 			stmt = "DELETE FROM tblUsersLocations WHERE UserID = ?";
-			preparedStatement = connect.prepareStatement(stmt);
-			preparedStatement.setInt(1, userID);
-			runUpdate(preparedStatement);
+			params = new ArrayList<String>();
+			Collections.addAll(params, String.valueOf(userID));
+			runUpdate(stmt, params);
 
 			stmt = "DELETE FROM tblUser WHERE UserID = ?";
-			preparedStatement = connect.prepareStatement(stmt);
-			preparedStatement.setInt(1, userID);
-			runUpdate(preparedStatement);
+			params = new ArrayList<String>();
+			Collections.addAll(params, String.valueOf(userID));
+			runUpdate(stmt, params);
 		} 
-    	catch (SQLException ex) {
-    		printSqlError(ex);
-    	}
 	}
 
 	
@@ -320,23 +243,15 @@ public class DataFetcher {
 	 */
 	private void storeUser() {
 		User user = getUser();
-		PreparedStatement preparedStatement;
 		String username = user.getUsername();
 		int routesCycled = user.getRoutesCycled();
 		double hoursCycled = user.getHours();
 		double distanceCycled = user.getDistance();
 		String stmt = "UPDATE tblUser SET NumRoutesCycled = ?, HoursCycled = ?, DistanceCycled = ? WHERE Username = ?";
-		try {
-			preparedStatement = connect.prepareStatement(stmt);
-			preparedStatement.setInt(1, routesCycled);
-			preparedStatement.setDouble(2, hoursCycled);
-			preparedStatement.setDouble(3, distanceCycled);
-			preparedStatement.setString(4, username);
-			runUpdate(preparedStatement);
-		} 
-	    catch (SQLException ex) {
-	    	printSqlError(ex);
-	    }
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, String.valueOf(routesCycled), String.valueOf(hoursCycled),
+				String.valueOf(distanceCycled), username);
+		runUpdate(stmt, params);
 	}
 
 	
@@ -690,9 +605,14 @@ public class DataFetcher {
      * Runs an update query on the database. Update queries are used to add data to an existing table.
      * @param update The update query to run
      */
-    private void runUpdate(PreparedStatement update) {
-
+    private void runUpdate(String query, ArrayList<String> parameters) {
     	try {
+    		PreparedStatement update = connect.prepareStatement(query);
+    		int count = 0;
+    		while (count < parameters.size()) {
+    			update.setString(count + 1, parameters.get(count));
+    			count += 1;
+    		}
 			update.executeUpdate();
 		} 
     	catch (SQLException ex) {
@@ -710,11 +630,17 @@ public class DataFetcher {
      * @param query The MySQL syntax query to run
      * @return An Array List that contains another Array List, representing the rows of the table, that contains Strings, representing the column of the data
      */
-    private ArrayList<ArrayList<String>> runQuery(PreparedStatement query) {
+    private ArrayList<ArrayList<String>> runQuery(String stmt, ArrayList<String> parameters) {
     	//Creates an ArrayList that will contain each individual result as its own ArrayList
     	ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
     	//By using try/catch here the entire program will not crash if there is an error with a query. Instead it will return null.
 		try {
+    		PreparedStatement query = connect.prepareStatement(stmt);
+    		int count = 0;
+    		while (count < parameters.size()) {
+    			query.setString(count + 1, parameters.get(count));
+    			count += 1;
+    		}
 			//Initializes the query statement
 			//Initializes the set of results for the query
 	    	ResultSet output = query.executeQuery();
@@ -763,21 +689,14 @@ public class DataFetcher {
      * @return true if the user exists, false otherwise
      */
     public boolean userExists(User user) {
-    	PreparedStatement preparedStatement;
     	String username = user.getUsername();
-    	try {
-			preparedStatement = connect.prepareStatement("SELECT Username FROM tblUser WHERE Username = ?");
-			preparedStatement.setString(1, username);
-			if (runQuery(preparedStatement).isEmpty()) {
-				return false;
-			} else {
-				return true;
-			}
-		} 
-		catch (SQLException ex) {
-    		printSqlError(ex);
+    	String stmt = "SELECT Username FROM tblUser WHERE Username = ?";
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, username);
+		if (runQuery(stmt, params).isEmpty()) {
+			return false;
 		}
-		return false;
+		return true;
     }
     
     
@@ -786,7 +705,6 @@ public class DataFetcher {
      * @param user User to add into the external database
      */
     public void addUser(User user) {
-    	PreparedStatement preparedStatement;
     	String firstName = user.getFirstName();
     	String lastName = user.getLastName();
     	String password = user.getPassword();
@@ -799,23 +717,10 @@ public class DataFetcher {
     		String stmt  = "INSERT INTO tblUser "
 					+ "(FName, LName, Username, YearOfBirth, Password, NumRoutesCycled, HoursCycled, DistanceCycled) VALUES "
 					+ "(?, ?, ?, ?, ?, ?, ?, ?)";
-    		try {
-				preparedStatement = connect.prepareStatement(stmt);
-				preparedStatement.setString(1, firstName);
-				preparedStatement.setString(2, lastName);
-				preparedStatement.setString(3, username);
-				preparedStatement.setString(4, dob);
-				preparedStatement.setString(5, password);
-				preparedStatement.setInt(6, routesCycled);
-				preparedStatement.setDouble(7, hoursCycled);
-				preparedStatement.setDouble(8, distanceCycled);
-
-				runUpdate(preparedStatement);
-			} 
-    		catch (SQLException ex) {
-        		printSqlError(ex);
-    		}
-
+    		ArrayList<String> params = new ArrayList<String>();
+    		Collections.addAll(params, firstName, lastName, username, dob, password, String.valueOf(routesCycled),
+    				String.valueOf(hoursCycled), String.valueOf(distanceCycled));
+    		runUpdate(stmt, params);
     	}
     	else {
     		System.out.println("Error: User already exists, cannot create new user with same username");
@@ -828,7 +733,6 @@ public class DataFetcher {
      * @param route Route to add into the external database.
      */
     public void addRoute(Route route) {
-    	PreparedStatement preparedStatement;
     	String name = route.getName();
     	Location start = route.getStart();
     	Location end = route.getEnd();
@@ -860,21 +764,10 @@ public class DataFetcher {
     	String stmt = "INSERT INTO tblRoutes "
 				+ "(StartID, EndID, Public, User, Name, BikeID, Gender) VALUES "
 				+ "(?, ?, ?, ?, ?)";
-    	try {
-			preparedStatement = connect.prepareStatement(stmt);
-			preparedStatement.setInt(1, startID);
-			preparedStatement.setInt(2, endID);
-			preparedStatement.setInt(3, secret);
-			preparedStatement.setString(4, owner);
-			preparedStatement.setString(5, name);
-			preparedStatement.setString(6, route.getBikeID());
-			preparedStatement.setString(7, route.getGender().substring(0, 1));
-
-			runUpdate(preparedStatement);
-		} 
-		catch (SQLException ex) {
-    		printSqlError(ex);
-		}
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, String.valueOf(startID), String.valueOf(endID), String.valueOf(secret),
+				owner, name, route.getBikeID(), route.getGender().substring(0, 1));
+		runUpdate(stmt, params);
     }
 
     
@@ -884,24 +777,13 @@ public class DataFetcher {
      * @return The ID of the location in the database, returns 0 if location not found.
      */
     private int findLocation(Location location) {
-    	PreparedStatement preparedStatement;
-    	String locationID = "0";
     	double[] coords = location.getCoords();
     	int type = location.getLocationType();
-    	try {
-    		preparedStatement = connect.prepareStatement("SELECT LocationID FROM tblLocations WHERE Latitude = ? AND Longitude = ? AND Type = ? AND Name = ?");
-    		preparedStatement.setDouble(1, coords[0]);
-    		preparedStatement.setDouble(2, coords[1]);
-    		preparedStatement.setInt(3, type);
-    		preparedStatement.setString(4, location.getName());
-    		locationID = runQuery(preparedStatement).get(0).get(0);
-    	} 
-		catch (SQLException ex) {
-    		printSqlError(ex);
-		}
-    	catch (IndexOutOfBoundsException e) {
-    		locationID = "0";
-    	}
+    	String stmt = "SELECT LocationID FROM tblLocations WHERE Latitude = ? AND Longitude = ? AND Type = ? AND Name = ?";
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, String.valueOf(coords[0]), String.valueOf(coords[1]),
+				String.valueOf(type), location.getName());
+		String locationID = runQuery(stmt, params).get(0).get(0);
     	return Integer.parseInt(locationID);
     }
     
@@ -940,31 +822,22 @@ public class DataFetcher {
      * @param wifi The Wifi to be added to the database
      */
     private void addWifi(Wifi wifi) {
-    	PreparedStatement preparedStatement;
     	String typeID;
     	String ssid = wifi.getSsid();
     	String provider = wifi.getProvider();
     	String type = wifi.getType();
-    	try {
-			String stmt = "INSERT INTO tblWifi "
-					+ "(SSID, Provider, Type) VALUES "
-					+ "(?, ?, ?)";
-			preparedStatement = connect.prepareStatement(stmt);
-			preparedStatement.setString(1, ssid);
-			preparedStatement.setString(2, provider);
-			preparedStatement.setString(3, type);
+		String stmt = "INSERT INTO tblWifi "
+				+ "(SSID, Provider, Type) VALUES "
+				+ "(?, ?, ?)";
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, ssid, provider, type);
+		runUpdate(stmt, params);
 
-			runUpdate(preparedStatement);
+		stmt = "SELECT LAST_INSERT_ID()";
+		params = new ArrayList<String>();
 
-			stmt = "SELECT LAST_INSERT_ID()";
-			preparedStatement = connect.prepareStatement(stmt);
-
-			typeID = runQuery(preparedStatement).get(0).get(0);
-			insertLocation(wifi, typeID);
-		} 
-		catch (SQLException ex) {
-    		printSqlError(ex);
-		}
+		typeID = runQuery(stmt, params).get(0).get(0);
+		insertLocation(wifi, typeID);
     }
     
     
@@ -973,28 +846,21 @@ public class DataFetcher {
      * @param retailer The Retailer to be added to the database
      */
     private void addRetailer(Retailer retailer) {
-    	PreparedStatement preparedStatement;
     	String typeID;
     	String product = retailer.getProduct();
     	String description = retailer.getDescription();
     	String stmt = "INSERT INTO tblRetailers "
 				+ "(RetailerType, Description) VALUES "
 				+ "(?, ?)";
-    	try {
-			preparedStatement = connect.prepareStatement(stmt);
-			preparedStatement.setString(1, product);
-			preparedStatement.setString(2, description);
-			runUpdate(preparedStatement);
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, product, description);
+		runUpdate(stmt, params);
+		
+		stmt = "SELECT LAST_INSERT_ID()";
 
-			stmt = "SELECT LAST_INSERT_ID()";
-
-			preparedStatement = connect.prepareStatement(stmt);
-			typeID = runQuery(preparedStatement).get(0).get(0);
-			insertLocation(retailer, typeID);
-		} 
-		catch (SQLException ex) {
-    		printSqlError(ex);
-		}
+		params = new ArrayList<String>();
+		typeID = runQuery(stmt, params).get(0).get(0);
+		insertLocation(retailer, typeID);
     }
     
     
@@ -1003,28 +869,20 @@ public class DataFetcher {
      * @param poi The Poi to be added to the database
      */
     private void addPoi(Poi poi) {
-    	PreparedStatement preparedStatement;
     	String typeID;
     	String description = poi.getDescription();
     	double cost = poi.getCost();
     	String stmt = "INSERT INTO tblPOI "
 				+ "(Cost, Description) VALUES"
 				+ "(?, ?)";
-		try {
-			preparedStatement = connect.prepareStatement(stmt);
-			preparedStatement.setDouble(1, cost);
-			preparedStatement.setString(2, description);
-			runUpdate(preparedStatement);
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, String.valueOf(cost), description);
+		runUpdate(stmt, params);
 
-			stmt = "SELECT LAST_INSERT_ID()";
-
-			preparedStatement = connect.prepareStatement(stmt);
-			typeID = runQuery(preparedStatement).get(0).get(0);
-			insertLocation(poi, typeID);
-		} 
-		catch (SQLException ex) {
-    		printSqlError(ex);
-		}
+		stmt = "SELECT LAST_INSERT_ID()";
+		params = new ArrayList<String>();
+		typeID = runQuery(stmt, params).get(0).get(0);
+		insertLocation(poi, typeID);
     }
     
     
@@ -1033,7 +891,6 @@ public class DataFetcher {
      * @param toilet The Toilet to be added to the database
      */
     private void addToilet(Toilet toilet) {
-    	PreparedStatement preparedStatement;
     	String typeID;
     	int disabled = 0;
     	int unisex = 0;
@@ -1046,21 +903,14 @@ public class DataFetcher {
 		String stmt = "INSERT INTO tblToilets "
 				+ "(IsDisabled, MixedGender) VALUES "
 				+ "(?, ?)";
-		try {
-			preparedStatement = connect.prepareStatement(stmt);
-			preparedStatement.setInt(1, disabled);
-			preparedStatement.setInt(2, unisex);
-			runUpdate(preparedStatement);
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, String.valueOf(disabled), String.valueOf(unisex));
+		runUpdate(stmt, params);
 
-			stmt = "SELECT LAST_INSERT_ID()";
-
-			preparedStatement = connect.prepareStatement(stmt);
-			typeID = runQuery(preparedStatement).get(0).get(0);
-			insertLocation(toilet, typeID);
-		} 
-		catch (SQLException ex) {
-    		printSqlError(ex);
-		}
+		stmt = "SELECT LAST_INSERT_ID()";
+		params = new ArrayList<String>();
+		typeID = runQuery(stmt, params).get(0).get(0);
+		insertLocation(toilet, typeID);
     }
     
     
@@ -1069,7 +919,6 @@ public class DataFetcher {
      * @param location The Location to be added to the database.
      */
     private void insertLocation(Location location, String typeID) {
-		PreparedStatement preparedStatement;
     	String name = location.getName();
     	int secret = 0;
     	if (location.getSecret()) {
@@ -1108,46 +957,19 @@ public class DataFetcher {
     		String stmt = "INSERT INTO tblLocations "
 					+ "(Latitude, Longitude, Name, User, Public, Type, Address) VALUES "
 					+ "(?, ?, ?, ?, ?, ?, ?)";
-    		try {
-				preparedStatement = connect.prepareStatement(stmt);
-				preparedStatement.setDouble(1, latitude);
-				preparedStatement.setDouble(2, longitude);
-				preparedStatement.setString(3, name);
-				preparedStatement.setString(4, owner);
-				preparedStatement.setInt(5, secret);
-				preparedStatement.setInt(6, type);
-				preparedStatement.setString(7, address);
-
-				runUpdate(preparedStatement);
-			} 
-    		catch (SQLException ex) {
-        		printSqlError(ex);
-    		}
+    		ArrayList<String> params = new ArrayList<String>();
+    		Collections.addAll(params, String.valueOf(latitude), String.valueOf(longitude), name, owner,
+    				String.valueOf(secret), String.valueOf(type), address);
+    		runUpdate(stmt, params);
     	} 
     	else {
-
 			String stmt = "INSERT INTO tblLocations "
 					+ "(Latitude, Longitude, Name, User, Public, Type, " + typeName + "ID, Zip, Borough, Address) VALUES "
 					+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-			try {
-				preparedStatement = connect.prepareStatement(stmt);
-				preparedStatement.setDouble(1, latitude);
-				preparedStatement.setDouble(2, longitude);
-				preparedStatement.setString(3, name);
-				preparedStatement.setString(4, owner);
-				preparedStatement.setInt(5, secret);
-				preparedStatement.setInt(6, type);
-				preparedStatement.setString(7, typeID);
-				preparedStatement.setString(8, zip);
-				preparedStatement.setString(9, borough);
-				preparedStatement.setString(10, address);
-
-				runUpdate(preparedStatement);
-			} 
-    		catch (SQLException ex) {
-        		printSqlError(ex);
-    		}
+    		ArrayList<String> params = new ArrayList<String>();
+    		Collections.addAll(params, String.valueOf(latitude), String.valueOf(longitude), name,
+    				owner, String.valueOf(secret), String.valueOf(type), typeID, zip, borough, address);
+    		runUpdate(stmt, params);
 		}
     }
     
@@ -1161,15 +983,9 @@ public class DataFetcher {
     	int userID = 0;
     	String username = user.getUsername();
     	String stmt = "SELECT UserID FROM tblUser WHERE Username = ?";
-		PreparedStatement preparedStatement = null;
-		try {
-	    	preparedStatement = connect.prepareStatement(stmt);
-			preparedStatement.setString(1, username);
-			userID = Integer.parseInt(runQuery(preparedStatement).get(0).get(0));
-		} 
-		catch (SQLException ex) {
-    		printSqlError(ex);
-		}
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, username);
+		userID = Integer.parseInt(runQuery(stmt, params).get(0).get(0));
     	return userID;
     }
     
