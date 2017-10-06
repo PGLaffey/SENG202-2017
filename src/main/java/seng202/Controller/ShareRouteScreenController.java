@@ -18,11 +18,9 @@ public class ShareRouteScreenController {
     private TextField shareableLinkTextField;
 
 
+    //TODO add docstring
     @FXML
     void initialize() {
         assert shareableLinkTextField != null : "fx:id=\"shareableLinkTextField\" was not injected: check your FXML file 'ShareRouteScreen.fxml'.";
-
-
     }
-
 }

@@ -12,14 +12,8 @@ import seng202.Model.CurrentStorage;
 import seng202.Model.DataFetcher;
 import seng202.Model.Poi;
 
-
-
 public class PoiInfoScreenController {
 	
-
-
-
-
     @FXML
     private TextField boroughText;
 
@@ -78,13 +72,12 @@ public class PoiInfoScreenController {
     private Button cancelButton;
     
     private Integer poiIndex;
-
     private Poi oldPoi;
 
 
     /**
      * Method when the ok button is pressed, hides the pop up.
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void okPressed(ActionEvent event) {
@@ -92,13 +85,13 @@ public class PoiInfoScreenController {
     	stage.hide();
     }
     
+    
     /**
      * Method for when the update button is pressed, displays screen for updating selected poi
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void updatePressed(ActionEvent event) {
-
     	boroughText.setVisible(true);
     	boroughText.setText(CurrentStorage.getPoiArray().get(poiIndex).getBorough());
     	costText.setVisible(true);
@@ -120,6 +113,7 @@ public class PoiInfoScreenController {
     	cancelButton.setVisible(true);
     }
     
+    
     /**
      * Checks the input is able to be parsed to a Double
      * @param s String to be checked
@@ -134,6 +128,7 @@ public class PoiInfoScreenController {
         }
     }
 
+    
     /**
      * Checks the input is able to be parsed to an Integer
      * @param s String to be checked
@@ -148,9 +143,10 @@ public class PoiInfoScreenController {
         }
     }
     
+    
+    //TODO add docstring
     @FXML
     void savePressed(ActionEvent event) {
-
     	nameLabel.setTextFill(Color.BLACK);
     	addressLabel.setTextFill(Color.BLACK);
     	longLabel.setTextFill(Color.BLACK);
@@ -199,14 +195,16 @@ public class PoiInfoScreenController {
                 exporter.connectDb();
                 exporter.updateLocation(oldPoi, CurrentStorage.getPoiArray().get(poiIndex));
                 exporter.closeConnection();
-            } catch (Exception e) {
+            } 
+            catch (Exception e) {
                 e.printStackTrace();
             }
-
-        	cancelPressed(event);
+            cancelPressed(event);
         }
     }
     
+    
+    //TODO add docstring
     @FXML
     void cancelPressed(ActionEvent event) {
         costLabel.setText("Cost: $" + CurrentStorage.getPoiArray().get(poiIndex).getCost());
@@ -225,6 +223,8 @@ public class PoiInfoScreenController {
         updateButton.setVisible(true);
     }
     
+    
+    //TODO add docstring
     @FXML
     void initialize() {
         oldPoi = new Poi(CurrentStorage.getPoiArray().get(CurrentStorage.getPoiIndex()));
@@ -244,10 +244,7 @@ public class PoiInfoScreenController {
         assert longLabel != null : "fx:id=\"longLabel\" was not injected: check your FXML file 'PoiInfoScreen.fxml'.";
         assert nameLabel != null : "fx:id=\"nameLabel\" was not injected: check your FXML file 'PoiInfoScreen.fxml'.";
         assert okButton != null : "fx:id=\"okButton\" was not injected: check your FXML file 'PoiInfoScreen.fxml'.";
-
-
     }
-
 }
 
 

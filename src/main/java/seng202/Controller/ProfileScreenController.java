@@ -97,22 +97,16 @@ public class ProfileScreenController {
     private ImageView level6Image;
 	
 	private User user;
-
 	private ArrayList<Badge> userBadges;
-
 	private Badge userDistBadge;
-
 	private Badge userTimeBadge;
-
 	private Badge userRouteBadge;
 	
 	
 	/**
 	 * Method for when the map menu button is pressed, shows the main map screen. 
-	 * @throws IOException 
 	 */
 	public void mapPressed() throws IOException {
-		
 		Stage primaryStage = (Stage) mapButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 
@@ -124,13 +118,12 @@ public class ProfileScreenController {
 		primaryStage.setTitle("Map");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
-		
 	}
+	
 	
 	/**
 	 * Method for when the table menu buttonis pressed, shows the raw tables screen.
-	 * @param event
-	 * @throws IOException
+	 * @param event Auto-generate event on button press
 	 */
 	@FXML
     void tablePressed(ActionEvent event) throws IOException {
@@ -146,7 +139,8 @@ public class ProfileScreenController {
 			primaryStage.setTitle("Table");
 			primaryStage.setScene(scene);
 			primaryStage.show();
-		} catch (Exception e){
+		} 
+		catch (Exception e){
 			Stage stage = new Stage();
 			Parent root = FXMLLoader.load(getClass().getResource("/DataLoadingScreen.fxml"));
 
@@ -160,10 +154,8 @@ public class ProfileScreenController {
 	
 	/**
 	 * Method for when the statistics menu button is pressed, shows the statistics screen.
-	 * @throws IOException 
 	 */
 	public void statPressed() throws IOException {
-		
 		Stage primaryStage = (Stage) statButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/DataViewerScreen.fxml"));
 
@@ -180,7 +172,6 @@ public class ProfileScreenController {
 	
 	/**
 	 * Method for when the account menu button is pressed, shows the profile screen.
-	 * @throws IOException 
 	 */
 	public void accountPressed() throws IOException {
 		Stage primaryStage = (Stage) accountButton.getScene().getWindow(); 
@@ -198,8 +189,7 @@ public class ProfileScreenController {
 	
 	
 	/**
-	 * Method for when the Logout button is pressed, shows the login screen and flushes the current storage.
-	 * @throws IOException 
+	 * Method for when the Logout button is pressed, shows the login screen and flushes the current storage. 
 	 */
 	public void logoutPressed() throws IOException {
 		DataFetcher exporter = new DataFetcher();
@@ -253,6 +243,8 @@ public class ProfileScreenController {
 		primaryStage.hide();
 	}
 	
+	
+	//TODO add docstring
 	@FXML
 	void initialize() {
 		user = CurrentStorage.getUser();
@@ -279,6 +271,4 @@ public class ProfileScreenController {
 		timeBadgeTooltip.setText(userTimeBadge.getDescription());
 		routesBadgeTooltip.setText(userRouteBadge.getDescription());
 	}
-	
-
 }

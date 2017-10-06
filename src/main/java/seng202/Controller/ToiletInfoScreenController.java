@@ -76,13 +76,12 @@ public class ToiletInfoScreenController {
     private Button cancelButton;
 
     private Toilet oldToilet;
-
     private Toilet newToilet;
 
 
     /**
      * Method when the ok button is pressed, hides the pop up.
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void okPressed(ActionEvent event) {
@@ -90,9 +89,10 @@ public class ToiletInfoScreenController {
     	stage.hide();
     }
     
+    
     /**
      * Method when the update button is pressed, displays screen to update the selected toilet
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void updatePressed(ActionEvent event) {
@@ -117,6 +117,7 @@ public class ToiletInfoScreenController {
     	cancelButton.setVisible(true);
     }
 
+    
     /**
      * Checks the input is able to be parsed to an Integer
      * @param s String to be checked
@@ -131,9 +132,10 @@ public class ToiletInfoScreenController {
         }
     }
     
+    
     /**
      * Method when the save button is pressed, updates the selected location
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void savePressed(ActionEvent event) {
@@ -185,13 +187,12 @@ public class ToiletInfoScreenController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
-
         	cancelPressed(event);
         }
     }
 
+    
+    //TODO add docstring
     @FXML
     void cancelPressed (ActionEvent event) {
         disabledLabel.setText("Disabled: " + String.valueOf(newToilet.getForDisabled()));
@@ -211,6 +212,7 @@ public class ToiletInfoScreenController {
     }
 
 
+    //TODO add docstring
     @FXML
     void initialize() {
         newToilet = CurrentStorage.getToiletArray().get(CurrentStorage.getToiletIndex());
@@ -236,10 +238,7 @@ public class ToiletInfoScreenController {
         assert nameLabel != null : "fx:id=\"nameLabel\" was not injected: check your FXML file 'ToiletInfoScreen.fxml'.";
         assert okButton != null : "fx:id=\"okButton\" was not injected: check your FXML file 'ToiletInfoScreen.fxml'.";
         assert unisexLabel != null : "fx:id=\"unisexLabel\" was not injected: check your FXML file 'ToiletInfoScreen.fxml'.";
-
-
     }
-
 }
 
 

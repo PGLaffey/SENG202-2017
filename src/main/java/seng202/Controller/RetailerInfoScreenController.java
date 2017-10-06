@@ -75,13 +75,12 @@ public class RetailerInfoScreenController {
     private TextField zipText;
     
     private Integer retailerIndex;
-
     private Retailer oldRetailer;
 
 
     /**
      * Method when the ok button is pressed, hides the pop up.
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void okPressed(ActionEvent event) {
@@ -89,9 +88,10 @@ public class RetailerInfoScreenController {
     	stage.hide();
     }
     
+    
     /** 
      * Method when the update button is pressed, opens screen for user to update the selected poi
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void updatePressed(ActionEvent event) {
@@ -116,6 +116,7 @@ public class RetailerInfoScreenController {
     	cancelButton.setVisible(true);
     }
     
+    
     /**
      * Checks the input is able to be parsed to a Double
      * @param s String to be checked
@@ -130,6 +131,7 @@ public class RetailerInfoScreenController {
         }
     }
 
+    
     /**
      * Checks the input is able to be parsed to an Integer
      * @param s String to be checked
@@ -144,6 +146,11 @@ public class RetailerInfoScreenController {
         }
     }
     
+    
+    /**
+     * TODO add docstring
+     * @param event Auto-generate event on button press
+     */
     @FXML
     void savePressed(ActionEvent event) {
     	
@@ -192,16 +199,16 @@ public class RetailerInfoScreenController {
                 exporter.connectDb();
                 exporter.updateLocation(oldRetailer, CurrentStorage.getRetailerArray().get(retailerIndex));
                 exporter.closeConnection();
-            } catch (Exception e) {
+            } 
+            catch (Exception e) {
                 e.printStackTrace();
             }
-
             cancelPressed(event);
-
         }
-
     }
     
+    
+    //TODO Add docstring
     @FXML
     void cancelPressed(ActionEvent event) {
     	nameLabel.setText("Name: " + CurrentStorage.getRetailerArray().get(retailerIndex).getName());
@@ -221,6 +228,7 @@ public class RetailerInfoScreenController {
     }
     
 
+    //TODO add docstring
     @FXML
     void initialize() {
         oldRetailer = new Retailer(CurrentStorage.getRetailerArray().get(CurrentStorage.getRetailerIndex()));
@@ -241,8 +249,5 @@ public class RetailerInfoScreenController {
         assert nameLabel != null : "fx:id=\"nameLabel\" was not injected: check your FXML file 'RetailerInfoScreen.fxml'.";
         assert okButton != null : "fx:id=\"okButton\" was not injected: check your FXML file 'RetailerInfoScreen.fxml'.";
         assert zipLabel != null : "fx:id=\"zipLabel\" was not injected: check your FXML file 'RetailerInfoScreen.fxml'.";
-
-
     }
-
 }

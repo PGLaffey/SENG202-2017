@@ -53,7 +53,7 @@ public class SaveRouteScreenController {
 
     /**
      * Method for when the cancel button is pressed, hides the pop up.
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void cancelButtonPressed(ActionEvent event) {
@@ -64,7 +64,7 @@ public class SaveRouteScreenController {
 
     /**
      * Method when the save button is pressed, saves the route and hides the pop up.
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void savePressed(ActionEvent event) {
@@ -75,13 +75,16 @@ public class SaveRouteScreenController {
         if (routeNameText.getText().equals("")) {
             routeNameLabel.setTextFill(Color.RED);
             allValid = false;
-        } if (routeEndText.getText().equals("")) {
+        } 
+        if (routeEndText.getText().equals("")) {
             routeEndLabel.setTextFill(Color.RED);
             allValid = false;
-        } if (routeStartText.getText().equals("")) {
+        } 
+        if (routeStartText.getText().equals("")) {
             routeStartLabel.setTextFill(Color.RED);
             allValid = false;
-        } if (allValid) {
+        } 
+        if (allValid) {
             Location start = CurrentStorage.getNewRouteStart();
             Location end = CurrentStorage.getNewRouteEnd();
             start.setName(routeStartText.getText());
@@ -98,17 +101,14 @@ public class SaveRouteScreenController {
             stage.hide();
 
             // TODO: Check if saving privately and do whatever need to do for it
-
         }
     }
 
 
+    //TODO add docstring
     @FXML
     void initialize() {
         assert cancelButton != null : "fx:id=\"cancelButton\" was not injected: check your FXML file 'SaveRouteScreen.fxml'.";
         assert saveButton != null : "fx:id=\"saveLocallyButton\" was not injected: check your FXML file 'SaveRouteScreen.fxml'.";
-
-
     }
-
 }
