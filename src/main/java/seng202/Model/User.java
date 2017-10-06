@@ -18,8 +18,6 @@ public class User {
     private double minutesCycled;
     private ArrayList<Route> routes; // TODO: Possibly delete this, added saved and favourite routes (wasnt sure if this was being used of not)
     private ArrayList<Badge> badges; // First badge is distance, second time and third route
-    private ArrayList<Route> savedRoutes = new ArrayList<Route>();
-    private ArrayList<Route> favouriteRoutes = new ArrayList<Route>();
 
 
     /**
@@ -49,13 +47,6 @@ public class User {
         badges.add(distBadge);
         badges.add(timeBadge);
         badges.add(routeBadge);
-        // For testing
-        Location s = new Location(123, 123, "start", 0);
-        Location e = new Location(234, 234, "end", 0);
-        savedRoutes.add(new Route(s, e, "saved1"));
-        savedRoutes.add(new Route(s, e, "saved2"));
-        favouriteRoutes.add(new Route(s, e, "fav1"));
-        favouriteRoutes.add(new Route(s, e, "fav2"));
     }
 
     public User(String first, String last, String username, String doB, String password, int routes, double distance, double minutes) {
@@ -77,13 +68,6 @@ public class User {
         badges.add(distBadge);
         badges.add(timeBadge);
         badges.add(routeBadge);
-        // For testing
-        Location s = new Location(123, 123, "start", 0);
-        Location e = new Location(234, 234, "end", 0);
-        savedRoutes.add(new Route(s, e, "saved1"));
-        savedRoutes.add(new Route(s, e, "saved2"));
-        favouriteRoutes.add(new Route(s, e, "fav1"));
-        favouriteRoutes.add(new Route(s, e, "fav2"));
     }
     /**
      * Getter for the users full name
@@ -184,18 +168,6 @@ public class User {
      * Increments the number of routes the user has cycled
      */
 	public void addRoute() {routesCycled += 1; }
-
-	public void setSavedRoutes(ArrayList<Route> routes) { savedRoutes = routes; }
-
-	public ArrayList<Route> getSavedRoutes() { return savedRoutes; }
-
-	public void addSavedRoutes(Route route) { savedRoutes.add(route); }
-
-	public void setFavouriteRoutes(ArrayList<Route> routes) { favouriteRoutes = routes; }
-
-	public ArrayList<Route> getFavouriteRoutes() { return favouriteRoutes; }
-
-	public void addFavouriteRoute(Route route) { favouriteRoutes.add(route); }
 
     /**
      * Overrides the .equals function in the user class so it compares key values of the class to check if the
