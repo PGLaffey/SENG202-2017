@@ -245,16 +245,18 @@ public class DataFetcher {
 	 * Updates the user's information on the database
 	 */
 	private void storeUser() {
-		User user = getUser();
-		String username = user.getUsername();
-		int routesCycled = user.getRoutesCycled();
-		double hoursCycled = user.getHours();
-		double distanceCycled = user.getDistance();
-		String stmt = "UPDATE tblUser SET NumRoutesCycled = ?, HoursCycled = ?, DistanceCycled = ? WHERE Username = ?";
-		ArrayList<String> params = new ArrayList<String>();
-		Collections.addAll(params, String.valueOf(routesCycled), String.valueOf(hoursCycled),
-				String.valueOf(distanceCycled), username);
-		runUpdate(stmt, params);
+		User user = CurrentStorage.getUser();
+		if (user != null) {
+			String username = user.getUsername();
+			int routesCycled = user.getRoutesCycled();
+			double hoursCycled = user.getHours();
+			double distanceCycled = user.getDistance();
+			String stmt = "UPDATE tblUser SET NumRoutesCycled = ?, HoursCycled = ?, DistanceCycled = ? WHERE Username = ?";
+			ArrayList<String> params = new ArrayList<String>();
+			Collections.addAll(params, String.valueOf(routesCycled), String.valueOf(hoursCycled),
+					String.valueOf(distanceCycled), username);
+			runUpdate(stmt, params);
+		}
 	}
 
 	
@@ -1005,7 +1007,7 @@ public class DataFetcher {
     	try {
     		//Tells the driver manager of jdbc to create a connection to a database of type mysql with the ip 222.152.179.135, through port 3306, named cyclrr, using user 'monitor' and password 'Team5Pass'
     		//Following line the 192.168.1.70 needs to be 125.239.188.8 if outside of Patrick's network
-    		connect = DriverManager.getConnection("jdbc:mysql://125.239.188.8:3306/cyclrr","monitor","Team5Pass");
+    		connect = DriverManager.getConnection("jdbc:mysql://192.168.1.70:3306/cyclrr","monitor","Team5Pass");
     	}
     	catch (SQLException ex) {
     		printSqlError(ex);
