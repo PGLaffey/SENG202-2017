@@ -760,6 +760,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         for (Retailer retailer : CurrentStorage.getRetailerArray()) {
                 Map.findRetailers(retailer, map);
         }
+
+
         Map.setRetailerVisible(!Map.getRetailerVisible());
     }
 
@@ -1517,13 +1519,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         }
 
         for (LatLong latLong : results.getRoutes().get(minIndex).getOverviewPath()) {
-
             nearby.addAll(Map.findNearby(latLong.getLatitude(), latLong.getLongitude()));
-            System.out.println(nearby);
-//            nearby.addAll(Map.findNearby(leg.getEndLocation().getLatitude(), leg.getEndLocation().getLongitude()));
         }
-
-        System.out.println(nearby.size());
 
         for (Location loc : nearby) {
             if (loc.getLocationType() == 0) {

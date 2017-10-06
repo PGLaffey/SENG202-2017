@@ -1,5 +1,6 @@
 package seng202.Model;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -369,7 +370,7 @@ public class Map {
     }
 
     /**
-     * Sets markers for the retailers on the map
+     * Sets markers for the retailers into a cluster
      * @param retailer retailer object to be used
      */
     public static void findRetailers(Retailer retailer, GoogleMap map) {
@@ -391,6 +392,7 @@ public class Map {
             map.addMarker(retailer.getMarker());
         }
     }
+
 
     /**
      * Method to find place of interest using the google maps API
