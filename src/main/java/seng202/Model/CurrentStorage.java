@@ -19,7 +19,7 @@ public class CurrentStorage {
     private static ArrayList<Location> generalArray = new ArrayList<Location>();
     private static ArrayList<Integer> addedGeneral = new ArrayList<Integer>();
     private static ArrayList<Coord> coordsArray = new ArrayList<Coord>();
-    private static User currentUser;
+    private static User currentUser = null;
     
     private static ArrayList<Integer> usersSavedRoutes = new ArrayList<Integer>();
     private static ArrayList<Integer> usersFavRoutes = new ArrayList<Integer>();
