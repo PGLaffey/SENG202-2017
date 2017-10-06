@@ -30,6 +30,14 @@ public class Poi extends Location {
         this.cost = cost;
     }
 
+    public Poi(Poi poi) {
+    	super(poi);
+    	this.description = poi.getDescription();
+    	this.cost = poi.getCost();
+    	this.marker = poi.getMarker();
+    }
+    
+    
     /**
      * Getter for the description of the POI
      */

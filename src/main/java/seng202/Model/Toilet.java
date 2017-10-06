@@ -23,6 +23,12 @@ public class Toilet extends Location {
         this.uniSex = uniSex;
     }
 
+    public Toilet(Toilet toilet) {
+    	super(toilet);
+    	this.forDisabled = toilet.getForDisabled();
+    	this.uniSex = toilet.getUniSex();
+    }
+    
     /**
      * Toilet contructor, creates a new instance of the toilet object using the location superclass constructor.
      * @param address The address of the toilet location.

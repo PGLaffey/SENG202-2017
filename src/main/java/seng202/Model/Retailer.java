@@ -28,6 +28,15 @@ public class Retailer extends Location {
     	this.description = description;
     }
     
+    public Retailer(Retailer retailer) {
+    	super(retailer);
+    	this.product = retailer.getProduct();
+    	this.description = retailer.getDescription();
+    	this.marker = retailer.getMarker();
+    	this.noMarker = retailer.hasNoMarker();
+    	this.coord = retailer.getCoord();
+    }
+    
     /**
      * Constructor for the retailer subclass, uses the location superclass constructor.
      * @param address The address of the retailer

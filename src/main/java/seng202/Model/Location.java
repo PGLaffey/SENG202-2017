@@ -61,6 +61,20 @@ public class Location {
         this.name = name;
         this.locationType = locationType;
     }
+    
+    //Location Location Location
+    public Location(Location location) {
+        this.latitude = location.getLatitude();
+        this.longitude = location.getLongitude();
+        this.locationType = location.getLocationType();
+        this.name = location.getName();
+        this.local = location.getLocal();
+        this.zip = location.getZip();
+        this.address = location.getAddress();
+        this.borough = location.getBorough();
+        this.secret = location.getSecret();
+        this.belongsTo = location.getOwner();
+    }
 
     public Location(double latitude, double longitude, int locationType) {
         this.latitude = latitude;
