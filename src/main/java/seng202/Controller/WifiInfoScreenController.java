@@ -209,7 +209,7 @@ public class WifiInfoScreenController {
             DataFetcher exporter = new DataFetcher();
             try {
                 exporter.connectDb();
-                exporter.updateLocation(oldWifi, CurrentStorage.getToiletArray().get(wifiIndex));
+                exporter.updateLocation(oldWifi, CurrentStorage.getWifiArray().get(wifiIndex));
                 exporter.closeConnection();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -241,7 +241,7 @@ public class WifiInfoScreenController {
 
     @FXML
     void initialize() {
-        oldWifi = CurrentStorage.getWifiArray().get(CurrentStorage.getWifiIndex());
+        oldWifi = new Wifi(CurrentStorage.getWifiArray().get(CurrentStorage.getWifiIndex()));
     	wifiIndex = CurrentStorage.getWifiIndex();
     	nameLabel.setText("Name: " + CurrentStorage.getWifiArray().get(wifiIndex).getName());
     	typeLabel.setText("Type: " + CurrentStorage.getWifiArray().get(wifiIndex).getType());

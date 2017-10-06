@@ -190,7 +190,7 @@ public class RetailerInfoScreenController {
             DataFetcher exporter = new DataFetcher();
             try {
                 exporter.connectDb();
-                exporter.updateLocation(oldRetailer, CurrentStorage.getToiletArray().get(retailerIndex));
+                exporter.updateLocation(oldRetailer, CurrentStorage.getRetailerArray().get(retailerIndex));
                 exporter.closeConnection();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -223,7 +223,7 @@ public class RetailerInfoScreenController {
 
     @FXML
     void initialize() {
-        oldRetailer = CurrentStorage.getRetailerArray().get(CurrentStorage.getRetailerIndex());
+        oldRetailer = new Retailer(CurrentStorage.getRetailerArray().get(CurrentStorage.getRetailerIndex()));
         retailerIndex = CurrentStorage.getRetailerIndex();
 
     	nameLabel.setText("Name: " + CurrentStorage.getRetailerArray().get(retailerIndex).getName());

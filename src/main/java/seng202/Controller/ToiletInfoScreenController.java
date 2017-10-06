@@ -75,9 +75,9 @@ public class ToiletInfoScreenController {
     @FXML
     private Button cancelButton;
 
-    private Integer toiletIndex;
-
     private Toilet oldToilet;
+
+    private Toilet newToilet;
 
 
     /**
@@ -97,15 +97,15 @@ public class ToiletInfoScreenController {
     @FXML
     void updatePressed(ActionEvent event) {
     	boroughText.setVisible(true);
-    	boroughText.setText(CurrentStorage.getToiletArray().get(toiletIndex).getBorough());
+    	boroughText.setText(newToilet.getBorough());
     	unisexChoice.setVisible(true);
-    	unisexChoice.setValue(CurrentStorage.getToiletArray().get(toiletIndex).getUniSex());
+    	unisexChoice.setValue(newToilet.getUniSex());
     	disabledChoice.setVisible(true);
-    	disabledChoice.setValue(CurrentStorage.getToiletArray().get(toiletIndex).getForDisabled());
+    	disabledChoice.setValue(newToilet.getForDisabled());
     	nameText.setVisible(true);
-    	nameText.setText(CurrentStorage.getToiletArray().get(toiletIndex).getName());
+    	nameText.setText(newToilet.getName());
     	zipText.setVisible(true);
-    	zipText.setText(String.valueOf(CurrentStorage.getToiletArray().get(toiletIndex).getZip()));;
+    	zipText.setText(String.valueOf(newToilet.getZip()));;
     	boroughLabel.setText("Borough: ");
     	unisexLabel.setText("Unisex: ");
     	disabledLabel.setText("Disabled: ");
@@ -167,20 +167,20 @@ public class ToiletInfoScreenController {
         }
 
         if (allValid) {
-    	    CurrentStorage.getToiletArray().get(toiletIndex).setBorough(boroughText.getText());
-        	CurrentStorage.getToiletArray().get(toiletIndex).setName(nameText.getText());
+            newToilet.setBorough(boroughText.getText());
+            newToilet.setName(nameText.getText());
         	if (!zipText.getText().equals("")) {
-        		CurrentStorage.getToiletArray().get(toiletIndex).setZip(Integer.parseInt(zipText.getText()));
+        		newToilet.setZip(Integer.parseInt(zipText.getText()));
             }
-        	CurrentStorage.getToiletArray().get(toiletIndex).setForDisabled(disabledChoice.getValue());
-            CurrentStorage.getToiletArray().get(toiletIndex).setUniSex(unisexChoice.getValue());
+            newToilet.setForDisabled(disabledChoice.getValue());
+            newToilet.setUniSex(unisexChoice.getValue());
 
         	// TODO: Update the database
 
             DataFetcher exporter = new DataFetcher();
             try {
                 exporter.connectDb();
-                exporter.updateLocation(oldToilet, CurrentStorage.getToiletArray().get(toiletIndex));
+                exporter.updateLocation(oldToilet, newToilet);
                 exporter.closeConnection();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -194,15 +194,15 @@ public class ToiletInfoScreenController {
 
     @FXML
     void cancelPressed (ActionEvent event) {
-        disabledLabel.setText("Disabled: " + String.valueOf(CurrentStorage.getToiletArray().get(toiletIndex).getForDisabled()));
+        disabledLabel.setText("Disabled: " + String.valueOf(newToilet.getForDisabled()));
         disabledChoice.setVisible(false);
-        nameLabel.setText("Name: " + CurrentStorage.getToiletArray().get(toiletIndex).getName());
+        nameLabel.setText("Name: " + newToilet.getName());
         nameText.setVisible(false);
-        unisexLabel.setText("Uni Sex: " + String.valueOf(CurrentStorage.getToiletArray().get(toiletIndex).getUniSex()));
+        unisexLabel.setText("Uni Sex: " + newToilet.getUniSex());
         unisexChoice.setVisible(false);
-        zipLabel.setText("Zip: " + CurrentStorage.getToiletArray().get(toiletIndex).getZip());
+        zipLabel.setText("Zip: " + newToilet.getZip());
         zipText.setVisible(false);
-        boroughLabel.setText("Borough: " + CurrentStorage.getToiletArray().get(toiletIndex).getBorough());
+        boroughLabel.setText("Borough: " + newToilet.getBorough());
         boroughText.setVisible(false);
         cancelButton.setVisible(false);
         saveButton.setVisible(false);
@@ -213,17 +213,17 @@ public class ToiletInfoScreenController {
 
     @FXML
     void initialize() {
+        newToilet = CurrentStorage.getToiletArray().get(CurrentStorage.getToiletIndex());
+        oldToilet = new Toilet(newToilet);
 
-        oldToilet = CurrentStorage.getToiletArray().get(CurrentStorage.getToiletIndex());
-    	toiletIndex = CurrentStorage.getToiletIndex();
-    	disabledLabel.setText("Disabled: " + String.valueOf(CurrentStorage.getToiletArray().get(toiletIndex).getForDisabled()));
-    	latLabel.setText("Latitude: " + CurrentStorage.getToiletArray().get(toiletIndex).getLatitude());
-    	longLabel.setText("Longitude " + CurrentStorage.getToiletArray().get(toiletIndex).getLongitude());
-    	nameLabel.setText("Name: " + CurrentStorage.getToiletArray().get(toiletIndex).getName());
-    	unisexLabel.setText("Uni Sex: " + String.valueOf(CurrentStorage.getToiletArray().get(toiletIndex).getUniSex()));
-    	zipLabel.setText("Zip: " + CurrentStorage.getToiletArray().get(toiletIndex).getZip());
-    	boroughLabel.setText("Borough: " + CurrentStorage.getToiletArray().get(toiletIndex).getBorough());
-    	addressLabel.setText("Address: " + CurrentStorage.getToiletArray().get(toiletIndex).getAddress());
+    	disabledLabel.setText("Disabled: " + String.valueOf(newToilet.getForDisabled()));
+    	latLabel.setText("Latitude: " + newToilet.getLatitude());
+    	longLabel.setText("Longitude " + newToilet.getLongitude());
+    	nameLabel.setText("Name: " + newToilet.getName());
+    	unisexLabel.setText("Uni Sex: " + newToilet.getUniSex());
+    	zipLabel.setText("Zip: " + newToilet.getZip());
+    	boroughLabel.setText("Borough: " + newToilet.getBorough());
+    	addressLabel.setText("Address: " + newToilet.getAddress());
     	
     	ObservableList<Boolean> disabledOptions = FXCollections.observableArrayList(true, false);
     	disabledChoice.setItems(disabledOptions);

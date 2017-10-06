@@ -71,12 +71,16 @@ public class DataFetcher {
 			switch(type) {
 			case 0:
 				updateToilet((Toilet) newLocation, Integer.parseInt(location.get(7)));
+				break;
 			case 1:
 				updatePoi((Poi) newLocation, Integer.parseInt(location.get(8)));
+				break;
 			case 2:
 				updateRetailer((Retailer) newLocation, Integer.parseInt(location.get(9)));
+				break;
 			case 3:
-				 	updateWifi((Wifi) newLocation, Integer.parseInt(location.get(10)));
+				updateWifi((Wifi) newLocation, Integer.parseInt(location.get(10)));
+				break;
 			}
     	}
     	else {
@@ -122,6 +126,8 @@ public class DataFetcher {
      * @param typeID The ID in the database of the toilet location
      */
     private void updateToilet(Toilet toilet, int typeID) {
+    	System.out.println(toilet.getForDisabled());
+    	System.out.println(toilet.getUniSex());
     	int isDisabled = 0;
     	int unisex = 0;
     	if (toilet.getForDisabled()) {
@@ -132,7 +138,7 @@ public class DataFetcher {
     	}
     	String stmt = "UPDATE tblToilets SET IsDisabled = ?, MixedGender = ? WHERE ToiletID = ?";
 		ArrayList<String> params = new ArrayList<String>();
-		Collections.addAll(params, String.valueOf(isDisabled), String.valueOf(unisex));
+		Collections.addAll(params, String.valueOf(isDisabled), String.valueOf(unisex), String.valueOf(typeID));
 		runUpdate(stmt, params);
     }
     

@@ -197,7 +197,7 @@ public class PoiInfoScreenController {
             DataFetcher exporter = new DataFetcher();
             try {
                 exporter.connectDb();
-                exporter.updateLocation(oldPoi, CurrentStorage.getToiletArray().get(poiIndex));
+                exporter.updateLocation(oldPoi, CurrentStorage.getPoiArray().get(poiIndex));
                 exporter.closeConnection();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -227,7 +227,7 @@ public class PoiInfoScreenController {
     
     @FXML
     void initialize() {
-        oldPoi = CurrentStorage.getPoiArray().get(CurrentStorage.getPoiIndex());
+        oldPoi = new Poi(CurrentStorage.getPoiArray().get(CurrentStorage.getPoiIndex()));
         poiIndex = CurrentStorage.getPoiIndex();;
     	costLabel.setText("Cost: $" + CurrentStorage.getPoiArray().get(poiIndex).getCost());
     	descriptionLabel.setText("Description: " + CurrentStorage.getPoiArray().get(poiIndex).getDescription());
