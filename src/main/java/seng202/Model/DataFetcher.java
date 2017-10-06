@@ -250,11 +250,55 @@ public class DataFetcher {
 		storeNewGeneral();
 		storeUser();
 		storeNewRoutes();
+		checkSavedRoutes(CurrentStorage.getSavedRoutes(), 1);
+		checkSavedRoutes(CurrentStorage.getFavRoutes(), 2);
 	}
 
+	private void checkSavedRoutes(ArrayList<Integer> savedList, int listNo) {
+		int count = 0;
+		ArrayList<Route> routes = CurrentStorage.getRouteArray();
+		boolean found = false;
+		int routeID = 0;
+		int checkCount = 0;
+		int userID = findUser(CurrentStorage.getUser());
+    	String stmt = "SELECT RouteID FROM tblUsersRoutes WHERE UserID = ? AND ListID = ?";
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, String.valueOf(userID), String.valueOf(listNo));
+		ArrayList<ArrayList<String>> saved = runQuery(stmt, params);
+		while (count < savedList.size()) {
+			checkCount = 0;
+			found = false;
+			routeID = findRoute(routes.get(savedList.get(count)));
+			if (routeID != 0) {
+				while (!found && checkCount < saved.size()) {
+					if (routeID == Integer.parseInt(saved.get(checkCount).get(0))) {
+						found = true;
+					}
+					checkCount += 1;
+				}
+				if (!found) {
+					addSavedRoute(userID, routeID, listNo);
+				}
+			}
+		}
+	}
+	
+	
+	private void addSavedRoute(int userID, int routeID, int listID) {
+    	String stmt = "INSERT INTO tblUsersRoutes (UserID, RouteID, ListID) VALUES (?, ?, ?)";
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, String.valueOf(userID), String.valueOf(routeID), String.valueOf(listID));
+		runUpdate(stmt, params);
+	}
 	
 	private void storeNewRoutes() {
-		
+		int count = 0;
+		ArrayList<Integer> newRoutes = CurrentStorage.getNewRoutes();
+		ArrayList<Route> routes = CurrentStorage.getRouteArray();
+		while (count < newRoutes.size()) {
+			addRoute(routes.get(newRoutes.get(count)));
+			count += 1;
+		}
 	}
 	
 	
@@ -369,8 +413,10 @@ public class DataFetcher {
 		else {
 			gender = "Female";
 		}
+		double distance = output.getDouble(12);
 		Route route = new Route(bikeID, start, end, name, gender);
 		route.setSecret(secret);
+		route.setDistance(distance);
 		return route;
 	}
 	
@@ -755,42 +801,69 @@ public class DataFetcher {
      * @param route Route to add into the external database.
      */
     public void addRoute(Route route) {
-    	String name = route.getName();
-    	Location start = route.getStart();
-    	Location end = route.getEnd();
-    	int secret = 0;
-    	//Checks if the start and end locations exist in the database.
-    	//If they do not it will create them.
-    	int startID = findLocation(start);
-    	int endID = findLocation(end);
-
-    	if (startID == 0) {
-    		addLocation(start);
-    		startID = findLocation(start);
-    	}
-    	if (endID == 0) {
-    		addLocation(end);
-    		endID = findLocation(end);
-    	}
-    	if (route.getSecret()) {
-    		secret = 1;
-    	}
-    	String owner = null;
-    	if (route.getOwner() != null) {
-			owner = String.valueOf(findUser(route.getOwner()));
-			if (owner == "0") {
-				owner = null;
+    	int routeID = findRoute(route);
+    	if (routeID == 0) {
+	    	String name = route.getName();
+	    	Location start = route.getStart();
+	    	Location end = route.getEnd();
+	    	int secret = 0;
+	    	double distance = route.getDistance();
+	    	//Checks if the start and end locations exist in the database.
+	    	//If they do not it will create them.
+	    	int startID = findLocation(start);
+	    	int endID = findLocation(end);
+	
+	    	if (startID == 0) {
+	    		addLocation(start);
+	    		startID = findLocation(start);
+	    	}
+	    	if (endID == 0) {
+	    		addLocation(end);
+	    		endID = findLocation(end);
+	    	}
+	    	if (route.getSecret()) {
+	    		secret = 1;
+	    	}
+	    	String owner = null;
+	    	if (route.getOwner() != null) {
+				owner = String.valueOf(findUser(route.getOwner()));
+				if (owner == "0") {
+					owner = null;
+				}
 			}
-		}
-    	String stmt = "INSERT INTO tblRoutes "
-				+ "(StartID, EndID, Public, User, Name, BikeID, Gender) VALUES "
-				+ "(?, ?, ?, ?, ?)";
-		ArrayList<String> params = new ArrayList<String>();
-		Collections.addAll(params, String.valueOf(startID), String.valueOf(endID), String.valueOf(secret),
-				owner, name, route.getBikeID(), route.getGender().substring(0, 1));
-		runUpdate(stmt, params);
+	    	String stmt = "INSERT INTO tblRoutes "
+					+ "(StartID, EndID, Public, User, Name, BikeID, Gender, Distance) VALUES "
+					+ "(?, ?, ?, ?, ?, ?)";
+			ArrayList<String> params = new ArrayList<String>();
+			Collections.addAll(params, String.valueOf(startID), String.valueOf(endID), String.valueOf(secret),
+					owner, name, route.getBikeID(), route.getGender().substring(0, 1), String.valueOf(distance));
+			runUpdate(stmt, params);
+    	}
+    	else {
+    		System.out.println("Route already exisits in the database. Did you mean to update it?");
+    	}
     }
 
+    
+    private int findRoute(Route route) {
+    	int startID = findLocation(route.getStart());
+    	if (startID == 0) {
+    		return 0;
+    	}
+    	int endID = findLocation(route.getEnd());
+    	if (endID == 0) {
+    		return 0;
+    	}
+    	String name = route.getName();
+    	String stmt = "SELECT RouteID FROM tblLocations WHERE StartID = ? AND EndID = ? AND Name = ?";
+		ArrayList<String> params = new ArrayList<String>();
+		Collections.addAll(params, String.valueOf(startID), String.valueOf(endID), name);
+		if (runQuery(stmt, params).isEmpty()) {
+			return 0;
+		}
+    	return Integer.parseInt(runQuery(stmt, params).get(0).get(0));
+    }
+    
     
     /**
      * 
@@ -812,12 +885,12 @@ public class DataFetcher {
     
     
     /**
-     * Adds a Location to the database based on what type of location it is
-     * @param location The Location to be added to the database
-     */
-    public void addLocation(Location location) {
-    	int locationID = findLocation(location);
-    	if (locationID == 0) {
+	 * Adds a Location to the database based on what type of location it is
+	 * @param location The Location to be added to the database
+	 */
+	public void addLocation(Location location) {
+		int locationID = findLocation(location);
+		if (locationID == 0) {
 	    	if (location.getClass() == Toilet.class) {
 	    		addToilet((Toilet) location);
 	    	}
@@ -833,14 +906,14 @@ public class DataFetcher {
 	    	else {
 	    		insertLocation(location, null);
 	    	}
-    	}
-    	else {
-    		System.out.println("Error: The location is already in the database. Did you mean to update it?");
-    	}
-    }
-    
-    
-    /**
+		}
+		else {
+			System.out.println("Error: The location is already in the database. Did you mean to update it?");
+		}
+	}
+
+
+	/**
      * Adds a Wifi to tblWifi in the database
      * @param wifi The Wifi to be added to the database
      */
