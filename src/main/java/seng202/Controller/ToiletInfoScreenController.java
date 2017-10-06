@@ -239,6 +239,7 @@ public class ToiletInfoScreenController {
         controller.getMapView().addMapReadyListener(new MapReadyListener() {
             @Override
             public void mapReady() {
+                controller.getMapView().getMap().clearMarkers();
                 Map.findToilets(toilet, controller.getMapView().getMap());
                 controller.getMapView().getMap().setCenter(new LatLong(toilet.getLatitude(), toilet.getLongitude()));
                 controller.getMapView().getMap().addMarker(

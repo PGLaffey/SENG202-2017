@@ -254,6 +254,7 @@ public class WifiInfoScreenController {
         controller.getMapView().addMapReadyListener(new MapReadyListener() {
             @Override
             public void mapReady() {
+                controller.getMapView().getMap().clearMarkers();
                 Map.findWifi(wifi, controller.getMapView().getMap());
                 controller.getMapView().getMap().setCenter(new LatLong(wifi.getLatitude(), wifi.getLongitude()));
                 controller.getMapView().getMap().addMarker(

@@ -488,9 +488,9 @@ public class DataFetcher {
 			typeID = output.getInt(11);
 			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblWifi WHERE WifiID = " + typeID + "");
 			typeOutput.next();
-			ssid = typeOutput.getString(2);
+			ssid = typeOutput.getString(4);
 			provider = typeOutput.getString(3);
-			wifi_type = typeOutput.getString(4);
+			wifi_type = typeOutput.getString(2);
 			Wifi wifi = new Wifi(latitude, longitude, name, wifi_type,  provider, ssid);
 			if (borough != null) {
 				wifi.setBorough(borough);

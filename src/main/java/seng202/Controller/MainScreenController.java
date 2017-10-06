@@ -1475,24 +1475,13 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                         Map.getEndLoc().getLatitude() + ", " + Map.getEndLoc().getLongitude(),
                         mapView, directionsService, this, directionsPane, directionsRenderer);
 
-                latLongDistanceLabel.setText("Distance: " + distance(CurrentStorage.getNewRouteStart().getLatitude(), CurrentStorage.getNewRouteStart().getLongitude(),
+                updateDistanceLabel(Map.getDistance(CurrentStorage.getNewRouteStart().getLatitude(), CurrentStorage.getNewRouteStart().getLongitude(),
                         CurrentStorage.getNewRouteEnd().getLatitude(),
-                         CurrentStorage.getNewRouteEnd().getLongitude()) + "Km");
-                //Map.resetStartMarker();
-                //Map.resetEndMarker();
+                         CurrentStorage.getNewRouteEnd().getLongitude())/1000);
+                Map.resetStartMarker();
+                Map.resetEndMarker();
             }
         });
-    }
-
-    private String distance(double lat1, double lon1, double lat2, double lon2) {
-        double theta = lon1 - lon2;
-        double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2)) + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.toRadians(theta));
-        dist = Math.acos(dist);
-        dist = Math.toDegrees(dist);
-        dist = dist * 60 * 1.1515;
-
-        dist = dist * 1.609344;
-        return String.format("%.2f", dist);
     }
 
     public WebEngine getMapWebEngine() { return mapEngine; }
@@ -1511,10 +1500,27 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
         //This section finds the nearby locations.
         ArrayList<Location> nearby = new ArrayList<Location>();
-        for (DirectionsLeg leg : results.getRoutes().get(0).getLegs()) {
-            nearby.addAll(Map.findNearby(leg.getStartLocation().getLatitude(), leg.getStartLocation().getLongitude()));
+        map.clearMarkers();
+        double minDistance = Double.MAX_VALUE;
+        int minIndex = 0;
+        int index = 0;
+        for (DirectionsRoute route : results.getRoutes()) {
+            double distance = 0;
+            for (DirectionsLeg leg : route.getLegs()) {
+                distance += leg.getDistance().getValue();
+            }
+            if (distance < minDistance) {
+                minDistance = distance;
+                minIndex = index;
+            }
+            index++;
+        }
+
+        for (LatLong latLong : results.getRoutes().get(minIndex).getOverviewPath()) {
+
+            nearby.addAll(Map.findNearby(latLong.getLatitude(), latLong.getLongitude()));
             System.out.println(nearby);
-            nearby.addAll(Map.findNearby(leg.getEndLocation().getLatitude(), leg.getEndLocation().getLongitude()));
+//            nearby.addAll(Map.findNearby(leg.getEndLocation().getLatitude(), leg.getEndLocation().getLongitude()));
         }
 
         System.out.println(nearby.size());

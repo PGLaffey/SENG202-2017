@@ -234,6 +234,7 @@ public class PoiInfoScreenController {
         controller.getMapView().addMapReadyListener(new MapReadyListener() {
             @Override
             public void mapReady() {
+                controller.getMapView().getMap().clearMarkers();
                 Map.findPoi(poi, controller.getMapView().getMap());
                 controller.getMapView().getMap().setCenter(new LatLong(poi.getLatitude(), poi.getLongitude()));
                 controller.getMapView().getMap().addMarker(

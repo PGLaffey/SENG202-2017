@@ -166,6 +166,7 @@ public class RetailerInfoScreenController {
         controller.getMapView().addMapReadyListener(new MapReadyListener() {
             @Override
             public void mapReady() {
+                controller.getMapView().getMap().clearMarkers();
                 Map.findRetailers(retailer, controller.getMapView().getMap());
                 controller.getMapView().getMap().setCenter(new LatLong(retailer.getLatitude(), retailer.getLongitude()));
                 controller.getMapView().getMap().addMarker(
