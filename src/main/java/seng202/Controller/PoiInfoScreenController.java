@@ -83,9 +83,10 @@ public class PoiInfoScreenController {
 
     @FXML
     private Button showOnMapBtn;
-    
-    private Integer poiIndex;
+
     private Poi oldPoi;
+
+    private Poi newPoi;
 
 
     /**
@@ -106,15 +107,15 @@ public class PoiInfoScreenController {
     @FXML
     void updatePressed(ActionEvent event) {
     	boroughText.setVisible(true);
-    	boroughText.setText(CurrentStorage.getPoiArray().get(poiIndex).getBorough());
+    	boroughText.setText(newPoi.getBorough());
     	costText.setVisible(true);
-    	costText.setText(String.valueOf(CurrentStorage.getPoiArray().get(poiIndex).getCost()));
+    	costText.setText(String.valueOf(newPoi.getCost()));
     	descriptionText.setVisible(true);
-    	descriptionText.setText(CurrentStorage.getPoiArray().get(poiIndex).getDescription());
+    	descriptionText.setText(newPoi.getDescription());
     	nameText.setVisible(true);
-    	nameText.setText(CurrentStorage.getPoiArray().get(poiIndex).getName());
+    	nameText.setText(newPoi.getName());
     	zipText.setVisible(true);
-    	zipText.setText(String.valueOf(CurrentStorage.getPoiArray().get(poiIndex).getZip()));
+    	zipText.setText(String.valueOf(newPoi.getZip()));
     	boroughLabel.setText("Borough: ");
     	costLabel.setText("Cost: ");
     	descriptionLabel.setText("Description: ");
@@ -193,20 +194,20 @@ public class PoiInfoScreenController {
     	}
 
         if (allValid) {
-            CurrentStorage.getPoiArray().get(poiIndex).setBorough(boroughText.getText());
-            CurrentStorage.getPoiArray().get(poiIndex).setName(nameText.getText());
+            newPoi.setBorough(boroughText.getText());
+            newPoi.setName(nameText.getText());
         	if (!zipText.getText().equals("")) {
-                CurrentStorage.getPoiArray().get(poiIndex).setZip(Integer.parseInt(zipText.getText()));
+                newPoi.setZip(Integer.parseInt(zipText.getText()));
             }
-            CurrentStorage.getPoiArray().get(poiIndex).setDescription(descriptionText.getText());
-            CurrentStorage.getPoiArray().get(poiIndex).setCost(Double.parseDouble(costText.getText()));
+            newPoi.setDescription(descriptionText.getText());
+            newPoi.setCost(Double.parseDouble(costText.getText()));
 
         	// TODO: Update database
 
             DataFetcher exporter = new DataFetcher();
             try {
                 exporter.connectDb();
-                exporter.updateLocation(oldPoi, CurrentStorage.getPoiArray().get(poiIndex));
+                exporter.updateLocation(oldPoi, newPoi);
                 exporter.closeConnection();
             } 
             catch (Exception e) {
@@ -220,15 +221,15 @@ public class PoiInfoScreenController {
     //TODO add docstring
     @FXML
     void cancelPressed(ActionEvent event) {
-        costLabel.setText("Cost: $" + CurrentStorage.getPoiArray().get(poiIndex).getCost());
+        costLabel.setText("Cost: $" + newPoi.getCost());
         costText.setVisible(false);
-        descriptionLabel.setText("Description: " + CurrentStorage.getPoiArray().get(poiIndex).getDescription());
+        descriptionLabel.setText("Description: " + newPoi.getDescription());
         descriptionText.setVisible(false);
-        nameLabel.setText("Name: " + CurrentStorage.getPoiArray().get(poiIndex).getName());
+        nameLabel.setText("Name: " + newPoi.getName());
         nameText.setVisible(false);
-        zipLabel.setText("Zip: " + CurrentStorage.getPoiArray().get(poiIndex).getZip());
+        zipLabel.setText("Zip: " + newPoi.getZip());
         zipText.setVisible(false);
-        boroughLabel.setText("Borough: " + CurrentStorage.getPoiArray().get(poiIndex).getBorough());
+        boroughLabel.setText("Borough: " + newPoi.getBorough());
         boroughText.setVisible(false);
         cancelButton.setVisible(false);
         saveButton.setVisible(false);
@@ -238,7 +239,7 @@ public class PoiInfoScreenController {
 
     @FXML
     void showPoiOnMap(ActionEvent event) throws IOException {
-        Poi poi = CurrentStorage.getPoiArray().get(poiIndex);
+        Poi poi = newPoi;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
         Parent root = loader.load();
 
@@ -281,16 +282,16 @@ public class PoiInfoScreenController {
     //TODO add docstring
     @FXML
     void initialize() {
-        oldPoi = new Poi(CurrentStorage.getPoiArray().get(CurrentStorage.getPoiIndex()));
-        poiIndex = CurrentStorage.getPoiIndex();;
-    	costLabel.setText("Cost: $" + CurrentStorage.getPoiArray().get(poiIndex).getCost());
-    	descriptionLabel.setText("Description: " + CurrentStorage.getPoiArray().get(poiIndex).getDescription());
-    	latLabel.setText("Latitude: " + CurrentStorage.getPoiArray().get(poiIndex).getLatitude());
-    	longLabel.setText("Longitude: " + CurrentStorage.getPoiArray().get(poiIndex).getLongitude());
-    	nameLabel.setText("Name: " + CurrentStorage.getPoiArray().get(poiIndex).getName());
-    	zipLabel.setText("Zip: " + CurrentStorage.getPoiArray().get(poiIndex).getZip());
-    	boroughLabel.setText("Borough: " + CurrentStorage.getPoiArray().get(poiIndex).getBorough());
-    	addressLabel.setText("Address: " + CurrentStorage.getPoiArray().get(poiIndex).getAddress());
+        newPoi = CurrentStorage.getPoiArray().get(CurrentStorage.getPoiIndex());
+        oldPoi = new Poi(newPoi);
+    	costLabel.setText("Cost: $" + newPoi.getCost());
+    	descriptionLabel.setText("Description: " + newPoi.getDescription());
+    	latLabel.setText("Latitude: " + newPoi.getLatitude());
+    	longLabel.setText("Longitude: " + newPoi.getLongitude());
+    	nameLabel.setText("Name: " + newPoi.getName());
+    	zipLabel.setText("Zip: " + newPoi.getZip());
+    	boroughLabel.setText("Borough: " + newPoi.getBorough());
+    	addressLabel.setText("Address: " + newPoi.getAddress());
     	
         assert costLabel != null : "fx:id=\"costLabel\" was not injected: check your FXML file 'PoiInfoScreen.fxml'.";
         assert descriptionLabel != null : "fx:id=\"descriptionLabel\" was not injected: check your FXML file 'PoiInfoScreen.fxml'.";
