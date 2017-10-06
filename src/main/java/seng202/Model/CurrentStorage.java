@@ -36,7 +36,9 @@ public class CurrentStorage {
     private static Location newRouteStart;
     private static Location newRouteEnd;
     
-    
+    public static ArrayList<Integer> getNewRoutes() {
+    	return addedRoutes;
+    }
     
     public static ArrayList<Integer> getSavedRoutes() {
     	return usersSavedRoutes;

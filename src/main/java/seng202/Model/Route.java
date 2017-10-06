@@ -77,6 +77,10 @@ public class Route {
         via3 = null;
     }
 
+    public void setDistance(double distance) {
+    	this.distance = distance;
+    }
+    
     public User getOwner() {
     	return owner;
     }
