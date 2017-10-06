@@ -1,7 +1,10 @@
 package seng202.Controller;
 
 import com.lynden.gmapsfx.MapReadyListener;
+import com.lynden.gmapsfx.javascript.object.Animation;
 import com.lynden.gmapsfx.javascript.object.LatLong;
+import com.lynden.gmapsfx.javascript.object.Marker;
+import com.lynden.gmapsfx.javascript.object.MarkerOptions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,13 +15,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import seng202.Model.CurrentStorage;
-import seng202.Model.Map;
-import seng202.Model.Wifi;
+import seng202.Model.*;
 import seng202.team5.Main;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -254,6 +256,25 @@ public class WifiInfoScreenController {
             public void mapReady() {
                 Map.findWifi(wifi, controller.getMapView().getMap());
                 controller.getMapView().getMap().setCenter(new LatLong(wifi.getLatitude(), wifi.getLongitude()));
+                controller.getMapView().getMap().addMarker(
+                        new Marker(
+                                new MarkerOptions().animation(Animation.DROP)
+                                        .position(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
+                        )
+                );
+                ArrayList<Location> nearby = Map.findNearby(wifi.getLatitude(), wifi.getLongitude());
+
+                for (Location loc : nearby) {
+                    if (loc.getLocationType() == 0) {
+                        Map.findToilets((Toilet) loc, controller.getMapView().getMap());
+                    } else if (loc.getLocationType() == 1) {
+                        Map.findPoi((Poi) loc, controller.getMapView().getMap());
+                    } else if (loc.getLocationType() == 2) {
+                        Map.findRetailers((Retailer) loc, controller.getMapView().getMap());
+                    } else if (loc.getLocationType() == 3) {
+                        Map.findWifi((Wifi) loc, controller.getMapView().getMap());
+                    }
+                }
             }
         });
         Main.getStage().show();
