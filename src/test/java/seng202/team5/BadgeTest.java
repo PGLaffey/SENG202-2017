@@ -135,7 +135,7 @@ public class BadgeTest extends TestCase {
         routesBadge.setValue(158);
         routesBadge.setLevel(5);
         String strRemaining = routesBadge.getStrRemaining();
-        assertEquals("42 trips", strRemaining);
+        assertEquals("42 routes", strRemaining);
     }
 
 
@@ -246,7 +246,7 @@ public class BadgeTest extends TestCase {
     @Test
     public void testUpdateDescriptionZero() {
         routesBadge.updateDescription();
-        String check = "You don't have a Routes badge yet.\nTake 2 trips to earn your first one!";
+        String check = "You don't have a Routes badge yet.\nTake 2 routes to earn your first one!";
         assertEquals(check, routesBadge.getDescription());
     }
 

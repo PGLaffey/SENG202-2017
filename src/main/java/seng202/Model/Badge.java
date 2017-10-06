@@ -11,7 +11,7 @@ public class Badge{
     private String filePath = "images/Badges/";
     private String[] types = {"Distance","Time","Routes"}; //Badge types array
     private int[][] requirements = {{0,2000,10000,50000,100000,200000,500000, MAX_VALUE},{0,120,600,3000,6000,12000,30000, MAX_VALUE},{0,2,5,10,50,100,200, MAX_VALUE}}; //Requirements for each level of a badge, arranged [type index from types array][level]
-    private String[] units = {"metres","minutes","trips"}; //Units for each badge type, arranged [type index from types array]
+    private String[] units = {"metres","minutes","routes"}; //Units for each badge type, arranged [type index from types array]
     private String[] methods = {"Travel","Cycle","Take"}; //Method of gaining each badge type, [type index from types array]
     private int remaining = 0; //Num remaining units until next level
 
@@ -202,6 +202,40 @@ public class Badge{
             strRemaining = Integer.toString(remaining) + " " + units[getBadgeTypeIndex()];
         }
         return strRemaining;
+    }
+
+
+    public String achievedString() {
+        String achievedString = "";
+        switch(units[getBadgeTypeIndex()]) {
+            case "minutes":
+                if (getValue() < 60) {
+                    achievedString += Integer.toString(getValue()) + " minutes";
+                }
+                else {
+                    int hours = getValue() / 60;
+                    int minutes = getValue() - (hours * 60);
+                    achievedString += Integer.toString(hours) + " hours";
+                    if (minutes > 0) {
+                        achievedString += " and " + Integer.toString(minutes) + " minutes";
+                    }
+                }
+                break;
+            case "metres":
+                if (getValue() < 1000) {
+                    achievedString += Integer.toString(getValue()) + " metres";
+                }
+                else {
+                    int kilometres = getValue() / 1000;
+                    int metres = getValue() - (kilometres * 1000);
+                    achievedString += Integer.toString(kilometres) + " kilometres";
+                    if (metres > 0) {
+                        achievedString += " and " + Integer.toString(metres) + " metres";
+                    }
+                }
+                break;
+        }
+        return achievedString;
     }
 
 
