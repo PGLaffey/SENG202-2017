@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
@@ -1370,12 +1371,24 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	ArrayList<Route> savedRoutes = CurrentStorage.getUser().getSavedRoutes();
 
     	for (Route route : favRoutes) {
-    	    // TODO: add to favourite routes menu
-            favouriteRoutesMenu.getItems().add(new MenuItem(route.getName()));
+            MenuItem menuItem = new MenuItem(route.getName());
+            menuItem.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+
+                }
+            });
+            favouriteRoutesMenu.getItems().add(menuItem);
         }
 
         for (Route route : savedRoutes) {
-    	    //TODO: add to to saved routes menu
+    	    MenuItem menuItem = new MenuItem(route.getName());
+    	    menuItem.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+
+                }
+            });
             savedRoutesMenu.getItems().add(new MenuItem(route.getName()));
         }
 
