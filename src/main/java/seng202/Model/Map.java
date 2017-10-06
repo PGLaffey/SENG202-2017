@@ -224,21 +224,9 @@ public class Map {
 
             MarkerOptions markOptns = new MarkerOptions()
                     .animation(Animation.DROP)
-                    .position(latLong);
+                    .position(latLong)
+                    .title(locationName);
 
-            switch(givenLocation.getLocationType()) {
-                case 0:
-                    markOptns.icon("http://google.com/mapfiles/ms/micons/green-dot");
-                    break;
-                //case 2:
-                    //markOptns.icon("http://google.com/mapfiles/ms/micons/green-dot");
-                    //break;
-                case 3:
-                    markOptns.icon("http://google.com/mapfiles/ms/micons/green-dot");
-                    break;
-                default:
-                    break;
-            }
             map.addMarker(new Marker(markOptns));
             map.setCenter(latLong);
     }
@@ -311,21 +299,6 @@ public class Map {
     }
 
     /**
-     * Overloaded method to find a route given two LatLongs
-     * @param startLoc - Start location in a LatLong object
-     * @param endLoc - End location in a LatLong object
-     * @param mapView - GoogleMapView object from the GMapsFX wrapper classes
-     * @param service - DirectionsService object from the GMapsFX wrapper classes
-     * @param callback - A DirectionsServiceCallback item to return the results to
-     * @param pane - A DirectionsPane object from the GMapsFX wrapper classes
-     */
-    public static void findRoute(LatLong startLoc, LatLong endLoc, GoogleMapView mapView, DirectionsService service,
-                                 DirectionsServiceCallback callback, DirectionsPane pane) {
-        DirectionsRequest request = new DirectionsRequest(startLoc, endLoc, TravelModes.BICYCLING);
-        service.getRoute(request, callback, new DirectionsRenderer(true, mapView.getMap(), pane));
-    }
-
-    /**
      * Finds a given route on the map
      * @param route - The route to find
      * @param mapView - the mapView to render the route on.
@@ -361,6 +334,20 @@ public class Map {
         wifi.setCircle(new Circle(circleOptns));
         map.addMapShape(wifi.getCircle());
 
+    }
+
+    /**
+     * Sets marker for the toilets on the map
+     * @param toilet - Toilet object to find
+     * @param map - map to place marker on
+     */
+    public static void findToilets(Toilet toilet, GoogleMap map) {
+        MarkerOptions toiletMarkOptns = new MarkerOptions().animation(Animation.DROP)
+                .label(toilet.getName() + "\n" + toilet.getAddress())
+                .position(new LatLong(toilet.getLatitude(), toilet.getLongitude()))
+                .visible(true);
+        Marker toiletMark = new Marker(toiletMarkOptns);
+        map.addMarker(toiletMark);
     }
 
     /**
