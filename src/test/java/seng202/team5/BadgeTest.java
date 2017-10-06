@@ -1,5 +1,6 @@
 package seng202.team5;
 
+
 import org.junit.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -8,10 +9,12 @@ import seng202.Model.Badge;
 
 import static java.lang.Integer.MAX_VALUE;
 
+
 public class BadgeTest extends TestCase {
     private Badge distanceBadge;
     private Badge timeBadge;
     private Badge routesBadge;
+
 
     /**
      * @param testName The name of the test
@@ -21,6 +24,7 @@ public class BadgeTest extends TestCase {
         super(testName);
     }
 
+
     /**
      * @return the test suite that the test belongs to.
      */
@@ -28,6 +32,7 @@ public class BadgeTest extends TestCase {
     {
         return new TestSuite(BadgeTest.class);
     }
+
 
     /**
      * Sets up a new dataFetcher before every test
@@ -38,9 +43,6 @@ public class BadgeTest extends TestCase {
         routesBadge = new Badge("Routes");
     }
 
-    /*
-     * Group of tests for testing getStrRemaining on a distance badge
-     */
 
     /**
      * Test to check the 0 boundary case (same test for all badge types)
@@ -51,6 +53,7 @@ public class BadgeTest extends TestCase {
         String strRemaining = distanceBadge.getStrRemaining();
         assertEquals("8 kilometres", strRemaining);
     }
+
 
     /**
      * Test to check kilometres only conditional
@@ -63,6 +66,7 @@ public class BadgeTest extends TestCase {
         assertEquals("70 kilometres", strRemaining);
     }
 
+
     /**
      * Test to check metres only conditional
      */
@@ -74,6 +78,7 @@ public class BadgeTest extends TestCase {
         assertEquals("357 metres", strRemaining);
     }
 
+
     /**
      * Test to check else conditional
      */
@@ -82,12 +87,9 @@ public class BadgeTest extends TestCase {
         distanceBadge.setValue(11742);
         distanceBadge.setLevel(2);
         String strRemaining = distanceBadge.getStrRemaining();
-        assertEquals("38 kilometres & 258 metres", strRemaining);
+        assertEquals("38 kilometres and 258 metres", strRemaining);
     }
 
-    /*
-     * Group of tests to check getStrRemaining with a time badge
-     */
 
     /**
      * Test to check hours only conditional
@@ -99,6 +101,7 @@ public class BadgeTest extends TestCase {
         String strRemaining = timeBadge.getStrRemaining();
         assertEquals("8 hours", strRemaining);
     }
+
 
     /**
      * Test to check minutes only conditional
@@ -120,7 +123,7 @@ public class BadgeTest extends TestCase {
         timeBadge.setValue(670);
         timeBadge.setLevel(2);
         String strRemaining = timeBadge.getStrRemaining();
-        assertEquals("38 hours & 50 minutes", strRemaining);
+        assertEquals("38 hours and 50 minutes", strRemaining);
     }
 
 
@@ -134,6 +137,7 @@ public class BadgeTest extends TestCase {
         String strRemaining = routesBadge.getStrRemaining();
         assertEquals("42 trips", strRemaining);
     }
+
 
     /**
      * Test to check getStrRemaining with level 6 boundary case
@@ -156,6 +160,7 @@ public class BadgeTest extends TestCase {
         assertTrue(routesBadge.getName().equals("Routes badge, level 5"));
     }
 
+
     /**
      * Test for updateRemaining for 0 border case
      */
@@ -167,6 +172,7 @@ public class BadgeTest extends TestCase {
         assertTrue(distanceBadge.getRemaining() == 50000);
     }
 
+
     /**
      * Test for updateRemaining for beyond border case
      */
@@ -177,6 +183,7 @@ public class BadgeTest extends TestCase {
         routesBadge.updateRemaining();
         assertTrue(routesBadge.getRemaining() == 27);
     }
+
 
     /**
      * Test for updateRemaining within bounds
@@ -199,6 +206,7 @@ public class BadgeTest extends TestCase {
         assertTrue(distanceBadge.getLevel() == 0);
     }
 
+
     /**
      * Test updateLevel on boundary
      */
@@ -209,6 +217,7 @@ public class BadgeTest extends TestCase {
         assertTrue(routesBadge.getLevel() == 6);
     }
 
+
     /**
      * Test updateLevel on extreme value
      */
@@ -218,6 +227,7 @@ public class BadgeTest extends TestCase {
         routesBadge.updateLevel();
         assertTrue(routesBadge.getLevel() == 6);
     }
+
 
     /**
      * Test updateIcon
@@ -236,9 +246,10 @@ public class BadgeTest extends TestCase {
     @Test
     public void testUpdateDescriptionZero() {
         routesBadge.updateDescription();
-        String check = "You don't have a Routes badge yet.\nTake 2 trips to earn one.";
-        assertTrue(routesBadge.getDescription().equals(check));
+        String check = "You don't have a Routes badge yet.\nTake 2 trips to earn your first one!";
+        assertEquals(check, routesBadge.getDescription());
     }
+
 
     /**
      * Test updateDescription on level between 0 and 6
@@ -248,10 +259,11 @@ public class BadgeTest extends TestCase {
         distanceBadge.setLevel(3);
         distanceBadge.setValue(74500);
         distanceBadge.updateBadge();
-        String check = "This is your beautiful, red, level 3 Distance badge." +
-                "\nTravel 25 kilometres & 500 metres to earn the next one.";
+        String check = "This is your Level 3 Distance Badge." +
+                "\nTravel 25 kilometres and 500 metres to earn the next one!";
         assertTrue(distanceBadge.getDescription().equals(check));
     }
+
 
     /**
      * Test updateDescription on level 6
@@ -261,9 +273,9 @@ public class BadgeTest extends TestCase {
         timeBadge.setLevel(6);
         timeBadge.setValue(30000);
         timeBadge.updateDescription();
-        String check = "Wow! This is your amazing, gold, level 6 Time badge." +
-                "\nYou seem to be at the top of your game, and we've run out of Time badges to give you!";
-        assertTrue(timeBadge.getDescription().equals(check));
+        String check = "Nice Work! This is your Level 6 Time Badge." +
+                "\nYou're at the top of your game, and we've run out of Time Badges to give you!";
+        assertTrue(check.equals(timeBadge.getDescription()));
     }
 }
 
