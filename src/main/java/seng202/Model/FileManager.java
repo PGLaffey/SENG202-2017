@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class FileManager {
 
+	
     /**
      * Method to read a .csv file from a chosen folder.
      * @param fileName The name of the .csv file to be read.
@@ -25,9 +26,13 @@ public class FileManager {
             while ((data = buffReader.readLine()) != null) {
                 dataList.add(data);
             }
-        } catch (IOException exception) {
+            file.close();
+            buffReader.close();
+        } 
+        catch (IOException exception) {
             exception.printStackTrace();
         }
+        
         return dataList;
     }
 
@@ -38,7 +43,7 @@ public class FileManager {
      * @param header The header of the current csv file.
      * @return The positive integer index for an item in the list.
      */
-    private static int indexer(int index, List header) {
+    private static int indexer(int index, List<String> header) {
         if (index < 0) {
             index += header.size();
         }
@@ -55,7 +60,7 @@ public class FileManager {
         ArrayList<String> routes = readFile(filename);
 
         if (!(routes.isEmpty())) {
-            List header = Arrays.asList(routes.get(0).split("\",\""));
+            List<String> header = Arrays.asList(routes.get(0).split("\",\""));
 
             //Get the index of each of the key fields for the route class from the header of the csv.
             int startNameIndex = indexer(header.indexOf("start station name"),header);
@@ -120,7 +125,8 @@ public class FileManager {
             }
             bufferedWriter.flush();
             bufferedWriter.close();
-        } catch (IOException e) {
+        } 
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -134,7 +140,7 @@ public class FileManager {
         ArrayList<String> retailers = readFile(filename);
 
         if (!(retailers.isEmpty())) {
-            List header = Arrays.asList(retailers.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
+            List<String> header = Arrays.asList(retailers.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
 
             int retailerName = header.indexOf("CnBio_Org_Name");
             int addrLine1Index = header.indexOf("CnAdrPrf_Addrline1");
@@ -190,7 +196,8 @@ public class FileManager {
                 bufferedWriter.flush();
                 bufferedWriter.close();
             }
-        } catch (IOException e) {
+        } 
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -204,7 +211,7 @@ public class FileManager {
         ArrayList<String> wifiHotspots = readFile(filename);
 
         if (!(wifiHotspots.isEmpty())) {
-            List header = Arrays.asList(wifiHotspots.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
+            List<String> header = Arrays.asList(wifiHotspots.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
 
             int wifiLatIndex = header.indexOf("LAT");
             int wifiLongIndex = header.indexOf("LON");
@@ -263,7 +270,8 @@ public class FileManager {
                 bufferedWriter.flush();
                 bufferedWriter.close();
             }
-        } catch (IOException e) {
+        } 
+        catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -278,7 +286,7 @@ public class FileManager {
         ArrayList<String> toilets = readFile(filename);
 
         if (!(toilets.isEmpty())) {
-            List header = Arrays.asList(toilets.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
+            List<String> header = Arrays.asList(toilets.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
 
             int nameIndex = header.indexOf("name");
             int disabledAccessIndex = header.indexOf("disabled access");
@@ -331,7 +339,8 @@ public class FileManager {
                 bufferedWriter.flush();
                 bufferedWriter.close();
             }
-        } catch (IOException e) {
+        } 
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -345,7 +354,7 @@ public class FileManager {
         ArrayList<String> pois = readFile(filename);
 
         if (!(pois.isEmpty())) {
-            List header = Arrays.asList(pois.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
+            List<String> header = Arrays.asList(pois.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
 
             //Finds locations of information in header.
             int poiNameIndex = header.indexOf("name");
@@ -401,7 +410,8 @@ public class FileManager {
                 bufferedWriter.flush();
                 bufferedWriter.close();
             }
-        } catch (IOException e) {
+        } 
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -415,7 +425,7 @@ public class FileManager {
         ArrayList<String> locations = readFile(filename);
         if (!locations.isEmpty()) {
 
-            List header = Arrays.asList(locations.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
+            List<String> header = Arrays.asList(locations.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
             int nameIndex = indexer(header.indexOf("name"), header);
             int latIndex = indexer(header.indexOf("latitude"), header);
             int lonIndex = indexer(header.indexOf("longitude"), header);
@@ -461,7 +471,8 @@ public class FileManager {
                 bufferedWriter.flush();
                 bufferedWriter.close();
             }
-        } catch (IOException e) {
+        } 
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
