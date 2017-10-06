@@ -234,7 +234,7 @@ public class ToiletInfoScreenController {
         controller.getMapView().addMapReadyListener(new MapReadyListener() {
             @Override
             public void mapReady() {
-                Map.findLocation(CurrentStorage.getToiletArray().get(toiletIndex), controller.getMapView().getMap());
+                Map.findToilets(CurrentStorage.getToiletArray().get(toiletIndex), controller.getMapView().getMap());
             }
         });
 
