@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -1379,7 +1380,40 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     		wifiProviderText.setText("");
     	}
     }
-    
+
+
+    @FXML
+    void loadRouteMenuPressed(Event event) {
+        ArrayList<Integer> favRoutes = CurrentStorage.getFavRoutes();
+        ArrayList<Integer> savedRoutes = CurrentStorage.getSavedRoutes();
+
+        for (Integer index : favRoutes) {
+            Route route = CurrentStorage.getRouteArray().get(index);
+            MenuItem menuItem = new MenuItem(route.getName());
+            menuItem.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    //TODO: display route on map
+                    displayRouteOnMap(route);
+                }
+            });
+            favouriteRoutesMenu.getItems().add(menuItem);
+        }
+
+        for (Integer index : savedRoutes) {
+            Route route = CurrentStorage.getRouteArray().get(index);
+            MenuItem menuItem = new MenuItem(route.getName());
+            menuItem.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    //TODO: display route on map
+                    displayRouteOnMap(route);
+                }
+            });
+            savedRoutesMenu.getItems().add(menuItem);
+        }
+    }
+
 
     @FXML
     void initialize() {
@@ -1402,34 +1436,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     	progressBar.setVisible(true);
 
-    	ArrayList<Integer> favRoutes = CurrentStorage.getFavRoutes();
-    	ArrayList<Integer> savedRoutes = CurrentStorage.getSavedRoutes();
-
-    	for (Integer index : favRoutes) {
-    	    Route route = CurrentStorage.getRouteArray().get(index);
-            MenuItem menuItem = new MenuItem(route.getName());
-            menuItem.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    //TODO: display route on map
-                    displayRouteOnMap(route);
-                }
-            });
-            favouriteRoutesMenu.getItems().add(menuItem);
-        }
-
-        for (Integer index : savedRoutes) {
-    	    Route route = CurrentStorage.getRouteArray().get(index);
-    	    MenuItem menuItem = new MenuItem(route.getName());
-    	    menuItem.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    //TODO: display route on map
-                    displayRouteOnMap(route);
-                }
-            });
-            savedRoutesMenu.getItems().add(menuItem);
-        }
 
     	if (!data.isHasImported()) {
             Service service = new Service() {

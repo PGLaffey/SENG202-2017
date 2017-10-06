@@ -94,13 +94,14 @@ public class SaveRouteScreenController {
             route.setSecret(saveRoutePrivateCheck.isSelected());
 
             CurrentStorage.addNewRoute(route);
+            CurrentStorage.addSavedRoute(CurrentStorage.getRouteArray().indexOf(route));
+
 
             CurrentStorage.setNewRouteEnd(null);
 
             Stage stage = (Stage) saveButton.getScene().getWindow();
             stage.hide();
 
-            // TODO: Check if saving privately and do whatever need to do for it
         }
     }
 

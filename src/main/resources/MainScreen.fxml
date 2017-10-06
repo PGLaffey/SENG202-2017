@@ -138,7 +138,7 @@
                   <children>
                     <GridPane maxHeight="1.7976931348623157E308" maxWidth="160.0" prefHeight="450.0" prefWidth="182.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <MenuButton fx:id="loadRouteMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #0B4D63, #CCE6EF;" text="Load Route" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                        <MenuButton fx:id="loadRouteMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#loadRouteMenuPressed" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #0B4D63, #CCE6EF;" text="Load Route" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                           <items>
                             <Menu fx:id="favouriteRoutesMenu" mnemonicParsing="false" style="" text="Favourite Routes" />
                             <Menu fx:id="savedRoutesMenu" mnemonicParsing="false" style="" text="Saved Routes" />

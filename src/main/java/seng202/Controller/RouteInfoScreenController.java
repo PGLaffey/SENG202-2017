@@ -148,9 +148,8 @@ public class RouteInfoScreenController {
      */
     @FXML
     void favouritePressed(ActionEvent event) {
-        //CurrentStorage.addFavouriteRoute(route);
-        //favouriteButton.setVisible(false);
-        // TODO: PATRICK...
+        CurrentStorage.addFavRoute(CurrentStorage.getRouteArray().indexOf(route));
+        favouriteButton.setVisible(false);
     }
 
 
