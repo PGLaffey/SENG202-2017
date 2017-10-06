@@ -1,5 +1,12 @@
 package seng202.Controller;
 
+
+import com.lynden.gmapsfx.MapReadyListener;
+import com.lynden.gmapsfx.javascript.object.Animation;
+import com.lynden.gmapsfx.javascript.object.LatLong;
+import com.lynden.gmapsfx.javascript.object.Marker;
+import com.lynden.gmapsfx.javascript.object.MarkerOptions;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -7,12 +14,23 @@ import com.sun.org.apache.bcel.internal.generic.RET;
 import com.sun.org.apache.regexp.internal.RE;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import seng202.Model.CurrentStorage;
-import seng202.Model.DataFetcher;
-import seng202.Model.Retailer;
+
+import seng202.Model.*;
+import seng202.team5.Main;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
 
 
 public class RetailerInfoScreenController {
@@ -67,6 +85,9 @@ public class RetailerInfoScreenController {
 
     @FXML
     private Button updateButton;
+
+    @FXML
+    private Button showOnMapButton;
 
     @FXML
     private Label zipLabel;
@@ -145,6 +166,48 @@ public class RetailerInfoScreenController {
             return false;
         }
     }
+
+    @FXML
+    void showRetailerOnMap(ActionEvent event) throws IOException{
+        Retailer retailer = CurrentStorage.getRetailerArray().get(retailerIndex);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
+        Parent root = loader.load();
+
+        Main.getStage().setScene(new Scene(root, Main.getStage().getScene().getWidth(), Main.getStage().getScene().getHeight()));
+        Main.getStage().setTitle("Map");
+
+        MainScreenController controller = loader.getController();
+        controller.getMapView().addMapReadyListener(new MapReadyListener() {
+            @Override
+            public void mapReady() {
+                controller.getMapView().getMap().clearMarkers();
+                Map.findRetailers(retailer, controller.getMapView().getMap());
+                controller.getMapView().getMap().setCenter(new LatLong(retailer.getLatitude(), retailer.getLongitude()));
+                controller.getMapView().getMap().addMarker(
+                        new Marker(
+                                new MarkerOptions().animation(Animation.DROP)
+                                        .position(new LatLong(retailer.getLatitude(), retailer.getLongitude()))
+                        )
+                );
+                ArrayList<Location> nearby = Map.findNearby(retailer.getLatitude(), retailer.getLongitude());
+
+                for (Location loc : nearby) {
+                    if (loc.getLocationType() == 0) {
+                        Map.findToilets((Toilet) loc, controller.getMapView().getMap());
+                    } else if (loc.getLocationType() == 1) {
+                        Map.findPoi((Poi) loc, controller.getMapView().getMap());
+                    } else if (loc.getLocationType() == 2) {
+                        Map.findRetailers((Retailer) loc, controller.getMapView().getMap());
+                    } else if (loc.getLocationType() == 3) {
+                        Map.findWifi((Wifi) loc, controller.getMapView().getMap());
+                    }
+                }
+            }
+        });
+        Main.getStage().show();
+    }
+
+
     
     
     /**

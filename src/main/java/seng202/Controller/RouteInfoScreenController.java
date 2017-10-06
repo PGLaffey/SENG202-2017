@@ -1,8 +1,6 @@
 package seng202.Controller;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import com.lynden.gmapsfx.MapReadyListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,12 +9,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import org.omg.CORBA.Current;
-import seng202.Model.CurrentStorage;
-import seng202.Model.Route;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import seng202.Model.CurrentStorage;
+import seng202.Model.Map;
+import seng202.Model.Route;
 import seng202.Model.User;
+import seng202.team5.Main;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
 public class RouteInfoScreenController {
@@ -152,6 +155,25 @@ public class RouteInfoScreenController {
 
 
     //TODO add docstring
+    @FXML
+    void showRouteBtnPressed(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
+        Parent root = loader.load();
+
+        Main.getStage().setScene(new Scene(root, Main.getStage().getScene().getWidth(), Main.getStage().getScene().getHeight()));
+        Main.getStage().setTitle("Map");
+
+        MainScreenController controller = loader.getController();
+        controller.getMapView().addMapReadyListener(new MapReadyListener() {
+            @Override
+            public void mapReady() {
+                Map.findRoute(route, controller.getMapView(), controller.getDirectionsService(), controller, controller.getMapView().getDirec());
+            }
+        });
+        controller.updateDistanceLabel(route.getDistance()/1000);
+        Main.getStage().show();
+    }
+
     @FXML
     void initialize() {
         route = CurrentStorage.getRoute();

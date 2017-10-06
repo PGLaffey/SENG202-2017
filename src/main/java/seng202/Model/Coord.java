@@ -1,5 +1,7 @@
 package seng202.Model;
 
+import com.lynden.gmapsfx.javascript.object.Marker;
+
 /**
  * Class to store known coordinates of addresses.
  */
@@ -7,7 +9,7 @@ public class Coord {
     private String address;
     private double lat;
     private double lng;
-    private boolean hasMarker = false;
+    private Marker locMark;
 
     
     public Coord(String address, double lattitude, double longitude) {
@@ -44,17 +46,17 @@ public class Coord {
     /**
      * @return whether the Coord has a marker
      */
-    public boolean hasMarker() {
-        return hasMarker;
+    public Marker getMarker() {
+        return locMark;
     }
 
     
     /**
      * Sets whether the coord has a marker
-     * @param value boolean value for whether the marker has been set
+     * @param marker Marker to set the locMark
      */
-    public void setHasMarker(boolean value) {
-        hasMarker = value;
+    public void setMarker(Marker marker) {
+        locMark = marker;
     }
 
     
@@ -63,7 +65,9 @@ public class Coord {
      * @return boolean for whether the coordinates are equal
      */
     public boolean equals(Coord c2) {
-        if (address.contains(c2.getAddress()) || c2.getAddress().contains(address) || address.equalsIgnoreCase(c2.getAddress())) {
+        if (address.toLowerCase().contains(c2.getAddress().toLowerCase())
+                || c2.getAddress().toLowerCase().contains(address.toLowerCase())
+                || address.equalsIgnoreCase(c2.getAddress())) {
             return true;
         } else {
             return false;

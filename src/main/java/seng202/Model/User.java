@@ -16,6 +16,9 @@ public class User {
     private double distanceCycled;
     private double minutesCycled;
     private ArrayList<Badge> badges; // First badge is distance, second time and third route
+    private ArrayList<Route> savedRoutes;
+    private ArrayList<Route> favouriteRoutes = new ArrayList<>(); // Temporary placeholder
+
 
 
     /**
