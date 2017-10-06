@@ -1212,7 +1212,7 @@ public class DataFetcher {
     	try {
     		//Tells the driver manager of jdbc to create a connection to a database of type mysql with the ip 222.152.179.135, through port 3306, named cyclrr, using user 'monitor' and password 'Team5Pass'
     		//Following line the 192.168.1.70 needs to be 125.239.188.8 if outside of Patrick's network
-    		connect = DriverManager.getConnection("jdbc:mysql://192.168.1.70:3306/cyclrr","monitor","Team5Pass");
+    		connect = DriverManager.getConnection("jdbc:mysql://125.239.188.8:3306/cyclrr","monitor","Team5Pass");
     	}
     	catch (SQLException ex) {
     		printSqlError(ex);
@@ -1258,22 +1258,7 @@ public class DataFetcher {
 
     
     public static void main(String[] argv) {
-    	DataFetcher da = new DataFetcher();
-    	try {
-			da.connectDb();
-			da.loadAllLocations();
-			System.out.println(CurrentStorage.getToiletArray());
-			
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 
 }
