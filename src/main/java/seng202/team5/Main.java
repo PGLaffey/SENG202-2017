@@ -14,6 +14,7 @@ import seng202.Model.FileManager;
 
 public class Main extends Application {
 
+	
 	/**
 	 * Begins the application and loads the GUI
 	 * @param primaryStage
@@ -27,6 +28,7 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 
+	
 	/**
 	 * Overrides the method for when the GUI is closed. Loads newly entered data into database, serializes the user and flushes CurrentStorage
 	 */
@@ -40,12 +42,13 @@ public class Main extends Application {
 			//FileManager.userSerialize(CurrentStorage.getUser(), "./src/main/resources/data_files/");
 			CurrentStorage.flush();
 			System.exit(0);
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
