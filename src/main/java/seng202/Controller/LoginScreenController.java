@@ -45,7 +45,11 @@ public class LoginScreenController {
 		data.connectDb();
 		//TODO: Jack to change
 		if (!usernameText.getText().isEmpty() && !passwordText.getText().isEmpty()) {
-			if ((data.fetchPassword(usernameText.getText()).equals(passwordText.getText().toString()))) {
+			if (data.fetchPassword(usernameText.getText()) == null) {
+				incorrectUserLbl.setVisible(true);
+				incorrectPasswordLbl.setVisible(true);				
+			}
+			else if ((data.fetchPassword(usernameText.getText()).equals(passwordText.getText().toString()))) {
 
 				ArrayList<String> userInfo;
 				userInfo = data.fetchUserInfo(usernameText.getText());
