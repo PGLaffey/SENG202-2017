@@ -10,6 +10,7 @@ public class RetailerImporterThread implements Runnable {
         this.path = path;
     }
 
+    
     @Override
     public void run() {
         FileManager.retailerRetriever(path);
