@@ -1,7 +1,5 @@
 package seng202.Model;
 
-import java.util.ArrayList;
-
 public class RetailerImporterThread implements Runnable {
     private String path;
 

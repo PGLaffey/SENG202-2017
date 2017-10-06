@@ -53,6 +53,76 @@ public class DataFetcher {
 	}
 
  
+	/**
+	 * Deletes a route from the database
+	 * @param route Route to be removed from the database
+	 */
+	public void deleteRoute(Route route) {
+		int routeID = findRoute(route);
+		if (routeID != 0) {
+			String stmt = "DELETE FROM tblUsersRoutes WHERE RouteID = ?";;
+			ArrayList<String> params = new ArrayList<String>();
+			params.add(String.valueOf(routeID));
+			runUpdate(stmt, params);
+			
+	    	stmt = "DELETE FROM tblRoutes WHERE RouteID = ?";
+			runUpdate(stmt, params);
+		}
+		else {
+			System.out.println("Route does not exisit within the database.");
+		}
+	}
+	
+	
+	/**
+	 * Remove a location from the database
+	 * @param location Location to be removed from the database
+	 */
+	public void deleteLocation(Location location) {
+		int locationID = findLocation(location);
+		if (locationID != 0) {
+			String stmt = "SELECT * FROM tblLocations WHERE LocationID = ?";
+			ArrayList<String> params = new ArrayList<String>();
+			params.add(String.valueOf(locationID));
+			ArrayList<String> locationInfo = runQuery(stmt, params).get(0);
+			int type = Integer.parseInt(locationInfo.get(6));
+			if (type != 4) { 
+				String typeID = "0";
+				stmt = "DELETE FROM tbl";
+				params = new ArrayList<String>();
+				switch (type) {
+				case 0:
+					typeID = locationInfo.get(7);
+					stmt = stmt + "Toilets WHERE ToiletID";
+					break;
+				case 1:
+					typeID = locationInfo.get(8);
+					stmt = stmt + "Poi WHERE PoiID";
+					break;
+				case 2:
+					typeID = locationInfo.get(9);
+					stmt = stmt + "Retailers WHERE RetailerID";
+					break;
+				case 3:
+					typeID = locationInfo.get(10);
+					stmt = stmt + "Wifi WHERE WifiID";
+					break;
+				}
+				params.add(typeID);
+				stmt = stmt + " = ?";
+				runUpdate(stmt, params);
+			}
+			stmt = "DELETE FROM tblLocations WHERE LocationID = ?";
+			params = new ArrayList<String>();
+			params.add(String.valueOf(locationID));
+			runUpdate(stmt, params);
+		}
+		else {
+			System.out.println("Location does not exisit within the database");
+		}
+	}
+	
+	
     /**
      * Updates a Location (oldLocation) in the database to the values of newLocation
      * @param oldLocation The old Location to be replaced
@@ -728,8 +798,11 @@ public class DataFetcher {
 				ResultSet output = qryLoadLocations.executeQuery();
 				//Loop while there a another location to be loaded from the database
 				while (output.next()) {
-					secret = output.getBoolean(6);
+					if (output.getBoolean(6)) {
+						secret = false;
+					}
 					//Checks if the Location is set to be secret
+					System.out.println("Location: " + output.getInt(1) + " | Secret: " + secret);
 					if (secret) {
 						ownerID = output.getInt(5);
 						//Checks if the Location belongs to a User
@@ -760,6 +833,8 @@ public class DataFetcher {
 					case("Wifi"): wifiOffset += output.getRow();
 						break;
 				}
+
+				secret = true;
 			}
 		} 
     	//Prints the correct error statements if an SQLException occurs
@@ -1249,7 +1324,7 @@ public class DataFetcher {
 
     
     public static void main(String[] argv) {
-    	
+
 	}
 
 }

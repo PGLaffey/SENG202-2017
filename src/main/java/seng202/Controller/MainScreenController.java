@@ -46,14 +46,11 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     private DirectionsService directionsService;
     private DirectionsPane directionsPane;
 
+    private InfoWindow infoWindow;
     private static DataFetcher data = new DataFetcher();
-
-    private static boolean isStart = true;
-    
+    private static boolean isStart = true;    
     private GoogleMap map;
-
     private GeocodingService geocodingService;
-
     private StringProperty address = new SimpleStringProperty();
 
     @FXML
@@ -462,13 +459,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     private WebEngine mapEngine;
 
-    ArrayList<Circle> wifiCircles = new ArrayList<Circle>();
-    ArrayList<Marker> locationMarkers = new ArrayList<Marker>();
     
     /** 
      * Method for when the map menu button is pressed, shows the main map screen.
-     * @param event
-     * @throws IOException
+     * @param event Auto-generate event on button press
      */
     @FXML
     void mapPressed(ActionEvent event) throws IOException {
@@ -479,23 +473,32 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
                 : new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
 
-        //Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Map");
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
     
+    
     /**
      * Method for when the table menu button is pressed, shows the raw tables screen.
-     * @param event
-     * @throws IOException
+     * @param event Auto-generate event on button press
      */
 	@FXML
     void tablePressed(ActionEvent event) throws IOException {
         Stage primaryStage = (Stage) tableButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
 
-	    try {
+        Scene currentScene = primaryStage.getScene();
+        Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
+                : new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+
+        primaryStage.setTitle("Table");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+/*	    try {
+            Stage primaryStage = (Stage) tableButton.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
+
             Scene currentScene = primaryStage.getScene();
             Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
                     : new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
@@ -512,14 +515,14 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             stage.setTitle("Still Loading");
             stage.setScene(scene);
             stage.show();
-        }
 
+        }*/
     }
-    
+ 
+	
 	/**
 	 * Method for when the statistics menu button is pressed, shows the statistics screen.
-	 * @param event
-	 * @throws IOException
+	 * @param event Auto-generate event on button press
 	 */
     @FXML
     void statPressed(ActionEvent event) throws IOException {
@@ -538,10 +541,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 		primaryStage.show();
     }
 
+    
     /** 
      * Method for when the account menu button is pressed, shows the account screen.
-     * @param event
-     * @throws IOException
+     * @param event Auto-generate event on button press
      */
     @FXML
     void accountPressed(ActionEvent event) throws IOException {
@@ -560,13 +563,13 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 		primaryStage.show();
     }
     
+    
     /**
      * Method for when logout button is pressed, shows the login screen and flushes current storage.
-     * @param event
-     * @throws IOException
+     * @param event Auto-generate event on button press
      */
     @FXML
-    void logoutPressed(ActionEvent event) throws IOException {
+    void logoutPressed(ActionEvent event) {
         DataFetcher exporter = new DataFetcher();
         try {
             exporter.connectDb();
@@ -574,14 +577,16 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             exporter.closeConnection();
             CurrentStorage.flush();
             System.exit(0);
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    
     /**
      * Places the route markers on the map
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void showRoutePressed(ActionEvent event) {
@@ -598,13 +603,15 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     }
 
 
+    //TODO What is this?
     @FXML
     void loadRoutePressed(ActionEvent event) {
     }
 
+    
     /**
      * Displays the file chooser pane
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void fileChooserPressed(ActionEvent event) {
@@ -622,9 +629,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         addOtherPane.setVisible(false);
     }
 
+    
     /**
      * Open the file chooser to load a wifi file
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void uploadWifiBtnPressed(ActionEvent event) {
@@ -639,9 +647,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         }
     }
 
+    
     /**
      * Open the file chooser to load a retailer file
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void uploadRetailerBtnPressed(ActionEvent event) {
@@ -656,9 +665,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         }
     }
 
+    
     /**
      * Open the file chooser to load a route file
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void uploadRouteBtnPressed(ActionEvent event) {
@@ -674,9 +684,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         }
     }
 
+    
     /**
      * Open the file chooser to load a toilet file
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void uploadToiletBtnPressed(ActionEvent event) {
@@ -690,9 +701,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         }
     }
 
+    
     /**
      * Open the file chooser to load a poi file
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void uploadPOIBtnPressed(ActionEvent event) {
@@ -709,7 +721,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     /**
      * Displays the add wifi pane
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void addLocationsPressed(ActionEvent event) {
@@ -717,10 +729,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	mainMapPane.setVisible(false);
     }
     
+    
     /**
      * Method for when the share button pressed. Shows the pop up.
-     * @param event
-     * @throws IOException
+     * @param event Auto-generate event on button press
      */
     @FXML
     void sharePressed(ActionEvent event) throws IOException {
@@ -732,9 +744,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	stage.show();
     }
 
+    
     /**
      * Method for when the bike button is pressed, displays all the routes on the map.
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void bikeIconPressed(ActionEvent event) {
@@ -755,20 +768,22 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 //        }
     }
 
+    
     /**
      * Method for when the favourite button is pressed, displays all the
      * users favourite routes on the map.
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void favouriteIconPressed(ActionEvent event) {
 
     }
 
+    
     /**
      * Method for when the retailer button is pressed, displays all the
      * retailers on the map
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void retailerIconPressed(ActionEvent event) {
@@ -782,10 +797,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         Map.setRetailerVisible(!Map.getRetailerVisible());
     }
 
+    
     /** 
      * Method for when the save route button is pressed, opens the pop up.
-     * @param event
-     * @throws IOException
+     * @param event Auto-generate event on button press
      */
     @FXML
     void saveRouteButtonPressed(ActionEvent event) throws IOException {
@@ -800,10 +815,11 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         }
     }
 
+    
     /**
      * Method for when the toilet button is pressed, displays all the toilet
      * locations on the map
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void toiletIconPressed(ActionEvent event) {
@@ -813,10 +829,11 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         }
     }
 
+    
     /**
      * Method for when the wifi button is pressed, displays all the wifi
      * locations on the map
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void wifiIconPressed(ActionEvent event) {
@@ -827,9 +844,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         }
     }
 
+    
     /**
      * Method for when a search is performed on the map.
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     public void searchTextAction(ActionEvent event) {
@@ -839,9 +857,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         Map.findLocation(address.get(), map, geocodingService);
     }
 
+    
     /**
      * Displays the pane for user to add an other location
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void addOtherMenuPressed(ActionEvent event) {
@@ -853,9 +872,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addOtherPane.setVisible(true);
     }
 
+    
     /**
      * Displays the pane for user to add a point of interest location
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void addPoiMenuPressed(ActionEvent event) {
@@ -867,9 +887,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addOtherPane.setVisible(false);
     }
 
+    
     /**
      * Displays the pane for user to add a retailer location
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void addRetailerMenuPressed(ActionEvent event) {
@@ -880,10 +901,11 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addRetailerPane.setVisible(true);
     	addOtherPane.setVisible(false);
     }
+    
 
     /**
      * Displays the pane for user to add a toilet location
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void addToiletMenuPressed(ActionEvent event) {
@@ -895,9 +917,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addOtherPane.setVisible(false);
     }
 
+    
     /**
      * Displays the pane for user to add a wifi location
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void addWifiMenuPressed(ActionEvent event) {
@@ -909,6 +932,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	addOtherPane.setVisible(false);
     }
 
+    
     /**
      * Checks the input is able to be parsed to a Double
      * @param s String to be checked
@@ -923,6 +947,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         }
     }
 
+    
     /**
      * Checks the input is able to be parsed to an Integer
      * @param s String to be checked
@@ -937,6 +962,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         }
     }
 
+    
     /**
      * Save an other location if all the required fields have the correct text - otherwise labels turn red
      * @param event
@@ -979,7 +1005,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	    Location location;
     		if (!otherAddressText.getText().equals("")) {
     			location = new Location(otherAddressText.getText(), otherNameText.getText(), 4);
-    		} else {
+    		} 
+    		else {
     			location = new Location(Double.parseDouble(otherLatText.getText()), Double.parseDouble(otherLongText.getText()), otherNameText.getText(), 4);
     		}
 
@@ -1005,9 +1032,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	}
     }
 
+    
     /**
      * Save a point of interest location if all the required fields have the correct text - otherwise labels turn red
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void savePoiButtonPressed(ActionEvent event) {
@@ -1061,7 +1089,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             Poi poi;
             if (!poiAddressText.getText().equals("")) {
                 poi = new Poi(poiAddressText.getText(), poiNameText.getText(), poiDescriptionText.getText(), Double.parseDouble(poiCostText.getText()));
-            } else {
+            } 
+            else {
                 poi = new Poi(Double.parseDouble(poiLatText.getText()), Double.parseDouble(poiLongText.getText()), poiNameText.getText(), poiDescriptionText.getText(), Double.parseDouble(poiCostText.getText()));
             }
             if (!poiZipText.getText().equals("")) {
@@ -1094,7 +1123,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     /**
      *Save a retailer location if all the required fields have the correct text - otherwise labels turn red
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void saveRetailerButtonPressed(ActionEvent event) {
@@ -1144,7 +1173,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	    Retailer retailer;
     		if (!retailerAddressText.getText().equals("")) {
         		retailer = new Retailer(retailerAddressText.getText(), retailerNameText.getText(), retailerProductText.getText(), retailerDescriptionText.getText());
-            } else {
+            } 
+    		else {
             	retailer = new Retailer(Double.parseDouble(retailerLatText.getText()), Double.parseDouble(retailerLongText.getText()), retailerNameText.getText(), retailerProductText.getText(), retailerDescriptionText.getText());
         	}
 
@@ -1173,12 +1203,12 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     		retailerProductText.setText("");
     		retailerDescriptionText.setText("");
     	}
-    	
     }
+    
 
     /**
      * Save a toilet location if all the required fields have the correct text - otherwise labels turn red
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void saveToiletButtonPressed(ActionEvent event) {
@@ -1226,7 +1256,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	    Toilet toilet;
     		if(!toiletAddressText.getText().equals("")) {
     			toilet = new Toilet(toiletAddressText.getText(), toiletNameText.getText(), toiletDisabledChoice.getValue(), toiletUnisexChoice.getValue());
-    		} else {
+    		} 
+    		else {
     			toilet = new Toilet(Double.parseDouble(toiletLatText.getText()), Double.parseDouble(toiletLongText.getText()), toiletNameText.getText(), toiletDisabledChoice.getValue(), toiletUnisexChoice.getValue());
     		}
 
@@ -1255,9 +1286,10 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	}
     }
 
+    
     /**
      * Save a wifi location if all the required fields have the correct text - otherwise labels turn red
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void saveWifiButtonPressed(ActionEvent event) {
@@ -1315,7 +1347,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     	    Wifi wifi;
     		if (!wifiAddressText.getText().equals("")) {
             	wifi = new Wifi(wifiAddressText.getText(), wifiNameText.getText(), wifiSsidText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
-        	} else {
+        	} 
+    		else {
             	wifi = new Wifi(Double.parseDouble(wifiLatText.getText()), Double.parseDouble(wifiLongText.getText()), wifiNameText.getText(), wifiSsidText.getText(), wifiTypeText.getText(), wifiProviderText.getText());
         	}
             if (!wifiZipText.getText().equals("")) {
@@ -1345,11 +1378,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     		wifiTypeText.setText("");
     		wifiProviderText.setText("");
     	}
-    	
-
     }
-
     
+
     @FXML
     void initialize() {
         //mapView = new GoogleMapView();
@@ -1584,6 +1615,5 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                 Map.findWifi((Wifi) loc, map);
             }
         }
-
     }
 }

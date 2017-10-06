@@ -73,14 +73,12 @@ public class RouteInfoScreenController {
     private Label addedLabel;
 
     private Route route;
-
     private User user;
 
 
     /**
-     * Method when the ok button is pressed, hides the pop up.
-     *routes
-     * @param event
+     * Method when the ok button is pressed, hides the pop up. routes
+     * @param event Auto-generate event on button press
      */
     @FXML
     void okPressed(ActionEvent event) {
@@ -88,10 +86,10 @@ public class RouteInfoScreenController {
         stage.hide();
     }
 
+    
     /**
      * Method when the update button is pressed, displays screen to change the selected route
-     *
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void updatePressed(ActionEvent event) {
@@ -99,27 +97,23 @@ public class RouteInfoScreenController {
         stage.hide();
     }
 
+    
     /**
      * Method when the completed route button is pressed. Adds the distance of the route to the users statistics and change the button text
-     *
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void completedRouteButtonPressed(ActionEvent event) {
-        //boolean add = false;
-
         completedRouteButton.setVisible(false);
         addButton.setVisible(true);
         timeLabel.setVisible(true);
         timeText.setVisible(true);
-
-
     }
 
+    
     /**
      * Method for when the add button is pressed. Verifies then adds the route
-     *routes
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void addButtonPressed(ActionEvent event) {
@@ -131,7 +125,8 @@ public class RouteInfoScreenController {
         try {
             Double.parseDouble(timeText.getText());
             add = true;
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             timeLabel.setTextFill(Color.RED);
         }
 
@@ -147,6 +142,10 @@ public class RouteInfoScreenController {
     }
 
 
+    /**
+     * TODO ADD docstring
+     * @param event Auto-generate event on button press
+     */
     @FXML
     void favouritePressed(ActionEvent event) {
         //CurrentStorage.addFavouriteRoute(route);
@@ -155,6 +154,7 @@ public class RouteInfoScreenController {
     }
 
 
+    //TODO add docstring
     @FXML
     void showRouteBtnPressed(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
@@ -176,7 +176,6 @@ public class RouteInfoScreenController {
 
     @FXML
     void initialize() {
-
         route = CurrentStorage.getRoute();
         user = CurrentStorage.getUser();
 
@@ -185,7 +184,6 @@ public class RouteInfoScreenController {
         } else {
             favouriteButton.setVisible(true);
         }
-
 
     	bikeidLabel.setText("Bike ID: "+ route.getBikeID());
     	distanceLabel.setText("Distance: " + route.getDistanceRound() + "m");
@@ -199,8 +197,7 @@ public class RouteInfoScreenController {
     	timeLabel.setVisible(false);
     	timeText.setVisible(false);
     	addButton.setVisible(false);
-    	
-    	
+    	  	
         assert bikeidLabel != null : "fx:id=\"bikeidLabel\" was not injected: check your FXML file 'RouteInfoScreen.fxml'.";
         assert distanceLabel != null : "fx:id=\"distanceLabel\" was not injected: check your FXML file 'RouteInfoScreen.fxml'.";
         assert endLabel != null : "fx:id=\"endLabel\" was not injected: check your FXML file 'RouteInfoScreen.fxml'.";
@@ -208,9 +205,6 @@ public class RouteInfoScreenController {
         assert nameLabel != null : "fx:id=\"nameLabel\" was not injected: check your FXML file 'RouteInfoScreen.fxml'.";
         assert okButton != null : "fx:id=\"okButton\" was not injected: check your FXML file 'RouteInfoScreen.fxml'.";
         assert startLabel != null : "fx:id=\"startLabel\" was not injected: check your FXML file 'RouteInfoScreen.fxml'.";
-
-
     }
-
 }
 

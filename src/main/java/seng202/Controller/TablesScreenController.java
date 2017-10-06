@@ -184,8 +184,7 @@ public class TablesScreenController {
 
     /**
      * Method for when account menu button pressed, shows the profile screen.
-     * @param event
-     * @throws IOException
+     * @param event Auto-generate event on button press
      */
     @FXML
     void accountPressed(ActionEvent event) throws IOException {
@@ -202,10 +201,10 @@ public class TablesScreenController {
 		primaryStage.show();
     }
 
+    
     /**
      * Method for when logout button pressed, shows the login screen and flushes current storage.
-     * @param event
-     * @throws IOException
+     * @param event Auto-generate event on button press
      */
     @FXML
     void logoutPressed(ActionEvent event) throws IOException {
@@ -216,15 +215,16 @@ public class TablesScreenController {
 			exporter.closeConnection();
 			CurrentStorage.flush();
 			System.exit(0);
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			e.printStackTrace();
 		}
     }
 
+    
     /**
      * Method for when the map menu button pressed, shows main map screen.
-     * @param event
-     * @throws IOException
+     * @param event Auto-generate event on button press
      */
     @FXML
     void mapPressed(ActionEvent event) throws IOException {
@@ -240,10 +240,11 @@ public class TablesScreenController {
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
+    
 
     /**
      * Method when the search button is pressed. Displays the correct table and filtering.
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void searchPressed(ActionEvent event) {
@@ -262,7 +263,8 @@ public class TablesScreenController {
     		if (allLocationsTable.getItems().isEmpty()) {
 				allLocationsTable.setVisible(false);
 				noDataLabel.setVisible(true);
-			} else {
+			} 
+    		else {
 				allLocationsTable.setVisible(true);
 				noDataLabel.setVisible(false);
 			}
@@ -271,7 +273,8 @@ public class TablesScreenController {
     		wifiTable.setVisible(false);
     		toiletsTable.setVisible(false);
     		routesTable.setVisible(false);
-    	} else if (option == "Retailers") {
+    	} 
+    	else if (option == "Retailers") {
     		retailersTable.refresh();
     		ArrayList<Retailer> retFiltered = RawDataViewer.searchRetailer(CurrentStorage.getRetailerArray(), keywordText.getText().toString());
     		ObservableList<Retailer> retData = FXCollections.observableArrayList(retFiltered);
@@ -279,7 +282,8 @@ public class TablesScreenController {
         	if (retailersTable.getItems().isEmpty()) {
 				retailersTable.setVisible(false);
 				noDataLabel.setVisible(true);
-			} else {
+			} 
+        	else {
 				retailersTable.setVisible(true);
 				noDataLabel.setVisible(false);
 			}
@@ -288,7 +292,8 @@ public class TablesScreenController {
     		wifiTable.setVisible(false);
     		toiletsTable.setVisible(false);
     		routesTable.setVisible(false);
-    	} else if (option == "WiFi") {
+    	} 
+    	else if (option == "WiFi") {
     		wifiTable.refresh();
     		ArrayList<Wifi> wifiFiltered = RawDataViewer.searchWifi(CurrentStorage.getWifiArray(), keywordText.getText().toString());
     		ObservableList<Wifi> wifiData = FXCollections.observableArrayList(wifiFiltered);
@@ -297,7 +302,8 @@ public class TablesScreenController {
     			noDataLabel.setVisible(true);
 				wifiTable.setVisible(false);
 
-			} else {
+			} 
+    		else {
 				wifiTable.setVisible(true);
 				noDataLabel.setVisible(false);
 			}
@@ -306,7 +312,8 @@ public class TablesScreenController {
     		retailersTable.setVisible(false);
     		toiletsTable.setVisible(false);
     		routesTable.setVisible(false);
-    	} else if (option == "Toilets") {
+    	} 
+    	else if (option == "Toilets") {
     		toiletsTable.refresh();
     		ArrayList<Toilet> toiletFiltered = RawDataViewer.searchToilets(CurrentStorage.getToiletArray(), keywordText.getText().toString());
     		ObservableList<Toilet> toiletData = FXCollections.observableArrayList(toiletFiltered);
@@ -316,6 +323,7 @@ public class TablesScreenController {
     			noDataLabel.setVisible(true);
 				toiletsTable.setVisible(false);
 			}
+    		
     		else {
 				toiletsTable.setVisible(true);
 				noDataLabel.setVisible(false);
@@ -326,7 +334,8 @@ public class TablesScreenController {
 			wifiTable.setVisible(false);
 			routesTable.setVisible(false);
 
-    	} else if (option == "Points of interest")  {
+    	} 
+    	else if (option == "Points of interest")  {
     		poiTable.refresh();
     		ArrayList<Poi> poiFiltered = RawDataViewer.searchPoi(CurrentStorage.getPoiArray(), keywordText.getText().toString());
     		ObservableList<Poi> poiData = FXCollections.observableArrayList(poiFiltered);
@@ -334,7 +343,8 @@ public class TablesScreenController {
     		if (poiTable.getItems().isEmpty()) {
     			noDataLabel.setVisible(true);
 				poiTable.setVisible(false);
-			} else {
+			} 
+    		else {
     			poiTable.setVisible(true);
     			noDataLabel.setVisible(false);
 			}
@@ -343,7 +353,8 @@ public class TablesScreenController {
     		wifiTable.setVisible(false);
     		toiletsTable.setVisible(false);
     		routesTable.setVisible(false);
-    	} else if (option == "Routes") {
+    	} 
+    	else if (option == "Routes") {
     		routesTable.refresh();
     		ArrayList<Route> routeFiltered = RawDataViewer.searchRoutes(CurrentStorage.getRouteArray(), keywordText.getText().toString());
     		ObservableList<Route> routeData = FXCollections.observableArrayList(routeFiltered);
@@ -351,7 +362,8 @@ public class TablesScreenController {
     		if (routesTable.getItems().isEmpty()) {
     			noDataLabel.setVisible(true);
     			routesTable.setVisible(false);
-			} else {
+			} 
+    		else {
     			noDataLabel.setVisible(false);
     			routesTable.setVisible(true);
 			}
@@ -366,8 +378,7 @@ public class TablesScreenController {
 
     /**
      * Method when the statistics menu button pressed, shows the statistics screen.
-     * @param event
-     * @throws IOException
+     * @param event Auto-generate event on button press
      */
     @FXML
     void statPressed(ActionEvent event) throws IOException {
@@ -384,9 +395,10 @@ public class TablesScreenController {
 		primaryStage.show();
     }
 
+    
+    //TODO add docstring
     @FXML
     void tablePressed(ActionEvent event) throws IOException {
-
 		try {
 			Stage primaryStage = (Stage) tableButton.getScene().getWindow();
 			Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
@@ -399,7 +411,8 @@ public class TablesScreenController {
 			primaryStage.setTitle("Table");
 			primaryStage.setScene(scene);
 			primaryStage.show();
-		} catch (Exception e){
+		} 
+		catch (Exception e){
 			Stage stage = new Stage();
 			Parent root = FXMLLoader.load(getClass().getResource("/DataLoadingScreen.fxml"));
 
@@ -408,13 +421,12 @@ public class TablesScreenController {
 			stage.setScene(scene);
 			stage.show();
 		}
-
     }
 
+    
 	/**
 	 * Method when a row in the wifi table is pressed, displays a pop up with further information
-	 * @param event
-	 * @throws IOException
+	 * @param event Auto-generate event on button press
 	 */
 	@FXML
     void wifiTableClicked(MouseEvent event) throws IOException {
@@ -428,13 +440,12 @@ public class TablesScreenController {
 		stage.setTitle("About wifi point");
 		stage.setScene(scene);
 		stage.show();
-
     }
 
+	
 	/**
 	 * Method when a row in the retailer table is pressed, displays a pop up with further information
-	 * @param event
-	 * @throws IOException
+	 * @param event Auto-generate event on button press
 	 */
 	@FXML
     void retailerTableClicked(MouseEvent event) throws IOException {
@@ -447,13 +458,12 @@ public class TablesScreenController {
 		stage.setTitle("About retailer point");
 		stage.setScene(scene);
 		stage.show();
-
     }
 
+	
 	/**
 	 * Method when a row in the toilet table is pressed, displays a pop up with further information
-	 * @param event
-	 * @throws IOException
+	 * @param event Auto-generate event on button press
 	 */
 	@FXML
     void toiletTableClicked(MouseEvent event) throws IOException {
@@ -468,10 +478,10 @@ public class TablesScreenController {
 		stage.show();
     }
 
+	
 	/**
 	 * Method when a row in the all locations table is pressed, displays a pop up with further information
-	 * @param event
-	 * @throws IOException
+	 * @param event Auto-generate event on button press
 	 */
 	@FXML
     void allLocationTableClicked(MouseEvent event) throws IOException {
@@ -485,11 +495,11 @@ public class TablesScreenController {
 		stage.setScene(scene);
 		stage.show();
     }
+	
 
 	/**
 	 * Method when a row in the route table is pressed, displays a pop up with further information
-	 * @param event
-	 * @throws IOException
+	 * @param event Auto-generate event on button press
 	 */
 	@FXML
     void routeTableClicked(MouseEvent event) throws IOException {
@@ -504,10 +514,10 @@ public class TablesScreenController {
 		stage.show();
     }
 
+	
 	/**
 	 * Method when a row in the point of interest table is pressed, displays a pop up with further information
-	 * @param event
-	 * @throws IOException
+	 * @param event Auto-generate event on button press
 	 */
 	@FXML
     void poiTableClicked(MouseEvent event) throws IOException {
@@ -522,43 +532,51 @@ public class TablesScreenController {
 		stage.show();
     }
 
+	//TODO add docstring
 	@FXML
 	void exportPressed(ActionEvent event)  {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Export Data");
 		if (noDataLabel.isVisible()) {
 			nothingLabel.setVisible(true);
-		} else if (allLocationsTable.isVisible()) { //TODO: At the moment can't edit as they're locations so wont have all the data (e.g. cost for poi)
+		} 
+		else if (allLocationsTable.isVisible()) { //TODO: At the moment can't edit as they're locations so wont have all the data (e.g. cost for poi)
 			nothingLabel.setVisible(false);
 			ArrayList<Location> locData =  new ArrayList<Location>(allLocationsTable.getItems());
 			File file = fileChooser.showSaveDialog(null);
-		} else if (poiTable.isVisible()) {
+		} 
+		else if (poiTable.isVisible()) {
 			nothingLabel.setVisible(false);
 			ArrayList<Poi> poiData = new ArrayList<Poi>(poiTable.getItems());
 			File file = fileChooser.showSaveDialog(null);
 			FileManager.poiWriter(file.toString() + ".csv", poiData);
-		} else if (retailersTable.isVisible()) {
+		}
+		else if (retailersTable.isVisible()) {
 			nothingLabel.setVisible(false);
 			ArrayList<Retailer> retData = new ArrayList<Retailer>(retailersTable.getItems());
 			File file = fileChooser.showSaveDialog(null);
 			FileManager.retailerWriter(file.toString() + ".csv", retData);
-		} else if (wifiTable.isVisible()) {
+		}
+		else if (wifiTable.isVisible()) {
 			nothingLabel.setVisible(false);
 			ArrayList<Wifi> wifiData = new ArrayList<Wifi>(wifiTable.getItems());
 			File file = fileChooser.showSaveDialog(null);
 			FileManager.wifiWriter(file.toString() + ".csv", wifiData);
-		} else if (toiletsTable.isVisible()) {
+		} 
+		else if (toiletsTable.isVisible()) {
 			nothingLabel.setVisible(false);
 			ArrayList<Toilet> toiletData = new ArrayList<Toilet>(toiletsTable.getItems());
 			File file = fileChooser.showSaveDialog(null);
 			FileManager.toiletWriter(file.toString() + ".csv", toiletData);
-		} else if (routesTable.isVisible()) {
+		} 
+		else if (routesTable.isVisible()) {
 			nothingLabel.setVisible(false);
 			ArrayList<Route> routeData = new ArrayList<Route>(routesTable.getItems());
 			File file = fileChooser.showSaveDialog(null);
 			FileManager.routeWriter(file.toString() + ".csv", routeData);
 		}
 	}
+	
 
     /**
      * Initialises all the nodes. Also fills all columns in each tables with the correct objects from current storage.
@@ -569,6 +587,8 @@ public class TablesScreenController {
     	noDataLabel.setVisible(true);
     	nothingLabel.setVisible(false);
 
+    	//TODO clean up
+    	
     	// Random objects for testing
 
     	/*CurrentStorage.addRetailer(new Retailer(23.45, 127.3, "Retailer new", "Bikes", "We sell bikes", 1));
@@ -695,7 +715,6 @@ public class TablesScreenController {
         assert wifiTable != null : "fx:id=\"wifiTable\" was not injected: check your FXML file 'TablesScreen.fxml'.";
         assert wifiTypeCol != null : "fx:id=\"wifiTypeCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
 
-
-}
+    }
 
 }

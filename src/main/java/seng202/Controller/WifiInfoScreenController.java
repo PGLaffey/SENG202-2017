@@ -98,14 +98,13 @@ public class WifiInfoScreenController {
     private Wifi wifi;
 
     private Integer wifiIndex;
-
     private Wifi oldWifi;
 
 
 
     /**
      * Method when the ok button is pressed, hides the pop up.
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void okPressed(ActionEvent event) {
@@ -113,9 +112,10 @@ public class WifiInfoScreenController {
     	stage.hide();
     }
     
+    
     /**
      * Method when the update button is pressed, displays screen to update selected wifi point
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void updatePressed(ActionEvent event) {
@@ -143,6 +143,7 @@ public class WifiInfoScreenController {
     	cancelButton.setVisible(true);
     }
     
+    
     /**
      * Checks the input is able to be parsed to a Double
      * @param s String to be checked
@@ -157,6 +158,7 @@ public class WifiInfoScreenController {
         }
     }
 
+    
     /**
      * Checks the input is able to be parsed to an Integer
      * @param s String to be checked
@@ -171,13 +173,13 @@ public class WifiInfoScreenController {
         }
     }
     
+    
     /**
      * Method when the save button is pressed
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void savePressed(ActionEvent event) {
-
     	nameLabel.setTextFill(Color.BLACK);
         ssidLabel.setTextFill(Color.BLACK);
         addressLabel.setTextFill(Color.BLACK);
@@ -231,14 +233,17 @@ public class WifiInfoScreenController {
                 exporter.connectDb();
                 exporter.updateLocation(oldWifi, CurrentStorage.getWifiArray().get(wifiIndex));
                 exporter.closeConnection();
-            } catch (Exception e) {
+            } 
+            catch (Exception e) {
                 e.printStackTrace();
             }
 
             cancelPressed(event);
         }
     }
-
+    
+    
+    //TODO add docstring
     @FXML
     void cancelPressed (ActionEvent event) {
         nameLabel.setText("Name: " + CurrentStorage.getWifiArray().get(wifiIndex).getName());
@@ -258,7 +263,9 @@ public class WifiInfoScreenController {
         okButton.setVisible(true);
         updateButton.setVisible(true);
     }
+    
 
+    //TODO add docstring
     @FXML
     void showWifiOnMap(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
@@ -319,8 +326,5 @@ public class WifiInfoScreenController {
         assert okButton != null : "fx:id=\"okButton\" was not injected: check your FXML file 'WifiInfoScreen.fxml'.";
         assert providerLabel != null : "fx:id=\"providerLabel\" was not injected: check your FXML file 'WifiInfoScreen.fxml'.";
         assert typeLabel != null : "fx:id=\"typeLabel\" was not injected: check your FXML file 'WifiInfoScreen.fxml'.";
-
-
     }
-
 }
