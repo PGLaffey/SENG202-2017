@@ -654,13 +654,32 @@ public class DataFetcher {
      */
     public void loadAllLocations() {
     	try {
-    		//Initialize the query to fetch all locations from the database and its result set
-    		Statement qryLoadLocations = connect.createStatement();
-			ResultSet output = qryLoadLocations.executeQuery("SELECT * FROM tblLocations");
-	    	//Loop while there a another location to be loaded from the database
+    		//Initialize the query to fetch all Locations from the database and its result set
+    		PreparedStatement qryLoadLocations = connect.prepareStatement("SELECT * FROM tblLocations");
+			ResultSet output = qryLoadLocations.executeQuery();
+			boolean secret = false;
+			int ownerID = 0;
+	    	//Loop while there a another Location to be loaded from the database
 			while (output.next()) {
-				loadLocation(output);
-    		}
+				secret = output.getBoolean(6);
+				//Checks if the Location is set to be secret
+				if (secret) {
+					ownerID = output.getInt(5);
+					//Checks if the Location belongs to a User
+					if (ownerID != 0) {
+						String currUser = CurrentStorage.getUser().getUsername();
+						PreparedStatement qryOwner = connect.prepareStatement("SELECT Username FROM tblUser WHERE UserID = ?");
+						qryOwner.setInt(1, ownerID);
+						ResultSet ownerOutput = qryOwner.executeQuery();
+						String owner = ownerOutput.getString(1);
+						//Checks if the currently loaded User is the Owner of the Location
+						//If so continue loading the Location
+						if (currUser.equals(owner)) {
+							loadLocation(output);
+						}
+					}
+				}
+			}
 		} 
     	//Prints the correct error statements if an SQLException occurs
     	catch (SQLException ex) {
