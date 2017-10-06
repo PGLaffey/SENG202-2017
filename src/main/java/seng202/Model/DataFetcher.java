@@ -56,27 +56,32 @@ public class DataFetcher {
     	int zip = newLocation.getZip();
     	int oldID = findLocation(oldLocation);
 
-    	String stmt = "UPDATE tblToilets SET Latitude = ?, Longitude = ?, Name = ?, Public = ?, "
-    			+ "Borough = ?, Zip = ?, Address = ? WHERE LocationID = ?";
-    	ArrayList<String> params = new ArrayList<String>();
-    	Collections.addAll(params, String.valueOf(latitude), String.valueOf(longitude), 
-			    				name, String.valueOf(secret), borough, String.valueOf(zip), address, String.valueOf(oldID));
-		runUpdate(stmt, params);
-		
-		stmt = "SELECT * FROM tblLocations WHERE LocationID = ?";
-		params = new ArrayList<String>();
-		params.add(String.valueOf(oldID));
-		ArrayList<String> location = runQuery(stmt, params).get(0);
-		switch(type) {
-		case 0:
-			updateToilet((Toilet) newLocation, Integer.parseInt(location.get(7)));
-		case 1:
-			updatePoi((Poi) newLocation, Integer.parseInt(location.get(8)));
-		case 2:
-			updateRetailer((Retailer) newLocation, Integer.parseInt(location.get(9)));
-		case 3:
-			 	updateWifi((Wifi) newLocation, Integer.parseInt(location.get(10)));
-		}
+    	if (oldID != 0) {
+	    	String stmt = "UPDATE tblLocations SET Latitude = ?, Longitude = ?, Name = ?, Public = ?, "
+	    			+ "Borough = ?, Zip = ?, Address = ? WHERE LocationID = ?";
+	    	ArrayList<String> params = new ArrayList<String>();
+	    	Collections.addAll(params, String.valueOf(latitude), String.valueOf(longitude), 
+				    				name, String.valueOf(secret), borough, String.valueOf(zip), address, String.valueOf(oldID));
+			runUpdate(stmt, params);
+			
+			stmt = "SELECT * FROM tblLocations WHERE LocationID = ?";
+			params = new ArrayList<String>();
+			params.add(String.valueOf(oldID));
+			ArrayList<String> location = runQuery(stmt, params).get(0);
+			switch(type) {
+			case 0:
+				updateToilet((Toilet) newLocation, Integer.parseInt(location.get(7)));
+			case 1:
+				updatePoi((Poi) newLocation, Integer.parseInt(location.get(8)));
+			case 2:
+				updateRetailer((Retailer) newLocation, Integer.parseInt(location.get(9)));
+			case 3:
+				 	updateWifi((Wifi) newLocation, Integer.parseInt(location.get(10)));
+			}
+    	}
+    	else {
+    		System.out.println("Location does not exisit in the database. Did you mean to add it?");
+    	}
     }
    
     
@@ -238,8 +243,14 @@ public class DataFetcher {
 		storeNewPoi();
 		storeNewGeneral();
 		storeUser();
+		storeNewRoutes();
 	}
 
+	
+	private void storeNewRoutes() {
+		
+	}
+	
 	
 	/**
 	 * Updates the user's information on the database
@@ -765,7 +776,6 @@ public class DataFetcher {
 				owner = null;
 			}
 		}
-    	
     	String stmt = "INSERT INTO tblRoutes "
 				+ "(StartID, EndID, Public, User, Name, BikeID, Gender) VALUES "
 				+ "(?, ?, ?, ?, ?)";
@@ -788,8 +798,10 @@ public class DataFetcher {
 		ArrayList<String> params = new ArrayList<String>();
 		Collections.addAll(params, String.valueOf(coords[0]), String.valueOf(coords[1]),
 				String.valueOf(type), location.getName());
-		String locationID = runQuery(stmt, params).get(0).get(0);
-    	return Integer.parseInt(locationID);
+		if (runQuery(stmt, params).isEmpty()) {
+			return 0;
+		}
+    	return Integer.parseInt(runQuery(stmt, params).get(0).get(0));
     }
     
     
@@ -1007,7 +1019,7 @@ public class DataFetcher {
     	try {
     		//Tells the driver manager of jdbc to create a connection to a database of type mysql with the ip 222.152.179.135, through port 3306, named cyclrr, using user 'monitor' and password 'Team5Pass'
     		//Following line the 192.168.1.70 needs to be 125.239.188.8 if outside of Patrick's network
-    		connect = DriverManager.getConnection("jdbc:mysql://192.168.1.70:3306/cyclrr","monitor","Team5Pass");
+    		connect = DriverManager.getConnection("jdbc:mysql://125.239.188.8:3306/cyclrr","monitor","Team5Pass");
     	}
     	catch (SQLException ex) {
     		printSqlError(ex);
