@@ -30,6 +30,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.omg.CORBA.Current;
 import seng202.Model.*;
+import seng202.team5.Main;
 
 import java.io.File;
 import java.io.IOException;
@@ -790,12 +791,14 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     void retailerIconPressed(ActionEvent event) {
         map.clearMarkers();
         directionsRenderer.clearDirections();
-        for (Retailer retailer : CurrentStorage.getRetailerArray()) {
+        if (!Map.getRetailerVisible()) {
+            for (Retailer retailer : CurrentStorage.getRetailerArray()) {
                 Map.findRetailers(retailer, map);
+            }
+        } else {
+            map.clearMarkers();
+            Map.setRetailerVisible(false);
         }
-
-
-        Map.setRetailerVisible(!Map.getRetailerVisible());
     }
 
     
@@ -825,8 +828,13 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     @FXML
     void toiletIconPressed(ActionEvent event) {
         map.clearMarkers();
-        for (Toilet toilet : CurrentStorage.getToiletArray()) {
-            Map.findToilets(toilet, map);
+        if (!Map.getToiletVisible()) {
+            for (Toilet toilet : CurrentStorage.getToiletArray()) {
+                Map.findToilets(toilet, map);
+            }
+        } else {
+            map.clearMarkers();
+            Map.setToiletVisible(false);
         }
     }
 
@@ -838,10 +846,16 @@ public class MainScreenController implements MapComponentInitializedListener, Di
      */
     @FXML
     void wifiIconPressed(ActionEvent event) {
+
         map.clearMarkers();
-        directionsRenderer.clearDirections();
-        for (Wifi wifi : CurrentStorage.getWifiArray()) {
-            Map.findWifi(wifi, map);
+        if (!Map.getWifiVisible()) {
+            directionsRenderer.clearDirections();
+            for (Wifi wifi : CurrentStorage.getWifiArray()) {
+                Map.findWifi(wifi, map);
+            }
+        } else {
+            map.clearMarkers();
+            Map.setWifiVisible(false);
         }
     }
 

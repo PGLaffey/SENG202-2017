@@ -29,9 +29,9 @@ public class Map {
     private static GeocodingService geoService;
     private static boolean retailerVisible = false;
     private static boolean routeStartVisible = false;
-//    private static boolean wifiVisible = false;
-//    private static boolean toiletVisible = false;
-//    private static boolean poiStartVisible = false;
+    private static boolean wifiVisible = false;
+    private static boolean toiletVisible = false;
+    private static boolean poiVisible = false;
     private static LatLong startLoc = null;
     private static LatLong endLoc = null;
 
@@ -56,7 +56,30 @@ public class Map {
         return retailerVisible;
     }
 
-    
+    public static boolean getToiletVisible() {
+        return toiletVisible;
+    }
+
+    public static void setToiletVisible(boolean value) {
+        toiletVisible = value;
+    }
+
+    public static boolean getWifiVisible() {
+        return wifiVisible;
+    }
+
+    public static void setWifiVisible(boolean value) {
+        wifiVisible = value;
+    }
+
+    public static boolean getPoiVisible() {
+        return poiVisible;
+    }
+
+    public static void setPoiVisible(boolean value) {
+        poiVisible = value;
+    }
+
     /**
      * Getter for whether the routes are visible on the map
      * @return If the routes are visible
@@ -378,6 +401,7 @@ public class Map {
             map.addMarker(wifiMarker);
         } else {
             map.addMarker(wifi.getCircle());
+            wifiVisible = true;
         }
 
     }
@@ -405,6 +429,7 @@ public class Map {
             map.addMarker(toiletMark);
         } else {
             map.addMarker(toilet.getMarker());
+            toiletVisible = true;
         }
     }
 
@@ -425,11 +450,14 @@ public class Map {
                     .visible(true)
                     .icon("http://maps.google.com/mapfiles/kml/pal3/icon26.png"); //Obtains the correct image for the marker.
             retailer.setMarker(new Marker(markerOptns));
-
+            System.out.println(retailer.getMarker().getVisible());
             map.addMarker(retailer.getMarker());
+            retailerVisible = true;
         } else {
             map.addMarker(retailer.getMarker());
+            retailerVisible = true;
         }
+
     }
 
     /**
@@ -449,6 +477,7 @@ public class Map {
             map.addMarker(poi.getMarker());
         } else {
             map.addMarker(poi.getMarker());
+            poiVisible = true;
         }
     }
 
