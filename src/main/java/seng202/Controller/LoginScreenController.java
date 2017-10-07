@@ -26,14 +26,12 @@ public class LoginScreenController {
 	@FXML
 	private Button signUpButton;
 
-	
 	@FXML
 	private Label incorrectPasswordLbl;
 
 	@FXML
 	private Label incorrectUserLbl;
-	
-	
+
 	/** 
 	 * Method for when the Sign In button is pressed. Checks the login, informing if information is wrong otherwise shows login screen.
 	 */
