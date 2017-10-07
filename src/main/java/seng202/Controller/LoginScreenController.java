@@ -58,14 +58,14 @@ public class LoginScreenController {
 				primaryStage.setScene(new Scene(root));
 			} 
 			else {
-				incorrectUserLbl.setVisible(true);
+				//incorrectUserLbl.setVisible(true);
 				incorrectPasswordLbl.setVisible(true);
 			}
 		
 		} 
 		else {
 			incorrectPasswordLbl.setVisible(false);
-			incorrectUserLbl.setVisible(false);
+			//incorrectUserLbl.setVisible(false);
 		}
 		data.closeConnection();
 	}
