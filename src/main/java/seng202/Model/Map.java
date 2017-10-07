@@ -1,5 +1,6 @@
 package seng202.Model;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -9,8 +10,6 @@ import com.lynden.gmapsfx.service.directions.*;
 import com.lynden.gmapsfx.service.geocoding.GeocoderStatus;
 import com.lynden.gmapsfx.service.geocoding.GeocodingResult;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
-import com.lynden.gmapsfx.shapes.Circle;
-import com.lynden.gmapsfx.shapes.CircleOptions;
 import javafx.scene.control.Alert;
 
 import java.io.InputStream;
@@ -30,6 +29,9 @@ public class Map {
     private static GeocodingService geoService;
     private static boolean retailerVisible = false;
     private static boolean routeStartVisible = false;
+//    private static boolean wifiVisible = false;
+//    private static boolean toiletVisible = false;
+//    private static boolean poiStartVisible = false;
     private static LatLong startLoc = null;
     private static LatLong endLoc = null;
 
@@ -117,7 +119,15 @@ public class Map {
         }
     }
 
-    
+    public static void resetStartMarker() {
+        startMarker = null;
+    }
+
+    public static void resetEndMarker() {
+        endMarker = null;
+    }
+
+
     /**
      * Repositions or sets the end marker
      * @param latLong A LatLong object of the mouse position
@@ -216,22 +226,7 @@ public class Map {
      * @return The displacement between the two points in metres.
      */
     public static double getDistance(LatLong start, LatLong end) {
-        double srcLat = start.getLatitude();
-        double srcLong = start.getLongitude();
-        double destLat = end.getLatitude();
-        double destLong = end.getLongitude();
-
-        double earthRadius = 6371e3; // metres
-        double lat1 = toRadians(srcLat);
-        double lat2 = toRadians(destLat);
-        double phi = toRadians(destLat-srcLat);
-        double delta = toRadians(destLong-srcLong);
-
-        double a = (Math.sin(phi/2) * Math.sin(phi/2)) + Math.cos(lat1) * Math.cos(lat2) * (Math.sin(delta/2) * Math.sin(delta/2));
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        double distance = earthRadius * c;
-
-        return distance;
+        return getDistance(start.getLatitude(), start.getLongitude(), end.getLatitude(), end.getLongitude());
     }
 
     
@@ -243,18 +238,12 @@ public class Map {
     public static void findLocation(Location givenLocation, GoogleMap map) {
         String locationName = givenLocation.getName();
         LatLong latLong = new LatLong(givenLocation.getLatitude(), givenLocation.getLongitude());
-        MarkerOptions markOptns = new MarkerOptions().animation(Animation.DROP).position(latLong);
-        switch(givenLocation.getLocationType()) {
-            case 0:
-                markOptns.icon("http://google.com/mapfiles/ms/micons/green-dot");
-                break;
-            //case 2:
-                //markOptns.icon("http://google.com/mapfiles/ms/micons/green-dot");
-                //break;
-            case 3:
-                markOptns.icon("http://google.com/mapfiles/ms/micons/green-dot");
-                break;
-        }
+
+        MarkerOptions markOptns = new MarkerOptions()
+                .animation(Animation.DROP)
+                .position(latLong)
+                .title(locationName);
+
         map.addMarker(new Marker(markOptns));
         map.setCenter(latLong);
     }
@@ -287,6 +276,18 @@ public class Map {
             map.addMarker(new Marker(new MarkerOptions().animation(Animation.DROP).position(latLong)));
             // Centres the map on the marker
             map.setCenter(latLong);
+            ArrayList<Location> nearby = findNearby(latLong.getLatitude(), latLong.getLongitude());
+            for (Location loc : nearby) {
+                if (loc.getLocationType() == 0) {
+                    Map.findLocation(loc, map);
+                } else if (loc.getLocationType() == 1) {
+                    Map.findPoi((Poi) loc, map);
+                } else if (loc.getLocationType() == 2) {
+                    Map.findRetailers((Retailer) loc, map);
+                } else if (loc.getLocationType() == 3) {
+                    Map.findWifi((Wifi) loc, map);
+                }
+            }
         });
     }
 
@@ -338,7 +339,6 @@ public class Map {
         service.getRoute(request, callback, new DirectionsRenderer(true, mapView.getMap(), pane));
     }
 
-    
     /**
      * Finds a given route on the map
      * @param route The route to find
@@ -347,11 +347,12 @@ public class Map {
      * @param callback The DirectionsServiceCallback to return the results to.
      * @param pane The directionsPane to use in the DirectionsRenderer.
      */
-    public void findRoute(Route route, GoogleMapView mapView, DirectionsService service, DirectionsServiceCallback callback, 
-    		DirectionsPane pane) {
+    public static void findRoute(Route route, GoogleMapView mapView,
+                          DirectionsService service, DirectionsServiceCallback callback, DirectionsPane pane) {
 
-        DirectionsRequest request = new DirectionsRequest(new LatLong(route.getStart().getLatitude(), route.getStart().getLongitude()),
-                new LatLong(route.getEnd().getLatitude(), route.getEnd().getLongitude()), TravelModes.BICYCLING);
+
+        DirectionsRequest request = new DirectionsRequest(route.getStart().getLatitude()+", "+ route.getStart().getLongitude(),
+                route.getEnd().getLatitude()+","+ route.getEnd().getLongitude(), TravelModes.BICYCLING);
 
         service.getRoute(request, callback, new DirectionsRenderer(true, mapView.getMap(), pane));
     }
@@ -363,65 +364,74 @@ public class Map {
      * @return The location of the pointer on the map
      */
     public static void findWifi(Wifi wifi, GoogleMap map) {
-        System.out.println("WEEWOO");
         //Creates a new circle and places it on a map.
-        CircleOptions circleOptns = new CircleOptions()
-                .center(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
-                .radius(70)
-                .draggable(false)
-                .clickable(false)
-                .fillOpacity(0.01)
-                .fillColor("Blue")
-                .strokeColor("Blue")
-                .strokeWeight(0.2);
-        wifi.setCircle(new Circle(circleOptns));
-        map.addMapShape(wifi.getCircle());
+
+        if (wifi.getCircle() == null) {
+            MarkerOptions wifiMarkOptns = new MarkerOptions()
+                    .title(wifi.getSsid())
+                    .animation(Animation.DROP)
+                    .visible(true)
+                    .position(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
+                    .icon("http://maps.google.com/mapfiles/ms/micons/blue-dot.png");
+            Marker wifiMarker = new Marker(wifiMarkOptns);
+            wifi.setMarker(wifiMarker);
+            map.addMarker(wifiMarker);
+        } else {
+            map.addMarker(wifi.getCircle());
+        }
+
     }
 
     
     /**
-     * Sets markers for the retailers on the map
-     * @param retailer Retailer object to be used
+     * Sets marker for the toilets on the map
+     * @param toilet - Toilet object to find
+     * @param map - map to place marker on
      */
-    public static Marker findRetailers(Retailer retailer) {
-        // Loops through a list of known addresses. This is to reduce the amount of requests that are made.
-        if (retailer.getLatitude() == -91 || retailer.getLongitude() == -181) {
-            for (Coord coord : CurrentStorage.getCoords()) {
-                //TODO: check if the address of the new retailer has already been found.
-                if (retailer.getAddress().equalsIgnoreCase(coord.getAddress())) {
-                    if (coord.hasMarker()) {
-                        retailer.setNoMarker(true);
-                        retailer.setCoord(coord);
-                        break;
-                    }
-                }
+    public static void findToilets(Toilet toilet, GoogleMap map) {
+        if (toilet.getMarker() == null) {
+            MarkerOptions toiletMarkOptns = new MarkerOptions().animation(Animation.DROP)
+                    .position(new LatLong(toilet.getLatitude(), toilet.getLongitude()))
+                    .visible(true)
+                    .icon("http://maps.google.com/mapfiles/ms/micons/toilets.png");
+
+            if (toilet.getAddress() == null) {
+                toiletMarkOptns.title(toilet.getName() + "\n" + toilet.getLatitude() + ", " + toilet.getLongitude());
+            } else {
+                toiletMarkOptns.title(toilet.getName() + "\n" + toilet.getAddress());
             }
+            Marker toiletMark = new Marker(toiletMarkOptns);
+            toilet.setMarker(toiletMark);
+            map.addMarker(toiletMark);
+        } else {
+            map.addMarker(toilet.getMarker());
         }
-        //Obtain the position for the marker and convert into the format required.
-        LatLong latLong = new LatLong(retailer.getLatitude(), retailer.getLongitude());
-
-        // Set up the marker options
-        MarkerOptions markerOptns = new MarkerOptions()
-                .animation(Animation.DROP)
-                .position(latLong)
-                .title(retailer.toString())
-                .visible(retailerVisible) // sets it to false and inverts it.
-                .icon("http://maps.google.com/mapfiles/kml/pal3/icon26.png"); //Obtains the correct image for the marker.
-        retailer.setMarker(new Marker(markerOptns));
-
-        retailer.getMarker().setVisible(!retailerVisible);
-
-        // Sets the corresponding coord so that it has a marker.
-        for (Coord coord : CurrentStorage.getCoords()) {
-            if (retailer.getAddress().equalsIgnoreCase(coord.getAddress())) {
-                retailer.setCoord(coord);
-                coord.setHasMarker(true);
-            }
-        }
-        return retailer.getMarker();
     }
 
-    
+    /**
+     * Sets markers for the retailers into a cluster
+     * @param retailer retailer object to be used
+     */
+    public static void findRetailers(Retailer retailer, GoogleMap map) {
+        if (retailer.getMarker() == null) {
+            //Obtain the position for the marker and convert into the format required.
+            LatLong latLong = new LatLong(retailer.getLatitude(), retailer.getLongitude());
+
+            // Set up the marker options
+            MarkerOptions markerOptns = new MarkerOptions()
+                    .animation(Animation.DROP)
+                    .position(latLong)
+                    .title(retailer.getName())
+                    .visible(true)
+                    .icon("http://maps.google.com/mapfiles/kml/pal3/icon26.png"); //Obtains the correct image for the marker.
+            retailer.setMarker(new Marker(markerOptns));
+
+            map.addMarker(retailer.getMarker());
+        } else {
+            map.addMarker(retailer.getMarker());
+        }
+    }
+
     /**
      * Method to find place of interest using the google maps API
      * @param poi Place of interest to find
@@ -429,22 +439,16 @@ public class Map {
      */
     public static void findPoi(Poi poi, GoogleMap map) {
         if (poi.getMarker() == null) {
-                LatLong latLong = new LatLong(poi.getLatitude(), poi.getLongitude());
-                Marker marker = new Marker(new MarkerOptions()
-                        .animation(Animation.DROP)
-                        .position(latLong)
-                        .icon("http://labs.google.com/ridefinder/images/mm_20_yellow.png"));
+            LatLong latLong = new LatLong(poi.getLatitude(), poi.getLongitude());
+            Marker marker = new Marker(new MarkerOptions()
+                    .animation(Animation.DROP)
+                    .position(latLong)
+                    .icon("http://maps.google.com/mapfiles/kml/pal4/icon46.png"));
 
-                poi.setMarker(marker);
-                map.addMarker(poi.getMarker());
-
-                // Toggles the visibility of the place of interest.
-                poi.getMarker().setVisible(!poi.getMarker().getVisible());
-
-        } 
-        else {
-            // If the place of interest already has a marker, then just toggle its visibility
-            poi.getMarker().setVisible(!poi.getMarker().getVisible());
+            poi.setMarker(marker);
+            map.addMarker(poi.getMarker());
+        } else {
+            map.addMarker(poi.getMarker());
         }
     }
 
@@ -489,32 +493,32 @@ public class Map {
     public static ArrayList<Location> findNearby(double locLat, double locLong) {
         ArrayList<Location> nearby = new ArrayList<Location>();
 
-        // Loops through the retailers in the list and checks if the location is within 50 metres of the retailer
+        // Loops through the retailers in the list and checks if the location is within 100 metres of the retailer
         for (Retailer retailer : CurrentStorage.getRetailerArray()) {
             if (Map.getDistance(locLat, locLong,
-                    retailer.getLatitude(), retailer.getLongitude() ) < 50) {
+                    retailer.getLatitude(), retailer.getLongitude() ) < 100) {
                 nearby.add(retailer);
             }
         }
 
-        // Loops through the wifi in the list and checks if the location is within 50 metres of the wifi
+        // Loops through the wifi in the list and checks if the location is within 100 metres of the wifi
         for (Wifi wifi : CurrentStorage.getWifiArray()) {
             if (Map.getDistance(locLat, locLong,
-                    wifi.getLatitude(), wifi.getLongitude()) < 50) {
+                    wifi.getLatitude(), wifi.getLongitude()) < 100) {
                 nearby.add(wifi);
             }
         }
-        
-        // Loops through the POI in the list and checks if the location is within 50 metres of the POI
+
+        // Loops through the POI in the list and checks if the location is within 100 metres of the POI
         for (Poi poi : CurrentStorage.getPoiArray()) {
-            if (Map.getDistance(locLat, locLong, poi.getLatitude(), poi.getLongitude()) < 50) {
+            if (Map.getDistance(locLat, locLong, poi.getLatitude(), poi.getLongitude()) < 100) {
                 nearby.add(poi);
             }
         }
 
-        // Loops through the toilets in the list and checks if the location is within 50 metres of the toilet
+        // Loops through the toilets in the list and checks if the location is within 100 metres of the toilet
         for (Toilet toilet : CurrentStorage.getToiletArray()) {
-            if (Map.getDistance(toilet.getLatitude(), toilet.getLongitude(), locLat, locLong) < 50) {
+            if (Map.getDistance(toilet.getLatitude(), toilet.getLongitude(), locLat, locLong) < 100) {
                 nearby.add(toilet);
             }
         }

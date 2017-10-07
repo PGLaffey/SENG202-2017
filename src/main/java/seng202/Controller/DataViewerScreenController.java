@@ -25,7 +25,6 @@ import static oracle.jrockit.jfr.events.Bits.intValue;
 
 public class DataViewerScreenController {
 	
-	
 	@FXML
 	private Button mapButton;
 	
@@ -93,7 +92,7 @@ public class DataViewerScreenController {
 	
 	/** 
 	 * Method for when the table menu button is pressed, shows the raw tables screen.
-	 * @param event
+	 * @param event Auto-generated event when button pressed
 	 * @throws IOException
 	 */
 	@FXML
@@ -110,7 +109,8 @@ public class DataViewerScreenController {
 			primaryStage.setTitle("Table");
 			primaryStage.setScene(scene);
 			primaryStage.show();
-		} catch (Exception e){
+		} 
+		catch (Exception e){
 			Stage stage = new Stage();
 			Parent root = FXMLLoader.load(getClass().getResource("/DataLoadingScreen.fxml"));
 
@@ -165,7 +165,7 @@ public class DataViewerScreenController {
 	 * Method for when the Logout button is pressed, shows the login screen and flushes the current storage.
 	 * @throws IOException 
 	 */
-	public void logoutPressed() throws IOException {
+	public void logoutPressed() {
 		DataFetcher exporter = new DataFetcher();
 		try {
 			exporter.connectDb();
@@ -173,7 +173,8 @@ public class DataViewerScreenController {
 			exporter.closeConnection();
 			CurrentStorage.flush();
 			System.exit(0);
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -197,6 +198,5 @@ public class DataViewerScreenController {
         distNextBadge.setText(CurrentStorage.getUser().getBadges().get(0).getStrRemaining());
         timeNextBadge.setText(CurrentStorage.getUser().getBadges().get(1).getStrRemaining());
 		routesNextbadge.setText(CurrentStorage.getUser().getBadges().get(2).getStrRemaining());
-
 	}
 }

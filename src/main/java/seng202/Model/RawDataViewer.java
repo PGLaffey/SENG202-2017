@@ -1,13 +1,15 @@
 package seng202.Model;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 
 /**
  * The raw data viewer class of the program.
  */
 public class RawDataViewer {
-	
-	
+
+    private ArrayList<Route> routeArrayList = new ArrayList<Route>();
+    private static DataFetcher fetcher = new DataFetcher();
     public RawDataViewer() {
         CurrentStorage.getRouteArray();
     }

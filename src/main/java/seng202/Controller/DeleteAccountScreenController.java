@@ -32,7 +32,7 @@ public class DeleteAccountScreenController {
 
     /**
      * Method when the no button is pressed, hides the pop up without changing the user/account
-     * @param event
+     * @param event Auto-generated event on button press
      * @throws IOException
      */
     @FXML
@@ -43,15 +43,12 @@ public class DeleteAccountScreenController {
 		primaryStage.setTitle("Profile");
 		primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
 		primaryStage.show();
-}
+    }
 
+    
     /**
      * Method when the yes button is pressed. Deletes the user from the database and returns to the login screen.
-     * @param event
-     * @throws IllegalAccessException
-     * @throws ClassNotFoundException
-     * @throws InstantiationException
-     * @throws IOException
+     * @param event Auto-generated event on button press
      */
     @FXML
     void yesButtonPressed(ActionEvent event) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException {
@@ -64,18 +61,16 @@ public class DeleteAccountScreenController {
     	stage.hide();	// TODO: Work out how to then change primaryStage to login screen
         Stage primaryStage = (Stage) yesButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
-        //data.closeConnection();
+        data.closeConnection();
         primaryStage.setTitle("Login");
         primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
         primaryStage.show();
     }
 
+    
     @FXML
     void initialize() {
         assert noButton != null : "fx:id=\"noButton\" was not injected: check your FXML file 'DeleteAccountScreen.fxml'.";
         assert yesButton != null : "fx:id=\"yesButton\" was not injected: check your FXML file 'DeleteAccountScreen.fxml'.";
-
-
     }
-
 }

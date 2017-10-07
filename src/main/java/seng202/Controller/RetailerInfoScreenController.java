@@ -1,5 +1,12 @@
 package seng202.Controller;
 
+
+import com.lynden.gmapsfx.MapReadyListener;
+import com.lynden.gmapsfx.javascript.object.Animation;
+import com.lynden.gmapsfx.javascript.object.LatLong;
+import com.lynden.gmapsfx.javascript.object.Marker;
+import com.lynden.gmapsfx.javascript.object.MarkerOptions;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -7,12 +14,24 @@ import com.sun.org.apache.bcel.internal.generic.RET;
 import com.sun.org.apache.regexp.internal.RE;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import seng202.Model.CurrentStorage;
-import seng202.Model.DataFetcher;
-import seng202.Model.Retailer;
+
+import org.omg.CORBA.Current;
+import seng202.Model.*;
+import seng202.team5.Main;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
 
 
 public class RetailerInfoScreenController {
@@ -69,19 +88,22 @@ public class RetailerInfoScreenController {
     private Button updateButton;
 
     @FXML
+    private Button showOnMapButton;
+
+    @FXML
     private Label zipLabel;
 
     @FXML
     private TextField zipText;
-    
-    private Integer retailerIndex;
 
     private Retailer oldRetailer;
+
+    private Retailer newRetailer;
 
 
     /**
      * Method when the ok button is pressed, hides the pop up.
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void okPressed(ActionEvent event) {
@@ -89,22 +111,23 @@ public class RetailerInfoScreenController {
     	stage.hide();
     }
     
+    
     /** 
      * Method when the update button is pressed, opens screen for user to update the selected poi
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void updatePressed(ActionEvent event) {
     	boroughText.setVisible(true);
-    	boroughText.setText(CurrentStorage.getRetailerArray().get(retailerIndex).getBorough());
+    	boroughText.setText(newRetailer.getBorough());
     	productText.setVisible(true);
-    	productText.setText(CurrentStorage.getRetailerArray().get(retailerIndex).getProduct());
+    	productText.setText(newRetailer.getProduct());
     	descriptionText.setVisible(true);
-    	descriptionText.setText(CurrentStorage.getRetailerArray().get(retailerIndex).getDescription());
+    	descriptionText.setText(newRetailer.getDescription());
     	nameText.setVisible(true);
-    	nameText.setText(CurrentStorage.getRetailerArray().get(retailerIndex).getName());
+    	nameText.setText(newRetailer.getName());
     	zipText.setVisible(true);
-    	zipText.setText(String.valueOf(CurrentStorage.getRetailerArray().get(retailerIndex).getZip()));;
+    	zipText.setText(String.valueOf(newRetailer.getZip()));;
     	boroughLabel.setText("Borough: ");
     	productLabel.setText("Product: ");
     	descriptionLabel.setText("Description: ");
@@ -115,6 +138,7 @@ public class RetailerInfoScreenController {
     	saveButton.setVisible(true);
     	cancelButton.setVisible(true);
     }
+    
     
     /**
      * Checks the input is able to be parsed to a Double
@@ -130,6 +154,7 @@ public class RetailerInfoScreenController {
         }
     }
 
+    
     /**
      * Checks the input is able to be parsed to an Integer
      * @param s String to be checked
@@ -143,7 +168,54 @@ public class RetailerInfoScreenController {
             return false;
         }
     }
+
+    @FXML
+    void showRetailerOnMap(ActionEvent event) throws IOException{
+        Retailer retailer = newRetailer;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
+        Parent root = loader.load();
+
+        Main.getStage().setScene(new Scene(root, Main.getStage().getScene().getWidth(), Main.getStage().getScene().getHeight()));
+        Main.getStage().setTitle("Map");
+
+        MainScreenController controller = loader.getController();
+        controller.getMapView().addMapReadyListener(new MapReadyListener() {
+            @Override
+            public void mapReady() {
+                controller.getMapView().getMap().clearMarkers();
+                Map.findRetailers(retailer, controller.getMapView().getMap());
+                controller.getMapView().getMap().setCenter(new LatLong(retailer.getLatitude(), retailer.getLongitude()));
+                controller.getMapView().getMap().addMarker(
+                        new Marker(
+                                new MarkerOptions().animation(Animation.DROP)
+                                        .position(new LatLong(retailer.getLatitude(), retailer.getLongitude()))
+                        )
+                );
+                ArrayList<Location> nearby = Map.findNearby(retailer.getLatitude(), retailer.getLongitude());
+
+                for (Location loc : nearby) {
+                    if (loc.getLocationType() == 0) {
+                        Map.findToilets((Toilet) loc, controller.getMapView().getMap());
+                    } else if (loc.getLocationType() == 1) {
+                        Map.findPoi((Poi) loc, controller.getMapView().getMap());
+                    } else if (loc.getLocationType() == 2) {
+                        Map.findRetailers((Retailer) loc, controller.getMapView().getMap());
+                    } else if (loc.getLocationType() == 3) {
+                        Map.findWifi((Wifi) loc, controller.getMapView().getMap());
+                    }
+                }
+            }
+        });
+        Main.getStage().show();
+    }
+
+
     
+    
+    /**
+     * TODO add docstring
+     * @param event Auto-generate event on button press
+     */
     @FXML
     void savePressed(ActionEvent event) {
     	
@@ -176,43 +248,43 @@ public class RetailerInfoScreenController {
         }
 
         if (allValid) {
-            CurrentStorage.getRetailerArray().get(retailerIndex).setBorough(boroughText.getText());
-            CurrentStorage.getRetailerArray().get(retailerIndex).setName(nameText.getText());
+            newRetailer.setBorough(boroughText.getText());
+            newRetailer.setName(nameText.getText());
         	if (!zipText.getText().equals("")) {
-                CurrentStorage.getRetailerArray().get(retailerIndex).setZip(Integer.parseInt(zipText.getText()));
+                newRetailer.setZip(Integer.parseInt(zipText.getText()));
 
         	}
-            CurrentStorage.getRetailerArray().get(retailerIndex).setDescription(descriptionText.getText());
-            CurrentStorage.getRetailerArray().get(retailerIndex).setProduct(productText.getText());
+            newRetailer.setDescription(descriptionText.getText());
+            newRetailer.setProduct(productText.getText());
 
         	// TODO: Work out how to update the database
 
             DataFetcher exporter = new DataFetcher();
             try {
                 exporter.connectDb();
-                exporter.updateLocation(oldRetailer, CurrentStorage.getRetailerArray().get(retailerIndex));
+                exporter.updateLocation(oldRetailer, newRetailer);
                 exporter.closeConnection();
-            } catch (Exception e) {
+            } 
+            catch (Exception e) {
                 e.printStackTrace();
             }
-
             cancelPressed(event);
-
         }
-
     }
     
+    
+    //TODO Add docstring
     @FXML
     void cancelPressed(ActionEvent event) {
-    	nameLabel.setText("Name: " + CurrentStorage.getRetailerArray().get(retailerIndex).getName());
+    	nameLabel.setText("Name: " + newRetailer.getName());
     	nameText.setVisible(false);
-    	zipLabel.setText("Zip: " + CurrentStorage.getRetailerArray().get(retailerIndex).getZip());
+    	zipLabel.setText("Zip: " + newRetailer.getZip());
     	zipText.setVisible(false);
-    	boroughLabel.setText("Borough: " + CurrentStorage.getRetailerArray().get(retailerIndex).getBorough());
+    	boroughLabel.setText("Borough: " + newRetailer.getBorough());
     	boroughText.setVisible(false);
-    	productLabel.setText("Product: " + CurrentStorage.getRetailerArray().get(retailerIndex).getProduct());
+    	productLabel.setText("Product: " + newRetailer.getProduct());
     	productText.setVisible(false);
-    	descriptionLabel.setText("Description: " + CurrentStorage.getRetailerArray().get(retailerIndex).getDescription());
+    	descriptionLabel.setText("Description: " + newRetailer.getDescription());
     	descriptionText.setVisible(false);
     	okButton.setVisible(true);
     	updateButton.setVisible(true);
@@ -221,19 +293,20 @@ public class RetailerInfoScreenController {
     }
     
 
+    //TODO add docstring
     @FXML
     void initialize() {
-        oldRetailer = new Retailer(CurrentStorage.getRetailerArray().get(CurrentStorage.getRetailerIndex()));
-        retailerIndex = CurrentStorage.getRetailerIndex();
+        newRetailer = CurrentStorage.getRetailerArray().get(CurrentStorage.getRetailerIndex());
+        oldRetailer = new Retailer(newRetailer);
 
-    	nameLabel.setText("Name: " + CurrentStorage.getRetailerArray().get(retailerIndex).getName());
-    	addressLabel.setText("Address: " + CurrentStorage.getRetailerArray().get(retailerIndex).getAddress());
-    	latLabel.setText("Latitude: " + CurrentStorage.getRetailerArray().get(retailerIndex).getLatitude());
-    	longLabel.setText("Longitude: " + CurrentStorage.getRetailerArray().get(retailerIndex).getLongitude());
-    	zipLabel.setText("Zip: " + CurrentStorage.getRetailerArray().get(retailerIndex).getZip());
-    	boroughLabel.setText("Borough: " + CurrentStorage.getRetailerArray().get(retailerIndex).getBorough());
-    	productLabel.setText("Product: " + CurrentStorage.getRetailerArray().get(retailerIndex).getProduct());
-    	descriptionLabel.setText("Description: " + CurrentStorage.getRetailerArray().get(retailerIndex).getDescription());
+    	nameLabel.setText("Name: " + newRetailer.getName());
+    	addressLabel.setText("Address: " + newRetailer.getAddress());
+    	latLabel.setText("Latitude: " + newRetailer.getLatitude());
+    	longLabel.setText("Longitude: " + newRetailer.getLongitude());
+    	zipLabel.setText("Zip: " + newRetailer.getZip());
+    	boroughLabel.setText("Borough: " + newRetailer.getBorough());
+    	productLabel.setText("Product: " + newRetailer.getProduct());
+    	descriptionLabel.setText("Description: " + newRetailer.getDescription());
     	
         assert addressLabel != null : "fx:id=\"addressLabel\" was not injected: check your FXML file 'RetailerInfoScreen.fxml'.";
         assert latLabel != null : "fx:id=\"latLabel\" was not injected: check your FXML file 'RetailerInfoScreen.fxml'.";
@@ -241,8 +314,5 @@ public class RetailerInfoScreenController {
         assert nameLabel != null : "fx:id=\"nameLabel\" was not injected: check your FXML file 'RetailerInfoScreen.fxml'.";
         assert okButton != null : "fx:id=\"okButton\" was not injected: check your FXML file 'RetailerInfoScreen.fxml'.";
         assert zipLabel != null : "fx:id=\"zipLabel\" was not injected: check your FXML file 'RetailerInfoScreen.fxml'.";
-
-
     }
-
 }

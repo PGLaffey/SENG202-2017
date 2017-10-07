@@ -45,9 +45,10 @@ public class SignupScreenController {
 
     @FXML Label wrongPasswordLbl;
     
+    
     /**
      * Creates an account if all fields are met and shows the login screen.
-     * @throws IOException
+	 * @param event Auto-generate event on button press
      */
     public void createBtnPressed(ActionEvent event) throws IOException, IllegalAccessException, ClassNotFoundException, InstantiationException {
         if (usernameLbl.getText().trim().isEmpty() || firstNameLbl.getText().trim().isEmpty() || lastNameLbl.getText().trim().isEmpty()){ //not sure why it's red
@@ -55,33 +56,34 @@ public class SignupScreenController {
         }
         else if (!passwordLbl.getText().equals(repeatPasswordLbl.getText())) {
             wrongPasswordLbl.setVisible(true);
-        } else {
-        String username = usernameLbl.getText().trim();
-        String first = firstNameLbl.getText().trim();
-        String last = lastNameLbl.getText().trim();
-        String birthDate = birthDatePicker.getValue().toString();
-        String password = passwordLbl.getText();
-
-        User newUser = new User(first, last, username, birthDate, password); //create new user - need to change id - TODO
-
-        DataFetcher data = new DataFetcher();
-        data.connectDb();
-        data.addUser(newUser);
-
-        Stage primaryStage = (Stage)createButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
-        primaryStage.setTitle("Login");
-        primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
+        } 
+        else {
+	        String username = usernameLbl.getText().trim();
+	        String first = firstNameLbl.getText().trim();
+	        String last = lastNameLbl.getText().trim();
+	        String birthDate = birthDatePicker.getValue().toString();
+	        String password = passwordLbl.getText();
+	
+	        User newUser = new User(first, last, username, birthDate, password); //create new user - need to change id - TODO
+	
+	        DataFetcher data = new DataFetcher();
+	        data.connectDb();
+	        data.addUser(newUser);
+	
+	        Stage primaryStage = (Stage)createButton.getScene().getWindow();
+	        Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
+	        primaryStage.setTitle("Login");
+	        primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
+	        data.closeConnection();
         }
     }
     
+    
     /**
      * Method for when the back button is pressed, shows the login screen.
-     * @param event
-     * @throws IOException
+     * @param event Auto-generate event on button press
      */
     public void backButtonPressed(ActionEvent event) throws IOException {
-		
 		Stage primaryStage = (Stage) backButton.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 		

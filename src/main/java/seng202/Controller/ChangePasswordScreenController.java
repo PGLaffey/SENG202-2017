@@ -18,7 +18,6 @@ import seng202.Model.CurrentStorage;
 import seng202.Model.DataFetcher;
 import seng202.Model.User;
 
-
 public class ChangePasswordScreenController {
 
     @FXML
@@ -50,6 +49,8 @@ public class ChangePasswordScreenController {
 
     @FXML
     private Label oldPasswordLbl;
+    
+    
     /** 
      * Method for when the cancel button is pressed, closes the window.
      * @param event
@@ -60,12 +61,12 @@ public class ChangePasswordScreenController {
     	Stage stage = (Stage) cancelButton.getScene().getWindow();
     	stage.hide();
     }
+    
 
     /**
      * Method for when the change password button is pressed.
      * Verifies the old and new password then runs the database query to update the users password
-     * @param event
-     * @throws IOException
+     * @param event Auto-generated event when button is pressed
      */
     @FXML
     void changePasswordButtonPressed(ActionEvent event) throws IOException, IllegalAccessException, ClassNotFoundException, InstantiationException {
@@ -74,18 +75,21 @@ public class ChangePasswordScreenController {
         data.connectDb();
         if (!user.getPassword().equals((oldPasswordText.getText()))) {
             oldPasswordLbl.setTextFill(Paint.valueOf("RED"));
-        } else if (!newPasswordText.getText().equals(newPasswordTextAgain.getText())) {
+        } 
+        else if (!newPasswordText.getText().equals(newPasswordTextAgain.getText())) {
             oldPasswordLbl.setTextFill(Paint.valueOf("BLACK"));
             newPasswordLbl.setTextFill(Paint.valueOf("RED"));
             repeatPasswordLbl.setTextFill(Paint.valueOf("RED"));
-        } else {
+        } 
+        else {
             data.updateUserPassword(user.getUsername(), newPasswordText.getText().toString());
-            //data.closeConnection();
             Stage stage = (Stage) changePasswordButton.getScene().getWindow();
             stage.hide();
-    }
+        }
+        data.closeConnection();
     }
 
+    
     @FXML
     void initialize() {
         assert cancelButton != null : "fx:id=\"cancelButton\" was not injected: check your FXML file 'ChangePasswordScreen.fxml'.";
@@ -93,8 +97,5 @@ public class ChangePasswordScreenController {
         assert newPasswordText != null : "fx:id=\"newPasswordText\" was not injected: check your FXML file 'ChangePasswordScreen.fxml'.";
         assert newPasswordTextAgain != null : "fx:id=\"newPasswordTextAgain\" was not injected: check your FXML file 'ChangePasswordScreen.fxml'.";
         assert oldPasswordText != null : "fx:id=\"oldPasswordText\" was not injected: check your FXML file 'ChangePasswordScreen.fxml'.";
-
-
     }
-
 }

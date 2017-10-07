@@ -107,6 +107,7 @@
       </GridPane.margin>
     </ChoiceBox>
       <Button id="okButton" fx:id="cancelButton" font="$x2" mnemonicParsing="false" onAction="#cancelPressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Cancel" visible="false" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+      <Button id="showOnMapBtn" fx:id="showOnMapBtn" font="$x2" mnemonicParsing="false" onAction="#showToiletOnMap" prefHeight="23.0" prefWidth="172.0" style="-fx-background-color: #30126D, #B39EDC;" text="Show Toilet on Map" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP" />
   </children>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="250.0" prefWidth="-1.0" />

@@ -1,18 +1,32 @@
 package seng202.Controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
+import com.lynden.gmapsfx.MapReadyListener;
+import com.lynden.gmapsfx.javascript.object.Animation;
+import com.lynden.gmapsfx.javascript.object.LatLong;
+import com.lynden.gmapsfx.javascript.object.Marker;
+import com.lynden.gmapsfx.javascript.object.MarkerOptions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import seng202.Model.CurrentStorage;
-import seng202.Model.DataFetcher;
-import seng202.Model.Toilet;
+
+import seng202.Model.*;
+import seng202.team5.Main;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
 
 
 
@@ -67,6 +81,9 @@ public class ToiletInfoScreenController {
     private Button updateButton;
 
     @FXML
+    private Button showOnMapBtn;
+
+    @FXML
     private Label zipLabel;
 
     @FXML
@@ -76,13 +93,12 @@ public class ToiletInfoScreenController {
     private Button cancelButton;
 
     private Toilet oldToilet;
-
     private Toilet newToilet;
 
 
     /**
      * Method when the ok button is pressed, hides the pop up.
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void okPressed(ActionEvent event) {
@@ -90,9 +106,10 @@ public class ToiletInfoScreenController {
     	stage.hide();
     }
     
+    
     /**
      * Method when the update button is pressed, displays screen to update the selected toilet
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void updatePressed(ActionEvent event) {
@@ -117,6 +134,7 @@ public class ToiletInfoScreenController {
     	cancelButton.setVisible(true);
     }
 
+    
     /**
      * Checks the input is able to be parsed to an Integer
      * @param s String to be checked
@@ -131,9 +149,10 @@ public class ToiletInfoScreenController {
         }
     }
     
+    
     /**
      * Method when the save button is pressed, updates the selected location
-     * @param event
+     * @param event Auto-generate event on button press
      */
     @FXML
     void savePressed(ActionEvent event) {
@@ -185,13 +204,12 @@ public class ToiletInfoScreenController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
-
         	cancelPressed(event);
         }
     }
 
+    
+    //TODO add docstring
     @FXML
     void cancelPressed (ActionEvent event) {
         disabledLabel.setText("Disabled: " + String.valueOf(newToilet.getForDisabled()));
@@ -210,7 +228,48 @@ public class ToiletInfoScreenController {
         updateButton.setVisible(true);
     }
 
+    @FXML
+    void showToiletOnMap(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
+        Parent root = loader.load();
+        Toilet toilet = newToilet;
 
+        Main.getStage().setScene(new Scene(root, Main.getStage().getScene().getWidth(), Main.getStage().getScene().getHeight()));
+        Main.getStage().setTitle("Map");
+
+        MainScreenController controller = loader.getController();
+        controller.getMapView().addMapReadyListener(new MapReadyListener() {
+            @Override
+            public void mapReady() {
+                controller.getMapView().getMap().clearMarkers();
+                Map.findToilets(toilet, controller.getMapView().getMap());
+                controller.getMapView().getMap().setCenter(new LatLong(toilet.getLatitude(), toilet.getLongitude()));
+                controller.getMapView().getMap().addMarker(
+                        new Marker(
+                                new MarkerOptions().animation(Animation.DROP)
+                                        .position(new LatLong(toilet.getLatitude(), toilet.getLongitude()))
+                        )
+                );
+                ArrayList<Location> nearby = Map.findNearby(toilet.getLatitude(), toilet.getLongitude());
+
+                for (Location loc : nearby) {
+                    if (loc.getLocationType() == 0) {
+                        Map.findToilets((Toilet) loc, controller.getMapView().getMap());
+                    } else if (loc.getLocationType() == 1) {
+                        Map.findPoi((Poi) loc, controller.getMapView().getMap());
+                    } else if (loc.getLocationType() == 2) {
+                        Map.findRetailers((Retailer) loc, controller.getMapView().getMap());
+                    } else if (loc.getLocationType() == 3) {
+                        Map.findWifi((Wifi) loc, controller.getMapView().getMap());
+                    }
+                }
+            }
+        });
+
+        Main.getStage().show();
+    }
+
+    //TODO add docstring
     @FXML
     void initialize() {
         newToilet = CurrentStorage.getToiletArray().get(CurrentStorage.getToiletIndex());
@@ -236,10 +295,7 @@ public class ToiletInfoScreenController {
         assert nameLabel != null : "fx:id=\"nameLabel\" was not injected: check your FXML file 'ToiletInfoScreen.fxml'.";
         assert okButton != null : "fx:id=\"okButton\" was not injected: check your FXML file 'ToiletInfoScreen.fxml'.";
         assert unisexLabel != null : "fx:id=\"unisexLabel\" was not injected: check your FXML file 'ToiletInfoScreen.fxml'.";
-
-
     }
-
 }
 
 

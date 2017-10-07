@@ -1,5 +1,7 @@
 package seng202.Model;
 
+import com.lynden.gmapsfx.javascript.object.Marker;
+
 /**
  * Class to store known coordinates of addresses.
  */
@@ -7,18 +9,42 @@ public class Coord {
     private String address;
     private double lat;
     private double lng;
-    private boolean hasMarker = false;
+    private Marker locMark;
 
     
-    public Coord(String address, double lattitude, double longitude) {
+    /**
+     * Constructor for Coord
+     * @param address The address if the coord
+     * @param latitude The latitude of the coord 
+     * @param longitude The longitude of the coord
+     */
+    public Coord(String address, double latitude, double longitude) {
         this.address = address;
-        lat = lattitude;
+        lat = latitude;
         lng = longitude;
     }
 
     
+    //TODO make proper override of equals
+    /**
+     * Checks whether two coordinates are equal
+     * @return boolean for whether the coordinates are equal
+     */
+    public boolean equals(Coord c2) {
+        if (address.toLowerCase().contains(c2.getAddress().toLowerCase())
+                || c2.getAddress().toLowerCase().contains(address.toLowerCase())
+                || address.equalsIgnoreCase(c2.getAddress())) {
+            return true;
+        } 
+        else {
+            return false;
+        }
+    }
+    
+    
     /**
      * Getter for the latitude
+     * @return The latitude of the coord
      */
     public double getLat() {
         return lat;
@@ -27,6 +53,7 @@ public class Coord {
     
     /**
      * Getter for the longitude
+     * @return The longitude of the coord
      */
     public double getLng() {
         return lng;
@@ -35,6 +62,7 @@ public class Coord {
     
     /**
      * Getter for the address
+     * @return The address of the coord
      */
     public String getAddress() {
         return address;
@@ -42,31 +70,19 @@ public class Coord {
 
     
     /**
-     * @return whether the Coord has a marker
+     * Getter for the marker
+     * @return The marker of the coord
      */
-    public boolean hasMarker() {
-        return hasMarker;
+    public Marker getMarker() {
+        return locMark;
     }
 
     
     /**
-     * Sets whether the coord has a marker
-     * @param value boolean value for whether the marker has been set
+     * Sets the marker for the coord
+     * @param marker The new marker for the coord
      */
-    public void setHasMarker(boolean value) {
-        hasMarker = value;
-    }
-
-    
-    /**
-     * Checks whether two coordinates are equal
-     * @return boolean for whether the coordinates are equal
-     */
-    public boolean equals(Coord c2) {
-        if (address.contains(c2.getAddress()) || c2.getAddress().contains(address) || address.equalsIgnoreCase(c2.getAddress())) {
-            return true;
-        } else {
-            return false;
-        }
+    public void setMarker(Marker marker) {
+        locMark = marker;
     }
 }
