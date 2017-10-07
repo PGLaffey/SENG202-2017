@@ -76,6 +76,8 @@ public class RouteInfoScreenController {
     private Route route;
     private User user;
 
+    private boolean owner;
+
 
     /**
      * Method when the ok button is pressed, hides the pop up. routes
@@ -200,6 +202,19 @@ public class RouteInfoScreenController {
         } else {
             favouriteButton.setVisible(true);
         }
+
+        DataFetcher df = new DataFetcher();
+        try {
+            df.connectDb();
+            if (df.getRouteOwner(route) != null && df.getRouteOwner(route).equals(CurrentStorage.getUser().getUsername())) {
+                owner = true;
+            }
+            df.closeConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        deleteButton.setVisible(owner);
 
     	bikeidLabel.setText("Bike ID: "+ route.getBikeID());
     	distanceLabel.setText("Distance: " + route.getDistanceRound() + "m");

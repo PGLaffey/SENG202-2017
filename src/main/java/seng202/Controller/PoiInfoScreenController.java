@@ -94,6 +94,8 @@ public class PoiInfoScreenController {
 
     private Poi newPoi;
 
+    private boolean owner = false;
+
 
     /**
      * Method when the ok button is pressed, hides the pop up.
@@ -256,7 +258,7 @@ public class PoiInfoScreenController {
         saveButton.setVisible(false);
         okButton.setVisible(true);
         updateButton.setVisible(true);
-        deleteButton.setVisible(true);
+        deleteButton.setVisible(owner);
     }
 
     /**
@@ -327,6 +329,20 @@ public class PoiInfoScreenController {
     void initialize() {
         newPoi = CurrentStorage.getPoiArray().get(CurrentStorage.getPoiIndex());
         oldPoi = new Poi(newPoi);
+
+        DataFetcher df = new DataFetcher();
+        try {
+            df.connectDb();
+            if (df.getLocationOwner(newPoi) != null && df.getLocationOwner(newPoi).equals(CurrentStorage.getUser().getUsername())) {
+                owner = true;
+            }
+            df.closeConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        deleteButton.setVisible(owner);
+
     	costLabel.setText("Cost: $" + newPoi.getCost());
     	descriptionLabel.setText("Description: " + newPoi.getDescription());
     	latLabel.setText("Latitude: " + newPoi.getLatitude());
