@@ -94,12 +94,16 @@ public class DataFetcherTest extends TestCase {
      */
     @Test
     public void testClose() {
-    	fetcher.closeConnection();
+
+
     	try {
-    		Location testLoc = new Location(10, 10, "Test", 4);
-    		fetcher.addLocation(testLoc);
-    		fetcher.deleteLocation(testLoc);
-    		fail("Did not successfully disconnect from database");
+    	    fetcher.connectDb();
+            fetcher.closeConnection();
+            assertFalse(fetcher.getConnect().isValid(60));
+//    		Location testLoc = new Location(10, 10, "Test", 4);
+//    		fetcher.addLocation(testLoc);
+//    		fetcher.deleteLocation(testLoc);
+//    		fail("Did not successfully disconnect from database");
     	}
     	catch (Exception ex) {
     		

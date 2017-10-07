@@ -65,13 +65,18 @@
         <Font name="System Bold" size="12.0" fx:id="x2" />
       </font>
     </Button>
-    <Button id="okButton" fx:id="updateButton" font="$x2" mnemonicParsing="false" onAction="#updatePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Update" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+    <Button id="okButton" fx:id="updateButton" font="$x2" mnemonicParsing="false" onAction="#updatePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Update" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
     <Button id="okButton" fx:id="saveButton" font="$x2" mnemonicParsing="false" onAction="#savePressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="Save" visible="false" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
     <TextField fx:id="nameText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
         <Insets left="50.0" top="-5.0" />
       </GridPane.margin>
     </TextField>
+      <TextField id="nameText" fx:id="addressText" prefWidth="200.0" visible="false" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="60.0" top="100.0" />
+         </GridPane.margin>
+      </TextField>
     <TextField id="nameText" fx:id="boroughText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
         <Insets left="60.0" top="135.0" />
@@ -108,6 +113,7 @@
     </ChoiceBox>
       <Button id="okButton" fx:id="cancelButton" font="$x2" mnemonicParsing="false" onAction="#cancelPressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Cancel" visible="false" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
       <Button id="showOnMapBtn" fx:id="showOnMapBtn" font="$x2" mnemonicParsing="false" onAction="#showToiletOnMap" prefHeight="23.0" prefWidth="172.0" style="-fx-background-color: #30126D, #B39EDC;" text="Show Toilet on Map" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP" />
+      <Button id="okButton" fx:id="deleteButton" font="$x2" mnemonicParsing="false" onAction="#deletePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Delete" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
   </children>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="250.0" prefWidth="-1.0" />
@@ -117,7 +123,7 @@
     <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
   </padding>
   <rowConstraints>
-    <RowConstraints maxHeight="400.0" minHeight="200.0" prefHeight="306.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="-1.0" minHeight="60.0" prefHeight="-1.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="400.0" minHeight="200.0" prefHeight="252.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="88.0" minHeight="60.0" prefHeight="88.0" vgrow="SOMETIMES" />
   </rowConstraints>
 </GridPane>
