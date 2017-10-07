@@ -86,16 +86,6 @@
         <Insets left="30.0" top="170.0" />
       </GridPane.margin>
     </TextField>
-    <TextField id="nameText" fx:id="latitudeText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
-      <GridPane.margin>
-        <Insets left="60.0" top="205.0" />
-      </GridPane.margin>
-    </TextField>
-    <TextField id="nameText" fx:id="longitudeText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
-      <GridPane.margin>
-        <Insets left="70.0" top="240.0" />
-      </GridPane.margin>
-    </TextField>
     <Button fx:id="okButton" mnemonicParsing="false" onAction="#okPressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="Ok" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
       <font>
         <Font name="System Bold" size="12.0" fx:id="x2" />

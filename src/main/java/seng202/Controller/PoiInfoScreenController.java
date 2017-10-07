@@ -25,6 +25,9 @@ import seng202.team5.Main;
 public class PoiInfoScreenController {
 
     @FXML
+    private TextField addressText;
+
+    @FXML
     private TextField boroughText;
 
     @FXML
@@ -106,6 +109,8 @@ public class PoiInfoScreenController {
      */
     @FXML
     void updatePressed(ActionEvent event) {
+        addressText.setVisible(true);
+        addressText.setText(newPoi.getAddress());
     	boroughText.setVisible(true);
     	boroughText.setText(newPoi.getBorough());
     	costText.setVisible(true);
@@ -116,6 +121,7 @@ public class PoiInfoScreenController {
     	nameText.setText(newPoi.getName());
     	zipText.setVisible(true);
     	zipText.setText(String.valueOf(newPoi.getZip()));
+        addressLabel.setText("Address:");
     	boroughLabel.setText("Borough: ");
     	costLabel.setText("Cost: ");
     	descriptionLabel.setText("Description: ");
@@ -194,6 +200,12 @@ public class PoiInfoScreenController {
     	}
 
         if (allValid) {
+    	    if (!oldPoi.getAddress().equals(addressText.getText())) {
+    	        newPoi.setAddress(addressText.getText());
+                double[] latLong = Map.getLatLong(addressText.getText());
+                newPoi.setLatitude(latLong[0]);
+                newPoi.setLongitude(latLong[1]);
+            }
             newPoi.setBorough(boroughText.getText());
             newPoi.setName(nameText.getText());
         	if (!zipText.getText().equals("")) {

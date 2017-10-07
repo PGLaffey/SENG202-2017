@@ -46,6 +46,9 @@ public class RetailerInfoScreenController {
     private Label addressLabel;
 
     @FXML
+    private TextField addressText;
+
+    @FXML
     private Label boroughLabel;
 
     @FXML
@@ -118,6 +121,8 @@ public class RetailerInfoScreenController {
      */
     @FXML
     void updatePressed(ActionEvent event) {
+        addressText.setVisible(true);
+        addressText.setText(newRetailer.getAddress());
     	boroughText.setVisible(true);
     	boroughText.setText(newRetailer.getBorough());
     	productText.setVisible(true);
@@ -133,6 +138,7 @@ public class RetailerInfoScreenController {
     	descriptionLabel.setText("Description: ");
     	nameLabel.setText("Name: ");
     	zipLabel.setText("Zip: ");
+    	addressLabel.setText("Address:");
     	okButton.setVisible(false);
     	updateButton.setVisible(false);
     	saveButton.setVisible(true);
@@ -248,6 +254,12 @@ public class RetailerInfoScreenController {
         }
 
         if (allValid) {
+    	    if (!oldRetailer.getAddress().equals(addressText.getText())) {
+    	        newRetailer.setAddress(addressText.getText());
+                double[] latLong = Map.getLatLong(addressText.getText());
+                newRetailer.setLatitude(latLong[0]);
+                newRetailer.setLongitude(latLong[1]);
+            }
             newRetailer.setBorough(boroughText.getText());
             newRetailer.setName(nameText.getText());
         	if (!zipText.getText().equals("")) {
@@ -256,8 +268,6 @@ public class RetailerInfoScreenController {
         	}
             newRetailer.setDescription(descriptionText.getText());
             newRetailer.setProduct(productText.getText());
-
-        	// TODO: Work out how to update the database
 
             DataFetcher exporter = new DataFetcher();
             try {
@@ -276,6 +286,8 @@ public class RetailerInfoScreenController {
     //TODO Add docstring
     @FXML
     void cancelPressed(ActionEvent event) {
+        addressLabel.setText("Address: " + newRetailer.getAddress());
+        addressText.setVisible(false);
     	nameLabel.setText("Name: " + newRetailer.getName());
     	nameText.setVisible(false);
     	zipLabel.setText("Zip: " + newRetailer.getZip());
