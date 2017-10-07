@@ -2,6 +2,7 @@ package seng202.Model;
 
 import java.util.Arrays;
 import static java.lang.Integer.MAX_VALUE;
+import static java.lang.Integer.min;
 
 /**
  * The Badge Object constructor and methods.
@@ -73,15 +74,6 @@ public class Badge{
 
 
     /**
-     * Getter for badge type
-     * @return badgeType Type of badge
-     */
-    public String getBadgeType(){ 
-    	return badgeType; 
-    }
-
-
-    /**
      * Getter for value
      * @return value Number of units user has gained towards badge
      */
@@ -136,15 +128,6 @@ public class Badge{
 
 
     /**
-     * Getter for requirements
-     * @return requirements Array of requirements for the type of badge
-     */
-    public int[] getRequirements() { 
-    	return requirements[getBadgeTypeIndex()]; 
-    }
-
-
-    /**
      * Getter for level cap
      * @return levelCap The value at which the badgetype will update to the next level
      */
@@ -163,48 +146,10 @@ public class Badge{
 
 
     /**
-     * Getter for a string representation ofremaining
-     * @return strRemaining A string representation of remaining including units
+     * Function to make a string of the users completed time or distance in hours and minutes, or kilometres and
+     * minutes respectively.
+     * @return A string representation of the time or distance a user has completed.
      */
-    public String getStrRemaining() {
-        String strRemaining;
-        updateRemaining();
-        if (level == 6) {
-            return "Max level achieved";
-        }
-        if (units[getBadgeTypeIndex()].equals("minutes")) {
-            if (remaining % 60 == 0) {
-                strRemaining = Integer.toString(remaining/60) + " hours";
-            } 
-            else if (remaining < 60) {
-                strRemaining = Integer.toString(remaining) + " minutes";
-            } 
-            else {
-                int hours = remaining / 60;
-                int minutes = remaining - (hours * 60);
-                strRemaining = Integer.toString(hours) + " hours and " + Integer.toString(minutes) + " minutes";
-            }
-        } 
-        else if (units[getBadgeTypeIndex()].equals("metres")) {
-            if (remaining % 1000 == 0) {
-                strRemaining = Integer.toString(remaining/1000) + " kilometres";
-            } 
-            else if (remaining < 1000) {
-                strRemaining = Integer.toString(remaining) + " metres";
-            } 
-            else {
-                int kilometres = remaining / 1000;
-                int metres = remaining - (kilometres * 1000);
-                strRemaining = Integer.toString(kilometres) + " kilometres and " + Integer.toString(metres) + " metres";
-            }
-        } 
-        else {
-            strRemaining = Integer.toString(remaining) + " " + units[getBadgeTypeIndex()];
-        }
-        return strRemaining;
-    }
-
-
     public String achievedString() {
         String achievedString = "";
         switch(units[getBadgeTypeIndex()]) {
@@ -236,6 +181,48 @@ public class Badge{
                 break;
         }
         return achievedString;
+    }
+
+
+    /**
+     * Getter for a string representation ofremaining
+     * @return strRemaining A string representation of remaining including units
+     */
+    public String getStrRemaining() {
+        String strRemaining;
+        updateRemaining();
+        if (level >= 6) {
+            return "Max level achieved";
+        }
+        switch (units[getBadgeTypeIndex()]) {
+            case "minutes":
+                if (remaining < 60) {
+                    strRemaining = Integer.toString(remaining) + " minutes";
+                } else {
+                    int hours = remaining / 60;
+                    int minutes = remaining - (hours * 60);
+                    strRemaining = Integer.toString(hours) + " hours";
+                    if (minutes > 0) {
+                        strRemaining += " and " + Integer.toString(minutes) + " minutes";
+                    }
+                }
+                break;
+            case "metres":
+                if (remaining < 1000) {
+                    strRemaining = Integer.toString(remaining) + " metres";
+                } else {
+                    int kilometres = remaining / 1000;
+                    int metres = remaining - (kilometres * 1000);
+                    strRemaining = Integer.toString(kilometres) + " kilometres";
+                    if (metres > 0) {
+                        strRemaining += " and " + Integer.toString(metres) + " metres";
+                    }
+                }
+                break;
+            default:
+                strRemaining = Integer.toString(remaining) + " " + units[getBadgeTypeIndex()];
+        }
+        return strRemaining;
     }
 
 
@@ -359,7 +346,7 @@ public class Badge{
             }
         } 
         else {
-            output = "Error: You've exceeded the current possible levels, good job.";
+            output = "Error: You've exceeded the current possible levels.";
         }
         description = output;
     }

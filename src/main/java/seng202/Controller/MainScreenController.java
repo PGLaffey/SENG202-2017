@@ -1466,6 +1466,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
                             updateMessage("Connecting to database...");
                             data.connectDb();
                             progressBar.setVisible(true);
+                            data.loadUsersRouteLists();
                             updateProgress(progress, 100);
                             //progressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
                             updateMessage("Retrieving Base Locations...");

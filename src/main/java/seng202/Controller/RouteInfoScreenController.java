@@ -11,10 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import seng202.Model.CurrentStorage;
-import seng202.Model.Map;
-import seng202.Model.Route;
-import seng202.Model.User;
+import seng202.Model.*;
 import seng202.team5.Main;
 
 import java.io.IOException;
@@ -68,6 +65,10 @@ public class RouteInfoScreenController {
 
     @FXML
     private Button favouriteButton;
+
+    @FXML
+    private Button deleteButton;
+
 
     @FXML
     private Label addedLabel;
@@ -171,6 +172,22 @@ public class RouteInfoScreenController {
         });
         controller.updateDistanceLabel(route.getDistance()/1000);
         Main.getStage().show();
+    }
+
+    @FXML
+    void deletePressed (ActionEvent event) {
+        DataFetcher df = new DataFetcher();
+        try {
+            df.connectDb();
+            df.deleteRoute(route);
+            df.closeConnection();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        CurrentStorage.getRouteArray().set(CurrentStorage.getRouteArray().indexOf(route), null);
+        Stage stage = (Stage) deleteButton.getScene().getWindow();
+        stage.hide();
     }
 
     @FXML

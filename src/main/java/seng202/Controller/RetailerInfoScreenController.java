@@ -119,7 +119,7 @@ public class RetailerInfoScreenController {
     
     
     /** 
-     * Method when the update button is pressed, opens screen for user to update the selected poi
+     * Method when the update button is pressed, opens text fields for user to update the selected retailer
      * @param event Auto-generate event on button press
      */
     @FXML
@@ -179,6 +179,8 @@ public class RetailerInfoScreenController {
         }
     }
 
+
+    //TODO: doctsring
     @FXML
     void showRetailerOnMap(ActionEvent event) throws IOException{
         Retailer retailer = newRetailer;
@@ -223,7 +225,8 @@ public class RetailerInfoScreenController {
     
     
     /**
-     * TODO add docstring
+     * Method for when the save button is pressed while a user is updating a retailer.
+     * Checks that the inputted data is valid then updates the retailer in the list and database.
      * @param event Auto-generate event on button press
      */
     @FXML
@@ -285,9 +288,13 @@ public class RetailerInfoScreenController {
             cancelPressed(event);
         }
     }
-    
-    
-    //TODO Add docstring
+
+
+    /**
+     * Method for when cancel is pressed while a user is updating a retailer.
+     * Ignores changes, hides the text fields and re displays full labels.
+     * @param event
+     */
     @FXML
     void cancelPressed(ActionEvent event) {
         addressLabel.setText("Address: " + newRetailer.getAddress());
@@ -309,6 +316,12 @@ public class RetailerInfoScreenController {
     	cancelButton.setVisible(false);
     }
 
+
+    /**
+     * Method for when a retailer is deleted.
+     * Removes it from the database, makes its index in retailer array list null and closes the pop up.
+     * @param event
+     */
     @FXML
     void deletePressed(ActionEvent event) {
         DataFetcher df = new DataFetcher();

@@ -120,7 +120,7 @@ public class WifiInfoScreenController {
     
     
     /**
-     * Method when the update button is pressed, displays screen to update selected wifi point
+     * Method when the update button is pressed, displays text fields to update selected wifi point
      * @param event Auto-generate event on button press
      */
     @FXML
@@ -185,7 +185,8 @@ public class WifiInfoScreenController {
     
     
     /**
-     * Method when the save button is pressed
+     * Method for when the save button is pressed while a user is updating a wifi.
+     * Checks that the inputted data is valid then updates the wifi in the list and database.
      * @param event Auto-generate event on button press
      */
     @FXML
@@ -242,8 +243,6 @@ public class WifiInfoScreenController {
             if (!zipText.getText().equals("")) {
                 newWifi.setZip(Integer.parseInt(zipText.getText()));
             }
-            // TODO: Update the database
-
             DataFetcher exporter = new DataFetcher();
             try {
                 exporter.connectDb();
@@ -257,10 +256,13 @@ public class WifiInfoScreenController {
             cancelPressed(event);
         }
     }
-    
-    
-    //TODO add docstring
-    @FXML
+
+
+    /**
+     * Method for when cancel is pressed while a user is updating a wifi.
+     * Ignores changes, hides the text fields and re displays full labels.
+     * @param event
+     */    @FXML
     void cancelPressed (ActionEvent event) {
         addressLabel.setText("Address: " + newWifi.getAddress());
         addressText.setVisible(false);
@@ -283,6 +285,12 @@ public class WifiInfoScreenController {
         deleteButton.setVisible(true);
     }
 
+
+    /**
+     * Method for when a wifi is deleted.
+     * Removes it from the database, makes its index in wifi array list null and closes the pop up.
+     * @param event
+     */
     @FXML
     void deletePressed(ActionEvent event) {
 

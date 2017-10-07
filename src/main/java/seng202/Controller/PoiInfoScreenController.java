@@ -107,7 +107,7 @@ public class PoiInfoScreenController {
     
     
     /**
-     * Method for when the update button is pressed, displays screen for updating selected poi
+     * Method for when the update button is pressed, displays text fields for updating selected poi
      * @param event Auto-generate event on button press
      */
     @FXML
@@ -167,8 +167,12 @@ public class PoiInfoScreenController {
         }
     }
     
-    
-    //TODO add docstring
+
+    /**
+     * Method for when the save button is pressed while a user is updating a poi.
+     * Checks that the inputted data is valid then updates the poi in the list and database.
+     * @param event
+     */
     @FXML
     void savePressed(ActionEvent event) {
     	nameLabel.setTextFill(Color.BLACK);
@@ -217,9 +221,6 @@ public class PoiInfoScreenController {
             }
             newPoi.setDescription(descriptionText.getText());
             newPoi.setCost(Double.parseDouble(costText.getText()));
-
-        	// TODO: Update database
-
             DataFetcher exporter = new DataFetcher();
             try {
                 exporter.connectDb();
@@ -232,9 +233,13 @@ public class PoiInfoScreenController {
             cancelPressed(event);
         }
     }
-    
-    
-    //TODO add docstring
+
+
+    /**
+     * Method for when cancel is pressed while a user is updating a poi.
+     * Ignores changes, hides the text fields and re displays full labels.
+     * @param event
+     */
     @FXML
     void cancelPressed(ActionEvent event) {
         costLabel.setText("Cost: $" + newPoi.getCost());
@@ -254,6 +259,11 @@ public class PoiInfoScreenController {
         deleteButton.setVisible(true);
     }
 
+    /**
+     * Method for when a poi is deleted.
+     * Removes it from the database, makes its index in poi array list null and closes the pop up.
+     * @param event
+     */
     @FXML
     void deletePressed(ActionEvent event) {
         DataFetcher df = new DataFetcher();
