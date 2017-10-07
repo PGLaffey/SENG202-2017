@@ -12,54 +12,20 @@ public class Coord {
     private Marker locMark;
 
     
-    public Coord(String address, double lattitude, double longitude) {
+    /**
+     * Constructor for Coord
+     * @param address The address if the coord
+     * @param latitude The latitude of the coord 
+     * @param longitude The longitude of the coord
+     */
+    public Coord(String address, double latitude, double longitude) {
         this.address = address;
-        lat = lattitude;
+        lat = latitude;
         lng = longitude;
     }
 
     
-    /**
-     * Getter for the latitude
-     */
-    public double getLat() {
-        return lat;
-    }
-
-    
-    /**
-     * Getter for the longitude
-     */
-    public double getLng() {
-        return lng;
-    }
-
-    
-    /**
-     * Getter for the address
-     */
-    public String getAddress() {
-        return address;
-    }
-
-    
-    /**
-     * @return whether the Coord has a marker
-     */
-    public Marker getMarker() {
-        return locMark;
-    }
-
-    
-    /**
-     * Sets whether the coord has a marker
-     * @param marker Marker to set the locMark
-     */
-    public void setMarker(Marker marker) {
-        locMark = marker;
-    }
-
-    
+    //TODO make proper override of equals
     /**
      * Checks whether two coordinates are equal
      * @return boolean for whether the coordinates are equal
@@ -69,8 +35,54 @@ public class Coord {
                 || c2.getAddress().toLowerCase().contains(address.toLowerCase())
                 || address.equalsIgnoreCase(c2.getAddress())) {
             return true;
-        } else {
+        } 
+        else {
             return false;
         }
+    }
+    
+    
+    /**
+     * Getter for the latitude
+     * @return The latitude of the coord
+     */
+    public double getLat() {
+        return lat;
+    }
+
+    
+    /**
+     * Getter for the longitude
+     * @return The longitude of the coord
+     */
+    public double getLng() {
+        return lng;
+    }
+
+    
+    /**
+     * Getter for the address
+     * @return The address of the coord
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    
+    /**
+     * Getter for the marker
+     * @return The marker of the coord
+     */
+    public Marker getMarker() {
+        return locMark;
+    }
+
+    
+    /**
+     * Sets the marker for the coord
+     * @param marker The new marker for the coord
+     */
+    public void setMarker(Marker marker) {
+        locMark = marker;
     }
 }
