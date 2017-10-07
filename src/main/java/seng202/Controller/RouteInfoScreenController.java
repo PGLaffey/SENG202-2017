@@ -169,7 +169,7 @@ public class RouteInfoScreenController {
         controller.getMapView().addMapReadyListener(new MapReadyListener() {
             @Override
             public void mapReady() {
-                Map.findRoute(route, controller.getMapView(), controller.getDirectionsService(), controller, controller.getMapView().getDirec());
+                Map.findRoute(route, controller.getMapView(), controller.getDirectionsService(), controller, controller.getMapView().getDirec(), controller.getMapRenderer());
             }
         });
         controller.updateDistanceLabel(route.getDistance()/1000);

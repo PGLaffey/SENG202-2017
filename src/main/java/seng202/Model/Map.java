@@ -280,7 +280,7 @@ public class Map {
      */
     public static void findLocation(String location, GoogleMap map, GeocodingService service) {
         //Obtains a geocode location around latLong
-        service.geocode(location, (GeocodingResult[] results, GeocoderStatus status) -> {
+        service.geocode(location+", NY", (GeocodingResult[] results, GeocoderStatus status) -> {
             LatLong latLong = null;
 
             if (status == GeocoderStatus.ZERO_RESULTS) {
@@ -344,22 +344,25 @@ public class Map {
      * @param pane Directions pane used for the directionsRenderer.
      */
     public static void findRoute(Location startLoc, Location endLoc, GoogleMapView mapView, DirectionsService service, 
-    		DirectionsServiceCallback callback, DirectionsPane pane) {
-
+    		DirectionsServiceCallback callback, DirectionsPane pane, DirectionsRenderer renderer) {
+        renderer.clearDirections();
         DirectionsRequest request = new DirectionsRequest(new LatLong(startLoc.getLatitude(), startLoc.getLongitude()),
                 new LatLong(endLoc.getLatitude(), endLoc.getLongitude()), TravelModes.BICYCLING);
 
-        service.getRoute(request, callback, new DirectionsRenderer(true, mapView.getMap(), pane));
+        service.getRoute(request, callback, renderer);
     }
 
     
     /**
      * Overloaded method to find a route given two LatLongs
      */
-    public static void findRoute(LatLong startLoc, LatLong endLoc, GoogleMapView mapView, DirectionsService service,
-                                 DirectionsServiceCallback callback, DirectionsPane pane) {
-        DirectionsRequest request = new DirectionsRequest(startLoc, endLoc, TravelModes.BICYCLING);
-        service.getRoute(request, callback, new DirectionsRenderer(true, mapView.getMap(), pane));
+    public static void findRoute(double startLat, double startLong, double endLat, double endLong,
+                                 GoogleMapView mapView, DirectionsService service,
+                                 DirectionsServiceCallback callback, DirectionsPane pane, DirectionsRenderer renderer) {
+
+        DirectionsRequest request = new DirectionsRequest(startLat+","+startLong,
+                endLat+","+endLong, TravelModes.BICYCLING);
+        service.getRoute(request, callback, renderer);
     }
 
     /**
@@ -371,13 +374,13 @@ public class Map {
      * @param pane The directionsPane to use in the DirectionsRenderer.
      */
     public static void findRoute(Route route, GoogleMapView mapView,
-                          DirectionsService service, DirectionsServiceCallback callback, DirectionsPane pane) {
+                          DirectionsService service, DirectionsServiceCallback callback, DirectionsPane pane, DirectionsRenderer renderer) {
 
 
         DirectionsRequest request = new DirectionsRequest(route.getStart().getLatitude()+", "+ route.getStart().getLongitude(),
                 route.getEnd().getLatitude()+","+ route.getEnd().getLongitude(), TravelModes.BICYCLING);
 
-        service.getRoute(request, callback, new DirectionsRenderer(true, mapView.getMap(), pane));
+        service.getRoute(request, callback, renderer);
     }
 
     

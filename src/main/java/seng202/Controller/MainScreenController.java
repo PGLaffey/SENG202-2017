@@ -601,7 +601,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
     }
 
     public void displayRouteOnMap(Route route) {
-        Map.findRoute(route, mapView, directionsService, this, directionsPane);
+        directionsRenderer.clearDirections();
+        Map.findRoute(route, mapView, directionsService, this, directionsPane, directionsRenderer);
     }
 
 
@@ -1577,9 +1578,9 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             }
 
             if (Map.getStartLoc() != null && Map.getEndLoc() != null) {
-
-                Map.findRoute(Map.getStartLoc().getLatitude() + ", " + Map.getStartLoc().getLongitude(),
-                        Map.getEndLoc().getLatitude() + ", " + Map.getEndLoc().getLongitude(),
+//                directionsRenderer.clearDirections();
+                Map.findRoute(Map.getStartLoc().getLatitude(), Map.getStartLoc().getLongitude(),
+                        Map.getEndLoc().getLatitude(), Map.getEndLoc().getLongitude(),
                         mapView, directionsService, this, directionsPane, directionsRenderer);
 
                 updateDistanceLabel(Map.getDistance(CurrentStorage.getNewRouteStart().getLatitude(), CurrentStorage.getNewRouteStart().getLongitude(),
@@ -1591,7 +1592,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         });
     }
 
-    public WebEngine getMapWebEngine() { return mapEngine; }
+    public DirectionsRenderer getMapRenderer() { return directionsRenderer; }
 
     public GoogleMapView getMapView() { return mapView; }
 

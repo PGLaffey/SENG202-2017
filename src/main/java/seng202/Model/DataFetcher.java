@@ -1061,7 +1061,7 @@ public class DataFetcher {
 			}
 	    	String stmt = "INSERT INTO tblRoutes "
 					+ "(StartID, EndID, Public, User, Name, BikeID, Gender, Distance) VALUES "
-					+ "(?, ?, ?, ?, ?, ?)";
+					+ "(?, ?, ?, ?, ?, ?, ?, ?)";
 			ArrayList<String> params = new ArrayList<String>();
 			Collections.addAll(params, String.valueOf(startID), String.valueOf(endID), String.valueOf(secret),
 					owner, name, route.getBikeID(), route.getGender().substring(0, 1), String.valueOf(distance));
