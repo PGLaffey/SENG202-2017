@@ -16,6 +16,26 @@ public class DataFetcher {
     static int poiOffset = 0;
     static int toiletOffset = 0;
     static int locationOffset = 0;
+    static String ip;
+    
+    
+    /**
+     * Gets the global ip for the database
+     * @return The global ip for the databse 
+     */
+    public static String getIP() {
+    	return ip;
+    }
+    
+    
+    /**
+     * Sets the global ip for the database
+     * @param newIP The new ip for the database
+     */
+    public static void setIP(String newIP) {
+    	ip = newIP;
+    }
+    
 
     
 	/**
@@ -1331,7 +1351,7 @@ public class DataFetcher {
     	try {
     		//Tells the driver manager of jdbc to create a connection to a database of type mysql with the ip 222.152.179.135, through port 3306, named cyclrr, using user 'monitor' and password 'Team5Pass'
     		//Following line the 192.168.1.70 needs to be 125.239.188.8 if outside of Patrick's network
-    		connect = DriverManager.getConnection("jdbc:mysql://125.239.188.8:3306/cyclrr","monitor","Team5Pass");
+    		connect = DriverManager.getConnection("jdbc:mysql:// " + ip + ":3306/cyclrr","monitor","Team5Pass");
     	}
     	catch (SQLException ex) {
     		printSqlError(ex);
@@ -1352,20 +1372,32 @@ public class DataFetcher {
     }
 
     
-    public void connectDbTest() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+    /**
+     * Tests if the connection to the database is working
+     * @return True if the connection is valid
+     */
+    public boolean connectDbTest() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
     	Class.forName("com.mysql.jdbc.Driver").newInstance();
     	try {
     		System.out.println("Connecting...");
-    		//Following line the 192.168.1.70 needs to be 222.152.179.135 if outside of Patrick's network
-    		Connection connectTest = DriverManager.getConnection("jdbc:mysql://192.168.1.70:3306/cyclrr","monitor","Team5Pass");
+    		//Following line the 192.168.1.70 needs to be 125.239.188.8 if outside of Patrick's network
+    		Connection connectTest = DriverManager.getConnection("jdbc:mysql://125.239.188.8:3306/cyclrr","monitor","Team5Pass");
     		testConnection(connectTest);
+    		connectTest.close();
+    		return true;
     	}
     	catch (SQLException ex) {
     		printSqlError(ex);
     	}
+    	return false;
     }
     
     
+    /**
+     * Tests if data can be pulled from the database
+     * @param connectTest A connection to the database
+     * @throws SQLException If there was an error reading data from the database
+     */
     private void testConnection(Connection connectTest) throws SQLException {
     	System.out.println("Connected");
     	Statement qrytest = connectTest.createStatement();
@@ -1374,10 +1406,4 @@ public class DataFetcher {
     		System.out.println(result.getString(1));
     	}
     }
-
-    
-    public static void main(String[] argv) {
-
-	}
-
 }
