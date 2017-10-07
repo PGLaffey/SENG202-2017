@@ -45,13 +45,13 @@ public class BadgeTest extends TestCase {
 
 
     /**
-     * Test to check the 0 boundary case (same test for all badge types)
+     * Test for level zero badge with
      */
     @Test
     public void testGetStrRemaingDistanceZero() {
         distanceBadge.setValue(2000);
-        String strRemaining = distanceBadge.getStrRemaining();
-        assertEquals("8 kilometres", strRemaining);
+        assertEquals("8 kilometres", distanceBadge.getStrRemaining());
+        assertEquals("2 kilometres", distanceBadge.achievedString());
     }
 
 
@@ -62,20 +62,34 @@ public class BadgeTest extends TestCase {
     public void testGetStrRemainingDistanceKilometres() {
         distanceBadge.setValue(130000);
         distanceBadge.setLevel(4);
-        String strRemaining = distanceBadge.getStrRemaining();
-        assertEquals("70 kilometres", strRemaining);
+        assertEquals("70 kilometres", distanceBadge.getStrRemaining());
+        assertEquals("130 kilometres", distanceBadge.achievedString());
     }
 
 
     /**
-     * Test to check metres only conditional
+     * Test acheivedString and getStrRetriever for a badge within metres of an
+     * level up.
      */
     @Test
     public void testGetStrRemainingDistanceMetres() {
         distanceBadge.setValue(9643);
         distanceBadge.setLevel(1);
-        String strRemaining = distanceBadge.getStrRemaining();
-        assertEquals("357 metres", strRemaining);
+        assertEquals("357 metres", distanceBadge.getStrRemaining());
+        assertEquals("9 kilometres and 643 metres", distanceBadge.achievedString());
+    }
+
+
+    /**
+     * Tests achievedString and getStrRemaining for a badge where the distance is less
+     * than one kilometre.
+     */
+    @Test
+    public void testAchievedStringMetres() {
+        distanceBadge.setValue(600);
+        distanceBadge.setLevel(1);
+        assertEquals("9 kilometres and 400 metres", distanceBadge.getStrRemaining());
+        assertEquals("600 metres", distanceBadge.achievedString());
     }
 
 
@@ -86,8 +100,8 @@ public class BadgeTest extends TestCase {
     public void testGetStrRemainingDistanceElse() {
         distanceBadge.setValue(11742);
         distanceBadge.setLevel(2);
-        String strRemaining = distanceBadge.getStrRemaining();
-        assertEquals("38 kilometres and 258 metres", strRemaining);
+        assertEquals("38 kilometres and 258 metres", distanceBadge.getStrRemaining());
+        assertEquals("11 kilometres and 742 metres", distanceBadge.achievedString());
     }
 
 
@@ -98,8 +112,8 @@ public class BadgeTest extends TestCase {
     public void testGetStrRemainingTimeHours() {
         timeBadge.setValue(11520);
         timeBadge.setLevel(4);
-        String strRemaining = timeBadge.getStrRemaining();
-        assertEquals("8 hours", strRemaining);
+        assertEquals("8 hours", timeBadge.getStrRemaining());
+        assertEquals("192 hours", timeBadge.achievedString());
     }
 
 
@@ -110,8 +124,21 @@ public class BadgeTest extends TestCase {
     public void testGetStrRemainingTimeMinutes() {
         timeBadge.setValue(542);
         timeBadge.setLevel(1);
-        String strRemaining = timeBadge.getStrRemaining();
-        assertEquals("58 minutes", strRemaining);
+        assertEquals("58 minutes", timeBadge.getStrRemaining());
+        assertEquals("9 hours and 2 minutes", timeBadge.achievedString());
+    }
+
+
+    /**
+     * Test to check the achievedString and the getStrRemaining functions for a badge where
+     * the time is less than one hour.
+     */
+    @Test
+    public void testAchievedStringUnderHour() {
+        timeBadge.setValue(40);
+        timeBadge.setLevel(1);
+        assertEquals("9 hours and 20 minutes", timeBadge.getStrRemaining());
+        assertEquals("40 minutes", timeBadge.achievedString());
     }
 
 
@@ -122,8 +149,8 @@ public class BadgeTest extends TestCase {
     public void testGetStrRemainingTimeElse() {
         timeBadge.setValue(670);
         timeBadge.setLevel(2);
-        String strRemaining = timeBadge.getStrRemaining();
-        assertEquals("38 hours and 50 minutes", strRemaining);
+        assertEquals("38 hours and 50 minutes", timeBadge.getStrRemaining());
+        assertEquals("11 hours and 10 minutes", timeBadge.achievedString());
     }
 
 
@@ -134,8 +161,7 @@ public class BadgeTest extends TestCase {
     public void testGetStrRemainingRoutes() {
         routesBadge.setValue(158);
         routesBadge.setLevel(5);
-        String strRemaining = routesBadge.getStrRemaining();
-        assertEquals("42 routes", strRemaining);
+        assertEquals("42 routes", routesBadge.getStrRemaining());
     }
 
 
@@ -157,7 +183,7 @@ public class BadgeTest extends TestCase {
     public void testUpdateName() {
         routesBadge.setLevel(5);
         routesBadge.updateName();
-        assertTrue(routesBadge.getName().equals("Routes badge, level 5"));
+        assertEquals("Routes badge, level 5", routesBadge.getName());
     }
 
 
@@ -261,7 +287,7 @@ public class BadgeTest extends TestCase {
         distanceBadge.updateBadge();
         String check = "This is your Level 3 Distance Badge." +
                 "\nTravel 25 kilometres and 500 metres to earn the next one!";
-        assertTrue(distanceBadge.getDescription().equals(check));
+        assertEquals(check, distanceBadge.getDescription());
     }
 
 
@@ -275,7 +301,7 @@ public class BadgeTest extends TestCase {
         timeBadge.updateDescription();
         String check = "Nice Work! This is your Level 6 Time Badge." +
                 "\nYou're at the top of your game, and we've run out of Time Badges to give you!";
-        assertTrue(check.equals(timeBadge.getDescription()));
+        assertEquals(check, timeBadge.getDescription());
     }
 }
 
