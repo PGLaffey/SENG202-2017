@@ -97,6 +97,9 @@ public class RetailerInfoScreenController {
     private Label zipLabel;
 
     @FXML
+    private Button deleteButton;
+
+    @FXML
     private TextField zipText;
 
     private Retailer oldRetailer;
@@ -141,6 +144,7 @@ public class RetailerInfoScreenController {
     	addressLabel.setText("Address:");
     	okButton.setVisible(false);
     	updateButton.setVisible(false);
+    	deleteButton.setVisible(false);
     	saveButton.setVisible(true);
     	cancelButton.setVisible(true);
     }
@@ -300,8 +304,25 @@ public class RetailerInfoScreenController {
     	descriptionText.setVisible(false);
     	okButton.setVisible(true);
     	updateButton.setVisible(true);
+    	deleteButton.setVisible(true);
     	saveButton.setVisible(false);
     	cancelButton.setVisible(false);
+    }
+
+    @FXML
+    void deletePressed(ActionEvent event) {
+        DataFetcher df = new DataFetcher();
+        try {
+            df.connectDb();
+            df.deleteLocation(newRetailer);
+            df.closeConnection();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        CurrentStorage.getRetailerArray().set(CurrentStorage.getRetailerIndex(), null);
+        Stage stage = (Stage) deleteButton.getScene().getWindow();
+        stage.hide();
     }
     
 

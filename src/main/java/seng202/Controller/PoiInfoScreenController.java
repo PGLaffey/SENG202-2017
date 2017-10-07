@@ -87,6 +87,9 @@ public class PoiInfoScreenController {
     @FXML
     private Button showOnMapBtn;
 
+    @FXML
+    private Button deleteButton;
+
     private Poi oldPoi;
 
     private Poi newPoi;
@@ -129,6 +132,7 @@ public class PoiInfoScreenController {
     	zipLabel.setText("Zip: ");
     	okButton.setVisible(false);
     	updateButton.setVisible(false);
+    	deleteButton.setVisible(false);
     	saveButton.setVisible(true);
     	cancelButton.setVisible(true);
     }
@@ -247,6 +251,23 @@ public class PoiInfoScreenController {
         saveButton.setVisible(false);
         okButton.setVisible(true);
         updateButton.setVisible(true);
+        deleteButton.setVisible(true);
+    }
+
+    @FXML
+    void deletePressed(ActionEvent event) {
+        DataFetcher df = new DataFetcher();
+        try {
+            df.connectDb();
+            df.deleteLocation(newPoi);
+            df.closeConnection();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        CurrentStorage.getPoiArray().set(CurrentStorage.getPoiIndex(), null);
+        Stage stage = (Stage) deleteButton.getScene().getWindow();
+        stage.hide();
     }
 
     @FXML

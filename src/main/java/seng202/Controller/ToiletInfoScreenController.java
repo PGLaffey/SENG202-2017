@@ -95,6 +95,9 @@ public class ToiletInfoScreenController {
     @FXML
     private Button cancelButton;
 
+    @FXML
+    private Button deleteButton;
+
     private Toilet oldToilet;
     private Toilet newToilet;
 
@@ -135,6 +138,7 @@ public class ToiletInfoScreenController {
     	zipLabel.setText("Zip: ");
     	okButton.setVisible(false);
     	updateButton.setVisible(false);
+    	deleteButton.setVisible(false);
     	saveButton.setVisible(true);
     	cancelButton.setVisible(true);
     }
@@ -241,6 +245,23 @@ public class ToiletInfoScreenController {
         saveButton.setVisible(false);
         okButton.setVisible(true);
         updateButton.setVisible(true);
+        deleteButton.setVisible(true);
+    }
+
+    @FXML
+    void deletePressed(ActionEvent event) {
+        DataFetcher df = new DataFetcher();
+        try {
+            df.connectDb();
+            df.deleteLocation(newToilet);
+            df.closeConnection();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        CurrentStorage.getToiletArray().set(CurrentStorage.getToiletIndex(), null);
+        Stage stage = (Stage) deleteButton.getScene().getWindow();
+        stage.hide();
     }
 
     @FXML

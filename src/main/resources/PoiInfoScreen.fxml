@@ -61,7 +61,7 @@
         <Font name="System Bold" size="12.0" fx:id="x2" />
       </font>
     </Button>
-    <Button id="okButton" fx:id="updateButton" font="$x2" mnemonicParsing="false" onAction="#updatePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Update" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+    <Button id="okButton" fx:id="updateButton" font="$x2" mnemonicParsing="false" onAction="#updatePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Update" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
     <TextField fx:id="nameText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
         <Insets left="50.0" top="-5.0" />
@@ -99,6 +99,7 @@
             <Font name="System Bold" size="12.0" fx:id="x21" />
          </font>
       </Button>
+      <Button id="okButton" fx:id="deleteButton" font="$x2" mnemonicParsing="false" onAction="#deletePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Delete" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
   </children>
   <columnConstraints>
     <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-1.0" minWidth="250.0" percentWidth="-1.0" prefWidth="-1.0" />
@@ -108,7 +109,7 @@
     <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
   </padding>
   <rowConstraints>
-    <RowConstraints maxHeight="400.0" minHeight="200.0" prefHeight="306.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="-1.0" minHeight="60.0" prefHeight="-1.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="400.0" minHeight="200.0" prefHeight="252.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="88.0" minHeight="60.0" prefHeight="88.0" vgrow="SOMETIMES" />
   </rowConstraints>
 </GridPane>

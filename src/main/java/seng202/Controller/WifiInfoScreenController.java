@@ -94,6 +94,9 @@ public class WifiInfoScreenController {
     @FXML
     private Button cancelButton;
 
+    @FXML
+    private Button deleteButton;
+
 
     @FXML
     private Button showOnMapBtn;
@@ -145,6 +148,7 @@ public class WifiInfoScreenController {
     	zipLabel.setText("Zip: ");
     	okButton.setVisible(false);
     	updateButton.setVisible(false);
+    	deleteButton.setVisible(false);
     	saveButton.setVisible(true);
     	cancelButton.setVisible(true);
     }
@@ -276,6 +280,24 @@ public class WifiInfoScreenController {
         saveButton.setVisible(false);
         okButton.setVisible(true);
         updateButton.setVisible(true);
+        deleteButton.setVisible(true);
+    }
+
+    @FXML
+    void deletePressed(ActionEvent event) {
+
+        DataFetcher df = new DataFetcher();
+        try {
+            df.connectDb();
+            df.deleteLocation(newWifi);
+            df.closeConnection();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        CurrentStorage.getWifiArray().set(CurrentStorage.getWifiIndex(), null);
+        Stage stage = (Stage) deleteButton.getScene().getWindow();
+        stage.hide();
     }
     
 
@@ -321,6 +343,7 @@ public class WifiInfoScreenController {
 
     @FXML
     void initialize() {
+        //TODO: Have a check for if they own it, if they do then delete button visible
         newWifi = CurrentStorage.getWifiArray().get(CurrentStorage.getWifiIndex());
         oldWifi = new Wifi(newWifi);
     	nameLabel.setText("Name: " + newWifi.getName());
