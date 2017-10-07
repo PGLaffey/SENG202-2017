@@ -114,7 +114,7 @@ public class ToiletInfoScreenController {
     
     
     /**
-     * Method when the update button is pressed, displays screen to update the selected toilet
+     * Method when the update button is pressed, displays text fields to update the selected toilet
      * @param event Auto-generate event on button press
      */
     @FXML
@@ -160,7 +160,8 @@ public class ToiletInfoScreenController {
     
     
     /**
-     * Method when the save button is pressed, updates the selected location
+     * Method for when the save button is pressed while a user is updating a toilet.
+     * Checks that the inputted data is valid then updates the toilet in the list and database.
      * @param event Auto-generate event on button press
      */
     @FXML
@@ -208,9 +209,6 @@ public class ToiletInfoScreenController {
             }
             newToilet.setForDisabled(disabledChoice.getValue());
             newToilet.setUniSex(unisexChoice.getValue());
-
-        	// TODO: Update the database
-
             DataFetcher exporter = new DataFetcher();
             try {
                 exporter.connectDb();
@@ -224,7 +222,11 @@ public class ToiletInfoScreenController {
     }
 
     
-    //TODO add docstring
+    /**
+     * Method for when cancel is pressed while a user is updating a toilet.
+     * Ignores changes, hides the text fields and re displays full labels.
+     * @param event
+     */
     @FXML
     void cancelPressed (ActionEvent event) {
         addressLabel.setText("Address: " + newToilet.getAddress());
@@ -248,6 +250,12 @@ public class ToiletInfoScreenController {
         deleteButton.setVisible(true);
     }
 
+
+    /**
+     * Method for when a toilet is deleted.
+     * Removes it from the database, makes its index in toilet array list null and closes the pop up.
+     * @param event
+     */
     @FXML
     void deletePressed(ActionEvent event) {
         DataFetcher df = new DataFetcher();
