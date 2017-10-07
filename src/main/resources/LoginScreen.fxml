@@ -38,10 +38,6 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-    <CheckBox fx:id="staySignedInCheck" mnemonicParsing="false" text="Stay signed in" GridPane.columnIndex="0" GridPane.rowIndex="4">
-         <font>
-            <Font name="KacstLetter" size="13.0" />
-         </font></CheckBox>
     <Label fx:id="incorrectPasswordLbl" text="Incorrect Password" textFill="#573895" visible="false" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
     <Label fx:id="incorrectUserLbl" text="User does not exist" textAlignment="CENTER" textFill="#573895" visible="false" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2" GridPane.halignment="CENTER">

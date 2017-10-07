@@ -25,9 +25,7 @@ public class LoginScreenController {
 	
 	@FXML
 	private Button signUpButton;
-	
-	@FXML
-	private CheckBox staySignedInCheck;
+
 	
 	@FXML
 	private Label incorrectPasswordLbl;
