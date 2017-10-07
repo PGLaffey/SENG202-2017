@@ -74,15 +74,6 @@ public class Badge{
 
 
     /**
-     * Getter for badge type
-     * @return badgeType Type of badge
-     */
-    public String getBadgeType(){ 
-    	return badgeType; 
-    }
-
-
-    /**
      * Getter for value
      * @return value Number of units user has gained towards badge
      */
@@ -133,15 +124,6 @@ public class Badge{
      */
     private int getBadgeTypeIndex() { 
     	return Arrays.asList(types).indexOf(badgeType); 
-    }
-
-
-    /**
-     * Getter for requirements
-     * @return requirements Array of requirements for the type of badge
-     */
-    public int[] getRequirements() { 
-    	return requirements[getBadgeTypeIndex()]; 
     }
 
 
@@ -364,7 +346,7 @@ public class Badge{
             }
         } 
         else {
-            output = "Error: You've exceeded the current possible levels, good job.";
+            output = "Error: You've exceeded the current possible levels.";
         }
         description = output;
     }
