@@ -106,6 +106,8 @@ public class WifiInfoScreenController {
     private Wifi oldWifi;
     private Wifi newWifi;
 
+    private boolean owner = false;
+
 
 
     /**
@@ -282,7 +284,7 @@ public class WifiInfoScreenController {
         saveButton.setVisible(false);
         okButton.setVisible(true);
         updateButton.setVisible(true);
-        deleteButton.setVisible(true);
+        deleteButton.setVisible(owner);
     }
 
 
@@ -354,6 +356,21 @@ public class WifiInfoScreenController {
         //TODO: Have a check for if they own it, if they do then delete button visible
         newWifi = CurrentStorage.getWifiArray().get(CurrentStorage.getWifiIndex());
         oldWifi = new Wifi(newWifi);
+
+        DataFetcher df = new DataFetcher();
+        try {
+            df.connectDb();
+            if (df.getLocationOwner(newWifi) != null && df.getLocationOwner(newWifi).equals(CurrentStorage.getUser().getUsername())) {
+                owner = true;
+            }
+            df.closeConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        deleteButton.setVisible(owner);
+
+
     	nameLabel.setText("Name: " + newWifi.getName());
     	typeLabel.setText("Type: " + newWifi.getType());
     	boroughLabel.setText("Borough: " + newWifi.getBorough());

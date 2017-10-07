@@ -106,6 +106,8 @@ public class RetailerInfoScreenController {
 
     private Retailer newRetailer;
 
+    private boolean owner = false;
+
 
     /**
      * Method when the ok button is pressed, hides the pop up.
@@ -311,7 +313,7 @@ public class RetailerInfoScreenController {
     	descriptionText.setVisible(false);
     	okButton.setVisible(true);
     	updateButton.setVisible(true);
-    	deleteButton.setVisible(true);
+    	deleteButton.setVisible(owner);
     	saveButton.setVisible(false);
     	cancelButton.setVisible(false);
     }
@@ -344,6 +346,19 @@ public class RetailerInfoScreenController {
     void initialize() {
         newRetailer = CurrentStorage.getRetailerArray().get(CurrentStorage.getRetailerIndex());
         oldRetailer = new Retailer(newRetailer);
+
+        DataFetcher df = new DataFetcher();
+        try {
+            df.connectDb();
+            if (df.getLocationOwner(newRetailer) != null && df.getLocationOwner(newRetailer).equals(CurrentStorage.getUser().getUsername())) {
+                owner = true;
+            }
+            df.closeConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        deleteButton.setVisible(owner);
 
     	nameLabel.setText("Name: " + newRetailer.getName());
     	addressLabel.setText("Address: " + newRetailer.getAddress());

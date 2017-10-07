@@ -101,6 +101,8 @@ public class ToiletInfoScreenController {
     private Toilet oldToilet;
     private Toilet newToilet;
 
+    private boolean owner = false;
+
 
     /**
      * Method when the ok button is pressed, hides the pop up.
@@ -247,7 +249,7 @@ public class ToiletInfoScreenController {
         saveButton.setVisible(false);
         okButton.setVisible(true);
         updateButton.setVisible(true);
-        deleteButton.setVisible(true);
+        deleteButton.setVisible(owner);
     }
 
 
@@ -318,6 +320,19 @@ public class ToiletInfoScreenController {
     void initialize() {
         newToilet = CurrentStorage.getToiletArray().get(CurrentStorage.getToiletIndex());
         oldToilet = new Toilet(newToilet);
+
+        DataFetcher df = new DataFetcher();
+        try {
+            df.connectDb();
+            if (df.getLocationOwner(newToilet) != null && df.getLocationOwner(newToilet).equals(CurrentStorage.getUser().getUsername())) {
+                owner = true;
+            }
+            df.closeConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        deleteButton.setVisible(owner);
 
     	disabledLabel.setText("Disabled: " + String.valueOf(newToilet.getForDisabled()));
     	latLabel.setText("Latitude: " + newToilet.getLatitude());
