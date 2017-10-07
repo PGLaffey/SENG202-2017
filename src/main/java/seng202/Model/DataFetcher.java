@@ -10,17 +10,11 @@ import java.util.Collections;
 public class DataFetcher {
     private Connection connect = null;
     private boolean hasImported = false;
-    static int wifiOffset = 0;
-    static int retailerOffset = 0;
-    static int routeOffset = 0;
-    static int poiOffset = 0;
-    static int toiletOffset = 0;
 
     
 	/**
 	 * @return true if objects have already been imported from database
 	 */
-	// TODO: Change docstring
     public boolean isHasImported() {
     	return hasImported;
 	}
@@ -30,21 +24,11 @@ public class DataFetcher {
 	 * Sets the value of hasImported to true if the database has already been imported from
 	 * @param value boolean value for whether an object has been imported previously
 	 */
-	// TODO: Change docstring
 	public void setHasImported(boolean value) {
     	hasImported = value;
 	}
 
 	
-	/**
-	 * Returns an array of the offsets. Used to check if there is stuff to import
-	 * @return the array of offsets in the form toilets, poi, wifi, retailer, route
-	 */
-	public Integer[] getOffsets() {
-		Integer[] offsets={toiletOffset, poiOffset, wifiOffset, retailerOffset, routeOffset};
-		return offsets;
-	}
-
 	/**
 	 * Getter for the Connection connect
 	 */
@@ -256,7 +240,7 @@ public class DataFetcher {
 		runUpdate(stmt, params);
     }
 
-
+	
 	/**
 	 * Fetches the users password to verify that they have the correct credentials
 	 * @param username Username of user logging in
@@ -521,8 +505,8 @@ public class DataFetcher {
 		route.setDistance(distance);
 		return route;
 	}
-
-
+	
+	
 	/**
 	 * Loads a location along a route.EG Start or End
 	 * @param locationID The database ID of the location to be loaded
@@ -537,8 +521,8 @@ public class DataFetcher {
 		locationOutput.next();
 		return loadLocation(locationOutput);
 	}
-
-
+	
+	
 	/**
 	 * Adds the Route to the current Users saved routes or fav routes if it is set to
 	 * @param output ResultSet of information about the currently loading Route
@@ -564,39 +548,19 @@ public class DataFetcher {
 			}
 		}
 	}
-
-
+	
+	
 	/**
 	 * Fetches all of the routes out of the database to be loaded in to the app
 	 */
 	public void loadAllRoutes() {
     	try {
-    		PreparedStatement qryLoadRoutes = connect.prepareStatement("SELECT * FROM tblRoutes LIMIT ?, 1000");
-    		qryLoadRoutes.setInt(1, routeOffset);
+    		//Initializes the result set of all Routes from the database
+    		PreparedStatement qryLoadRoutes = connect.prepareStatement("SELECT * FROM tblRoutes");
 			ResultSet output = qryLoadRoutes.executeQuery();
-			routeOffset += output.getFetchSize();
-			Location start = null;
-			Location end = null;
-			int startID;
-			int endID;
-			boolean secret = false;
-			String name;
-			String bikeID;
-			String gender;
-			String owner;
-			
-			double latitude;
-			double longitude;
-			int type;
-			
-
-			ResultSet locationOutput; 
-			ResultSet endOutput; 
-
 			//Loops while there is another Route to be loaded
-
 			while (output.next()) {
-				secret = output.getBoolean(7);
+				boolean secret = output.getBoolean(7);
 				//Checks if the Route is set to be secret
 				if (secret) {
 					int ownerID = output.getInt(8);
@@ -606,7 +570,7 @@ public class DataFetcher {
 						PreparedStatement qryOwner = connect.prepareStatement("SELECT Username FROM tblUser WHERE UserID = ?");
 						qryOwner.setInt(1, ownerID);
 						ResultSet ownerOutput = qryOwner.executeQuery();
-						owner = ownerOutput.getString(1);
+						String owner = ownerOutput.getString(1);
 						//Checks if the currently loaded User is the Owner of the Route
 						//If so add the Route to current storage
 						if (currUser.equals(owner)) {
@@ -732,11 +696,9 @@ public class DataFetcher {
 			typeID = output.getInt(11);
 			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblWifi WHERE WifiID = " + typeID + "");
 			typeOutput.next();
-
 			ssid = typeOutput.getString(2);
 			provider = typeOutput.getString(3);
 			wifi_type = typeOutput.getString(4);
-
 			Wifi wifi = new Wifi(latitude, longitude, name, wifi_type,  provider, ssid);
 			if (borough != null) {
 				wifi.setBorough(borough);
@@ -776,64 +738,36 @@ public class DataFetcher {
     /**
      * Loads all locations in the database into the programs current storage
      */
-    public void loadNextLocations() {
-		boolean secret = false;
-		int ownerID = 0;
+    public void loadAllLocations() {
     	try {
-    		//Initialize the query to fetch all locations from the database and its result set
-			String[] locationTypes = {"Retailer", "Toilet", "Poi", "Wifi"};
-			for (String location : locationTypes) {
-				PreparedStatement qryLoadLocations = connect.prepareStatement("SELECT * FROM tblLocations WHERE " + location + "ID IS NOT NULL LIMIT ?, 1000");
-				switch(location) {
-					case("Retailer"): qryLoadLocations.setInt(1, retailerOffset);
-						break;
-					case("Toilet"): qryLoadLocations.setInt(1, toiletOffset);
-						break;
-					case("Poi"): qryLoadLocations.setInt(1, poiOffset);
-						break;
-					case("Wifi"): qryLoadLocations.setInt(1, wifiOffset);
-						break;
+    		//Initialize the query to fetch all Locations from the database and its result set
+    		PreparedStatement qryLoadLocations = connect.prepareStatement("SELECT * FROM tblLocations");
+			ResultSet output = qryLoadLocations.executeQuery();
+			boolean secret = true;
+			int ownerID = 0;
+	    	//Loop while there a another Location to be loaded from the database
+			while (output.next()) {
+				if (output.getBoolean(6)) {
+					secret = false;
 				}
-
-				ResultSet output = qryLoadLocations.executeQuery();
-				//Loop while there a another location to be loaded from the database
-				while (output.next()) {
-					if (output.getBoolean(6)) {
-						secret = false;
-					}
-					//Checks if the Location is set to be secret
-					System.out.println("Location: " + output.getInt(1) + " | Secret: " + secret);
-					if (secret) {
-						ownerID = output.getInt(5);
-						//Checks if the Location belongs to a User
-						if (ownerID != 0) {
-							String currUser = CurrentStorage.getUser().getUsername();
-							PreparedStatement qryOwner = connect.prepareStatement("SELECT Username FROM tblUser WHERE UserID = ?");
-							qryOwner.setInt(1, ownerID);
-							ResultSet ownerOutput = qryOwner.executeQuery();
-							String owner = ownerOutput.getString(1);
-							//Checks if the currently loaded User is the Owner of the Location
-							//If so continue loading the Location
-							if (currUser.equals(owner)) {
-								loadLocation(output);
-							}
+				//Checks if the Location is set to be secret
+				System.out.println("Location: " + output.getInt(1) + " | Secret: " + secret);
+				if (secret) {
+					ownerID = output.getInt(5);
+					//Checks if the Location belongs to a User
+					if (ownerID != 0) {
+						String currUser = CurrentStorage.getUser().getUsername();
+						PreparedStatement qryOwner = connect.prepareStatement("SELECT Username FROM tblUser WHERE UserID = ?");
+						qryOwner.setInt(1, ownerID);
+						ResultSet ownerOutput = qryOwner.executeQuery();
+						String owner = ownerOutput.getString(1);
+						//Checks if the currently loaded User is the Owner of the Location
+						//If so continue loading the Location
+						if (currUser.equals(owner)) {
+							loadLocation(output);
 						}
-					} else {
-						loadLocation(output);
 					}
 				}
-				output.last();
-				switch(location) {
-					case("Retailer"): retailerOffset += output.getRow();
-						break;
-					case("Toilet"): toiletOffset += output.getRow();
-						break;
-					case("Poi"): poiOffset += output.getRow();
-						break;
-					case("Wifi"): wifiOffset += output.getRow();
-						break;
-				}
-
 				secret = true;
 			}
 		} 
@@ -846,7 +780,7 @@ public class DataFetcher {
     
     /**
      * Runs an update query on the database. Update queries are used to add data to an existing table.
-     * @param query The update query to run
+     * @param update The update query to run
      */
     private void runUpdate(String query, ArrayList<String> parameters) {
     	try {
@@ -870,7 +804,7 @@ public class DataFetcher {
      * result = [[(0,0), (0,1), (0,2)],
      *           [(1,0), (1,1), (1,2)],
      *           [(2,0), (2,1), (2,2)]]
-     * @param stmt The MySQL syntax query to run
+     * @param query The MySQL syntax query to run
      * @return An Array List that contains another Array List, representing the rows of the table, that contains Strings, representing the column of the data
      */
     private ArrayList<ArrayList<String>> runQuery(String stmt, ArrayList<String> parameters) {
