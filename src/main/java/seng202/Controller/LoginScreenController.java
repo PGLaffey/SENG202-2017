@@ -54,7 +54,6 @@ public class LoginScreenController {
 						Integer.parseInt(userInfo.get(3)), Double.parseDouble(userInfo.get(4)), Double.parseDouble(userInfo.get(5)));
 
 				CurrentStorage.setUser(user);
-				System.out.println(userInfo.get(5));
 				Stage primaryStage = (Stage) signInButton.getScene().getWindow();
 				Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 				primaryStage.setTitle("Profile");
