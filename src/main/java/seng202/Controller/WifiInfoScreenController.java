@@ -38,6 +38,9 @@ public class WifiInfoScreenController {
     private Label addressLabel;
 
     @FXML
+    private TextField addressText;
+
+    @FXML
     private Label boroughLabel;
 
     @FXML
@@ -119,6 +122,8 @@ public class WifiInfoScreenController {
      */
     @FXML
     void updatePressed(ActionEvent event) {
+        addressText.setVisible(true);
+        addressText.setText(newWifi.getAddress());
     	boroughText.setVisible(true);
     	boroughText.setText(newWifi.getBorough());
     	ssidText.setVisible(true);
@@ -130,7 +135,8 @@ public class WifiInfoScreenController {
     	nameText.setVisible(true);
     	nameText.setText(newWifi.getName());
     	zipText.setVisible(true);
-    	zipText.setText(String.valueOf(newWifi.getZip()));;
+    	zipText.setText(String.valueOf(newWifi.getZip()));
+    	addressLabel.setText("Address:");
     	boroughLabel.setText("Borough: ");
     	ssidLabel.setText("Ssid: ");
     	typeLabel.setText("Type: ");
@@ -218,6 +224,12 @@ public class WifiInfoScreenController {
     	}
         
         if (allValid) {
+    	    if (!oldWifi.getAddress().equals(addressText.getText())) {
+    	        newWifi.setAddress(addressText.getText());
+                double[] latLong = Map.getLatLong(addressText.getText());
+                newWifi.setLatitude(latLong[0]);
+                newWifi.setLongitude(latLong[1]);
+            }
             newWifi.setBorough(boroughText.getText());
             newWifi.setName(nameText.getText());
             newWifi.setSsid(ssidText.getText());
@@ -246,6 +258,8 @@ public class WifiInfoScreenController {
     //TODO add docstring
     @FXML
     void cancelPressed (ActionEvent event) {
+        addressLabel.setText("Address: " + newWifi.getAddress());
+        addressText.setVisible(false);
         nameLabel.setText("Name: " + newWifi.getName());
         nameText.setVisible(false);
         typeLabel.setText("Type: " + newWifi.getType());

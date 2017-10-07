@@ -84,6 +84,11 @@
         <Insets left="60.0" top="100.0" />
       </GridPane.margin>
     </TextField>
+      <TextField fx:id="addressText" prefWidth="200.0" visible="false" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="60.0" top="135.0" />
+         </GridPane.margin>
+      </TextField>
     <TextField id="nameText" fx:id="boroughText" prefWidth="200.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.valignment="TOP">
       <GridPane.margin>
         <Insets left="60.0" top="170.0" />

@@ -42,6 +42,9 @@ public class ToiletInfoScreenController {
     private Label addressLabel;
 
     @FXML
+    private TextField addressText;
+
+    @FXML
     private Label boroughLabel;
 
     @FXML
@@ -113,6 +116,8 @@ public class ToiletInfoScreenController {
      */
     @FXML
     void updatePressed(ActionEvent event) {
+        addressText.setVisible(true);
+        addressText.setText(newToilet.getAddress());
     	boroughText.setVisible(true);
     	boroughText.setText(newToilet.getBorough());
     	unisexChoice.setVisible(true);
@@ -186,6 +191,12 @@ public class ToiletInfoScreenController {
         }
 
         if (allValid) {
+    	    if (!addressText.getText().equals(oldToilet.getAddress())) {
+    	        newToilet.setAddress(addressText.getText());
+                double[] latLong = Map.getLatLong(addressText.getText());
+                newToilet.setLatitude(latLong[0]);
+                newToilet.setLongitude(latLong[1]);
+            }
             newToilet.setBorough(boroughText.getText());
             newToilet.setName(nameText.getText());
         	if (!zipText.getText().equals("")) {
@@ -212,6 +223,10 @@ public class ToiletInfoScreenController {
     //TODO add docstring
     @FXML
     void cancelPressed (ActionEvent event) {
+        addressLabel.setText("Address: " + newToilet.getAddress());
+        addressText.setVisible(false);
+        latLabel.setText("Latitude: " + newToilet.getLatitude());
+        longLabel.setText("Longitude: " + newToilet.getLongitude());
         disabledLabel.setText("Disabled: " + String.valueOf(newToilet.getForDisabled()));
         disabledChoice.setVisible(false);
         nameLabel.setText("Name: " + newToilet.getName());
