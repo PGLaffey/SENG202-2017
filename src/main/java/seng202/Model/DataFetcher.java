@@ -1090,7 +1090,7 @@ public class DataFetcher {
 			runUpdate(stmt, params);
     	}
     	else {
-    		System.out.println("Route already exisits in the database. Did you mean to update it?");
+    		System.out.println("Route already exists in the database. Did you mean to update it?");
     	}
     }
 
@@ -1110,7 +1110,7 @@ public class DataFetcher {
     		return 0;
     	}
     	String name = route.getName();
-    	String stmt = "SELECT RouteID FROM tblLocations WHERE StartID = ? AND EndID = ? AND Name = ?";
+    	String stmt = "SELECT RouteID FROM tblRoutes WHERE StartID = ? AND EndID = ? AND Name = ?";
 		ArrayList<String> params = new ArrayList<String>();
 		Collections.addAll(params, String.valueOf(startID), String.valueOf(endID), name);
 		if (runQuery(stmt, params).isEmpty()) {
