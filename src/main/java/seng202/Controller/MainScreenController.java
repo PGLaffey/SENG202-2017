@@ -699,7 +699,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             String path = selectedFile.getPath();
-            FileManager.toiletRetriever(path);
+            Thread t = new Thread(new ToiletImporterThread(path));
+            t.start();
         }
     }
 
@@ -716,7 +717,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             String path = selectedFile.getPath();
-            FileManager.poiRetriever(path);
+            Thread t = new Thread(new PoiImporterThread(path));
+            t.start();
         }
     }
 
