@@ -450,7 +450,6 @@ public class Map {
                     .visible(true)
                     .icon("http://maps.google.com/mapfiles/kml/pal3/icon26.png"); //Obtains the correct image for the marker.
             retailer.setMarker(new Marker(markerOptns));
-            System.out.println(retailer.getMarker().getVisible());
             map.addMarker(retailer.getMarker());
             retailerVisible = true;
         } else {
