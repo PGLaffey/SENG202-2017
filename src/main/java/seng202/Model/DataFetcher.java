@@ -715,8 +715,9 @@ public class DataFetcher {
 		double longitude = output.getDouble(3);
 		String name = output.getString(4);
 		boolean secret = true;
-		if (output.getBoolean(6))
+		if (output.getBoolean(6)) {
 			secret = false;
+		}
 		int type = output.getInt(7);
 		String borough = output.getString(12);
 		int zip = output.getInt(13);
@@ -779,7 +780,7 @@ public class DataFetcher {
 			if (borough != null) {
 				retailer.setBorough(borough);
 			}
-			if (zip != -1) {
+			if (zip != 0) {
 				retailer.setZip(zip);
 			}
 			if (address != null) {
