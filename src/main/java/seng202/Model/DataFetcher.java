@@ -863,7 +863,7 @@ public class DataFetcher {
     		PreparedStatement qryLoadLocations = connect.prepareStatement("SELECT * FROM tblLocations LIMIT ?, 1000");
 			qryLoadLocations.setInt(1, locationOffset);
     		ResultSet output = qryLoadLocations.executeQuery();
-    		locationOffset += output.getFetchSize();
+//    		locationOffset += output.getFetchSize();
 			boolean secret = true;
 			int ownerID = 0;
 			int type = 0;
@@ -909,6 +909,8 @@ public class DataFetcher {
 					wifiOffset += 1;
 				}
 			}
+			output.last();
+			locationOffset += output.getRow();
 		} 
     	//Prints the correct error statements if an SQLException occurs
     	catch (SQLException ex) {
@@ -919,7 +921,7 @@ public class DataFetcher {
     
     /**
      * Runs an update query on the database. Update queries are used to add data to an existing table.
-     * @param update The update query to run
+     * @param query The update query to run
      */
     private void runUpdate(String query, ArrayList<String> parameters) {
     	try {
@@ -943,7 +945,7 @@ public class DataFetcher {
      * result = [[(0,0), (0,1), (0,2)],
      *           [(1,0), (1,1), (1,2)],
      *           [(2,0), (2,1), (2,2)]]
-     * @param query The MySQL syntax query to run
+     * @param stmt The MySQL syntax query to run
      * @return An Array List that contains another Array List, representing the rows of the table, that contains Strings, representing the column of the data
      */
     private ArrayList<ArrayList<String>> runQuery(String stmt, ArrayList<String> parameters) {
