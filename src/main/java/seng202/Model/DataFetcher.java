@@ -714,7 +714,9 @@ public class DataFetcher {
 		double latitude = output.getDouble(2);
 		double longitude = output.getDouble(3);
 		String name = output.getString(4);
-		boolean secret = output.getBoolean(6);
+		boolean secret = true;
+		if (output.getBoolean(6))
+			secret = false;
 		int type = output.getInt(7);
 		String borough = output.getString(12);
 		int zip = output.getInt(13);
