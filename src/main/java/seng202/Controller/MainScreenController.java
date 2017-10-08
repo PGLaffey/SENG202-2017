@@ -1107,8 +1107,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             Poi poi;
             if (!poiAddressText.getText().equals("")) {
                 poi = new Poi(poiAddressText.getText(), poiNameText.getText(), poiDescriptionText.getText(), Double.parseDouble(poiCostText.getText()));
-            } 
-            else {
+            } else {
                 poi = new Poi(Double.parseDouble(poiLatText.getText()), Double.parseDouble(poiLongText.getText()), poiNameText.getText(), poiDescriptionText.getText(), Double.parseDouble(poiCostText.getText()));
             }
             if (!poiZipText.getText().equals("")) {

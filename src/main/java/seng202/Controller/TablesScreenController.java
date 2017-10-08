@@ -612,8 +612,7 @@ public class TablesScreenController {
     	ObservableList<String> filterOptions = FXCollections.observableArrayList("All locations","Routes", "Retailers", "WiFi", "Toilets", "Points of interest");
     	tableOptions.setItems(filterOptions);
     	tableOptions.getSelectionModel().selectFirst();
-    	
-    	// TODO: Dont think we need to set table items here
+
 
     	// Set up the all locations table
     	allLocNameCol.setCellValueFactory(new PropertyValueFactory<Location,String>("name"));
@@ -621,8 +620,6 @@ public class TablesScreenController {
 		allLocAddressCol.setCellValueFactory(new PropertyValueFactory<Location, String>("address"));
 		allLocBoroughCol.setCellValueFactory(new PropertyValueFactory<Location, String>("borough"));
 
-		ObservableList<Location> locData = FXCollections.observableArrayList(CurrentStorage.getToiletArray()); // TODO: Make a list in Current Storage that has all the locations, getLocationArray()
-		allLocationsTable.setItems(locData);
 
 
     	// Set up the toilets table
@@ -631,9 +628,6 @@ public class TablesScreenController {
     	toiletBoroughCol.setCellValueFactory(new PropertyValueFactory<Toilet, String>("borough"));
     	toiletUniCol.setCellValueFactory(new PropertyValueFactory<Toilet, Boolean>("uniSex"));
     	toiletNameCol.setCellValueFactory(new PropertyValueFactory<Toilet, String>("name"));
-
-    	ObservableList<Toilet> toiletData = FXCollections.observableArrayList(CurrentStorage.getToiletArray());
-    	toiletsTable.setItems(toiletData);
 
 
     	// Set up the wifi table
@@ -644,8 +638,6 @@ public class TablesScreenController {
     	wifiBoroughCol.setCellValueFactory(new PropertyValueFactory<Wifi, String>("borough"));
 
 
-    	ObservableList<Wifi> wifiData = FXCollections.observableArrayList(CurrentStorage.getWifiArray());
-    	wifiTable.setItems(wifiData);
 
 
     	// Set up the routes table
@@ -654,8 +646,7 @@ public class TablesScreenController {
     	routeDistCol.setCellValueFactory(new PropertyValueFactory<Route, String>("distanceRound"));
     	routeNameCol.setCellValueFactory(new PropertyValueFactory<Route, String>("name"));
 
-    	ObservableList<Route> routeData = FXCollections.observableArrayList(CurrentStorage.getRouteArray());
-    	routesTable.setItems(routeData);
+
 
 
     	// Set up the retailers table
@@ -665,8 +656,6 @@ public class TablesScreenController {
     	retProductCol.setCellValueFactory(new PropertyValueFactory<Retailer, String>("product"));
     	retNameCol.setCellValueFactory(new PropertyValueFactory<Retailer, String>("name"));
 
-    	ObservableList<Retailer> retData = FXCollections.observableArrayList(CurrentStorage.getRetailerArray());
-    	retailersTable.setItems(retData);
 
 
     	// Set up the poi table
