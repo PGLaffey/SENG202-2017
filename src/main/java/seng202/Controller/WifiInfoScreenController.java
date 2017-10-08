@@ -231,7 +231,7 @@ public class WifiInfoScreenController {
     	}
         
         if (allValid) {
-    	    if (!oldWifi.getAddress().equals(addressText.getText())) {
+    	    if (addressText.getText() != null && !oldWifi.getAddress().equals(addressText.getText())) {
     	        newWifi.setAddress(addressText.getText());
                 double[] latLong = Map.getLatLong(addressText.getText());
                 newWifi.setLatitude(latLong[0]);

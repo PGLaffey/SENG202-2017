@@ -198,7 +198,7 @@ public class ToiletInfoScreenController {
         }
 
         if (allValid) {
-    	    if (!addressText.getText().equals(oldToilet.getAddress())) {
+    	    if (addressText.getText() != null && !addressText.getText().equals(oldToilet.getAddress())) {
     	        newToilet.setAddress(addressText.getText());
                 double[] latLong = Map.getLatLong(addressText.getText());
                 newToilet.setLatitude(latLong[0]);

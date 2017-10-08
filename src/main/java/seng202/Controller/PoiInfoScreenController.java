@@ -210,7 +210,7 @@ public class PoiInfoScreenController {
     	}
 
         if (allValid) {
-    	    if (!oldPoi.getAddress().equals(addressText.getText())) {
+    	    if (addressText.getText() != null && !oldPoi.getAddress().equals(addressText.getText())) {
     	        newPoi.setAddress(addressText.getText());
                 double[] latLong = Map.getLatLong(addressText.getText());
                 newPoi.setLatitude(latLong[0]);
@@ -244,6 +244,8 @@ public class PoiInfoScreenController {
      */
     @FXML
     void cancelPressed(ActionEvent event) {
+        addressLabel.setText("Address: " + newPoi.getAddress());
+        addressText.setVisible(false);
         costLabel.setText("Cost: $" + newPoi.getCost());
         costText.setVisible(false);
         descriptionLabel.setText("Description: " + newPoi.getDescription());
