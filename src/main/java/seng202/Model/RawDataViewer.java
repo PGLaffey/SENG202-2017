@@ -73,7 +73,7 @@ public class RawDataViewer {
                         foundPoi.add(poiArrayList.get(i));
                     }
                 }
-                if (poiArrayList.get(i).getBorough() != null) {
+                else if (poiArrayList.get(i).getBorough() != null) {
                     if (poiArrayList.get(i).getBorough().toLowerCase().contains(condition.toLowerCase())) {
                         foundPoi.add(poiArrayList.get(i));
                     }
