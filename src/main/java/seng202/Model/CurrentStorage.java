@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Class to store all current locations and routes for one instance of the program.
  */
 public class CurrentStorage {
+	
     private static ArrayList<Route> routeArray = new ArrayList<Route>();
     private static ArrayList<Integer> addedRoutes = new ArrayList<Integer>();
     private static ArrayList<Retailer> retailerArray = new ArrayList<Retailer>();
@@ -27,7 +28,6 @@ public class CurrentStorage {
     private static Location locationViewed;
     private static Route routeViewed;
 
-
 	private static Integer toiletIndex;
 	private static Integer retailerIndex;
 	private static Integer poiIndex;
@@ -38,8 +38,8 @@ public class CurrentStorage {
     
     
     /**
-     * Getter for the newly added routes
-     * @return addedRoutes
+     * Getter for the newly added routes.
+     * @return - addedRoutes
      */
     public static ArrayList<Integer> getNewRoutes() {
     	return addedRoutes;
@@ -47,8 +47,8 @@ public class CurrentStorage {
     
     
     /**
-     * Getter for the users saved routes
-     * @return usersSavedRoutes
+     * Getter for the users saved routes.
+     * @return - usersSavedRoutes
      */
     public static ArrayList<Integer> getSavedRoutes() {
     	return usersSavedRoutes;
@@ -56,8 +56,8 @@ public class CurrentStorage {
     
     
     /**
-     * Getter for the users favorite routes
-     * @return userFavRoutes
+     * Getter for the users favorite routes.
+     * @return - userFavRoutes
      */
     public static ArrayList<Integer> getFavRoutes() {
     	return usersFavRoutes;
@@ -65,8 +65,8 @@ public class CurrentStorage {
     
     
      /**
-      * Adds a route to the users saved routes
-      * @param index The index in the routes ArrayList of the route to add to saved routes
+      * Adds a route to the users saved routes.
+      * @param index - The index in the routes ArrayList of the route to add to saved routes
       */
     public static void addSavedRoute(int index) {
     	usersSavedRoutes.add(index);
@@ -74,8 +74,8 @@ public class CurrentStorage {
     
     
     /**
-     * Adds a route to the users favorite routes
-     * @param index The index in the routes ArrayList of the route to add to favorite routes
+     * Adds a route to the users favorite routes.
+     * @param index - The index in the routes ArrayList of the route to add to favorite routes
      */
     public static void addFavRoute(int index) {
     	usersFavRoutes.add(index);
@@ -83,8 +83,8 @@ public class CurrentStorage {
     
     
     /**
-     * Sets the currently viewed toilet to i
-     * @param i The index of the currently viewed toilet
+     * Sets the currently viewed toilet to i.
+     * @param i - The index of the currently viewed toilet
      */
     public static void setToiletIndex(Integer i) { 
     	toiletIndex = i; 
@@ -92,8 +92,8 @@ public class CurrentStorage {
     
     
     /**
-     * Getter for the currently viewed toilet's index
-     * @return Currently viewed toilet's index
+     * Getter for the currently viewed toilet's index.
+     * @return - Currently viewed toilet's index
      */
     public static Integer getToiletIndex() {
     	return toiletIndex; 
@@ -101,8 +101,8 @@ public class CurrentStorage {
 
     
     /**
-     * Sets the currently viewed retailer to i
-     * @param i The index of the currently viewed retailer
+     * Sets the currently viewed retailer to i.
+     * @param i - The index of the currently viewed retailer
      */
     public static void setRetailerIndex(Integer i) { 
     	retailerIndex = i; 
@@ -110,8 +110,8 @@ public class CurrentStorage {
 
     
     /**
-     * Getter for the currently viewed retailer's index
-     * @return Currently viewed retailer's index
+     * Getter for the currently viewed retailer's index.
+     * @return - Currently viewed retailer's index
      */
     public static Integer getRetailerIndex() {
     	return retailerIndex; 
@@ -119,8 +119,8 @@ public class CurrentStorage {
 
     
     /**
-     * Sets the currently viewed poi to i
-     * @param i The index of the currently viewed poi
+     * Sets the currently viewed poi to i.
+     * @param i - The index of the currently viewed poi
      */
     public static void setPoiIndex(Integer i) {
     	poiIndex = i; 
@@ -128,8 +128,8 @@ public class CurrentStorage {
 
     
     /**
-     * Getter for the currently viewed poi's index
-     * @return Currently viewed poi's index
+     * Getter for the currently viewed poi's index.
+     * @return - Currently viewed poi's index
      */
     public static Integer getPoiIndex() {
     	return poiIndex; 
@@ -137,8 +137,8 @@ public class CurrentStorage {
 
     
     /**
-     * Sets the currently viewed wifi to i
-     * @param i The index of the currently viewed wifi
+     * Sets the currently viewed wifi to i.
+     * @param i - The index of the currently viewed wifi
      */
     public static void setWifiIndex(Integer i) { 
     	wifiIndex = i; 
@@ -146,8 +146,8 @@ public class CurrentStorage {
 
     
     /**
-     * Getter for the currently viewed wifi's index
-     * @return Currently viewed wifi's index
+     * Getter for the currently viewed wifi's index.
+     * @return - Currently viewed wifi's index
      */
     public static Integer getWifiIndex() { 
     	return wifiIndex; 
@@ -155,8 +155,8 @@ public class CurrentStorage {
 
 
 	/**
-	 * Getter for the current user
-	 * @return  currentUser
+	 * Getter for the current user.
+	 * @return - currentUser
 	 */
 	public static User getUser() {
 		return currentUser;
@@ -164,8 +164,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Setter for the current user
-	 * @param user User to be set as the current user
+	 * Setter for the current user.
+	 * @param user - User to be set as the current user
 	 */
 	public static void setUser(User user) {
 		currentUser = user;
@@ -173,8 +173,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Setter for the newRouteStart
-	 * @param location Location to be set as the start of new route being created
+	 * Setter for the newRouteStart.
+	 * @param location - Location to be set as the start of new route being created
 	 */
 	public static void setNewRouteStart(Location location) { 
 		newRouteStart = location; 
@@ -182,8 +182,8 @@ public class CurrentStorage {
 	
 
 	/**
-	 * Getter for the newRouteStart
-	 * @return newRouteStart The starting location for route being added
+	 * Getter for the newRouteStart.
+	 * @return - The starting location for route being added
 	 */
 	public static Location getNewRouteStart() { 
 		return newRouteStart; 
@@ -191,8 +191,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Setter for the newRouteEnd
-	 * @param location Location to be set as the end of new route being created
+	 * Setter for the newRouteEnd.
+	 * @param location - Location to be set as the end of new route being created
 	 */
 	public static void setNewRouteEnd(Location location) { 
 		newRouteEnd = location; 
@@ -200,8 +200,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Getter for newRouteEnd
-	 * @return newRouteEnd The ending location for route being added
+	 * Getter for newRouteEnd.
+	 * @return - The ending location for route being added
 	 */
 	public static Location getNewRouteEnd() { 
 		return newRouteEnd; 
@@ -209,8 +209,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Getter for the routeArray
-	 * @return the ArrayList of all routes in the application
+	 * Getter for the routeArray.
+	 * @return - The ArrayList of all routes in the application
 	 */
 	public static ArrayList<Route> getRouteArray() {
 		return routeArray;
@@ -218,8 +218,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Getter for the retailerArray
-	 * @return the ArrayList of all retailers in the application
+	 * Getter for the retailerArray.
+	 * @return - The ArrayList of all retailers in the application
 	 */
 	public static ArrayList<Retailer> getRetailerArray() {
 		return retailerArray;
@@ -227,8 +227,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Getter for the wifiArray
-	 * @return the ArrayList of all wifi in the applciation
+	 * Getter for the wifiArray.
+	 * @return - The ArrayList of all wifi in the applciation
 	 */
 	public static ArrayList<Wifi> getWifiArray() {
 		return wifiArray;
@@ -236,8 +236,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Getter for the toiletArray
-	 * @return the ArrayList of all toilets in the application
+	 * Getter for the toiletArray.
+	 * @return - The ArrayList of all toilets in the application
 	 */
 	public static ArrayList<Toilet> getToiletArray() {
 		return toiletArray;
@@ -245,8 +245,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Getter for the poiArray
-	 * @return ArrayList of all poi in the application
+	 * Getter for the poiArray.
+	 * @return  - The ArrayList of all poi in the application
 	 */
 	public static ArrayList<Poi> getPoiArray() {
 		return poiArray;
@@ -254,8 +254,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Getter for the generalArray
-	 * @return ArrayList of all general locations in the application
+	 * Getter for the generalArray.
+	 * @return - The ArrayList of all general locations in the application
 	 */
 	public static ArrayList<Location> getGeneralArray() {
 		return generalArray;
@@ -263,8 +263,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Adds a coord to the coordArray
-	 * @param coord Coord to be added
+	 * Adds a coord to the coordArray.
+	 * @param coord - Coord to be added
 	 */
 	public static void addCoords(Coord coord) {
 		coordsArray.add(coord);
@@ -272,8 +272,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Getter for the coordsArray
-	 * @return ArrayList of Coord
+	 * Getter for the coordsArray.
+	 * @return - The ArrayList of Coord
 	 */
 	public static ArrayList<Coord> getCoords() {
 		return coordsArray;
@@ -281,8 +281,8 @@ public class CurrentStorage {
 
 
 	/**
-	 * Getter for the location being viewed in a pop up
-	 * @return Location being viewed
+	 * Getter for the location being viewed in a pop up.
+	 * @return - Location being viewed
 	 */
 	public static Location getLocation() {
 		return locationViewed;
@@ -290,8 +290,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Setter for the location that is being viewed in a pop up
-	 * @param location Location being viewed
+	 * Setter for the location that is being viewed in a pop up.
+	 * @param location - Location being viewed
 	 */
 	public static void setLocation(Location location) {
 		locationViewed = location;
@@ -299,8 +299,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Getter for the route being viewed in a pop up
-	 * @return Route being viewed
+	 * Getter for the route being viewed in a pop up.
+	 * @return - Route being viewed
 	 */
 	public static Route getRoute() {
 		return routeViewed;
@@ -308,8 +308,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Setter for the route that is being viewed in a pop up
-	 * @param route Route being viewed
+	 * Setter for the route that is being viewed in a pop up.
+	 * @param route - Route being viewed
 	 */
 	public static void setRoute(Route route) {
 		routeViewed = route;
@@ -317,8 +317,8 @@ public class CurrentStorage {
 
 
 	/**
-	 * Getter for the indexes of newly added wifi
-	 * @return ArrayList of indexes
+	 * Getter for the indexes of newly added wifi.
+	 * @return - ArrayList of indexes
 	 */
 	public static ArrayList<Integer> getAddedWifi() {
 		return addedWifi;
@@ -326,8 +326,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Getter for the indexes of newly added toilets
-	 * @return ArrayList of indexes
+	 * Getter for the indexes of newly added toilets.
+	 * @return - ArrayList of indexes
 	 */
 	public static ArrayList<Integer> getAddedToilets() {
 		return addedToilets;
@@ -335,8 +335,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Getter for the indexes of newly added poi
-	 * @return ArrayList of indexes
+	 * Getter for the indexes of newly added poi.
+	 * @return - ArrayList of indexes
 	 */
 	public static ArrayList<Integer> getAddedPoi() {
 		return addedPoi;
@@ -344,8 +344,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Getter for the indexes of newly added general locations
-	 * @return ArrayList of indexes
+	 * Getter for the indexes of newly added general locations.
+	 * @return - ArrayList of indexes
 	 */
 	public static ArrayList<Integer> getAddedGeneral() {
 		return addedGeneral;
@@ -353,8 +353,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Getter for the indexes of newly added retailer
-	 * @return ArrayList of indexes
+	 * Getter for the indexes of newly added retailer.
+	 * @return - ArrayList of indexes
 	 */
 	public static ArrayList<Integer> getAddedRetailers() {
 		return addedRetailers;
@@ -362,8 +362,8 @@ public class CurrentStorage {
 
 
 	/**
-	 * Adds an existing wifi to the application, adding to wifiArray
-	 * @param wifi Wifi to be added
+	 * Adds an existing wifi to the application, adding to wifiArray.
+	 * @param wifi - Wifi to be added
 	 */
 	public static void addWifi(Wifi wifi) {
 		wifiArray.add(wifi);
@@ -371,9 +371,9 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Checks if a wifi is already in the application
-	 * @param wifi Wifi to be checked
-	 * @return true if in array, false otherwise
+	 * Checks if a wifi is already in the application.
+	 * @param 	- wifi Wifi to be checked
+	 * @return 	- true if in array, false otherwise
 	 */
 	public static boolean containsWifi(Wifi wifi) {
 		for (Wifi currentWifi : wifiArray) {
@@ -386,8 +386,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Adds a new wifi to the application, adding to wifiArray and its index to addedWifi
-	 * @param wifi Wifi to be added
+	 * Adds a new wifi to the application, adding to wifiArray and its index to addedWifi.
+	 * @param wifi - Wifi to be added
 	 */
 	public static void addNewWifi(Wifi wifi) {
 		// Used when user adding new data (from GUI or CSV)
@@ -399,8 +399,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Adds an existing retailer to the application, adding to retailer Array
-	 * @param retailer Retailer to be added
+	 * Adds an existing retailer to the application, adding to retailer Array.
+	 * @param retailer - Retailer to be added
 	 */
 	public static void addRetailer(Retailer retailer) { // Used when bringing data in from database
 		retailerArray.add(retailer);
@@ -408,9 +408,9 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Checks if a retailer is already in the application
-	 * @param retailer Retailer to be checked
-	 * @return true if in array, false otherwise
+	 * Checks if a retailer is already in the application.
+	 * @param retailer 	- Retailer to be checked
+	 * @return 			- true if in array, false otherwise
 	 */
 	public static boolean containsRetailer(Retailer retailer) {
 		for (Retailer currentRetailer : retailerArray) {
@@ -423,8 +423,9 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Adds a new retailer to the application, adding to retailerArray and its index to addedRetailer
-	 * @param retailer Retailer to be added
+	 * Adds a new retailer to the application, adding to retailerArray and its index to 
+	 * addedRetailer.
+	 * @param retailer - Retailer to be added
 	 */
 	public static void addNewRetailer(Retailer retailer) {
 		// Used when user adding new data (from GUI or CSV)
@@ -436,8 +437,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Adds an existing toilet to the application, adding to toiletArray
-	 * @param toilet Toilet to be added
+	 * Adds an existing toilet to the application, adding to toiletArray.
+	 * @param toilet - Toilet to be added
 	 */
 	public static void addToilet(Toilet toilet) {
 		toiletArray.add(toilet);
@@ -445,9 +446,9 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Checks if a toilet is already in the application
-	 * @param toilet Toilet to be checked
-	 * @return true if in array, false otherwise
+	 * Checks if a toilet is already in the application.
+	 * @param toilet 	- Toilet to be checked
+	 * @return 			- true if in array, false otherwise
 	 */
 	public static boolean containsToilet(Toilet toilet) {
 		for (Toilet currentToilet : toiletArray) {
@@ -460,8 +461,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Adds a new toilet to the application, adding to toiletArray and its index to addedToilet
-	 * @param toilet Toilet to be added
+	 * Adds a new toilet to the application, adding to toiletArray and its index to addedToilet.
+	 * @param toilet - Toilet to be added
 	 */
 	public static void addNewToilet(Toilet toilet) {
 		// Used when user adding new data (from GUI or CSV)
@@ -473,8 +474,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Adds an existing poi to the application, adding to poiArray
-	 * @param poi Poi to be added
+	 * Adds an existing poi to the application, adding to poiArray.
+	 * @param poi - Poi to be added
 	 */
 	public static void addPoi(Poi poi) {
 		poiArray.add(poi);
@@ -482,9 +483,9 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Checks if a poi is already in the application
-	 * @param poi Poi to be checked
-	 * @return true if in array, false otherwise
+	 * Checks if a poi is already in the application.
+	 * @param poi 	- Poi to be checked
+	 * @return 		- true if in array, false otherwise
 	 */
 	public static boolean containsPoi(Poi poi) {
 		for (Poi currentPoi : poiArray) {
@@ -497,8 +498,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Adds a new poi to the application, adding to poiArray and its index to addedPoi
-	 * @param poi Poi to be added
+	 * Adds a new poi to the application, adding to poiArray and its index to addedPoi.
+	 * @param poi - Poi to be added
 	 */
 	public static void addNewPoi(Poi poi) {
 		// Used when user adding new data (from GUI or CSV)
@@ -510,8 +511,8 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Adds an existing route to the application, adding to routeArray
-	 * @param route Route to be added
+	 * Adds an existing route to the application, adding to routeArray.
+	 * @param route - Route to be added
 	 */
     public static void addRoute(Route route) {
         routeArray.add(route);
@@ -519,9 +520,9 @@ public class CurrentStorage {
 
     
 	/**
-	 * Checks if a route is already in the application
-	 * @param route Route to be checked
-	 * @return true if in array, false otherwise
+	 * Checks if a route is already in the application.
+	 * @param route 	- Route to be checked
+	 * @return 			- true if in array, false otherwise
 	 */
     public static boolean containsRoute(Route route) {
     	for (Route currentRoute : routeArray) {
@@ -534,8 +535,8 @@ public class CurrentStorage {
 
     
 	/**
-	 * Adds a new route to the application, adding to routeArray and its index to addedRoute
-	 * @param route Route to be added
+	 * Adds a new route to the application, adding to routeArray and its index to addedRoute.
+	 * @param route - Route to be added
 	 */
     public static void addNewRoute(Route route) {
     	if (!(containsRoute(route))) {
@@ -546,8 +547,8 @@ public class CurrentStorage {
 
     
 	/**
-	 * Adds an existing general location to the application, adding to generalArray
-	 * @param location Location to be added
+	 * Adds an existing general location to the application, adding to generalArray.
+	 * @param location - Location to be added
 	 */
 	public static void addGeneral(Location location) {
 		generalArray.add(location);
@@ -555,9 +556,9 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Checks if a general location is already in the application
-	 * @param location Location to be checked
-	 * @return true if in array, false otherwise
+	 * Checks if a general location is already in the application.
+	 * @param location 	- Location to be checked
+	 * @return 			- true if in array, false otherwise
 	 */
 	public static boolean containsGeneral(Location location) {
 		for (Location currentLocation : generalArray) {
@@ -570,8 +571,9 @@ public class CurrentStorage {
 
 	
 	/**
-	 * Adds a new general location to the application, adding to generalArray and its index to addedGeneral
-	 * @param location Location to be added
+	 * Adds a new general location to the application, adding to generalArray and its index to 
+	 * addedGeneral.
+	 * @param location - Location to be added
 	 */
 	public static void addNewGeneral(Location location) {
     	// Used when user adding new data (from GUI or CSV)
