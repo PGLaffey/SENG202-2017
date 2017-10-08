@@ -19,6 +19,11 @@ public class UploadingScreenController {
     @FXML
     Button cancelButton;
 
+    /**
+     * Method to execute when the cancel button is pressed
+     * @param event Auto generated event
+     * @throws IOException
+     */
     @FXML
     void cancelPressed(ActionEvent event) throws IOException {
         Stage stage = new Stage();
