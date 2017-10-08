@@ -372,8 +372,8 @@ public class CurrentStorage {
 	
 	/**
 	 * Checks if a wifi is already in the application.
-	 * @param 	- wifi Wifi to be checked
-	 * @return 	- true if in array, false otherwise
+	 * @param  - wifi Wifi to be checked
+	 * @return - true if in array, false otherwise
 	 */
 	public static boolean containsWifi(Wifi wifi) {
 		for (Wifi currentWifi : wifiArray) {
@@ -409,8 +409,8 @@ public class CurrentStorage {
 	
 	/**
 	 * Checks if a retailer is already in the application.
-	 * @param retailer 	- Retailer to be checked
-	 * @return 			- true if in array, false otherwise
+	 * @param retailer - Retailer to be checked
+	 * @return 		   - true if in array, false otherwise
 	 */
 	public static boolean containsRetailer(Retailer retailer) {
 		for (Retailer currentRetailer : retailerArray) {
@@ -447,8 +447,8 @@ public class CurrentStorage {
 	
 	/**
 	 * Checks if a toilet is already in the application.
-	 * @param toilet 	- Toilet to be checked
-	 * @return 			- true if in array, false otherwise
+	 * @param toilet - Toilet to be checked
+	 * @return 		 - true if in array, false otherwise
 	 */
 	public static boolean containsToilet(Toilet toilet) {
 		for (Toilet currentToilet : toiletArray) {
@@ -484,8 +484,8 @@ public class CurrentStorage {
 	
 	/**
 	 * Checks if a poi is already in the application.
-	 * @param poi 	- Poi to be checked
-	 * @return 		- true if in array, false otherwise
+	 * @param poi - Poi to be checked
+	 * @return 	  - true if in array, false otherwise
 	 */
 	public static boolean containsPoi(Poi poi) {
 		for (Poi currentPoi : poiArray) {
@@ -521,8 +521,8 @@ public class CurrentStorage {
     
 	/**
 	 * Checks if a route is already in the application.
-	 * @param route 	- Route to be checked
-	 * @return 			- true if in array, false otherwise
+	 * @param route - Route to be checked
+	 * @return 		- true if in array, false otherwise
 	 */
     public static boolean containsRoute(Route route) {
     	for (Route currentRoute : routeArray) {
@@ -557,8 +557,8 @@ public class CurrentStorage {
 	
 	/**
 	 * Checks if a general location is already in the application.
-	 * @param location 	- Location to be checked
-	 * @return 			- true if in array, false otherwise
+	 * @param location - Location to be checked
+	 * @return 		   - true if in array, false otherwise
 	 */
 	public static boolean containsGeneral(Location location) {
 		for (Location currentLocation : generalArray) {

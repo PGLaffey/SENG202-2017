@@ -15,9 +15,6 @@ public class Route {
     private boolean local;
     private Location start;
     private Location end;
-    private Location via1;
-    private Location via2;
-    private Location via3;
     private boolean secret = false; // true if private, false if public
     private Marker startMarker = null;
     private Marker endMarker = null;
@@ -35,9 +32,6 @@ public class Route {
         this.start = start;
         this.end = end;
         this.distance = Map.getDistance(start.getLatitude(), start.getLongitude(), end.getLatitude(), end.getLongitude());
-        via1 = null;
-        via2 = null;
-        via3 = null;
     }
 
     
@@ -56,9 +50,6 @@ public class Route {
         this.name = name;
         this.gender = gender;
         this.distance = Map.getDistance(start.getLatitude(), start.getLongitude(), end.getLatitude(), end.getLongitude());
-        via1 = null;
-        via2 = null;
-        via3 = null;
     }
 
     
@@ -75,31 +66,24 @@ public class Route {
         this.distance = Map.getDistance(start.getLatitude(), start.getLongitude(), end.getLatitude(), end.getLongitude());
         this.gender = "0";
         this.bikeID = "0";
-        via1 = null;
-        via2 = null;
-        via3 = null;
     }
 
-    
-    //TODO
-    //NO, make a proper override to .equals like in Location
+
     /**
      * A .equals method for route.
      * @param other The object to compare to.
      * @return A boolean value based on whether the contents are similar.
      */
-    public boolean equals(Route other) {
-        if (getStart().getLatitude() != other.getStart().getLatitude() |
-                getStart().getLongitude() != other.getStart().getLongitude() |
-                getEnd().getLatitude() != other.getEnd().getLatitude() |
-                getEnd().getLongitude() != other.getEnd().getLongitude()) {
-            return false;
-        }
-
-        if (!Arrays.equals(getVia(), other.getVia())) {
-            return false;
-        }
-        return true;
+    @Override
+    public boolean equals(Object other) {
+        Route otherRoute = (Route) other;
+        return (other != null && getStart().getLatitude() == otherRoute.getStart().getLatitude() &&
+                getStart().getLongitude() == otherRoute.getStart().getLongitude() &&
+                getStart().getLocationType() == otherRoute.getStart().getLocationType() &&
+                getEnd().getLatitude() == otherRoute.getEnd().getLatitude() &&
+                getEnd().getLongitude() == otherRoute.getEnd().getLongitude() &&
+                getGender().equals(otherRoute.getGender()) &&
+                getBikeID().equals(otherRoute.getBikeID()));
     }
     
     
@@ -218,17 +202,7 @@ public class Route {
         return start;
     }
 
-    
-    /**
-     * Getter for the a location array containing all of the locations the route goes via
-     * @return The location array of locations the route goes via
-     */
-    public Location[] getVia() {
-    	Location[] vias = {via1, via2, via3};
-    	return vias;
-    }
 
-    
     /**
      * Getter for the end of the route
      * @return The location at the end of the route

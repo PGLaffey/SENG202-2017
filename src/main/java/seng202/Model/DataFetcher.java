@@ -10,6 +10,7 @@ import java.util.Collections;
  * Class to communicate with the remote database.
  */
 public class DataFetcher {
+	
     private Connection connect = null;
     private boolean hasImported = false;
     static int wifiOffset = 0;
@@ -203,8 +204,8 @@ public class DataFetcher {
     
     /**
      * Updates a Wifi location in the database.
-     * @param wifi 		- The new wifi location
-     * @param typeID 	- The ID in the database of the wifi location
+     * @param wifi 	 - The new wifi location
+     * @param typeID - The ID in the database of the wifi location
      */
     private void updateWifi(Wifi wifi, int typeID) {
     	String ssid = wifi.getSsid();
@@ -219,8 +220,8 @@ public class DataFetcher {
     
     /**
      * Updates a Poi location in the database.
-     * @param poi 		- The new Poi location
-     * @param typeID 	- The ID in the database of the Poi location
+     * @param poi 	 - The new Poi location
+     * @param typeID - The ID in the database of the Poi location
      */
     private void updatePoi(Poi poi, int typeID) {
     	String description = poi.getDescription();
@@ -256,8 +257,8 @@ public class DataFetcher {
     
     /**
      * Updates a retailer location in the database.
-     * @param retailer 	- The new retailer location
-     * @param typeID 	- The ID in the database of the retailer location
+     * @param retailer - The new retailer location
+     * @param typeID   - The ID in the database of the retailer location
      */
     private void updateRetailer(Retailer retailer, int typeID) {
     	String retailerType = retailer.getProduct();
@@ -272,8 +273,8 @@ public class DataFetcher {
     
 	/**
 	 * Changes the password of a user in the database.
-	 * @param username 		- Username of the user trying to change their password
-	 * @param newPassword 	- desired password
+	 * @param username 	  - Username of the user trying to change their password
+	 * @param newPassword - desired password
 	 */
 	public void updateUserPassword(String username, String newPassword) {
     	String stmt = "UPDATE tblUser SET Password = ? WHERE Username = ?";
@@ -285,8 +286,8 @@ public class DataFetcher {
 	
 	/**
 	 * Fetches the users password to verify that they have the correct credentials.
-	 * @param username 	- Username of user logging in
-	 * @return 			- The users password if the user exists, null otherwise
+	 * @param username - Username of user logging in
+	 * @return 		   - The users password if the user exists, null otherwise
 	 */
 	public String fetchPassword(String username) {
     	String stmt = "SELECT Password FROM tblUser WHERE Username = ?";
@@ -301,8 +302,8 @@ public class DataFetcher {
 	
 	/**
 	 * Returns information about the user with the given username.
-	 * @param username 	- The username of the user logging in
-	 * @return 			- The LName, FName and YearOfBirth of the user from the database
+	 * @param username - The username of the user logging in
+	 * @return 		   - The LName, FName and YearOfBirth of the user from the database
 	 */
 	public ArrayList<String> fetchUserInfo(String username) {
 		String stmt = "SELECT FName, LNAME, YearOfBirth, NumRoutesCycled, DistanceCycled, "
@@ -353,8 +354,8 @@ public class DataFetcher {
 	
 	/**
 	 * Finds the username of the given routes owner.
-	 * @param route 	- The route to find the owner of
-	 * @return 			- The username of the routes owner
+	 * @param route - The route to find the owner of
+	 * @return 		- The username of the routes owner
 	 */
 	public String getRouteOwner(Route route) {
 		int routeID = findRoute(route);
@@ -377,8 +378,8 @@ public class DataFetcher {
 	
 	/**
 	 * Finds the username of the given locations owner.
-	 * @param location 	- The location to find the owner of
-	 * @return 			- The username of the locations owner
+	 * @param location - The location to find the owner of
+	 * @return 		   - The username of the locations owner
 	 */
 	public String getLocationOwner(Location location) {
 		int locationID = findLocation(location);
@@ -417,8 +418,8 @@ public class DataFetcher {
 	
 	/**
 	 * Checks if there are any changes in the users saved routes for the list, listNo.
-	 * @param savedList 	- The list of indices that reference routes
-	 * @param listNo 		- The number assigned to the savedList
+	 * @param savedList - The list of indices that reference routes
+	 * @param listNo 	- The number assigned to the savedList
 	 */
 	private void checkSavedRoutes(ArrayList<Integer> savedList, int listNo) {
 		int count = 0;
@@ -453,9 +454,9 @@ public class DataFetcher {
 	
 	/**
 	 * Adds a route to a users list of saved routes in a specified list on the database.
-	 * @param userID 	- The database ID of the user that is saving the route
-	 * @param routeID 	- The database ID of the route being saved
-	 * @param listID 	- The database ID of the list the route is being saved in
+	 * @param userID  - The database ID of the user that is saving the route
+	 * @param routeID - The database ID of the route being saved
+	 * @param listID  - The database ID of the list the route is being saved in
 	 */
 	private void addSavedRoute(int userID, int routeID, int listID) {
     	String stmt = "INSERT INTO tblUsersRoutes (UserID, RouteID, ListID) VALUES (?, ?, ?)";
@@ -831,9 +832,9 @@ public class DataFetcher {
 			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblWifi WHERE WifiID = " 
 						+ typeID + "");
 			typeOutput.next();
-			ssid = typeOutput.getString(4);
-			provider = typeOutput.getString(2);
-			wifi_type = typeOutput.getString(3);
+			ssid = typeOutput.getString(2);
+			provider = typeOutput.getString(3);
+			wifi_type = typeOutput.getString(4);
 			Wifi wifi = new Wifi(latitude, longitude, name, wifi_type,  provider, ssid);
 			if (borough != null) {
 				wifi.setBorough(borough);
@@ -880,7 +881,6 @@ public class DataFetcher {
     				+ "tblLocations LIMIT ?, 1000");
 			qryLoadLocations.setInt(1, locationOffset);
     		ResultSet output = qryLoadLocations.executeQuery();
-//    		locationOffset += output.getFetchSize();
 			boolean secret = true;
 			int ownerID = 0;
 			int type = 0;
@@ -965,9 +965,9 @@ public class DataFetcher {
      * result = [[(0,0), (0,1), (0,2)],
      *           [(1,0), (1,1), (1,2)],
      *           [(2,0), (2,1), (2,2)]]
-     * @param stmt 	- The MySQL syntax query to run
-     * @return 		- An Array List that contains another Array List, representing the rows of 
-     * 				  the table, that contains Strings, representing the column of the data
+     * @param stmt - The MySQL syntax query to run
+     * @return 	   - An Array List that contains another Array List, representing the rows of 
+     * 				 the table, that contains Strings, representing the column of the data
      */
     private ArrayList<ArrayList<String>> runQuery(String stmt, ArrayList<String> parameters) {
     	//Creates an ArrayList that will contain each individual result as its own ArrayList
@@ -1026,8 +1026,8 @@ public class DataFetcher {
     
     /**
      * Finds if a user exists in the database based off their unique username.
-     * @param user 	- The user to check
-     * @return 		- True if the user exists, false otherwise
+     * @param user - The user to check
+     * @return 	   - True if the user exists, false otherwise
      */
     public boolean userExists(User user) {
     	String username = user.getUsername();
@@ -1150,8 +1150,8 @@ public class DataFetcher {
     
     /**
      * Returns the ID of the location in the database or 0 if it is not found.
-     * @param location 	- The location to find in the database.
-     * @return 			- The ID of the location in the database, returns 0 if location not found
+     * @param location - The location to find in the database.
+     * @return 		   - The ID of the location in the database, returns 0 if location not found
      */
     private int findLocation(Location location) {
     	double[] coords = location.getCoords();
@@ -1350,8 +1350,8 @@ public class DataFetcher {
     
     /**
      * Finds the input User in the database and returns its ID within the database.
-     * @param user 	- The user to find
-     * @return 		- ID in the database as an int
+     * @param user - The user to find
+     * @return 	   - ID in the database as an int
      */
     private int findUser(User user) {
     	int userID = 0;

@@ -67,32 +67,21 @@ public class Wifi extends Location {
         return "SSID: " + getName() + "\nLocation: (" + getLatitude() + ", " + getLongitude() + ")\nProvider: "
                 + getProvider() + "\nType: " + getType() + "\nBorough: " + getBorough();
     }
+
     
-    
-    //TODO
-    //Change to a proper override of the equals method like in Location
     /**
+     *  Checks if two wifi objects are equal to one another
      *  @return True if wifi objects are equal
      */
-    public boolean equals(Wifi other) {
-
-        if (!getName().equals(other.getName())) {
-            return false;
-        }
-
-        if (getLatitude() != other.getLatitude() && getLongitude() != other.getLongitude()) {
-            return false;
-        }
-
-        if (!getProvider().equals(other.getProvider())) {
-            return false;
-        }
-
-        if (!getType().equals(other.getType())) {
-            return false;
-        }
-        return true;
+    @Override
+    public boolean equals(Object other) {
+        Wifi otherWifi = (Wifi) other;
+        return (otherWifi != null && getName().equals(otherWifi.getName()) &&
+                getLatitude() == otherWifi.getLatitude() &&
+                getLongitude() == otherWifi.getLongitude() &&
+                getLocationType() == otherWifi.getLocationType());
     }
+
 
     /**
      * Getter for the SSID
