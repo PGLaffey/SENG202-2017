@@ -1412,7 +1412,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             menuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    //TODO: display route on map
                     displayRouteOnMap(route);
                 }
             });
@@ -1425,7 +1424,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             menuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    //TODO: display route on map
                     displayRouteOnMap(route);
                 }
             });

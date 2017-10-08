@@ -353,7 +353,6 @@ public class WifiInfoScreenController {
 
     @FXML
     void initialize() {
-        //TODO: Have a check for if they own it, if they do then delete button visible
         newWifi = CurrentStorage.getWifiArray().get(CurrentStorage.getWifiIndex());
         oldWifi = new Wifi(newWifi);
 

@@ -146,7 +146,8 @@ public class RouteInfoScreenController {
 
 
     /**
-     * TODO ADD docstring
+     * Method for when the add to favourite button is pressed.
+     * Adds the selected route to the users favourite routes
      * @param event Auto-generate event on button press
      */
     @FXML
@@ -156,7 +157,12 @@ public class RouteInfoScreenController {
     }
 
 
-    //TODO add docstring
+    /**
+     * Method for when the show route button is pressed.
+     * Displays the route on the main map pane
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void showRouteBtnPressed(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));

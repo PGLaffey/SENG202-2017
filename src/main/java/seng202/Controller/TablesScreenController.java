@@ -395,9 +395,14 @@ public class TablesScreenController {
 		primaryStage.show();
     }
 
-    
-    //TODO add docstring
-    @FXML
+
+	/**
+	 * Method for when the table menu button is pressed, shows the table screen.
+	 * Displays pop up if an error occurs.
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
     void tablePressed(ActionEvent event) throws IOException {
 		try {
 			Stage primaryStage = (Stage) tableButton.getScene().getWindow();
@@ -532,7 +537,12 @@ public class TablesScreenController {
 		stage.show();
     }
 
-	//TODO add docstring
+
+	/**
+	 * Method for when the export button is pressed.
+	 * Exports the data currently in the table.
+	 * @param event
+	 */
 	@FXML
 	void exportPressed(ActionEvent event)  {
 		FileChooser fileChooser = new FileChooser();
@@ -540,7 +550,7 @@ public class TablesScreenController {
 		if (noDataLabel.isVisible()) {
 			nothingLabel.setVisible(true);
 		} 
-		else if (allLocationsTable.isVisible()) { //TODO: At the moment can't edit as they're locations so wont have all the data (e.g. cost for poi)
+		else if (allLocationsTable.isVisible()) {
 			nothingLabel.setVisible(false);
 			ArrayList<Location> locData =  new ArrayList<Location>(allLocationsTable.getItems());
 			File file = fileChooser.showSaveDialog(null);
@@ -586,20 +596,6 @@ public class TablesScreenController {
     	
     	noDataLabel.setVisible(true);
     	nothingLabel.setVisible(false);
-
-    	//TODO clean up
-    	
-    	// Random objects for testing
-
-    	/*CurrentStorage.addRetailer(new Retailer(23.45, 127.3, "Retailer new", "Bikes", "We sell bikes", 1));
-    	CurrentStorage.addRetailer(new Retailer(5345.2, 765.3, "Retailer old", "Biks", "what do we", 1));
-    	CurrentStorage.addRetailer(new Retailer(123.45, 127.3, "Retailer new", "Bikes", "rand", 1));
-    	CurrentStorage.addRetailer(new Retailer(400.45, 127.3, "Retailer new", "Bikes", "We sell bikes", 1));
-    	CurrentStorage.addRetailer(new Retailer(1235, 123, "Retaew", "CLothes", "We sell bikes", 1));*/
-
-    	//CurrentStorage.addToilet(new Toilet(324.3, 235.456, "A toilet", false, true));
-
-    	//CurrentStorage.addPoi(new Poi(2343.2, 467.42, "POI", "cool place", 23.50));
 
     	// Originally
     	allLocationsTable.setVisible(false);
