@@ -1410,10 +1410,21 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             Route route = CurrentStorage.getRouteArray().get(index);
             MenuItem menuItem = new MenuItem(route.getName());
             menuItem.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    displayRouteOnMap(route);
-                }
+                 @Override
+                 public void handle(ActionEvent event) {
+                     CurrentStorage.setRoute(route);
+                     Stage stage = new Stage();
+                     try {
+                         Parent root = FXMLLoader.load(getClass().getResource("/RouteInfoScreen.fxml"));
+
+                         Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+                         stage.setTitle("About route");
+                         stage.setScene(scene);
+                         stage.show();
+                     } catch (IOException exception) {
+                         exception.printStackTrace();
+                     }
+                 }
             });
             favouriteRoutesMenu.getItems().add(menuItem);
         }
@@ -1424,7 +1435,18 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             menuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    displayRouteOnMap(route);
+                    CurrentStorage.setRoute(route);
+                    Stage stage = new Stage();
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("/RouteInfoScreen.fxml"));
+
+                        Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+                        stage.setTitle("About route");
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException exception) {
+                        exception.printStackTrace();
+                    }
                 }
             });
             savedRoutesMenu.getItems().add(menuItem);
