@@ -14,6 +14,9 @@ import seng202.Model.User;
 
 import java.io.IOException;
 
+/**
+ * Controller class for the sign up screen.
+ */
 public class SignupScreenController {
 
     @FXML
@@ -48,10 +51,13 @@ public class SignupScreenController {
     
     /**
      * Creates an account if all fields are met and shows the login screen.
-	 * @param event Auto-generate event on button press
+	 * @param event - Auto-generate event on button press
      */
-    public void createBtnPressed(ActionEvent event) throws IOException, IllegalAccessException, ClassNotFoundException, InstantiationException {
-        if (usernameLbl.getText().trim().isEmpty() || firstNameLbl.getText().trim().isEmpty() || lastNameLbl.getText().trim().isEmpty()){ //not sure why it's red
+    public void createBtnPressed(ActionEvent event) throws IOException, IllegalAccessException, 
+    		ClassNotFoundException, InstantiationException {
+        if (usernameLbl.getText().trim().isEmpty() || 
+        		firstNameLbl.getText().trim().isEmpty() || 
+        		lastNameLbl.getText().trim().isEmpty()){ 
             missingField.setVisible(true);
         }
         else if (!passwordLbl.getText().equals(repeatPasswordLbl.getText())) {
@@ -64,8 +70,9 @@ public class SignupScreenController {
 	        String birthDate = birthDatePicker.getValue().toString();
 	        String password = passwordLbl.getText();
 	
-	        User newUser = new User(first, last, username, birthDate, password); //create new user - need to change id - TODO
-	
+	        //create new user
+	        User newUser = new User(first, last, username, birthDate, password); 
+	        
 	        DataFetcher data = new DataFetcher();
 	        data.connectDb();
 	        data.addUser(newUser);
@@ -73,7 +80,8 @@ public class SignupScreenController {
 	        Stage primaryStage = (Stage)createButton.getScene().getWindow();
 	        Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
 	        primaryStage.setTitle("Login");
-	        primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
+	        primaryStage.setScene(new Scene(root, primaryStage.getWidth(), 
+	        		primaryStage.getHeight()));
 	        data.closeConnection();
         }
     }
@@ -81,7 +89,7 @@ public class SignupScreenController {
     
     /**
      * Method for when the back button is pressed, shows the login screen.
-     * @param event Auto-generate event on button press
+     * @param event - Auto-generate event on button press
      */
     public void backButtonPressed(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) backButton.getScene().getWindow();

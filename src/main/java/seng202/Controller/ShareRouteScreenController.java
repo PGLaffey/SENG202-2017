@@ -5,7 +5,9 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-
+/**
+ * Controller class for the share route screen.
+ */
 public class ShareRouteScreenController {
 
     @FXML
@@ -18,7 +20,9 @@ public class ShareRouteScreenController {
     private TextField shareableLinkTextField;
 
 
-    //TODO add docstring
+    /**
+     * Initializes the controller.
+     */
     @FXML
     void initialize() {
         assert shareableLinkTextField != null : "fx:id=\"shareableLinkTextField\" was not injected: check your FXML file 'ShareRouteScreen.fxml'.";
