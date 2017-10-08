@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * User class stores the users information to be used in the app and stored.
  */
 public class User {
+	
     private String name;
     private String firstName;
     private String lastName;
@@ -16,18 +17,15 @@ public class User {
     private double distanceCycled;
     private double minutesCycled;
     private ArrayList<Badge> badges; // First badge is distance, second time and third route
-    private ArrayList<Route> savedRoutes;
-    private ArrayList<Route> favouriteRoutes = new ArrayList<>(); // Temporary placeholder
-
 
 
     /**
-    Constructor for the User class, creates a new user instance
-     @param first The first name of the user.
-     @param last The last name of the user.
-     @param username The username of the user.
-     @param doB The date of the user's birth.
-     @param password The password the user has chosen.
+    Constructor for the User class, creates a new user instance.
+     @param first    - The first name of the user
+     @param last     - The last name of the user
+     @param username - The username of the user
+     @param doB      - The date of the user's birth
+     @param password - The password the user has chosen
      */
     public User(String first, String last, String username, String doB, String password) {
         this.name = first + " " + last;
@@ -51,17 +49,18 @@ public class User {
 
     
     /**
-     * Overloaded constructor
-     * @param first The first name of the user.
-     * @param last The last name of the user.
-     * @param username The username of the user.
-     * @param doB The date of the user's birth.
-     * @param password The password the user has chosen.
-     * @param routes The number of routes the user has cycled
-     * @param distance The total distance the user has cycled
-     * @param minutes The total number of minutes the user has cycled for
+     * Overloaded constructor.
+     * @param first    - The first name of the user
+     * @param last     - The last name of the user
+     * @param username - The username of the user
+     * @param doB      - The date of the user's birth
+     * @param password - The password the user has chosen
+     * @param routes   - The number of routes the user has cycled
+     * @param distance - The total distance the user has cycled
+     * @param minutes  - The total number of minutes the user has cycled for
      */
-    public User(String first, String last, String username, String doB, String password, int routes, double distance, double minutes) {
+    public User(String first, String last, String username, String doB, String password, 
+    		int routes, double distance, double minutes) {
         this.name = first + " " + last;
         this.firstName = first;
         this.lastName = last;
@@ -83,10 +82,10 @@ public class User {
 
 	
     /**
-     * Overrides the .equals function in the user class so it compares key values of the class to check if the
-     * objects are equal to one another.
-     * @param user The user to be compared.
-     * @return Whether the current user has the same key values as the previous user.
+     * Overrides the .equals function in the user class so it compares key values of the class 
+     * to check if the objects are equal to one another.
+     * @param user - The user to be compared
+     * @return - Whether the current user has the same key values as the previous user
      */
     @Override
     public boolean equals(Object user) {
@@ -99,8 +98,8 @@ public class User {
     
     
     /**
-     * Getter for the users full name
-     * @return The full name of the user
+     * Getter for the users full name.
+     * @return - The full name of the user
      */
     public String getName() { 
     	return name; 
@@ -108,8 +107,8 @@ public class User {
 
     
     /**
-     * Getter for the users first name
-     * @return The first name of the user
+     * Getter for the users first name.
+     * @return -The first name of the user
      */
     public String getFirstName() {
         return firstName;
@@ -117,8 +116,8 @@ public class User {
 
     
     /**
-     * Getter for the users last name
-     * @return The last name of the user
+     * Getter for the users last name.
+     * @return - The last name of the user
      */
     public String getLastName() {
         return lastName;
@@ -126,8 +125,8 @@ public class User {
 
 
     /**
-     * Getter for the users date of birth
-     * @return The date of birth for the user
+     * Getter for the users date of birth.
+     * @return - The date of birth for the user
      */
     public String getDob() {
     	return dateOfBirth;
@@ -135,8 +134,8 @@ public class User {
 
     
     /**
-     * Getter for the users minutes cycled
-     * @return The total minutes the user has cycled
+     * Getter for the users minutes cycled.
+     * @return - The total minutes the user has cycled
      */
     public double getHours() {
         return minutesCycled;
@@ -144,8 +143,8 @@ public class User {
 
     
     /**
-     * Getter for the users distance stat
-     * @return The total distance the user has cycled
+     * Getter for the users distance stat.
+     * @return - The total distance the user has cycled
      */
     public double getDistance() {
         return distanceCycled;
@@ -153,8 +152,8 @@ public class User {
 
     
     /**
-     * Getter for the distance the user has cycled, rounded
-     * @return The total distance the user has cycled rounded to 2 decimal places
+     * Getter for the distance the user has cycled, rounded.
+     * @return - The total distance the user has cycled rounded to 2 decimal places
      */
     public String getDistanceRounded() { 
     	return String.format("%.2f", distanceCycled); 
@@ -162,8 +161,8 @@ public class User {
 
     
     /**
-     * Getter for the users routes that they have cycled
-     * @return The total number of routes the user has cycled
+     * Getter for the users routes that they have cycled.
+     * @return - The total number of routes the user has cycled
      */
     public int getRoutesCycled() {
         return routesCycled;
@@ -171,8 +170,8 @@ public class User {
 
     
     /**
-     * Getter for the users password
-     * @return The password for the user
+     * Getter for the users password.
+     * @return - The password for the user
      */
     public String getPassword() {
     	return password;
@@ -180,8 +179,8 @@ public class User {
 
     
     /**
-     * Getter for an arrayList of the users badges
-     * @return ArrayList of the users badges
+     * Getter for an arrayList of the users badges.
+     * @return - ArrayList of the users badges
      */
     public ArrayList<Badge> getBadges() {
         return badges;
@@ -189,8 +188,8 @@ public class User {
 
     
     /**
-     * Getter for the users username
-     * @return The username for the user
+     * Getter for the users username.
+     * @return - The username for the user
      */
 	public String getUsername() {
 		return username;
@@ -198,8 +197,8 @@ public class User {
 
 	
 	/**
-	 * Adds on to the users distance stat
-	 * @param dist The distance to add to the users total distance cycled
+	 * Adds on to the users distance stat.
+	 * @param dist - The distance to add to the users total distance cycled
 	 */
 	public void addDistance(double dist) {
 		distanceCycled += dist;
@@ -207,8 +206,8 @@ public class User {
 
 	
 	/**
-	 * Adds on to the users time spent cycling
-	 * @param time The time to add to the users total time cycled
+	 * Adds on to the users time spent cycling.
+	 * @param time - The time to add to the users total time cycled
 	 */
 	public void addTime(double time) {
 		minutesCycled += time;
@@ -216,7 +215,7 @@ public class User {
 
 	
 	/**
-	 * Increments the number of routes the user has cycled by 1
+	 * Increments the number of routes the user has cycled by 1.
 	 */
 	public void addRoute() {
 		routesCycled += 1; 
