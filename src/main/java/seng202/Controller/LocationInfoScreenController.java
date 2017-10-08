@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 import seng202.Model.CurrentStorage;
 import seng202.Model.Location;
 
+/**
+ * Controller class for the location info screen.
+ */
 public class LocationInfoScreenController {
 
     @FXML
@@ -42,7 +45,7 @@ public class LocationInfoScreenController {
     
     /**
      * Method when the ok button is pressed, hides the pop up.
-     * @param event Auto-generate event on button press
+     * @param event - Auto-generate event on button press
      */
     @FXML
     void okPressed(ActionEvent event) {
@@ -52,8 +55,8 @@ public class LocationInfoScreenController {
     
     
     /**
-     * Method when the update button is pressed, displays screen to update selection location
-     * @param event Auto-generate event on button press
+     * Method when the update button is pressed, displays screen to update selection location.
+     * @param event - Auto-generate event on button press
      */
     @FXML
     void updatePressed(ActionEvent event) {
@@ -62,6 +65,9 @@ public class LocationInfoScreenController {
     }
 
     
+    /**
+     * Initializes the controller.
+     */
     @FXML
     void initialize() {
         location = CurrentStorage.getLocation();
