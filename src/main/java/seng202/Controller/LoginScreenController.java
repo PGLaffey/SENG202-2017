@@ -103,8 +103,19 @@ public class LoginScreenController {
 
 	@FXML
 	void ipOkButtonPressed() {
-    	ipOkButton.setVisible(false);
-    	ipText.setVisible(false);
+    	if (!ipText.getText().equals("")) {
+			ipOkButton.setVisible(false);
+			ipText.setVisible(false);
+			DataFetcher df = new DataFetcher();
+			try {
+				df.connectDb();;
+				df.setIP(ipText.getText());
+				df.closeConnection();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 
 	}
 }
