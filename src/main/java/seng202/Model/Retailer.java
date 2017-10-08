@@ -104,30 +104,18 @@ public class Retailer extends Location {
     }
 
 
-    //TODO:
-    //NONONNONONONONONONNOOOOOOOOOOOO
-    //Create a proper equals function with @Override
-    //Look at Location for example
     /**
      * A .equals method for retailer.
      * @param other - The object to compare to.
      * @return a boolean value based on whether the contents are similar.
      */
-    public boolean equals(Retailer other) {
-        if (!getName().equals(other.getName())) {
-            return false;
-        }
-        if (getLatitude() != other.getLatitude() &&
-                getLongitude() != other.getLongitude()) {
-            return false;
-        }
-        if (!getProduct().equals(other.getProduct())) {
-            return false;
-        }
-        if (!getDescription().equals(other.getDescription())) {
-            return false;
-        }
-        return true;
+    @Override
+    public boolean equals(Object other) {
+        Retailer otherRetailer = (Retailer) other;
+        return (otherRetailer != null && getName().equals(otherRetailer.getName()) &&
+                getLatitude() == otherRetailer.getLatitude() &&
+                getLongitude() == otherRetailer.getLongitude() &&
+                getLocationType() == otherRetailer.getLocationType());
     }
 
     /**

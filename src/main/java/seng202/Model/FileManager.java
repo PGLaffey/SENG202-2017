@@ -62,6 +62,9 @@ public class FileManager {
         if (!(routes.isEmpty())) {
             List<String> header = Arrays.asList(routes.get(0).split("\",\""));
 
+            header.set(0, header.get(0).substring(1));
+            header.set(header.size() - 1, header.get(header.size() - 1).substring(0, header.get(header.size() - 1).length() - 1));
+
             //Get the index of each of the key fields for the route class from the header of the 
             //csv.
             int startNameIndex = indexer(header.indexOf("start station name"),header);

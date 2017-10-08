@@ -61,27 +61,19 @@ public class Toilet extends Location {
         return marker;
     }
 
-    
-    //TODO
-    //Replace with proper equals override like in Location
+
     /**
      * Returns whether the toilet locations are equal
      * @param other the toilet to be compared
      */
-    public boolean equals(Toilet other) {
-        if (!getName().equals(other.getName())) {
-            return false;
-        }
-
-        if (getLatitude() != other.getLatitude() &&
-                getLongitude() != other.getLongitude()) {
-            return false;
-        }
-
-        if (getForDisabled() != other.forDisabled || getUniSex() != other.getUniSex()) {
-            return false;
-        }
-        return true;
+    @Override
+    public boolean equals(Object other) {
+        Toilet otherToilet = (Toilet) other;
+        return (other != null && getLocationType() == otherToilet.getLocationType() &&
+                getLatitude() == otherToilet.getLatitude() &&
+                getLongitude() == otherToilet.getLongitude() &&
+                getUniSex() == otherToilet.getUniSex() &&
+                getForDisabled() == otherToilet.getForDisabled());
     }
     
     

@@ -14,7 +14,7 @@ public class Coord {
     
     /**
      * Constructor for Coord
-     * @param address The address if the coord
+     * @param address The address of the coord
      * @param latitude The latitude of the coord 
      * @param longitude The longitude of the coord
      */
@@ -30,15 +30,11 @@ public class Coord {
      * Checks whether two coordinates are equal
      * @return boolean for whether the coordinates are equal
      */
-    public boolean equals(Coord c2) {
-        if (address.toLowerCase().contains(c2.getAddress().toLowerCase())
-                || c2.getAddress().toLowerCase().contains(address.toLowerCase())
-                || address.equalsIgnoreCase(c2.getAddress())) {
-            return true;
-        } 
-        else {
-            return false;
-        }
+    public boolean equals(Object c1) {
+        Coord c2 = (Coord) c1;
+        return (c2 != null && address.toLowerCase().contains(c2.getAddress().toLowerCase())
+                && c2.getAddress().toLowerCase().contains(address.toLowerCase())
+                && address.equalsIgnoreCase(c2.getAddress()));
     }
     
     
