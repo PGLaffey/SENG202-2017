@@ -6,7 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * File Manager class reads and writes files to and from .csv files, and stores the information in the apps current storage.
+ * File Manager class reads and writes files to and from .csv files, and stores the information 
+ * in the apps current storage.
  * The File Manager class also serializes and deserializes user objects.
  */
 public class FileManager {
@@ -14,8 +15,8 @@ public class FileManager {
 	
     /**
      * Method to read a .csv file from a chosen folder.
-     * @param fileName The name of the .csv file to be read.
-     * @return An arrayList of the data from the .csv file.
+     * @param fileName 	- The name of the .csv file to be read
+     * @return 			- An arrayList of the data from the .csv file
      */
     public static ArrayList<String> readFile(String fileName) {
         ArrayList<String> dataList = new ArrayList<String>();
@@ -32,16 +33,15 @@ public class FileManager {
         catch (IOException exception) {
             exception.printStackTrace();
         }
-        
         return dataList;
     }
 
 
     /**
      * Checks if an index if less than zero and returns a positive index for the same value.
-     * @param index The current index of the string.
-     * @param header The header of the current csv file.
-     * @return The positive integer index for an item in the list.
+     * @param index 	- The current index of the string
+     * @param header 	- The header of the current csv file
+     * @return 			- The positive integer index for an item in the list
      */
     private static int indexer(int index, List<String> header) {
         if (index < 0) {
@@ -52,9 +52,9 @@ public class FileManager {
 
 
     /**
-     * Retrieves a list of routes from the readFile function and then converts them individually to Route objects stored
-     * in the current storage class for that instance of the app.
-     * @param filename The filename where the .csv file is stored.
+     * Retrieves a list of routes from the readFile function and then converts them individually 
+     * to Route objects stored in the current storage class for that instance of the app.
+     * @param filename - The filename where the .csv file is stored
      */
     public static void routeRetriever(String filename) {
         ArrayList<String> routes = readFile(filename);
@@ -62,7 +62,8 @@ public class FileManager {
         if (!(routes.isEmpty())) {
             List<String> header = Arrays.asList(routes.get(0).split("\",\""));
 
-            //Get the index of each of the key fields for the route class from the header of the csv.
+            //Get the index of each of the key fields for the route class from the header of the 
+            //csv.
             int startNameIndex = indexer(header.indexOf("start station name"),header);
             int startLatIndex = indexer(header.indexOf("start station latitude"), header);
             int startLongIndex = indexer(header.indexOf("start station longitude"), header);
@@ -75,17 +76,34 @@ public class FileManager {
             routes.remove(0);
 
             for (String route : routes) {
-                ArrayList<String> information = new ArrayList<String>(Arrays.asList(route.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1)));
+                ArrayList<String> information = new ArrayList<String>(Arrays.asList(
+                		route.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1)));
 
                 //Obtain the relevant information from the csv.
-                String bikeID = information.get(bikeIdIndex).substring(1, information.get(bikeIdIndex).lastIndexOf("\""));
-                String startName = information.get(startNameIndex).substring(1, information.get(startNameIndex).lastIndexOf("\""));
-                String endName = information.get(endNameIndex).substring(1, information.get(endNameIndex).lastIndexOf("\""));
-                double startLatitude = Double.parseDouble(information.get(startLatIndex).substring(1, information.get(startLatIndex).lastIndexOf("\"")));
-                double startLongitude = Double.parseDouble(information.get(startLongIndex).substring(1, information.get(startLongIndex).lastIndexOf("\"")));
-                double endLatitude = Double.parseDouble(information.get(endLatIndex).substring(1, information.get(endLatIndex).lastIndexOf("\"")));
-                double endLongitude = Double.parseDouble(information.get(endLongIndex).substring(1, information.get(endLongIndex).lastIndexOf("\"")));
-                String gender = information.get(genderIndex).substring(1, information.get(genderIndex).lastIndexOf("\""));
+                String bikeID = information.get(bikeIdIndex)
+                		.substring(1, information.get(bikeIdIndex).lastIndexOf("\""));
+                
+                String startName = information.get(startNameIndex)
+                		.substring(1, information.get(startNameIndex).lastIndexOf("\""));
+                
+                String endName = information.get(endNameIndex).substring(1, 
+                		information.get(endNameIndex).lastIndexOf("\""));
+                
+                double startLatitude = Double.parseDouble(
+                		information.get(startLatIndex)
+                		.substring(1, information.get(startLatIndex).lastIndexOf("\"")));
+                
+                double startLongitude = Double.parseDouble(information.get(startLongIndex)
+                		.substring(1, information.get(startLongIndex).lastIndexOf("\"")));
+                
+                double endLatitude = Double.parseDouble(information.get(endLatIndex)
+                		.substring(1, information.get(endLatIndex).lastIndexOf("\"")));
+                
+                double endLongitude = Double.parseDouble(information.get(endLongIndex)
+                		.substring(1, information.get(endLongIndex).lastIndexOf("\"")));
+                
+                String gender = information.get(genderIndex)
+                		.substring(1, information.get(genderIndex).lastIndexOf("\""));
 
                 //Convert the relevant data into the associated classes
                 Location startLocation = new Location(startLatitude, startLongitude, startName, 4);
@@ -101,15 +119,16 @@ public class FileManager {
 
     /**
      * Stores the route data stored in the current storage class.
-     * @param filename The filename where the csv file is to be stored.
-     * @param routeArray The array of routes to be stored.
+     * @param filename 		- The filename where the csv file is to be stored
+     * @param routeArray 	- The array of routes to be stored
      */
     public static void routeWriter(String filename, ArrayList<Route> routeArray) {
         File file = new File(filename);
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-            bufferedWriter.write("\"start station name\",\"start station latitude\",\"start station longitude\"," +
-                    "\"end station name\",\"end station latitude\",\"end station longitude\",\"bikeid\",\"gender\"\n");
+            bufferedWriter.write("\"start station name\",\"start station latitude\",\"start "
+            		+ "station longitude\",\"end station name\",\"end station latitude\",\"end "
+            		+ "station longitude\",\"bikeid\",\"gender\"\n");
             for (Route route : routeArray) {
                 String startName = route.getStart().getName();
                 String endName = route.getEnd().getName();
@@ -120,7 +139,9 @@ public class FileManager {
                 String bikeID = route.getBikeID();
                 String gender = route.getGender();
 
-                String strRoute = "\"" + startName + "\",\"" + startLatitude + "\",\"" + startLongitude + "\",\"" + endName + "\",\"" + endLatitude + "\",\"" + endLongitude + "\",\"" + bikeID + "\",\"" + gender + "\"\n";
+                String strRoute = "\"" + startName + "\",\"" + startLatitude + "\",\"" 
+                		+ startLongitude + "\",\"" + endName + "\",\"" + endLatitude + "\",\"" 
+                		+ endLongitude + "\",\"" + bikeID + "\",\"" + gender + "\"\n";
                 bufferedWriter.write(strRoute);
             }
             bufferedWriter.flush();
@@ -133,14 +154,16 @@ public class FileManager {
 
 
     /**
-     * Retrieves the list of the given retailers and converts each of these to being a new instance of Retailer stored in currentStorage.
-     * @param filename The filename where the csv file is stored.
+     * Retrieves the list of the given retailers and converts each of these to being a new 
+     * instance of Retailer stored in currentStorage.
+     * @param filename - The filename where the csv file is stored
      */
     public static void retailerRetriever(String filename) {
         ArrayList<String> retailers = readFile(filename);
 
         if (!(retailers.isEmpty())) {
-            List<String> header = Arrays.asList(retailers.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
+            List<String> header = Arrays.asList(retailers.get(0)
+            		.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
 
             int retailerName = header.indexOf("CnBio_Org_Name");
             int addrLine1Index = header.indexOf("CnAdrPrf_Addrline1");
@@ -158,7 +181,9 @@ public class FileManager {
                 String[] information = retailer.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 
                 //Creates a new instance of retailer.
-                Retailer newRetailer = new Retailer(information[addrLine1Index], information[retailerName], information[retailerPrimary], information[retailerSecondary]);
+                Retailer newRetailer = new Retailer(information[addrLine1Index], 
+                		information[retailerName], information[retailerPrimary], 
+                		information[retailerSecondary]);
 
                 //Checks if the zip of the retailer needs to be changed
                 if (!information[retailerZip].equals("")) {
@@ -174,15 +199,16 @@ public class FileManager {
 
     /**
      * Converts an arrayList of Retailers to a csv file.
-     * @param filename The file where the csv of retailers is to be written.
-     * @param retailers The arrayList of retailers to be stored as a csv file.
+     * @param filename 	- The file where the csv of retailers is to be written
+     * @param retailers - The arrayList of retailers to be stored as a csv file
      */
     public static void retailerWriter(String filename, ArrayList<Retailer> retailers) {
         File newFile = new File(filename);
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(newFile));
             if (!retailers.isEmpty()) {
-                bufferedWriter.write("CnBio_Org_Name,CnAdrPrf_Addrline1,CnAdrPrf_ZIP,Primary,Secondary\n");
+                bufferedWriter.write("CnBio_Org_Name,CnAdrPrf_Addrline1,CnAdrPrf_ZIP,"
+                		+ "Primary,Secondary\n");
                 for (Retailer retailer : retailers) {
                     //Obtain relevant information to write.
                     String name = retailer.getName();
@@ -190,7 +216,8 @@ public class FileManager {
                     String zip = Integer.toString(retailer.getZip());
                     String product = retailer.getProduct();
                     String description = retailer.getDescription();
-                    String strRetailer = name + "," + address + "," + zip + "," + product + "," + description + "\n";
+                    String strRetailer = name + "," + address + "," + zip + "," + product + "," 
+                    		+ description + "\n";
                     bufferedWriter.write(strRetailer);
                 }
                 bufferedWriter.flush();
@@ -204,14 +231,16 @@ public class FileManager {
 
 
     /**
-     * Retrieves the list of the given wifiHotspots and converts each item into a wifi object list in the currentStorage class.
-     * @param filename The file that the csv to be read is in.
+     * Retrieves the list of the given wifiHotspots and converts each item into a wifi object 
+     * list in the currentStorage class.
+     * @param filename - The file that the csv to be read is in
      */
     public static void wifiRetriever(String filename) {
         ArrayList<String> wifiHotspots = readFile(filename);
 
         if (!(wifiHotspots.isEmpty())) {
-            List<String> header = Arrays.asList(wifiHotspots.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
+            List<String> header = Arrays.asList(wifiHotspots.get(0)
+            		.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
 
             int wifiLatIndex = header.indexOf("LAT");
             int wifiLongIndex = header.indexOf("LON");
@@ -235,7 +264,8 @@ public class FileManager {
                 String ssid = information[wifiSSIDIndex];
 
                 //Creates a new Wifi object.
-                Wifi newHotspot = new Wifi(wifiLatitude, wifiLongitude, wifiName, ssid, type, wifiProvider);
+                Wifi newHotspot = new Wifi(wifiLatitude, wifiLongitude, wifiName, ssid, type, 
+                		wifiProvider);
                 newHotspot.setBorough(borough);
                 CurrentStorage.addNewWifi(newHotspot);
             }
@@ -245,8 +275,8 @@ public class FileManager {
 
     /**
      * Writes a csv file of wifi hotspots to a specified file.
-     * @param filename The filename for the list of wifi objects to be written to.
-     * @param wifis The list of wifi objects to be converted to a csv file.
+     * @param filename 	- The filename for the list of wifi objects to be written to
+     * @param wifis 	- The list of wifi objects to be converted to a csv file
      */
     public static void wifiWriter(String filename, ArrayList<Wifi> wifis) {
         //filename = filenameConverter(filename);
@@ -264,7 +294,9 @@ public class FileManager {
                     String wifiType = wifi.getType();
                     String wifiBorough = wifi.getBorough();
                     String wifiProvider = wifi.getProvider();
-                    String strWifi = wifiLatitude + "," + wifiLongitude + "," + name + "," + wifiProvider + "," + SSID + "," + wifiBorough + "," + wifiType + "\n";
+                    String strWifi = wifiLatitude + "," + wifiLongitude + "," + name + "," 
+                    		+ wifiProvider + "," + SSID + "," + wifiBorough + "," + wifiType 
+                    		+ "\n";
                     bufferedWriter.write(strWifi);
                 }
                 bufferedWriter.flush();
@@ -286,7 +318,8 @@ public class FileManager {
         ArrayList<String> toilets = readFile(filename);
 
         if (!(toilets.isEmpty())) {
-            List<String> header = Arrays.asList(toilets.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
+            List<String> header = Arrays.asList(toilets.get(0)
+            		.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
 
             int nameIndex = header.indexOf("name");
             int disabledAccessIndex = header.indexOf("disabled access");
@@ -307,7 +340,8 @@ public class FileManager {
                 boolean unisex = Boolean.parseBoolean(information[unisexIndex]);
 
                 //Creates a new toilet object.
-                Toilet newToilet = new Toilet(toiletLatitude, toiletLongitude, toiletName, disabledAccess, unisex);
+                Toilet newToilet = new Toilet(toiletLatitude, toiletLongitude, toiletName, 
+                		disabledAccess, unisex);
 
                 CurrentStorage.addNewToilet(newToilet);
             }
@@ -317,8 +351,8 @@ public class FileManager {
 
     /**
      * Writes an arrayList of toilet objects to a string.
-     * @param filename The file where the csv will be placed.
-     * @param toilets The arrayList of toilet objects to be stored in the csv.
+     * @param filename  - The file where the csv will be placed
+     * @param toilets 	- The arrayList of toilet objects to be stored in the csv
      */
     public static void toiletWriter(String filename, ArrayList<Toilet> toilets) {
         File newFile = new File(filename);
@@ -333,7 +367,8 @@ public class FileManager {
                     String toiletLon = Double.toString(toilet.getLongitude());
                     String accessable = Boolean.toString(toilet.getForDisabled());
                     String unisex = Boolean.toString(toilet.getUniSex());
-                    String strToilet = toiletName + "," + toiletLat + "," + toiletLon + "," + accessable + "," + unisex + "\n";
+                    String strToilet = toiletName + "," + toiletLat + "," + toiletLon + "," 
+                    		+ accessable + "," + unisex + "\n";
                     bufferedWriter.write(strToilet);
                 }
                 bufferedWriter.flush();
@@ -348,13 +383,14 @@ public class FileManager {
 
     /**
      * Reads Points Of Interest from a csv file and stores them in the current storage class.
-     * @param filename The file where the new points of interest csv is.
+     * @param filename - The file where the new points of interest csv is
      */
     public static void poiRetriever(String filename) {
         ArrayList<String> pois = readFile(filename);
 
         if (!(pois.isEmpty())) {
-            List<String> header = Arrays.asList(pois.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
+            List<String> header = Arrays.asList(pois.get(0)
+            		.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
 
             //Finds locations of information in header.
             int poiNameIndex = header.indexOf("name");
@@ -387,8 +423,8 @@ public class FileManager {
 
     /**
      * Writes a csv file of a supplied arrayList of Poi objects.
-     * @param filename The filename for the csv to be saved to.
-     * @param pois The list of points of interest to be saved as a csv.
+     * @param filename 	- The filename for the csv to be saved to
+     * @param pois	 	- The list of points of interest to be saved as a csv
      */
     public static void poiWriter(String filename, ArrayList<Poi> pois) {
         File newFile = new File(filename);
@@ -404,7 +440,8 @@ public class FileManager {
                     String poiDescription = poi.getDescription();
                     String poiCost = Double.toString(poi.getCost());
 
-                    String strPoi = poiName + "," + poiLat + "," + poiLon + "," + poiDescription + "," + poiCost + "\n";
+                    String strPoi = poiName + "," + poiLat + "," + poiLon + "," + poiDescription 
+                    		+ "," + poiCost + "\n";
                     bufferedWriter.write(strPoi);
                 }
                 bufferedWriter.flush();
@@ -418,14 +455,16 @@ public class FileManager {
 
 
     /**
-     * Reads an arrayList of strings from a file, converts each item to a Location object, and adds them to the currentStorage class.
-     * @param filename The name of the file where the information is being stored.
+     * Reads an arrayList of strings from a file, converts each item to a Location object, and 
+     * adds them to the currentStorage class.
+     * @param filename - The name of the file where the information is being stored
      */
     public static void generalRetriever(String filename) {
         ArrayList<String> locations = readFile(filename);
         if (!locations.isEmpty()) {
 
-            List<String> header = Arrays.asList(locations.get(0).split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
+            List<String> header = Arrays.asList(locations.get(0)
+            		.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
             int nameIndex = indexer(header.indexOf("name"), header);
             int latIndex = indexer(header.indexOf("latitude"), header);
             int lonIndex = indexer(header.indexOf("longitude"), header);
@@ -450,8 +489,8 @@ public class FileManager {
 
     /**
      * Takes an arrayList of locations and converts them into a .csv file at a specific location.
-     * @param filename The file the csv file is to be put in.
-     * @param locations An arrayList of the general locations to be stored.
+     * @param filename 	- The file the csv file is to be put in.
+     * @param locations - An arrayList of the general locations to be stored.
      */
     public static void generalWriter(String filename, ArrayList<Location> locations) {
         File newFile = new File(filename);

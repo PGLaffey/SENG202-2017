@@ -24,6 +24,7 @@ import static java.lang.Math.toRadians;
  * Class to handle all the GoogleMapAPI services.
  */
 public class Map {
+	
     private Route currentRoute;
     private Location currentLocation;
     private static GeocodingService geoService;
@@ -40,8 +41,8 @@ public class Map {
 
     
     /**
-     * Sets if the retailers are visible on the map
-     * @param value If the retailers are to be visible
+     * Setter for if the retailers are visible on the map.
+     * @param value - If the retailers are to be visible
      */
     public static void setRetailerVisible(boolean value) {
         retailerVisible = value;
@@ -49,40 +50,71 @@ public class Map {
 
     
     /**
-     * Getter for whether the retailers are visible on the map
-     * @return If the retailers are visible
+     * Getter for whether the retailers are visible on the map.
+     * @return - If the retailers are visible
      */
     public static boolean getRetailerVisible() {
         return retailerVisible;
     }
 
+    
+    /**
+     * Getter for whether the toilets are visible on the map.
+     * @return - If the toilets are visible
+     */
     public static boolean getToiletVisible() {
         return toiletVisible;
     }
 
+    
+    /**
+     * Setter for if the toilets are visible on the map.
+     * @param value - If the toilets are to be visible
+     */
     public static void setToiletVisible(boolean value) {
         toiletVisible = value;
     }
 
+    
+    /**
+     * Getter for whether the wifi are visible on the map.
+     * @return - If the wifi are visible
+     */
     public static boolean getWifiVisible() {
         return wifiVisible;
     }
 
+    
+    /**
+     * Setter for if the wifi are visible on the map.
+     * @param value - If the wifi are to be visible
+     */
     public static void setWifiVisible(boolean value) {
         wifiVisible = value;
     }
 
+    
+    /**
+     * Getter for whether the poi are visible on the map.
+     * @return - If the poi are visible
+     */
     public static boolean getPoiVisible() {
         return poiVisible;
     }
 
+    
+    /**
+     * Setter for if the poi are visible on the map.
+     * @param value - If the poi are to be visible
+     */
     public static void setPoiVisible(boolean value) {
         poiVisible = value;
     }
 
+    
     /**
-     * Getter for whether the routes are visible on the map
-     * @return If the routes are visible
+     * Getter for whether the routes are visible on the map.
+     * @return - If the routes are visible
      */
     public static boolean getRouteVisible() { 
     	return routeStartVisible; 
@@ -90,8 +122,8 @@ public class Map {
 
     
     /**
-     * Sets if the start of the routes are visible on the map
-     * @param value If the start of the routes are to be visible
+     * Sets if the start of the routes are visible on the map.
+     * @param value - If the start of the routes are to be visible
      */
     public static void setRouteStartVisible(boolean value) { 
     	routeStartVisible = value; 
@@ -99,8 +131,8 @@ public class Map {
 
     
     /**
-     * Getter for the start location on the map
-     * @return The start location on the map as LatLong
+     * Getter for the start location on the map.
+     * @return - The start location on the map as LatLong
      */
     public static LatLong getStartLoc() {
         return startLoc;
@@ -108,8 +140,8 @@ public class Map {
 
     
     /**
-     * Getter for the end location on the map
-     * @return The end location on the map as LatLong
+     * Getter for the end location on the map.
+     * @return - The end location on the map as LatLong
      */
     public static LatLong getEndLoc() {
         return endLoc;
@@ -117,9 +149,9 @@ public class Map {
 
     
     /**
-     * Repositions or creates the startMarker
-     * @param latLong A LatLong object of the mouse position
-     * @param map A googleMap object to place the startMarker on.
+     * Repositions or creates the startMarker.
+     * @param latLong 	- A LatLong object of the mouse position
+     * @param map 		- A googleMap object to place the startMarker on
      */
     public static void setStartMarker(LatLong latLong, GoogleMap map) {
         startLoc = latLong;
@@ -142,19 +174,27 @@ public class Map {
         }
     }
 
+    
+    /**
+     * Resets the start marker on the map.
+     */
     public static void resetStartMarker() {
         startMarker = null;
     }
 
+    
+    /**
+     * Resets the end marker on the map.
+     */
     public static void resetEndMarker() {
         endMarker = null;
     }
 
 
     /**
-     * Repositions or sets the end marker
-     * @param latLong A LatLong object of the mouse position
-     * @param map A googleMap object to place the startMarker on.
+     * Repositions or sets the end marker.
+     * @param latLong 	- A LatLong object of the mouse position
+     * @param map 		- A googleMap object to place the startMarker on
      */
     public static void setEndMarker(LatLong latLong, GoogleMap map) {
         endLoc = latLong;
@@ -176,9 +216,10 @@ public class Map {
 
     
     /**
-     * Sends a GET-request to the google geocoding service and parses the returned JSON to find the latitude and longitude.
-     * @param address Address to find.
-     * @return An array of doubles containing the latitude and longitude.
+     * Sends a GET-request to the google geocoding service and parses the returned JSON to find 
+     * the latitude and longitude.
+     * @param address   - Address to find
+     * @return 			- An array of doubles containing the latitude and longitude
      */
     public static double[] getLatLong(String address) {
         double latitude = 0;
@@ -189,21 +230,25 @@ public class Map {
                 return latLong;
             }
         }
-
         try {
             //Sets the HTTP request
-            URL mapsUrl = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=" + address.replaceAll(" ", "%20") + ",%20New%20York&sensor=true");
+            URL mapsUrl = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=" 
+            + address.replaceAll(" ", "%20") + ",%20New%20York&sensor=true");
             HttpURLConnection request = (HttpURLConnection) mapsUrl.openConnection();
             request.setRequestMethod("GET");
             request.connect();
 
             // Parses the main objects of the JSON
             JsonParser jp = new JsonParser();
-            JsonElement thing = jp.parse(new InputStreamReader((InputStream) request.getContent()));
+            JsonElement thing = jp.parse(new InputStreamReader(
+            		(InputStream) request.getContent()));
+            
             JsonObject thingObj = thing.getAsJsonObject();
 
             // Slowly works down the JSON to find the correct field.
-            JsonObject resultsObj = thingObj.get("results").getAsJsonArray().get(0).getAsJsonObject();
+            JsonObject resultsObj = thingObj.get("results").getAsJsonArray().get(0)
+            		.getAsJsonObject();
+            
             JsonObject geometry = resultsObj.getAsJsonObject("geometry");
             JsonObject location = geometry.getAsJsonObject("location");
             latitude = location.get("lat").getAsDouble();
@@ -221,21 +266,25 @@ public class Map {
     }
 
     
-    /** Calculates the displacement of two latitudes and longitudes by using the Haversine formula
-     * @param srcLat Source Latitude
-     * @param srcLong Source longitude
-     * @param destLat Destination latitude
-     * @param destLong Destination longitude
-     * @return Displacement between the two points in metres.
+    /** 
+     * Calculates the displacement of two latitudes and longitudes by using the Haversine 
+     * formula.
+     * @param srcLat 	- Source Latitude
+     * @param srcLong 	- Source longitude
+     * @param destLat 	- Destination latitude
+     * @param destLong 	- Destination longitude
+     * @return 			- Displacement between the two points in metres
      */
-    public static double getDistance(double srcLat, double srcLong, double destLat, double destLong) {
+    public static double getDistance(double srcLat, double srcLong, double destLat, 
+    		double destLong) {
         double earthRadius = 6371e3; // metres
         double lat1 = toRadians(srcLat);
         double lat2 = toRadians(destLat);
         double phi = toRadians(destLat-srcLat);
         double delta = toRadians(destLong-srcLong);
 
-        double a = (Math.sin(phi/2) * Math.sin(phi/2)) + Math.cos(lat1) * Math.cos(lat2) * (Math.sin(delta/2) * Math.sin(delta/2));
+        double a = (Math.sin(phi/2) * Math.sin(phi/2)) + Math.cos(lat1) * Math.cos(lat2) 
+        		* (Math.sin(delta/2) * Math.sin(delta/2));
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         double distance = earthRadius * c;
         return distance;
@@ -243,20 +292,22 @@ public class Map {
 
     
     /**
-     * Overloaded distance method to calculate the displacement between two points via the Haversine formula
-     * @param start Starting point of type LatLong
-     * @param end Ending point of type LatLong
-     * @return The displacement between the two points in metres.
+     * Overloaded distance method to calculate the displacement between two points via the 
+     * Haversine formula.
+     * @param start - Starting point of type LatLong
+     * @param end 	- Ending point of type LatLong
+     * @return 		- The displacement between the two points in metres
      */
     public static double getDistance(LatLong start, LatLong end) {
-        return getDistance(start.getLatitude(), start.getLongitude(), end.getLatitude(), end.getLongitude());
+        return getDistance(start.getLatitude(), start.getLongitude(), end.getLatitude(), 
+        		end.getLongitude());
     }
 
     
     /**
      * Locates an address on the maps in the application given a Location object.
-     * @param givenLocation A initialized Location object
-     * @param map The map to place the marker on
+     * @param givenLocation - A initialized Location object
+     * @param map 			- The map to place the marker on
      */
     public static void findLocation(Location givenLocation, GoogleMap map) {
         String locationName = givenLocation.getName();
@@ -273,10 +324,11 @@ public class Map {
 
     
     /**
-     * An overloaded method to handle a lone address and display it as a marker on a GoogleMap object
-     * @param location An address passed as a string
-     * @param map The map object to place the marker on.
-     * @param service A GeocodingService from the GMapsFX API
+     * An overloaded method to handle a lone address and display it as a marker on a GoogleMap 
+     * object.
+     * @param location 	- An address passed as a string
+     * @param map 		- The map object to place the marker on
+     * @param service 	- A GeocodingService from the GMapsFX API
      */
     public static void findLocation(String location, GoogleMap map, GeocodingService service) {
         //Obtains a geocode location around latLong
@@ -296,18 +348,22 @@ public class Map {
                         results[0].getGeometry().getLocation().getLongitude());
             }
             //Create a new marker on the map to identify the location
-            map.addMarker(new Marker(new MarkerOptions().animation(Animation.DROP).position(latLong)));
+            map.addMarker(new Marker(new MarkerOptions().animation(Animation.DROP)
+            		.position(latLong)));
             // Centres the map on the marker
             map.setCenter(latLong);
             ArrayList<Location> nearby = findNearby(latLong.getLatitude(), latLong.getLongitude());
             for (Location loc : nearby) {
                 if (loc.getLocationType() == 0) {
                     Map.findLocation(loc, map);
-                } else if (loc.getLocationType() == 1) {
+                } 
+                else if (loc.getLocationType() == 1) {
                     Map.findPoi((Poi) loc, map);
-                } else if (loc.getLocationType() == 2) {
+                } 
+                else if (loc.getLocationType() == 2) {
                     Map.findRetailers((Retailer) loc, map);
-                } else if (loc.getLocationType() == 3) {
+                } 
+                else if (loc.getLocationType() == 3) {
                     Map.findWifi((Wifi) loc, map);
                 }
             }
@@ -316,18 +372,21 @@ public class Map {
 
     
     /**
-     * Method to find a route given two addresses
-     * @param startAddress Starting address of the route
-     * @param endAddress Destination address of the route.
-     * @param mapView The mapView for the renderer to draw on.
-     * @param service The DirectionsService object used to obtain the route
-     * @param callback The callback to return the object to.
-     * @param pane The DirectionsPane object used in the DirectionsRenderer for the service.
+     * Method to find a route given two addresses.
+     * @param startAddress 	- Starting address of the route
+     * @param endAddress 	- Destination address of the route
+     * @param mapView 		- The mapView for the renderer to draw on
+     * @param service 		- The DirectionsService object used to obtain the route
+     * @param callback 		- The callback to return the object to
+     * @param pane 			- The DirectionsPane object used in the DirectionsRenderer for the 
+     * 						  service
      */
-    public static void findRoute(String startAddress, String endAddress, GoogleMapView mapView, DirectionsService service,
-    		DirectionsServiceCallback callback, DirectionsPane pane, DirectionsRenderer directionsRenderer) {
+    public static void findRoute(String startAddress, String endAddress, GoogleMapView mapView, 
+    		DirectionsService service, DirectionsServiceCallback callback, DirectionsPane pane, 
+    		DirectionsRenderer directionsRenderer) {
         // Creates a new directions request for the Google Maps API
-        DirectionsRequest request = new DirectionsRequest(startAddress, endAddress, TravelModes.BICYCLING);
+        DirectionsRequest request = new DirectionsRequest(startAddress, endAddress, 
+        		TravelModes.BICYCLING);
 
         // Obtains the result of the request using the Directions Service.
         service.getRoute(request, callback, directionsRenderer);
@@ -335,59 +394,71 @@ public class Map {
 
     
     /**
-     * Overloaded method to find a route given two locations
-     * @param startLoc starting location
-     * @param endLoc Destination
-     * @param mapView MapView to render the route on.
-     * @param service DirectionsService Object to use/
-     * @param callback callback to return the results to
-     * @param pane Directions pane used for the directionsRenderer.
+     * Overloaded method to find a route given two locations.
+     * @param startLoc 	- Starting location
+     * @param endLoc 	- Destination
+     * @param mapView 	- MapView to render the route on
+     * @param service 	- DirectionsService Object to use
+     * @param callback 	- Callback to return the results to
+     * @param pane 		- Directions pane used for the directionsRenderer
      */
-    public static void findRoute(Location startLoc, Location endLoc, GoogleMapView mapView, DirectionsService service, 
-    		DirectionsServiceCallback callback, DirectionsPane pane, DirectionsRenderer renderer) {
+    public static void findRoute(Location startLoc, Location endLoc, GoogleMapView mapView, 
+    		DirectionsService service, DirectionsServiceCallback callback, DirectionsPane pane, 
+    		DirectionsRenderer renderer) {
         renderer.clearDirections();
-        DirectionsRequest request = new DirectionsRequest(new LatLong(startLoc.getLatitude(), startLoc.getLongitude()),
-                new LatLong(endLoc.getLatitude(), endLoc.getLongitude()), TravelModes.BICYCLING);
+        DirectionsRequest request = new DirectionsRequest(new LatLong(startLoc.getLatitude(), 
+        		startLoc.getLongitude()), new LatLong(endLoc.getLatitude(), endLoc.getLongitude()),
+        		TravelModes.BICYCLING);
 
         service.getRoute(request, callback, renderer);
     }
 
     
-    /**
-     * Overloaded method to find a route given two LatLongs
-     */
+	/**
+	 * Overloaded method to find a route given two LatLongs.
+	 * @param startLat	- Start latitude
+	 * @param startLong - Start longitude
+	 * @param endLat	- End latitude
+	 * @param endLong	- End longitude
+     * @param mapView 	- MapView to render the route on
+     * @param service 	- DirectionsService Object to use
+     * @param callback 	- Callback to return the results to
+     * @param pane 		- Directions pane used for the directionsRenderer
+	 * @param renderer	- Associated DirectionsRenderer to display the route on
+	 */
     public static void findRoute(double startLat, double startLong, double endLat, double endLong,
-                                 GoogleMapView mapView, DirectionsService service,
-                                 DirectionsServiceCallback callback, DirectionsPane pane, DirectionsRenderer renderer) {
+    		GoogleMapView mapView, DirectionsService service, DirectionsServiceCallback callback, 
+    		DirectionsPane pane, DirectionsRenderer renderer) {
 
-        DirectionsRequest request = new DirectionsRequest(startLat+","+startLong,
-                endLat+","+endLong, TravelModes.BICYCLING);
+        DirectionsRequest request = new DirectionsRequest(startLat + "," + startLong , endLat + 
+        		"," + endLong, TravelModes.BICYCLING);
         service.getRoute(request, callback, renderer);
     }
 
+    
     /**
-     * Finds a given route on the map
-     * @param route The route to find
-     * @param mapView The mapView to render the route on.
-     * @param service The DirectionsService to use.
-     * @param callback The DirectionsServiceCallback to return the results to.
-     * @param pane The directionsPane to use in the DirectionsRenderer.
+     * Finds a given route on the map.
+     * @param route 	- The route to find
+     * @param mapView 	- The mapView to render the route on
+     * @param service 	- The DirectionsService to use
+     * @param callback 	- The DirectionsServiceCallback to return the results to
+     * @param pane 		- The directionsPane to use in the DirectionsRenderer
      */
-    public static void findRoute(Route route, GoogleMapView mapView,
-                          DirectionsService service, DirectionsServiceCallback callback, DirectionsPane pane, DirectionsRenderer renderer) {
+    public static void findRoute(Route route, GoogleMapView mapView, DirectionsService service, 
+    		DirectionsServiceCallback callback, DirectionsPane pane, DirectionsRenderer renderer) {
 
-
-        DirectionsRequest request = new DirectionsRequest(route.getStart().getLatitude()+", "+ route.getStart().getLongitude(),
-                route.getEnd().getLatitude()+","+ route.getEnd().getLongitude(), TravelModes.BICYCLING);
+        DirectionsRequest request = new DirectionsRequest(route.getStart().getLatitude() + ", " 
+        		+ route.getStart().getLongitude(), route.getEnd().getLatitude() + "," 
+        		+ route.getEnd().getLongitude(), TravelModes.BICYCLING);
 
         service.getRoute(request, callback, renderer);
     }
 
     
     /**
-     * Sets the pointer for the wifi location on the map
-     * @param wifi Wifi object to use
-     * @return The location of the pointer on the map
+     * Sets the pointer for the wifi location on the map.
+     * @param wifi 	- Wifi object to use
+     * @return 		- The location of the pointer on the map
      */
     public static void findWifi(Wifi wifi, GoogleMap map) {
         //Creates a new circle and places it on a map.
@@ -402,18 +473,18 @@ public class Map {
             Marker wifiMarker = new Marker(wifiMarkOptns);
             wifi.setMarker(wifiMarker);
             map.addMarker(wifiMarker);
-        } else {
+        } 
+        else {
             map.addMarker(wifi.getCircle());
             wifiVisible = true;
         }
-
     }
 
     
     /**
-     * Sets marker for the toilets on the map
+     * Sets marker for the toilets on the map.
      * @param toilet - Toilet object to find
-     * @param map - map to place marker on
+     * @param map 	 - Map to place marker on
      */
     public static void findToilets(Toilet toilet, GoogleMap map) {
         if (toilet.getMarker() == null) {
@@ -423,22 +494,26 @@ public class Map {
                     .icon("http://maps.google.com/mapfiles/ms/micons/toilets.png");
 
             if (toilet.getAddress() == null) {
-                toiletMarkOptns.title(toilet.getName() + "\n" + toilet.getLatitude() + ", " + toilet.getLongitude());
-            } else {
+                toiletMarkOptns.title(toilet.getName() + "\n" + toilet.getLatitude() + ", " 
+                + toilet.getLongitude());
+            } 
+            else {
                 toiletMarkOptns.title(toilet.getName() + "\n" + toilet.getAddress());
             }
             Marker toiletMark = new Marker(toiletMarkOptns);
             toilet.setMarker(toiletMark);
             map.addMarker(toiletMark);
-        } else {
+        } 
+        else {
             map.addMarker(toilet.getMarker());
             toiletVisible = true;
         }
     }
 
+    
     /**
-     * Sets markers for the retailers into a cluster
-     * @param retailer retailer object to be used
+     * Sets markers for the retailers into a cluster.
+     * @param retailer - Retailer object to be used
      */
     public static void findRetailers(Retailer retailer, GoogleMap map) {
         if (retailer.getMarker() == null) {
@@ -451,21 +526,24 @@ public class Map {
                     .position(latLong)
                     .title(retailer.getName())
                     .visible(true)
-                    .icon("http://maps.google.com/mapfiles/kml/pal3/icon26.png"); //Obtains the correct image for the marker.
+                    .icon("http://maps.google.com/mapfiles/kml/pal3/icon26.png"); 
+            		//^ Obtains the correct image for the marker.
+            
             retailer.setMarker(new Marker(markerOptns));
             map.addMarker(retailer.getMarker());
             retailerVisible = true;
-        } else {
+        } 
+        else {
             map.addMarker(retailer.getMarker());
             retailerVisible = true;
         }
-
     }
 
+    
     /**
-     * Method to find place of interest using the google maps API
-     * @param poi Place of interest to find
-     * @param map Map to render the marker on.
+     * Method to find place of interest using the google maps API.
+     * @param poi - Place of interest to find
+     * @param map - Map to render the marker on
      */
     public static void findPoi(Poi poi, GoogleMap map) {
         if (poi.getMarker() == null) {
@@ -477,7 +555,8 @@ public class Map {
 
             poi.setMarker(marker);
             map.addMarker(poi.getMarker());
-        } else {
+        } 
+        else {
             map.addMarker(poi.getMarker());
             poiVisible = true;
         }
@@ -485,14 +564,15 @@ public class Map {
 
     
     /**
-     * Sets the route markers on the map
-     * @param route route object to be used
-     * @param map map object to be used
+     * Sets the route markers on the map.
+     * @param route - Route object to be used
+     * @param map 	- Map object to be used
      */
     public static void findRouteMarker(Route route, GoogleMap map) {
         if (route.getStartMarker() == null) {
             MarkerOptions startMarkOptns  = new MarkerOptions()
-                    .position(new LatLong(route.getStart().getLatitude(), route.getStart().getLongitude()))
+                    .position(new LatLong(route.getStart().getLatitude(), 
+                    		route.getStart().getLongitude()))
                     .animation(Animation.DROP)
                     .title(route.getStartString())
                     .visible(routeStartVisible)
@@ -501,7 +581,8 @@ public class Map {
             route.setStartMarker(new Marker(startMarkOptns));
 
             MarkerOptions endMarkOptns = new MarkerOptions()
-                    .position(new LatLong(route.getEnd().getLatitude(), route.getEnd().getLongitude()))
+                    .position(new LatLong(route.getEnd().getLatitude(), 
+                    		route.getEnd().getLongitude()))
                     .animation(Animation.DROP)
                     .title(route.getEndString())
                     .visible(false)
@@ -516,15 +597,17 @@ public class Map {
 
     
     /**
-     * Method that finds every location near the locations for a route. Called by the directionsReceived method in MainScreenController
-     * @param locLat Latitude of the location to find nearby places of.
-     * @param locLong Longitude of the location to find nearby places of.
-     * @return An arrayList of locations that are nearby.
+     * Method that finds every location near the locations for a route. Called by the 
+     * directionsReceived method in MainScreenController.
+     * @param locLat 	- Latitude of the location to find nearby places of
+     * @param locLong 	- Longitude of the location to find nearby places of
+     * @return 			- An arrayList of locations that are nearby
      */
     public static ArrayList<Location> findNearby(double locLat, double locLong) {
         ArrayList<Location> nearby = new ArrayList<Location>();
 
-        // Loops through the retailers in the list and checks if the location is within 100 metres of the retailer
+        // Loops through the retailers in the list and checks if the location is within 100 
+        // metres of the retailer
         for (Retailer retailer : CurrentStorage.getRetailerArray()) {
             if (Map.getDistance(locLat, locLong,
                     retailer.getLatitude(), retailer.getLongitude() ) < 100) {
@@ -532,7 +615,8 @@ public class Map {
             }
         }
 
-        // Loops through the wifi in the list and checks if the location is within 100 metres of the wifi
+        // Loops through the wifi in the list and checks if the location is within 100 
+        // metres of the wifi
         for (Wifi wifi : CurrentStorage.getWifiArray()) {
             if (Map.getDistance(locLat, locLong,
                     wifi.getLatitude(), wifi.getLongitude()) < 100) {
@@ -540,16 +624,19 @@ public class Map {
             }
         }
 
-        // Loops through the POI in the list and checks if the location is within 100 metres of the POI
+        // Loops through the POI in the list and checks if the location is within 100 
+        // metres of the POI
         for (Poi poi : CurrentStorage.getPoiArray()) {
             if (Map.getDistance(locLat, locLong, poi.getLatitude(), poi.getLongitude()) < 100) {
                 nearby.add(poi);
             }
         }
 
-        // Loops through the toilets in the list and checks if the location is within 100 metres of the toilet
+        // Loops through the toilets in the list and checks if the location is within 100 
+        // metres of the toilet
         for (Toilet toilet : CurrentStorage.getToiletArray()) {
-            if (Map.getDistance(toilet.getLatitude(), toilet.getLongitude(), locLat, locLong) < 100) {
+            if (Map.getDistance(toilet.getLatitude(), toilet.getLongitude(), locLat, locLong) 
+            		< 100) {
                 nearby.add(toilet);
             }
         }
