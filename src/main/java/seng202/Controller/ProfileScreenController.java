@@ -19,6 +19,9 @@ import seng202.Model.*;
 
 import static oracle.jrockit.jfr.events.Bits.intValue;
 
+/**
+ * Controller class for the profile screen
+ */
 public class ProfileScreenController {
 	
 	@FXML
@@ -111,10 +114,10 @@ public class ProfileScreenController {
 		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 
 		Scene currentScene = primaryStage.getScene();
-		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
-				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), 
+				primaryStage.getMinHeight()): new Scene(root, currentScene.getWidth(), 
+				currentScene.getHeight()));
 
-		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Map");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -123,7 +126,7 @@ public class ProfileScreenController {
 	
 	/**
 	 * Method for when the table menu buttonis pressed, shows the raw tables screen.
-	 * @param event Auto-generate event on button press
+	 * @param event - Auto-generate event on button press
 	 */
 	@FXML
     void tablePressed(ActionEvent event) throws IOException {
@@ -132,10 +135,10 @@ public class ProfileScreenController {
 			Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
 
 			Scene currentScene = primaryStage.getScene();
-			Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
-					: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+			Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), 
+					primaryStage.getMinHeight()): new Scene(root, currentScene.getWidth(), 
+					currentScene.getHeight()));
 
-			//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 			primaryStage.setTitle("Table");
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -160,10 +163,10 @@ public class ProfileScreenController {
 		Parent root = FXMLLoader.load(getClass().getResource("/DataViewerScreen.fxml"));
 
 		Scene currentScene = primaryStage.getScene();
-		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
-				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), 
+				primaryStage.getMinHeight()): new Scene(root, currentScene.getWidth(), 
+				currentScene.getHeight()));
 
-		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Statistics");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -178,10 +181,10 @@ public class ProfileScreenController {
 		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
 
 		Scene currentScene = primaryStage.getScene();
-		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
-				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), 
+				primaryStage.getMinHeight()): new Scene(root, currentScene.getWidth(), 
+				currentScene.getHeight()));
 
-		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Profile");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -189,7 +192,8 @@ public class ProfileScreenController {
 	
 	
 	/**
-	 * Method for when the Logout button is pressed, shows the login screen and flushes the current storage. 
+	 * Method for when the Logout button is pressed, shows the login screen and flushes the 
+	 * current storage. 
 	 */
 	public void logoutPressed() throws IOException {
 		DataFetcher exporter = new DataFetcher();
@@ -199,22 +203,24 @@ public class ProfileScreenController {
 			exporter.closeConnection();
 			CurrentStorage.flush();
 			System.exit(0);
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
 	
 	/**
-	 * Method for when the Edit Account button is pressed
+	 * Method for when the Edit Account button is pressed.
 	 */
 	public void editPressed() {
+		
 	}
 	
 	
 	/**
-	 * Method for when the Change Password button is pressed, shows the change password pop up screen.
-	 * @throws IOException 
+	 * Method for when the Change Password button is pressed, shows the change password pop up 
+	 * screen.
 	 */
 	public void passwordPressed() throws IOException {
 		Stage stage = new Stage();
@@ -228,8 +234,8 @@ public class ProfileScreenController {
 	
 	
 	/**
-	 * Method for when the Delete Account button is pressed, shows the delete account pop up screen.
-	 * @throws IOException 
+	 * Method for when the Delete Account button is pressed, shows the delete account pop up 
+	 * screen.
 	 */
 	public void deletePressed() throws IOException {
 		Stage stage = new Stage();
@@ -244,7 +250,9 @@ public class ProfileScreenController {
 	}
 	
 	
-	//TODO add docstring
+	/**
+	 * Intializes the controller
+	 */
 	@FXML
 	void initialize() {
 		user = CurrentStorage.getUser();
