@@ -2,7 +2,6 @@ package seng202.Model;
 
 import java.util.Arrays;
 import static java.lang.Integer.MAX_VALUE;
-import static java.lang.Integer.min;
 
 /**
  * The Badge Object constructor and methods.
@@ -11,9 +10,16 @@ public class Badge{
 
     private String filePath = "images/Badges/";
     private String[] types = {"Distance","Time","Routes"}; //Badge types array
-    private int[][] requirements = {{0,2000,10000,50000,100000,200000,500000, MAX_VALUE},{0,120,600,3000,6000,12000,30000, MAX_VALUE},{0,2,5,10,50,100,200, MAX_VALUE}}; //Requirements for each level of a badge, arranged [type index from types array][level]
-    private String[] units = {"metres","minutes","routes"}; //Units for each badge type, arranged [type index from types array]
-    private String[] methods = {"Travel","Cycle","Take"}; //Method of gaining each badge type, [type index from types array]
+    
+    //Requirements for each level of a badge, arranged [type index from types array][level]
+    private int[][] requirements = {{0,2000,10000,50000,100000,200000,500000, MAX_VALUE},
+    		{0,120,600,3000,6000,12000,30000, MAX_VALUE},{0,2,5,10,50,100,200, MAX_VALUE}}; 
+    
+    //Units for each badge type, arranged [type index from types array]
+    private String[] units = {"metres","minutes","routes"}; 
+    
+    //Method of gaining each badge type, [type index from types array]
+    private String[] methods = {"Travel","Cycle","Take"}; 
     private int remaining = 0; //Num remaining units until next level
 
     private String badgeType; //Type of badge
@@ -25,15 +31,16 @@ public class Badge{
 
     
     /**
-     * Main constructor for Badge class
-     * @param badgeType Type of badge
-     * @param value Number of units user has gained towards badge
-     * @param level Level of badge
-     * @param description Description of badge
-     * @param name Name of badge
-     * @param icon filiName of badge image
+     * Main constructor for Badge class.
+     * @param badgeType 	- Type of badge
+     * @param value			- Number of units user has gained towards badge
+     * @param level 		- Level of badge
+     * @param description 	- Description of badge
+     * @param name 			- Name of badge
+     * @param icon 			- FileName of badge image
      */
-    public Badge(String badgeType, int value, int level, String description, String name, String icon) {
+    public Badge(String badgeType, int value, int level, String description, String name, 
+    		String icon) {
         this.badgeType = badgeType;
         this.value = value;
         this.level = level;
@@ -49,11 +56,10 @@ public class Badge{
 
 
     /**
-     * Overloaded constructor for badge type
-     *  For constructing badge with only type and value
-     *  all other variables are formed using built-in algorithms
-     * @param badgeType Type of badge
-     * @param value Number of units user has earned towards badge
+     * Overloaded constructor for badge type for constructing badge with only type and value all 
+     * other variables are formed using built-in algorithms.
+     * @param badgeType 	- Type of badge
+     * @param value 		- Number of units user has earned towards badge
      */
     public Badge(String badgeType, int value) {
         this(badgeType, value, 0, "", "", null);
@@ -62,10 +68,9 @@ public class Badge{
 
 
     /**
-     * Overloaded constructor for Badge class
-     *  For constructing badge from scratch using only badge type
-     *  all other variables are formed using built-in algorithms based on value being 0
-     * @param badgeType Type of badge
+     * Overloaded constructor for Badge class for constructing badge from scratch using only badge
+     * type all other variables are formed using built-in algorithms based on value being 0.
+     * @param badgeType - Type of badge
      */
     public Badge(String badgeType) {
         this(badgeType, 0, 0, "", "",  null);
@@ -74,8 +79,8 @@ public class Badge{
 
 
     /**
-     * Getter for value
-     * @return value Number of units user has gained towards badge
+     * Getter for value.
+     * @return - Number of units user has gained towards badge
      */
     public int getValue() { 
     	return value; 
@@ -83,8 +88,8 @@ public class Badge{
 
 
     /**
-     * Getter for level
-     * @return level Level of badge
+     * Getter for level.
+     * @return - Level of badge
      */
     public int getLevel() { 
     	return level; 
@@ -92,8 +97,8 @@ public class Badge{
 
 
     /**
-     * Getter for description
-     * @return description Description of badge
+     * Getter for description.
+     * @return - Description of badge
      */
     public String getDescription() { 
     	return description; 
@@ -101,8 +106,8 @@ public class Badge{
 
 
     /**
-     * Getter for icon
-     * @return icon Filename of badge image
+     * Getter for icon.
+     * @return - Filename of badge image
      */
     public String getIcon() { 
     	return icon; 
@@ -110,8 +115,8 @@ public class Badge{
 
 
     /**
-     * Getter for name
-     * @return name Name of badge
+     * Getter for name.
+     * @return - Name of badge
      */
     public String getName() { 
     	return name; 
@@ -119,8 +124,8 @@ public class Badge{
 
 
     /**
-     * getter for badge type index
-     * @return badgeTypeIndex Index of badge type in array types
+     * Getter for badge type index.
+     * @return - Index of badge type in array types
      */
     private int getBadgeTypeIndex() { 
     	return Arrays.asList(types).indexOf(badgeType); 
@@ -128,8 +133,8 @@ public class Badge{
 
 
     /**
-     * Getter for level cap
-     * @return levelCap The value at which the badgetype will update to the next level
+     * Getter for level cap.
+     * @return - The value at which the badgetype will update to the next level
      */
     public int getLevelCap() { 
     	return requirements[getBadgeTypeIndex()][level+1]; 
@@ -137,8 +142,8 @@ public class Badge{
 
 
     /**
-     * Getter for remaining
-     * @return remaining Amount of remaining units until level-up
+     * Getter for remaining.
+     * @return - Amount of remaining units until level-up
      */
     public int getRemaining() { 
     	return remaining; 
@@ -146,9 +151,9 @@ public class Badge{
 
 
     /**
-     * Function to make a string of the users completed time or distance in hours and minutes, or kilometres and
-     * minutes respectively.
-     * @return A string representation of the time or distance a user has completed.
+     * Function to make a string of the users completed time or distance in hours and minutes, or 
+     * kilometres and minutes respectively.
+     * @return - A string representation of the time or distance a user has completed.
      */
     public String achievedString() {
         String achievedString = "";
@@ -185,8 +190,8 @@ public class Badge{
 
 
     /**
-     * Getter for a string representation ofremaining
-     * @return strRemaining A string representation of remaining including units
+     * Getter for a string representation of remaining units till next level.
+     * @return - A string representation of remaining including units
      */
     public String getStrRemaining() {
         String strRemaining;
@@ -198,7 +203,8 @@ public class Badge{
             case "minutes":
                 if (remaining < 60) {
                     strRemaining = Integer.toString(remaining) + " minutes";
-                } else {
+                } 
+                else {
                     int hours = remaining / 60;
                     int minutes = remaining - (hours * 60);
                     strRemaining = Integer.toString(hours) + " hours";
@@ -210,7 +216,8 @@ public class Badge{
             case "metres":
                 if (remaining < 1000) {
                     strRemaining = Integer.toString(remaining) + " metres";
-                } else {
+                } 
+                else {
                     int kilometres = remaining / 1000;
                     int metres = remaining - (kilometres * 1000);
                     strRemaining = Integer.toString(kilometres) + " kilometres";
@@ -227,8 +234,8 @@ public class Badge{
 
 
     /**
-     * Setter for value
-     * @param value Number of units the user has achieved towards the badge
+     * Setter for value.
+     * @param value - Number of units the user has achieved towards the badge
      */
     public void setValue(int value) { 
     	this.value = value; 
@@ -236,8 +243,8 @@ public class Badge{
 
 
     /**
-     * Setter for level
-     * @param level The level of badge the user as attained
+     * Setter for level.
+     * @param level - The level of badge the user as attained
      */
     public void setLevel(int level) {
         this.level = level;
@@ -245,8 +252,8 @@ public class Badge{
 
 
     /**
-     * Setter for description
-     * @param description Description of the badge
+     * Setter for description.
+     * @param description - Description of the badge
      */
     public void setDescription(String description) { 
     	this.description = description; 
@@ -254,8 +261,8 @@ public class Badge{
 
 
     /**
-     * Setter for name
-     * @param name Name of the badge
+     * Setter for name.
+     * @param name - Name of the badge
      */
     public void setName(String name) { 
     	this.name = name; 
@@ -263,8 +270,7 @@ public class Badge{
 
 
     /**
-     * Updater for name
-     *      Creates name using badgeType and Level
+     * Updater for name, creates the name using badgeType and Level.
      */
     public void updateName() { 
     	this.name = badgeType + " badge, level " + level; 
@@ -272,8 +278,7 @@ public class Badge{
 
 
     /**
-     * Updater for remaining
-     * Calculates remaining based on value and levelCap
+     * Updater for remaining, calculates remaining based on value and levelCap.
      */
     public void updateRemaining() {
         int remaining = (getLevelCap() - value);
@@ -286,8 +291,7 @@ public class Badge{
 
 
     /**
-     * Updater for level
-     *      Recalculates level based on value and the requirements array
+     * Updater for level, recalculates level based on value and the requirements array.
      */
     public void updateLevel() {
         int level = 0;
@@ -314,8 +318,7 @@ public class Badge{
 
 
     /**
-     * Updater for icon
-     *      Recalls icon using badgeType and level
+     * Updater for icon, recalls icon using badgeType and level.
      */
     public void updateIcon() {
         String fileName = "badge";
@@ -325,24 +328,28 @@ public class Badge{
 
 
     /**
-     * Updater for description
-     * Writes a description of the badge using level, badgeType, and remaining
+     * Updater for description, writes a description of the badge using level, badgeType, and 
+     * remaining.
      */
     public void updateDescription() {
         int type = getBadgeTypeIndex();
         String output;
         if (level == 0) {
             output = "You don't have a " + badgeType + " badge yet.";
-            output += ("\n" + methods[type] + " " + getStrRemaining() + " to earn your first one!");
+            output += ("\n" + methods[type] + " " + getStrRemaining() 
+            		+ " to earn your first one!");
         } 
         else if (level >= 1 && level <= 6) {
             if (level == 6) {
                 output = "Nice Work! This is your Level 6 " + badgeType + " Badge.";
-                output += "\nYou're at the top of your game, and we've run out of " + badgeType + " Badges to give you!";
+                output += "\nYou're at the top of your game, and we've run out of " + badgeType 
+                		+ " Badges to give you!";
             } 
             else {
-                output = "This is your Level " + (Integer.toString(level)) + " " + badgeType + " Badge.";
-                output += "\n" + methods[type] + " " + getStrRemaining() + " to earn the next one!";
+                output = "This is your Level " + (Integer.toString(level)) + " " + badgeType 
+                		+ " Badge.";
+                output += "\n" + methods[type] + " " + getStrRemaining() 
+                		+ " to earn the next one!";
             }
         } 
         else {
@@ -353,16 +360,13 @@ public class Badge{
 
 
     /**
-     * Core updater for Badge class
-     * Calls all updater methods
-     * Also sets value given a new value
-     * @param value The number of units the user has gained towards the badge
+     * Core updater for Badge class, calls all updater methods and sets value given a new value.
+     * @param value - The number of units the user has gained towards the badge
      */
     public void updateBadge(int value) {
         this.setValue(value);
         this.updateLevel();
         this.updateIcon();
-
         this.updateRemaining();
         this.updateDescription();
         this.updateName();
@@ -370,9 +374,8 @@ public class Badge{
 
 
     /**
-     * Overloaded core updater for badge class
-     * Calls all updater methods
-     * Uses existing value
+     * Overloaded core updater for badge class, calls all updater methods and uses existing value
+     * for value.
      */
     public void updateBadge() {
         this.updateBadge(this.getValue());

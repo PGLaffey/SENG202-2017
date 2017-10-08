@@ -22,8 +22,8 @@ public class DataFetcher {
     
     
     /**
-     * Gets the global ip for the database
-     * @return The global ip for the databse 
+     * Gets the global IP for the database.
+     * @return - The global IP for the database 
      */
     public static String getIP() {
     	return ip;
@@ -31,8 +31,8 @@ public class DataFetcher {
     
     
     /**
-     * Sets the global ip for the database
-     * @param newIP The new ip for the database
+     * Sets the global IP for the database.
+     * @param newIP - The new IP for the database
      */
     public static void setIP(String newIP) {
     	ip = newIP;
@@ -41,7 +41,8 @@ public class DataFetcher {
 
     
 	/**
-	 * @return true if objects have already been imported from database
+	 * Checks if data has been imported from the database.
+	 * @return - True if all objects have already been imported from database
 	 */
     public boolean isHasImported() {
     	return hasImported;
@@ -49,8 +50,8 @@ public class DataFetcher {
 
     
 	/**
-	 * Sets the value of hasImported to true if the database has already been imported from
-	 * @param value boolean value for whether an object has been imported previously
+	 * Sets the value of hasImported to true if the database has already been imported from.
+	 * @param value - Boolean value for whether an object has been imported previously
 	 */
 	public void setHasImported(boolean value) {
     	hasImported = value;
@@ -58,8 +59,8 @@ public class DataFetcher {
 
 	
 	/**
-	 * Returns an array of the offsets. Used to check if there is stuff to import
-	 * @return the array of offsets in the form toilets, poi, wifi, retailer, route
+	 * Returns an array of the offsets. Used to check if there is stuff to import.
+	 * @return - The array of offsets in the form toilets, poi, wifi, retailer, route
 	 */
 	public Integer[] getOffsets() {
 		Integer[] offsets = { toiletOffset, poiOffset, wifiOffset, retailerOffset, routeOffset};
@@ -68,7 +69,8 @@ public class DataFetcher {
 	
 	
 	/**
-	 * Getter for the Connection connect
+	 * Getter for the Connection connect.
+	 * @return - The current connection to the database
 	 */
 	public Connection getConnect() {
 		return connect;
@@ -76,8 +78,8 @@ public class DataFetcher {
 
  
 	/**
-	 * Deletes a route from the database
-	 * @param route Route to be removed from the database
+	 * Deletes a route from the database.
+	 * @param route - Route to be removed from the database
 	 */
 	public void deleteRoute(Route route) {
 		int routeID = findRoute(route);
@@ -97,8 +99,8 @@ public class DataFetcher {
 	
 	
 	/**
-	 * Remove a location from the database
-	 * @param location Location to be removed from the database
+	 * Remove a location from the database.
+	 * @param location - Location to be removed from the database
 	 */
 	public void deleteLocation(Location location) {
 		int locationID = findLocation(location);
@@ -146,9 +148,9 @@ public class DataFetcher {
 	
 	
     /**
-     * Updates a Location (oldLocation) in the database to the values of newLocation
-     * @param oldLocation The old Location to be replaced
-     * @param newLocation The new Location to replace the old Location
+     * Updates a Location (oldLocation) in the database to the values of newLocation.
+     * @param oldLocation - The old Location to be replaced
+     * @param newLocation - The new Location to replace the old Location
      */
     public void updateLocation(Location oldLocation, Location newLocation) {
     	double latitude = newLocation.getLatitude();
@@ -165,11 +167,12 @@ public class DataFetcher {
     	int oldID = findLocation(oldLocation);
 
     	if (oldID != 0) {
-	    	String stmt = "UPDATE tblLocations SET Latitude = ?, Longitude = ?, Name = ?, Public = ?, "
-	    			+ "Borough = ?, Zip = ?, Address = ? WHERE LocationID = ?";
+	    	String stmt = "UPDATE tblLocations SET Latitude = ?, Longitude = ?, Name = ?, "
+	    			+ "Public = ?, Borough = ?, Zip = ?, Address = ? WHERE LocationID = ?";
 	    	ArrayList<String> params = new ArrayList<String>();
-	    	Collections.addAll(params, String.valueOf(latitude), String.valueOf(longitude), 
-				    				name, String.valueOf(secret), borough, String.valueOf(zip), address, String.valueOf(oldID));
+	    	Collections.addAll(params, String.valueOf(latitude), String.valueOf(longitude),	name,
+	    			String.valueOf(secret), borough, String.valueOf(zip), address, 
+	    			String.valueOf(oldID));
 			runUpdate(stmt, params);
 			
 			stmt = "SELECT * FROM tblLocations WHERE LocationID = ?";
@@ -192,15 +195,16 @@ public class DataFetcher {
 			}
     	}
     	else {
-    		System.out.println("Location does not exisit in the database. Did you mean to add it?");
+    		System.out.println("Location does not exisit in the database. Did you mean to add "
+    				+ "it?");
     	}
     }
    
     
     /**
-     * Updates a Wifi location in the database
-     * @param wifi The new wifi location
-     * @param typeID The ID in the database of the wifi location
+     * Updates a Wifi location in the database.
+     * @param wifi 		- The new wifi location
+     * @param typeID 	- The ID in the database of the wifi location
      */
     private void updateWifi(Wifi wifi, int typeID) {
     	String ssid = wifi.getSsid();
@@ -214,9 +218,9 @@ public class DataFetcher {
     
     
     /**
-     * Updates a Poi location in the database
-     * @param poi The new Poi location
-     * @param typeID The ID in the database of the Poi location
+     * Updates a Poi location in the database.
+     * @param poi 		- The new Poi location
+     * @param typeID 	- The ID in the database of the Poi location
      */
     private void updatePoi(Poi poi, int typeID) {
     	String description = poi.getDescription();
@@ -229,9 +233,9 @@ public class DataFetcher {
     
     
     /**
-     * Updates a toilet location in the database
-     * @param toilet The new toilet location
-     * @param typeID The ID in the database of the toilet location
+     * Updates a toilet location in the database.
+     * @param toilet - The new toilet location
+     * @param typeID - The ID in the database of the toilet location
      */
     private void updateToilet(Toilet toilet, int typeID) {
     	int isDisabled = 0;
@@ -244,20 +248,22 @@ public class DataFetcher {
     	}
     	String stmt = "UPDATE tblToilets SET IsDisabled = ?, MixedGender = ? WHERE ToiletID = ?";
 		ArrayList<String> params = new ArrayList<String>();
-		Collections.addAll(params, String.valueOf(isDisabled), String.valueOf(unisex), String.valueOf(typeID));
+		Collections.addAll(params, String.valueOf(isDisabled), String.valueOf(unisex), 
+				String.valueOf(typeID));
 		runUpdate(stmt, params);
     }
     
     
     /**
-     * Updates a retailer location in the database
-     * @param retailer The new retailer location
-     * @param typeID The ID in the database of the retailer location
+     * Updates a retailer location in the database.
+     * @param retailer 	- The new retailer location
+     * @param typeID 	- The ID in the database of the retailer location
      */
     private void updateRetailer(Retailer retailer, int typeID) {
     	String retailerType = retailer.getProduct();
     	String description = retailer.getDescription();
-    	String stmt = "UPDATE tblRetailers SET RetailerType = ?, Description = ? WHERE RetailerID = ?";
+    	String stmt = "UPDATE tblRetailers SET RetailerType = ?, Description = ? WHERE RetailerID"
+    			+ " = ?";
 		ArrayList<String> params = new ArrayList<String>();
 		Collections.addAll(params, retailerType, description, String.valueOf(typeID));
 		runUpdate(stmt, params);
@@ -265,9 +271,9 @@ public class DataFetcher {
     
     
 	/**
-	 * Changes the password of a user in the database
-	 * @param username username of the user trying to change their password
-	 * @param newPassword desired password
+	 * Changes the password of a user in the database.
+	 * @param username 		- Username of the user trying to change their password
+	 * @param newPassword 	- desired password
 	 */
 	public void updateUserPassword(String username, String newPassword) {
     	String stmt = "UPDATE tblUser SET Password = ? WHERE Username = ?";
@@ -278,9 +284,9 @@ public class DataFetcher {
 
 	
 	/**
-	 * Fetches the users password to verify that they have the correct credentials
-	 * @param username Username of user logging in
-	 * @return The users password if the user exists, null otherwise
+	 * Fetches the users password to verify that they have the correct credentials.
+	 * @param username 	- Username of user logging in
+	 * @return 			- The users password if the user exists, null otherwise
 	 */
 	public String fetchPassword(String username) {
     	String stmt = "SELECT Password FROM tblUser WHERE Username = ?";
@@ -294,12 +300,13 @@ public class DataFetcher {
 
 	
 	/**
-	 *
-	 * @param username the username of the user logging in
-	 * @return the LName, FName and YearOfBirth of the user from the database
+	 * Returns information about the user with the given username.
+	 * @param username 	- The username of the user logging in
+	 * @return 			- The LName, FName and YearOfBirth of the user from the database
 	 */
 	public ArrayList<String> fetchUserInfo(String username) {
-		String stmt = "SELECT FName, LNAME, YearOfBirth, NumRoutesCycled, DistanceCycled, HoursCycled FROM tblUser WHERE Username = ?";
+		String stmt = "SELECT FName, LNAME, YearOfBirth, NumRoutesCycled, DistanceCycled, "
+				+ "HoursCycled FROM tblUser WHERE Username = ?";
 		ArrayList<String> params = new ArrayList<String>();
 		Collections.addAll(params, username);
 		return runQuery(stmt, params).get(0);
@@ -307,9 +314,8 @@ public class DataFetcher {
 
 	
 	/**
-	 * Deletes the user from the database, as well as all corresponding
-	 * user locations and routes,
-	 * @param username Username of the user
+	 * Deletes the user from the database, as well as all corresponding user locations and routes.
+	 * @param username - Username of the user
 	 */
 	public void deleteUser(String username) {
 		String stmt = "SELECT UserID FROM tblUser WHERE Username = ?";
@@ -346,9 +352,9 @@ public class DataFetcher {
 
 	
 	/**
-	 * Finds the username of the given routes owner
-	 * @param route The route to find the owner of
-	 * @return The username of the routes owner
+	 * Finds the username of the given routes owner.
+	 * @param route 	- The route to find the owner of
+	 * @return 			- The username of the routes owner
 	 */
 	public String getRouteOwner(Route route) {
 		int routeID = findRoute(route);
@@ -370,9 +376,9 @@ public class DataFetcher {
 	
 	
 	/**
-	 * Finds the username of the given locations owner
-	 * @param location The location to find the owner of
-	 * @return The username of the locations owner
+	 * Finds the username of the given locations owner.
+	 * @param location 	- The location to find the owner of
+	 * @return 			- The username of the locations owner
 	 */
 	public String getLocationOwner(Location location) {
 		int locationID = findLocation(location);
@@ -394,7 +400,7 @@ public class DataFetcher {
 	
 	
 	/**
-	 * Stores the new retailers, toilets, wifi's, Poi's in to the database
+	 * Stores the new retailers, toilets, wifi's, Poi's in to the database.
 	 */
 	public void storeCurrentStorage() {
 		storeNewRetailers();
@@ -410,9 +416,9 @@ public class DataFetcher {
 
 	
 	/**
-	 * Checks if there are any changes in the users saved routes for the list, listNo
-	 * @param savedList The list of indices that reference routes
-	 * @param listNo The number assigned to the savedList
+	 * Checks if there are any changes in the users saved routes for the list, listNo.
+	 * @param savedList 	- The list of indices that reference routes
+	 * @param listNo 		- The number assigned to the savedList
 	 */
 	private void checkSavedRoutes(ArrayList<Integer> savedList, int listNo) {
 		int count = 0;
@@ -446,21 +452,22 @@ public class DataFetcher {
 	
 	
 	/**
-	 * Adds a route to a users list of saved routes in a specified list on the database
-	 * @param userID The database ID of the user that is saving the route
-	 * @param routeID The database ID of the route being saved
-	 * @param listID The database ID of the list the route is being saved in
+	 * Adds a route to a users list of saved routes in a specified list on the database.
+	 * @param userID 	- The database ID of the user that is saving the route
+	 * @param routeID 	- The database ID of the route being saved
+	 * @param listID 	- The database ID of the list the route is being saved in
 	 */
 	private void addSavedRoute(int userID, int routeID, int listID) {
     	String stmt = "INSERT INTO tblUsersRoutes (UserID, RouteID, ListID) VALUES (?, ?, ?)";
 		ArrayList<String> params = new ArrayList<String>();
-		Collections.addAll(params, String.valueOf(userID), String.valueOf(routeID), String.valueOf(listID));
+		Collections.addAll(params, String.valueOf(userID), String.valueOf(routeID), 
+				String.valueOf(listID));
 		runUpdate(stmt, params);
 	}
 	
 	
 	/**
-	 * Stores all new routes created in this session into the database
+	 * Stores all new routes created in this session into the database.
 	 */
 	private void storeNewRoutes() {
 		int count = 0;
@@ -476,7 +483,7 @@ public class DataFetcher {
 	
 	
 	/**
-	 * Updates the user's information on the database
+	 * Updates the user's information on the database.
 	 */
 	private void storeUser() {
 		User user = CurrentStorage.getUser();
@@ -485,7 +492,8 @@ public class DataFetcher {
 			int routesCycled = user.getRoutesCycled();
 			double hoursCycled = user.getHours();
 			double distanceCycled = user.getDistance();
-			String stmt = "UPDATE tblUser SET NumRoutesCycled = ?, HoursCycled = ?, DistanceCycled = ? WHERE Username = ?";
+			String stmt = "UPDATE tblUser SET NumRoutesCycled = ?, HoursCycled = ?, "
+					+ "DistanceCycled = ? WHERE Username = ?";
 			ArrayList<String> params = new ArrayList<String>();
 			Collections.addAll(params, String.valueOf(routesCycled), String.valueOf(hoursCycled),
 					String.valueOf(distanceCycled), username);
@@ -495,7 +503,7 @@ public class DataFetcher {
 
 	
 	/**
-	 * Stores the new retailers from CurrentStorage into the database
+	 * Stores the new retailers from CurrentStorage into the database.
 	 */
 	private void storeNewRetailers() {
 		int count = 0;
@@ -511,7 +519,7 @@ public class DataFetcher {
 
 	
 	/**
-	 * Stores the new toilets from CurrentStorage into the database
+	 * Stores the new toilets from CurrentStorage into the database.
 	 */
 	private void storeNewToilets() {
 		int count = 0;
@@ -527,7 +535,7 @@ public class DataFetcher {
 
 	
 	/**
-	 * Stores the new Wifi's from CurrentStorage into the database
+	 * Stores the new Wifi's from CurrentStorage into the database.
 	 */
 	private void storeNewWifi() {
 		int count = 0;
@@ -543,7 +551,7 @@ public class DataFetcher {
 
 	
 	/**
-	 * Stores the new Poi's from CurrentStorage into the database
+	 * Stores the new Poi's from CurrentStorage into the database.
 	 */
 	private void storeNewPoi() {
 		int count = 0;
@@ -559,7 +567,7 @@ public class DataFetcher {
 
 	
 	/**
-	 * Stores the new General locations from CurrentStorage into the database
+	 * Stores the new General locations from CurrentStorage into the database.
 	 */
 	private void storeNewGeneral() {
 		int count = 0;
@@ -575,10 +583,10 @@ public class DataFetcher {
 
 	
 	/**
-	 * Loads a single Route from the database and returns a Route object
-	 * @param output The ResultSet of the Route to be loaded from the database
-	 * @return A Route object made of the data from the database
-	 * @throws SQLException If there is an error reading data from the database
+	 * Loads a single Route from the database and returns a Route object.
+	 * @param output 		- The ResultSet of the Route to be loaded from the database
+	 * @return 				- A Route object made of the data from the database
+	 * @throws SQLException - If there is an error reading data from the database
 	 */
 	private Route loadRoute(ResultSet output) throws SQLException {
 		int startID = output.getInt(2);
@@ -604,10 +612,10 @@ public class DataFetcher {
 	
 	
 	/**
-	 * Loads a location along a route.EG Start or End
-	 * @param locationID The database ID of the location to be loaded
-	 * @return A location object made of the data from the database
-	 * @throws SQLException If there is an error reading data from the database
+	 * Loads a location along a route. EG Start or End.
+	 * @param locationID 	- The database ID of the location to be loaded
+	 * @return 				- A location object made of the data from the database
+	 * @throws SQLException - If there is an error reading data from the database
 	 */
 	private Location loadRouteLocation(int locationID) throws SQLException {
 		PreparedStatement qryLocation = connect.prepareStatement("SELECT * FROM tblLocations" +
@@ -620,7 +628,7 @@ public class DataFetcher {
 	
 	
 	/**
-	 * Loads all the users routes that have been saved in a list by the user
+	 * Loads all the users routes that have been saved in a list by the user.
 	 */
 	public void loadUsersRouteLists() {
 		int currUser = findUser(CurrentStorage.getUser());
@@ -646,7 +654,8 @@ public class DataFetcher {
 				listsOutput = qryLists.executeQuery();
 				while (listsOutput.next()) {
 					routeID = listsOutput.getInt(1);
-					qryRoute = connect.prepareStatement("SELECT * FROM tblRoutes WHERE RouteID = ?");
+					qryRoute = connect.prepareStatement("SELECT * FROM tblRoutes WHERE RouteID = "
+							+ "?");
 					qryRoute.setInt(1, routeID);
 					routeOutput = qryRoute.executeQuery();
 					routeOutput.next();
@@ -671,12 +680,13 @@ public class DataFetcher {
 	
 	
 	/**
-	 * Fetches all of the routes out of the database to be loaded in to the app
+	 * Fetches all of the routes out of the database to be loaded in to the app.
 	 */
 	public void loadAllRoutes() {
     	try {
     		//Initializes the result set of all Routes from the database
-    		PreparedStatement qryLoadRoutes = connect.prepareStatement("SELECT * FROM tblRoutes LIMIT ?, 1000");
+    		PreparedStatement qryLoadRoutes = connect.prepareStatement("SELECT * FROM tblRoutes "
+    				+ "LIMIT ?, 1000");
     		qryLoadRoutes.setInt(1, routeOffset);
 			ResultSet output = qryLoadRoutes.executeQuery();
 			routeOffset += output.getFetchSize();
@@ -689,7 +699,8 @@ public class DataFetcher {
 					//Checks if the Route belongs to a User
 					if (ownerID != 0) {
 						String currUser = CurrentStorage.getUser().getUsername();
-						PreparedStatement qryOwner = connect.prepareStatement("SELECT Username FROM tblUser WHERE UserID = ?");
+						PreparedStatement qryOwner = connect.prepareStatement("SELECT Username "
+								+ "FROM tblUser WHERE UserID = ?");
 						qryOwner.setInt(1, ownerID);
 						ResultSet ownerOutput = qryOwner.executeQuery();
 						String owner = ownerOutput.getString(1);
@@ -715,7 +726,7 @@ public class DataFetcher {
 
 	
 	/**
-	 * Fetches all of the locations out of the database to be loaded in to the app
+	 * Fetches all of the locations out of the database to be loaded in to the app.
 	 */
     private Location loadLocation(ResultSet output) throws SQLException {	
     	//Initialize all the variables for the different location types
@@ -749,7 +760,8 @@ public class DataFetcher {
 		case 0:
 			//Defines the type specific data
 			typeID = output.getInt(8);
-			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblToilets WHERE ToiletID = " + typeID + "");
+			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblToilets WHERE ToiletID = " 
+						+ typeID + "");
 			typeOutput.next();
 			isDisabled = typeOutput.getBoolean(2);
 			unisex = typeOutput.getBoolean(3);
@@ -772,7 +784,8 @@ public class DataFetcher {
 		//Same as the case for toilet but with data for the other types
 		case 1:
 			typeID = output.getInt(9);
-			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblPOI WHERE PoiID = " + typeID + "");
+			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblPOI WHERE PoiID = " 
+						+ typeID + "");
 			typeOutput.next();
 			cost = typeOutput.getDouble(2);
 			description = typeOutput.getString(3);
@@ -793,7 +806,8 @@ public class DataFetcher {
 			return poi;
 		case 2:
 			typeID = output.getInt(10);
-			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblRetailers WHERE RetailerID = " + typeID + "");
+			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblRetailers WHERE RetailerID = "
+						+ typeID + "");
 			typeOutput.next();
 			product = typeOutput.getString(2);
 			description = typeOutput.getString(3);
@@ -814,7 +828,8 @@ public class DataFetcher {
 			return retailer;
 		case 3:
 			typeID = output.getInt(11);
-			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblWifi WHERE WifiID = " + typeID + "");
+			typeOutput = qryTypeData.executeQuery("SELECT * FROM tblWifi WHERE WifiID = " 
+						+ typeID + "");
 			typeOutput.next();
 			ssid = typeOutput.getString(2);
 			provider = typeOutput.getString(3);
@@ -856,12 +871,13 @@ public class DataFetcher {
     
     
     /**
-     * Loads all locations in the database into the programs current storage
+     * Loads all locations in the database into the programs current storage.
      */
     public void loadNextLocations() {
     	try {
     		//Initialize the query to fetch all Locations from the database and its result set
-    		PreparedStatement qryLoadLocations = connect.prepareStatement("SELECT * FROM tblLocations LIMIT ?, 1000");
+    		PreparedStatement qryLoadLocations = connect.prepareStatement("SELECT * FROM "
+    				+ "tblLocations LIMIT ?, 1000");
 			qryLoadLocations.setInt(1, locationOffset);
     		ResultSet output = qryLoadLocations.executeQuery();
 //    		locationOffset += output.getFetchSize();
@@ -879,7 +895,8 @@ public class DataFetcher {
 					//Checks if the Location belongs to a User
 					if (ownerID != 0) {
 						String currUser = CurrentStorage.getUser().getUsername();
-						PreparedStatement qryOwner = connect.prepareStatement("SELECT Username FROM tblUser WHERE UserID = ?");
+						PreparedStatement qryOwner = connect.prepareStatement("SELECT Username "
+								+ "FROM tblUser WHERE UserID = ?");
 						qryOwner.setInt(1, ownerID);
 						ResultSet ownerOutput = qryOwner.executeQuery();
 						String owner = ownerOutput.getString(1);
@@ -921,8 +938,9 @@ public class DataFetcher {
     
     
     /**
-     * Runs an update query on the database. Update queries are used to add data to an existing table.
-     * @param query The update query to run
+     * Runs an update query on the database. Update queries are used to add data to an existing 
+     * table.
+     * @param query - The update query to run
      */
     private void runUpdate(String query, ArrayList<String> parameters) {
     	try {
@@ -947,13 +965,15 @@ public class DataFetcher {
      * result = [[(0,0), (0,1), (0,2)],
      *           [(1,0), (1,1), (1,2)],
      *           [(2,0), (2,1), (2,2)]]
-     * @param stmt The MySQL syntax query to run
-     * @return An Array List that contains another Array List, representing the rows of the table, that contains Strings, representing the column of the data
+     * @param stmt 	- The MySQL syntax query to run
+     * @return 		- An Array List that contains another Array List, representing the rows of 
+     * 				  the table, that contains Strings, representing the column of the data
      */
     private ArrayList<ArrayList<String>> runQuery(String stmt, ArrayList<String> parameters) {
     	//Creates an ArrayList that will contain each individual result as its own ArrayList
     	ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
-    	//By using try/catch here the entire program will not crash if there is an error with a query. Instead it will return null.
+    	//By using try/catch here the entire program will not crash if there is an error with a 
+    	//query. Instead it will return null.
 		try {
     		PreparedStatement query = connect.prepareStatement(stmt);
     		int count = 0;
@@ -974,7 +994,8 @@ public class DataFetcher {
 	    		results.add(new ArrayList<String>());
 	    		//Loop while there are more columns with data for the current result
 	    		while (currentColumn <= totalColumns) {
-	    			//Add the data from the current result and current column to the respective position in the ArrayList
+	    			//Add the data from the current result and current column to the respective 
+	    			//position in the ArrayList
 	    			results.get(currentRow).add(output.getString(currentColumn));
 	    			currentColumn += 1;
 	    		}
@@ -993,8 +1014,8 @@ public class DataFetcher {
     
     /**
      * Prints the contents of the SQL exception. This is needed for the standard exception print
-     * does not give much information while this will give all the information needed to debug 
-     * @param ex The SQL exception
+     * does not give much information while this will give all the information needed to debug, 
+     * @param ex - The SQL exception
      */
     private void printSqlError(SQLException ex) {
 		System.out.println("Exception: " + ex.getMessage());
@@ -1004,9 +1025,9 @@ public class DataFetcher {
     
     
     /**
-     * Finds if a user exists in the database based off their unique username
-     * @param user The user to check
-     * @return true if the user exists, false otherwise
+     * Finds if a user exists in the database based off their unique username.
+     * @param user 	- The user to check
+     * @return 		- True if the user exists, false otherwise
      */
     public boolean userExists(User user) {
     	String username = user.getUsername();
@@ -1021,8 +1042,8 @@ public class DataFetcher {
     
     
     /**
-     * Adds a user into the external database
-     * @param user User to add into the external database
+     * Adds a user into the external database.
+     * @param user - User to add into the external database
      */
     public void addUser(User user) {
     	String firstName = user.getFirstName();
@@ -1035,22 +1056,24 @@ public class DataFetcher {
     	double distanceCycled = user.getDistance();
     	if (!userExists(user)) {
     		String stmt  = "INSERT INTO tblUser "
-					+ "(FName, LName, Username, YearOfBirth, Password, NumRoutesCycled, HoursCycled, DistanceCycled) VALUES "
-					+ "(?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "(FName, LName, Username, YearOfBirth, Password, NumRoutesCycled, "
+					+ "HoursCycled, DistanceCycled) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     		ArrayList<String> params = new ArrayList<String>();
-    		Collections.addAll(params, firstName, lastName, username, dob, password, String.valueOf(routesCycled),
-    				String.valueOf(hoursCycled), String.valueOf(distanceCycled));
+    		Collections.addAll(params, firstName, lastName, username, dob, password, 
+    				String.valueOf(routesCycled), String.valueOf(hoursCycled), 
+    				String.valueOf(distanceCycled));
     		runUpdate(stmt, params);
     	}
     	else {
-    		System.out.println("Error: User already exists, cannot create new user with same username");
+    		System.out.println("Error: User already exists, cannot create new user with same "
+    				+ "username");
     	}
     }
 
     
     /**
-     * Adds a route into the external database
-     * @param route Route to add into the external database.
+     * Adds a route into the external database.
+     * @param route - Route to add into the external database
      */
     public void addRoute(Route route) {
     	int routeID = findRoute(route);
@@ -1087,20 +1110,22 @@ public class DataFetcher {
 					+ "(StartID, EndID, Public, User, Name, BikeID, Gender, Distance) VALUES "
 					+ "(?, ?, ?, ?, ?, ?, ?, ?)";
 			ArrayList<String> params = new ArrayList<String>();
-			Collections.addAll(params, String.valueOf(startID), String.valueOf(endID), String.valueOf(secret),
-					owner, name, route.getBikeID(), route.getGender().substring(0, 1), String.valueOf(distance));
+			Collections.addAll(params, String.valueOf(startID), String.valueOf(endID), 
+					String.valueOf(secret),	owner, name, route.getBikeID(), 
+					route.getGender().substring(0, 1), String.valueOf(distance));
 			runUpdate(stmt, params);
     	}
     	else {
-    		System.out.println("Route already exists in the database. Did you mean to update it?");
+    		System.out.println("Route already exists in the database. Did you mean to update "
+    				+ "it?");
     	}
     }
 
     
     /**
-     * Returns the ID of the route in the database or 0 if it is not found
-     * @param route The route to find
-     * @return The ID of the route of 0 if it is not found
+     * Returns the ID of the route in the database or 0 if it is not found.
+     * @param route - The route to find
+     * @return 		- The ID of the route of 0 if it is not found
      */
     private int findRoute(Route route) {
     	int startID = findLocation(route.getStart());
@@ -1112,7 +1137,8 @@ public class DataFetcher {
     		return 0;
     	}
     	String name = route.getName();
-    	String stmt = "SELECT RouteID FROM tblRoutes WHERE StartID = ? AND EndID = ? AND Name = ?";
+    	String stmt = "SELECT RouteID FROM tblRoutes WHERE StartID = ? AND EndID = ? AND Name = "
+    			+ "?";
 		ArrayList<String> params = new ArrayList<String>();
 		Collections.addAll(params, String.valueOf(startID), String.valueOf(endID), name);
 		if (runQuery(stmt, params).isEmpty()) {
@@ -1123,17 +1149,18 @@ public class DataFetcher {
     
     
     /**
-     * Returns the ID of the location in the database or 0 if it is not found
-     * @param location The location to find in the database.
-     * @return The ID of the location in the database, returns 0 if location not found.
+     * Returns the ID of the location in the database or 0 if it is not found.
+     * @param location 	- The location to find in the database.
+     * @return 			- The ID of the location in the database, returns 0 if location not found
      */
     private int findLocation(Location location) {
     	double[] coords = location.getCoords();
     	int type = location.getLocationType();
-    	String stmt = "SELECT LocationID FROM tblLocations WHERE Latitude = ? AND Longitude = ? AND Type = ? AND Name = ?";
+    	String stmt = "SELECT LocationID FROM tblLocations WHERE Latitude = ? AND Longitude = "
+    			+ "? AND Type = ? AND Name = ?";
 		ArrayList<String> params = new ArrayList<String>();
-		Collections.addAll(params, String.format("%.8f", coords[0]), String.format("%.8f", coords[1]),
-				String.valueOf(type), location.getName());
+		Collections.addAll(params, String.format("%.8f", coords[0]), 
+				String.format("%.8f", coords[1]), String.valueOf(type), location.getName());
 		if (runQuery(stmt, params).isEmpty()) {
 			return 0;
 		}
@@ -1142,8 +1169,8 @@ public class DataFetcher {
     
     
     /**
-	 * Adds a Location to the database based on what type of location it is
-	 * @param location The Location to be added to the database
+	 * Adds a Location to the database based on what type of location it is.
+	 * @param location - The Location to be added to the database
 	 */
 	public void addLocation(Location location) {
 		int locationID = findLocation(location);
@@ -1165,23 +1192,22 @@ public class DataFetcher {
 	    	}
 		}
 		else {
-			System.out.println("Error: The location is already in the database. Did you mean to update it?");
+			System.out.println("Error: The location is already in the database. Did you mean to "
+					+ "update it?");
 		}
 	}
 
 
 	/**
-     * Adds a Wifi to tblWifi in the database
-     * @param wifi The Wifi to be added to the database
+     * Adds a Wifi to tblWifi in the database.
+     * @param wifi - The Wifi to be added to the database
      */
     private void addWifi(Wifi wifi) {
     	String typeID;
     	String ssid = wifi.getSsid();
     	String provider = wifi.getProvider();
     	String type = wifi.getType();
-		String stmt = "INSERT INTO tblWifi "
-				+ "(SSID, Provider, Type) VALUES "
-				+ "(?, ?, ?)";
+		String stmt = "INSERT INTO tblWifi (SSID, Provider, Type) VALUES (?, ?, ?)";
 		ArrayList<String> params = new ArrayList<String>();
 		Collections.addAll(params, ssid, provider, type);
 		runUpdate(stmt, params);
@@ -1195,16 +1221,14 @@ public class DataFetcher {
     
     
     /**
-     * Adds a retailer to tblRetailers in the database
-     * @param retailer The Retailer to be added to the database
+     * Adds a retailer to tblRetailers in the database.
+     * @param retailer - The Retailer to be added to the database
      */
     private void addRetailer(Retailer retailer) {
     	String typeID;
     	String product = retailer.getProduct();
     	String description = retailer.getDescription();
-    	String stmt = "INSERT INTO tblRetailers "
-				+ "(RetailerType, Description) VALUES "
-				+ "(?, ?)";
+    	String stmt = "INSERT INTO tblRetailers (RetailerType, Description) VALUES (?, ?)";
 		ArrayList<String> params = new ArrayList<String>();
 		Collections.addAll(params, product, description);
 		runUpdate(stmt, params);
@@ -1218,16 +1242,14 @@ public class DataFetcher {
     
     
     /**
-     * Adds a Poi to tblPOI in the database
-     * @param poi The Poi to be added to the database
+     * Adds a Poi to tblPOI in the database.
+     * @param poi - The Poi to be added to the database
      */
     private void addPoi(Poi poi) {
     	String typeID;
     	String description = poi.getDescription();
     	double cost = poi.getCost();
-    	String stmt = "INSERT INTO tblPOI "
-				+ "(Cost, Description) VALUES"
-				+ "(?, ?)";
+    	String stmt = "INSERT INTO tblPOI (Cost, Description) VALUES (?, ?)";
 		ArrayList<String> params = new ArrayList<String>();
 		Collections.addAll(params, String.valueOf(cost), description);
 		runUpdate(stmt, params);
@@ -1240,8 +1262,8 @@ public class DataFetcher {
     
     
     /**
-     * Adds a toilet to tblToilets in the database
-     * @param toilet The Toilet to be added to the database
+     * Adds a toilet to tblToilets in the database.
+     * @param toilet - The Toilet to be added to the database
      */
     private void addToilet(Toilet toilet) {
     	String typeID;
@@ -1253,9 +1275,7 @@ public class DataFetcher {
     	if (toilet.getUniSex()) {
     		unisex = 1;
     	}
-		String stmt = "INSERT INTO tblToilets "
-				+ "(IsDisabled, MixedGender) VALUES "
-				+ "(?, ?)";
+		String stmt = "INSERT INTO tblToilets (IsDisabled, MixedGender) VALUES (?, ?)";
 		ArrayList<String> params = new ArrayList<String>();
 		Collections.addAll(params, String.valueOf(disabled), String.valueOf(unisex));
 		runUpdate(stmt, params);
@@ -1268,8 +1288,8 @@ public class DataFetcher {
     
     
     /**
-     * Adds a location to tblLocations in the database
-     * @param location The Location to be added to the database.
+     * Adds a location to tblLocations in the database.
+     * @param location - The Location to be added to the database
      */
     private void insertLocation(Location location, String typeID) {
     	String name = location.getName();
@@ -1307,30 +1327,31 @@ public class DataFetcher {
     		break;
     	}
     	if (type == 4 || typeID == null) {
-    		String stmt = "INSERT INTO tblLocations "
-					+ "(Latitude, Longitude, Name, User, Public, Type, Address) VALUES "
-					+ "(?, ?, ?, ?, ?, ?, ?)";
+    		String stmt = "INSERT INTO tblLocations (Latitude, Longitude, Name, User, Public, "
+    				+ "Type, Address) VALUES (?, ?, ?, ?, ?, ?, ?)";
     		ArrayList<String> params = new ArrayList<String>();
-    		Collections.addAll(params, String.format("%.8f", latitude), String.format("%.8f", longitude), name, owner,
-    				String.valueOf(secret), String.valueOf(type), address);
+    		Collections.addAll(params, String.format("%.8f", latitude),
+    				String.format("%.8f", longitude), name, owner, String.valueOf(secret), 
+    				String.valueOf(type), address);
     		runUpdate(stmt, params);
     	} 
     	else {
-			String stmt = "INSERT INTO tblLocations "
-					+ "(Latitude, Longitude, Name, User, Public, Type, " + typeName + "ID, Zip, Borough, Address) VALUES "
+			String stmt = "INSERT INTO tblLocations (Latitude, Longitude, Name, User, Public, "
+					+ "Type, " + typeName + "ID, Zip, Borough, Address) VALUES "
 					+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     		ArrayList<String> params = new ArrayList<String>();
-    		Collections.addAll(params, String.format("%.8f", latitude), String.format("%.8f", longitude), name,
-    				owner, String.valueOf(secret), String.valueOf(type), typeID, zip, borough, address);
+    		Collections.addAll(params, String.format("%.8f", latitude), 
+    				String.format("%.8f", longitude), name,	owner, String.valueOf(secret), 
+    				String.valueOf(type), typeID, zip, borough, address);
     		runUpdate(stmt, params);
 		}
     }
     
     
     /**
-     * Finds the input User in the database and returns its ID within the database
-     * @param user The user to find
-     * @return ID in the database as an int
+     * Finds the input User in the database and returns its ID within the database.
+     * @param user 	- The user to find
+     * @return 		- ID in the database as an int
      */
     private int findUser(User user) {
     	int userID = 0;
@@ -1345,17 +1366,24 @@ public class DataFetcher {
     
     /**
      * Provides a request to connect to the external database.
-     * @throws ClassNotFoundException Occurs when the mysql driver class is not found
-     * @throws IllegalAccessException Occurs when access to the database is refused due to username or password issues
-     * @throws InstantiationException Occurs when there is an error creating an instance of the mysql driver class
+     * @throws ClassNotFoundException - Occurs when the mysql driver class is not found
+     * @throws IllegalAccessException - Occurs when access to the database is refused due to 
+     * 									username or password issues
+     * @throws InstantiationException - Occurs when there is an error creating an instance of 
+     * 									the mysql driver class
      */
-    public void connectDb() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+    public void connectDb() throws InstantiationException, IllegalAccessException, 
+    	ClassNotFoundException {
 		//Creates an instance of the driver to connect to the database
     	Class.forName("com.mysql.jdbc.Driver").newInstance();
     	try {
-    		//Tells the driver manager of jdbc to create a connection to a database of type mysql with the ip 222.152.179.135, through port 3306, named cyclrr, using user 'monitor' and password 'Team5Pass'
-    		//Following line the 192.168.1.70 needs to be 125.239.188.8 if outside of Patrick's network
-    		connect = DriverManager.getConnection("jdbc:mysql://" + ip + ":3306/cyclrr","monitor","Team5Pass");
+    		//Tells the driver manager of jdbc to create a connection to a database of type 
+    		//mysql with the ip 222.152.179.135, through port 3306, named cyclrr, using user 
+    		//'monitor' and password 'Team5Pass'
+    		//Following line the 192.168.1.70 needs to be 125.239.188.8 if outside of Patrick's 
+    		//network
+    		connect = DriverManager.getConnection("jdbc:mysql://" + ip + ":3306/cyclrr", 
+    				"monitor", "Team5Pass");
     	}
     	catch (SQLException ex) {
     		printSqlError(ex);
@@ -1364,7 +1392,7 @@ public class DataFetcher {
     
     
     /**
-     * Closes the connection to the database if it exists
+     * Closes the connection to the database if it exists.
      */
     public void closeConnection() {
     	try {
@@ -1377,15 +1405,18 @@ public class DataFetcher {
 
     
     /**
-     * Tests if the connection to the database is working
-     * @return True if the connection is valid
+     * Tests if the connection to the database is working.
+     * @return - True if the connection is valid
      */
-    public boolean connectDbTest() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+    public boolean connectDbTest() throws InstantiationException, IllegalAccessException, 
+    	ClassNotFoundException {
     	Class.forName("com.mysql.jdbc.Driver").newInstance();
     	try {
     		System.out.println("Connecting...");
-    		//Following line the 192.168.1.70 needs to be 125.239.188.8 if outside of Patrick's network
-    		Connection connectTest = DriverManager.getConnection("jdbc:mysql://125.239.188.8:3306/cyclrr","monitor","Team5Pass");
+    		//Following line the 192.168.1.70 needs to be 125.239.188.8 if outside of Patrick's 
+    		//network
+    		Connection connectTest = DriverManager.getConnection("jdbc:mysql://125.239.188.8:"
+    				+ "3306/cyclrr", "monitor", "Team5Pass");
     		testConnection(connectTest);
     		connectTest.close();
     		return true;
@@ -1398,9 +1429,9 @@ public class DataFetcher {
     
     
     /**
-     * Tests if data can be pulled from the database
-     * @param connectTest A connection to the database
-     * @throws SQLException If there was an error reading data from the database
+     * Tests if data can be pulled from the database.
+     * @param connectTest	- A connection to the database
+     * @throws SQLException - If there was an error reading data from the database
      */
     private void testConnection(Connection connectTest) throws SQLException {
     	System.out.println("Connected");
