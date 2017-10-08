@@ -233,7 +233,7 @@ public class Map {
         try {
             //Sets the HTTP request
             URL mapsUrl = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=" 
-            + address.replaceAll(" ", "%20") + ",%20New%20York&sensor=true");
+            + address.replaceAll(" ", "%20") + "&sensor=true");
             HttpURLConnection request = (HttpURLConnection) mapsUrl.openConnection();
             request.setRequestMethod("GET");
             request.connect();
