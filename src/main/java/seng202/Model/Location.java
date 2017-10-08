@@ -60,11 +60,11 @@ public class Location {
     
     /**
      * Overloaded constructor.
-     * @param latitude 		- Latitude of the location
-     * @param longitude 	- Longitude of the location
-     * @param address 		- Address of the location
-     * @param name 			- Name of the location
-     * @param locationType 	- Type of location, 0
+     * @param latitude 	   - Latitude of the location
+     * @param longitude    - Longitude of the location
+     * @param address 	   - Address of the location
+     * @param name 		   - Name of the location
+     * @param locationType - Type of location, 0
      */
     public Location(double latitude, double longitude, String address, String name, 
     		int locationType) {
@@ -96,9 +96,9 @@ public class Location {
     
     /**
      * Overloaded constructor.
-     * @param latitude 		- Latitude of the location
-     * @param longitude 	- Longitude of the location
-     * @param locationType 	- Type of the location
+     * @param latitude 	   - Latitude of the location
+     * @param longitude    - Longitude of the location
+     * @param locationType - Type of the location
      */
     public Location(double latitude, double longitude, int locationType) {
         this.latitude = latitude;

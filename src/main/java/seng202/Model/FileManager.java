@@ -15,8 +15,8 @@ public class FileManager {
 	
     /**
      * Method to read a .csv file from a chosen folder.
-     * @param fileName 	- The name of the .csv file to be read
-     * @return 			- An arrayList of the data from the .csv file
+     * @param fileName - The name of the .csv file to be read
+     * @return 		   - An arrayList of the data from the .csv file
      */
     public static ArrayList<String> readFile(String fileName) {
         ArrayList<String> dataList = new ArrayList<String>();
@@ -39,9 +39,9 @@ public class FileManager {
 
     /**
      * Checks if an index if less than zero and returns a positive index for the same value.
-     * @param index 	- The current index of the string
-     * @param header 	- The header of the current csv file
-     * @return 			- The positive integer index for an item in the list
+     * @param index  - The current index of the string
+     * @param header - The header of the current csv file
+     * @return 		 - The positive integer index for an item in the list
      */
     private static int indexer(int index, List<String> header) {
         if (index < 0) {
@@ -63,7 +63,8 @@ public class FileManager {
             List<String> header = Arrays.asList(routes.get(0).split("\",\""));
 
             header.set(0, header.get(0).substring(1));
-            header.set(header.size() - 1, header.get(header.size() - 1).substring(0, header.get(header.size() - 1).length() - 1));
+            header.set(header.size() - 1, header.get(header.size() - 1)
+            		.substring(0, header.get(header.size() - 1).length() - 1));
 
             //Get the index of each of the key fields for the route class from the header of the 
             //csv.
@@ -122,8 +123,8 @@ public class FileManager {
 
     /**
      * Stores the route data stored in the current storage class.
-     * @param filename 		- The filename where the csv file is to be stored
-     * @param routeArray 	- The array of routes to be stored
+     * @param filename 	 - The filename where the csv file is to be stored
+     * @param routeArray - The array of routes to be stored
      */
     public static void routeWriter(String filename, ArrayList<Route> routeArray) {
         File file = new File(filename);
@@ -278,8 +279,8 @@ public class FileManager {
 
     /**
      * Writes a csv file of wifi hotspots to a specified file.
-     * @param filename 	- The filename for the list of wifi objects to be written to
-     * @param wifis 	- The list of wifi objects to be converted to a csv file
+     * @param filename - The filename for the list of wifi objects to be written to
+     * @param wifis    - The list of wifi objects to be converted to a csv file
      */
     public static void wifiWriter(String filename, ArrayList<Wifi> wifis) {
         //filename = filenameConverter(filename);
@@ -315,7 +316,7 @@ public class FileManager {
 
     /**
      * Retrieves a list of toilet location from a csv file and stores them in the current storage.
-     * @param filename The file where the list of toilets is found.
+     * @param filename - The file where the list of toilets is found
      */
     public static void toiletRetriever(String filename) {
         ArrayList<String> toilets = readFile(filename);
@@ -354,8 +355,8 @@ public class FileManager {
 
     /**
      * Writes an arrayList of toilet objects to a string.
-     * @param filename  - The file where the csv will be placed
-     * @param toilets 	- The arrayList of toilet objects to be stored in the csv
+     * @param filename - The file where the csv will be placed
+     * @param toilets  - The arrayList of toilet objects to be stored in the csv
      */
     public static void toiletWriter(String filename, ArrayList<Toilet> toilets) {
         File newFile = new File(filename);
@@ -426,8 +427,8 @@ public class FileManager {
 
     /**
      * Writes a csv file of a supplied arrayList of Poi objects.
-     * @param filename 	- The filename for the csv to be saved to
-     * @param pois	 	- The list of points of interest to be saved as a csv
+     * @param filename - The filename for the csv to be saved to
+     * @param pois	   - The list of points of interest to be saved as a csv
      */
     public static void poiWriter(String filename, ArrayList<Poi> pois) {
         File newFile = new File(filename);
@@ -493,7 +494,7 @@ public class FileManager {
     /**
      * Takes an arrayList of locations and converts them into a .csv file at a specific location.
      * @param filename 	- The file the csv file is to be put in.
-     * @param locations - An arrayList of the general locations to be stored.
+     * @param locations - An arrayList of the general locations to be stored
      */
     public static void generalWriter(String filename, ArrayList<Location> locations) {
         File newFile = new File(filename);
