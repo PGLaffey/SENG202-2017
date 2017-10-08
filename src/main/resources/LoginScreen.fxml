@@ -30,21 +30,37 @@
          </font></Label>
     <TextField fx:id="usernameText" onAction="#signInButtonPressed" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0, 1.5;" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
     <PasswordField fx:id="passwordText" onAction="#signInButtonPressed" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-    <Button fx:id="signInButton" mnemonicParsing="false" onAction="#signInButtonPressed" style="-fx-background-color: #30126D, #B39EDC;" text="Sign In" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="BOTTOM">
+    <Button fx:id="signInButton" mnemonicParsing="false" onAction="#signInButtonPressed" style="-fx-background-color: #30126D, #B39EDC;" text="Sign In" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-    <Button fx:id="signUpButton" mnemonicParsing="false" mouseTransparent="false" onAction="#signUpButtonPressed" style="-fx-background-color: #30126D, #B39EDC;" text="Sign Up" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="BOTTOM">
+    <Button fx:id="signUpButton" mnemonicParsing="false" mouseTransparent="false" onAction="#signUpButtonPressed" style="-fx-background-color: #30126D, #B39EDC;" text="Sign Up" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-    <Label fx:id="incorrectPasswordLbl" text="Incorrect Password" textFill="#573895" visible="false" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-    <Label fx:id="incorrectUserLbl" text="User does not exist" textAlignment="CENTER" textFill="#573895" visible="false" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2" GridPane.halignment="CENTER">
          <image>
             <Image url="@images/logo_1_retro.png" />
          </image>
       </ImageView>
+      <Button fx:id="ipChangedButton" mnemonicParsing="false" onAction="#ipChangedButtonPressed" prefHeight="22.0" prefWidth="83.0" style="-fx-background-color: #30126D, #B39EDC;" text="IP changed?" GridPane.rowIndex="4">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="ipOkButton" mnemonicParsing="false" onAction="#ipOkButtonPressed" prefHeight="22.0" prefWidth="32.0" style="-fx-background-color: #30126D, #B39EDC;" text="Ok" visible="false" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+      </Button>
+      <TextField fx:id="ipText" onAction="#ipOkButtonPressed" prefWidth="200.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0, 1.5;" visible="false" GridPane.columnSpan="2" GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets left="90.0" right="38.0" />
+         </GridPane.margin>
+      </TextField>
   </children>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="196.0" />
@@ -57,8 +73,7 @@
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="16.0" minHeight="3.0" prefHeight="3.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="22.0" minHeight="9.0" prefHeight="16.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
   </rowConstraints>
 </GridPane>

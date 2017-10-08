@@ -32,6 +32,15 @@ public class LoginScreenController {
 	@FXML
 	private Label incorrectUserLbl;
 
+	@FXML
+	private Button ipChangedButton;
+
+	@FXML
+	private Button ipOkButton;
+
+	@FXML
+	private TextField ipText;
+
 	/** 
 	 * Method for when the Sign In button is pressed. Checks the login, informing if information is wrong otherwise shows login screen.
 	 */
@@ -69,6 +78,8 @@ public class LoginScreenController {
 		}
 		data.closeConnection();
 	}
+
+
 	
 
 	/** 
@@ -82,4 +93,18 @@ public class LoginScreenController {
     	primaryStage.setTitle("Sign Up");
     	primaryStage.setScene(new Scene(root));
     }
+
+	@FXML
+	void ipChangedButtonPressed() {
+    	ipOkButton.setVisible(true);
+    	ipText.setVisible(true);
+    	ipText.setPromptText("Enter new IP address");
+	}
+
+	@FXML
+	void ipOkButtonPressed() {
+    	ipOkButton.setVisible(false);
+    	ipText.setVisible(false);
+
+	}
 }
