@@ -119,25 +119,13 @@ public class MainScreenController implements MapComponentInitializedListener,
     @FXML
     private MenuItem addWifiMenuButton;
     
-    @FXML
-    private Button shareButton;
-    
     //Main map pane
     
     @FXML
     private AnchorPane mainMapPane;
     
     @FXML
-    private Button bikeIconButton;
-    
-    @FXML
-    private Button favouriteIconButton;
-    
-    @FXML
     private Button retailerIconButton;
-    
-    @FXML
-    private Button shareIconButton;
 
     @FXML
     private Button toiletIconButton;
@@ -759,58 +747,8 @@ public class MainScreenController implements MapComponentInitializedListener,
     	addWifiPane.setVisible(true);
     	mainMapPane.setVisible(false);
     }
-    
-    
-    /**
-     * Method for when the share button pressed. Shows the pop up.
-     * @param event - Auto-generate event on button press
-     */
-    @FXML
-    void sharePressed(ActionEvent event) throws IOException {
-    	Stage stage = new Stage();
-    	Parent root = FXMLLoader.load(getClass().getResource("/ShareRouteScreen.fxml"));
 
-    	stage.setTitle("Share route");
-    	stage.setScene(new Scene(root, stage.getWidth(), stage.getHeight()));
-    	stage.show();
-    }
 
-    
-    /**
-     * Method for when the bike button is pressed, displays all the routes on the map.
-     * @param event - Auto-generate event on button press
-     */
-    @FXML
-    void bikeIconPressed(ActionEvent event) {
-//        int initCount = count;
-//        Map.setRouteStartVisible(!Map.getRouteVisible());
-//        // Places 50 route icons on the map.
-//        while (count < CurrentStorage.getRouteArray().size() && count < initCount + 50) {
-//            Route route = CurrentStorage.getRouteArray().get(count);
-//            if (!(route.getStartMarker() == null) || !(route.getEndMarker() == null)) {
-//                route.getStartMarker().setVisible(Map.getRouteVisible());
-//                map.addMarker(route.getStartMarker());
-//
-//            } else {
-//                Map.findRouteMarker(route, map);
-//                route.getStartMarker().setVisible(Map.getRouteVisible());
-//            }
-//            count++;
-//        }
-    }
-
-    
-    /**
-     * Method for when the favourite button is pressed, displays all the users favourite routes 
-     * on the map.
-     * @param event - Auto-generate event on button press
-     */
-    @FXML
-    void favouriteIconPressed(ActionEvent event) {
-
-    }
-
-    
     /**
      * Method for when the retailer button is pressed, displays all the retailers on the map.
      * @param event - Auto-generate event on button press
@@ -1671,10 +1609,6 @@ public class MainScreenController implements MapComponentInitializedListener,
         		+ "FXML file 'MainScreen.fxml'.";
         assert addWifiPane != null : "fx:id=\"addWifiPane\" was not injected: check your FXML "
         		+ "file 'MainScreen.fxml'.";
-        assert bikeIconButton != null : "fx:id=\"bikeIconButton\" was not injected: check your "
-        		+ "FXML file 'MainScreen.fxml'.";
-        assert favouriteIconButton != null : "fx:id=\"favouriteIconButton\" was not injected: "
-        		+ "check your FXML file 'MainScreen.fxml'.";
         assert favouriteRoutesMenu != null : "fx:id=\"favouriteRoutesMenu\" was not injected: "
         		+ "check your FXML file 'MainScreen.fxml'.";
         assert loadRouteMenu != null : "fx:id=\"loadRouteMenu\" was not injected: check your "
@@ -1697,10 +1631,6 @@ public class MainScreenController implements MapComponentInitializedListener,
         		+ " FXML file 'MainScreen.fxml'.";
         assert searchText != null : "fx:id=\"searchText\" was not injected: check your FXML file"
         		+ " 'MainScreen.fxml'.";
-        assert shareButton != null : "fx:id=\"shareButton\" was not injected: check your FXML "
-        		+ "file 'MainScreen.fxml'.";
-        assert shareIconButton != null : "fx:id=\"shareIconButton\" was not injected: check your"
-        		+ " FXML file 'MainScreen.fxml'.";
         assert showRouteButton != null : "fx:id=\"showRouteButton\" was not injected: check your"
         		+ " FXML file 'MainScreen.fxml'.";
         assert statButton != null : "fx:id=\"statButton\" was not injected: check your FXML file"
