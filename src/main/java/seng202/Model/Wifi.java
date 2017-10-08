@@ -37,7 +37,7 @@ public class Wifi extends Location {
     	super(wifi);
     	this.provider = wifi.getProvider();
     	this.type = wifi.getType();
-    	this.marker = wifi.getCircle();
+    	this.marker = wifi.getMarker();
     	this.ssid = wifi.getSsid();
     }
     
@@ -93,8 +93,7 @@ public class Wifi extends Location {
         }
         return true;
     }
-    
-    
+
     /**
      * Getter for the SSID
      * @return The SSID of the wifi location
@@ -103,7 +102,6 @@ public class Wifi extends Location {
         return this.ssid;
     }
 
-    
     /**
      * Setter for the SSID
      * @param ss The new SSID for the wifi location
@@ -112,7 +110,6 @@ public class Wifi extends Location {
     	ssid = ss; 
     }
 
-    
     /**
      * Getter for the wifi provider
      * @return The provider of the wifi location
@@ -121,7 +118,6 @@ public class Wifi extends Location {
         return provider;
     }
 
-    
     /**
      * Setter for the provider of the wifi location
      * @param prov The new provider for the wifi
@@ -130,23 +126,18 @@ public class Wifi extends Location {
     	provider = prov; 
     }
 
-    
     /**
      * Getter for the marker of the wifi point
      * @return The circle for the wifi location
      */
-    public Marker getCircle() { return marker; }
-
-
+    public Marker getMarker() { return marker; }
     
     /**
      * Setter the circle for the wifi
-     * @param circle The new circle for the wifi
+     * @param marker The new marker for the wifi
      */
     public void setMarker(Marker marker) { this.marker = marker; }
 
-
-    
     /**
      * Getter for the wifi type
      * @return The type of the wifi
@@ -155,7 +146,6 @@ public class Wifi extends Location {
         return type;
     }
 
-    
     /**
      * Setter for the type of the wifi
      * @param ty The new type for the wifi

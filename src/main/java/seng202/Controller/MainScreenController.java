@@ -798,6 +798,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             for (Retailer retailer : CurrentStorage.getRetailerArray()) {
                 Map.findRetailers(retailer, map);
             }
+            Map.setRetailerVisible(true);
         } else {
             map.clearMarkers();
             Map.setRetailerVisible(false);
@@ -835,6 +836,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             for (Toilet toilet : CurrentStorage.getToiletArray()) {
                 Map.findToilets(toilet, map);
             }
+            Map.setToiletVisible(true);
         } else {
             map.clearMarkers();
             Map.setToiletVisible(false);
@@ -843,7 +845,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     
     /**
-     * Method for when the wifi button is pressed, displays all the wifi
+     * Method for when the wifi button is pressed, displays all the
      * locations on the map
      * @param event Auto-generate event on button press
      */
@@ -856,6 +858,7 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             for (Wifi wifi : CurrentStorage.getWifiArray()) {
                 Map.findWifi(wifi, map);
             }
+            Map.setWifiVisible(true);
         } else {
             map.clearMarkers();
             Map.setWifiVisible(false);

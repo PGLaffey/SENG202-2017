@@ -264,7 +264,8 @@ public class WifiInfoScreenController {
      * Method for when cancel is pressed while a user is updating a wifi.
      * Ignores changes, hides the text fields and re displays full labels.
      * @param event
-     */    @FXML
+     */
+    @FXML
     void cancelPressed (ActionEvent event) {
         addressLabel.setText("Address: " + newWifi.getAddress());
         addressText.setVisible(false);
@@ -314,6 +315,7 @@ public class WifiInfoScreenController {
     //TODO add docstring
     @FXML
     void showWifiOnMap(ActionEvent event) throws IOException {
+        wifi = newWifi;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
         Parent root = loader.load();
 
@@ -324,6 +326,7 @@ public class WifiInfoScreenController {
         controller.getMapView().addMapReadyListener(new MapReadyListener() {
             @Override
             public void mapReady() {
+
                 controller.getMapView().getMap().clearMarkers();
                 Map.findWifi(wifi, controller.getMapView().getMap());
                 controller.getMapView().getMap().setCenter(new LatLong(wifi.getLatitude(), wifi.getLongitude()));

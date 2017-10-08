@@ -462,22 +462,15 @@ public class Map {
      */
     public static void findWifi(Wifi wifi, GoogleMap map) {
         //Creates a new circle and places it on a map.
-
-        if (wifi.getCircle() == null) {
-            MarkerOptions wifiMarkOptns = new MarkerOptions()
-                    .title(wifi.getSsid())
-                    .animation(Animation.DROP)
-                    .visible(true)
-                    .position(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
-                    .icon("http://maps.google.com/mapfiles/ms/micons/blue-dot.png");
-            Marker wifiMarker = new Marker(wifiMarkOptns);
-            wifi.setMarker(wifiMarker);
-            map.addMarker(wifiMarker);
-        } 
-        else {
-            map.addMarker(wifi.getCircle());
-            wifiVisible = true;
-        }
+        MarkerOptions wifiMarkOptns = new MarkerOptions()
+                .title(wifi.getSsid())
+                .animation(Animation.DROP)
+                .visible(true)
+                .position(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
+                .icon("http://maps.google.com/mapfiles/ms/micons/blue-dot.png");
+        Marker wifiMarker = new Marker(wifiMarkOptns);
+        wifi.setMarker(wifiMarker);
+        map.addMarker(wifiMarker);
     }
 
     
@@ -487,27 +480,21 @@ public class Map {
      * @param map 	 - Map to place marker on
      */
     public static void findToilets(Toilet toilet, GoogleMap map) {
-        if (toilet.getMarker() == null) {
-            MarkerOptions toiletMarkOptns = new MarkerOptions().animation(Animation.DROP)
-                    .position(new LatLong(toilet.getLatitude(), toilet.getLongitude()))
-                    .visible(true)
-                    .icon("http://maps.google.com/mapfiles/ms/micons/toilets.png");
+        MarkerOptions toiletMarkOptns = new MarkerOptions().animation(Animation.DROP)
+                .position(new LatLong(toilet.getLatitude(), toilet.getLongitude()))
+                .visible(true)
+                .icon("http://maps.google.com/mapfiles/ms/micons/toilets.png");
 
-            if (toilet.getAddress() == null) {
-                toiletMarkOptns.title(toilet.getName() + "\n" + toilet.getLatitude() + ", " 
-                + toilet.getLongitude());
-            } 
-            else {
-                toiletMarkOptns.title(toilet.getName() + "\n" + toilet.getAddress());
-            }
-            Marker toiletMark = new Marker(toiletMarkOptns);
-            toilet.setMarker(toiletMark);
-            map.addMarker(toiletMark);
-        } 
-        else {
-            map.addMarker(toilet.getMarker());
-            toiletVisible = true;
+        if (toilet.getAddress() == null) {
+            toiletMarkOptns.title(toilet.getName() + "\n" + toilet.getLatitude() + ", "
+            + toilet.getLongitude());
         }
+        else {
+            toiletMarkOptns.title(toilet.getName() + "\n" + toilet.getAddress());
+        }
+        Marker toiletMark = new Marker(toiletMarkOptns);
+        toilet.setMarker(toiletMark);
+        map.addMarker(toiletMark);
     }
 
     
@@ -516,27 +503,20 @@ public class Map {
      * @param retailer - Retailer object to be used
      */
     public static void findRetailers(Retailer retailer, GoogleMap map) {
-        if (retailer.getMarker() == null) {
-            //Obtain the position for the marker and convert into the format required.
-            LatLong latLong = new LatLong(retailer.getLatitude(), retailer.getLongitude());
+        //Obtain the position for the marker and convert into the format required.
+        LatLong latLong = new LatLong(retailer.getLatitude(), retailer.getLongitude());
 
-            // Set up the marker options
-            MarkerOptions markerOptns = new MarkerOptions()
-                    .animation(Animation.DROP)
-                    .position(latLong)
-                    .title(retailer.getName())
-                    .visible(true)
-                    .icon("http://maps.google.com/mapfiles/kml/pal3/icon26.png"); 
-            		//^ Obtains the correct image for the marker.
-            
-            retailer.setMarker(new Marker(markerOptns));
-            map.addMarker(retailer.getMarker());
-            retailerVisible = true;
-        } 
-        else {
-            map.addMarker(retailer.getMarker());
-            retailerVisible = true;
-        }
+        // Set up the marker options
+        MarkerOptions markerOptns = new MarkerOptions()
+                .animation(Animation.DROP)
+                .position(latLong)
+                .title(retailer.getName())
+                .visible(true)
+                .icon("http://maps.google.com/mapfiles/kml/pal3/icon26.png");
+                //^ Obtains the correct image for the marker.
+
+        retailer.setMarker(new Marker(markerOptns));
+        map.addMarker(retailer.getMarker());
     }
 
     
@@ -546,7 +526,6 @@ public class Map {
      * @param map - Map to render the marker on
      */
     public static void findPoi(Poi poi, GoogleMap map) {
-        if (poi.getMarker() == null) {
             LatLong latLong = new LatLong(poi.getLatitude(), poi.getLongitude());
             Marker marker = new Marker(new MarkerOptions()
                     .animation(Animation.DROP)
@@ -555,11 +534,6 @@ public class Map {
 
             poi.setMarker(marker);
             map.addMarker(poi.getMarker());
-        } 
-        else {
-            map.addMarker(poi.getMarker());
-            poiVisible = true;
-        }
     }
 
     
