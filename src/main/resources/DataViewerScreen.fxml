@@ -140,101 +140,53 @@
             </GridPane>
                </children>
             </AnchorPane>
-      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="355.0" prefWidth="642.0" SplitPane.resizableWithParent="false">
-        <children>
-          <SplitPane dividerPositions="0.1938534278959811" focusTraversable="false" prefHeight="433.0" prefWidth="825.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <items>
-              <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="160.0" style="-fx-background-color: #D1D7F1;" SplitPane.resizableWithParent="false">
-                <children>
-                  <ChoiceBox fx:id="filterGraphBox" layoutX="15.0" layoutY="63.0" maxWidth="1.7976931348623157E308" prefWidth="130.0" style="-fx-background-color: #0B4D63, #CCE6EF;" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="60.0">
-                    <items>
-                      <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Item 1" />
-                        <String fx:value="Item 2" />
-                        <String fx:value="Item 3" />
-                      </FXCollections>
-                    </items>
-                  </ChoiceBox>
-                  <Label layoutX="30.0" layoutY="30.0" text="Filter Graph" textAlignment="CENTER" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="30.0">
-                                 <font>
-                                    <Font name="KacstOne Bold" size="13.0" />
-                                 </font>
-                              </Label>
-                  <RadioButton fx:id="graphRadio" layoutX="9.0" layoutY="327.0" mnemonicParsing="false" text="Graph" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="6.0">
-                                 <font>
-                                    <Font name="KacstOne Bold" size="13.0" />
-                                 </font>
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="statsExport" />
-                                 </toggleGroup>
-                              </RadioButton>
-                  <RadioButton fx:id="rawDataRadio" layoutX="6.0" layoutY="349.0" mnemonicParsing="false" text="Raw Data Viewer" toggleGroup="$statsExport" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="6.0">
-                                 <font>
-                                    <Font name="KacstOne Bold" size="13.0" />
-                                 </font>
-                              </RadioButton>
-                  <Button layoutX="45.0" layoutY="381.0" mnemonicParsing="false" style="-fx-background-color: #30126D, #B39EDC;" text="Export" textAlignment="CENTER" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
-                                 <font>
-                                    <Font name="System Bold" size="11.0" />
-                                 </font>
-                              </Button>
-                  <Label fx:id="mapPressedLabel" focusTraversable="false" layoutX="9.0" layoutY="156.0" text="MAP BUTTON PRESSED" textAlignment="CENTER" textFill="#30126d" visible="false" AnchorPane.bottomAnchor="268.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="156.0">
-                                 <font>
-                                    <Font name="System Bold" size="11.0" />
-                                 </font></Label>
-                </children>
-              </AnchorPane>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #D1D7F1;">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="52.0" layoutY="219.0" stroke="#14246c" strokeType="INSIDE" width="170.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="52.0" layoutY="280.0" stroke="#14246c" strokeType="INSIDE" width="170.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="222.0" layoutY="280.0" stroke="#14246c" strokeType="INSIDE" width="170.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="222.0" layoutY="158.0" stroke="#14246c" strokeType="INSIDE" width="170.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="52.0" layoutY="158.0" stroke="#14246c" strokeType="INSIDE" width="170.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="222.0" layoutY="219.0" stroke="#14246c" strokeType="INSIDE" width="170.0" />
-                              <Label layoutX="73.0" layoutY="181.0" text="Completed routes:">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="66.0" layoutY="242.0" text="Time spent cycling:">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="80.0" layoutY="303.0" text="Distance cycled:">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="392.0" layoutY="280.0" stroke="#14246c" strokeType="INSIDE" width="234.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="392.0" layoutY="219.0" stroke="#14246c" strokeType="INSIDE" width="234.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="392.0" layoutY="158.0" stroke="#14246c" strokeType="INSIDE" width="234.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="392.0" layoutY="97.0" stroke="#14246c" strokeType="INSIDE" width="234.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="222.0" layoutY="97.0" stroke="#14246c" strokeType="INSIDE" width="170.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="52.0" layoutY="97.0" stroke="#14246c" strokeType="INSIDE" width="170.0" />
-                              <Label layoutX="286.0" layoutY="120.0" text="Value:">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="426.0" layoutY="120.0" text="Until next badge:">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="routesValue" layoutX="241.0" layoutY="181.0" text="0" />
-                              <Label fx:id="distNextBadge" layoutX="409.0" layoutY="303.0" text="0" />
-                              <Label fx:id="distValue" layoutX="241.0" layoutY="303.0" text="0" />
-                              <Label fx:id="timeNextBadge" layoutX="409.0" layoutY="242.0" text="0" />
-                              <Label fx:id="timeValue" layoutX="241.0" layoutY="242.0" text="0" />
-                              <Label fx:id="routesNextbadge" layoutX="409.0" layoutY="181.0" text="0" />
-                           </children>
-              </AnchorPane>
-            </items>
-          </SplitPane>
-        </children>
-      </AnchorPane>
+  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #D1D7F1;">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="105.0" layoutY="220.0" stroke="#14246c" strokeType="INSIDE" width="170.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="105.0" layoutY="281.0" stroke="#14246c" strokeType="INSIDE" width="170.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="275.0" layoutY="281.0" stroke="#14246c" strokeType="INSIDE" width="234.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="275.0" layoutY="159.0" stroke="#14246c" strokeType="INSIDE" width="234.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="105.0" layoutY="159.0" stroke="#14246c" strokeType="INSIDE" width="170.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="275.0" layoutY="220.0" stroke="#14246c" strokeType="INSIDE" width="234.0" />
+                  <Label layoutX="126.0" layoutY="182.0" text="Completed routes:">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="119.0" layoutY="243.0" text="Time spent cycling:">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="133.0" layoutY="304.0" text="Distance cycled:">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="509.0" layoutY="281.0" stroke="#14246c" strokeType="INSIDE" width="234.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="509.0" layoutY="220.0" stroke="#14246c" strokeType="INSIDE" width="234.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="509.0" layoutY="159.0" stroke="#14246c" strokeType="INSIDE" width="234.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="509.0" layoutY="98.0" stroke="#14246c" strokeType="INSIDE" width="234.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="275.0" layoutY="98.0" stroke="#14246c" strokeType="INSIDE" width="234.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dbd0f1" height="61.0" layoutX="105.0" layoutY="98.0" stroke="#14246c" strokeType="INSIDE" width="170.0" />
+                  <Label layoutX="339.0" layoutY="121.0" text="Value:">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="551.0" layoutY="121.0" text="Until next badge:">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="routesValue" layoutX="294.0" layoutY="182.0" text="0" />
+                  <Label fx:id="distNextBadge" layoutX="538.0" layoutY="305.0" text="0" />
+                  <Label fx:id="distValue" layoutX="294.0" layoutY="304.0" text="0" />
+                  <Label fx:id="timeNextBadge" layoutX="538.0" layoutY="243.0" text="0" />
+                  <Label fx:id="timeValue" layoutX="294.0" layoutY="243.0" text="0" />
+                  <Label fx:id="routesNextbadge" layoutX="538.0" layoutY="183.0" text="0" />
+               </children>
+  </AnchorPane>
     </items>
   </SplitPane>
 </children>
