@@ -40,18 +40,7 @@ public class Main extends Application {
 	 */
 	@Override
 	public void stop() {
-		DataFetcher exporter = new DataFetcher();
-		try {
-			exporter.connectDb();
-			exporter.storeCurrentStorage();
-			exporter.closeConnection();
-			//FileManager.userSerialize(CurrentStorage.getUser(), "./src/main/resources/data_files/");
-			CurrentStorage.flush();
-			System.exit(0);
-		} 
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+
 	}
 
 	

@@ -283,6 +283,7 @@ public class Map {
         double phi = toRadians(destLat-srcLat);
         double delta = toRadians(destLong-srcLong);
 
+        //Performs the Haversine formula calculation to find the displacement.
         double a = (Math.sin(phi/2) * Math.sin(phi/2)) + Math.cos(lat1) * Math.cos(lat2) 
         		* (Math.sin(delta/2) * Math.sin(delta/2));
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
@@ -467,7 +468,7 @@ public class Map {
                 .animation(Animation.DROP)
                 .visible(true)
                 .position(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
-                .icon("http://maps.google.com/mapfiles/ms/micons/blue-dot.png");
+                .icon("https://i.imgur.com/tsYS8Rv.png");
         Marker wifiMarker = new Marker(wifiMarkOptns);
         wifi.setMarker(wifiMarker);
         map.addMarker(wifiMarker);
@@ -480,11 +481,13 @@ public class Map {
      * @param map 	 - Map to place marker on
      */
     public static void findToilets(Toilet toilet, GoogleMap map) {
+        //Options for creating marker
         MarkerOptions toiletMarkOptns = new MarkerOptions().animation(Animation.DROP)
                 .position(new LatLong(toilet.getLatitude(), toilet.getLongitude()))
                 .visible(true)
                 .icon("http://maps.google.com/mapfiles/ms/micons/toilets.png");
 
+        //Sets the title depending on whether the toilet has an address.
         if (toilet.getAddress() == null) {
             toiletMarkOptns.title(toilet.getName() + "\n" + toilet.getLatitude() + ", "
             + toilet.getLongitude());
@@ -513,7 +516,6 @@ public class Map {
                 .title(retailer.getName())
                 .visible(true)
                 .icon("http://maps.google.com/mapfiles/kml/pal3/icon26.png");
-                //^ Obtains the correct image for the marker.
 
         retailer.setMarker(new Marker(markerOptns));
         map.addMarker(retailer.getMarker());
@@ -535,40 +537,6 @@ public class Map {
             poi.setMarker(marker);
             map.addMarker(poi.getMarker());
     }
-
-    
-    /**
-     * Sets the route markers on the map.
-     * @param route - Route object to be used
-     * @param map 	- Map object to be used
-     */
-    public static void findRouteMarker(Route route, GoogleMap map) {
-        if (route.getStartMarker() == null) {
-            MarkerOptions startMarkOptns  = new MarkerOptions()
-                    .position(new LatLong(route.getStart().getLatitude(), 
-                    		route.getStart().getLongitude()))
-                    .animation(Animation.DROP)
-                    .title(route.getStartString())
-                    .visible(routeStartVisible)
-                    .icon("http://google.com/mapfiles/ms/micons/cycling.png");
-            map.clearMarkers();
-            route.setStartMarker(new Marker(startMarkOptns));
-
-            MarkerOptions endMarkOptns = new MarkerOptions()
-                    .position(new LatLong(route.getEnd().getLatitude(), 
-                    		route.getEnd().getLongitude()))
-                    .animation(Animation.DROP)
-                    .title(route.getEndString())
-                    .visible(false)
-                    .icon("http://maps.google.com/mapsfiles/kml/pal2/icon13.png");
-
-            route.setEndMarker(new Marker(endMarkOptns));
-
-            map.addMarker(route.getStartMarker());
-            map.addMarker(route.getEndMarker());
-        }
-    }
-
     
     /**
      * Method that finds every location near the locations for a route. Called by the 
