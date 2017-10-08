@@ -1,5 +1,7 @@
 package seng202.Model;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -232,8 +234,6 @@ public class DataFetcher {
      * @param typeID The ID in the database of the toilet location
      */
     private void updateToilet(Toilet toilet, int typeID) {
-    	System.out.println(toilet.getForDisabled());
-    	System.out.println(toilet.getUniSex());
     	int isDisabled = 0;
     	int unisex = 0;
     	if (toilet.getForDisabled()) {
@@ -440,6 +440,7 @@ public class DataFetcher {
 					addSavedRoute(userID, routeID, listNo);
 				}
 			}
+			count++;
 		}
 	}
 	
@@ -585,8 +586,8 @@ public class DataFetcher {
 		Location start = loadRouteLocation(startID);
 		Location end = loadRouteLocation(endID);
 		boolean secret = output.getBoolean(7);
-		String name = output.getString(9);;
-		String bikeID = output.getString(10);;
+		String name = output.getString(9);
+		String bikeID = output.getString(10);
 		String gender;
 		if (output.getBoolean(11)) {
 			gender = "Male";
@@ -931,6 +932,7 @@ public class DataFetcher {
     			update.setString(count + 1, parameters.get(count));
     			count += 1;
     		}
+
 			update.executeUpdate();
 		} 
     	catch (SQLException ex) {
@@ -1130,7 +1132,7 @@ public class DataFetcher {
     	int type = location.getLocationType();
     	String stmt = "SELECT LocationID FROM tblLocations WHERE Latitude = ? AND Longitude = ? AND Type = ? AND Name = ?";
 		ArrayList<String> params = new ArrayList<String>();
-		Collections.addAll(params, String.valueOf(coords[0]), String.valueOf(coords[1]),
+		Collections.addAll(params, String.format("%.8f", coords[0]), String.format("%.8f", coords[1]),
 				String.valueOf(type), location.getName());
 		if (runQuery(stmt, params).isEmpty()) {
 			return 0;
@@ -1309,7 +1311,7 @@ public class DataFetcher {
 					+ "(Latitude, Longitude, Name, User, Public, Type, Address) VALUES "
 					+ "(?, ?, ?, ?, ?, ?, ?)";
     		ArrayList<String> params = new ArrayList<String>();
-    		Collections.addAll(params, String.valueOf(latitude), String.valueOf(longitude), name, owner,
+    		Collections.addAll(params, String.format("%.8f", latitude), String.format("%.8f", longitude), name, owner,
     				String.valueOf(secret), String.valueOf(type), address);
     		runUpdate(stmt, params);
     	} 
@@ -1318,7 +1320,7 @@ public class DataFetcher {
 					+ "(Latitude, Longitude, Name, User, Public, Type, " + typeName + "ID, Zip, Borough, Address) VALUES "
 					+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     		ArrayList<String> params = new ArrayList<String>();
-    		Collections.addAll(params, String.valueOf(latitude), String.valueOf(longitude), name,
+    		Collections.addAll(params, String.format("%.8f", latitude), String.format("%.8f", longitude), name,
     				owner, String.valueOf(secret), String.valueOf(type), typeID, zip, borough, address);
     		runUpdate(stmt, params);
 		}
