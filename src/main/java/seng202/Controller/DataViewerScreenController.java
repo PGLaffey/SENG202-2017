@@ -31,9 +31,6 @@ public class DataViewerScreenController {
     @FXML
     private Button tableButton;
 	
-	@FXML 
-	private Label mapPressedLabel;
-	
 	@FXML
 	private Button statButton;
 	
@@ -41,16 +38,7 @@ public class DataViewerScreenController {
 	private Button accountButton;
 	
 	@FXML
-	private Button logoutButton;	
-	
-	@FXML
-	private ChoiceBox<String> filterGraphBox;
-	
-	@FXML
-	private RadioButton graphRadio;
-	
-	@FXML
-	private RadioButton rawDataRadio;
+	private Button logoutButton;
 
 	@FXML
 	private Label distValue;
@@ -182,8 +170,6 @@ public class DataViewerScreenController {
 
 	@FXML
 	void initialize() {
-		ObservableList<String> filterTypes = FXCollections.observableArrayList("Distance travelled","Time spent cycling");
-		filterGraphBox.setItems(filterTypes);
 
 		User user = CurrentStorage.getUser();
 
