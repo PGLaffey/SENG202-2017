@@ -1,12 +1,20 @@
 package seng202.Model;
 
 /**
- * Location object stores the information about a specific location (i.e. wifi hotspot, retailer, toilet or point of interest).
+ * Location object stores the information about a specific location (i.e. wifi hotspot, retailer, 
+ * toilet or point of interest).
  */
 public class Location {
-    private double latitude = -91; // Maximum range for latitude is -90 to 90, so setting it outside this range tells up it was never set
-    private double longitude = -181; // Maximum range for longitude is -180 to 180, so setting it outside this range tells us it was never set.
-    private int locationType; //toilet = 0, poi = 1, retailer = 2, wifi = 3, general = 4
+	
+	// Maximum range for latitude is -90 to 90, so setting it outside this range tells up it was 
+	// never set
+	private double latitude = -91; 
+    
+	// Maximum range for longitude is -180 to 180, so setting it outside this range tells us it 
+	// was never set.
+	private double longitude = -181; 
+  
+	private int locationType; //toilet = 0, poi = 1, retailer = 2, wifi = 3, general = 4
     private String name;
     private boolean local;
     private int zip = -1; // Automatic set to -1 to prevent mix ups.
@@ -18,11 +26,11 @@ public class Location {
     
     /**
      * Constructor for the location class, creates a new Location.
-     *
-     * @param latitude     The latitude of the new location.
-     * @param longitude    The longitude of the new location.
-     * @param name         The name of the new location.
-     * @param locationType The type of location the new location is (i.e. point of interest, wifi spot, retailer or toilet).
+     * @param latitude     - The latitude of the new location.
+     * @param longitude    - The longitude of the new location.
+     * @param name         - The name of the new location.
+     * @param locationType - The type of location the new location is (i.e. point of interest, 
+     * 						 wifi spot, retailer or toilet).
      */
     public Location(double latitude, double longitude, String name, int locationType) {
         this.latitude = latitude;
@@ -33,11 +41,12 @@ public class Location {
 
     
     /**
-     * Overloaded constructor to take an address and obtain a longitude and lattitude for the address.
-     *
-     * @param address      The address of the location.
-     * @param name         The name of the new location.
-     * @param locationType The type of location the new location is (i.e. point of interest, wifi spot, retailer or toilet).
+     * Overloaded constructor to take an address and obtain a longitude and lattitude for the 
+     * address.
+     * @param address      - The address of the location.
+     * @param name         - The name of the new location.
+     * @param locationType - The type of location the new location is (i.e. point of interest, 
+     * 						 wifi spot, retailer or toilet).
      */
     public Location(String address, String name, int locationType) {
         double[] latLong = Map.getLatLong(address);
@@ -50,14 +59,15 @@ public class Location {
 
     
     /**
-     * Overloaded constructor
-     * @param latitude Latitude of the location
-     * @param longitude Longitude of the location
-     * @param address Address of the location
-     * @param name Name of the location
-     * @param locationType Type of location, 0
+     * Overloaded constructor.
+     * @param latitude 		- Latitude of the location
+     * @param longitude 	- Longitude of the location
+     * @param address 		- Address of the location
+     * @param name 			- Name of the location
+     * @param locationType 	- Type of location, 0
      */
-    public Location(double latitude, double longitude, String address, String name, int locationType) {
+    public Location(double latitude, double longitude, String address, String name, 
+    		int locationType) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
@@ -67,8 +77,8 @@ public class Location {
     
     
     /**
-     * Overloaded constructor for cloning locations
-     * @param location The location the clone
+     * Overloaded constructor for cloning locations.
+     * @param location - The location the clone
      */
     public Location(Location location) {
         this.latitude = location.getLatitude();
@@ -85,10 +95,10 @@ public class Location {
 
     
     /**
-     * Overloaded constructor
-     * @param latitude Latitude of the location
-     * @param longitude Longitude of the location
-     * @param locationType Type of the location
+     * Overloaded constructor.
+     * @param latitude 		- Latitude of the location
+     * @param longitude 	- Longitude of the location
+     * @param locationType 	- Type of the location
      */
     public Location(double latitude, double longitude, int locationType) {
         this.latitude = latitude;
@@ -98,9 +108,9 @@ public class Location {
 
     
     /**
-     * Overrides the equals methods for comparing when two location objects are equal
-     * @param other The value to be compared to the current object.
-     * @return Whether the two objects are equal.
+     * Overrides the equals methods for comparing when two location objects are equal.
+     * @param other - The value to be compared to the current object
+     * @return		- Whether the two objects are equal
      */
     @Override
     public boolean equals(Object other) {
@@ -113,8 +123,8 @@ public class Location {
     
     
 	/**
-	 * Getter for the locations latitude
-	 * @return The locations latitude
+	 * Getter for the locations latitude.
+	 * @return - The locations latitude
 	 */
     public double getLatitude() {
         return latitude;
@@ -122,8 +132,8 @@ public class Location {
    
     
     /**
-     * Getter for if the location is secret
-     * @return If the location is secret
+     * Getter for if the location is secret.
+     * @return - If the location is secret
      */
     public boolean getSecret() {
     	return secret;
@@ -131,8 +141,8 @@ public class Location {
     
     
     /**
-     * Setter for the locations latitude
-     * @param lat The new latitude
+     * Setter for the locations latitude.
+     * @param lat - The new latitude
      */
     public void setLatitude(double lat) {
     	latitude = lat;
@@ -140,8 +150,8 @@ public class Location {
 
     
     /**
-     * Getter for the locations longitude
-     * @return The locations longitude
+     * Getter for the locations longitude.
+     * @return - The locations longitude
      */
     public double getLongitude() {
         return longitude;
@@ -149,8 +159,8 @@ public class Location {
     
     
     /**
-     * Setter for the locations longitude
-     * @param lon The new longitude
+     * Setter for the locations longitude.
+     * @param lon - The new longitude
      */
     public void setLongitude(double lon) {
     	longitude = lon;
@@ -158,8 +168,8 @@ public class Location {
 
     
     /**
-     * Getter for the locations address
-     * @return The locations address
+     * Getter for the locations address.
+     * @return - The locations address
      */
     public String getAddress() {
         return address;
@@ -167,8 +177,8 @@ public class Location {
 
     
     /**
-     * Sets the locations address
-     * @param address address to be set
+     * Sets the locations address.
+     * @param address - Address to be set
      */
     public void setAddress(String address) {
         this.address = address;
@@ -176,8 +186,8 @@ public class Location {
 
     
     /**
-     * Getter for the location name
-     * @return The locations name
+     * Getter for the location name.
+     * @return - The locations name
      */
     public String getName() {
         return name;
@@ -185,8 +195,8 @@ public class Location {
 
     
     /**
-     * Getter for the location type
-     * @return The locations type
+     * Getter for the location type.
+     * @return - The locations type
      */
     public int getLocationType() {
         return locationType;
@@ -194,8 +204,8 @@ public class Location {
 
     
     /**
-     * Getter for whether the location is local
-     * @return If the location is local
+     * Getter for whether the location is local.
+     * @return - If the location is local
      */
     public boolean getLocal() {
         return local;
@@ -203,8 +213,8 @@ public class Location {
 
     
     /**
-     * Getter for the owner of the location
-     * @return The locations owner
+     * Getter for the owner of the location.
+     * @return - The locations owner
      */
     public User getOwner() {
         return belongsTo;
@@ -212,8 +222,8 @@ public class Location {
 
     
     /**
-     * Getter for the ZIP code of the location
-     * @return The locations ZIP
+     * Getter for the ZIP code of the location.
+     * @return - The locations ZIP
      */
     public int getZip() {
         return zip;
@@ -221,8 +231,8 @@ public class Location {
 
     
     /**
-     * Sets the ZIP code of the location
-     * @param zip ZIP code to be set
+     * Sets the ZIP code of the location.
+     * @param zip - ZIP code to be set
      */
     public void setZip(int zip) {
         this.zip = zip;
@@ -230,8 +240,8 @@ public class Location {
 
     
     /**
-     * Stores whether the location is local
-     * @param local Sets if the location is local
+     * Stores whether the location is local.
+     * @param local - Sets if the location is local
      */
     public void storeLocal(boolean local) {
         this.local = local;
@@ -239,8 +249,8 @@ public class Location {
 
     
     /**
-     * Returns whether the route is secret
-     * @return If the location is secret
+     * Returns whether the route is secret.
+     * @return - If the location is secret
      */
     public boolean isSecret() {
         return secret;
@@ -248,8 +258,8 @@ public class Location {
 
     
     /**
-     * Sets whether the location is secret
-     * @param secret boolean value for whether the route is secret
+     * Sets whether the location is secret.
+     * @param secret - Boolean value for whether the route is secret
      */
     public void setSecret(boolean secret) {
         this.secret = secret;
@@ -257,8 +267,8 @@ public class Location {
 
     
     /**
-     * Getter for the borough of the location
-     * @return The locations borough
+     * Getter for the borough of the location.
+     * @return - The locations borough
      */
     public String getBorough() {
         return this.borough;
@@ -266,8 +276,8 @@ public class Location {
 
     
     /**
-     * Sets the name of the borough of the location
-     * @param borough name of the borough to be set
+     * Sets the name of the borough of the location.
+     * @param borough - Name of the borough to be set
      */
     public void setBorough(String borough) {
         this.borough = borough;
@@ -275,8 +285,8 @@ public class Location {
 
     
     /**
-     * Sets the name of the location
-     * @param name string to be set as name
+     * Sets the name of the location.
+     * @param name - String to be set as name
      */
     public void setName(String name) {
         this.name = name;
@@ -285,7 +295,7 @@ public class Location {
 
     /**
      * Function that returns the longitude and latitude of the location in an Array.
-     * @return The latitude and longitude of the location in an Array.
+     * @return - The latitude and longitude of the location in an Array.
      */
     public double[] getCoords() {
         double[] coords = {latitude, longitude};
@@ -294,8 +304,8 @@ public class Location {
 
     
     /**
-     * Getter for the type of location, returns this as a string
-     * @return The String name of the locations type
+     * Getter for the type of location, returns this as a string.
+     * @return - The String name of the locations type
      */
     public String getTypeString() {
         if (locationType == 0) {
