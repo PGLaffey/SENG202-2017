@@ -1404,13 +1404,8 @@ public class MainScreenController implements MapComponentInitializedListener, Di
         ArrayList<Integer> favRoutes = CurrentStorage.getFavRoutes();
         ArrayList<Integer> savedRoutes = CurrentStorage.getSavedRoutes();
 
-        System.out.println(CurrentStorage.getRouteArray());
-        System.out.println(favRoutes);
-        System.out.println(savedRoutes);
-
         favouriteRoutesMenu.getItems().clear();
         savedRoutesMenu.getItems().clear();
-
 
         for (Integer index : favRoutes) {
             Route route = CurrentStorage.getRouteArray().get(index);
