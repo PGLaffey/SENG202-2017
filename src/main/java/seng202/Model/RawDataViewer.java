@@ -10,9 +10,9 @@ public class RawDataViewer {
     
     /**
      * Searches for all locations within a ArrayList that meet a condition.
-     * @param locationsArrayList	- The list of locations to search through
-     * @param condition 			- The condition to filter results by
-     * @return 						- ArrayList of the locations that meet the condition
+     * @param locationsArrayList - The list of locations to search through
+     * @param condition 		 - The condition to filter results by
+     * @return 					 - ArrayList of the locations that meet the condition
      */
     public static ArrayList<Location> searchLocations(ArrayList<Location> locationsArrayList, 
     		String condition) {
@@ -49,12 +49,11 @@ public class RawDataViewer {
     /**
      * Filters through an array list of points of interest and returns an array list of Poi's 
      * that match the search condition.
-     * @param poiArrayList 	- ArrayList of points of interests to be searched through
-     * @param condition 	- The condition which is looked for in each Poi object
-     * @return 				- An ArrayList of matched Poi objects
+     * @param poiArrayList - ArrayList of points of interests to be searched through
+     * @param condition    - The condition which is looked for in each Poi object
+     * @return 			   - An ArrayList of matched Poi objects
      */
     public static ArrayList<Poi> searchPoi(ArrayList<Poi> poiArrayList, String condition) {
-
         ArrayList<Poi> foundPoi = new ArrayList<Poi>();
         String cost = null;
         String description = null;
@@ -71,7 +70,7 @@ public class RawDataViewer {
                 name = poiArrayList.get(i).getName().toLowerCase();
                 latitude = String.valueOf(poiArrayList.get(i).getLatitude()).toLowerCase();
                 longitude = String.valueOf(poiArrayList.get(i).getLongitude()).toLowerCase();
-                address = poiArrayList.get(i).getAddress().toLowerCase();
+                address = poiArrayList.get(i).getAddress();
                 borough = poiArrayList.get(i).getBorough();
                 if (cost.contains(condition)) {
                     foundPoi.add(poiArrayList.get(i));
@@ -88,8 +87,8 @@ public class RawDataViewer {
                 else if (longitude.contains(condition)) {
                     foundPoi.add(poiArrayList.get(i));
                 }
-                else if (!address.isEmpty()) {
-                    if(address.contains(condition)) {
+                else if (address != null) {
+                    if(address.toLowerCase().contains(condition)) {
                         foundPoi.add(poiArrayList.get(i));
                     }
                 }
@@ -132,7 +131,7 @@ public class RawDataViewer {
             	name = retailerArrayList.get(i).getName().toLowerCase();
             	latitude = String.valueOf(retailerArrayList.get(i).getLatitude()).toLowerCase();
             	longitude = String.valueOf(retailerArrayList.get(i).getLongitude()).toLowerCase();
-            	address = retailerArrayList.get(i).getAddress().toLowerCase();
+            	address = retailerArrayList.get(i).getAddress();
                 borough = retailerArrayList.get(i).getBorough();
             	if (description.contains(condition.toLowerCase())) {
                     foundRetailer.add(retailerArrayList.get(i));
@@ -152,8 +151,8 @@ public class RawDataViewer {
                 else if (longitude.contains(condition)) {               	
                     foundRetailer.add(retailerArrayList.get(i));
                 }
-                else if (!address.isEmpty()) {
-                    if (address.contains(condition)) {                  	
+                else if (address != null) {
+                    if (address.toLowerCase().contains(condition)) {                  	
                         foundRetailer.add(retailerArrayList.get(i));
                     }
                 }
@@ -171,12 +170,13 @@ public class RawDataViewer {
     /**
      * Filters through an array list of routes and returns an array list of routes that 
      * match the search condition.
-     * @param routeArrayList ArrayList of routes to be searched through
-     * @param condition The condition which is looked for in each route object
-     * @return An ArrayList of matched route objects
+     * @param routeArrayList - ArrayList of routes to be searched through
+     * @param condition      - The condition which is looked for in each route object
+     * @return               - An ArrayList of matched route objects
      */
-    public static ArrayList<Route> searchRoutes(ArrayList<Route> routeArrayList, String condition) { // TODO: how will we check for start and end location? In the table I have it displaying the name of the start and end locations, so could search this?
-        ArrayList<Route> foundRoutes = new ArrayList<Route>();
+    public static ArrayList<Route> searchRoutes(ArrayList<Route> routeArrayList, 
+    		String condition) { 
+    	ArrayList<Route> foundRoutes = new ArrayList<Route>();
         String name = null;
         String distance = null;
         String gender = null;
@@ -217,10 +217,11 @@ public class RawDataViewer {
 
     
     /**
-     * Filters through an array list of wifi objects and returns an array list of wifi objects that match the search condition
-     * @param wifiArrayList ArrayList of wifi objects to be searched through
-     * @param condition The condition which is looked for in each wifi object
-     * @return An ArrayList of matched wifi objects
+     * Filters through an array list of wifi objects and returns an array list of wifi objects 
+     * that match the search condition.
+     * @param wifiArrayList - ArrayList of wifi objects to be searched through
+     * @param condition     - The condition which is looked for in each wifi object
+     * @return              - An ArrayList of matched wifi objects
      */
     public static ArrayList<Wifi> searchWifi (ArrayList<Wifi> wifiArrayList, String condition) {
         ArrayList<Wifi> foundWifi = new ArrayList<Wifi>();
@@ -259,7 +260,7 @@ public class RawDataViewer {
                 else if (ssid.contains(condition)) {
                     foundWifi.add(wifiArrayList.get(i));
                 }
-                else if (borough != (null)) {
+                else if (borough != null) {
                     if (borough.toLowerCase().contains(condition)) {
                         foundWifi.add(wifiArrayList.get(i));
                     }
@@ -271,12 +272,14 @@ public class RawDataViewer {
 
     
     /**
-     * Filter through an array of toilet objects and returns an array of toilet objects that match the search condition
-     * @param toiletArrayList ArrayList of toilet objects to be search through
-     * @param condition The condition which is looked for in each toilet object
-     * @return An ArrayList of matched toilet objects
+     * Filter through an array of toilet objects and returns an array of toilet objects that 
+     * match the search condition.
+     * @param toiletArrayList - ArrayList of toilet objects to be search through
+     * @param condition       - The condition which is looked for in each toilet object
+     * @return                - An ArrayList of matched toilet objects
      */
-    public static ArrayList<Toilet> searchToilets (ArrayList<Toilet> toiletArrayList, String condition) {
+    public static ArrayList<Toilet> searchToilets (ArrayList<Toilet> toiletArrayList, 
+    		String condition) {
         ArrayList<Toilet> foundToilets = new ArrayList<Toilet>();
         String forDisabled = null;
         String uniSex = null;
@@ -286,8 +289,8 @@ public class RawDataViewer {
         condition = condition.toLowerCase();
 		for (int i = 0; i < toiletArrayList.size(); i++) {
 		    if (toiletArrayList.get(i) != null) {
-
-                forDisabled = String.valueOf(toiletArrayList.get(i).getForDisabled()).toLowerCase();
+                forDisabled = String.valueOf(toiletArrayList.get(i).getForDisabled())
+                		.toLowerCase();
                 uniSex = String.valueOf(toiletArrayList.get(i).getForDisabled()).toLowerCase();
                 name = toiletArrayList.get(i).getName().toLowerCase();
                 latitude = String.valueOf(toiletArrayList.get(i).getLatitude()).toLowerCase();
