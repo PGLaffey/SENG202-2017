@@ -467,7 +467,7 @@ public class Map {
                 .animation(Animation.DROP)
                 .visible(true)
                 .position(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
-                .icon("http://maps.google.com/mapfiles/ms/micons/blue-dot.png");
+                .icon("https://i.imgur.com/tsYS8Rv.png");
         Marker wifiMarker = new Marker(wifiMarkOptns);
         wifi.setMarker(wifiMarker);
         map.addMarker(wifiMarker);

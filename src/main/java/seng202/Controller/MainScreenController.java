@@ -8,6 +8,7 @@ import com.lynden.gmapsfx.javascript.object.*;
 import com.lynden.gmapsfx.service.directions.*;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
 import com.lynden.gmapsfx.shapes.Circle;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -28,6 +29,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.web.WebEngine;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.omg.CORBA.Current;
 import seng202.Model.*;
 import seng202.team5.Main;
@@ -572,16 +574,56 @@ public class MainScreenController implements MapComponentInitializedListener, Di
      */
     @FXML
     void logoutPressed(ActionEvent event) {
-        DataFetcher exporter = new DataFetcher();
+        Service service = new Service() {
+            @Override
+            protected Task createTask() {
+                return new Task() {
+                    @Override
+                    protected Object call() throws Exception {
+                        DataFetcher exporter = new DataFetcher();
+                        try {
+                            exporter.connectDb();
+                            exporter.storeCurrentStorage();
+                            exporter.closeConnection();
+                            CurrentStorage.flush();
+                            System.exit(0);
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+                };
+            }
+        };
+        service.restart();
         try {
-            exporter.connectDb();
-            exporter.storeCurrentStorage();
-            exporter.closeConnection();
-            CurrentStorage.flush();
-            System.exit(0);
-        } 
-        catch (Exception e) {
-            e.printStackTrace();
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/UploadingScreen.fxml"));
+
+            Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+            stage.setTitle("Uploading data...");
+            stage.setScene(scene);
+            // If the user attempts to close the progress bar, ensure that the confirmation dialog appears
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    Stage stage = new Stage();
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("/ConfirmationDialogScreen.fxml"));
+
+                        Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+                        stage.setScene(scene);
+                        stage.setTitle("Cancel upload");
+                        stage.show();
+                    } catch (IOException exception) {
+                        exception.printStackTrace();
+                    }
+                }
+            });
+            stage.show();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 
@@ -1459,7 +1501,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     @FXML
     void initialize() {
-        //mapView = new GoogleMapView();
         mapView.addMapInializedListener(this);
         mapEngine = mapView.getWebview().getEngine();
         address.bind(searchText.textProperty());
@@ -1475,9 +1516,6 @@ public class MainScreenController implements MapComponentInitializedListener, Di
 
     	fileChooserMenu.setPopupSide(Side.RIGHT);
     	addLocationsMenu.setPopupSide(Side.RIGHT);
-
-    	progressBar.setVisible(true);
-
 
     	if (!data.isHasImported()) {
             Service service = new Service() {
@@ -1531,6 +1569,70 @@ public class MainScreenController implements MapComponentInitializedListener, Di
             progressBarLabel.textProperty().bind(service.messageProperty());
             service.start();
         }
+        //Creates a progress bar when the user clicks close so that they know the app is still uploading stuff.
+        Main.getStage().setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Service service = new Service() {
+                    @Override
+                    protected Task createTask() {
+                        return new Task() {
+                            @Override
+                            protected Object call() throws Exception {
+                                DataFetcher exporter = new DataFetcher();
+                                try {
+                                    exporter.connectDb();
+                                    exporter.storeCurrentStorage();
+                                    exporter.closeConnection();
+                                    CurrentStorage.flush();
+                                    Platform.runLater(new Runnable() {
+                                          @Override
+                                          public void run() {
+                                              System.exit(0);
+                                          }
+                                      }
+                                    );
+                                }
+                                catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                return null;
+                            }
+                        };
+                    }
+                };
+                service.restart();
+                try {
+                    Stage stage = new Stage();
+                    Parent root = FXMLLoader.load(getClass().getResource("/UploadingScreen.fxml"));
+
+                    Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+                    stage.setTitle("Uploading data...");
+                    stage.setScene(scene);
+                    // If the user attempts to close the progress bar, ensure that the confirmation dialog appears
+                    stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                        @Override
+                        public void handle(WindowEvent event) {
+                            Stage stage = new Stage();
+                            try {
+                                Parent root = FXMLLoader.load(getClass().getResource("/ConfirmationDialogScreen.fxml"));
+
+                                Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+                                stage.setScene(scene);
+                                stage.setTitle("Cancel upload");
+                                stage.show();
+                            } catch (IOException exception) {
+                                exception.printStackTrace();
+                            }
+                        }
+                    });
+                    stage.show();
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
+            }
+
+        });
 
     	ObservableList<Boolean> disabledOptions = FXCollections.observableArrayList(true, false);
     	toiletDisabledChoice.setItems(disabledOptions);
