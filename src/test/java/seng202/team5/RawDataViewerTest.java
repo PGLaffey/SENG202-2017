@@ -57,7 +57,7 @@ public class RawDataViewerTest extends TestCase {
         pois.add(ESB);
 
         ArrayList<Poi> found = RawDataViewer.searchPoi(pois, "350 5th Ave, New Tork, NY");
-        assertTrue(found.get(0).equals(ESB));
+        assertEquals(ESB, found.get(0));
     }
 
     /**
@@ -320,6 +320,10 @@ public class RawDataViewerTest extends TestCase {
         ArrayList<Retailer> found = RawDataViewer.searchRetailer(retailers, "A.J. Kelly's");
         assertTrue(found.get(0).equals(AJK));
     }
+
+    /**
+     * Test to
+     */
 
     /**
      * Test to ensure that searchRetailers can search via a description
