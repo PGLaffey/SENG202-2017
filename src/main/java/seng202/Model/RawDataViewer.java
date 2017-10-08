@@ -1,6 +1,5 @@
 package seng202.Model;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 
 /**
@@ -8,33 +7,37 @@ import java.util.ArrayList;
  */
 public class RawDataViewer {
 
-    private ArrayList<Route> routeArrayList = new ArrayList<Route>();
-    private static DataFetcher fetcher = new DataFetcher();
-    public RawDataViewer() {
-        CurrentStorage.getRouteArray();
-    }
-
     
     /**
-     * Searches for all locations within a ArrayList that meet a condition
-     * @param locationsArrayList The list of locations to search through
-     * @param condition The condition to filter results by
-     * @return ArrayList of the locations that meet the condition
+     * Searches for all locations within a ArrayList that meet a condition.
+     * @param locationsArrayList	- The list of locations to search through
+     * @param condition 			- The condition to filter results by
+     * @return 						- ArrayList of the locations that meet the condition
      */
-    public static ArrayList<Location> searchLocations(ArrayList<Location> locationsArrayList, String condition) {
+    public static ArrayList<Location> searchLocations(ArrayList<Location> locationsArrayList, 
+    		String condition) {
+    	
         ArrayList<Location> foundLocations = new ArrayList<Location>();
         for (int i = 0; i < locationsArrayList.size(); i++) {
             if (locationsArrayList.get(i) != null) {
-                if (locationsArrayList.get(i).getTypeString().toString().toLowerCase().contains(condition.toLowerCase())) {
+                if (locationsArrayList.get(i).getTypeString().toString().toLowerCase()
+                		.contains(condition.toLowerCase())) {
+                	
                     foundLocations.add(locationsArrayList.get(i));
                 }
-                else if (locationsArrayList.get(i).getName().toLowerCase().contains(condition.toLowerCase())) {
+                else if (locationsArrayList.get(i).getName().toLowerCase()
+                		.contains(condition.toLowerCase())) {
+                	
                     foundLocations.add(locationsArrayList.get(i));
                 }
-                else if (String.valueOf(locationsArrayList.get(i).getLatitude()).toLowerCase().contains(condition.toLowerCase())) {
+                else if (String.valueOf(locationsArrayList.get(i).getLatitude()).toLowerCase()
+                		.contains(condition.toLowerCase())) {
+                	
                     foundLocations.add(locationsArrayList.get(i));
                 }
-                else if (String.valueOf(locationsArrayList.get(i).getLongitude()).toLowerCase().contains(condition.toLowerCase())) {
+                else if (String.valueOf(locationsArrayList.get(i).getLongitude()).toLowerCase()
+                		.contains(condition.toLowerCase())) {
+                	
                     foundLocations.add(locationsArrayList.get(i));
                 }
             }
@@ -44,37 +47,52 @@ public class RawDataViewer {
     
     
     /**
-     * Filters through an array list of points of interest and returns an array list of Poi's that match the search condition
-     * @param poiArrayList ArrayList of points of interests to be searched through
-     * @param condition The condition which is looked for in each Poi object
-     * @return An ArrayList of matched Poi objects
+     * Filters through an array list of points of interest and returns an array list of Poi's 
+     * that match the search condition.
+     * @param poiArrayList 	- ArrayList of points of interests to be searched through
+     * @param condition 	- The condition which is looked for in each Poi object
+     * @return 				- An ArrayList of matched Poi objects
      */
     public static ArrayList<Poi> searchPoi(ArrayList<Poi> poiArrayList, String condition) {
         ArrayList<Poi> foundPoi = new ArrayList<Poi>();
         for (int i = 0; i < poiArrayList.size(); i++) {
             if (poiArrayList.get(i) != null) {
-                if (Double.toString(poiArrayList.get(i).getCost()).toLowerCase().contains(condition.toLowerCase())) {
+                if (Double.toString(poiArrayList.get(i).getCost()).toLowerCase()
+                		.contains(condition.toLowerCase())) {
+                	
                     foundPoi.add(poiArrayList.get(i));
                 }
-                else if (poiArrayList.get(i).getDescription().toLowerCase().contains(condition.toLowerCase())) {
+                else if (poiArrayList.get(i).getDescription().toLowerCase()
+                		.contains(condition.toLowerCase())) {
+                	
                     foundPoi.add(poiArrayList.get(i));
                 }
-                else if (poiArrayList.get(i).getName().toLowerCase().contains(condition.toLowerCase())) {
+                else if (poiArrayList.get(i).getName().toLowerCase()
+                		.contains(condition.toLowerCase())) {
+                	
                     foundPoi.add(poiArrayList.get(i));
                 }
-                else if (String.valueOf(poiArrayList.get(i).getLatitude()).toLowerCase().contains(condition.toLowerCase())) {
+                else if (String.valueOf(poiArrayList.get(i).getLatitude()).toLowerCase()
+                		.contains(condition.toLowerCase())) {
+                	
                     foundPoi.add(poiArrayList.get(i));
                 }
-                else if (String.valueOf(poiArrayList.get(i).getLongitude()).toLowerCase().contains(condition.toLowerCase())) {
+                else if (String.valueOf(poiArrayList.get(i).getLongitude()).toLowerCase()
+                		.contains(condition.toLowerCase())) {
+                	
                     foundPoi.add(poiArrayList.get(i));
                 }
                 else if (poiArrayList.get(i).getAddress() != null) {
-                    if (poiArrayList.get(i).getAddress().toLowerCase().contains(condition.toLowerCase())) {
+                    if (poiArrayList.get(i).getAddress().toLowerCase()
+                    		.contains(condition.toLowerCase())) {
+                    	
                         foundPoi.add(poiArrayList.get(i));
                     }
                 }
                 else if (poiArrayList.get(i).getBorough() != null) {
-                    if (poiArrayList.get(i).getBorough().toLowerCase().contains(condition.toLowerCase())) {
+                    if (poiArrayList.get(i).getBorough().toLowerCase()
+                    		.contains(condition.toLowerCase())) {
+                    	
                         foundPoi.add(poiArrayList.get(i));
                     }
                 }
@@ -85,40 +103,60 @@ public class RawDataViewer {
 
     
     /**
-     * Filters through an array list of retailers and returns an array list of retailers that match the search condition
-     * @param retailerArrayList ArrayList of retailers to be searched through
-     * @param condition The condition which is looked for in each retailer object
-     * @return An ArrayList of matched retailer objects
+     * Filters through an array list of retailers and returns an array list of retailers 
+     * that match the search condition.
+     * @param retailerArrayList - ArrayList of retailers to be searched through
+     * @param condition 		- The condition which is looked for in each retailer object
+     * @return		 			- An ArrayList of matched retailer objects
      */
-    public static ArrayList<Retailer> searchRetailer(ArrayList<Retailer> retailerArrayList, String condition) {
+    public static ArrayList<Retailer> searchRetailer(ArrayList<Retailer> retailerArrayList, 
+    		String condition) {
+    	
         ArrayList<Retailer> foundRetailer = new ArrayList<Retailer>();
+        String description = null;
+        String product = null;
+        String zip = null;
+        String name = null;
+        String latitude = null;
+        String longitude = null;
+        String address = null;
+        String borough = null;
+        condition = condition.toLowerCase();
         for (int i = 0; i < retailerArrayList.size(); i++) {
             if (retailerArrayList.get(i) != null) {
-                if (retailerArrayList.get(i).getDescription().toLowerCase().contains(condition.toLowerCase())) {
+            	description = retailerArrayList.get(i).getDescription().toLowerCase();
+            	product = retailerArrayList.get(i).getProduct().toLowerCase();
+            	zip = Integer.toString(retailerArrayList.get(i).getZip());
+            	name = retailerArrayList.get(i).getName().toLowerCase();
+            	latitude = String.valueOf(retailerArrayList.get(i).getLatitude()).toLowerCase();
+            	longitude = String.valueOf(retailerArrayList.get(i).getLongitude()).toLowerCase();
+            	address = retailerArrayList.get(i).getAddress().toLowerCase();
+            	borough = retailerArrayList.get(i).getBorough().toLowerCase();
+                if (description.contains(condition.toLowerCase())) {
                     foundRetailer.add(retailerArrayList.get(i));
                 }
-                else if (retailerArrayList.get(i).getProduct().toLowerCase().contains(condition.toLowerCase())) {
+                else if (product.contains(condition)) {
                     foundRetailer.add(retailerArrayList.get(i));
                 }
-                else if (Integer.toString(retailerArrayList.get(i).getZip()).contains(condition)) {
+                else if (zip.contains(condition)) {
                     foundRetailer.add(retailerArrayList.get(i));
                 }
-                else if (retailerArrayList.get(i).getName().toLowerCase().contains(condition.toLowerCase())) {
+                else if (name.contains(condition)) {            	
                     foundRetailer.add(retailerArrayList.get(i));
                 }
-                else if (String.valueOf(retailerArrayList.get(i).getLatitude()).toLowerCase().contains(condition.toLowerCase())) {
+                else if (latitude.contains(condition)) {             	
                     foundRetailer.add(retailerArrayList.get(i));
                 }
-                else if (String.valueOf(retailerArrayList.get(i).getLongitude()).toLowerCase().contains(condition.toLowerCase())) {
+                else if (longitude.contains(condition)) {               	
                     foundRetailer.add(retailerArrayList.get(i));
                 }
-                else if (!retailerArrayList.get(i).getAddress().isEmpty()) {
-                    if (retailerArrayList.get(i).getAddress().toLowerCase().contains(condition.toLowerCase())) {
+                else if (!address.isEmpty()) {
+                    if (address.contains(condition)) {                  	
                         foundRetailer.add(retailerArrayList.get(i));
                     }
                 }
-                else if (retailerArrayList.get(i).getBorough() != (null)) {
-                    if (retailerArrayList.get(i).getBorough().toLowerCase().contains(condition.toLowerCase())) {
+                else if (borough != (null)) {
+                    if (borough.contains(condition)) {            	
                         foundRetailer.add(retailerArrayList.get(i));
                     }
                 }
@@ -129,7 +167,8 @@ public class RawDataViewer {
 
     
     /**
-     * Filters through an array list of routes and returns an array list of routes that match the search condition
+     * Filters through an array list of routes and returns an array list of routes that 
+     * match the search condition.
      * @param routeArrayList ArrayList of routes to be searched through
      * @param condition The condition which is looked for in each route object
      * @return An ArrayList of matched route objects
@@ -229,5 +268,5 @@ public class RawDataViewer {
             }
 		}
         return foundToilets;
-        }
+    }
 }
