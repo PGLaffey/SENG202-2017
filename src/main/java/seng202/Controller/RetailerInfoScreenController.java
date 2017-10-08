@@ -263,7 +263,7 @@ public class RetailerInfoScreenController {
         }
 
         if (allValid) {
-    	    if (!oldRetailer.getAddress().equals(addressText.getText())) {
+    	    if (addressText.getText() != null && !oldRetailer.getAddress().equals(addressText.getText())) {
     	        newRetailer.setAddress(addressText.getText());
                 double[] latLong = Map.getLatLong(addressText.getText());
                 newRetailer.setLatitude(latLong[0]);
