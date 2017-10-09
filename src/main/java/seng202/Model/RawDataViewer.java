@@ -55,7 +55,13 @@ public class RawDataViewer {
      */
     public static ArrayList<Poi> searchPoi(ArrayList<Poi> poiArrayList, String condition) {
         ArrayList<Poi> foundPoi = new ArrayList<Poi>();
+        // Stores the address separately because of the structure of te if-else statements
+        String address = null;
         for (int i = 0; i < poiArrayList.size(); i++) {
+            address = poiArrayList.get(i).getAddress();
+            if (address == null) {
+                address = "";
+            }
             if (poiArrayList.get(i) != null) {
                 if (Double.toString(poiArrayList.get(i).getCost()).toLowerCase()
                 		.contains(condition.toLowerCase())) {
@@ -82,17 +88,13 @@ public class RawDataViewer {
                 	
                     foundPoi.add(poiArrayList.get(i));
                 }
-                else if (poiArrayList.get(i).getAddress() != null) {
-                    if (poiArrayList.get(i).getAddress().toLowerCase()
+                else if (address.toLowerCase()
                     		.contains(condition.toLowerCase())) {
-                    	
                         foundPoi.add(poiArrayList.get(i));
-                    }
                 }
                 else if (poiArrayList.get(i).getBorough() != null) {
                     if (poiArrayList.get(i).getBorough().toLowerCase()
                     		.contains(condition.toLowerCase())) {
-                    	
                         foundPoi.add(poiArrayList.get(i));
                     }
                 }
@@ -130,8 +132,16 @@ public class RawDataViewer {
             	name = retailerArrayList.get(i).getName().toLowerCase();
             	latitude = String.valueOf(retailerArrayList.get(i).getLatitude()).toLowerCase();
             	longitude = String.valueOf(retailerArrayList.get(i).getLongitude()).toLowerCase();
-            	address = retailerArrayList.get(i).getAddress().toLowerCase();
-            	borough = retailerArrayList.get(i).getBorough().toLowerCase();
+            	address = retailerArrayList.get(i).getAddress();
+            	if (address == null) {
+            	    address = "";
+                }
+
+                borough = retailerArrayList.get(i).getBorough();
+                if (borough == null) {
+            	    borough = "";
+                }
+
                 if (description.contains(condition.toLowerCase())) {
                     foundRetailer.add(retailerArrayList.get(i));
                 }
@@ -150,15 +160,11 @@ public class RawDataViewer {
                 else if (longitude.contains(condition)) {               	
                     foundRetailer.add(retailerArrayList.get(i));
                 }
-                else if (!address.isEmpty()) {
-                    if (address.contains(condition)) {                  	
+                else if (address.toLowerCase().contains(condition)) {
                         foundRetailer.add(retailerArrayList.get(i));
-                    }
                 }
-                else if (borough != (null)) {
-                    if (borough.contains(condition)) {            	
+                else if (borough.toLowerCase().contains(condition)) {
                         foundRetailer.add(retailerArrayList.get(i));
-                    }
                 }
             }
         }
