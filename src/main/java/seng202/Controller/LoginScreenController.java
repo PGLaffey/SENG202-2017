@@ -54,7 +54,7 @@ public class LoginScreenController {
 		data.connectDb();
 		if (!usernameText.getText().isEmpty() && !passwordText.getText().isEmpty()) {
 			if (data.fetchPassword(usernameText.getText()) == null) {
-				incorrectUserLbl.setVisible(true);
+				//incorrectUserLbl.setVisible(true);
 				incorrectPasswordLbl.setVisible(true);				
 			}
 			else if ((data.fetchPassword(usernameText.getText()).equals(passwordText.getText()
