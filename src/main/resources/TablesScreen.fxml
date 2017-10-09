@@ -186,7 +186,7 @@
             <Label font="$x1" text="with the keyword " AnchorPane.leftAnchor="325.0" AnchorPane.topAnchor="15.0" />
             <Label fx:id="noDataLabel" layoutX="311.0" layoutY="208.0" text="No data to show for this search" visible="false" />
             <Label fx:id="nothingLabel" layoutX="137.0" layoutY="406.0" text="No data currently selected" textFill="RED" visible="true" />
-            <Button id="searchButton" fx:id="exportButton" font="$x2" layoutX="14.0" layoutY="408.0" mnemonicParsing="false" onAction="#exportPressed" prefWidth="100.0" style="-fx-background-color: #30126D, #B39EDC;" text="Export" />
+            <Button id="searchButton" fx:id="exportButton" font="$x2" layoutX="14.0" layoutY="408.0" mnemonicParsing="false" onAction="#exportPressed" prefWidth="100.0" style="-fx-background-color: #30126D, #B39EDC;" text="Export" AnchorPane.leftAnchor="15.0" AnchorPane.bottomAnchor="7.5"/>
           </children>
         </AnchorPane>
       </items>
