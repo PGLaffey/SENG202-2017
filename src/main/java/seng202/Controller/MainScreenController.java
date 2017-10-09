@@ -1007,6 +1007,7 @@ public class MainScreenController implements MapComponentInitializedListener,
             if (!otherBoroughText.getText().equals("")) {
     		    location.setBorough(otherBoroughText.getText());
             }
+            location.setOwner(CurrentStorage.getUser());
             location.setSecret(otherPrivateCheck.isSelected());
             CurrentStorage.addNewGeneral(location);
 
@@ -1094,6 +1095,7 @@ public class MainScreenController implements MapComponentInitializedListener,
             if (!poiBoroughText.getText().equals("")) {
                 poi.setBorough(poiBoroughText.getText());
             }
+            poi.setOwner(CurrentStorage.getUser());
             poi.setSecret(poiPrivateCheck.isSelected());
             CurrentStorage.addNewPoi(poi);
 

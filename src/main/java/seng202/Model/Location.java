@@ -220,6 +220,8 @@ public class Location {
         return belongsTo;
     }
 
+    public void setOwner(User user) {this.belongsTo = user; }
+
     
     /**
      * Getter for the ZIP code of the location.
