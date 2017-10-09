@@ -1,5 +1,3 @@
-//Main class to set up and test the GUI until we incorporate it with the actual implementation
-
 package seng202.team5;
 
 import javafx.application.Application;
@@ -12,18 +10,26 @@ import seng202.Model.CurrentStorage;
 import seng202.Model.DataFetcher;
 import seng202.Model.FileManager;
 
+/**
+ * Main class to run to start the application.
+ */
 public class Main extends Application {
 
 	private static Stage mainStage;
 
+	
+	/**
+	 * Getter for the main window/stage.
+	 * @return The main window/stage
+	 */
 	public static Stage getStage() {
 		return mainStage;
 	}
 
+	
 	/**
 	 * Begins the application and loads the GUI
-	 * @param primaryStage
-	 * @throws Exception
+	 * @param primaryStage The initial stage for the app.
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception{
@@ -36,7 +42,8 @@ public class Main extends Application {
 
 	
 	/**
-	 * Overrides the method for when the GUI is closed. Loads newly entered data into database, serializes the user and flushes CurrentStorage
+	 * Overrides the method for when the GUI is closed. Loads newly entered data into database, 
+	 * serializes the user and flushes CurrentStorage.
 	 */
 	@Override
 	public void stop() {
@@ -44,6 +51,10 @@ public class Main extends Application {
 	}
 
 	
+	/**
+	 * Launches the app.
+	 * @param args The input parameters when launching the application from command line.
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

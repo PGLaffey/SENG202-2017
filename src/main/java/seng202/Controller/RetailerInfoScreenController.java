@@ -32,8 +32,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-
-
+/**
+ * Controller class for retailer information screen.
+ */
 public class RetailerInfoScreenController {
 
 	@FXML
@@ -111,7 +112,7 @@ public class RetailerInfoScreenController {
 
     /**
      * Method when the ok button is pressed, hides the pop up.
-     * @param event Auto-generate event on button press
+     * @param event - Auto-generate event on button press
      */
     @FXML
     void okPressed(ActionEvent event) {
@@ -121,8 +122,9 @@ public class RetailerInfoScreenController {
     
     
     /** 
-     * Method when the update button is pressed, opens text fields for user to update the selected retailer
-     * @param event Auto-generate event on button press
+     * Method when the update button is pressed, opens text fields for user to update the selected
+     * retailer.
+     * @param event - Auto-generate event on button press
      */
     @FXML
     void updatePressed(ActionEvent event) {
@@ -153,43 +155,49 @@ public class RetailerInfoScreenController {
     
     
     /**
-     * Checks the input is able to be parsed to a Double
-     * @param s String to be checked
-     * @return true if Double otherwise false
+     * Checks the input is able to be parsed to a Double.
+     * @param s - String to be checked
+     * @return  - True if Double otherwise false
      */
     Boolean isDouble(String s) {
         try {
             Double.parseDouble(s);
             return true;
-        } catch (Exception e){
+        } 
+        catch (Exception e){
             return false;
         }
     }
 
     
     /**
-     * Checks the input is able to be parsed to an Integer
-     * @param s String to be checked
-     * @return true if Integer otherwise false
+     * Checks the input is able to be parsed to an Integer.
+     * @param s - String to be checked
+     * @return  - True if Integer otherwise false
      */
     Boolean isInt(String s) {
         try {
             Integer.parseInt(s);
             return true;
-        } catch (Exception e){
+        } 
+        catch (Exception e){
             return false;
         }
     }
 
 
-    //TODO: doctsring
+    /**
+     * Shows all retailers on the map.
+     * @param event - Auto-generate event on button press
+	 */
     @FXML
     void showRetailerOnMap(ActionEvent event) throws IOException{
         Retailer retailer = newRetailer;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
         Parent root = loader.load();
 
-        Main.getStage().setScene(new Scene(root, Main.getStage().getScene().getWidth(), Main.getStage().getScene().getHeight()));
+        Main.getStage().setScene(new Scene(root, Main.getStage().getScene().getWidth(), 
+        		Main.getStage().getScene().getHeight()));
         Main.getStage().setTitle("Map");
 
         MainScreenController controller = loader.getController();
@@ -198,23 +206,29 @@ public class RetailerInfoScreenController {
             public void mapReady() {
                 controller.getMapView().getMap().clearMarkers();
                 Map.findRetailers(retailer, controller.getMapView().getMap());
-                controller.getMapView().getMap().setCenter(new LatLong(retailer.getLatitude(), retailer.getLongitude()));
+                controller.getMapView().getMap().setCenter(new LatLong(retailer.getLatitude(), 
+                		retailer.getLongitude()));
                 controller.getMapView().getMap().addMarker(
                         new Marker(
                                 new MarkerOptions().animation(Animation.DROP)
-                                        .position(new LatLong(retailer.getLatitude(), retailer.getLongitude()))
+                                        .position(new LatLong(retailer.getLatitude(), 
+                                        		retailer.getLongitude()))
                         )
                 );
-                ArrayList<Location> nearby = Map.findNearby(retailer.getLatitude(), retailer.getLongitude());
+                ArrayList<Location> nearby = Map.findNearby(retailer.getLatitude(), 
+                		retailer.getLongitude());
 
                 for (Location loc : nearby) {
                     if (loc.getLocationType() == 0) {
                         Map.findToilets((Toilet) loc, controller.getMapView().getMap());
-                    } else if (loc.getLocationType() == 1) {
+                    } 
+                    else if (loc.getLocationType() == 1) {
                         Map.findPoi((Poi) loc, controller.getMapView().getMap());
-                    } else if (loc.getLocationType() == 2) {
+                    } 
+                    else if (loc.getLocationType() == 2) {
                         Map.findRetailers((Retailer) loc, controller.getMapView().getMap());
-                    } else if (loc.getLocationType() == 3) {
+                    } 
+                    else if (loc.getLocationType() == 3) {
                         Map.findWifi((Wifi) loc, controller.getMapView().getMap());
                     }
                 }
@@ -229,7 +243,7 @@ public class RetailerInfoScreenController {
     /**
      * Method for when the save button is pressed while a user is updating a retailer.
      * Checks that the inputted data is valid then updates the retailer in the list and database.
-     * @param event Auto-generate event on button press
+     * @param event - Auto-generate event on button press
      */
     @FXML
     void savePressed(ActionEvent event) {
@@ -295,7 +309,7 @@ public class RetailerInfoScreenController {
     /**
      * Method for when cancel is pressed while a user is updating a retailer.
      * Ignores changes, hides the text fields and re displays full labels.
-     * @param event
+     * @param event - Auto-generate event on button press
      */
     @FXML
     void cancelPressed(ActionEvent event) {
@@ -321,8 +335,9 @@ public class RetailerInfoScreenController {
 
     /**
      * Method for when a retailer is deleted.
-     * Removes it from the database, makes its index in retailer array list null and closes the pop up.
-     * @param event
+     * Removes it from the database, makes its index in retailer array list null and closes the 
+     * pop up.
+     * @param event - Auto-generate event on button press
      */
     @FXML
     void deletePressed(ActionEvent event) {
@@ -341,7 +356,9 @@ public class RetailerInfoScreenController {
     }
     
 
-    //TODO add docstring
+    /**
+     * Initialize the controller.
+     */
     @FXML
     void initialize() {
         newRetailer = CurrentStorage.getRetailerArray().get(CurrentStorage.getRetailerIndex());
@@ -350,11 +367,13 @@ public class RetailerInfoScreenController {
         DataFetcher df = new DataFetcher();
         try {
             df.connectDb();
-            if (df.getLocationOwner(newRetailer) != null && df.getLocationOwner(newRetailer).equals(CurrentStorage.getUser().getUsername())) {
+            if (df.getLocationOwner(newRetailer) != null && df.getLocationOwner(newRetailer)
+            		.equals(CurrentStorage.getUser().getUsername())) {
                 owner = true;
             }
             df.closeConnection();
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -369,11 +388,17 @@ public class RetailerInfoScreenController {
     	productLabel.setText("Product: " + newRetailer.getProduct());
     	descriptionLabel.setText("Description: " + newRetailer.getDescription());
     	
-        assert addressLabel != null : "fx:id=\"addressLabel\" was not injected: check your FXML file 'RetailerInfoScreen.fxml'.";
-        assert latLabel != null : "fx:id=\"latLabel\" was not injected: check your FXML file 'RetailerInfoScreen.fxml'.";
-        assert longLabel != null : "fx:id=\"longLabel\" was not injected: check your FXML file 'RetailerInfoScreen.fxml'.";
-        assert nameLabel != null : "fx:id=\"nameLabel\" was not injected: check your FXML file 'RetailerInfoScreen.fxml'.";
-        assert okButton != null : "fx:id=\"okButton\" was not injected: check your FXML file 'RetailerInfoScreen.fxml'.";
-        assert zipLabel != null : "fx:id=\"zipLabel\" was not injected: check your FXML file 'RetailerInfoScreen.fxml'.";
+        assert addressLabel != null : "fx:id=\"addressLabel\" was not injected: check your FXML"
+        		+ " file 'RetailerInfoScreen.fxml'.";
+        assert latLabel != null : "fx:id=\"latLabel\" was not injected: check your FXML file "
+        		+ "'RetailerInfoScreen.fxml'.";
+        assert longLabel != null : "fx:id=\"longLabel\" was not injected: check your FXML file"
+        		+ " 'RetailerInfoScreen.fxml'.";
+        assert nameLabel != null : "fx:id=\"nameLabel\" was not injected: check your FXML file"
+        		+ " 'RetailerInfoScreen.fxml'.";
+        assert okButton != null : "fx:id=\"okButton\" was not injected: check your FXML file "
+        		+ "'RetailerInfoScreen.fxml'.";
+        assert zipLabel != null : "fx:id=\"zipLabel\" was not injected: check your FXML file "
+        		+ "'RetailerInfoScreen.fxml'.";
     }
 }

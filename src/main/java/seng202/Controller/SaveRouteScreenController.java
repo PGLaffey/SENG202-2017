@@ -14,7 +14,9 @@ import seng202.Model.CurrentStorage;
 import seng202.Model.Location;
 import seng202.Model.Route;
 
-
+/**
+ * Controller class for the save route screen.
+ */
 public class SaveRouteScreenController {
 
     @FXML
@@ -53,7 +55,7 @@ public class SaveRouteScreenController {
 
     /**
      * Method for when the cancel button is pressed, hides the pop up.
-     * @param event Auto-generate event on button press
+     * @param event - Auto-generate event on button press
      */
     @FXML
     void cancelButtonPressed(ActionEvent event) {
@@ -64,7 +66,7 @@ public class SaveRouteScreenController {
 
     /**
      * Method when the save button is pressed, saves the route and hides the pop up.
-     * @param event Auto-generate event on button press
+     * @param event - Auto-generate event on button press
      */
     @FXML
     void savePressed(ActionEvent event) {
@@ -101,15 +103,18 @@ public class SaveRouteScreenController {
 
             Stage stage = (Stage) saveButton.getScene().getWindow();
             stage.hide();
-
         }
     }
 
 
-    //TODO add docstring
+    /**
+     * Initializes the controller.
+     */
     @FXML
     void initialize() {
-        assert cancelButton != null : "fx:id=\"cancelButton\" was not injected: check your FXML file 'SaveRouteScreen.fxml'.";
-        assert saveButton != null : "fx:id=\"saveLocallyButton\" was not injected: check your FXML file 'SaveRouteScreen.fxml'.";
+        assert cancelButton != null : "fx:id=\"cancelButton\" was not injected: check your FXML"
+        		+ " file 'SaveRouteScreen.fxml'.";
+        assert saveButton != null : "fx:id=\"saveLocallyButton\" was not injected: check your "
+        		+ "FXML file 'SaveRouteScreen.fxml'.";
     }
 }

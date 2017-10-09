@@ -24,8 +24,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-
-
+/**
+ * Controller class for the wifi information screen.
+ */
 public class WifiInfoScreenController {
 
 	@FXML
@@ -112,7 +113,7 @@ public class WifiInfoScreenController {
 
     /**
      * Method when the ok button is pressed, hides the pop up.
-     * @param event Auto-generate event on button press
+     * @param event - Auto-generate event on button press
      */
     @FXML
     void okPressed(ActionEvent event) {
@@ -122,8 +123,9 @@ public class WifiInfoScreenController {
     
     
     /**
-     * Method when the update button is pressed, displays text fields to update selected wifi point
-     * @param event Auto-generate event on button press
+     * Method when the update button is pressed, displays text fields to update selected 
+     * wifi point.
+     * @param event - Auto-generate event on button press
      */
     @FXML
     void updatePressed(ActionEvent event) {
@@ -157,30 +159,32 @@ public class WifiInfoScreenController {
     
     
     /**
-     * Checks the input is able to be parsed to a Double
-     * @param s String to be checked
-     * @return true if Double otherwise false
+     * Checks the input is able to be parsed to a Double.
+     * @param s - String to be checked
+     * @return  - True if Double otherwise false
      */
     Boolean isDouble(String s) {
         try {
             Double.parseDouble(s);
             return true;
-        } catch (Exception e){
+        } 
+        catch (Exception e){
             return false;
         }
     }
 
     
     /**
-     * Checks the input is able to be parsed to an Integer
-     * @param s String to be checked
-     * @return true if Integer otherwise false
+     * Checks the input is able to be parsed to an Integer.
+     * @param s - String to be checked
+     * @return  - True if Integer otherwise false
      */
     Boolean isInt(String s) {
         try {
             Integer.parseInt(s);
             return true;
-        } catch (Exception e){
+        } 
+        catch (Exception e){
             return false;
         }
     }
@@ -188,8 +192,8 @@ public class WifiInfoScreenController {
     
     /**
      * Method for when the save button is pressed while a user is updating a wifi.
-     * Checks that the inputted data is valid then updates the wifi in the list and database.
-     * @param event Auto-generate event on button press
+     * Checks that the inputed data is valid then updates the wifi in the list and database.
+     * @param event - Auto-generate event on button press
      */
     @FXML
     void savePressed(ActionEvent event) {
@@ -231,7 +235,8 @@ public class WifiInfoScreenController {
     	}
         
         if (allValid) {
-    	    if (addressText.getText() != null && !oldWifi.getAddress().equals(addressText.getText())) {
+    	    if (addressText.getText() != null && !oldWifi.getAddress().equals(
+    	    		addressText.getText())) {
     	        newWifi.setAddress(addressText.getText());
                 double[] latLong = Map.getLatLong(addressText.getText());
                 newWifi.setLatitude(latLong[0]);
@@ -263,7 +268,7 @@ public class WifiInfoScreenController {
     /**
      * Method for when cancel is pressed while a user is updating a wifi.
      * Ignores changes, hides the text fields and re displays full labels.
-     * @param event
+     * @param event - Auto-generate event on button press
      */
     @FXML
     void cancelPressed (ActionEvent event) {
@@ -290,9 +295,9 @@ public class WifiInfoScreenController {
 
 
     /**
-     * Method for when a wifi is deleted.
-     * Removes it from the database, makes its index in wifi array list null and closes the pop up.
-     * @param event
+     * Method for when a wifi is deleted. Removes it from the database, makes its index in 
+     * wifi array list null and closes the pop up.
+     * @param event - Auto-generate event on button press
      */
     @FXML
     void deletePressed(ActionEvent event) {
@@ -312,14 +317,18 @@ public class WifiInfoScreenController {
     }
     
 
-    //TODO add docstring
+    /**
+     * Shows all wifi on the map.
+     * @param event - Auto-generate event on button press
+     */
     @FXML
     void showWifiOnMap(ActionEvent event) throws IOException {
         wifi = newWifi;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
         Parent root = loader.load();
 
-        Main.getStage().setScene(new Scene(root, Main.getStage().getScene().getWidth(), Main.getStage().getScene().getHeight()));
+        Main.getStage().setScene(new Scene(root, Main.getStage().getScene().getWidth(), 
+        		Main.getStage().getScene().getHeight()));
         Main.getStage().setTitle("Map");
 
         MainScreenController controller = loader.getController();
@@ -329,23 +338,26 @@ public class WifiInfoScreenController {
 
                 controller.getMapView().getMap().clearMarkers();
                 Map.findWifi(wifi, controller.getMapView().getMap());
-                controller.getMapView().getMap().setCenter(new LatLong(wifi.getLatitude(), wifi.getLongitude()));
+                controller.getMapView().getMap().setCenter(new LatLong(wifi.getLatitude(), 
+                		wifi.getLongitude()));
                 controller.getMapView().getMap().addMarker(
                         new Marker(
-                                new MarkerOptions().animation(Animation.DROP)
-                                        .position(new LatLong(wifi.getLatitude(), wifi.getLongitude()))
-                        )
-                );
-                ArrayList<Location> nearby = Map.findNearby(wifi.getLatitude(), wifi.getLongitude());
+                                new MarkerOptions().animation(Animation.DROP).position(
+                                		new LatLong(wifi.getLatitude(), wifi.getLongitude()))));
+                ArrayList<Location> nearby = Map.findNearby(wifi.getLatitude(), 
+                		wifi.getLongitude());
 
                 for (Location loc : nearby) {
                     if (loc.getLocationType() == 0) {
                         Map.findToilets((Toilet) loc, controller.getMapView().getMap());
-                    } else if (loc.getLocationType() == 1) {
+                    } 
+                    else if (loc.getLocationType() == 1) {
                         Map.findPoi((Poi) loc, controller.getMapView().getMap());
-                    } else if (loc.getLocationType() == 2) {
+                    } 
+                    else if (loc.getLocationType() == 2) {
                         Map.findRetailers((Retailer) loc, controller.getMapView().getMap());
-                    } else if (loc.getLocationType() == 3) {
+                    } 
+                    else if (loc.getLocationType() == 3) {
                         Map.findWifi((Wifi) loc, controller.getMapView().getMap());
                     }
                 }
@@ -354,6 +366,10 @@ public class WifiInfoScreenController {
         Main.getStage().show();
     }
 
+    
+    /**
+     * Initializes the controller.
+     */
     @FXML
     void initialize() {
         newWifi = CurrentStorage.getWifiArray().get(CurrentStorage.getWifiIndex());
@@ -362,17 +378,17 @@ public class WifiInfoScreenController {
         DataFetcher df = new DataFetcher();
         try {
             df.connectDb();
-            if (df.getLocationOwner(newWifi) != null && df.getLocationOwner(newWifi).equals(CurrentStorage.getUser().getUsername())) {
+            if (df.getLocationOwner(newWifi) != null && df.getLocationOwner(newWifi)
+            		.equals(CurrentStorage.getUser().getUsername())) {
                 owner = true;
             }
             df.closeConnection();
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             e.printStackTrace();
         }
 
         deleteButton.setVisible(owner);
-
-
     	nameLabel.setText("Name: " + newWifi.getName());
     	typeLabel.setText("Type: " + newWifi.getType());
     	boroughLabel.setText("Borough: " + newWifi.getBorough());
@@ -383,12 +399,19 @@ public class WifiInfoScreenController {
     	addressLabel.setText("Address: " + newWifi.getAddress());
     	ssidLabel.setText("Ssid: " + newWifi.getSsid());
     	
-        assert boroughLabel != null : "fx:id=\"boroughLabel\" was not injected: check your FXML file 'WifiInfoScreen.fxml'.";
-        assert latLabel != null : "fx:id=\"latLabel\" was not injected: check your FXML file 'WifiInfoScreen.fxml'.";
-        assert longLabel != null : "fx:id=\"longLabel\" was not injected: check your FXML file 'WifiInfoScreen.fxml'.";
-        assert nameLabel != null : "fx:id=\"nameLabel\" was not injected: check your FXML file 'WifiInfoScreen.fxml'.";
-        assert okButton != null : "fx:id=\"okButton\" was not injected: check your FXML file 'WifiInfoScreen.fxml'.";
-        assert providerLabel != null : "fx:id=\"providerLabel\" was not injected: check your FXML file 'WifiInfoScreen.fxml'.";
-        assert typeLabel != null : "fx:id=\"typeLabel\" was not injected: check your FXML file 'WifiInfoScreen.fxml'.";
+        assert boroughLabel != null : "fx:id=\"boroughLabel\" was not injected: check your "
+        		+ "FXML file 'WifiInfoScreen.fxml'.";
+        assert latLabel != null : "fx:id=\"latLabel\" was not injected: check your FXML file "
+        		+ "'WifiInfoScreen.fxml'.";
+        assert longLabel != null : "fx:id=\"longLabel\" was not injected: check your FXML file"
+        		+ " 'WifiInfoScreen.fxml'.";
+        assert nameLabel != null : "fx:id=\"nameLabel\" was not injected: check your FXML file"
+        		+ " 'WifiInfoScreen.fxml'.";
+        assert okButton != null : "fx:id=\"okButton\" was not injected: check your FXML file "
+        		+ "'WifiInfoScreen.fxml'.";
+        assert providerLabel != null : "fx:id=\"providerLabel\" was not injected: check your "
+        		+ "FXML file 'WifiInfoScreen.fxml'.";
+        assert typeLabel != null : "fx:id=\"typeLabel\" was not injected: check your FXML file "
+        		+ "'WifiInfoScreen.fxml'.";
     }
 }

@@ -23,6 +23,9 @@ import sun.util.resources.cldr.uk.CurrencyNames_uk;
 
 import static oracle.jrockit.jfr.events.Bits.intValue;
 
+/**
+ * Controller class for the data viewer screen.
+ */
 public class DataViewerScreenController {
 	
 	@FXML
@@ -61,17 +64,17 @@ public class DataViewerScreenController {
 	
 	/**
 	 * Method for when the map menu button is pressed, shows the main map screen.
-	 * @throws IOException 
 	 */
 	public void mapPressed() throws IOException {
-		Stage primaryStage = (Stage) mapButton.getScene().getWindow(); // Here the window is the stage
+		// Here the window is the stage
+		Stage primaryStage = (Stage) mapButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 
 		Scene currentScene = primaryStage.getScene();
-		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
-				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), 
+				primaryStage.getMinHeight()): new Scene(root, currentScene.getWidth(), 
+				currentScene.getHeight()));
 
-		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Map");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -80,8 +83,7 @@ public class DataViewerScreenController {
 	
 	/** 
 	 * Method for when the table menu button is pressed, shows the raw tables screen.
-	 * @param event Auto-generated event when button pressed
-	 * @throws IOException
+	 * @param event - Auto-generated event when button pressed
 	 */
 	@FXML
     void tablePressed(ActionEvent event) throws IOException {
@@ -90,10 +92,10 @@ public class DataViewerScreenController {
 			Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
 
 			Scene currentScene = primaryStage.getScene();
-			Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
-					: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+			Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), 
+					primaryStage.getMinHeight()): new Scene(root, currentScene.getWidth(), 
+					currentScene.getHeight()));
 
-			//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 			primaryStage.setTitle("Table");
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -112,18 +114,17 @@ public class DataViewerScreenController {
 	
 	/**
 	 * Method for when the statistics menu button is pressed, shows the statistics screen.
-	 * @throws IOException 
 	 */
 	public void statPressed() throws IOException {
-		
-		Stage primaryStage = (Stage) statButton.getScene().getWindow(); // Here the window is the stage
+		// Here the window is the stage
+		Stage primaryStage = (Stage) statButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/DataViewerScreen.fxml"));
 
 		Scene currentScene = primaryStage.getScene();
-		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
-				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
-		
-		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), 
+				primaryStage.getMinHeight()): new Scene(root, currentScene.getWidth(), 
+				currentScene.getHeight()));
+
 		primaryStage.setTitle("Statistics");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -132,17 +133,16 @@ public class DataViewerScreenController {
 	
 	/**
 	 * Method for when the account menu button is pressed, shows the profile screen.
-	 * @throws IOException 
 	 */
 	public void accountPressed() throws IOException {
 		Stage primaryStage = (Stage) accountButton.getScene().getWindow(); 
 		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
 
 		Scene currentScene = primaryStage.getScene();
-		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
-				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), 
+				primaryStage.getMinHeight()): new Scene(root, currentScene.getWidth(), 
+				currentScene.getHeight()));
 
-		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Profile");
 		primaryStage.setScene(scene);
 		primaryStage.show();	
@@ -150,8 +150,8 @@ public class DataViewerScreenController {
 	
 	
 	/**
-	 * Method for when the Logout button is pressed, shows the login screen and flushes the current storage.
-	 * @throws IOException 
+	 * Method for when the Logout button is pressed, shows the login screen and flushes the 
+	 * current storage.
 	 */
 	public void logoutPressed() {
 		DataFetcher exporter = new DataFetcher();
@@ -168,6 +168,9 @@ public class DataViewerScreenController {
 	}
 
 
+	/**
+	 * Initializes the controller.
+	 */
 	@FXML
 	void initialize() {
 

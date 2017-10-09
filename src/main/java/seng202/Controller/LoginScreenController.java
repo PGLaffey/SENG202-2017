@@ -12,6 +12,9 @@ import seng202.Model.User;
 
 import java.util.ArrayList;
 
+/**
+ * Controller class for the login screen.
+ */
 public class LoginScreenController {
 	
 	@FXML
@@ -41,8 +44,10 @@ public class LoginScreenController {
 	@FXML
 	private TextField ipText;
 
+	
 	/** 
-	 * Method for when the Sign In button is pressed. Checks the login, informing if information is wrong otherwise shows login screen.
+	 * Method for when the Sign In button is pressed. Checks the login, informing if information 
+	 * is wrong otherwise shows login screen.
 	 */
 	public void signInButtonPressed() throws Exception {
 		DataFetcher data = new DataFetcher();
@@ -52,13 +57,16 @@ public class LoginScreenController {
 				incorrectUserLbl.setVisible(true);
 				incorrectPasswordLbl.setVisible(true);				
 			}
-			else if ((data.fetchPassword(usernameText.getText()).equals(passwordText.getText().toString()))) {
+			else if ((data.fetchPassword(usernameText.getText()).equals(passwordText.getText()
+					.toString()))) {
 
 				ArrayList<String> userInfo;
 				userInfo = data.fetchUserInfo(usernameText.getText());
 
-				User user = new User(userInfo.get(0), userInfo.get(1), usernameText.getText().toLowerCase(), userInfo.get(2), passwordText.getText().toString(),
-						Integer.parseInt(userInfo.get(3)), Double.parseDouble(userInfo.get(4)), Double.parseDouble(userInfo.get(5)));
+				User user = new User(userInfo.get(0), userInfo.get(1), usernameText.getText()
+						.toLowerCase(), userInfo.get(2), passwordText.getText().toString(),
+						Integer.parseInt(userInfo.get(3)), Double.parseDouble(userInfo.get(4)), 
+						Double.parseDouble(userInfo.get(5)));
 
 				CurrentStorage.setUser(user);
 				Stage primaryStage = (Stage) signInButton.getScene().getWindow();
@@ -67,20 +75,16 @@ public class LoginScreenController {
 				primaryStage.setScene(new Scene(root));
 			} 
 			else {
-				//incorrectUserLbl.setVisible(true);
 				incorrectPasswordLbl.setVisible(true);
 			}
 		
 		} 
 		else {
 			incorrectPasswordLbl.setVisible(false);
-			//incorrectUserLbl.setVisible(false);
 		}
 		data.closeConnection();
 	}
 
-
-	
 
 	/** 
 	 * Method for when the Sign Up button is pressed, shows the sign up screen.
@@ -94,6 +98,10 @@ public class LoginScreenController {
     	primaryStage.setScene(new Scene(root));
     }
 
+    
+    /**
+     * Method for when the ip changed button is pressed.
+     */
 	@FXML
 	void ipChangedButtonPressed() {
     	ipOkButton.setVisible(true);
@@ -101,6 +109,10 @@ public class LoginScreenController {
     	ipText.setPromptText("Enter new IP address");
 	}
 
+	
+	/**
+	 * Method for when the ip okay button is pressed.
+	 */
 	@FXML
 	void ipOkButtonPressed() {
     	if (!ipText.getText().equals("")) {
@@ -111,11 +123,10 @@ public class LoginScreenController {
 				df.connectDb();;
 				df.setIP(ipText.getText());
 				df.closeConnection();
-			} catch(Exception e) {
+			} 
+			catch(Exception e) {
 				e.printStackTrace();
 			}
 		}
-
-
 	}
 }

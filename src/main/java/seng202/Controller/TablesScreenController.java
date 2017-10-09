@@ -31,7 +31,9 @@ import java.io.File;
 
 import javafx.scene.control.*;
 
-
+/**
+ * Controller class for the tables screen.
+ */
 public class TablesScreenController {
 
     @FXML
@@ -184,7 +186,7 @@ public class TablesScreenController {
 
     /**
      * Method for when account menu button pressed, shows the profile screen.
-     * @param event Auto-generate event on button press
+     * @param event - Auto-generate event on button press
      */
     @FXML
     void accountPressed(ActionEvent event) throws IOException {
@@ -192,10 +194,10 @@ public class TablesScreenController {
 		Parent root = FXMLLoader.load(getClass().getResource("/ProfileScreen.fxml"));
 
 		Scene currentScene = primaryStage.getScene();
-		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
-				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), 
+				primaryStage.getMinHeight()): new Scene(root, currentScene.getWidth(), 
+				currentScene.getHeight()));
 
-		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Profile");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -204,7 +206,7 @@ public class TablesScreenController {
     
     /**
      * Method for when logout button pressed, shows the login screen and flushes current storage.
-     * @param event Auto-generate event on button press
+     * @param event - Auto-generate event on button press
      */
     @FXML
     void logoutPressed(ActionEvent event) throws IOException {
@@ -224,7 +226,7 @@ public class TablesScreenController {
     
     /**
      * Method for when the map menu button pressed, shows main map screen.
-     * @param event Auto-generate event on button press
+     * @param event - Auto-generate event on button press
      */
     @FXML
     void mapPressed(ActionEvent event) throws IOException {
@@ -232,10 +234,10 @@ public class TablesScreenController {
 		Parent root = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
 
 		Scene currentScene = primaryStage.getScene();
-		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
-				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), 
+				primaryStage.getMinHeight()): new Scene(root, currentScene.getWidth(), 
+				currentScene.getHeight()));
 
-		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Map");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -244,7 +246,7 @@ public class TablesScreenController {
 
     /**
      * Method when the search button is pressed. Displays the correct table and filtering.
-     * @param event Auto-generate event on button press
+     * @param event - Auto-generate event on button press
      */
     @FXML
     void searchPressed(ActionEvent event) {
@@ -257,7 +259,8 @@ public class TablesScreenController {
     		locations.addAll(CurrentStorage.getToiletArray());
     		locations.addAll(CurrentStorage.getWifiArray());
 
-    		ArrayList<Location> locFiltered = RawDataViewer.searchLocations(locations, keywordText.getText().toString());
+    		ArrayList<Location> locFiltered = RawDataViewer.searchLocations(locations, 
+    				keywordText.getText().toString());
     		ObservableList<Location> locData = FXCollections.observableArrayList(locFiltered);
     		allLocationsTable.setItems(locData);
     		if (allLocationsTable.getItems().isEmpty()) {
@@ -276,7 +279,8 @@ public class TablesScreenController {
     	} 
     	else if (option == "Retailers") {
     		retailersTable.refresh();
-    		ArrayList<Retailer> retFiltered = RawDataViewer.searchRetailer(CurrentStorage.getRetailerArray(), keywordText.getText().toString());
+    		ArrayList<Retailer> retFiltered = RawDataViewer.searchRetailer(
+    				CurrentStorage.getRetailerArray(), keywordText.getText().toString());
     		ObservableList<Retailer> retData = FXCollections.observableArrayList(retFiltered);
         	retailersTable.setItems(retData);
         	if (retailersTable.getItems().isEmpty()) {
@@ -295,7 +299,8 @@ public class TablesScreenController {
     	} 
     	else if (option == "WiFi") {
     		wifiTable.refresh();
-    		ArrayList<Wifi> wifiFiltered = RawDataViewer.searchWifi(CurrentStorage.getWifiArray(), keywordText.getText().toString());
+    		ArrayList<Wifi> wifiFiltered = RawDataViewer.searchWifi(
+    				CurrentStorage.getWifiArray(), keywordText.getText().toString());
     		ObservableList<Wifi> wifiData = FXCollections.observableArrayList(wifiFiltered);
     		wifiTable.setItems(wifiData);
     		if (wifiTable.getItems().isEmpty()) {
@@ -315,7 +320,8 @@ public class TablesScreenController {
     	} 
     	else if (option == "Toilets") {
     		toiletsTable.refresh();
-    		ArrayList<Toilet> toiletFiltered = RawDataViewer.searchToilets(CurrentStorage.getToiletArray(), keywordText.getText().toString());
+    		ArrayList<Toilet> toiletFiltered = RawDataViewer.searchToilets(
+    				CurrentStorage.getToiletArray(), keywordText.getText().toString());
     		ObservableList<Toilet> toiletData = FXCollections.observableArrayList(toiletFiltered);
     		toiletsTable.setItems(toiletData);
 
@@ -337,7 +343,8 @@ public class TablesScreenController {
     	} 
     	else if (option == "Points of interest")  {
     		poiTable.refresh();
-    		ArrayList<Poi> poiFiltered = RawDataViewer.searchPoi(CurrentStorage.getPoiArray(), keywordText.getText().toString());
+    		ArrayList<Poi> poiFiltered = RawDataViewer.searchPoi(
+    				CurrentStorage.getPoiArray(), keywordText.getText().toString());
     		ObservableList<Poi> poiData = FXCollections.observableArrayList(poiFiltered);
     		poiTable.setItems(poiData);
     		if (poiTable.getItems().isEmpty()) {
@@ -356,7 +363,8 @@ public class TablesScreenController {
     	} 
     	else if (option == "Routes") {
     		routesTable.refresh();
-    		ArrayList<Route> routeFiltered = RawDataViewer.searchRoutes(CurrentStorage.getRouteArray(), keywordText.getText().toString());
+    		ArrayList<Route> routeFiltered = RawDataViewer.searchRoutes(
+    				CurrentStorage.getRouteArray(), keywordText.getText().toString());
     		ObservableList<Route> routeData = FXCollections.observableArrayList(routeFiltered);
     		routesTable.setItems(routeData);
     		if (routesTable.getItems().isEmpty()) {
@@ -378,7 +386,8 @@ public class TablesScreenController {
 
     /**
      * Method when the statistics menu button pressed, shows the statistics screen.
-     * @param event Auto-generate event on button press
+     * @param event - Auto-generate event on button press
+	
      */
     @FXML
     void statPressed(ActionEvent event) throws IOException {
@@ -386,10 +395,10 @@ public class TablesScreenController {
 		Parent root = FXMLLoader.load(getClass().getResource("/DataViewerScreen.fxml"));
 
 		Scene currentScene = primaryStage.getScene();
-		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
-				: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+		Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), 
+				primaryStage.getMinHeight()): new Scene(root, currentScene.getWidth(), 
+				currentScene.getHeight()));
 
-		//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 		primaryStage.setTitle("Statistics");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -399,8 +408,7 @@ public class TablesScreenController {
 	/**
 	 * Method for when the table menu button is pressed, shows the table screen.
 	 * Displays pop up if an error occurs.
-	 * @param event
-	 * @throws IOException
+	 * @param event - Auto-generate event on button press
 	 */
 	@FXML
     void tablePressed(ActionEvent event) throws IOException {
@@ -409,10 +417,10 @@ public class TablesScreenController {
 			Parent root = FXMLLoader.load(getClass().getResource("/TablesScreen.fxml"));
 
 			Scene currentScene = primaryStage.getScene();
-			Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), primaryStage.getMinHeight())
-					: new Scene(root, currentScene.getWidth(), currentScene.getHeight()));
+			Scene scene = (currentScene == null ? new Scene(root, primaryStage.getMinWidth(), 
+					primaryStage.getMinHeight()): new Scene(root, currentScene.getWidth(), 
+					currentScene.getHeight()));
 
-			//Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()); // I think we can add in window size here?
 			primaryStage.setTitle("Table");
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -430,8 +438,8 @@ public class TablesScreenController {
 
     
 	/**
-	 * Method when a row in the wifi table is pressed, displays a pop up with further information
-	 * @param event Auto-generate event on button press
+	 * Method when a row in the wifi table is pressed, displays a pop up with further information.
+	 * @param event - Auto-generate event on button press
 	 */
 	@FXML
     void wifiTableClicked(MouseEvent event) throws IOException {
@@ -449,8 +457,9 @@ public class TablesScreenController {
 
 	
 	/**
-	 * Method when a row in the retailer table is pressed, displays a pop up with further information
-	 * @param event Auto-generate event on button press
+	 * Method when a row in the retailer table is pressed, displays a pop up with further 
+	 * information.
+	 * @param event - Auto-generate event on button press
 	 */
 	@FXML
     void retailerTableClicked(MouseEvent event) throws IOException {
@@ -467,8 +476,9 @@ public class TablesScreenController {
 
 	
 	/**
-	 * Method when a row in the toilet table is pressed, displays a pop up with further information
-	 * @param event Auto-generate event on button press
+	 * Method when a row in the toilet table is pressed, displays a pop up with further 
+	 * information.
+	 * @param event - Auto-generate event on button press
 	 */
 	@FXML
     void toiletTableClicked(MouseEvent event) throws IOException {
@@ -485,8 +495,9 @@ public class TablesScreenController {
 
 	
 	/**
-	 * Method when a row in the all locations table is pressed, displays a pop up with further information
-	 * @param event Auto-generate event on button press
+	 * Method when a row in the all locations table is pressed, displays a pop up with further 
+	 * information.
+	 * @param event - Auto-generate event on button press
 	 */
 	@FXML
     void allLocationTableClicked(MouseEvent event) throws IOException {
@@ -503,8 +514,9 @@ public class TablesScreenController {
 	
 
 	/**
-	 * Method when a row in the route table is pressed, displays a pop up with further information
-	 * @param event Auto-generate event on button press
+	 * Method when a row in the route table is pressed, displays a pop up with further 
+	 * information.
+	 * @param event - Auto-generate event on button press
 	 */
 	@FXML
     void routeTableClicked(MouseEvent event) throws IOException {
@@ -521,8 +533,9 @@ public class TablesScreenController {
 
 	
 	/**
-	 * Method when a row in the point of interest table is pressed, displays a pop up with further information
-	 * @param event Auto-generate event on button press
+	 * Method when a row in the point of interest table is pressed, displays a pop up with 
+	 * further information.
+	 * @param event - Auto-generate event on button press
 	 */
 	@FXML
     void poiTableClicked(MouseEvent event) throws IOException {
@@ -539,9 +552,8 @@ public class TablesScreenController {
 
 
 	/**
-	 * Method for when the export button is pressed.
-	 * Exports the data currently in the table.
-	 * @param event
+	 * Method for when the export button is pressed. Exports the data currently in the table.
+	 * @param event - Auto-generate event on button press
 	 */
 	@FXML
 	void exportPressed(ActionEvent event)  {
@@ -589,7 +601,8 @@ public class TablesScreenController {
 	
 
     /**
-     * Initialises all the nodes. Also fills all columns in each tables with the correct objects from current storage.
+     * Initialises all the nodes. Also fills all columns in each tables with the correct 
+     * objects from current storage.
      */
     @FXML
     void initialize() {
@@ -605,26 +618,31 @@ public class TablesScreenController {
 		toiletsTable.setVisible(false);
 		routesTable.setVisible(false);
 
-    	ObservableList<String> filterOptions = FXCollections.observableArrayList("All locations","Routes", "Retailers", "WiFi", "Toilets", "Points of interest");
+    	ObservableList<String> filterOptions = FXCollections.observableArrayList("All locations",
+    			"Routes", "Retailers", "WiFi", "Toilets", "Points of interest");
     	tableOptions.setItems(filterOptions);
     	tableOptions.getSelectionModel().selectFirst();
 
-
     	// Set up the all locations table
     	allLocNameCol.setCellValueFactory(new PropertyValueFactory<Location,String>("name"));
-    	allLocTypeCol.setCellValueFactory(new PropertyValueFactory<Location,String>("typeString"));
-		allLocAddressCol.setCellValueFactory(new PropertyValueFactory<Location, String>("address"));
-		allLocBoroughCol.setCellValueFactory(new PropertyValueFactory<Location, String>("borough"));
-
-
+    	allLocTypeCol.setCellValueFactory(
+    			new PropertyValueFactory<Location,String>("typeString"));
+		allLocAddressCol.setCellValueFactory(
+				new PropertyValueFactory<Location, String>("address"));
+		allLocBoroughCol.setCellValueFactory(
+				new PropertyValueFactory<Location, String>("borough"));
 
     	// Set up the toilets table
-    	toiletDisCol.setCellValueFactory(new PropertyValueFactory<Toilet, Boolean>("forDisabled"));
-    	toiletAddressCol.setCellValueFactory(new PropertyValueFactory<Toilet, String>("address"));
-    	toiletBoroughCol.setCellValueFactory(new PropertyValueFactory<Toilet, String>("borough"));
-    	toiletUniCol.setCellValueFactory(new PropertyValueFactory<Toilet, Boolean>("uniSex"));
-    	toiletNameCol.setCellValueFactory(new PropertyValueFactory<Toilet, String>("name"));
-
+    	toiletDisCol.setCellValueFactory(
+    			new PropertyValueFactory<Toilet, Boolean>("forDisabled"));
+    	toiletAddressCol.setCellValueFactory(
+    			new PropertyValueFactory<Toilet, String>("address"));
+    	toiletBoroughCol.setCellValueFactory(
+    			new PropertyValueFactory<Toilet, String>("borough"));
+    	toiletUniCol.setCellValueFactory(
+    			new PropertyValueFactory<Toilet, Boolean>("uniSex"));
+    	toiletNameCol.setCellValueFactory(
+    			new PropertyValueFactory<Toilet, String>("name"));
 
     	// Set up the wifi table
     	wifiProvCol.setCellValueFactory(new PropertyValueFactory<Wifi, String>("provider"));
@@ -633,17 +651,11 @@ public class TablesScreenController {
 		wifiAddressCol.setCellValueFactory(new PropertyValueFactory<Wifi, String>("address"));
     	wifiBoroughCol.setCellValueFactory(new PropertyValueFactory<Wifi, String>("borough"));
 
-
-
-
     	// Set up the routes table
     	routeEndCol.setCellValueFactory(new PropertyValueFactory<Route, String>("endString"));
     	routeStartCol.setCellValueFactory(new PropertyValueFactory<Route, String>("startString"));
     	routeDistCol.setCellValueFactory(new PropertyValueFactory<Route, String>("distanceRound"));
     	routeNameCol.setCellValueFactory(new PropertyValueFactory<Route, String>("name"));
-
-
-
 
     	// Set up the retailers table
     	retAddressCol.setCellValueFactory(new PropertyValueFactory<Retailer, String>("address"));
@@ -652,54 +664,83 @@ public class TablesScreenController {
     	retProductCol.setCellValueFactory(new PropertyValueFactory<Retailer, String>("product"));
     	retNameCol.setCellValueFactory(new PropertyValueFactory<Retailer, String>("name"));
 
-
-
     	// Set up the poi table
     	poiAddressCol.setCellValueFactory(new PropertyValueFactory<Poi, String>("address"));
     	poiBoroughCol.setCellValueFactory(new PropertyValueFactory<Poi, String>("borough"));
     	poiDescCol.setCellValueFactory(new PropertyValueFactory<Poi, String>("description"));
     	poiNameCol.setCellValueFactory(new PropertyValueFactory<Poi, String>("name"));
     	poiCostCol.setCellValueFactory(new PropertyValueFactory<Poi, Double>("cost"));
-    	ObservableList<Poi> poiData = FXCollections.observableArrayList(CurrentStorage.getPoiArray());
+    	ObservableList<Poi> poiData = FXCollections.observableArrayList(
+    			CurrentStorage.getPoiArray());
     	poiTable.setItems(poiData);
 
-
-
-    	assert accountButton != null : "fx:id=\"accountButton\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert allLocLatCol != null : "fx:id=\"allLocLatCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert allLocLongCol != null : "fx:id=\"allLocLongCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert allLocNameCol != null : "fx:id=\"allLocNameCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert allLocTypeCol != null : "fx:id=\"allLocTypeCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert allLocationsTable != null : "fx:id=\"allLocationsTable\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert keywordText != null : "fx:id=\"conditionText\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert logoutButton != null : "fx:id=\"logoutButton\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert mapButton != null : "fx:id=\"mapButton\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert poiCostCol != null : "fx:id=\"poiCostCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert poiDescCol != null : "fx:id=\"poiDescCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert poiNameCol != null : "fx:id=\"poiNameCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert poiTable != null : "fx:id=\"poiTable\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert retDescCol != null : "fx:id=\"retDescCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert retNameCol != null : "fx:id=\"retNameCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert retProductCol != null : "fx:id=\"retProductCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert retailersTable != null : "fx:id=\"retailersTable\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert routeDistCol != null : "fx:id=\"routeDistCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert routeEndCol != null : "fx:id=\"routeEndCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert routeNameCol != null : "fx:id=\"routeNameCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert routeStartCol != null : "fx:id=\"routeStartCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert routesTable != null : "fx:id=\"routesTable\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert searchButton != null : "fx:id=\"searchButton\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert statButton != null : "fx:id=\"statButton\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert tableButton != null : "fx:id=\"tableButton\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert tableOptions != null : "fx:id=\"tableOptions\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert toiletDisCol != null : "fx:id=\"toiletDisCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert toiletNameCol != null : "fx:id=\"toiletNameCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert toiletUniCol != null : "fx:id=\"toiletUniCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert toiletsTable != null : "fx:id=\"toiletsTable\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert wifiNameCol != null : "fx:id=\"wifiNameCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert wifiProvCol != null : "fx:id=\"wifiProvCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert wifiTable != null : "fx:id=\"wifiTable\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-        assert wifiTypeCol != null : "fx:id=\"wifiTypeCol\" was not injected: check your FXML file 'TablesScreen.fxml'.";
-
+    	assert accountButton != null : "fx:id=\"accountButton\" was not injected: check your "
+    			+ "FXML file 'TablesScreen.fxml'.";
+        assert allLocLatCol != null : "fx:id=\"allLocLatCol\" was not injected: check your FXML "
+        		+ "file 'TablesScreen.fxml'.";
+        assert allLocLongCol != null : "fx:id=\"allLocLongCol\" was not injected: check your FXML"
+        		+ " file 'TablesScreen.fxml'.";
+        assert allLocNameCol != null : "fx:id=\"allLocNameCol\" was not injected: check your FXML"
+        		+ " file 'TablesScreen.fxml'.";
+        assert allLocTypeCol != null : "fx:id=\"allLocTypeCol\" was not injected: check your FXML"
+        		+ " file 'TablesScreen.fxml'.";
+        assert allLocationsTable != null : "fx:id=\"allLocationsTable\" was not injected: check "
+        		+ "your FXML file 'TablesScreen.fxml'.";
+        assert keywordText != null : "fx:id=\"conditionText\" was not injected: check your FXML "
+        		+ "file 'TablesScreen.fxml'.";
+        assert logoutButton != null : "fx:id=\"logoutButton\" was not injected: check your FXML "
+        		+ "file 'TablesScreen.fxml'.";
+        assert mapButton != null : "fx:id=\"mapButton\" was not injected: check your FXML file "
+        		+ "'TablesScreen.fxml'.";
+        assert poiCostCol != null : "fx:id=\"poiCostCol\" was not injected: check your FXML file"
+        		+ " 'TablesScreen.fxml'.";
+        assert poiDescCol != null : "fx:id=\"poiDescCol\" was not injected: check your FXML file"
+        		+ " 'TablesScreen.fxml'.";
+        assert poiNameCol != null : "fx:id=\"poiNameCol\" was not injected: check your FXML file"
+        		+ " 'TablesScreen.fxml'.";
+        assert poiTable != null : "fx:id=\"poiTable\" was not injected: check your FXML file "
+        		+ "'TablesScreen.fxml'.";
+        assert retDescCol != null : "fx:id=\"retDescCol\" was not injected: check your FXML file"
+        		+ " 'TablesScreen.fxml'.";
+        assert retNameCol != null : "fx:id=\"retNameCol\" was not injected: check your FXML file"
+        		+ " 'TablesScreen.fxml'.";
+        assert retProductCol != null : "fx:id=\"retProductCol\" was not injected: check your "
+        		+ "FXML file 'TablesScreen.fxml'.";
+        assert retailersTable != null : "fx:id=\"retailersTable\" was not injected: check your "
+        		+ "FXML file 'TablesScreen.fxml'.";
+        assert routeDistCol != null : "fx:id=\"routeDistCol\" was not injected: check your FXML "
+        		+ "file 'TablesScreen.fxml'.";
+        assert routeEndCol != null : "fx:id=\"routeEndCol\" was not injected: check your FXML "
+        		+ "file 'TablesScreen.fxml'.";
+        assert routeNameCol != null : "fx:id=\"routeNameCol\" was not injected: check your FXML "
+        		+ "file 'TablesScreen.fxml'.";
+        assert routeStartCol != null : "fx:id=\"routeStartCol\" was not injected: check your "
+        		+ "FXML file 'TablesScreen.fxml'.";
+        assert routesTable != null : "fx:id=\"routesTable\" was not injected: check your FXML "
+        		+ "file 'TablesScreen.fxml'.";
+        assert searchButton != null : "fx:id=\"searchButton\" was not injected: check your FXML "
+        		+ "file 'TablesScreen.fxml'.";
+        assert statButton != null : "fx:id=\"statButton\" was not injected: check your FXML file"
+        		+ " 'TablesScreen.fxml'.";
+        assert tableButton != null : "fx:id=\"tableButton\" was not injected: check your FXML "
+        		+ "file 'TablesScreen.fxml'.";
+        assert tableOptions != null : "fx:id=\"tableOptions\" was not injected: check your FXML"
+        		+ " file 'TablesScreen.fxml'.";
+        assert toiletDisCol != null : "fx:id=\"toiletDisCol\" was not injected: check your FXML"
+        		+ " file 'TablesScreen.fxml'.";
+        assert toiletNameCol != null : "fx:id=\"toiletNameCol\" was not injected: check your FXML"
+        		+ " file 'TablesScreen.fxml'.";
+        assert toiletUniCol != null : "fx:id=\"toiletUniCol\" was not injected: check your FXML"
+        		+ " file 'TablesScreen.fxml'.";
+        assert toiletsTable != null : "fx:id=\"toiletsTable\" was not injected: check your FXML"
+        		+ " file 'TablesScreen.fxml'.";
+        assert wifiNameCol != null : "fx:id=\"wifiNameCol\" was not injected: check your FXML "
+        		+ "file 'TablesScreen.fxml'.";
+        assert wifiProvCol != null : "fx:id=\"wifiProvCol\" was not injected: check your FXML "
+        		+ "file 'TablesScreen.fxml'.";
+        assert wifiTable != null : "fx:id=\"wifiTable\" was not injected: check your FXML file "
+        		+ "'TablesScreen.fxml'.";
+        assert wifiTypeCol != null : "fx:id=\"wifiTypeCol\" was not injected: check your FXML "
+        		+ "file 'TablesScreen.fxml'.";
     }
-
 }

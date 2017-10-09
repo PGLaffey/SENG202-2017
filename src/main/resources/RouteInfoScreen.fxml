@@ -49,12 +49,15 @@
         <Insets top="125.0" />
       </GridPane.margin>
     </Label>
-      <Button fx:id="showRoute" alignment="CENTER" mnemonicParsing="false" onAction="#showRouteBtnPressed" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: #30126D, #B39EDC;" text="Show on Map" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.valignment="TOP">
+      <Button fx:id="showRoute" alignment="CENTER" mnemonicParsing="false" onAction="#showRouteBtnPressed" prefHeight="25.0" prefWidth="119.0" style="-fx-background-color: #30126D, #B39EDC;" text="Show on Map" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.valignment="TOP">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-    <Button fx:id="completedRouteButton" mnemonicParsing="false" onAction="#completedRouteButtonPressed" text="I have completed this route!" visible="false" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+    <Button fx:id="completedRouteButton" mnemonicParsing="false" onAction="#completedRouteButtonPressed" style="-fx-background-color: #30126D, #B39EDC;" text="I have completed this route!" visible="false" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Button>
     <Label fx:id="timeLabel" prefHeight="35.0" prefWidth="134.0" text="How long did it take you? (minutes)" wrapText="true" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
     <TextField fx:id="timeText" maxWidth="50.0" prefHeight="13.0" prefWidth="50.0" style="-fx-background-color: #0B4D63, #CCE6EF; -fx-background-insets: 0,1.5;" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
       <GridPane.margin>
@@ -77,8 +80,8 @@
       <Button id="okButton" fx:id="deleteButton" font="$x2" mnemonicParsing="false" onAction="#deletePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Delete" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
   </children>
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="286.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="10.0" prefWidth="106.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="278.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="10.0" prefWidth="112.0" />
   </columnConstraints>
   <padding>
     <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />

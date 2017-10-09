@@ -14,7 +14,9 @@ import seng202.Model.CurrentStorage;
 import seng202.Model.DataFetcher;
 import seng202.Model.User;
 
-
+/**
+ * Controller class for the delete account screen.
+ */
 public class DeleteAccountScreenController {
 
     @FXML
@@ -31,9 +33,8 @@ public class DeleteAccountScreenController {
 
 
     /**
-     * Method when the no button is pressed, hides the pop up without changing the user/account
-     * @param event Auto-generated event on button press
-     * @throws IOException
+     * Method when the no button is pressed, hides the pop up without changing the user/account.
+     * @param event - Auto-generated event on button press
      */
     @FXML
     void noButtonPressed(ActionEvent event) throws IOException {
@@ -47,18 +48,20 @@ public class DeleteAccountScreenController {
 
     
     /**
-     * Method when the yes button is pressed. Deletes the user from the database and returns to the login screen.
-     * @param event Auto-generated event on button press
+     * Method when the yes button is pressed. Deletes the user from the database and returns to 
+     * the login screen.
+     * @param event - Auto-generated event on button press
      */
     @FXML
-    void yesButtonPressed(ActionEvent event) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException {
+    void yesButtonPressed(ActionEvent event) throws IllegalAccessException, ClassNotFoundException,
+    		InstantiationException, IOException {
         DataFetcher data = new DataFetcher();
         data.connectDb();
         User user = CurrentStorage.getUser();
         data.deleteUser(user.getUsername());
         CurrentStorage.flush();
     	Stage stage = (Stage) yesButton.getScene().getWindow(); 
-    	stage.hide();	// TODO: Work out how to then change primaryStage to login screen
+    	stage.hide();
         Stage primaryStage = (Stage) yesButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen.fxml"));
         data.closeConnection();
@@ -68,9 +71,14 @@ public class DeleteAccountScreenController {
     }
 
     
+    /**
+     * Initializes the controller.
+     */
     @FXML
     void initialize() {
-        assert noButton != null : "fx:id=\"noButton\" was not injected: check your FXML file 'DeleteAccountScreen.fxml'.";
-        assert yesButton != null : "fx:id=\"yesButton\" was not injected: check your FXML file 'DeleteAccountScreen.fxml'.";
+        assert noButton != null : "fx:id=\"noButton\" was not injected: check your FXML file "
+        		+ "'DeleteAccountScreen.fxml'.";
+        assert yesButton != null : "fx:id=\"yesButton\" was not injected: check your FXML file "
+        		+ "'DeleteAccountScreen.fxml'.";
     }
 }

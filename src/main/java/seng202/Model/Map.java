@@ -150,8 +150,8 @@ public class Map {
     
     /**
      * Repositions or creates the startMarker.
-     * @param latLong 	- A LatLong object of the mouse position
-     * @param map 		- A googleMap object to place the startMarker on
+     * @param latLong - A LatLong object of the mouse position
+     * @param map 	  - A googleMap object to place the startMarker on
      */
     public static void setStartMarker(LatLong latLong, GoogleMap map) {
         startLoc = latLong;
@@ -193,8 +193,8 @@ public class Map {
 
     /**
      * Repositions or sets the end marker.
-     * @param latLong 	- A LatLong object of the mouse position
-     * @param map 		- A googleMap object to place the startMarker on
+     * @param latLong - A LatLong object of the mouse position
+     * @param map 	  - A googleMap object to place the startMarker on
      */
     public static void setEndMarker(LatLong latLong, GoogleMap map) {
         endLoc = latLong;
@@ -218,8 +218,8 @@ public class Map {
     /**
      * Sends a GET-request to the google geocoding service and parses the returned JSON to find 
      * the latitude and longitude.
-     * @param address   - Address to find
-     * @return 			- An array of doubles containing the latitude and longitude
+     * @param address - Address to find
+     * @return 		  - An array of doubles containing the latitude and longitude
      */
     public static double[] getLatLong(String address) {
         double latitude = 0;
@@ -233,7 +233,7 @@ public class Map {
         try {
             //Sets the HTTP request
             URL mapsUrl = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=" 
-            + address.replaceAll(" ", "%20") + ",%20New%20York&sensor=true");
+            + address.replaceAll(" ", "%20") + "&sensor=true");
             HttpURLConnection request = (HttpURLConnection) mapsUrl.openConnection();
             request.setRequestMethod("GET");
             request.connect();
@@ -269,11 +269,11 @@ public class Map {
     /** 
      * Calculates the displacement of two latitudes and longitudes by using the Haversine 
      * formula.
-     * @param srcLat 	- Source Latitude
-     * @param srcLong 	- Source longitude
-     * @param destLat 	- Destination latitude
-     * @param destLong 	- Destination longitude
-     * @return 			- Displacement between the two points in metres
+     * @param srcLat   - Source Latitude
+     * @param srcLong  - Source longitude
+     * @param destLat  - Destination latitude
+     * @param destLong - Destination longitude
+     * @return 		   - Displacement between the two points in metres
      */
     public static double getDistance(double srcLat, double srcLong, double destLat, 
     		double destLong) {
@@ -327,9 +327,9 @@ public class Map {
     /**
      * An overloaded method to handle a lone address and display it as a marker on a GoogleMap 
      * object.
-     * @param location 	- An address passed as a string
-     * @param map 		- The map object to place the marker on
-     * @param service 	- A GeocodingService from the GMapsFX API
+     * @param location - An address passed as a string
+     * @param map 	   - The map object to place the marker on
+     * @param service  - A GeocodingService from the GMapsFX API
      */
     public static void findLocation(String location, GoogleMap map, GeocodingService service) {
         //Obtains a geocode location around latLong
@@ -374,13 +374,13 @@ public class Map {
     
     /**
      * Method to find a route given two addresses.
-     * @param startAddress 	- Starting address of the route
-     * @param endAddress 	- Destination address of the route
-     * @param mapView 		- The mapView for the renderer to draw on
-     * @param service 		- The DirectionsService object used to obtain the route
-     * @param callback 		- The callback to return the object to
-     * @param pane 			- The DirectionsPane object used in the DirectionsRenderer for the 
-     * 						  service
+     * @param startAddress - Starting address of the route
+     * @param endAddress   - Destination address of the route
+     * @param mapView 	   - The mapView for the renderer to draw on
+     * @param service 	   - The DirectionsService object used to obtain the route
+     * @param callback 	   - The callback to return the object to
+     * @param pane 		   - The DirectionsPane object used in the DirectionsRenderer for the 
+     * 						 service
      */
     public static void findRoute(String startAddress, String endAddress, GoogleMapView mapView, 
     		DirectionsService service, DirectionsServiceCallback callback, DirectionsPane pane, 
@@ -396,12 +396,12 @@ public class Map {
     
     /**
      * Overloaded method to find a route given two locations.
-     * @param startLoc 	- Starting location
-     * @param endLoc 	- Destination
-     * @param mapView 	- MapView to render the route on
-     * @param service 	- DirectionsService Object to use
-     * @param callback 	- Callback to return the results to
-     * @param pane 		- Directions pane used for the directionsRenderer
+     * @param startLoc - Starting location
+     * @param endLoc   - Destination
+     * @param mapView  - MapView to render the route on
+     * @param service  - DirectionsService Object to use
+     * @param callback - Callback to return the results to
+     * @param pane 	   - Directions pane used for the directionsRenderer
      */
     public static void findRoute(Location startLoc, Location endLoc, GoogleMapView mapView, 
     		DirectionsService service, DirectionsServiceCallback callback, DirectionsPane pane, 
@@ -439,11 +439,11 @@ public class Map {
     
     /**
      * Finds a given route on the map.
-     * @param route 	- The route to find
-     * @param mapView 	- The mapView to render the route on
-     * @param service 	- The DirectionsService to use
-     * @param callback 	- The DirectionsServiceCallback to return the results to
-     * @param pane 		- The directionsPane to use in the DirectionsRenderer
+     * @param route    - The route to find
+     * @param mapView  - The mapView to render the route on
+     * @param service  - The DirectionsService to use
+     * @param callback - The DirectionsServiceCallback to return the results to
+     * @param pane 	   - The directionsPane to use in the DirectionsRenderer
      */
     public static void findRoute(Route route, GoogleMapView mapView, DirectionsService service, 
     		DirectionsServiceCallback callback, DirectionsPane pane, DirectionsRenderer renderer) {
@@ -458,8 +458,8 @@ public class Map {
     
     /**
      * Sets the pointer for the wifi location on the map.
-     * @param wifi 	- Wifi object to use
-     * @return 		- The location of the pointer on the map
+     * @param wifi - Wifi object to use
+     * @return 	   - The location of the pointer on the map
      */
     public static void findWifi(Wifi wifi, GoogleMap map) {
         //Creates a new circle and places it on a map.
@@ -541,9 +541,9 @@ public class Map {
     /**
      * Method that finds every location near the locations for a route. Called by the 
      * directionsReceived method in MainScreenController.
-     * @param locLat 	- Latitude of the location to find nearby places of
-     * @param locLong 	- Longitude of the location to find nearby places of
-     * @return 			- An arrayList of locations that are nearby
+     * @param locLat  - Latitude of the location to find nearby places of
+     * @param locLong - Longitude of the location to find nearby places of
+     * @return 		  - An arrayList of locations that are nearby
      */
     public static ArrayList<Location> findNearby(double locLat, double locLong) {
         ArrayList<Location> nearby = new ArrayList<Location>();

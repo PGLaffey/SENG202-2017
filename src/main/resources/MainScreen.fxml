@@ -171,10 +171,6 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                         </MenuButton>
-                        <Button fx:id="shareButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#sharePressed" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #30126D, #B39EDC;" text="Share" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
-                                       <font>
-                                          <Font name="System Bold" size="13.0" />
-                                       </font></Button>
                                     <ProgressBar fx:id="progressBar" prefHeight="20.0" prefWidth="160.0" progress="1.0" style="-fx-text-box-border: #30126D; -fx-text-box-border-width: 1.5; -fx-accent: #573895;" visible="false" />
                                     <Label fx:id="progressBarLabel" text="Done..." textFill="#573895" visible="false">
                                        <padding>
@@ -233,33 +229,6 @@
                             <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                               <image>
                                 <Image url="@images/toiletIcon.png" />
-                              </image>
-                            </ImageView>
-                          </graphic>
-                        </Button>
-                        <Button fx:id="bikeIconButton" layoutY="180.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bikeIconPressed" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="21.0">
-                          <graphic>
-                            <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                              <image>
-                                <Image url="@images/routeIcon.png" />
-                              </image>
-                            </ImageView>
-                          </graphic>
-                        </Button>
-                        <Button fx:id="favouriteIconButton" layoutY="220.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#favouriteIconPressed" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="21.0">
-                          <graphic>
-                            <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                              <image>
-                                <Image url="@images/favouriteIcon.png" />
-                              </image>
-                            </ImageView>
-                          </graphic>
-                        </Button>
-                        <Button fx:id="shareIconButton" layoutY="260.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#sharePressed" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="21.0">
-                          <graphic>
-                            <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                              <image>
-                                <Image url="@images/shareIcon.png" />
                               </image>
                             </ImageView>
                           </graphic>

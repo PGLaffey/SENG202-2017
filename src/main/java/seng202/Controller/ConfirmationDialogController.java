@@ -10,6 +10,7 @@ import javafx.stage.Stage;
  * Controller class for the confirmation dialog.
  */
 public class ConfirmationDialogController {
+	
     @FXML
     Button yesButton;
 
@@ -19,18 +20,20 @@ public class ConfirmationDialogController {
     @FXML
     Label confirmLabel;
 
+    
     /**
-     * Ends the program
-     * @param event auto generated event
+     * Ends the program.
+     * @param event - Auto-generated event when button is pressed
      */
     @FXML
     void yesButtonPressed(ActionEvent event) {
         System.exit(0);
     }
 
+    
     /**
      * Hides the stage and continues if no is pressed.
-     * @param event auto generated event
+     * @param event - Auto-generated event when button is pressed
      */
     @FXML
     void noButtonPressed(ActionEvent event) {
@@ -38,10 +41,17 @@ public class ConfirmationDialogController {
         stage.hide();
     }
 
+    
+    /**
+     * Initializes the controller.
+     */
     @FXML
     void initialize() {
-        assert yesButton != null : "fx:id=\"yesButton\" was not injected: check your FXML file 'ConfirmationDialogScreen.fxml'.";
-        assert noButton != null : "fx:id=\"noButton\" was not injected: check your FXML file 'ConfirmationDialogScreen.fxml'.";
-        assert confirmLabel != null : "fx:id=\"confirmLabel\" was not injected: check your FXML file 'ConfirmationDialogScreen.fxml'.";
+        assert yesButton != null : "fx:id=\"yesButton\" was not injected: check your FXML file "
+        		+ "'ConfirmationDialogScreen.fxml'.";
+        assert noButton != null : "fx:id=\"noButton\" was not injected: check your FXML file "
+        		+ "'ConfirmationDialogScreen.fxml'.";
+        assert confirmLabel != null : "fx:id=\"confirmLabel\" was not injected: check your FXML "
+        		+ "file 'ConfirmationDialogScreen.fxml'.";
     }
 }
