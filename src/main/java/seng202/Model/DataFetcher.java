@@ -1294,9 +1294,9 @@ public class DataFetcher {
      */
     private void insertLocation(Location location, String typeID) {
     	String name = location.getName();
-    	int secret = 0;
+    	int secret = 1;
     	if (location.getSecret()) {
-    		secret = 1;
+    		secret = 0;
     	}
     	String address = location.getAddress();
     	String zip = ((Integer) location.getZip()).toString();
