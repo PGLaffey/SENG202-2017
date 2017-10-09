@@ -94,6 +94,7 @@ public class SaveRouteScreenController {
 
             Route route = new Route(start, end, routeNameText.getText());
             route.setSecret(saveRoutePrivateCheck.isSelected());
+            route.setOwner(CurrentStorage.getUser());
 
             CurrentStorage.addNewRoute(route);
             CurrentStorage.addSavedRoute(CurrentStorage.getRouteArray().indexOf(route));

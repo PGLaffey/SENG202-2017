@@ -352,8 +352,7 @@ public class PoiInfoScreenController {
         DataFetcher df = new DataFetcher();
         try {
             df.connectDb();
-            if (df.getLocationOwner(newPoi) != null && df.getLocationOwner(newPoi)
-            		.equals(CurrentStorage.getUser().getUsername())) {
+            if (df.getLocationOwner(newPoi) != null && df.getLocationOwner(newPoi).equals(CurrentStorage.getUser().getUsername())) {
                 owner = true;
             }
             df.closeConnection();

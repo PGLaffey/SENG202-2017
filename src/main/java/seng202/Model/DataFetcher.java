@@ -899,6 +899,7 @@ public class DataFetcher {
 								+ "FROM tblUser WHERE UserID = ?");
 						qryOwner.setInt(1, ownerID);
 						ResultSet ownerOutput = qryOwner.executeQuery();
+						ownerOutput.next();
 						String owner = ownerOutput.getString(1);
 						//Checks if the currently loaded User is the owner of the Location
 						//If so continue loading the Location
