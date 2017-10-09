@@ -29,6 +29,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.web.WebEngine;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import org.omg.CORBA.Current;
 import seng202.Model.*;
@@ -572,11 +573,13 @@ public class MainScreenController implements MapComponentInitializedListener,
             Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
             stage.setTitle("Uploading data...");
             stage.setScene(scene);
+            stage.setResizable(false);
             // If the user attempts to close the progress bar, ensure that the confirmation 
             //dialog appears
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent event) {
+                    event.consume();
                     Stage stage = new Stage();
                     try {
                         Parent root = FXMLLoader.load(getClass().getResource("/Confirmation"
@@ -585,6 +588,7 @@ public class MainScreenController implements MapComponentInitializedListener,
                         Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
                         stage.setScene(scene);
                         stage.setTitle("Cancel upload");
+                        stage.setResizable(false);
                         stage.show();
                     } 
                     catch (IOException exception) {
@@ -1570,11 +1574,14 @@ public class MainScreenController implements MapComponentInitializedListener,
                     Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
                     stage.setTitle("Uploading data...");
                     stage.setScene(scene);
+                    stage.setResizable(false);
+
                     // If the user attempts to close the progress bar, ensure that the 
                     // confirmation dialog appears
                     stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                         @Override
                         public void handle(WindowEvent event) {
+                            event.consume();
                             Stage stage = new Stage();
                             try {
                                 Parent root = FXMLLoader.load(getClass()
@@ -1584,6 +1591,7 @@ public class MainScreenController implements MapComponentInitializedListener,
                                 		stage.getHeight());
                                 stage.setScene(scene);
                                 stage.setTitle("Cancel upload");
+                                stage.setResizable(false);
                                 stage.show();
                             } 
                             catch (IOException exception) {
@@ -1663,8 +1671,44 @@ public class MainScreenController implements MapComponentInitializedListener,
                 .streetViewControl(false)
                 .zoomControl(true)
                 .zoom(12);
-
+        mapOptions.styleString("[\n" +
+                "  {\n" +
+                "    \"featureType\": \"administrative\",\n" +
+                "    \"elementType\": \"geometry\",\n" +
+                "    \"stylers\": [\n" +
+                "      {\n" +
+                "        \"visibility\": \"off\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"featureType\": \"poi\",\n" +
+                "    \"stylers\": [\n" +
+                "      {\n" +
+                "        \"visibility\": \"off\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"featureType\": \"road\",\n" +
+                "    \"elementType\": \"labels.icon\",\n" +
+                "    \"stylers\": [\n" +
+                "      {\n" +
+                "        \"visibility\": \"off\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"featureType\": \"transit\",\n" +
+                "    \"stylers\": [\n" +
+                "      {\n" +
+                "        \"visibility\": \"off\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  }\n" +
+                "]");
         map = mapView.createMap(mapOptions);
+
 
         directionsService = new DirectionsService();
         directionsPane = mapView.getDirec();

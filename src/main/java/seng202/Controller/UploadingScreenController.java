@@ -30,6 +30,7 @@ public class UploadingScreenController {
 
         stage.setScene(new Scene(root));
         stage.setTitle("Cancel upload");
+        stage.setResizable(false);
         stage.show();
     }
 
