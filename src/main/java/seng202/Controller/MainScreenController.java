@@ -773,6 +773,26 @@ public class MainScreenController implements MapComponentInitializedListener,
         }
     }
 
+    /**
+     * Method for when the poi button is pressed, displays all the poi on the map.
+     * @param event - Auto-generate event on button press
+     */
+    @FXML
+    void poiIconPressed(ActionEvent event) {
+        map.clearMarkers();
+        directionsRenderer.clearDirections();
+        if (!Map.getPoiVisible()) {
+            for (Poi poi : CurrentStorage.getPoiArray()) {
+                Map.findPoi(poi, map);
+            }
+            Map.setPoiVisible(true);
+        }
+        else {
+            map.clearMarkers();
+            Map.setPoiVisible(false);
+        }
+    }
+
     
     /** 
      * Method for when the save route button is pressed, opens the pop up.
