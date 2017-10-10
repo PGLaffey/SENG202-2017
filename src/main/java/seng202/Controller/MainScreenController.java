@@ -656,8 +656,8 @@ public class MainScreenController implements MapComponentInitializedListener,
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             String path = selectedFile.getPath();
-                Thread wifiThread = new Thread(new WifiImporterThread(path));
-                wifiThread.start();
+            Thread wifiThread = new Thread(new WifiImporterThread(path));
+            wifiThread.start();
         }
     }
 

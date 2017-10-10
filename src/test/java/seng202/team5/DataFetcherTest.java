@@ -5,7 +5,6 @@ import junit.framework.TestSuite;
 import org.junit.Test;
 import seng202.Model.DataFetcher;
 import seng202.Model.FileManager;
-import seng202.Model.Location;
 
 import java.sql.SQLException;
 
@@ -30,6 +29,7 @@ public class DataFetcherTest extends TestCase {
      * Sets up a new dataFetcher before every test
      */
     public void setUp() {
+        DataFetcher.setIP("125.239.188.8");
         fetcher = new DataFetcher();
     }
 
