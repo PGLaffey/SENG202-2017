@@ -459,7 +459,6 @@ public class Map {
     /**
      * Sets the pointer for the wifi location on the map.
      * @param wifi - Wifi object to use
-     * @return 	   - The location of the pointer on the map
      */
     public static void findWifi(Wifi wifi, GoogleMap map) {
         //Creates a new circle and places it on a map.

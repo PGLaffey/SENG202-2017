@@ -75,7 +75,7 @@ public class Route {
 
     /**
      * Override of the .equals method for route.
-     * @param   - other The object to compare to
+     * @param other  - other The object to compare to
      * @return  - A boolean value based on whether the contents are similar
      */
     @Override

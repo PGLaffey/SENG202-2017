@@ -57,7 +57,7 @@ public class Poi extends Location {
     
     /**
      * Overrides the equals methods for comparing when two Poi objects are equal.
-     * @param other - The value to be compared to the current object
+     * @param poi - The value to be compared to the current object
      * @return      - Whether the two objects are equal
      */
     @Override

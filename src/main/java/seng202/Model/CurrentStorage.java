@@ -372,7 +372,7 @@ public class CurrentStorage {
 	
 	/**
 	 * Checks if a wifi is already in the application.
-	 * @param  - wifi Wifi to be checked
+	 * @param wifi - wifi Wifi to be checked
 	 * @return - true if in array, false otherwise
 	 */
 	public static boolean containsWifi(Wifi wifi) {
