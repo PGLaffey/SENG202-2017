@@ -1,6 +1,7 @@
 package seng202.Model;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
+import org.omg.CORBA.Current;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class DataFetcher {
     static int poiOffset = 0;
     static int toiletOffset = 0;
     static int locationOffset = 0;
-    static String ip = "125.239.188.8";
+    static String ip;
     
     
     /**
@@ -646,8 +647,8 @@ public class DataFetcher {
 			ResultSet listsOutput = qryLists.executeQuery();
 			listsOutput.next();
 			int listCount = listsOutput.getInt(1);
-			int count = 1;
-			while (count <= listCount) {
+			int count = 2;
+			while (count > 0) {
 				qryLists = connect.prepareStatement("SELECT RouteID FROM tblUsersRoutes"
 						+ " WHERE UserID = ? AND ListID = ?");
 				qryLists.setInt(1,  currUser);
@@ -661,16 +662,21 @@ public class DataFetcher {
 					routeOutput = qryRoute.executeQuery();
 					routeOutput.next();
 					route = loadRoute(routeOutput);
-					CurrentStorage.addRoute(route);
-					addedIndex = CurrentStorage.getRouteArray().size() - 1;
+					if (!CurrentStorage.getRouteArray().contains(route)) {
+                        CurrentStorage.addRoute(route);
+                        addedIndex = CurrentStorage.getRouteArray().size() - 1;
+                    }
+                    else {
+					    addedIndex = CurrentStorage.getRouteArray().indexOf(route);
+                    }
 					if (count == 1) {
-						CurrentStorage.addSavedRoute(addedIndex);
+					    CurrentStorage.addSavedRoute(addedIndex);
 					}
 					else if (count == 2) {
 						CurrentStorage.addFavRoute(addedIndex);
 					}
 				}
-				count += 1;
+				count -= 1;
 			}
 		} 
 		catch (SQLException e) {
@@ -690,34 +696,54 @@ public class DataFetcher {
     				+ "LIMIT ?, 1000");
     		qryLoadRoutes.setInt(1, routeOffset);
 			ResultSet output = qryLoadRoutes.executeQuery();
-			routeOffset += output.getFetchSize();
+            String currUser = CurrentStorage.getUser().getUsername();
+            int currUserID = findUser(CurrentStorage.getUser());
+			PreparedStatement qryRouteList = connect.
+                    prepareStatement("SELECT RouteID FROM tblUsersRoutes WHERE UserID = ?");
+            qryRouteList.setInt(1, currUserID);
+            ResultSet routeList = qryRouteList.executeQuery();
+			ArrayList<Integer> listIndex = new ArrayList<Integer>();
+			while (routeList.next()) {
+			    listIndex.add(routeList.getInt(1));
+            }
 			//Loops while there is another Route to be loaded
+            int i = 0;
 			while (output.next()) {
+			    System.out.println(i);
+			    i++;
 				boolean secret = output.getBoolean(7);
+				int routeID = output.getInt(1);
 				//Checks if the Route is set to be secret
 				if (secret) {
 					int ownerID = output.getInt(8);
 					//Checks if the Route belongs to a User
 					if (ownerID != 0) {
-						String currUser = CurrentStorage.getUser().getUsername();
 						PreparedStatement qryOwner = connect.prepareStatement("SELECT Username "
 								+ "FROM tblUser WHERE UserID = ?");
 						qryOwner.setInt(1, ownerID);
 						ResultSet ownerOutput = qryOwner.executeQuery();
+                        ownerOutput.next();
 						String owner = ownerOutput.getString(1);
 						//Checks if the currently loaded User is the Owner of the Route
 						//If so add the Route to current storage
 						if (currUser.equals(owner)) {
-							CurrentStorage.addRoute(loadRoute(output));
+						    if (!listIndex.contains(routeID)) {
+                                CurrentStorage.addRoute(loadRoute(output));
+                            }
 						}
+
 					}
 					//If the Route does not belong to a User, don't add it because it is secret
 				}
 				//If the Route is not secret add it to current storage
 				else {
-					CurrentStorage.addRoute(loadRoute(output));
+                    if (!listIndex.contains(routeID)) {
+                        CurrentStorage.addRoute(loadRoute(output));
+                    }
 				}
 			}
+			output.last();
+			routeOffset += output.getRow();
     	}
     	//Prints the correct error statements if an SQLException occurs
     	catch (SQLException ex) {
