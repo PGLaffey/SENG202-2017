@@ -1208,6 +1208,7 @@ public class MainScreenController implements MapComponentInitializedListener,
             if (!retailerBoroughText.getText().equals("")) {
     		    retailer.setBorough(retailerBoroughText.getText());
             }
+            retailer.setOwner(CurrentStorage.getUser());
             retailer.setSecret(retailerPrivateCheck.isSelected());
             CurrentStorage.addNewRetailer(retailer);
 
@@ -1296,6 +1297,7 @@ public class MainScreenController implements MapComponentInitializedListener,
             if(!toiletBoroughText.getText().equals("")) {
     		    toilet.setBorough(toiletBoroughText.getText());
             }
+            toilet.setOwner(CurrentStorage.getUser());
             toilet.setSecret(toiletPrivateCheck.isSelected());
             CurrentStorage.addNewToilet(toilet);
 
@@ -1393,6 +1395,7 @@ public class MainScreenController implements MapComponentInitializedListener,
             if (!wifiBoroughText.getText().equals("")) {
     		    wifi.setBorough(wifiBoroughText.getText());
             }
+            wifi.setOwner(CurrentStorage.getUser());
             wifi.setSecret(wifiPrivateCheck.isSelected());
             CurrentStorage.addNewWifi(wifi);
 

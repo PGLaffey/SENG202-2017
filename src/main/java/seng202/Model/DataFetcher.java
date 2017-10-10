@@ -899,6 +899,7 @@ public class DataFetcher {
 								+ "FROM tblUser WHERE UserID = ?");
 						qryOwner.setInt(1, ownerID);
 						ResultSet ownerOutput = qryOwner.executeQuery();
+						ownerOutput.next();
 						String owner = ownerOutput.getString(1);
 						//Checks if the currently loaded User is the owner of the Location
 						//If so continue loading the Location
@@ -1293,9 +1294,9 @@ public class DataFetcher {
      */
     private void insertLocation(Location location, String typeID) {
     	String name = location.getName();
-    	int secret = 0;
+    	int secret = 1;
     	if (location.getSecret()) {
-    		secret = 1;
+    		secret = 0;
     	}
     	String address = location.getAddress();
     	String zip = ((Integer) location.getZip()).toString();
