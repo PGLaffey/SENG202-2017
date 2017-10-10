@@ -1,5 +1,8 @@
 package seng202.Model;
 
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+
 /**
  * Runnable object to import routes from a separate thread
  */
@@ -22,6 +25,16 @@ public class RouteImporterThread implements Runnable {
      */
     @Override
     public void run() {
-        FileManager.routeRetriever(path);
+        try {
+            FileManager.routeRetriever(path);
+        } catch (ArrayIndexOutOfBoundsException ex){
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "File is not in the right format");
+                    alert.show();
+                }
+            });
+        }
     }
 }
