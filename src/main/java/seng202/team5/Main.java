@@ -1,14 +1,11 @@
 package seng202.team5;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import seng202.Model.CurrentStorage;
 import seng202.Model.DataFetcher;
-import seng202.Model.FileManager;
 
 /**
  * Main class to run to start the application.
@@ -38,6 +35,7 @@ public class Main extends Application {
 		primaryStage.setTitle("Login");
 		primaryStage.setScene(new Scene(root, 300, 275));
 		primaryStage.show();
+		DataFetcher.setIP("125.239.188.8");
 	}
 
 	

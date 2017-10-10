@@ -120,7 +120,7 @@ public class LoginScreenController {
 			ipText.setVisible(false);
 			DataFetcher df = new DataFetcher();
 			try {
-				df.connectDb();;
+				df.connectDb();
 				df.setIP(ipText.getText());
 				df.closeConnection();
 			} 

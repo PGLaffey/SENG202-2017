@@ -19,7 +19,7 @@ public class DataFetcher {
     static int poiOffset = 0;
     static int toiletOffset = 0;
     static int locationOffset = 0;
-    static String ip = "125.239.188.8";
+    static String ip;
     
     
     /**
