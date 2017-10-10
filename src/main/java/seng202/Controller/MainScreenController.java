@@ -7,7 +7,6 @@ import com.lynden.gmapsfx.javascript.event.UIEventType;
 import com.lynden.gmapsfx.javascript.object.*;
 import com.lynden.gmapsfx.service.directions.*;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
-import com.lynden.gmapsfx.shapes.Circle;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -29,15 +28,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.web.WebEngine;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import org.omg.CORBA.Current;
 import seng202.Model.*;
 import seng202.team5.Main;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -660,8 +656,8 @@ public class MainScreenController implements MapComponentInitializedListener,
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             String path = selectedFile.getPath();
-            Thread wifiThread = new Thread(new WifiImporterThread(path));
-            wifiThread.start();
+                Thread wifiThread = new Thread(new WifiImporterThread(path));
+                wifiThread.start();
         }
     }
 
@@ -679,6 +675,7 @@ public class MainScreenController implements MapComponentInitializedListener,
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             String path = selectedFile.getPath();
+
             Thread retailerThread = new Thread(new RetailerImporterThread(path));
             retailerThread.start();
         }
@@ -770,6 +767,26 @@ public class MainScreenController implements MapComponentInitializedListener,
         else {
             map.clearMarkers();
             Map.setRetailerVisible(false);
+        }
+    }
+
+    /**
+     * Method for when the poi button is pressed, displays all the poi on the map.
+     * @param event - Auto-generate event on button press
+     */
+    @FXML
+    void poiIconPressed(ActionEvent event) {
+        map.clearMarkers();
+        directionsRenderer.clearDirections();
+        if (!Map.getPoiVisible()) {
+            for (Poi poi : CurrentStorage.getPoiArray()) {
+                Map.findPoi(poi, map);
+            }
+            Map.setPoiVisible(true);
+        }
+        else {
+            map.clearMarkers();
+            Map.setPoiVisible(false);
         }
     }
 

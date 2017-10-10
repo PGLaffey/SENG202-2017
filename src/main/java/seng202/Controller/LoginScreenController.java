@@ -33,9 +33,6 @@ public class LoginScreenController {
 	private Label incorrectPasswordLbl;
 
 	@FXML
-	private Label incorrectUserLbl;
-
-	@FXML
 	private Button ipChangedButton;
 
 	@FXML
@@ -54,7 +51,6 @@ public class LoginScreenController {
 		data.connectDb();
 		if (!usernameText.getText().isEmpty() && !passwordText.getText().isEmpty()) {
 			if (data.fetchPassword(usernameText.getText()) == null) {
-				//incorrectUserLbl.setVisible(true);
 				incorrectPasswordLbl.setVisible(true);				
 			}
 			else if ((data.fetchPassword(usernameText.getText()).equals(passwordText.getText()
@@ -120,7 +116,7 @@ public class LoginScreenController {
 			ipText.setVisible(false);
 			DataFetcher df = new DataFetcher();
 			try {
-				df.connectDb();;
+				df.connectDb();
 				df.setIP(ipText.getText());
 				df.closeConnection();
 			} 

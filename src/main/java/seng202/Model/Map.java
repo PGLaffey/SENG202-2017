@@ -532,6 +532,7 @@ public class Map {
             Marker marker = new Marker(new MarkerOptions()
                     .animation(Animation.DROP)
                     .position(latLong)
+                    .visible(true)
                     .icon("http://maps.google.com/mapfiles/kml/pal4/icon46.png"));
 
             poi.setMarker(marker);

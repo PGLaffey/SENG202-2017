@@ -1,5 +1,8 @@
 package seng202.Model;
 
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+
 /**
  * Runnable object to import POIs from a separate thread
  */
@@ -21,7 +24,17 @@ public class PoiImporterThread implements Runnable {
      */
     @Override
     public void run() {
-        FileManager.poiRetriever(path);
+        try {
+            FileManager.poiRetriever(path);
+        } catch (ArrayIndexOutOfBoundsException ex){
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "File is not in the right format");
+                    alert.show();
+                }
+            });
+        }
     }
 }
 
