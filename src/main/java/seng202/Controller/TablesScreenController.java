@@ -258,6 +258,7 @@ public class TablesScreenController {
     		locations.addAll(CurrentStorage.getRetailerArray());
     		locations.addAll(CurrentStorage.getToiletArray());
     		locations.addAll(CurrentStorage.getWifiArray());
+    		locations.addAll(CurrentStorage.getGeneralArray());
 
     		ArrayList<Location> locFiltered = RawDataViewer.searchLocations(locations, 
     				keywordText.getText().toString());

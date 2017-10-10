@@ -73,8 +73,6 @@
       </GridPane.margin>
     </Button>
     <Button fx:id="okButton" font="$x2" mnemonicParsing="false" onAction="#okPressed" prefWidth="50.0" style="-fx-background-color: #30126D, #B39EDC;" text="Ok" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-
-    <Button id="okButton" fx:id="updateButton" font="$x2" mnemonicParsing="false" onAction="#updatePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Update" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
       <Label fx:id="addedLabel" text="Added!" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
       <Button id="okButton" fx:id="favouriteButton" font="$x2" layoutX="360.0" layoutY="184.0" mnemonicParsing="false" onAction="#favouritePressed" prefHeight="23.0" prefWidth="141.0" style="-fx-background-color: #30126D, #B39EDC;" text="Mark as favourite" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" />
       <Button id="okButton" fx:id="deleteButton" font="$x2" mnemonicParsing="false" onAction="#deletePressed" prefWidth="75.0" style="-fx-background-color: #30126D, #B39EDC;" text="Delete" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
@@ -87,7 +85,7 @@
     <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
   </padding>
   <rowConstraints>
-    <RowConstraints maxHeight="158.0" minHeight="10.0" prefHeight="93.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="97.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="158.0" minHeight="10.0" prefHeight="134.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
   </rowConstraints>
 </GridPane>
