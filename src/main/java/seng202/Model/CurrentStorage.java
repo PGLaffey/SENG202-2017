@@ -377,7 +377,7 @@ public class CurrentStorage {
 	 */
 	public static boolean containsWifi(Wifi wifi) {
 		for (Wifi currentWifi : wifiArray) {
-			if (currentWifi.equals(wifi)) {
+			if (currentWifi != null && currentWifi.equals(wifi)) {
 				return true;
 			}
 		}
@@ -414,7 +414,7 @@ public class CurrentStorage {
 	 */
 	public static boolean containsRetailer(Retailer retailer) {
 		for (Retailer currentRetailer : retailerArray) {
-			if (currentRetailer.equals(retailer)) {
+			if (currentRetailer != null && currentRetailer.equals(retailer)) {
 				return true;
 			}
 		}
@@ -452,7 +452,7 @@ public class CurrentStorage {
 	 */
 	public static boolean containsToilet(Toilet toilet) {
 		for (Toilet currentToilet : toiletArray) {
-			if (currentToilet.equals(toilet)) {
+			if (currentToilet != null && currentToilet.equals(toilet)) {
 				return true;
 			}
 		}
@@ -489,8 +489,8 @@ public class CurrentStorage {
 	 */
 	public static boolean containsPoi(Poi poi) {
 		for (Poi currentPoi : poiArray) {
-			if (currentPoi.equals(poi)) {
-				return true;
+			if (currentPoi != null && currentPoi.equals(poi)) {
+					return true;
 			}
 		}
 		return false;
@@ -526,7 +526,7 @@ public class CurrentStorage {
 	 */
     public static boolean containsRoute(Route route) {
     	for (Route currentRoute : routeArray) {
-    		if (currentRoute.equals(route)) {
+    		if (currentRoute != null && currentRoute.equals(route)) {
     			return true;
 			}
 		}
@@ -562,7 +562,7 @@ public class CurrentStorage {
 	 */
 	public static boolean containsGeneral(Location location) {
 		for (Location currentLocation : generalArray) {
-			if (currentLocation.equals(location)) {
+			if (currentLocation != null && currentLocation.equals(location)) {
 				return true;
 			}
 		}
